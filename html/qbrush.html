@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QBrush Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QBrush Class Reference</h1><br clear="all">
+<p>
+The QBrush class defines the fill pattern of shapes drawn by a <a href="qpainter.html">QPainter</a>.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qbrush-h.html">qbrush.h</a>&gt;</code>
+<p><a href="qbrush-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qbrush.html#a0"><strong>QBrush</strong></a> () </span>
+<li><span class="fn"><a href="qbrush.html#a1"><strong>QBrush</strong></a> ( BrushStyle ) </span>
+<li><span class="fn"><a href="qbrush.html#a2"><strong>QBrush</strong></a> ( const QColor &amp;, BrushStyle=SolidPattern ) </span>
+<li><span class="fn"><a href="qbrush.html#a3"><strong>QBrush</strong></a> ( const QColor &amp;, const QPixmap &amp; ) </span>
+<li><span class="fn"><a href="qbrush.html#a4"><strong>QBrush</strong></a> ( const QBrush &amp; ) </span>
+<li><span class="fn"><a href="qbrush.html#a5"><strong>~QBrush</strong></a> () </span>
+<li><span class="fn">QBrush&amp; <a href="qbrush.html#a6"><strong>operator=</strong></a> ( const QBrush &amp; ) </span>
+<li><span class="fn">BrushStyle <a href="qbrush.html#a7"><strong>style</strong></a> () const</span>
+<li><span class="fn">void <a href="qbrush.html#a8"><strong>setStyle</strong></a> ( BrushStyle ) </span>
+<li><span class="fn">const QColor&amp; <a href="qbrush.html#a9"><strong>color</strong></a> () const</span>
+<li><span class="fn">void <a href="qbrush.html#b0"><strong>setColor</strong></a> ( const QColor &amp; ) </span>
+<li><span class="fn">QPixmap* <a href="qbrush.html#b1"><strong>pixmap</strong></a> () const</span>
+<li><span class="fn">void <a href="qbrush.html#b2"><strong>setPixmap</strong></a> ( const QPixmap &amp; ) </span>
+<li><span class="fn">bool <a href="qbrush.html#b3"><strong>operator==</strong></a> ( const QBrush &amp; p ) const</span>
+<li><span class="fn">bool <a href="qbrush.html#b4"><strong>operator!=</strong></a> ( const QBrush &amp; b ) const</span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>QDataStream &amp; <a href="qbrush.html#b8"><strong>operator&lt;&lt;</strong></a> (QDataStream &amp; s, const QBrush &amp; b)
+<li>QDataStream &amp; <a href="qbrush.html#b9"><strong>operator&gt;&gt;</strong></a> (QDataStream &amp; s, QBrush &amp; b)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QBrush class defines the fill pattern of shapes drawn by a <a href="qpainter.html">QPainter</a>.
+<p>
+A brush has a style and a color.  One of the brush styles is a custom
+pattern, which is defined by a <a href="qpixmap.html">QPixmap</a>.
+<p>The brush style defines the fill pattern. The default brush style is <code>NoBrush</code> (depends on how you construct a brush).  This style tells the
+painter to not fill shapes. The standard style for filling is called <code>SolidPattern.</code>
+<p>The brush color defines the color of the fill pattern.
+The <a href="qcolor.html">QColor</a> documentation lists the predefined colors.
+<p>Use the <a href="qpen.html">QPen</a> class for specifying line/outline styles.
+<p>Example:
+<pre>    <a href="qpainter.html">QPainter</a> painter;
+    <a href="qbrush.html">QBrush</a>   brush( yellow );           // yellow solid pattern
+    painter.<a href="qpainter.html#b0">begin</a>( &amp;anyPaintDevice );   // paint something
+    painter.<a href="qpainter.html#c8">setBrush</a>( brush );          // set the yellow brush
+    painter.<a href="qpainter.html#c4">setPen</a>( NoPen );            // do not draw outline
+    painter.<a href="qpainter.html#i0">drawRect</a>( 40,30, 200,100 ); // draw filled rectangle
+    painter.<a href="qpainter.html#c8">setBrush</a>( NoBrush );        // do not fill
+    painter.<a href="qpainter.html#c4">setPen</a>( black );            // set black pen, 0 pixel width
+    painter.<a href="qpainter.html#i0">drawRect</a>( 10,10, 30,20 );   // draw rectangle outline
+    painter.<a href="qpainter.html#b2">end</a>();                      // painting done
+</pre>
+<p>See the <a href="qbrush.html#a8">setStyle</a>() function for a complete list of brush styles.
+<p>See also:  <a href="qpainter.html">QPainter</a>, <a href="qpainter.html#c8">QPainter::setBrush</a>() and <a href="qpainter.html#d8">QPainter::setBrushOrigin</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#QBrush">tictac/tictac.cpp</a>
+ <a href="drawdemo-drawdemo-cpp.html#QBrush">drawdemo/drawdemo.cpp</a>
+ <a href="picture-picture-cpp.html#QBrush">picture/picture.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QBrush::QBrush ()</h3>
+<p>Constructs a default black brush with the style <code>NoBrush</code> (will not fill
+shapes).
+<h3 class="fn"><a name="a1"></a>QBrush::QBrush ( BrushStyle style )</h3>
+<p>Constructs a black brush with the specified style.
+<p>See also:  <a href="qbrush.html#a8">setStyle</a>().
+<h3 class="fn"><a name="a2"></a>QBrush::QBrush ( const <a href="qcolor.html">QColor</a> &amp; color, BrushStyle style=SolidPattern )</h3>
+<p>Constructs a brush with a specified color and style.
+<p>See also:  <a href="qbrush.html#b0">setColor</a>() and <a href="qbrush.html#a8">setStyle</a>().
+<h3 class="fn"><a name="a3"></a>QBrush::QBrush ( const <a href="qcolor.html">QColor</a> &amp; color, const <a href="qpixmap.html">QPixmap</a> &amp; pixmap )</h3>
+<p>Constructs a brush with a specified color and a custom pattern.
+<p>The color will only have an effect for monochrome pixmaps, i.e.
+<a href="qpixmap.html#b5">QPixmap::depth</a>() == 1.
+<p>See also:  <a href="qbrush.html#b0">setColor</a>() and <a href="qbrush.html#b2">setPixmap</a>().
+<h3 class="fn"><a name="a4"></a>QBrush::QBrush ( const QBrush &amp; b )</h3>
+<p>Constructs a brush which is a
+<a href="shclass.html">shallow copy</a> of <em>b.</em>
+<h3 class="fn"><a name="a5"></a>QBrush::~QBrush ()</h3>
+<p>Destroys the brush.
+<h3 class="fn">const <a href="qcolor.html">QColor</a> &amp; <a name="a9"></a>QBrush::color () const</h3>
+<p>Returns the brush color.
+<p>See also:  <a href="qbrush.html#b0">setColor</a>().
+<h3 class="fn">bool <a name="b4"></a>QBrush::operator!= ( const QBrush &amp; b ) const</h3>
+<p>Returns TRUE if the brush is different from <em>b,</em> or FALSE if the brushes are
+equal.
+<p>Two brushes are different if they have different styles, colors or pixmaps.
+<p>See also:  <a href="qbrush.html#b3">operator==</a>().
+<h3 class="fn">QBrush &amp; <a name="a6"></a>QBrush::operator= ( const QBrush &amp; b )</h3>
+<p>Assigns <em>b</em> to this brush and returns a reference to this brush.
+<h3 class="fn">bool <a name="b3"></a>QBrush::operator== ( const QBrush &amp; b ) const</h3>
+<p>Returns TRUE if the brush is equal to <em>b,</em> or FALSE if the brushes are
+different.
+<p>Two brushes are equal if they have equal styles, colors and pixmaps.
+<p>See also:  <a href="qbrush.html#b4">operator!=</a>().
+<h3 class="fn"><a href="qpixmap.html">QPixmap</a> * <a name="b1"></a>QBrush::pixmap () const</h3>
+<p>Returns a pointer to the custom brush pattern.
+<p>A null pointer is returned if no custom brush pattern has been set.
+<p>See also:  <a href="qbrush.html#b2">setPixmap</a>().
+<h3 class="fn">void <a name="b0"></a>QBrush::setColor ( const <a href="qcolor.html">QColor</a> &amp; c )</h3>
+<p>Sets the brush color to <em>c.</em>
+<p>See also:  <a href="qbrush.html#a9">color</a>() and <a href="qbrush.html#a8">setStyle</a>().
+<p>Examples:
+ <a href="picture-picture-cpp.html#setColor">picture/picture.cpp</a>
+<h3 class="fn">void <a name="b2"></a>QBrush::setPixmap ( const <a href="qpixmap.html">QPixmap</a> &amp; pixmap )</h3>
+<p>Sets the brush pixmap.  The style is set to <code>CustomPattern.</code>
+<p>The curren brush color will only have an effect for monochrome pixmaps,
+i.e.  <a href="qpixmap.html#b5">QPixmap::depth</a>() == 1.
+<p>See also:  <a href="qbrush.html#b1">pixmap</a>() and <a href="qbrush.html#a9">color</a>().
+<h3 class="fn">void <a name="a8"></a>QBrush::setStyle ( BrushStyle s )</h3>
+<p>Sets the brush style to <em>s.</em>
+<p>The brush styles are:
+<ul>
+<li> <code>NoBrush</code>  will not fill shapes (default).
+<li> <code>SolidPattern</code>  solid (100%) fill pattern.
+<li> <code>Dense1Pattern</code>  94% fill pattern.
+<li> <code>Dense2Pattern</code>  88% fill pattern.
+<li> <code>Dense3Pattern</code>  63% fill pattern.
+<li> <code>Dense4Pattern</code>  50% fill pattern.
+<li> <code>Dense5Pattern</code>  37% fill pattern.
+<li> <code>Dense6Pattern</code>  12% fill pattern.
+<li> <code>Dense7Pattern</code>  6% fill pattern.
+<li> <code>HorPattern</code>  horizontal lines pattern.
+<li> <code>VerPattern</code>  vertical lines pattern.
+<li> <code>CrossPattern</code>  crossing lines pattern.
+<li> <code>BDiagPattern</code>  diagonal lines (directed / ) pattern.
+<li> <code>FDiagPattern</code>  diagonal lines (directed \ ) pattern.
+<li> <code>DiagCrossPattern</code>  diagonal crossing lines pattern.
+<li> <code>CustomPattern</code>  set when a pixmap pattern is being used.
+</ul>
+<p>See also:  <a href="qbrush.html#a7">style</a>().
+<h3 class="fn">BrushStyle <a name="a7"></a>QBrush::style () const</h3>
+<p>Returns the brush style.
+<p>See also:  <a href="qbrush.html#a8">setStyle</a>().
+<hr><h2>Related Functions</h2>
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="b8"></a>operator&lt;&lt; (<a href="qdatastream.html">QDataStream</a> &amp; s, const QBrush &amp; b)</h3>
+<p>Writes a brush to the stream and returns a reference to the stream.
+<p>The serialization format is:
+<ol>
+<li> The brush style (UINT8)
+<li> The brush color (<a href="qcolor.html">QColor</a>)
+<li> If style == <code>CustomPattern:</code> the brush pixmap (<a href="qpixmap.html">QPixmap</a>)
+</ol>
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="b9"></a>operator&gt;&gt; (<a href="qdatastream.html">QDataStream</a> &amp; s, QBrush &amp; b)</h3>
+<p>Reads a brush from the stream and returns a reference to the stream.
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qbrush.h: 1998/08/25
+<li>qpainter.cpp: 1998/12/15
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

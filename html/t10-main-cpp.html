@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>Qt tutorial - t10/main.cpp</title>
+</head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Source code for <a href="t10.html">tutorial 10</a>: main.cpp</h1><br clear="all">
+<hr>
+<pre>/****************************************************************
+**
+** Qt tutorial 10
+**
+****************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a href="qscrollbar-h.html">qscrollbar.h</a>&gt;
+#include &lt;<a href="qlcdnumber-h.html">qlcdnumber.h</a>&gt;
+#include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+
+#include "lcdrange.h"
+#include "cannon.h"
+
+class MyWidget : public QWidget
+{
+public:
+    MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+protected:
+    void resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * );
+private:
+    <a href="qpushbutton.html">QPushButton</a> *quit;
+    LCDRange    *angle;
+    LCDRange    *force;
+    CannonField *cannonField;
+};
+
+MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    <a href="qwidget.html#c6">setMinimumSize</a>( 500, 355 );
+
+    quit = new <a href="qpushbutton.html">QPushButton</a>( "Quit", this, "quit" );
+    quit-&gt;<a href="qpushbutton.html#b4">setGeometry</a>( 10, 10, 75, 30 );
+    quit-&gt;<a href="qwidget.html#f9">setFont</a>( <a href="qfont.html">QFont</a>( "Times", 18, QFont::Bold ) );
+
+    <a href="qobject.html#f2">connect</a>( quit, SIGNAL(clicked()), qApp, SLOT(quit()) );
+
+    angle  = new LCDRange( this, "angle" );
+    angle-&gt;setRange( 5, 70 );
+    angle-&gt;<a href="qwidget.html#l5">setGeometry</a>( 10, quit-&gt;<a href="qwidget.html#b6">y</a>() + quit-&gt;<a href="qwidget.html#c0">height</a>() + 10, 75, 130 );
+
+    force  = new LCDRange( this, "force" );
+    force-&gt;setRange( 10, 50 );
+    force-&gt;<a href="qwidget.html#l5">setGeometry</a>( 10, angle-&gt;<a href="qwidget.html#b6">y</a>() + angle-&gt;<a href="qwidget.html#c0">height</a>() + 10, 75, 130 );
+
+    cannonField = new CannonField( this, "cannonField" );
+    cannonField-&gt;move( angle-&gt;<a href="qwidget.html#b5">x</a>() + angle-&gt;<a href="qwidget.html#b9">width</a>() + 10, angle-&gt;<a href="qwidget.html#b6">y</a>() );
+    cannonField-&gt;setBackgroundColor( <a href="qcolor.html">QColor</a>( 250, 250, 200) );
+
+    <a href="qobject.html#f2">connect</a>( angle,SIGNAL(valueChanged(int)), cannonField,SLOT(setAngle(int)));
+    <a href="qobject.html#f2">connect</a>( cannonField,SIGNAL(angleChanged(int)), angle,SLOT(setValue(int)));
+
+    <a href="qobject.html#f2">connect</a>( force,SIGNAL(valueChanged(int)), cannonField,SLOT(setForce(int)));
+    <a href="qobject.html#f2">connect</a>( cannonField,SIGNAL(forceChanged(int)), force,SLOT(setValue(int)));
+
+    angle-&gt;setValue( 60 );
+    force-&gt;setValue( 25 );
+}
+
+void <a name="225"></a>MyWidget::resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * )
+{
+    cannonField-&gt;resize( <a href="qwidget.html#b9">width</a>()  - cannonField-&gt;x() - 10,
+                         <a href="qwidget.html#c0">height</a>() - cannonField-&gt;y() - 10 );
+}
+
+int main( int argc, char **argv )
+{
+    <a href="qapplication.html#f6">QApplication::setColorSpec</a>( QApplication::CustomColor );
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+    MyWidget w;
+    w.<a href="qwidget.html#l5">setGeometry</a>( 100, 100, 500, 355 );
+    a.<a href="qapplication.html#b9">setMainWidget</a>( &amp;w );
+    w.<a href="qwidget.html#k2">show</a>();
+    return a.<a href="qapplication.html#c9">exec</a>();
+}
+</pre>
+<p>
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

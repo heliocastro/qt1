@@ -1,0 +1,435 @@
+.TH QTextStream 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QTextStream \- Basic functions for reading and writing text using a QIODevice
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qtextstream.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QTextStream ()"
+.br
+.ti -1c
+.BI "QTextStream ( QIODevice * )"
+.br
+.ti -1c
+.BI "QTextStream ( QByteArray, int mode )"
+.br
+.ti -1c
+.BI "QTextStream ( FILE *, int mode )"
+.br
+.ti -1c
+.BI "virtual \fB~QTextStream\fR ()"
+.br
+.ti -1c
+.BI "QIODevice* device () const"
+.br
+.ti -1c
+.BI "void setDevice ( QIODevice * )"
+.br
+.ti -1c
+.BI "void unsetDevice ()"
+.br
+.ti -1c
+.BI "bool eof () const"
+.br
+.ti -1c
+.BI "QTextStream& operator>> ( char & )"
+.br
+.ti -1c
+.BI "QTextStream& operator>> ( signed short & )"
+.br
+.ti -1c
+.BI "QTextStream& operator>> ( unsigned short & )"
+.br
+.ti -1c
+.BI "QTextStream& operator>> ( signed int & )"
+.br
+.ti -1c
+.BI "QTextStream& operator>> ( unsigned int & )"
+.br
+.ti -1c
+.BI "QTextStream& operator>> ( signed long & )"
+.br
+.ti -1c
+.BI "QTextStream& operator>> ( unsigned long & )"
+.br
+.ti -1c
+.BI "QTextStream& operator>> ( float & )"
+.br
+.ti -1c
+.BI "QTextStream& operator>> ( double & )"
+.br
+.ti -1c
+.BI "QTextStream& operator>> ( char * )"
+.br
+.ti -1c
+.BI "QTextStream& operator>> ( QString & )"
+.br
+.ti -1c
+.BI "QTextStream& operator<< ( char )"
+.br
+.ti -1c
+.BI "QTextStream& operator<< ( signed short )"
+.br
+.ti -1c
+.BI "QTextStream& operator<< ( unsigned short )"
+.br
+.ti -1c
+.BI "QTextStream& operator<< ( signed int )"
+.br
+.ti -1c
+.BI "QTextStream& operator<< ( unsigned int )"
+.br
+.ti -1c
+.BI "QTextStream& operator<< ( signed long )"
+.br
+.ti -1c
+.BI "QTextStream& operator<< ( unsigned long )"
+.br
+.ti -1c
+.BI "QTextStream& operator<< ( float )"
+.br
+.ti -1c
+.BI "QTextStream& operator<< ( double )"
+.br
+.ti -1c
+.BI "QTextStream& operator<< ( const char * )"
+.br
+.ti -1c
+.BI "QTextStream& operator<< ( void * )"
+.br
+.ti -1c
+.BI "QTextStream& readRawBytes ( char *, uint len )"
+.br
+.ti -1c
+.BI "QTextStream& writeRawBytes ( const char *, uint len )"
+.br
+.ti -1c
+.BI "QString readLine ()"
+.br
+.ti -1c
+.BI "enum { skipws = 0x0001, left = 0x0002, right = 0x0004, internal = 0x0008, bin = 0x0010, oct = 0x0020, dec = 0x0040, hex = 0x0080, showbase = 0x0100, showpoint = 0x0200, uppercase = 0x0400, showpos = 0x0800, scientific= 0x1000, fixed = 0x2000 }"
+.br
+.ti -1c
+.BI "int flags () const"
+.br
+.ti -1c
+.BI "int flags ( int f )"
+.br
+.ti -1c
+.BI "int setf ( int bits )"
+.br
+.ti -1c
+.BI "int setf ( int " "bits" ", int mask )"
+.br
+.ti -1c
+.BI "int unsetf ( int bits )"
+.br
+.ti -1c
+.BI "void reset ()"
+.br
+.ti -1c
+.BI "int width () const"
+.br
+.ti -1c
+.BI "int width ( int )"
+.br
+.ti -1c
+.BI "int fill () const"
+.br
+.ti -1c
+.BI "int fill ( int )"
+.br
+.ti -1c
+.BI "int precision () const"
+.br
+.ti -1c
+.BI "int precision ( int )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QTextStream class provides basic functions for reading and writing text using a QIODevice.
+.PP
+The text stream class has a functional interface that is very similar to that of the standard C++ iostream class. The difference between iostream and QTextStream is that our stream operates on a QIODevice, which is easily subclassed, while iostream operates on FILE * pointers, which can not be subclassed.
+.PP
+Qt provides several global functions similar to the ones in iostream:
+.TP
+\fCbin\fR sets the QTextStream to output binary numbers
+.TP
+\fCoct\fR sets the QTextStream to output octal numbers
+.TP
+\fCdec\fR sets the QTextStream to output decimal numbers
+.TP
+\fChex\fR sets the QTextStream to output hexadecimal numbers
+.TP
+\fCendl\fR forces a line break
+.TP
+\fCflush\fR forces the QIODevice to flush any buffered data
+.TP
+\fCws\fR eats any available white space (on input)
+.TP
+\fCreset\fR resets the QTextStream to its default mode (see reset()).
+.PP
+The QTextStream class reads and writes ASCII text and it is not appropriate for dealing with binary data (but QDataStream is).
+.PP
+See also: QDataStream.
+.PP
+Examples:
+.(l
+grapher/grapher.cpp application/application.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QTextStream::QTextStream ()"
+Constructs a data stream that has no IO device.
+.SH "QTextStream::QTextStream ( QByteArray a, int mode )"
+Constructs a text stream that operates on a byte array throught an internal QBuffer device.
+.PP
+Example:
+.PP
+.nf
+.br
+    QString str;
+.br
+    QTextStream ts( str, IO_WriteOnly );
+.br
+    ts << "pi = " << 3.14;                      // str == "pi = 3.14"
+.fi
+.PP
+Writing data to the text stream will modify the contents of the string. The string will be expanded when data is written beyond the end of the string.
+.PP
+Same example, using a QBuffer:
+.PP
+.nf
+.br
+    QString str;
+.br
+    QBuffer buf( str );
+.br
+    buf.open( IO_WriteOnly );
+.br
+    QTextStream ts( &buf );
+.br
+    ts << "pi = " << 3.14;                      // str == "pi = 3.14"
+.br
+    buf.close();
+.fi
+.PP
+Note that QStrings created in this way will not have NUL terminators. So unless you are using the string purely as an array of bytes, you should terminate them:
+.PP
+.nf
+.br
+    QString str;
+.br
+    ...
+.br
+    ts << "pi = " << 3.14;                      // str == "pi = 3.14"
+.br
+    ts << '\\0';
+.fi
+.SH "QTextStream::QTextStream ( QIODevice * d )"
+Constructs a text stream that uses the IO device \fId.\fR
+.SH "QTextStream::QTextStream ( FILE * fh, int mode )"
+Constructs a text stream that operates on an existing file handle \fIfh\fR throught an internal QFile device.
+.PP
+Example:
+.PP
+.nf
+.br
+    QTextStream cout( stdout, IO_WriteOnly );
+.br
+    QTextStream cin ( stdin,  IO_ReadOnly );
+.br
+    QTextStream cerr( stderr, IO_WriteOnly );
+.fi
+.SH "QTextStream::~QTextStream () \fC[virtual]\fR"
+Destroys the text stream.
+.PP
+The destructor will not affect the current IO device.
+.SH "QIODevice * QTextStream::device () const"
+Returns the IO device currently set.
+.PP
+See also: setDevice() and unsetDevice().
+.SH "bool QTextStream::eof () const"
+Returns TRUE if the IO device has reached the end position (end of stream or file) or if there is no IO device set.
+.PP
+Returns FALSE if the current position of the read/write head of the IO device is somewhere before the end position.
+.PP
+See also: QIODevice::atEnd().
+.PP
+Examples:
+.(l
+grapher/grapher.cpp application/application.cpp
+.)l
+.SH "int QTextStream::fill () const"
+Returns the fill character. The default value is ' ' (space).
+.SH "int QTextStream::fill ( int f )"
+Sets the fill character to \fIf.\fR Returns the previous fill character.
+.SH "int QTextStream::flags () const"
+Returns the current stream flags. The default value is 0.
+.PP
+The meaning of the flags are:
+.TP
+\fIskipws\fR - Not currently used - whitespace always skipped
+.TP
+\fIleft\fR - Numeric fields are left-aligned
+.TP
+\fIright\fR - Not currently used (by default numerics are right aligned)
+.TP
+\fIinternal\fR - Put any padding spaces between +/- and value
+.TP
+\fIbin\fR - Output \fIand\fR input only in binary
+.TP
+\fIoct\fR - Output \fIand\fR input only in octal
+.TP
+\fIdec\fR - Output \fIand\fR input only in decimal
+.TP
+\fIhex\fR - Output \fIand\fR input only in hexadecimal
+.TP
+\fIshowbase\fR - Annotate numeric outputs with 0b, 0, or 0x if in \fIbin, oct,\fR or \fIhex\fR format
+.TP
+\fIshowpoint\fR - Not currently used
+.TP
+\fIuppercase\fR - Use 0B and 0X rather than 0b and 0x
+.TP
+\fIshowpos\fR - Show + for positive numeric values
+.TP
+\fIscientific\fR - Use scientific notation for floating point values
+.TP
+\fIfixed\fR - Use fixed-point notation for floating point values
+.PP
+Note that unless \fIbin, oct, dec,\fR or \fIhex\fR is set, the input base is octal if the value starts with 0, hexadecimal if it starts with 0x, binary if the value starts with 0b, and decimal otherwise.
+.PP
+See also: setf() and unsetf().
+.SH "int QTextStream::flags ( int f )"
+Sets the stream flags to \fIf.\fR Returns the previous stream flags.
+.PP
+See also: setf(), unsetf() and flags().
+.SH "QTextStream & QTextStream::operator<< ( char c )"
+Writes a \fCchar\fR to the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator<< ( const char * s )"
+Writes a string to the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator<< ( double f )"
+Writes a \fCdouble\fR to the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator<< ( float f )"
+Writes a \fCfloat\fR to the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator<< ( signed int i )"
+Writes an \fCint\fR to the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator<< ( signed long i )"
+Writes a \fClong int\fR to the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator<< ( signed short i )"
+Writes a \fCshort\fR integer to the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator<< ( unsigned int i )"
+Writes an \fCunsigned int\fR to the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator<< ( unsigned long i )"
+Writes an \fCunsigned long int\fR to the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator<< ( unsigned short i )"
+Writes an \fCunsigned short\fR integer to the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator<< ( void * ptr )"
+Writes a pointer to the stream and returns a reference to the stream.
+.PP
+The \fIptr\fR is output as an unsigned long hexadecimal integer.
+.SH "QTextStream & QTextStream::operator>> ( QString & str )"
+Reads a word from the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator>> ( char & c )"
+Reads a \fCchar\fR from the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator>> ( char * s )"
+Reads a word from the stream and returns a reference to the stream.
+.SH "QTextStream & QTextStream::operator>> ( double & f )"
+Reads a \fCdouble\fR from the stream and returns a reference to the stream. See flags() for an explanation of expected input format.
+.SH "QTextStream & QTextStream::operator>> ( float & f )"
+Reads a \fCfloat\fR from the stream and returns a reference to the stream. See flags() for an explanation of expected input format.
+.SH "QTextStream & QTextStream::operator>> ( signed int & i )"
+Reads a signed \fCint\fR from the stream and returns a reference to the stream. See flags() for an explanation of expected input format.
+.SH "QTextStream & QTextStream::operator>> ( signed long & i )"
+Reads a signed \fClong\fR int from the stream and returns a reference to the stream. See flags() for an explanation of expected input format.
+.SH "QTextStream & QTextStream::operator>> ( signed short & i )"
+Reads a signed \fCshort\fR integer from the stream and returns a reference to the stream. See flags() for an explanation of expected input format.
+.SH "QTextStream & QTextStream::operator>> ( unsigned int & i )"
+Reads an unsigned \fCint\fR from the stream and returns a reference to the stream. See flags() for an explanation of expected input format.
+.SH "QTextStream & QTextStream::operator>> ( unsigned long & i )"
+Reads an unsigned \fClong\fR int from the stream and returns a reference to the stream. See flags() for an explanation of expected input format.
+.SH "QTextStream & QTextStream::operator>> ( unsigned short & i )"
+Reads an unsigned \fCshort\fR integer from the stream and returns a reference to the stream. See flags() for an explanation of expected input format.
+.SH "int QTextStream::precision () const"
+Returns the precision. The default value is 6.
+.SH "int QTextStream::precision ( int p )"
+Sets the precision to \fIp.\fR Returns the previous precision setting.
+.SH "QString QTextStream::readLine ()"
+Reads a line from the stream and returns a string containing the text.
+.PP
+The returned string does not contain any trailing newline or carriage return. Note that this is different from QIODevice::readLine(), which does not strip the newline at the end of the line.
+.PP
+See also: QIODevice::readLine().
+.PP
+Examples:
+.(l
+application/application.cpp
+.)l
+.SH "QTextStream & QTextStream::readRawBytes ( char * s, uint len )"
+Reads \fIlen\fR bytes from the stream into \fIe\fR s and returns a reference to the stream.
+.PP
+The buffer \fIs\fR must be preallocated.
+.PP
+See also: QIODevice::readBlock().
+.SH "void QTextStream::reset ()"
+Resets the text stream.
+.TP
+All flags are set to 0.
+.TP
+The field width is set to 0.
+.TP
+The fill character is set to ' ' (space).
+.TP
+The precision is set to 6.
+.PP
+See also: setf(), width(), fill() and precision().
+.SH "void QTextStream::setDevice ( QIODevice * d )"
+Sets the IO device to \fId.\fR
+.PP
+See also: device() and unsetDevice().
+.SH "int QTextStream::setf ( int bits )"
+Sets the stream flag bits \fIbits.\fR Returns the previous stream flags.
+.PP
+Equivalent to \fCflags( flags() | bits )\fR.
+.PP
+See also: setf() and unsetf().
+.SH "int QTextStream::setf ( int bits, int mask )"
+Sets the stream flag bits \fIbits\fR with a bit mask \fImask.\fR Returns the previous stream flags.
+.PP
+Equivalent to \fCflags( (flags() & ~mask) | (bits & mask) )\fR.
+.PP
+See also: setf() and unsetf().
+.SH "void QTextStream::unsetDevice ()"
+Unsets the IO device. Equivalent to setDevice( 0 ).
+.PP
+See also: device() and setDevice().
+.SH "int QTextStream::unsetf ( int bits )"
+Clears the stream flag bits \fIbits.\fR Returns the previous stream flags.
+.PP
+Equivalent to \fCflags( flags() & ~mask )\fR.
+.PP
+See also: setf().
+.SH "int QTextStream::width () const"
+Returns the field width. The default value is 0.
+.SH "int QTextStream::width ( int w )"
+Sets the field width to \fIw.\fR Returns the previous field width.
+.SH "QTextStream & QTextStream::writeRawBytes ( const char * s, uint len )"
+Writes the \fIlen\fR bytes from \fIs\fR to the stream and returns a reference to the stream.
+.PP
+See also:  QIODevice::writeBlock().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qtextstream.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,79 @@
+.TH QUrlDrag 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QUrlDrag \- Provides for drag-and-drop of a list of file references
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qdragobject.h>\fR
+.PP
+Inherits QStoredDrag.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QUrlDrag ( QStrList " "urls" ", QWidget * " "dragSource" " = 0, const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "QUrlDrag ( QWidget * " "dragSource" " = 0, const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "\fB~QUrlDrag\fR ()"
+.br
+.ti -1c
+.BI "void setUrls ( QStrList urls )"
+.br
+.in -1c
+.SS "Static Public Members"
+.in +1c
+.ti -1c
+.BI "QString urlToLocalFile ( const char * )"
+.br
+.ti -1c
+.BI "bool canDecode ( QDragMoveEvent * e )"
+.br
+.ti -1c
+.BI "bool decode ( QDropEvent * " "e" ", QStrList & i )"
+.br
+.ti -1c
+.BI "bool decodeLocalFiles ( QDropEvent * " "e" ", QStrList & i )"
+.br
+.in -1c
+.SH DESCRIPTION
+Provides for drag-and-drop of a list of file references.
+.PP
+URLs are a useful way to refer to files that may be distributed across multiple machines. Much of the time a URL will refer to a file on a machine local to both the drag source and the drop target, and so the URL will be equivalent to passing a filename, but more extensible.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QUrlDrag::QUrlDrag ( QStrList urls, QWidget * dragSource = 0, const char * name = 0 )"
+Creates an object to drag the list of urls in \fIurls.\fR The \fIdragSource\fR and \fIname\fR arguments are passed on to QStoredDrag.
+.SH "QUrlDrag::QUrlDrag ( QWidget * dragSource = 0, const char * name = 0 )"
+Creates a object to drag. You will need to call setUrls() before you start the drag().
+.SH "QUrlDrag::~QUrlDrag ()"
+Destroys the object.
+.SH "bool QUrlDrag::canDecode ( QDragMoveEvent * e ) \fC[static]\fR"
+Returns TRUE if decode() would be able to decode \fIe.\fR
+.SH "bool QUrlDrag::decode ( QDropEvent * e, QStrList & l ) \fC[static]\fR"
+Decodes URLs from \fIe,\fR placing the result in \fIl\fR (which is first cleared).
+.PP
+Returns TRUE if the event contained a valid list of URLs.
+.SH "bool QUrlDrag::decodeLocalFiles ( QDropEvent * e, QStrList & l ) \fC[static]\fR"
+Decodes URLs from \fIe,\fR converts them to local files if they refer to local files, and places them in \fIl\fR (which is first cleared).
+.PP
+Returns TRUE if the event contained a valid list of URLs. The list will be empty if no URLs were local files.
+.SH "void QUrlDrag::setUrls ( QStrList urls )"
+Changes the list of \fIurls\fR to be dragged.
+.SH "QString QUrlDrag::urlToLocalFile ( const char * url ) \fC[static]\fR"
+Returns the name of a local file equivalent to \fIurl,\fR
+or a null string if \fIurl\fR is not a local file.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qurldrag.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

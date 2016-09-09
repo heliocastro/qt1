@@ -1,0 +1,240 @@
+.TH QRegion 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QRegion \- Clip region for a painter
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qregion.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QRegion ()"
+.br
+.ti -1c
+.BI "QRegion ( int " "x" ", int " "y" ", int " "w" ", int " "h" ", RegionType = Rectangle )"
+.br
+.ti -1c
+.BI "QRegion ( const QRect &, RegionType = Rectangle )"
+.br
+.ti -1c
+.BI "QRegion ( const QPointArray &, bool " "winding" "=FALSE )"
+.br
+.ti -1c
+.BI "QRegion ( const QRegion & )"
+.br
+.ti -1c
+.BI "QRegion ( const QBitmap & )"
+.br
+.ti -1c
+.BI "\fB~QRegion\fR ()"
+.br
+.ti -1c
+.BI "QRegion& operator= ( const QRegion & )"
+.br
+.ti -1c
+.BI "bool isNull () const"
+.br
+.ti -1c
+.BI "bool isEmpty () const"
+.br
+.ti -1c
+.BI "bool contains ( const QPoint & p ) const"
+.br
+.ti -1c
+.BI "bool contains ( const QRect & r ) const"
+.br
+.ti -1c
+.BI "void translate ( int " "dx" ", int dy )"
+.br
+.ti -1c
+.BI "QRegion unite ( const QRegion & ) const"
+.br
+.ti -1c
+.BI "QRegion intersect ( const QRegion & ) const"
+.br
+.ti -1c
+.BI "QRegion subtract ( const QRegion & ) const"
+.br
+.ti -1c
+.BI "QRegion eor ( const QRegion & ) const"
+.br
+.ti -1c
+.BI "QRect boundingRect () const"
+.br
+.ti -1c
+.BI "QArray<QRect> rects () const"
+.br
+.ti -1c
+.BI "bool operator== ( const QRegion & ) const"
+.br
+.ti -1c
+.BI "bool operator!= ( const QRegion & r ) const"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "QDataStream & operator<< (QDataStream & " "s" ", const QRegion & " "r" ")"
+.br
+.ti -1c
+.BI "QDataStream & operator>> (QDataStream & " "s" ", QRegion & " "r" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The QRegion class specifies a clip region for a painter.
+.PP
+A region can be a rectangle, an ellipse, a polygon or a combination of these.
+.PP
+Regions are combined by creating a new region which is a union, intersection or difference between any two regions.
+.PP
+The region XOR operation is defined as:
+.PP
+.nf
+.br
+    a XOR b = (a UNION b) - (a INTERSECTION b)
+.fi
+.PP
+Example of using complex regions:
+.PP
+.nf
+.br
+    void MyWidget::paintEvent( QPaintEvent * )
+.br
+    {
+.br
+        QPainter p;                             // our painter
+.br
+        QRegion r1( QRect(100,100,200,80),      // r1 = elliptic region
+.br
+                    QRegion::Ellipse );
+.br
+        QRegion r2( QRect(100,120,90,30) );     // r2 = rectangular region
+.br
+        QRegion r3 = r1.intersect( r2 );        // r3 = intersection
+.br
+        p.begin( this );                        // start painting widget
+.br
+        p.setClipRegion( r3 );                  // set clip region
+.br
+        ...                                     // paint clipped graphics
+.br
+        p.end();                                // painting done
+.br
+    }
+.fi
+.PP
+See also: QPainter::setClipRegion() and QPainter::setClipRect().
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QRegion::QRegion ()"
+Constructs an null region.
+.PP
+See also: isNull().
+.SH "QRegion::QRegion ( const QBitmap & bm )"
+Constructs a region from a bitmap.
+.PP
+The pixels in \fIbm\fR that are color1 will be part of the region as if each was a 1 by 1 rectangle.
+.SH "QRegion::QRegion ( const QPointArray & a, bool winding=FALSE )"
+Constructs a polygon region from the point array \fIa.\fR
+.PP
+If \fIwinding\fR is TRUE, the polygon region uses the winding algorithm, otherwise the alternative (even-odd) algorithm will be used.
+.SH "QRegion::QRegion ( const QRect & r, RegionType t = Rectangle )"
+Constructs a rectangular or elliptic region.
+.PP
+Arguments:
+.TP
+\fIr\fR is the region rectangle.
+.TP
+\fIt\fR is the region type: QRegion::Rectangle (default) or QRegion::Ellipse.
+.SH "QRegion::QRegion ( const QRegion & r )"
+Constructs a region which is a shallow copy of \fIr.\fR
+.SH "QRegion::QRegion ( int x, int y, int w, int h, RegionType t = Rectangle )"
+Constructs a rectangular or elliptic region.
+.PP
+\fIx, y, w,\fR and \fIh\fR specify the region rectangle. \fIt\fR is the region type: QRegion::Rectangle (default) or QRegion::Ellipse.
+.SH "QRegion::~QRegion ()"
+Destroys the region.
+.SH "QRect QRegion::boundingRect () const"
+Returns the bounding rectange of this region. An empty region gives a null rectangle.
+.SH "bool QRegion::contains ( const QPoint & p ) const"
+Returns TRUE if the region contains the point \fIp,\fR or FALSE if \fIp\fR is outside the region.
+.SH "bool QRegion::contains ( const QRect & r ) const"
+Returns TRUE if the region contains the rectangle \fIr,\fR or FALSE if \fIr\fR is outside the region.
+.SH "QRegion QRegion::eor ( const QRegion & r ) const"
+Returns a region which is this region XOR \fIr.\fR
+.SH "QRegion QRegion::intersect ( const QRegion & r ) const"
+Returns a region which is the intersection of this region and \fIr.\fR
+.SH "bool QRegion::isEmpty () const"
+Returns TRUE if the region is empty, or FALSE if it is non-empty.
+.PP
+Example:
+.PP
+.nf
+.br
+    QRegion r1( 10, 10, 20, 20 );
+.br
+    QRegion r2( 40, 40, 20, 20 );
+.br
+    QRegion r3;
+.br
+    r1.isNull();                // FALSE
+.br
+    r1.isEmpty();               // FALSE
+.br
+    r3.isNull();                // TRUE
+.br
+    r3.isEmpty();               // TRUE
+.br
+    r3 = r1.intersect( r2 );    // r3 = intersection of r1 and r2
+.br
+    r3.isNull();                // FALSE
+.br
+    r3.isEmpty();               // TRUE
+.br
+    r3 = r1.unite( r2 );        // r3 = union of r1 and r2
+.br
+    r3.isNull();                // FALSE
+.br
+    r3.isEmpty();               // FALSE
+.fi
+.PP
+See also: isNull().
+.SH "bool QRegion::isNull () const"
+Returns TRUE if the region is a null region, otherwise FALSE.
+.PP
+A null region is a region that has not been initialized. The documentation for isEmpty() contains an example that shows how to use isNull() and isEmpty().
+.PP
+See also: isEmpty().
+.SH "bool QRegion::operator!= ( const QRegion & r ) const"
+Returns TRUE if the region is different from \fIr,\fR or FALSE if the regions are equal.
+.SH "QRegion & QRegion::operator= ( const QRegion & r )"
+Assigns a shallow copy of \fIr\fR to this region and returns a reference to the region.
+.SH "bool QRegion::operator== ( const QRegion & r ) const"
+Returns TRUE if the region is equal to \fIr,\fR or FALSE if the regions are different.
+.SH "QArray<QRect> QRegion::rects () const"
+Returns an array of the rectangles that make up the region. The rectangles are non-overlapping. The region is formed by the union of all these rectangles.
+.SH "QRegion QRegion::subtract ( const QRegion & r ) const"
+Returns a region which is \fIr\fR subtracted from this region.
+.SH "void QRegion::translate ( int dx, int dy )"
+Translates the region \fIdx\fR along the X axis and \fIdy\fR along the Y axis.
+.SH "QRegion QRegion::unite ( const QRegion & r ) const"
+Returns a region which is the union of this region and \fIr.\fR
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "QDataStream & operator<< (QDataStream & s, const QRegion & r)"
+Writes a region to the stream and returns a reference to the stream.
+.SH "QDataStream & operator>> (QDataStream & s, QRegion & r)"
+Reads a region from the stream and returns a reference to the stream.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qregion.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

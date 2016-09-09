@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - tooltip/tooltip.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Advanced use of tool tips</h1><br clear="all">
+
+  This example widget demonstrates how to use tool tips for static and
+  dynamic regions within a widget.
+
+  It displays two blue and one red rectangle.  The blue ones move every
+  time you click on them, the red one is static.  There are dynamic
+  tool tips on the blue rectangles and a static tool tip on the red one.
+<pre>/****************************************************************************
+** &#36;Id&#58; tooltip.cpp,v 1.6 1998/06/16 11:39:35 warwick Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "tooltip.h"
+#include &lt;<a name="qapplication.h"></a><a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a name="qpainter.h"></a><a href="qpainter-h.html">qpainter.h</a>&gt;
+#include &lt;stdlib.h&gt;
+
+DynamicTip::DynamicTip( <a name="QWidget"></a><a href="qwidget.html">QWidget</a> * parent )
+    : <a name="QToolTip"></a><a href="qtooltip.html">QToolTip</a>( parent )
+{
+    // no explicit initialization needed
+}
+
+void <a name="75"></a>DynamicTip::maybeTip( const QPoint &amp;pos )
+{
+    if ( !parentWidget()-&gt;inherits( "TellMe" ) )
+        return;
+
+    <a name="QRect"></a><a href="qrect.html">QRect</a> r( ((TellMe*)parentWidget())-&gt;tip(pos) );
+    if ( !r.<a name="isValid"></a><a href="qrect.html#a6">isValid</a>() )
+        return;
+
+    <a name="QString"></a><a href="qstring.html">QString</a> s;
+    s.<a name="sprintf"></a><a href="qstring.html#c7">sprintf</a>( "position: %d,%d", r.<a name="center"></a><a href="qrect.html#c4">center</a>().x(), r.<a href="qrect.html#c4">center</a>().y() );
+    <a name="tip"></a><a href="qtooltip.html#b2">tip</a>( r, s );
+}
+
+TellMe::TellMe( <a href="qwidget.html">QWidget</a> * parent , const char * name  )
+    : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    <a name="setMinimumSize"></a><a href="qwidget.html#c6">setMinimumSize</a>( 30, 30 );
+    r1 = randomRect();
+    r2 = randomRect();
+    r3 = randomRect();
+
+    t = new DynamicTip( this );
+
+    <a name="QToolTip::add"></a><a href="qtooltip.html#c3">QToolTip::add</a>( this, r3, "this color is called red" ); // &lt;- helpful
+}
+
+TellMe::~TellMe()
+{
+    delete t;
+    t = 0;
+}
+
+void <a name="76"></a>TellMe::paintEvent( <a name="QPaintEvent"></a><a href="qpaintevent.html">QPaintEvent</a> * e )
+{
+    <a name="QPainter"></a><a href="qpainter.html">QPainter</a> p( this );
+
+    // I try to be efficient here, and repaint only what's needed
+
+    if ( e-&gt;rect().intersects( r1 ) ) {
+        p.<a name="setBrush"></a><a href="qpainter.html#c8">setBrush</a>( blue );
+        p.<a name="drawRect"></a><a href="qpainter.html#i0">drawRect</a>( r1 );
+    }
+
+    if ( e-&gt;rect().intersects( r2 ) ) {
+        p.<a href="qpainter.html#c8">setBrush</a>( blue );
+        p.<a href="qpainter.html#i0">drawRect</a>( r2 );
+    }
+
+    if ( e-&gt;rect().intersects( r3 ) ) {
+        p.<a href="qpainter.html#c8">setBrush</a>( red );
+        p.<a href="qpainter.html#i0">drawRect</a>( r3 );
+    }
+}
+
+void <a name="77"></a>TellMe::mousePressEvent( <a name="QMouseEvent"></a><a href="qmouseevent.html">QMouseEvent</a> * e )
+{
+    if ( r1.contains( e-&gt;<a name="pos"></a><a href="qmouseevent.html#a2">pos</a>() ) )
+        r1 = randomRect();
+    if ( r2.contains( e-&gt;<a href="qmouseevent.html#a2">pos</a>() ) )
+        r2 = randomRect();
+    <a name="repaint"></a><a href="qwidget.html#k0">repaint</a>();
+}
+
+void <a name="78"></a>TellMe::resizeEvent( <a name="QResizeEvent"></a><a href="qresizeevent.html">QResizeEvent</a> * )
+{
+    if ( !rect().contains( r1 ) )
+         r1 = randomRect();
+    if ( !rect().contains( r2 ) )
+         r2 = randomRect();
+}
+
+<a href="qrect.html">QRect</a> <a name="79"></a>TellMe::randomRect()
+{
+    return QRect( ::rand() % (<a name="width"></a><a href="qwidget.html#b9">width</a>() - 20), ::rand() % (<a name="height"></a><a href="qwidget.html#c0">height</a>() - 20),
+                  20, 20 );
+}
+
+<a href="qrect.html">QRect</a> <a name="80"></a>TellMe::tip( const QPoint &amp; p )
+{
+    if ( r1.contains( p ) )
+        return r1;
+    else if ( r2.contains( p ) )
+        return r2;
+    else
+        return QRect( 0,0, -1,-1 );
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

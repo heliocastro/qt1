@@ -1,0 +1,52 @@
+.TH QAsyncIO 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QAsyncIO \- Encapsulates I/O asynchronicity
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qasyncio.h>\fR
+.PP
+Inherited by QDataSink and QDataSource.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "virtual \fB~QAsyncIO\fR ()"
+.br
+.ti -1c
+.BI "void connect ( QObject *, const char * member )"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "void ready ()"
+.br
+.in -1c
+.SH DESCRIPTION
+Encapsulates I/O asynchronicity.
+.PP
+The Qt classes for asynchronous input/output provide a simple mechanism to allow large files or slow datasources to be processed without using large amounts of memory, or blocking the user interface.
+.PP
+This facility is used in Qt to drive animated images. See QImageConsumer and QImageSource.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QAsyncIO::~QAsyncIO () \fC[virtual]\fR"
+Destroys the async IO object.
+.SH "void QAsyncIO::connect ( QObject * obj, const char * member )"
+Ensures only one object can respond to changes in readiness.
+.SH "void QAsyncIO::ready () \fC[protected]\fR"
+Derived classes should call this when they change from being
+unready to ready.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qasyncio.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

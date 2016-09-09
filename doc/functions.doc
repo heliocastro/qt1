@@ -1,0 +1,30 @@
+/****************************************************************************
+** $Id: functions.doc,v 1.4 1998/03/31 09:05:36 aavit Exp $
+**
+** Documentation for class overview
+**
+** Copyright (C) 1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+#if defined(DEBUG)
+static char ident[] = "$Id: functions.doc,v 1.4 1998/03/31 09:05:36 aavit Exp $";
+#endif
+
+
+/*!
+\page functions.html
+
+<title>Qt Documentation</title>
+</head><body bgcolor="#ffffff">
+
+\postheader
+
+<h1 align=center>Member Function Index</h1><br clear="all">
+
+Here is a list of all of the documented member functions in the Qt
+API with links to the class documentation for each function.
+
+<p>
+\functionindex
+*/

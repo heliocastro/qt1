@@ -1,0 +1,219 @@
+.TH QRegExp 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QRegExp \- Pattern matching using regular expressions and wildcards
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qregexp.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QRegExp ()"
+.br
+.ti -1c
+.BI "QRegExp ( const char *, bool " "caseSensitive" "=TRUE, bool " "wildcard" "=FALSE )"
+.br
+.ti -1c
+.BI "QRegExp ( const QRegExp & )"
+.br
+.ti -1c
+.BI "\fB~QRegExp\fR ()"
+.br
+.ti -1c
+.BI "QRegExp& operator= ( const QRegExp & )"
+.br
+.ti -1c
+.BI "QRegExp& operator= ( const char * pattern )"
+.br
+.ti -1c
+.BI "bool operator== ( const QRegExp & ) const"
+.br
+.ti -1c
+.BI "bool operator!= ( const QRegExp & r ) const"
+.br
+.ti -1c
+.BI "bool isEmpty () const"
+.br
+.ti -1c
+.BI "bool isValid () const"
+.br
+.ti -1c
+.BI "bool caseSensitive () const"
+.br
+.ti -1c
+.BI "void setCaseSensitive ( bool )"
+.br
+.ti -1c
+.BI "bool wildcard () const"
+.br
+.ti -1c
+.BI "void setWildcard ( bool )"
+.br
+.ti -1c
+.BI "const char* pattern () const"
+.br
+.ti -1c
+.BI "int match ( const char * " "str" ", int " "index" "=0, int * " "len" "=0 ) const"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "void compile ()"
+.br
+.ti -1c
+.BI "char* matchstr ( ushort *, char *, char * ) const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QRegExp class provides pattern matching using regular expressions and wildcards.
+.PP
+QRegExp knows these regexp primitives:
+.TP
+\fIc\fR matches the character 'c'
+.TP
+\fI.\fR matches any character
+.TP
+\fI^\fR matches start of input (except [^x] which matches NOT [x])
+.TP
+\fI$\fR matches end of input
+.TP
+\fI[]\fR matches a set of characters, for example [a-z0-9_]
+.TP
+\fIa*\fR matches a sequence of zero or more a's
+.TP
+\fIa+\fR matches a sequence of one or more a's
+.TP
+\fIa?\fR matches an optional a
+.TP
+\fI\\c\fR escape code for matching special characters like \\, [, *, +, . etc.
+.TP
+\fI\\b\fR matches the BELL character (7)
+.TP
+\fI\\t\fR matches the TAB character (9)
+.TP
+\fI\\n\fR matches newline (10)
+.TP
+\fI\\r\fR matches return (13)
+.TP
+\fI\\s\fR matches white space (9,10,11,12,13,32)
+.TP
+\fI\\x12\fR matches the character 0x12 (18 decimal, 12 hexadecimal).
+.TP
+\fI\\022\fR matches the character 022 (18 decimal, 22 octal).
+.PP
+In wildcard mode, it only knows three primitives:
+.TP
+\fI?\fR matches any character
+.TP
+\fI*\fR matches any sequence of characters
+.TP
+\fI[]\fR matches a defined set of characters, e.g. [a-zA-Z0-9\\.] matches upper and lower case ASCII letters, digits, and dot, and [^z] matches everything except lower-case z.
+.PP
+When writing regular expressions in C++ code, remember that the C++ preprocessor processes \\ characters. So in order to match a "." character, you must write "\\\\." in C++ source, not "\\.".
+.PP
+Examples:
+.(l
+qmag/qmag.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QRegExp::QRegExp ()"
+Constructs an empty regular expression.
+.SH "QRegExp::QRegExp ( const QRegExp & r )"
+Constructs a regular expression which is a copy of \fIr.\fR
+.PP
+See also: operator=(const and QRegExp&).
+.SH "QRegExp::QRegExp ( const char * pattern, bool caseSensitive=TRUE, bool wildcard=FALSE )"
+Constructs a regular expression.
+.PP
+Arguments:
+.TP
+\fIpattern\fR is the regular expression pattern string.
+.TP
+\fIcaseSensitive\fR specifies whether or not to use case sensitive matching.
+.TP
+\fIwildcard\fR specifies whether the pattern string should be used for wildcard matching (also called globbing expression), normally used for matching file names.
+.PP
+See also: setWildcard().
+.SH "QRegExp::~QRegExp ()"
+Destroys the regular expression and cleans up its internal data.
+.SH "bool QRegExp::caseSensitive () const"
+Returns TRUE if case sensitivity is enabled, otherwise FALSE. The default is TRUE.
+.PP
+See also: setCaseSensitive().
+.SH "void QRegExp::compile () \fC[protected]\fR"
+For internal use only.
+.SH "bool QRegExp::isEmpty () const"
+Returns TRUE if the regexp is empty.
+.SH "bool QRegExp::isValid () const"
+Returns TRUE if the regexp is valid, or FALSE if it is invalid.
+.PP
+The pattern "[a-z" is an example of an invalid pattern, since it lacks a closing bracket.
+.SH "int QRegExp::match ( const char * str, int index=0, int * len=0 ) const"
+Attempts to match in \fIstr,\fR starting from position \fIindex.\fR Returns the position of the match, or -1 if there was no match.
+.PP
+If \fIlen\fR is not a null pointer, the length of the match is stored in \fI*len.\fR
+.PP
+Example:
+.PP
+.nf
+.br
+    QRegExp r("[0-9]*\\.[0-9]+");                // matches floating point
+.br
+    int len;
+.br
+    r.match("pi = 3.1416", 0, &len);            // returns 5, len == 6
+.fi
+.PP
+Examples:
+.(l
+qmag/qmag.cpp
+.)l
+.SH "char * QRegExp::matchstr ( ushort * rxd, char * str, char * bol ) const \fC[protected]\fR"
+For internal use only.
+.SH "bool QRegExp::operator!= ( const QRegExp & r ) const"
+Returns TRUE if this regexp is \fInot\fR equal to \fIr.\fR
+.PP
+See also: operator==().
+.SH "QRegExp & QRegExp::operator= ( const QRegExp & r )"
+Copies the regexp \fIr\fR and returns a reference to this regexp. The case sensitivity and wildcard options are copied, as well.
+.SH "QRegExp & QRegExp::operator= ( const char * pattern )"
+Sets the pattern string to \fIpattern\fR and returns a reference to this regexp. The case sensitivity or wildcard options do not change.
+.SH "bool QRegExp::operator== ( const QRegExp & r ) const"
+Returns TRUE if this regexp is equal to \fIr.\fR
+.PP
+Two regexp objects are equal if they have equal pattern strings, case sensitivity options and wildcard options.
+.SH "const char * QRegExp::pattern () const"
+Returns the pattern string of the regexp.
+.SH "void QRegExp::setCaseSensitive ( bool enable )"
+Enables or disables case sensitive matching.
+.PP
+In case sensitive mode, "a.e" matches "axe" but not "Axe".
+.PP
+See also: caseSensitive().
+.SH "void QRegExp::setWildcard ( bool wildcard )"
+Sets the wildcard option for the regular expression. The default is FALSE.
+.PP
+Setting \fIwildcard\fR to TRUE makes it convenient to match filenames instead of plain text.
+.PP
+For example, "qr*.cpp" matches the string "qregexp.cpp" in wildcard mode, but not "qicpp" (which will be matched in normal mode).
+.PP
+See also: wildcard().
+.SH "bool QRegExp::wildcard () const"
+Returns TRUE if wildcard mode is on, otherwise FALSE.
+.PP
+See also:  setWildcard().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qregexp.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

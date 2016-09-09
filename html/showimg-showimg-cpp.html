@@ -1,0 +1,583 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - showimg/showimg.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Show Image</h1><br clear="all">
+
+  This example reads and displays an image in any supported image
+  format (GIF, BMP, PPM, XMP etc.)
+<pre>/****************************************************************************
+** &#36;Id&#58; showimg.cpp,v 2.24.2.1 1999/01/27 12:43:11 aavit Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "showimg.h"
+#include &lt;<a name="qmenubar.h"></a><a href="qmenubar-h.html">qmenubar.h</a>&gt;
+#include &lt;<a name="qfiledialog.h"></a><a href="qfiledialog-h.html">qfiledialog.h</a>&gt;
+#include &lt;<a name="qmessagebox.h"></a><a href="qmessagebox-h.html">qmessagebox.h</a>&gt;
+#include &lt;<a name="qpopupmenu.h"></a><a href="qpopupmenu-h.html">qpopupmenu.h</a>&gt;
+#include &lt;<a name="qlabel.h"></a><a href="qlabel-h.html">qlabel.h</a>&gt;
+#include &lt;<a name="qpainter.h"></a><a href="qpainter-h.html">qpainter.h</a>&gt;
+#include &lt;<a name="qkeycode.h"></a><a href="qkeycode-h.html">qkeycode.h</a>&gt;
+#include &lt;<a name="qapplication.h"></a><a href="qapplication-h.html">qapplication.h</a>&gt;
+
+/*
+  In the constructor, we just pass the standard parameters on to
+  <a name="QWidget"></a><a href="qwidget.html">QWidget</a>.
+
+  The menu uses a single slot to simplify the process of adding
+  more items to the options menu.
+*/
+ImageViewer::ImageViewer( <a href="qwidget.html">QWidget</a> *parent, const char *name, int wFlags )
+    : <a href="qwidget.html">QWidget</a>( parent, name, wFlags ),
+      conversion_flags( PreferDither ),
+      filename( 0 ),
+      helpmsg( 0 )
+{
+    pickx = -1;
+    picky = -1;
+    clickx = -1;
+    clicky = -1;
+    alloc_context = 0;
+
+    menubar = new <a name="QMenuBar"></a><a href="qmenubar.html">QMenuBar</a>(this);
+    menubar-&gt;setSeparator( QMenuBar::InWindowsStyle );
+
+    <a name="QStrList"></a><a href="qstrlist.html">QStrList</a> fmt = QImage::outputFormats();
+    saveimage = new <a name="QPopupMenu"></a><a href="qpopupmenu.html">QPopupMenu</a>();
+    savepixmap = new <a href="qpopupmenu.html">QPopupMenu</a>();
+    for (const char* f = fmt.<a name="first"></a><a href="qlist.html#d2">first</a>(); f; f = fmt.<a name="next"></a><a href="qlist.html#d4">next</a>()) {
+        saveimage-&gt;insertItem( f );
+        savepixmap-&gt;insertItem( f );
+    }
+    <a name="connect"></a><a href="qobject.html#f2">connect</a>( saveimage, SIGNAL(activated(int)), this, SLOT(<a name="saveImage"></a><a href="#162">saveImage</a>(int)) );
+    <a href="qobject.html#f2">connect</a>( savepixmap, SIGNAL(activated(int)), this, SLOT(<a name="savePixmap"></a><a href="#163">savePixmap</a>(int)) );
+
+    file = new <a href="qpopupmenu.html">QPopupMenu</a>();
+    menubar-&gt;insertItem( "&amp;File", file );
+    file-&gt;insertItem( "New window", this,  SLOT(<a name="newWindow"></a><a href="#164">newWindow</a>()), CTRL+Key_N );
+    file-&gt;insertItem( "Open...", this,  SLOT(<a name="openFile"></a><a href="#165">openFile</a>()), CTRL+Key_O );
+    si = file-&gt;insertItem( "Save image", saveimage );
+    sp = file-&gt;insertItem( "Save pixmap", savepixmap );
+    file-&gt;insertSeparator();
+    file-&gt;insertItem( "Quit", qApp,  SLOT(quit()), CTRL+Key_Q );
+
+    options =  new <a href="qpopupmenu.html">QPopupMenu</a>();
+    menubar-&gt;insertItem( "&amp;Options", options );
+    ac = options-&gt;insertItem( "AutoColor" );
+    co = options-&gt;insertItem( "ColorOnly" );
+    mo = options-&gt;insertItem( "MonoOnly" );
+    options-&gt;insertSeparator();
+    fd = options-&gt;insertItem( "DiffuseDither" );
+    bd = options-&gt;insertItem( "OrderedDither" );
+    td = options-&gt;insertItem( "ThresholdDither" );
+    options-&gt;insertSeparator();
+    ta = options-&gt;insertItem( "ThresholdAlphaDither" );
+    ba = options-&gt;insertItem( "OrderedAlphaDither" );
+    fa = options-&gt;insertItem( "DiffuseAlphaDither" );
+    options-&gt;insertSeparator();
+    ad = options-&gt;insertItem( "PreferDither" );
+    dd = options-&gt;insertItem( "AvoidDither" );
+    options-&gt;insertSeparator();
+    ss = options-&gt;insertItem( "Smooth scaling" );
+    cc = options-&gt;insertItem( "Use colour context" );
+    if ( <a name="QApplication::colorSpec"></a><a href="qapplication.html#f5">QApplication::colorSpec</a>() == QApplication::ManyColor )
+        options-&gt;setItemEnabled( cc, FALSE );
+    options-&gt;setCheckable( TRUE );
+    <a name="setMenuItemFlags"></a><a href="#160">setMenuItemFlags</a>();
+
+    menubar-&gt;insertSeparator();
+
+    <a href="qpopupmenu.html">QPopupMenu</a>* help = new <a href="qpopupmenu.html">QPopupMenu</a>();
+    menubar-&gt;insertItem( "&amp;Help", help );
+    help-&gt;<a name="insertItem"></a><a href="qmenudata.html#a8">insertItem</a>( "Help!", this, SLOT(<a name="giveHelp"></a><a href="#177">giveHelp</a>()), CTRL+Key_H );
+
+    <a href="qobject.html#f2">connect</a>( options, SIGNAL(activated(int)), this, SLOT(<a name="doOption"></a><a href="#159">doOption</a>(int)) );
+
+    status = new <a name="QLabel"></a><a href="qlabel.html">QLabel</a>(this);
+    status-&gt;setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
+    status-&gt;setFixedHeight( <a name="fontMetrics"></a><a href="qwidget.html#g0">fontMetrics</a>().height() + 4 );
+
+    <a name="setMouseTracking"></a><a href="qwidget.html#h5">setMouseTracking</a>( TRUE );
+}
+
+ImageViewer::~ImageViewer()
+{
+    if ( alloc_context )
+        <a name="QColor::destroyAllocContext"></a><a href="qcolor.html#f5">QColor::destroyAllocContext</a>( alloc_context );
+    if ( other == this )
+        other = 0;
+}
+
+/*
+  This function modifies the conversion_flags when an options menu item
+  is selected, then ensures all menu items are up to date, and reconverts
+  the image if possibly necessary.
+*/
+void <a name="159"></a>ImageViewer::doOption(int item)
+{
+    if ( item == ss || item == cc ) {
+        // Toggle
+        bool newbool = !options-&gt;isItemChecked(item);
+        options-&gt;setItemChecked(item, newbool);
+        // And reconvert...
+        <a name="reconvertImage"></a><a href="#167">reconvertImage</a>();
+        <a name="repaint"></a><a href="qwidget.html#k0">repaint</a>(image.hasAlphaBuffer());        // show image in widget
+        return;
+    }
+
+    if ( options-&gt;isItemChecked( item ) ) return; // They are all radio buttons
+
+    int ocf = conversion_flags;
+
+    if ( item == ac ) {
+        conversion_flags = conversion_flags &amp; ~ColorMode_Mask | AutoColor;
+    } else if ( item == co ) {
+        conversion_flags = conversion_flags &amp; ~ColorMode_Mask | ColorOnly;
+    } else if ( item == mo ) {
+        conversion_flags = conversion_flags &amp; ~ColorMode_Mask | MonoOnly;
+    } else if ( item == fd ) {
+        conversion_flags = conversion_flags &amp; ~Dither_Mask | DiffuseDither;
+    } else if ( item == bd ) {
+        conversion_flags = conversion_flags &amp; ~Dither_Mask | OrderedDither;
+    } else if ( item == td ) {
+        conversion_flags = conversion_flags &amp; ~Dither_Mask | ThresholdDither;
+    } else if ( item == ta ) {
+        conversion_flags = conversion_flags &amp; ~AlphaDither_Mask | ThresholdAlphaDither;
+    } else if ( item == fa ) {
+        conversion_flags = conversion_flags &amp; ~AlphaDither_Mask | DiffuseAlphaDither;
+    } else if ( item == ba ) {
+        conversion_flags = conversion_flags &amp; ~AlphaDither_Mask | OrderedAlphaDither;
+    } else if ( item == ad ) {
+        conversion_flags = conversion_flags &amp; ~DitherMode_Mask | PreferDither;
+    } else if ( item == dd ) {
+        conversion_flags = conversion_flags &amp; ~DitherMode_Mask | AvoidDither;
+    }
+
+    if ( ocf != conversion_flags ) {
+        <a href=#160>setMenuItemFlags</a>();
+        // And reconvert...
+        <a href=#167>reconvertImage</a>();
+        <a href="qwidget.html#k0">repaint</a>(image.hasAlphaBuffer());        // show image in widget
+    }
+}
+
+/*
+  Set the options menu to reflect the conversion_flags value.
+*/
+void <a name="160"></a>ImageViewer::setMenuItemFlags()
+{
+    // File
+    bool valid_image = pm.size() != QSize( 0, 0 );
+    file-&gt;setItemEnabled( si, valid_image );
+    file-&gt;setItemEnabled( sp, valid_image );
+
+    // Options
+    bool may_need_color_dithering =
+            !valid_image || image.depth() == 32 &amp;&amp; <a name="QPixmap::defaultDepth"></a><a href="qpixmap.html#f6">QPixmap::defaultDepth</a>() &lt;= 8;
+    bool may_need_dithering = may_need_color_dithering
+         || image.depth() &gt; 1 &amp;&amp; options-&gt;isItemChecked(mo)
+         || image.depth() &gt; 1 &amp;&amp; <a href="qpixmap.html#f6">QPixmap::defaultDepth</a>() == 1;
+    bool has_alpha_mask = !valid_image || image.hasAlphaBuffer();
+
+    options-&gt;setItemEnabled( fd, may_need_dithering );
+    options-&gt;setItemEnabled( bd, may_need_dithering );
+    options-&gt;setItemEnabled( td, may_need_dithering );
+
+    options-&gt;setItemEnabled( ta, has_alpha_mask );
+    options-&gt;setItemEnabled( fa, has_alpha_mask );
+    options-&gt;setItemEnabled( ba, has_alpha_mask );
+
+    options-&gt;setItemEnabled( ad, may_need_color_dithering );
+    options-&gt;setItemEnabled( dd, may_need_color_dithering );
+
+    options-&gt;setItemChecked( ac, (conversion_flags &amp; ColorMode_Mask) == AutoColor );
+    options-&gt;setItemChecked( co, (conversion_flags &amp; ColorMode_Mask) == ColorOnly );
+    options-&gt;setItemChecked( mo, (conversion_flags &amp; ColorMode_Mask) == MonoOnly );
+    options-&gt;setItemChecked( fd, (conversion_flags &amp; Dither_Mask) == DiffuseDither );
+    options-&gt;setItemChecked( bd, (conversion_flags &amp; Dither_Mask) == OrderedDither );
+    options-&gt;setItemChecked( td, (conversion_flags &amp; Dither_Mask) == ThresholdDither );
+    options-&gt;setItemChecked( ta, (conversion_flags &amp; AlphaDither_Mask) == ThresholdAlphaDither );
+    options-&gt;setItemChecked( fa, (conversion_flags &amp; AlphaDither_Mask) == DiffuseAlphaDither );
+    options-&gt;setItemChecked( ba, (conversion_flags &amp; AlphaDither_Mask) == OrderedAlphaDither );
+    options-&gt;setItemChecked( ad, (conversion_flags &amp; DitherMode_Mask) == PreferDither );
+    options-&gt;setItemChecked( dd, (conversion_flags &amp; DitherMode_Mask) == AvoidDither );
+}
+
+void <a name="161"></a>ImageViewer::updateStatus()
+{
+    if ( pm.size() == QSize( 0, 0 ) ) {
+        if ( filename )
+            status-&gt;setText("Could not load image");
+        else
+            status-&gt;setText("No image - select Open from File menu.");
+    } else {
+        <a name="QString"></a><a href="qstring.html">QString</a> message, moremsg;
+        message.<a name="sprintf"></a><a href="qstring.html#c7">sprintf</a>("%dx%d", image.width(), image.height());
+        if ( pm.size() != pmScaled.size() ) {
+            moremsg.sprintf(" [%dx%d]", pmScaled.width(),
+                pmScaled.height());
+            message += moremsg;
+        }
+        moremsg.sprintf(", %d bits ", image.depth());
+        message += moremsg;
+        if (image.valid(pickx,picky)) {
+            moremsg.sprintf("(%d,%d)=#%0*x ",
+                          pickx, picky,
+                          image.hasAlphaBuffer() ? 8 : 6,
+                          image.pixel(pickx,picky));
+            message += moremsg;
+        }
+        if ( image.numColors() &gt; 0 ) {
+            if (image.valid(pickx,picky)) {
+                moremsg.sprintf(", %d/%d colors", image.pixelIndex(pickx,picky),
+                    image.numColors());
+            } else {
+                moremsg.sprintf(", %d colors", image.numColors());
+            }
+            message += moremsg;
+        }
+        if ( image.hasAlphaBuffer() ) {
+            if ( image.depth() == 8 ) {
+                int i;
+                bool alpha[256];
+                int nalpha=0;
+
+                for (i=0; i&lt;256; i++)
+                    alpha[i] = FALSE;
+
+                for (i=0; i&lt;image.numColors(); i++) {
+                    int alevel = image.color(i) &gt;&gt; 24;
+                    if (!alpha[alevel]) {
+                        alpha[alevel] = TRUE;
+                        nalpha++;
+                    }
+                }
+                moremsg.sprintf(", %d alpha levels", nalpha);
+            } else {
+                // Too many pixels to bother counting.
+                moremsg = ", 8-bit alpha channel";
+            }
+            message += moremsg;
+        }
+        status-&gt;setText(message);
+    }
+}
+
+/*
+  This function saves the image.
+*/
+void <a name="162"></a>ImageViewer::saveImage( int item )
+{
+    const char* fmt = saveimage-&gt;text(item);
+    <a href="qstring.html">QString</a> savefilename = QFileDialog::getSaveFileName(0, 0, 0, filename);
+    if ( !savefilename.<a name="isEmpty"></a><a href="qstring.html#c1">isEmpty</a>() )
+        if ( !image.save( savefilename, fmt ) )
+            <a name="QMessageBox::warning"></a><a href="qmessagebox.html#d4">QMessageBox::warning</a>( this, "Save failed", "Error saving file" );
+}
+
+/*
+  This function saves the converted image.
+*/
+void <a name="163"></a>ImageViewer::savePixmap( int item )
+{
+    const char* fmt = savepixmap-&gt;text(item);
+    <a href="qstring.html">QString</a> savefilename = QFileDialog::getSaveFileName(0, 0, 0, filename);
+    if ( !savefilename.<a href="qstring.html#c1">isEmpty</a>() )
+        if ( !pmScaled.save( savefilename, fmt ) )
+            <a href="qmessagebox.html#d4">QMessageBox::warning</a>( this, "Save failed", "Error saving file" );
+}
+
+void <a name="164"></a>ImageViewer::newWindow()
+{
+    ImageViewer* that = new ImageViewer(0, "new window", WDestructiveClose);
+    that-&gt;<a name="show"></a><a href="qwidget.html#k2">show</a>();
+}
+
+/*
+  This function is the slot for processing the Open menu item.
+*/
+void <a name="165"></a>ImageViewer::openFile()
+{
+    <a href="qstring.html">QString</a> newfilename = QFileDialog::getOpenFileName();
+    if ( !newfilename.<a href="qstring.html#c1">isEmpty</a>() ) {
+        <a name="loadImage"></a><a href="#166">loadImage</a>( newfilename ) ;
+        <a href="qwidget.html#k0">repaint</a>();                      // show image in widget
+    }
+}
+
+/*
+  This function loads an image from a file and resizes the widget to
+  exactly fit the image size. If the file was not found or the image
+  format was unknown it will resize the widget to fit the errorText
+  message (see above) displayed in the current font.
+
+  Returns TRUE if the image was successfully loaded.
+*/
+
+bool <a name="166"></a>ImageViewer::loadImage( const char *fileName )
+{
+    filename = fileName;
+    bool ok = FALSE;
+    if ( filename ) {
+        <a name="QApplication::setOverrideCursor"></a><a href="qapplication.html#h6">QApplication::setOverrideCursor</a>( waitCursor ); // this might take time
+        ok = image.load(filename, 0);
+        pickx = -1;
+        clickx = -1;
+        if ( ok )
+            ok = reconvertImage();
+        if ( ok ) {
+            <a name="setCaption"></a><a href="qwidget.html#h2">setCaption</a>( filename );                     // set window caption
+            int w = pm.width();
+            int h = pm.height();
+
+            const int reasonable_width = 128;
+            if ( w &lt; reasonable_width ) {
+                // Integer scale up to something reasonable
+                int multiply = ( reasonable_width + w - 1 ) / w;
+                w *= multiply;
+                h *= multiply;
+            }
+
+            h += menubar-&gt;heightForWidth(w) + status-&gt;height();
+            <a name="resize"></a><a href="qwidget.html#l3">resize</a>( w, h );                             // we resize to fit image
+        } else {
+            pm.resize(0,0);                             // couldn't load image
+            <a name="update"></a><a href="qwidget.html#j6">update</a>();
+        }
+        <a name="QApplication::restoreOverrideCursor"></a><a href="qapplication.html#h7">QApplication::restoreOverrideCursor</a>();  // restore original cursor
+    }
+    <a name="updateStatus"></a><a href="#161">updateStatus</a>();
+    <a href=#160>setMenuItemFlags</a>();
+    return ok;
+}
+
+bool <a name="167"></a>ImageViewer::reconvertImage()
+{
+    bool success = FALSE;
+
+    if ( image.isNull() ) return FALSE;
+
+    if ( alloc_context ) {
+        <a href="qcolor.html#f5">QColor::destroyAllocContext</a>( alloc_context );
+        alloc_context = 0;
+    }
+    if ( useColorContext() ) {
+        alloc_context = QColor::enterAllocContext();
+        // Clear the image to hide flickering palette
+        <a name="QPainter"></a><a href="qpainter.html">QPainter</a> painter(this);
+        painter.<a name="eraseRect"></a><a href="qpainter.html#l2">eraseRect</a>(0, menubar-&gt;heightForWidth( <a name="width"></a><a href="qwidget.html#b9">width</a>() ), <a href="qwidget.html#b9">width</a>(), <a name="height"></a><a href="qwidget.html#c0">height</a>());
+    }
+
+    <a href="qapplication.html#h6">QApplication::setOverrideCursor</a>( waitCursor ); // this might take time
+    if ( pm.convertFromImage(image, conversion_flags) )
+    {
+        pmScaled = QPixmap();
+        <a name="scale"></a><a href="#170">scale</a>();
+        <a href="qwidget.html#l3">resize</a>( width(), <a href="qwidget.html#c0">height</a>() );
+        success = TRUE;                         // load successful
+    } else {
+        pm.resize(0,0);                         // couldn't load image
+    }
+    <a href=#161>updateStatus</a>();
+    <a href=#160>setMenuItemFlags</a>();
+    <a href="qapplication.html#h7">QApplication::restoreOverrideCursor</a>();      // restore original cursor
+
+    if ( useColorContext() )
+        <a name="QColor::leaveAllocContext"></a><a href="qcolor.html#f3">QColor::leaveAllocContext</a>();
+
+    return success;                             // TRUE if loaded OK
+}
+
+bool <a name="168"></a>ImageViewer::smooth() const
+{
+    return options-&gt;isItemChecked(ss);
+}
+
+bool <a name="169"></a>ImageViewer::useColorContext() const
+{
+    return options-&gt;isItemChecked(cc);
+}
+
+/*
+  This functions scales the pixmap in the member variable "pm" to fit the
+  widget size and  puts the resulting pixmap in the member variable "pmScaled".
+*/
+
+void <a name="170"></a>ImageViewer::scale()
+{
+    int h = height() - menubar-&gt;heightForWidth( <a href="qwidget.html#b9">width</a>() ) - status-&gt;height();
+
+    if ( image.isNull() ) return;
+
+    <a href="qapplication.html#h6">QApplication::setOverrideCursor</a>( waitCursor ); // this might take time
+    if ( width() == pm.width() &amp;&amp; h == pm.height() )
+    {                                           // no need to scale if widget
+        pmScaled = pm;                          // size equals pixmap size
+    } else {
+        if (smooth()) {
+            pmScaled.convertFromImage(image.smoothScale(<a href="qwidget.html#b9">width</a>(), h),
+                conversion_flags);
+        } else {
+            <a name="QWMatrix"></a><a href="qwmatrix.html">QWMatrix</a> m;                         // transformation matrix
+            m.<a name="scale"></a><a href="qwmatrix.html#b6">scale</a>(((double)width())/pm.width(),// define scale factors
+                    ((double)h)/pm.height());
+            pmScaled = pm.xForm( m );           // create scaled pixmap
+        }
+    }
+    <a href="qapplication.html#h7">QApplication::restoreOverrideCursor</a>();      // restore original cursor
+}
+
+/*
+  The resize event handler, if a valid pixmap was loaded it will call
+  <a href=#170>scale</a>() to fit the pixmap to the new widget size.
+*/
+
+void <a name="171"></a>ImageViewer::resizeEvent( <a name="QResizeEvent"></a><a href="qresizeevent.html">QResizeEvent</a> * )
+{
+    status-&gt;setGeometry(0, <a href="qwidget.html#c0">height</a>() - status-&gt;height(),
+                        <a href="qwidget.html#b9">width</a>(), status-&gt;height());
+
+    if ( pm.size() == QSize( 0, 0 ) )           // we couldn't load the image
+        return;
+
+    int h = height() - menubar-&gt;heightForWidth( <a href="qwidget.html#b9">width</a>() ) - status-&gt;height();
+    if ( width() != pmScaled.width() || h != pmScaled.height())
+    {                                           // if new size,
+        <a href=#170>scale</a>();                                // scale pmScaled to window
+        <a href=#161>updateStatus</a>();
+    }
+}
+
+bool <a name="172"></a>ImageViewer::convertEvent( <a name="QMouseEvent"></a><a href="qmouseevent.html">QMouseEvent</a>* e, int&amp; x, int&amp; y)
+{
+    if ( pm.size() != QSize( 0, 0 ) ) {
+        int h = height() - menubar-&gt;heightForWidth( <a href="qwidget.html#b9">width</a>() ) - status-&gt;height();
+        int nx = e-&gt;x() * image.width() / width();
+        int ny = (e-&gt;y()-menubar-&gt;heightForWidth( <a href="qwidget.html#b9">width</a>() )) * image.height() / h;
+        if (nx != x || ny != y ) {
+            x = nx;
+            y = ny;
+            <a href=#161>updateStatus</a>();
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+void <a name="173"></a>ImageViewer::mousePressEvent( <a href="qmouseevent.html">QMouseEvent</a> *e )
+{
+    may_be_other = convertEvent(e, clickx, clicky);
+}
+
+void <a name="174"></a>ImageViewer::mouseReleaseEvent( <a href="qmouseevent.html">QMouseEvent</a> * )
+{
+    if ( may_be_other )
+        other = this;
+}
+
+/*
+  Record the pixel position of interest.
+*/
+void <a name="175"></a>ImageViewer::mouseMoveEvent( <a href="qmouseevent.html">QMouseEvent</a> *e )
+{
+    if (convertEvent(e,pickx,picky)) {
+        <a href=#161>updateStatus</a>();
+        if ((e-&gt;state()&amp;LeftButton)) {
+            may_be_other = FALSE;
+            if ( clickx &gt;= 0 &amp;&amp; other) {
+                <a name="copyFrom"></a><a href="#178">copyFrom</a>(other);
+            }
+        }
+    }
+}
+
+/*
+  Draws the portion of the scaled pixmap that needs to be updated or prints
+  an error message if no legal pixmap has been loaded.
+*/
+
+void <a name="176"></a>ImageViewer::paintEvent( <a name="QPaintEvent"></a><a href="qpaintevent.html">QPaintEvent</a> *e )
+{
+    if ( pm.size() != QSize( 0, 0 ) ) {         // is an image loaded?
+        <a href="qpainter.html">QPainter</a> painter(this);
+        painter.<a name="setClipRect"></a><a href="qpainter.html#g9">setClipRect</a>(e-&gt;<a name="rect"></a><a href="qpaintevent.html#a1">rect</a>());
+        painter.<a name="drawPixmap"></a><a href="qpainter.html#k0">drawPixmap</a>(0, menubar-&gt;heightForWidth( <a href="qwidget.html#b9">width</a>() ), pmScaled);
+    }
+}
+
+/*
+  Explain anything that might be confusing.
+*/
+void <a name="177"></a>ImageViewer::giveHelp()
+{
+    if (!helpmsg) {
+        <a href="qstring.html">QString</a> helptext = "Usage: showimg [-m] [filename]\n\n   -m  - use ManyColor color spec";
+        <a href="qstrlist.html">QStrList</a> support = QImage::inputFormats();
+        helptext += "\n\nSupported input formats:\n";
+        int lastnl = helptext.<a name="length"></a><a href="qstring.html#c2">length</a>();
+        helptext += "  ";
+        const char* f = support.<a href="qlist.html#d2">first</a>();
+        helptext += f;
+        f = support.<a href="qlist.html#d4">next</a>();
+        for (; f; f = support.<a href="qlist.html#d4">next</a>()) {
+            helptext += ',';
+            if ( helptext.<a href="qstring.html#c2">length</a>() - lastnl &gt; 40 ) {
+                helptext += "\n  ";
+                lastnl = helptext.<a href="qstring.html#c2">length</a>() - 2;
+            } else {
+                helptext += ' ';
+            }
+            helptext += f;
+        }
+        helpmsg = new <a name="QMessageBox"></a><a href="qmessagebox.html">QMessageBox</a>( "Help", helptext,
+            QMessageBox::Information, QMessageBox::Ok, 0, 0, 0, 0, FALSE );
+    }
+    helpmsg-&gt;show();
+    helpmsg-&gt;raise();
+}
+
+void <a name="178"></a>ImageViewer::copyFrom(ImageViewer* s)
+{
+    if ( clickx &gt;= 0 ) {
+        int dx = clickx;
+        int dy = clicky;
+        int sx = s-&gt;clickx;
+        int sy = s-&gt;clicky;
+        int sw = QABS(clickx - pickx)+1;
+        int sh = QABS(clicky - picky)+1;
+        if ( clickx &gt; pickx ) {
+            dx = pickx;
+            sx -= sw-1;
+        }
+        if ( clicky &gt; picky ) {
+            dy = picky;
+            sy -= sh-1;
+        }
+        <a name="bitBlt"></a><a href="qpaintdevice.html#b2">bitBlt</a>( &amp;image, dx, dy, &amp;s-&gt;image, sx, sy, sw, sh );
+        <a href=#167>reconvertImage</a>();
+        <a href="qwidget.html#k0">repaint</a>( image.hasAlphaBuffer() );
+    }
+}
+
+ImageViewer* <a name="179"></a>ImageViewer::other = 0;
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

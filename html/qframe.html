@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QFrame Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QFrame Class Reference</h1><br clear="all">
+<p>
+The QFrame class is the base class of widgets that have an (optional) frame.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qframe-h.html">qframe.h</a>&gt;</code>
+<p>
+Inherits <a href="qwidget.html">QWidget</a>.
+<p>Inherited by <a href="qgroupbox.html">QGroupBox</a>, <a href="qlcdnumber.html">QLCDNumber</a>, <a href="qlabel.html">QLabel</a>, <a href="qmenubar.html">QMenuBar</a>, <a href="qprogressbar.html">QProgressBar</a>, <a href="qscrollview.html">QScrollView</a>, <a href="qspinbox.html">QSpinBox</a>, <a href="qsplitter.html">QSplitter</a>, <a href="qtableview.html">QTableView</a> and <a href="qwidgetstack.html">QWidgetStack</a>.
+<p><a href="qframe-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qframe.html#a0"><strong>QFrame</strong></a> ( QWidget * parent=0, const char * name=0, WFlags f=0, bool allowLines=TRUE ) </span>
+<li><span class="fn">enum { NoFrame = 0, Box = 0x0001, Panel = 0x0002, WinPanel = 0x0003, HLine = 0x0004, VLine = 0x0005, MShape = 0x000f, Plain = 0x0010, Raised = 0x0020, Sunken = 0x0030, MShadow = 0x00f0 }</span>
+<li><span class="fn">int <a href="qframe.html#a1"><strong>frameStyle</strong></a> () const</span>
+<li><span class="fn">int <a href="qframe.html#a2"><strong>frameShape</strong></a> () const</span>
+<li><span class="fn">int <a href="qframe.html#a3"><strong>frameShadow</strong></a> () const</span>
+<li><span class="fn">void <a href="qframe.html#a4"><strong>setFrameStyle</strong></a> ( int ) </span>
+<li><span class="fn">bool <a href="qframe.html#a5"><strong>lineShapesOk</strong></a> () const</span>
+<li><span class="fn">int <a href="qframe.html#a6"><strong>lineWidth</strong></a> () const</span>
+<li><span class="fn">void <a href="qframe.html#a7"><strong>setLineWidth</strong></a> ( int ) </span>
+<li><span class="fn">int <a href="qframe.html#a8"><strong>margin</strong></a> () const</span>
+<li><span class="fn">void <a href="qframe.html#a9"><strong>setMargin</strong></a> ( int ) </span>
+<li><span class="fn">int <a href="qframe.html#b0"><strong>midLineWidth</strong></a> () const</span>
+<li><span class="fn">void <a href="qframe.html#b1"><strong>setMidLineWidth</strong></a> ( int ) </span>
+<li><span class="fn">int <a href="qframe.html#b2"><strong>frameWidth</strong></a> () const</span>
+<li><span class="fn">QRect <a href="qframe.html#b3"><strong>frameRect</strong></a> () const</span>
+<li><span class="fn">QRect <a href="qframe.html#b4"><strong>contentsRect</strong></a> () const</span>
+<li><span class="fn">virtual QSize <a href="qwidget.html#l7"><strong>sizeHint</strong></a> () const</span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">void <a href="qframe.html#b6"><strong>setFrameRect</strong></a> ( const QRect &amp; ) </span>
+<li><span class="fn">virtual void <a href="qframe.html#b7"><strong>paintEvent</strong></a> ( QPaintEvent * ) </span>
+<li><span class="fn">virtual void <a href="qframe.html#b8"><strong>resizeEvent</strong></a> ( QResizeEvent * ) </span>
+<li><span class="fn">virtual void <a href="qframe.html#b9"><strong>drawFrame</strong></a> ( QPainter * ) </span>
+<li><span class="fn">virtual void <a href="qframe.html#c0"><strong>drawContents</strong></a> ( QPainter * ) </span>
+<li><span class="fn">virtual void <a href="qframe.html#c1"><strong>frameChanged</strong></a> () </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QFrame class is the base class of widgets that have an (optional) frame.
+<p>
+It draws a label and calls a virtual function, <a href="qframe.html#c0">drawContents</a>(), to
+fill in the frame.  This function is reimplemented by essentially
+all subclasses.  There are also two other less useful functions,
+<a href="qframe.html#b9">drawFrame</a>() and <a href="qframe.html#c1">frameChanged</a>().
+<p><a href="qmenubar.html">QMenuBar</a> uses this to "raise" the menu bar above the surrounding
+screen:
+<p><pre>    if ( style() == MotifStyle ) {
+        setFrameStyle( QFrame::Panel | QFrame::Raised );
+        setLineWidth( 2 );
+    } else {
+        setFrameStyle( QFrame::NoFrame );
+    }
+</pre>
+<p>The QFrame class can also be used directly for creating simple frames
+without any contents, for example like this:
+<p><pre>    <a href="qframe.html">QFrame</a> *emptyFrame = new <a href="qframe.html">QFrame</a>( parentWidget );
+    emptyFrame-&gt;<a href="qframe.html#a4">setFrameStyle</a>( Panel | Sunken );
+    emptyFrame-&gt;<a href="qframe.html#a7">setLineWidth</a>( 2 );
+</pre>
+<p>A frame widget has three attributes: <a href="qframe.html#a4">frame
+style</a>, a <a href="qframe.html#a7">line width</a> and a <a href="qframe.html#b1">mid-line width</a>.
+<p>The frame style is specified by a frame shape and a shadow style.
+The frame shapes are <code>NoFrame, Box, Panel, WinPanel, HLine</code> and <code>VLine,</code> and the shadow styles are <code>Plain, Raised</code>
+and <code>Sunken.</code>
+<p>The line width is the width of the frame border.
+<p>The mid-line width specifies the width of an extra line in the
+middle of the frame, that uses a third color to obtain a special 3D
+effect.  Notice that a mid-line is only drawn for <code>Box, HLine</code>
+and <code>VLine</code> frames that are raised or sunken.
+<p><a name=picture></a>
+This table shows the most useful combinations of styles and widths
+(and some rather useless ones):
+<p><img src=frames.gif height=422 width=520 alt="Table of frame styles">
+<p>For obvious reasons, <code>NoFrame</code> isn't shown.  The gray areas next to
+the <code>VLine</code> and <code>HLine</code> examples are there because the widgets are
+taller/wider than the natural width of the lines.  <a href="qframe.html#b2">frameWidth</a>()
+returns the natural width of the line.
+<p>The labels on the top and right are <a href="qlabel.html">QLabel</a> objects with <a href="qframe.html#a1">frameStyle</a>()
+<code>Raised|Panel</code> and <a href="qframe.html#a6">lineWidth</a>() 1.
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#QFrame">tictac/tictac.cpp</a>
+ <a href="life-life-cpp.html#QFrame">life/life.cpp</a>
+ <a href="movies-main-cpp.html#QFrame">movies/main.cpp</a>
+ <a href="xform-xform-cpp.html#QFrame">xform/xform.cpp</a>
+ <a href="widgets-widgets-cpp.html#QFrame">widgets/widgets.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QFrame::QFrame ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0, WFlags f=0, bool allowLines=TRUE )</h3>
+<p>Constructs a frame widget with frame style <code>NoFrame</code> and a 1 pixel frame
+width.
+<p>The <em>allowLines</em> argument can be set to FALSE to disallow <code>HLine</code> and
+<code>VLine</code> shapes.
+<p>The <em>parent, name</em> and <em>f</em> arguments are passed to the <a href="qwidget.html">QWidget</a>
+constructor.
+<h3 class="fn"><a href="qrect.html">QRect</a> <a name="b4"></a>QFrame::contentsRect () const</h3>
+<p>Returns the rectangle inside the frame.
+<p>See also:  <a href="qframe.html#b3">frameRect</a>() and <a href="qframe.html#c0">drawContents</a>().
+<h3 class="fn">void <a name="c0"></a>QFrame::drawContents ( <a href="qpainter.html">QPainter</a> * ) <code>[virtual protected]</code></h3>
+<p>Virtual function that draws the contents of the frame.
+<p>The <a href="qpainter.html">QPainter</a> is already open when you get it, and you must leave it
+open.  Painter <a href="qpainter.html#f1">transformations</a>
+are switched off on entry.  If you transform the painter, remember to
+take the frame into account and <a href="qpainter.html#f6">reset
+transformation</a> before returning.
+<p>This function is reimplemented by subclasses that draw something
+inside the frame.  It should draw only inside <a href="qframe.html#b4">contentsRect</a>(). The
+default function does nothing.
+<p>See also:  <a href="qframe.html#b4">contentsRect</a>() and <a href="qpainter.html#g9">QPainter::setClipRect</a>().
+<p>Reimplemented in <a href="qlcdnumber.html#c5">QLCDNumber</a>, <a href="qmenubar.html#b1">QMenuBar</a>, <a href="qlabel.html#c2">QLabel</a> and <a href="qprogressbar.html#a9">QProgressBar</a>.
+<h3 class="fn">void <a name="b9"></a>QFrame::drawFrame ( <a href="qpainter.html">QPainter</a> * p ) <code>[virtual protected]</code></h3>
+<p>Draws the frame using the current frame attributes and color
+group.  The rectangle inside the frame is not affected.
+<p>This function is virtual, but in general you do not need to
+reimplement it.  If you do, note that the <a href="qpainter.html">QPainter</a> is already open
+and must remain open.
+<p>See also:  <a href="qframe.html#b3">frameRect</a>(), <a href="qframe.html#b4">contentsRect</a>(), <a href="qframe.html#c0">drawContents</a>(), <a href="qframe.html#a1">frameStyle</a>() and <a href="qwidget.html#f7">setPalette</a>().
+<p>Examples:
+ <a href="life-life-cpp.html#drawFrame">life/life.cpp</a>
+<h3 class="fn">void <a name="c1"></a>QFrame::frameChanged () <code>[virtual protected]</code></h3>
+<p>Virtual function that is called when the frame style, line width or
+mid-line width changes.
+<p>This function can be reimplemented by subclasses that need to know
+when the frame attributes change.
+<p>Reimplemented in <a href="qscrollview.html#e5">QScrollView</a> and <a href="qwidgetstack.html#b3">QWidgetStack</a>.
+<h3 class="fn"><a href="qrect.html">QRect</a> <a name="b3"></a>QFrame::frameRect () const</h3>
+<p>Returns the frame rectangle.
+<p>The default frame rectangle is equivalent to the <a href="qwidget.html#c1">widget rectangle</a>.
+<p>See also:  <a href="qframe.html#b6">setFrameRect</a>().
+<h3 class="fn">int <a name="a3"></a>QFrame::frameShadow () const</h3>
+<p>Returns the frame shadow value from the frame style.
+<p>See also:  <a href="qframe.html#a1">frameStyle</a>() and <a href="qframe.html#a2">frameShape</a>().
+<h3 class="fn">int <a name="a2"></a>QFrame::frameShape () const</h3>
+<p>Returns the frame shape value from the frame style.
+<p>See also:  <a href="qframe.html#a1">frameStyle</a>() and <a href="qframe.html#a3">frameShadow</a>().
+<h3 class="fn">int <a name="a1"></a>QFrame::frameStyle () const</h3>
+<p>Returns the frame style.
+<p>The default value is QFrame::NoFrame.
+<p>See also:  <a href="qframe.html#a4">setFrameStyle</a>(), <a href="qframe.html#a2">frameShape</a>() and <a href="qframe.html#a3">frameShadow</a>().
+<h3 class="fn">int <a name="b2"></a>QFrame::frameWidth () const</h3>
+<p>Returns the width of the frame that is drawn.
+<p>Note that the frame width depends on the <a href="qframe.html#a4">frame
+style</a>, not only the line width and the mid line width.  For
+example, the style <code>NoFrame</code> always has a frame width 0, while the
+style <code>Panel</code> has a frame width equivalent to the line width.
+<p>See also:  <a href="qframe.html#a6">lineWidth</a>(), <a href="qframe.html#b0">midLineWidth</a>() and <a href="qframe.html#a1">frameStyle</a>().
+<p>Examples:
+ <a href="widgets-widgets-cpp.html#frameWidth">widgets/widgets.cpp</a>
+<h3 class="fn">bool <a name="a5"></a>QFrame::lineShapesOk () const</h3>
+<p>Returns TRUE if line shapes (<code>HLine</code> or <code>VLine)</code> are allowed, or FALSE if
+they are not allowed.
+<p>It is only possible to disallow line shapes in the constructor.
+The default value is TRUE.
+<h3 class="fn">int <a name="a6"></a>QFrame::lineWidth () const</h3>
+<p>Returns the line width.  (Note that the <em>total</em> line width
+for <code>HLine</code> and <code>VLine</code> is given by <a href="qframe.html#b2">frameWidth</a>(), not
+lineWidth().)
+<p>The default value is 1.
+<p>See also:  <a href="qframe.html#a7">setLineWidth</a>(), <a href="qframe.html#b0">midLineWidth</a>() and <a href="qframe.html#b2">frameWidth</a>().
+<h3 class="fn">int <a name="a8"></a>QFrame::margin () const</h3>
+<p>Returns the width of the margin. The margin is the distance between the
+innermost pixel of the frame and the outermost pixel of <a href="qframe.html#b4">contentsRect</a>().
+It is included in <a href="qframe.html#b2">frameWidth</a>().
+<p>The margin is filled according to backgroundMode().
+<p>The default value is 0.
+<p>See also:  <a href="qframe.html#a9">setMargin</a>(), <a href="qframe.html#a6">lineWidth</a>() and <a href="qframe.html#b2">frameWidth</a>().
+<h3 class="fn">int <a name="b0"></a>QFrame::midLineWidth () const</h3>
+<p>Returns the width of the mid-line.
+<p>The default value is 0.
+<p>See also:  <a href="qframe.html#b1">setMidLineWidth</a>(), <a href="qframe.html#a6">lineWidth</a>() and <a href="qframe.html#b2">frameWidth</a>().
+<h3 class="fn">void <a name="b7"></a>QFrame::paintEvent ( <a href="qpaintevent.html">QPaintEvent</a> * event ) <code>[virtual protected]</code></h3>
+<p>Handles paint events for the frame.
+<p>Paints the frame and the contents.
+<p>Opens the painter on the frame and calls first <a href="qframe.html#b9">drawFrame</a>(), then
+<a href="qframe.html#c0">drawContents</a>().
+<p>Reimplemented from <a href="qwidget.html#o4">QWidget.</a>
+<h3 class="fn">void <a name="b8"></a>QFrame::resizeEvent ( <a href="qresizeevent.html">QResizeEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles resize events for the frame.
+<p>Adjusts the frame rectangle for the resized widget.  The frame
+rectangle is elastic, the surrounding area is static.
+<p>The resulting frame rectangle may be null or invalid.  You can use
+<a href="qwidget.html#c6">setMinimumSize</a>() to avoid that possibility.
+<p>Nothing is done if the frame rectangle is a <a href="qrect.html#a4">null rectangle</a> already.
+<p>Reimplemented from <a href="qwidget.html#o6">QWidget.</a>
+<h3 class="fn">void <a name="b6"></a>QFrame::setFrameRect ( const <a href="qrect.html">QRect</a> &amp; r ) <code>[protected]</code></h3>
+<p>Sets the frame rectangle to <em>r.</em>
+<p>The frame rectangle is the rectangle the frame is drawn in.  By
+default, this is the entire widget.  Calling setFrameRect() does <em>not</em> cause a widget update.
+<p>If <em>r</em> is a null rectangle (for example
+<code><a href="qrect.html">QRect</a>(0,0,0,0)</code>), then the frame rectangle is equivalent
+to the <a href="qwidget.html#c1">widget rectangle</a>.
+<p>See also:  <a href="qframe.html#b3">frameRect</a>() and <a href="qframe.html#b4">contentsRect</a>().
+<h3 class="fn">void <a name="a4"></a>QFrame::setFrameStyle ( int style )</h3>
+<p>Sets the frame style to <em>style.</em>
+<p>The <em>style</em> is the bitwise OR between a frame shape and a frame
+shadow style.  See the <a href="#picture">illustration</a> in the
+class documentation.
+<p>The frame shapes are:
+<ul>
+<li> <code>NoFrame</code> draws nothing. Naturally, you should not specify a shadow
+style if you use this.
+<li> <code>Box</code> draws a rectangular box.  The contents appear to be
+level with the surrounding screen, but the border itself may be
+raised or sunken.
+<li> <code>Panel</code> draws a rectangular panel that can be raised or sunken.
+<li> <code>WinPanel</code> draws a rectangular panel that can be raised or sunken.
+Specifying this shape sets the line width to 2 pixels.  WinPanel provides
+fancy Windows 95-like shadows.
+<li> <code>HLine</code> draws a horizontal line (vertically centered).
+<li> <code>VLine</code> draws a vertical line (horizontally centered).
+</ul>
+<p>The shadow styles are:
+<ul>
+<li> <code>Plain</code> draws using the palette foreground color (without any
+3D effect).
+<li> <code>Raised</code> draws a 3D raised line using the light and dark
+colors of the current color group.
+<li> <code>Sunken</code> draws a 3D sunken line using the light and dark
+colors of the current color group.
+</ul>
+<p>If a mid-line width greater than 0 is specified, an additional line
+is drawn for <code>Raised</code> or <code>Sunken Box, HLine</code> and <code>VLine</code>
+frames.  The mid color of the current color group is used for
+drawing middle lines.<p><strong>Warning:</strong> Attempts to set the frame style to <code>HLine</code> or <code>VLine</code>
+(with any shadow style) are disregarded unless line shapes are
+allowed.  Line shapes are allowed by default.
+<p>See also:  <a href="#picture">Illustration</a>, <a href="qframe.html#a1">frameStyle</a>(), <a href="qframe.html#a5">lineShapesOk</a>(), <a href="qwidget.html#f5">colorGroup</a>() and <a href="qcolorgroup.html">QColorGroup</a>.
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#setFrameStyle">tictac/tictac.cpp</a>
+ <a href="dclock-dclock-cpp.html#setFrameStyle">dclock/dclock.cpp</a>
+ <a href="xform-xform-cpp.html#setFrameStyle">xform/xform.cpp</a>
+ <a href="cursor-cursor-cpp.html#setFrameStyle">cursor/cursor.cpp</a>
+ <a href="layout-layout-cpp.html#setFrameStyle">layout/layout.cpp</a>
+ <a href="widgets-widgets-cpp.html#setFrameStyle">widgets/widgets.cpp</a>
+<h3 class="fn">void <a name="a7"></a>QFrame::setLineWidth ( int w )</h3>
+<p>Sets the line width to <em>w.</em>
+<p>See also:  <a href="qframe.html#b2">frameWidth</a>(), <a href="qframe.html#a6">lineWidth</a>() and <a href="qframe.html#b1">setMidLineWidth</a>().
+<p>Examples:
+ <a href="dclock-dclock-cpp.html#setLineWidth">dclock/dclock.cpp</a>
+ <a href="xform-xform-cpp.html#setLineWidth">xform/xform.cpp</a>
+<h3 class="fn">void <a name="a9"></a>QFrame::setMargin ( int w )</h3>
+<p>Sets the width of the margin to <em>w.</em>
+<p>See also:  <a href="qframe.html#a8">margin</a>() and <a href="qframe.html#a7">setLineWidth</a>().
+<h3 class="fn">void <a name="b1"></a>QFrame::setMidLineWidth ( int w )</h3>
+<p>Sets the width of the mid-line to <em>w.</em>
+<p>See also:  <a href="qframe.html#b0">midLineWidth</a>() and <a href="qframe.html#a7">setLineWidth</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qframe.h: 1998/08/21
+<li>qframe.cpp: 1998/08/12
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

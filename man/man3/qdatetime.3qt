@@ -1,0 +1,202 @@
+.TH QDateTime 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QDateTime \- Combines QDate and QTime into a single class
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qdatetime.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QDateTime ()"
+.br
+.ti -1c
+.BI "QDateTime ( const QDate & )"
+.br
+.ti -1c
+.BI "QDateTime ( const QDate &, const QTime & )"
+.br
+.ti -1c
+.BI "bool isNull () const"
+.br
+.ti -1c
+.BI "bool isValid () const"
+.br
+.ti -1c
+.BI "QDate date () const"
+.br
+.ti -1c
+.BI "QTime time () const"
+.br
+.ti -1c
+.BI "void setDate ( const QDate & date )"
+.br
+.ti -1c
+.BI "void setTime ( const QTime & time )"
+.br
+.ti -1c
+.BI "void setTime_t ( uint secsSince1Jan1970UTC )"
+.br
+.ti -1c
+.BI "QString toString () const"
+.br
+.ti -1c
+.BI "QDateTime addDays ( int days ) const"
+.br
+.ti -1c
+.BI "QDateTime addSecs ( int secs ) const"
+.br
+.ti -1c
+.BI "int daysTo ( const QDateTime & ) const"
+.br
+.ti -1c
+.BI "int secsTo ( const QDateTime & ) const"
+.br
+.ti -1c
+.BI "bool operator== ( const QDateTime & dt ) const"
+.br
+.ti -1c
+.BI "bool operator!= ( const QDateTime & dt ) const"
+.br
+.ti -1c
+.BI "bool operator< ( const QDateTime & dt ) const"
+.br
+.ti -1c
+.BI "bool operator<= ( const QDateTime & dt ) const"
+.br
+.ti -1c
+.BI "bool operator> ( const QDateTime & dt ) const"
+.br
+.ti -1c
+.BI "bool operator>= ( const QDateTime & dt ) const"
+.br
+.in -1c
+.SS "Static Public Members"
+.in +1c
+.ti -1c
+.BI "QDateTime currentDateTime ()"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "QDataStream & operator<< (QDataStream & " "s" ", const QDateTime & " "dt" ")"
+.br
+.ti -1c
+.BI "QDataStream & operator>> (QDataStream & " "s" ", QDateTime & " "dt" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The QDateTime class combines QDate and QTime into a single class.
+.PP
+QDateTime provides high precision date and time functions since it can work with Gregorian dates up to about year 8000.
+.PP
+Most countries that use the Gregorian calendar switched to it between 1550 and 1920.
+.PP
+See also: QDate and QTime.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QDateTime::QDateTime ()"
+Constructs a null datetime (i.e. null date and null time). A null datetime is invalid, since the date is invalid.
+.SH "QDateTime::QDateTime ( const QDate & date )"
+Constructs a datetime with date \fIdate\fR and null time (00:00:00.000).
+.SH "QDateTime::QDateTime ( const QDate & date, const QTime & time )"
+Constructs a datetime with date \fIdate\fR and time \fItime.\fR
+.SH "QDateTime QDateTime::addDays ( int ndays ) const"
+Returns the datetime plus \fIndays\fR days.
+.PP
+See also: daysTo().
+.SH "QDateTime QDateTime::addSecs ( int nsecs ) const"
+Returns the datetime plus \fInsecs\fR seconds.
+.PP
+See also: secsTo().
+.SH "QDateTime QDateTime::currentDateTime () \fC[static]\fR"
+Returns the current datetime.
+.PP
+See also: QDate::currentDate() and QTime::currentTime().
+.SH "QDate QDateTime::date () const"
+Returns the date part of this datetime.
+.PP
+See also: time().
+.SH "int QDateTime::daysTo ( const QDateTime & dt ) const"
+Returns the number of days from this datetime to \fIdt,\fR which is negative if \fIdt\fR is in the past.
+.PP
+See also: addDays() and secsTo().
+.SH "bool QDateTime::isNull () const"
+Returns TRUE if both the date and the time are null. A null date is invalid.
+.PP
+See also: QDate::isNull() and QTime::isNull().
+.SH "bool QDateTime::isValid () const"
+Returns TRUE if both the date and the time are value.
+.PP
+See also: QDate::isValid() and QTime::isValid().
+.SH "bool QDateTime::operator!= ( const QDateTime & dt ) const"
+Returns TRUE if this datetime is different from \fIdt,\fR or FALSE if they are equal.
+.PP
+See also: operator==().
+.SH "bool QDateTime::operator< ( const QDateTime & dt ) const"
+Returns TRUE if this datetime is before \fIdt,\fR otherwise FALSE.
+.SH "bool QDateTime::operator<= ( const QDateTime & dt ) const"
+Returns TRUE if this datetime is before or equal to \fIdt,\fR otherwise FALSE.
+.SH "bool QDateTime::operator== ( const QDateTime & dt ) const"
+Returns TRUE if this datetime is equal to \fIdt,\fR or FALSE if they are different.
+.PP
+See also: operator!=().
+.SH "bool QDateTime::operator> ( const QDateTime & dt ) const"
+Returns TRUE if this datetime is after \fIdt,\fR otherwise FALSE.
+.SH "bool QDateTime::operator>= ( const QDateTime & dt ) const"
+Returns TRUE if this datetime is equal to or after \fIdt,\fR otherwise FALSE.
+.SH "int QDateTime::secsTo ( const QDateTime & dt ) const"
+Returns the number of seconds from this datetime to \fIdt,\fR which is negative if \fIt\fR is in the past.
+.PP
+Example:
+.PP
+.nf
+.br
+    QDateTime dt = QDateTime::currentDateTime();
+.br
+    QDateTime x( QDate(dt.year(),12,24), QTime(17,00) );
+.br
+    debug( "There are %d seconds to Christmas", dt.secsTo(x) );
+.fi
+.PP
+See also: addSecs(), daysTo() and QTime::secsTo().
+.SH "void QDateTime::setDate ( const QDate & date )"
+Sets the date part of this datetime.
+.PP
+See also: setTime().
+.SH "void QDateTime::setTime ( const QTime & time )"
+Sets the time part of this datetime.
+.PP
+See also: setDate().
+.SH "void QDateTime::setTime_t ( uint secsSince1Jan1970UTC )"
+Sets the local date and time given the number of seconds that have passed since 00:00:00 on January 1, 1970, Coordinated Universal Time (UTC). On systems that do not support timezones this function will behave as if local time were UTC.
+.SH "QTime QDateTime::time () const"
+Returns the time part of this datetime.
+.PP
+See also: date().
+.SH "QString QDateTime::toString () const"
+Returns the datetime as a string.
+.PP
+The string format is "Sat May 20 1995 03:40:13".
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "QDataStream & operator<< (QDataStream & s, const QDateTime & dt)"
+Writes a datetime to the stream.
+.PP
+Serialization format: [QDate QTime].
+.SH "QDataStream & operator>> (QDataStream & s, QDateTime & dt)"
+Reads a datetime from the stream.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qdatetime.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,114 @@
+.TH QGroupBox 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QGroupBox \- Group box frame with a title
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qgroupbox.h>\fR
+.PP
+Inherits QFrame.
+.PP
+Inherited by QButtonGroup.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QGroupBox ( QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "QGroupBox ( const char * " "title" ", QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "const char* title () const"
+.br
+.ti -1c
+.BI "void setTitle ( const char * )"
+.br
+.ti -1c
+.BI "int alignment () const"
+.br
+.ti -1c
+.BI "void setAlignment ( int )"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void paintEvent ( QPaintEvent * )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QGroupBox widget provides a group box frame with a title.
+.PP
+The intended use of a group box is to show that a number of widgets (i.e. child widgets) are logically related. QPrintDialog is a good example; each of its three panes is one group box.
+.PP
+By default, the group's setFont() and setPalette() functions do not change the appearance of the widgets it contaisn, but you can use setFontPropagation() and setPalettePropagation() to change that.
+.PP
+Qt also provides a more specialized group box, QButtonGroup, that is very useful for organizing buttons in a group.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+Examples:
+.(l
+xform/xform.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QGroupBox::QGroupBox ( QWidget * parent=0, const char * name=0 )"
+Constructs a group box widget with no title.
+.PP
+The \fIparent\fR and \fIname\fR arguments are passed to the QWidget constructor.
+.SH "QGroupBox::QGroupBox ( const char * title, QWidget * parent=0, const char * name=0 )"
+Constructs a group box with a title.
+.PP
+The \fIparent\fR and \fIname\fR arguments are passed to the QWidget constructor.
+.SH "int QGroupBox::alignment () const"
+Returns the alignment of the group box title.
+.PP
+The default alignment is \fCAlignHCenter.\fR
+.PP
+See also: setAlignment().
+.SH "void QGroupBox::paintEvent ( QPaintEvent * event ) \fC[virtual protected]\fR"
+Handles paint events for the group box.
+.PP
+Reimplemented from QWidget.
+.SH "void QGroupBox::setAlignment ( int alignment )"
+Sets the alignment of the group box title.
+.PP
+The title is always placed on the upper frame line, however, the horizontal alignment can be specified by the \fIalignment\fR parameter.
+.PP
+The \fIalignment\fR is the bitwise OR of the following flags:
+.TP
+\fCAlignLeft\fR aligns the title text to the left.
+.TP
+\fCAlignRight\fR aligns the title text to the right.
+.TP
+\fCAlignHCenter\fR aligns the title text centered.
+.PP
+See also: alignment().
+.SH "void QGroupBox::setTitle ( const char * title )"
+Sets the group box title text to \fItitle.\fR
+.PP
+Examples:
+.(l
+xform/xform.cpp widgets/widgets.cpp
+.)l
+.SH "const char* QGroupBox::title () const"
+Returns the group box title text.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qgroupbox.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,76 @@
+.TH QListBoxPixmap 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QListBoxPixmap \- List box items with a pixmap
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qlistbox.h>\fR
+.PP
+Inherits QListBoxItem.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QListBoxPixmap ( const QPixmap & )"
+.br
+.ti -1c
+.BI "\fB~QListBoxPixmap\fR ()"
+.br
+.ti -1c
+.BI "virtual const QPixmap* pixmap () const"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void paint ( QPainter * )"
+.br
+.ti -1c
+.BI "virtual int height ( const QListBox * ) const"
+.br
+.ti -1c
+.BI "virtual int width ( const QListBox * ) const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QListBoxPixmap class provides list box items with a pixmap.
+.PP
+See also: QListBox and QListBoxItem.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QListBoxPixmap::QListBoxPixmap ( const QPixmap & pixmap )"
+Creates a new list box item showing the pixmap \fIpixmap.\fR
+.SH "QListBoxPixmap::~QListBoxPixmap ()"
+Destroys the item.
+.SH "int QListBoxPixmap::height ( const QListBox * ) const \fC[virtual protected]\fR"
+Returns the height of the pixmap.
+.PP
+See also: paint() and width().
+.PP
+Reimplemented from QListBoxItem.
+.SH "void QListBoxPixmap::paint ( QPainter * p ) \fC[virtual protected]\fR"
+Draws the pixmap using painter \fIp.\fR
+.PP
+Reimplemented from QListBoxItem.
+.SH "const QPixmap * QListBoxPixmap::pixmap () const \fC[virtual]\fR"
+Returns the pixmap connected with the item.
+.PP
+Reimplemented from QListBoxItem.
+.SH "int QListBoxPixmap::width ( const QListBox * ) const \fC[virtual protected]\fR"
+Returns the width of the pixmap.
+.PP
+See also: paint() and height().
+.PP
+Reimplemented from QListBoxItem.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qlistboxpixmap.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

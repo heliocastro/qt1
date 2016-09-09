@@ -1,0 +1,46 @@
+.TH QLNode 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QLNode \- Internal class for the QList template collection
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qglist.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "GCI getData ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QLNode class is an internal class for the QList template collection.
+.PP
+QLNode is a doubly linked list node; it has three pointers:
+.IP 1
+Pointer to the previous node.
+.IP 2
+Pointer to the next node.
+.IP 3
+Pointer to the actual data.
+.PP
+Sometimes it might be practical to have direct access to the list nodes in a QList, but it is seldom required.
+.PP
+\fBWarning:\fR Be very careful if you want to access the list nodes. The heap can easily get corrupted if you make a mistake.
+.PP
+See also: QList::currentNode(), QList::removeNode() and QList::takeNode().
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "GCI QLNode::getData ()"
+Returns a pointer (\fCvoid*)\fR to the actual data in the list node.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qlnode.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

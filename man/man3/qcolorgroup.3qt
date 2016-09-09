@@ -1,0 +1,160 @@
+.TH QColorGroup 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QColorGroup \- Group of widget colors
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qpalette.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QColorGroup ()"
+.br
+.ti -1c
+.BI "QColorGroup ( const QColor & " "foreground" ", const QColor & " "background" ", const QColor & " "light" ", const QColor & " "dark" ", const QColor & " "mid" ", const QColor & " "text" ", const QColor & base )"
+.br
+.ti -1c
+.BI "\fB~QColorGroup\fR ()"
+.br
+.ti -1c
+.BI "const QColor& foreground () const"
+.br
+.ti -1c
+.BI "const QColor& background () const"
+.br
+.ti -1c
+.BI "const QColor& light () const"
+.br
+.ti -1c
+.BI "QColor midlight () const"
+.br
+.ti -1c
+.BI "const QColor& dark () const"
+.br
+.ti -1c
+.BI "const QColor& mid () const"
+.br
+.ti -1c
+.BI "const QColor& text () const"
+.br
+.ti -1c
+.BI "const QColor& base () const"
+.br
+.ti -1c
+.BI "bool operator== ( const QColorGroup & g ) const"
+.br
+.ti -1c
+.BI "bool operator!= ( const QColorGroup & g ) const"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "QDataStream & operator<< (QDataStream & " "s" ", const QColorGroup & " "g" ")"
+.br
+.ti -1c
+.BI "QDataStream & operator>> (QDataStream & " "s" ", QColorGroup & " "g" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The QColorGroup class contains a group of widget colors.
+.PP
+A color group contains a group of colors used by widgets for drawing themselves. Widgets should not use colors like "red" and "turqoise" but rather "foreground" and "base", where possible.
+.PP
+We have identified eight distinct color roles:
+.IP 1
+Foreground (graphics foreground color)
+.IP 2
+Background (general background color)
+.IP 3
+Light (lighter than background color, for shadow effects)
+.IP 4
+Midlight (between Background and Light, for shadow effects)
+.IP 5
+Dark (darker than the background color, for shadow effects)
+.IP 6
+Medium (between background and dark, used for shadow and contrast effects)
+.IP 7
+Text (usually the same as the foreground color, but sometimes text and other foreground are not the same)
+.IP 8
+Base (used as background color for some widgets). Usually white or another light color.
+.PP
+We have not seen any good, well-made and usable widgets that use more than these eight color roles.
+.PP
+A QPalette contains three color groups.
+.PP
+The current widget color group is returned by QWidget::colorGroup().
+.PP
+See also: QColor and QPalette.
+.PP
+Examples:
+.(l
+xform/xform.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QColorGroup::QColorGroup ()"
+Constructs a color group with all colors set to black.
+.SH "QColorGroup::QColorGroup ( const QColor & foreground, const QColor & background, const QColor & light, const QColor & dark, const QColor & mid, const QColor & text, const QColor & base )"
+Constructs a color group with the specified colors.
+.SH "QColorGroup::~QColorGroup ()"
+Destroys the color group.
+.SH "const QColor & QColorGroup::background () const"
+Returns the background color of the color group.
+.SH "const QColor & QColorGroup::base () const"
+Returns the base color of the color group.
+.SH "const QColor & QColorGroup::dark () const"
+Returns the dark color of the color group.
+.SH "const QColor & QColorGroup::foreground () const"
+Returns the foreground color of the color group.
+.SH "const QColor & QColorGroup::light () const"
+Returns the light color of the color group.
+.SH "const QColor & QColorGroup::mid () const"
+Returns the medium color of the color group.
+.SH "QColor QColorGroup::midlight () const"
+Returns the midlight color of the color group. Currently, this is a lightened version of the background, but this may change in the future, to return a \fCconst QColor &\fR from the palette.
+.SH "bool QColorGroup::operator!= ( const QColorGroup & g ) const"
+Returns TRUE if this color group is different from \fIg,\fR or FALSE if it is equal to \fIg.\fR
+.PP
+See also: operator!=().
+.SH "bool QColorGroup::operator== ( const QColorGroup & g ) const"
+Returns TRUE if this color group is equal to \fIg,\fR or FALSE if it is different from \fIg.\fR
+.PP
+See also: operator==().
+.SH "const QColor & QColorGroup::text () const"
+Returns the text foreground color of the color group.
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "QDataStream & operator<< (QDataStream & s, const QColorGroup & g)"
+Writes a color group to the stream.
+.PP
+Serialization format:
+.IP 1
+QColor foreground
+.IP 2
+QColor background
+.IP 3
+QColor light
+.IP 4
+QColor dark
+.IP 5
+QColor mid
+.IP 6
+QColor text
+.IP 7
+QColor base The colors are serialized in the listed order.
+.SH "QDataStream & operator>> (QDataStream & s, QColorGroup & g)"
+Reads a color group from the stream.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qcolorgroup.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

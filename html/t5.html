@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>
+Qt Tutorial - Chapter 5
+</title></head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Chapter 5: Building Blocks</h1><br clear="all">
+<p>
+<center><img src="t5.gif" alt="Screenshot of tutorial five"></center>
+<p>
+This example shows how to create and connect together several widgets
+using signals and slots, and how to handle resize events.
+<p>
+<pre>/****************************************************************
+**
+** Qt tutorial 5
+**
+****************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a href="qscrollbar-h.html">qscrollbar.h</a>&gt;
+#include &lt;<a href="qlcdnumber-h.html">qlcdnumber.h</a>&gt;
+#include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+
+class MyWidget : public QWidget
+{
+public:
+    MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+protected:
+    void resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * );
+private:
+    <a href="qpushbutton.html">QPushButton</a> *quit;
+    <a href="qscrollbar.html">QScrollBar</a>  *sBar;
+    <a href="qlcdnumber.html">QLCDNumber</a>  *lcd;
+};
+
+MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    <a href="qwidget.html#c6">setMinimumSize</a>( 200, 200 );
+
+    quit = new <a href="qpushbutton.html">QPushButton</a>( "Quit", this, "quit" );
+    quit-&gt;<a href="qpushbutton.html#b4">setGeometry</a>( 10, 10, 75, 30 );
+    quit-&gt;<a href="qwidget.html#f9">setFont</a>( <a href="qfont.html">QFont</a>( "Times", 18, QFont::Bold ) );
+
+    <a href="qobject.html#f2">connect</a>( quit, SIGNAL(clicked()), qApp, SLOT(quit()) );
+
+    lcd  = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "lcd" );
+    lcd-&gt;<a href="qwidget.html#l2">move</a>( 10, quit-&gt;<a href="qwidget.html#b6">y</a>() + quit-&gt;<a href="qwidget.html#c0">height</a>() + 10 );
+
+    sBar = new <a href="qscrollbar.html">QScrollBar</a>( 0, 99,                       // range
+                           1, 10,                       // line/page steps
+                           0,                           // inital value
+                           QScrollBar::Horizontal,      // orientation
+                           this, "scrollbar" );
+
+    <a href="qobject.html#f2">connect</a>( sBar, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)) );
+}
+
+void <a name="340"></a>MyWidget::resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * )
+{
+    sBar-&gt;<a href="qwidget.html#l5">setGeometry</a>( 10, <a href="qwidget.html#c0">height</a>() - 10 - 16, <a href="qwidget.html#b9">width</a>() - 20, 16 );
+    lcd-&gt;<a href="qwidget.html#l4">resize</a>( sBar-&gt;<a href="qwidget.html#b9">width</a>(), sBar-&gt;<a href="qwidget.html#b6">y</a>() - lcd-&gt;<a href="qwidget.html#b6">y</a>() - 5 );
+}
+
+int main( int argc, char **argv )
+{
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+    MyWidget w;
+    w.<a href="qwidget.html#l5">setGeometry</a>( 100, 100, 200, 200 );
+    a.<a href="qapplication.html#b9">setMainWidget</a>( &amp;w );
+    w.<a href="qwidget.html#k2">show</a>();
+    return a.<a href="qapplication.html#c9">exec</a>();
+}
+</pre>
+<p>
+<h2>Line by Line Walk-Through</h2>
+<p>
+<pre>
+    #include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+    #include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+    #include &lt;<a href="qscrollbar-h.html">qscrollbar.h</a>&gt;
+    #include &lt;<a href="qlcdnumber-h.html">qlcdnumber.h</a>&gt;
+    #include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+</pre>
+<p>
+Two new include files here, qscrollbar.h and qlcdnumber.h, because we use two
+new classes; QScrollBar and QLCDNumber.
+<p>
+<pre>
+    class MyWidget : public QWidget
+    {
+    public:
+        MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+</pre>
+<p>
+Nothing new compared to the previous chapter.
+<p>
+<pre>
+    protected:
+        void resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * );
+</pre>
+<p>
+MyWidget now gains the ability to handle resize event.
+<p>
+resizeEvent() is one of many virtual functions in QWidget which are used
+to pass events of various kinds to widgets.  These event functions are one
+of the the central control flow mechanisms in Qt, the other is the <a href="metaobjects.html">signal/slot mechanism</a>.
+<p>
+This one is called, unsurprisingly, whenever the user or a part of the
+program resizes the widget.
+<p>
+<pre>
+    private:
+        <a href="qpushbutton.html">QPushButton</a> *quit;
+        <a href="qscrollbar.html">QScrollBar</a>  *sBar;
+        <a href="qlcdnumber.html">QLCDNumber</a>  *lcd;
+    };
+</pre>
+<p>
+In chapter three, MyWidget didn't remember its child widgets.  Now it
+does (so it can resize them).
+<p>
+<pre>
+    MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qwidget.html">QWidget</a>( parent, name )
+    {
+        <a href="qwidget.html#c6">setMinimumSize</a>( 200, 200 );
+</pre>
+<p>
+Since we want MyWidget to handle all sizes greater than 200 by 200
+pixels, we only set a minimum size.
+<p>
+<a name=constructor></a>
+<p>
+<pre>
+        lcd  = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "lcd" );
+        lcd-&gt;<a href="qwidget.html#l2">move</a>( 10, quit-&gt;<a href="qwidget.html#b6">y</a>() + quit-&gt;<a href="qwidget.html#c0">height</a>() + 10 );
+</pre>
+<p>
+<code>lcd</code> is a QLCDNumber, a widget which displays numbers in an LCD-like
+fashion.  This instance is set up to display two digits, be a child of
+<em>this</em> and is named "lcd".
+<p>
+It is located at x position 10 and a y position giving 10 pixels between the
+quit button and the LCD number.  It is a good idea to take a look at
+<a href="coordsys.html">The Coordinate System</a>.
+Note that its size is not set here, resizeEvent() will do that when
+MyWidget's own size is set.
+<p>
+Hardcoding positions like this is tedious when you have many widgets,
+but Qt does not include a nice designer yet.  Stay tuned.
+<p>
+<pre>
+        sBar = new <a href="qscrollbar.html">QScrollBar</a>( 0, 99,                       // range
+                               1, 10,                       // line/page steps
+                               0,                           // inital value
+                               QScrollBar::Horizontal,      // orientation
+                               this, "scrollbar" );
+</pre>
+<p>
+QScrollBar is a classical window system scroll bar.  This is one of
+several possible constructors, there are other constructors that take
+fewer arguments but then we'd have to set up the same state using
+several function calls.
+<p>
+We don't set up the scroll bar's geometry, the resize event will handle
+it.
+<p>
+<pre>
+        <a href="qobject.html#f2">connect</a>( sBar, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)) );
+</pre>
+<p>
+Here we use the <a href="metaobjects.html">signal/slot mechanism</a>
+to connect the scroll bar's valueChanged() signal to the LCD number's
+display() slot.
+<p>
+Whenever the scroll bar's value changes, it broadcasts the new value by
+emitting the valueChanged() signal.  Since that signal is connected to
+the LCD number's display() slot, the slot is called when the signal is
+broadcast.  Neither of the objects know about the other.  This is
+essential in component programming.
+<p>
+Slots are otherwise normal C++ member functions and follow the normal
+C++ access rules.
+<p>
+<a name=resize></a>
+<p>
+<pre>
+    void <a name="340"></a>MyWidget::resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * )
+    {
+        sBar-&gt;<a href="qwidget.html#l5">setGeometry</a>( 10, <a href="qwidget.html#c0">height</a>() - 10 - 16, <a href="qwidget.html#b9">width</a>() - 20, 16 );
+        lcd-&gt;<a href="qwidget.html#l4">resize</a>( sBar-&gt;<a href="qwidget.html#b9">width</a>(), sBar-&gt;<a href="qwidget.html#b6">y</a>() - lcd-&gt;<a href="qwidget.html#b6">y</a>() - 5 );
+    }
+</pre>
+<p>
+Here we want to fit the child widgets nicely inside our widget when it is
+resized.  We want the LCD number to be above the scroll bar.  First we
+position the scroll bar at the bottom of MyWidget.
+<p>
+The scroll bar's geometry is set so there is a 10-pixel border to the
+left, right and below it, and its height is fixed at 16 pixels, which
+is recommended by most style guides.
+<p>
+Remember that the order of arguments to setGeometry() is left, top,
+width, height.
+<p>
+The x position is easy; 10 pixels from the left edge. The y position is
+calculated from the total height of the widget. We subtract 10 pixels
+for the border and 16 pixels for the scroll bar's height.
+The width of the scroll bar should be the entire width of MyWidget
+less a 10 pixel borders on each side. As mentioned above, we give the
+scroll bar a height of 16 pixels.
+<p>
+Finally, the LCD number is resized. The width is easy. We give the same
+width as the scroll bar. The height is the distance from the top of the
+scroll bar to the top of the LCD number less a 5 pixel border.
+Remember from the constructor that we have positioned the LCD number
+below the quit button.
+<p>
+Auto-placement of widgets like we do here is tedious. Qt includes
+geometry management classes that make this job easier.  The classes are
+QBoxLayout and QGridLayout. Later versions of this tutorial will include
+chapters on geometry management. Stay tuned!
+<p>
+<h2>Behavior</h2>
+<p>
+The LCD number reflects everything you do to the scroll bar, and the
+widget handles resizing well.
+<p>
+<h2>Excercises</h2>
+<p>
+Try changing the LCD number to add more digits or <a href="qlcdnumber.html#a9">change mode.</a> You can even add four push
+buttons to set mode.
+<p>
+You can also change the scroll bar's range.
+<p>
+Try to make the application quit when the LCD number overflows.
+<p>
+You may now go on to <a href="t6.html">chapter six.</a>
+<p>
+[<a href="t4.html">Previous tutorial</a>]
+[<a href="t6.html">Next tutorial</a>]
+[<a href="tutorial.html">Main tutorial page</a>]
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

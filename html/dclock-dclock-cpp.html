@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - dclock/dclock.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Digital Clock</h1><br clear="all">
+
+  This example displays a digital LCD clock and can switch between time
+  and date.
+
+  <hr>
+
+  <pre>/****************************************************************************
+** &#36;Id&#58; dclock.h,v 2.3 1998/06/16 11:39:32 warwick Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#ifndef DCLOCK_H
+#define DCLOCK_H
+
+#include &lt;<a href="qlcdnumber-h.html">qlcdnumber.h</a>&gt;
+
+class DigitalClock : public QLCDNumber          // digital clock widget
+{
+    Q_OBJECT
+public:
+    DigitalClock( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+
+protected:                                      // event handlers
+    void        timerEvent( <a href="qtimerevent.html">QTimerEvent</a> * );
+    void        mousePressEvent( <a href="qmouseevent.html">QMouseEvent</a> * );
+
+private slots:                                  // internal slots
+    void        stopDate();
+    void        showTime();
+
+private:                                        // internal data
+    void        showDate();
+
+    bool        showingColon;
+    int         normalTimer;
+    int         showDateTimer;
+};
+
+#endif // DCLOCK_H
+</pre>
+
+<pre>/****************************************************************************
+** &#36;Id&#58; dclock.cpp,v 2.4 1998/06/16 11:39:32 warwick Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "dclock.h"
+#include &lt;<a name="qdatetime.h"></a><a href="qdatetime-h.html">qdatetime.h</a>&gt;
+
+//
+// Constructs a DigitalClock widget with a parent and a name.
+//
+
+DigitalClock::DigitalClock( <a name="QWidget"></a><a href="qwidget.html">QWidget</a> *parent, const char *name )
+    : <a name="QLCDNumber"></a><a href="qlcdnumber.html">QLCDNumber</a>( parent, name )
+{
+    showingColon = FALSE;
+    <a name="setFrameStyle"></a><a href="qframe.html#a4">setFrameStyle</a>( QFrame::Panel | QFrame::Raised );
+    <a name="setLineWidth"></a><a href="qframe.html#a7">setLineWidth</a>( 2 );                          // set frame line width
+    <a name="showTime"></a><a href="#40">showTime</a>();                                 // display the current time
+    normalTimer = startTimer( 500 );            // 1/2 second timer events
+    showDateTimer = -1;                         // not showing date
+}
+
+//
+// Handles timer events for the digital clock widget.
+// There are two different timers; one timer for updating the clock
+// and another one for switching back from date mode to time mode.
+//
+
+void <a name="36"></a>DigitalClock::timerEvent( <a name="QTimerEvent"></a><a href="qtimerevent.html">QTimerEvent</a> *e )
+{
+    if ( e-&gt;timerId() == showDateTimer )        // stop showing date
+        <a name="stopDate"></a><a href="#39">stopDate</a>();
+    else {                                      // normal timer
+        if ( showDateTimer == -1 )              // not showing date
+            <a href=#40>showTime</a>();
+    }
+}
+
+//
+// Enters date mode when the left mouse button is pressed.
+//
+
+void <a name="37"></a>DigitalClock::mousePressEvent( <a name="QMouseEvent"></a><a href="qmouseevent.html">QMouseEvent</a> *e )
+{
+    if ( e-&gt;<a name="button"></a><a href="qmouseevent.html#a8">button</a>() == LeftButton )            // left button pressed
+        <a name="showDate"></a><a href="#38">showDate</a>();
+}
+
+//
+// Shows the current date in the internal lcd widget.
+// Fires a timer to stop showing the date.
+//
+
+void <a name="38"></a>DigitalClock::showDate()
+{
+    if ( showDateTimer != -1 )                  // already showing date
+        return;
+    <a name="QDate"></a><a href="qdate.html">QDate</a> d = QDate::currentDate();
+    <a name="QString"></a><a href="qstring.html">QString</a> s;
+    s.<a name="sprintf"></a><a href="qstring.html#c7">sprintf</a>( "%2d %2d", d.<a name="month"></a><a href="qdate.html#a5">month</a>(), d.<a name="day"></a><a href="qdate.html#a6">day</a>() );
+    <a name="display"></a><a href="qlcdnumber.html#b5">display</a>( s );                               // sets the LCD number/text
+    showDateTimer = startTimer( 2000 );         // keep this state for 2 secs
+}
+
+//
+// Stops showing the date.
+//
+
+void <a name="39"></a>DigitalClock::stopDate()
+{
+    <a name="killTimer"></a><a href="qobject.html#b7">killTimer</a>( showDateTimer );
+    showDateTimer = -1;
+    <a href=#40>showTime</a>();
+}
+
+//
+// Shows the current time in the internal lcd widget.
+//
+
+void <a name="40"></a>DigitalClock::showTime()
+{
+    showingColon = !showingColon;               // toggle/blink colon
+    <a href="qstring.html">QString</a> s = QTime::currentTime().toString().left(5);
+    if ( !showingColon )
+        s[2] = ' ';
+    if ( s[0] == '0' )
+        s[0] = ' ';
+    <a href="qlcdnumber.html#b5">display</a>( s );                               // set LCD number/text
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

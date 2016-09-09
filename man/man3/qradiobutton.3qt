@@ -1,0 +1,136 @@
+.TH QRadioButton 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QRadioButton \- Radio button with a text label
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qradiobutton.h>\fR
+.PP
+Inherits QButton.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QRadioButton ( QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "QRadioButton ( const char * " "text" ", QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "bool isChecked () const"
+.br
+.ti -1c
+.BI "void setChecked ( bool check )"
+.br
+.ti -1c
+.BI "virtual QSize sizeHint () const"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual bool hitButton ( const QPoint & ) const"
+.br
+.ti -1c
+.BI "virtual void drawButton ( QPainter * )"
+.br
+.ti -1c
+.BI "virtual void drawButtonLabel ( QPainter * )"
+.br
+.ti -1c
+.BI "virtual void mouseReleaseEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void keyPressEvent ( QKeyEvent * )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QRadioButton widget provides a radio button with a text label.
+.PP
+QRadioButton and QCheckBox are both toggle buttons, that is, they can be switched on (checked) or off (unchecked). Unlike check boxes, radio buttons are normally organized in groups where only one radio button can be switched on at a time.
+.PP
+The QButtonGroup widget is very useful for defining groups of radio buttons.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+See also: QPushButton, QToolButton and GUI Design Handbook: Radio Button
+.PP
+Examples:
+.(l
+drawdemo/drawdemo.cpp xform/xform.cpp pref/pref.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QRadioButton::QRadioButton ( QWidget * parent=0, const char * name=0 )"
+Constructs a radio button with no text.
+.PP
+The \fIparent\fR and \fIname\fR arguments are sent to the QWidget constructor.
+.SH "QRadioButton::QRadioButton ( const char * text, QWidget * parent=0, const char * name=0 )"
+Constructs a radio button with a text.
+.PP
+The \fIparent\fR and \fIname\fR arguments are sent to the QWidget constructor.
+.SH "void QRadioButton::drawButton ( QPainter * paint ) \fC[virtual protected]\fR"
+Draws the radio button, but not the button label.
+.PP
+See also: drawButtonLabel().
+.PP
+Reimplemented from QButton.
+.SH "void QRadioButton::drawButtonLabel ( QPainter * p ) \fC[virtual protected]\fR"
+Draws the radio button label.
+.PP
+See also: drawButton().
+.PP
+Reimplemented from QButton.
+.SH "bool QRadioButton::hitButton ( const QPoint & pos ) const \fC[virtual protected]\fR"
+Reimplements QButton::hitButton(). This function is implemented to prevent a radio button that is on from being switched off.
+.PP
+Reimplemented from QButton.
+.SH "bool QRadioButton::isChecked () const"
+Returns TRUE if the radio button is checked, or FALSE if it is not checked.
+.PP
+See also: setChecked().
+.SH "void QRadioButton::keyPressEvent ( QKeyEvent * e ) \fC[virtual protected]\fR"
+Obsolete; to be removed in Qt 2.0.
+.PP
+Reimplemented from QWidget.
+.SH "void QRadioButton::mouseReleaseEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Obsolete; to be removed in Qt 2.0.
+.PP
+Reimplemented from QWidget.
+.SH "void QRadioButton::setChecked ( bool check )"
+Checks the radio button if \fIcheck\fR is TRUE, or unchecks it if \fIcheck\fR is FALSE.
+.PP
+Calling this function does not affect other radio buttons unless a radio button group has been defined using the QButtonGroup widget.
+.PP
+See also: isChecked().
+.PP
+Examples:
+.(l
+drawdemo/drawdemo.cpp widgets/widgets.cpp
+.)l
+.SH "QSize QRadioButton::sizeHint () const \fC[virtual]\fR"
+Returns a size which fits the contents of the radio button.
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.PP
+Reimplemented from QWidget.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qradiobutton.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

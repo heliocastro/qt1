@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QWMatrix Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QWMatrix Class Reference</h1><br clear="all">
+<p>
+The QWMatrix class specifies 2D transformations of a coordinate system.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qwmatrix-h.html">qwmatrix.h</a>&gt;</code>
+<p><a href="qwmatrix-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qwmatrix.html#a0"><strong>QWMatrix</strong></a> () </span>
+<li><span class="fn"><a href="qwmatrix.html#a1"><strong>QWMatrix</strong></a> ( float m11, float m12, float m21, float m22, float dx, float dy ) </span>
+<li><span class="fn">void <a href="qwmatrix.html#a2"><strong>setMatrix</strong></a> ( float m11, float m12, float m21, float m22, float dx, float dy ) </span>
+<li><span class="fn">float <a href="qwmatrix.html#a3"><strong>m11</strong></a> () const</span>
+<li><span class="fn">float <a href="qwmatrix.html#a4"><strong>m12</strong></a> () const</span>
+<li><span class="fn">float <a href="qwmatrix.html#a5"><strong>m21</strong></a> () const</span>
+<li><span class="fn">float <a href="qwmatrix.html#a6"><strong>m22</strong></a> () const</span>
+<li><span class="fn">float <a href="qwmatrix.html#a7"><strong>dx</strong></a> () const</span>
+<li><span class="fn">float <a href="qwmatrix.html#a8"><strong>dy</strong></a> () const</span>
+<li><span class="fn">void <a href="qwmatrix.html#a9"><strong>map</strong></a> ( int x, int y, int * tx, int * ty ) const</span>
+<li><span class="fn">void <a href="qwmatrix.html#b0"><strong>map</strong></a> ( float x, float y, float * tx, float * ty ) const</span>
+<li><span class="fn">QPoint <a href="qwmatrix.html#b1"><strong>map</strong></a> ( const QPoint &amp; ) const</span>
+<li><span class="fn">QRect <a href="qwmatrix.html#b2"><strong>map</strong></a> ( const QRect &amp; ) const</span>
+<li><span class="fn">QPointArray <a href="qwmatrix.html#b3"><strong>map</strong></a> ( const QPointArray &amp; ) const</span>
+<li><span class="fn">void <a href="qwmatrix.html#b4"><strong>reset</strong></a> () </span>
+<li><span class="fn">QWMatrix&amp; <a href="qwmatrix.html#b5"><strong>translate</strong></a> ( float dx, float dy ) </span>
+<li><span class="fn">QWMatrix&amp; <a href="qwmatrix.html#b6"><strong>scale</strong></a> ( float sx, float sy ) </span>
+<li><span class="fn">QWMatrix&amp; <a href="qwmatrix.html#b7"><strong>shear</strong></a> ( float sh, float sv ) </span>
+<li><span class="fn">QWMatrix&amp; <a href="qwmatrix.html#b8"><strong>rotate</strong></a> ( float a ) </span>
+<li><span class="fn">QWMatrix <a href="qwmatrix.html#b9"><strong>invert</strong></a> ( bool * = 0 ) const</span>
+<li><span class="fn">bool <a href="qwmatrix.html#c0"><strong>operator==</strong></a> ( const QWMatrix &amp; ) const</span>
+<li><span class="fn">bool <a href="qwmatrix.html#c1"><strong>operator!=</strong></a> ( const QWMatrix &amp; ) const</span>
+<li><span class="fn">QWMatrix&amp; <a href="qwmatrix.html#c2"><strong>operator*=</strong></a> ( const QWMatrix &amp; ) </span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>QWMatrix <a href="qwmatrix.html#c4"><strong>operator*</strong></a> (const QWMatrix &amp; m1, const QWMatrix &amp; m2)
+<li>QDataStream &amp; <a href="qwmatrix.html#c5"><strong>operator&lt;&lt;</strong></a> (QDataStream &amp; s, const QWMatrix &amp; m)
+<li>QDataStream &amp; <a href="qwmatrix.html#c6"><strong>operator&gt;&gt;</strong></a> (QDataStream &amp; s, QWMatrix &amp; m)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QWMatrix class specifies 2D transformations of a coordinate system.
+<p>
+The standard coordinate system of a <a href="qpaintdevice.html">paint
+device</a> has the origin located at the top left position. X
+values increase to the right, and Y values increase downwards.
+<p>This coordinate system is default for the <a href="qpainter.html">QPainter</a>, which renders
+graphics in a paint device. A user-defined coordinate system can be
+specified by setting a QWMatrix for the painter.
+<p>Example:
+<pre>    MyWidget::paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * )
+    {
+      <a href="qpainter.html">QPainter</a> p;                       // our painter
+      <a href="qwmatrix.html">QWMatrix</a> m;                       // our transformation matrix
+      m.<a href="qwmatrix.html#b8">rotate</a>( 22.5 );                 // rotated coordinate system
+      p.<a href="qpainter.html#b0">begin</a>( this );                  // start painting
+      p.<a href="qpainter.html#f1">setWorldMatrix</a>( m );            // use rotated coordinate system
+      p.<a href="qpainter.html#l4">drawText</a>( 30,20, "detator" );   // draw rotated text at 30,20
+      p.<a href="qpainter.html#b2">end</a>();                          // painting done
+    }
+</pre>
+<p>A matrix specifies how to translate, scale, shear or rotate the
+graphics, and the actual transformation is performed by the drawing
+routines in QPainter and by <a href="qpixmap.html#c7">QPixmap::xForm</a>().
+<p>The QWMatrix class contains a 3*3 matrix of the form:
+<pre>
+    m11  m12  0
+    m21  m22  0
+    dx   dy   1
+  </pre>
+<p>A matrix transforms a point in the plane to another point:
+<pre>    x' = m11*x + m21*y + dx
+    y' = m22*y + m12*x + dy
+</pre>
+<p>The point <em>(x,y)</em> is the original point, and <em>(x',y')</em> is the
+transformed point.  <em>(x',y')</em> can be transformed back to <em>(x,y)</em>
+by performing the same operation on the <a href="qwmatrix.html#b9">inverted matrix</a>.
+<p>The elements <em>dx</em> and <em>dy</em> specify horisontal and vertical
+translation.  The elements <em>m11</em> and <em>m22</em> specify horisontal and
+vertical scaling.  The elements <em>m12</em> and <em>m21</em> specify horisontal
+and vertical shearing.
+<p>The identity matrix has <em>m11</em> and <em>m22</em> set to 1, all others set
+to 0.  This matrix maps a point to itself.
+<p>Translation is the simplest transformation. Setting <em>dx</em> and <em>dy</em>
+will move the coordinate system <em>dx</em> units along the X axis and <em>dy</em> units along the Y axis.
+<p>Scaling can be done by setting <em>m11</em> and <em>m22.</em>  For example,
+setting <em>m11</em> to 2 and <em>m22</em> to 1.5 will double the height and
+increase the width by 50%.
+<p>Shearing is controlled by <em>m12</em> and <em>m21.</em> Setting these elements
+to values different from zero will twist the coordinate system.
+<p>Rotation is achieved by carefully setting both the shearing factors
+and the scaling factors.  The QWMatrix has a function that sets
+<a href="qwmatrix.html#b8">rotation</a> directly.
+<p>QWMatrix lets you combine transformations like this:
+<pre>    <a href="qwmatrix.html">QWMatrix</a> m;                                 // identity matrix
+    m.<a href="qwmatrix.html#b5">translate</a>(10, -20);                       // first translate (10,-20)
+    m.<a href="qwmatrix.html#b8">rotate</a>(25);                               // then rotate 25 degrees
+    m.<a href="qwmatrix.html#b6">scale</a>(1.2, 0.7);                          // finally scale it
+</pre>
+<p>The same example, but using basic matrix operations:
+<pre>    float a    = pi/180 * 25;                   // convert 25 to radians
+    float sina = sin(a);
+    float cosa = cos(a);
+    <a href="qwmatrix.html">QWMatrix</a> m1(0, 0, 0, 0, 10, -20);           // translation matrix
+    <a href="qwmatrix.html">QWMatrix</a> m2( cosa, sina,                    // rotation matrix
+                -sina, cosa, 0, 0 );
+    <a href="qwmatrix.html">QWMatrix</a> m3(1.2, 0, 0, 0.7, 0, 0);          // scaling matrix
+    <a href="qwmatrix.html">QWMatrix</a> m;
+    m = m3 * m2 * m1;                           // combine all transformations
+</pre>
+<p><a href="qpainter.html">QPainter</a> has functions that <a href="qpainter.html#f2">translate</a>, <a href="qpainter.html#f3">scale</a>, <a href="qpainter.html#f4">shear</a> and <a href="qpainter.html#f5">rotate</a> the coordinate system without using a
+QWMatrix.  These functions are very convenient, however, if you want to
+perform more than a single transform operation, it is more efficient to
+build a QWMatrix and call <a href="qpainter.html#f1">QPainter::setWorldMatrix</a>().
+<p>See also:  <a href="qpainter.html#f1">QPainter::setWorldMatrix</a>() and <a href="qpixmap.html#c7">QPixmap::xForm</a>().
+<p>Examples:
+ <a href="qtimage-qtimage-cpp.html#QWMatrix">qtimage/qtimage.cpp</a>
+ <a href="desktop-desktop-cpp.html#QWMatrix">desktop/desktop.cpp</a>
+ <a href="drawdemo-drawdemo-cpp.html#QWMatrix">drawdemo/drawdemo.cpp</a>
+ <a href="movies-main-cpp.html#QWMatrix">movies/main.cpp</a>
+ <a href="xform-xform-cpp.html#QWMatrix">xform/xform.cpp</a>
+ <a href="aclock-aclock-cpp.html#QWMatrix">aclock/aclock.cpp</a>
+ <a href="qmag-qmag-cpp.html#QWMatrix">qmag/qmag.cpp</a>
+ <a href="showimg-showimg-cpp.html#QWMatrix">showimg/showimg.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QWMatrix::QWMatrix ()</h3>
+<p>Constructs an identity matrix.  All elements are set to zero,
+except <em>m11</em> and <em>m22</em> (scaling) which are set to 1.
+<h3 class="fn"><a name="a1"></a>QWMatrix::QWMatrix ( float m11, float m12, float m21, float m22, float dx, float dy )</h3>
+<p>Constructs a matrix with the specified elements.
+<h3 class="fn">float <a name="a7"></a>QWMatrix::dx () const</h3>
+<p>Returns the horizontal translation.
+<h3 class="fn">float <a name="a8"></a>QWMatrix::dy () const</h3>
+<p>Returns the vertical translation.
+<h3 class="fn">QWMatrix <a name="b9"></a>QWMatrix::invert ( bool * invertible = 0 ) const</h3>
+<p>Returns the inverted matrix.
+<p>If the matrix is singular (not invertible), then the identity matrix is
+returned.
+<p>If <em>*invertible</em> is not null, then the value of <em>*invertible</em> will
+be set to TRUE or FALSE to tell if the matrix is invertible or not.
+<h3 class="fn">float <a name="a3"></a>QWMatrix::m11 () const</h3>
+<p>Returns the X scaling factor.
+<h3 class="fn">float <a name="a4"></a>QWMatrix::m12 () const</h3>
+<p>Returns the vertical shearing factor.
+<h3 class="fn">float <a name="a5"></a>QWMatrix::m21 () const</h3>
+<p>Returns the horizontal shearing factor.
+<h3 class="fn">float <a name="a6"></a>QWMatrix::m22 () const</h3>
+<p>Returns the Y scaling factor.
+<h3 class="fn"><a href="qpoint.html">QPoint</a> <a name="b1"></a>QWMatrix::map ( const <a href="qpoint.html">QPoint</a> &amp; p ) const</h3>
+<p>Returns the transformed <em>p.</em>
+<h3 class="fn"><a href="qpointarray.html">QPointArray</a> <a name="b3"></a>QWMatrix::map ( const <a href="qpointarray.html">QPointArray</a> &amp; a ) const</h3>
+<p>Returns the point array <em>a</em> transformed by calling map for each point.
+<h3 class="fn"><a href="qrect.html">QRect</a> <a name="b2"></a>QWMatrix::map ( const <a href="qrect.html">QRect</a> &amp; r ) const</h3>
+<p>Returns the tranformed rectangle <em>r.</em>
+<p>If rotation or shearing has been specified, then the bounding rectangle
+will be returned.
+<h3 class="fn">void <a name="b0"></a>QWMatrix::map ( float x, float y, float * tx, float * ty ) const</h3>
+<p>Transforms <em>(x,y)</em> to <em>(*tx,*ty),</em> using the formulae:
+<p><pre>    *tx = m11*x + m21*y + dx
+    *ty = m22*y + m12*x + dy
+</pre>
+<h3 class="fn">void <a name="a9"></a>QWMatrix::map ( int x, int y, int * tx, int * ty ) const</h3>
+<p>Transforms <em>(x,y)</em> to <em>(*tx,*ty),</em> using the formulae:
+<p><pre>    *tx = m11*x + m21*y + dx  --  (rounded to the nearest integer)
+    *ty = m22*y + m12*x + dy  --  (rounded to the nearest integer)
+</pre>
+<p>Examples:
+ <a href="xform-xform-cpp.html#map">xform/xform.cpp</a>
+<h3 class="fn">bool <a name="c1"></a>QWMatrix::operator!= ( const QWMatrix &amp; m ) const</h3>
+<p>Returns TRUE if this matrix is not equal to <em>m.</em>
+<h3 class="fn">QWMatrix &amp; <a name="c2"></a>QWMatrix::operator*= ( const QWMatrix &amp; m )</h3>
+<p>Returns the result of multiplying this matrix with <em>m.</em>
+<h3 class="fn">bool <a name="c0"></a>QWMatrix::operator== ( const QWMatrix &amp; m ) const</h3>
+<p>Returns TRUE if this matrix is equal to <em>m.</em>
+<h3 class="fn">void <a name="b4"></a>QWMatrix::reset ()</h3>
+<p>Resets the matrix to an identity matrix.
+<p>All elements are set to zero, except <em>m11</em> and <em>m22</em> (scaling)
+that are set to 1.
+<h3 class="fn">QWMatrix &amp; <a name="b8"></a>QWMatrix::rotate ( float a )</h3>
+<p>Rotates the coordinate system <em>a</em> degrees counterclockwise.
+<p>Returns a reference to the matrix.
+<p>See also:  <a href="qwmatrix.html#b5">translate</a>(), <a href="qwmatrix.html#b6">scale</a>() and <a href="qwmatrix.html#b7">shear</a>().
+<p>Examples:
+ <a href="desktop-desktop-cpp.html#rotate">desktop/desktop.cpp</a>
+ <a href="drawdemo-drawdemo-cpp.html#rotate">drawdemo/drawdemo.cpp</a>
+ <a href="xform-xform-cpp.html#rotate">xform/xform.cpp</a>
+ <a href="aclock-aclock-cpp.html#rotate">aclock/aclock.cpp</a>
+<h3 class="fn">QWMatrix &amp; <a name="b6"></a>QWMatrix::scale ( float sx, float sy )</h3>
+<p>Scales the coordinate system unit by <em>sx</em> horizontally and <em>sy</em>
+vertically.
+<p>Returns a reference to the matrix.
+<p>See also:  <a href="qwmatrix.html#b5">translate</a>(), <a href="qwmatrix.html#b7">shear</a>() and <a href="qwmatrix.html#b8">rotate</a>().
+<p>Examples:
+ <a href="qtimage-qtimage-cpp.html#scale">qtimage/qtimage.cpp</a>
+ <a href="movies-main-cpp.html#scale">movies/main.cpp</a>
+ <a href="xform-xform-cpp.html#scale">xform/xform.cpp</a>
+ <a href="aclock-aclock-cpp.html#scale">aclock/aclock.cpp</a>
+ <a href="showimg-showimg-cpp.html#scale">showimg/showimg.cpp</a>
+<h3 class="fn">void <a name="a2"></a>QWMatrix::setMatrix ( float m11, float m12, float m21, float m22, float dx, float dy )</h3>
+<p>Sets the matrix elements to the specified values.
+<h3 class="fn">QWMatrix &amp; <a name="b7"></a>QWMatrix::shear ( float sh, float sv )</h3>
+<p>Shears the coordinate system  by <em>sh</em> horizontally and <em>sv</em> vertically.
+<p>Returns a reference to the matrix.
+<p>See also:  <a href="qwmatrix.html#b5">translate</a>(), <a href="qwmatrix.html#b6">scale</a>() and <a href="qwmatrix.html#b8">rotate</a>().
+<p>Examples:
+ <a href="drawdemo-drawdemo-cpp.html#shear">drawdemo/drawdemo.cpp</a>
+ <a href="xform-xform-cpp.html#shear">xform/xform.cpp</a>
+<h3 class="fn">QWMatrix &amp; <a name="b5"></a>QWMatrix::translate ( float dx, float dy )</h3>
+<p>Moves the coordinate system <em>dx</em> along the X-axis and <em>dy</em>
+along the Y-axis.
+<p>Returns a reference to the matrix.
+<p>See also:  <a href="qwmatrix.html#b6">scale</a>(), <a href="qwmatrix.html#b7">shear</a>() and <a href="qwmatrix.html#b8">rotate</a>().
+<p>Examples:
+ <a href="drawdemo-drawdemo-cpp.html#translate">drawdemo/drawdemo.cpp</a>
+ <a href="xform-xform-cpp.html#translate">xform/xform.cpp</a>
+ <a href="aclock-aclock-cpp.html#translate">aclock/aclock.cpp</a>
+<hr><h2>Related Functions</h2>
+<h3>QWMatrix <a name="c4"></a>operator* (const QWMatrix &amp; m1, const QWMatrix &amp; m2)</h3>
+<p>Returns the product <em>m1</em> * <em>m2.</em>
+<p>Remember that matrix multiplication is not commutative, thus
+a*b != b*a.
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="c5"></a>operator&lt;&lt; (<a href="qdatastream.html">QDataStream</a> &amp; s, const QWMatrix &amp; m)</h3>
+<p>Writes a matrix to the stream and returns a reference to the stream.
+<p>Serialization format: m11, m12, m21, m22, dx and dy are serialized as
+<code>float</code> in the listed order.
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="c6"></a>operator&gt;&gt; (<a href="qdatastream.html">QDataStream</a> &amp; s, QWMatrix &amp; m)</h3>
+<p>Reads a matrix from the stream and returns a reference to the stream.
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qwmatrix.h: 1998/08/25
+<li>qwmatrix.cpp: 1998/09/20
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

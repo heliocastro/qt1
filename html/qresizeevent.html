@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QResizeEvent Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QResizeEvent Class Reference</h1><br clear="all">
+<p>
+The QResizeEvent class contains event parameters for resize events.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qevent-h.html">qevent.h</a>&gt;</code>
+<p>
+Inherits <a href="qevent.html">QEvent</a>.
+<p><a href="qresizeevent-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qresizeevent.html#a0"><strong>QResizeEvent</strong></a> ( const QSize &amp; size, const QSize &amp; oldSize ) </span>
+<li><span class="fn">const QSize&amp; <a href="qresizeevent.html#a1"><strong>size</strong></a> () const</span>
+<li><span class="fn">const QSize&amp; <a href="qresizeevent.html#a2"><strong>oldSize</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QResizeEvent class contains event parameters for resize events.
+<p>
+Resize events are sent to widgets that have been resized.
+<p>The event handler <a href="qwidget.html#o6">QWidget::resizeEvent</a>() receives resize events.
+<p>See also:  <a href="qwidget.html#l3">QWidget::resize</a>() and <a href="qwidget.html#l5">QWidget::setGeometry</a>().
+<p>Examples:
+ <a href="mainlyMotif-editor-cpp.html#QResizeEvent">mainlyMotif/editor.cpp</a>
+ <a href="tictac-tictac-cpp.html#QResizeEvent">tictac/tictac.cpp</a>
+ <a href="life-life-cpp.html#QResizeEvent">life/life.cpp</a>
+ <a href="mainlyQt-editor-cpp.html#QResizeEvent">mainlyQt/editor.cpp</a>
+ <a href="tooltip-tooltip-cpp.html#QResizeEvent">tooltip/tooltip.cpp</a>
+ <a href="drawdemo-drawdemo-cpp.html#QResizeEvent">drawdemo/drawdemo.cpp</a>
+ <a href="xform-xform-cpp.html#QResizeEvent">xform/xform.cpp</a>
+ <a href="menu-menu-cpp.html#QResizeEvent">menu/menu.cpp</a>
+ <a href="qmag-qmag-cpp.html#QResizeEvent">qmag/qmag.cpp</a>
+ <a href="showimg-showimg-cpp.html#QResizeEvent">showimg/showimg.cpp</a>
+ <a href="mainlyXt-editor-cpp.html#QResizeEvent">mainlyXt/editor.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QResizeEvent::QResizeEvent ( const <a href="qsize.html">QSize</a> &amp; size, const <a href="qsize.html">QSize</a> &amp; oldSize )</h3>
+<p>Constructs a resize event with the new and old widget sizes.
+<h3 class="fn">const <a href="qsize.html">QSize</a> &amp; <a name="a2"></a>QResizeEvent::oldSize () const</h3>
+<p>Returns the old size of the widget.
+<h3 class="fn">const <a href="qsize.html">QSize</a> &amp; <a name="a1"></a>QResizeEvent::size () const</h3>
+<p>Returns the new size of the widget, which is the same as
+<a href="qwidget.html#b8">QWidget::size</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qevent.h: 1998/10/05
+<li>qdnd_x11.cpp: 1998/12/17
+<li>qevent.cpp: 1999/01/13
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

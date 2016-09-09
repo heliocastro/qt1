@@ -1,0 +1,29 @@
+.TH QShared 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QShared \- The QShared struct is internally used for implementing shared classes
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qshared.h>\fR
+.PP
+.SH DESCRIPTION
+The QShared struct is internally used for implementing shared classes.
+.PP
+It only contains a reference count and member functions to increment and decrement it.
+.PP
+Shared classes normally have internal classes that inherit QShared and add the shared data.
+.PP
+See also:  Shared Classes
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qshared.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

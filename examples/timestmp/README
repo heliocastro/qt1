@@ -1,0 +1,13 @@
+This example is a Qt program that only uses tool classes and does not need
+an X server or X client library to run.
+
+The example demonstrates the how to use the QDir class to traverse and
+create directories, how to use QFileInfo to get information about files
+and directories, how to use a QFile and a QDataStream to read and write
+files, and how to use QDateTime to read the current time and date.
+
+The createTimeStamp() function tries to cd into the directory "time.qt" under
+the home directory. If it does not exist it tries to create one. The time
+stamp in the file "stamp.qt" is read, if possible, and the current date and
+time is then written into the file, if possible.
+

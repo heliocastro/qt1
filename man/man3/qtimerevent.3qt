@@ -1,0 +1,55 @@
+.TH QTimerEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QTimerEvent \- Parameters that describe a timer event
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherits QEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QTimerEvent ( int timerId )"
+.br
+.ti -1c
+.BI "int timerId () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QTimerEvent class contains parameters that describe a timer event.
+.PP
+Timer events are sent at regular intervals to objects that have started one or more timers. Each timer has a unique identifier.
+.PP
+If interval is 0, then the timer event occurs once every time there are no more window system events to process.
+.PP
+The QTimer class provides a high-level programming interface with one-shot timers and timer signals instead of events.
+.PP
+The event handler QObject::timerEvent() receives timer events.
+.PP
+See also: QTimer, QObject::timerEvent(), QObject::startTimer(), QObject::killTimer() and QObject::killTimers().
+.PP
+Examples:
+.(l
+dclock/dclock.cpp grapher/grapher.cpp forever/forever.cpp progress/progress.cpp qmag/qmag.cpp biff/biff.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QTimerEvent::QTimerEvent ( int timerId )"
+Constructs a timer event object with the timer identifier set to \fItimerId.\fR
+.SH "int QTimerEvent::timerId () const"
+Returns the unique timer identifier, which is the same identifier as
+returned from QObject::startTimer().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qtimerevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

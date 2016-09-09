@@ -1,0 +1,57 @@
+.TH QFocusEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QFocusEvent \- Event parameters for widget focus events
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherits QEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QFocusEvent ( int type )"
+.br
+.ti -1c
+.BI "bool gotFocus () const"
+.br
+.ti -1c
+.BI "bool lostFocus () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QFocusEvent class contains event parameters for widget focus events.
+.PP
+Focus events are sent to widgets when the keyboard input focus changes.
+.PP
+The event handlers QWidget::focusInEvent() and QWidget::focusOutEvent() receive focus events.
+.PP
+See also: QWidget::setFocus() and QWidget::setFocusEnabled().
+.PP
+Examples:
+.(l
+table/table.cpp qmag/qmag.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QFocusEvent::QFocusEvent ( int type )"
+Constructs a focus event object.
+.PP
+The \fItype\fR parameter must be either \fIEvent_FocusIn\fR or \fIEvent_FocusOut.\fR
+.SH "bool QFocusEvent::gotFocus () const"
+Returns TRUE if the widget received the text input focus.
+.SH "bool QFocusEvent::lostFocus () const"
+Returns TRUE if the widget lost the text input focus.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qfocusevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QPicture Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QPicture Class Reference</h1><br clear="all">
+<p>
+The QPicture class is a paint device that records and replays <a href="qpainter.html">QPainter</a> commands.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qpicture-h.html">qpicture.h</a>&gt;</code>
+<p>
+Inherits <a href="qpaintdevice.html">QPaintDevice</a>.
+<p><a href="qpicture-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qpicture.html#a0"><strong>QPicture</strong></a> () </span>
+<li><span class="fn"><a href="qpicture.html#a1"><strong>~QPicture</strong></a> () </span>
+<li><span class="fn">bool <a href="qpicture.html#a2"><strong>isNull</strong></a> () const</span>
+<li><span class="fn">uint <a href="qpicture.html#a3"><strong>size</strong></a> () const</span>
+<li><span class="fn">const char* <a href="qpicture.html#a4"><strong>data</strong></a> () const</span>
+<li><span class="fn">void <a href="qpicture.html#a5"><strong>setData</strong></a> ( const char * data, uint size ) </span>
+<li><span class="fn">bool <a href="qpicture.html#a6"><strong>play</strong></a> ( QPainter * ) </span>
+<li><span class="fn">bool <a href="qpicture.html#a7"><strong>load</strong></a> ( const char * fileName ) </span>
+<li><span class="fn">bool <a href="qpicture.html#a8"><strong>save</strong></a> ( const char * fileName ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual bool <a href="qpicture.html#a9"><strong>cmd</strong></a> ( int, QPainter *, QPDevCmdParam * ) </span>
+<li><span class="fn">virtual int <a href="qpicture.html#b0"><strong>metric</strong></a> ( int ) const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QPicture class is a paint device that records and replays <a href="qpainter.html">QPainter</a> commands.
+<p>
+A picture serializes painter commands to an IO device in a
+platform-independent format.  A picture created under Windows
+can be read on a Sun SPARC.
+<p>Pictures are called meta-files on some platforms.
+<p>Qt pictures use a proprietary binary format.  Unlike native picture
+(meta-file) formats on many window systems, Qt pictures have no
+limitations regarding the contents.  Everything that can be painted can
+also be stored in a picture (fonts, pixmaps, regions, transformed
+graphics etc.)
+<p>Example of how to record a picture:
+<pre>    <a href="qpicture.html">QPicture</a>  pic;
+    <a href="qpainter.html">QPainter</a>  p;
+    p.<a href="qpainter.html#b0">begin</a>( &amp;pic );                            // paint in picture
+    p.<a href="qpainter.html#i8">drawEllipse</a>( 10,20, 80,70 );              // draw an ellipse
+    p.<a href="qpainter.html#b2">end</a>();                                    // painting done
+    pic.<a href="qpicture.html#a8">save</a>( "drawing.pic" );                  // save picture
+</pre>
+<p>Example of how to replay a picture:
+<pre>    <a href="qpicture.html">QPicture</a>  pic;
+    pic.<a href="qpicture.html#a7">load</a>( "drawing.pic" );                  // load picture
+    <a href="qpainter.html">QPainter</a>  p;
+    p.<a href="qpainter.html#b0">begin</a>( &amp;myWidget );                       // paint in myWidget
+    p.<a href="qpainter.html#k9">drawPicture</a>( pic );                       // draw the picture
+    p.<a href="qpainter.html#b2">end</a>();                                    // painting done
+</pre>
+<p>Examples:
+ <a href="picture-picture-cpp.html#QPicture">picture/picture.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QPicture::QPicture ()</h3>
+<p>Constructs an empty picture.
+<h3 class="fn"><a name="a1"></a>QPicture::~QPicture ()</h3>
+<p>Destroys the picture.
+<h3 class="fn">bool <a name="a9"></a>QPicture::cmd ( int c, <a href="qpainter.html">QPainter</a> *, QPDevCmdParam * p ) <code>[virtual protected]</code></h3>
+<p>For internal use only.
+<p>Reimplemented from <a href="qpaintdevice.html#a7">QPaintDevice.</a>
+<h3 class="fn">const char * <a name="a4"></a>QPicture::data () const</h3>
+<p>Returns a pointer to the picture data.  The returned pointer is null
+if the picture contains no data.
+<p>See also:  <a href="qpicture.html#a3">size</a>() and <a href="qpicture.html#a2">isNull</a>().
+<h3 class="fn">bool <a name="a2"></a>QPicture::isNull () const</h3>
+<p>Returns TRUE if the picture contains no data, otherwise FALSE.
+<h3 class="fn">bool <a name="a7"></a>QPicture::load ( const char * fileName )</h3>
+<p>Loads a picture from the file specified by <em>fileName</em> and returns TRUE
+if successful, otherwise FALSE.
+<p>See also:  <a href="qpicture.html#a8">save</a>().
+<p>Examples:
+ <a href="picture-picture-cpp.html#load">picture/picture.cpp</a>
+<h3 class="fn">int <a name="b0"></a>QPicture::metric ( int m ) const <code>[virtual protected]</code></h3>
+<p>Internal implementation of the virtual <a href="qpaintdevice.html#a8">QPaintDevice::metric</a>() function.
+<p>Use the <a href="qpaintdevicemetrics.html">QPaintDeviceMetrics</a> class instead.
+<p>A picture has the following hard coded values:
+width=640, height=480. widthMM=236, heightMM=176, numcolors=16777216
+and depth=24.
+<p>Reimplemented from <a href="qpaintdevice.html#a8">QPaintDevice.</a>
+<h3 class="fn">bool <a name="a6"></a>QPicture::play ( <a href="qpainter.html">QPainter</a> * painter )</h3>
+<p>Replays the picture using <em>painter</em> and returns TRUE if successful, or
+FALSE if the internal picture data is inconsistent.
+<p>This function does exactly the same as <a href="qpainter.html#k9">QPainter::drawPicture</a>().
+<h3 class="fn">bool <a name="a8"></a>QPicture::save ( const char * fileName )</h3>
+<p>Saves a picture to the file specified by <em>fileName</em> and returns TRUE
+if successful, otherwise FALSE.
+<p>See also:  <a href="qpicture.html#a7">load</a>().
+<p>Examples:
+ <a href="picture-picture-cpp.html#save">picture/picture.cpp</a>
+<h3 class="fn">void <a name="a5"></a>QPicture::setData ( const char * data, uint size )</h3>
+<p>Sets the picture data directly from <em>data</em> and <em>size.</em> This function
+copies the input data.
+<p>See also:  <a href="qpicture.html#a4">data</a>() and <a href="qpicture.html#a3">size</a>().
+<h3 class="fn">uint <a name="a3"></a>QPicture::size () const</h3>
+<p>Returns the size of the picture data.
+<p>See also:  <a href="qpicture.html#a4">data</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qpicture.h: 1998/08/21
+<li>qpicture.cpp: 1998/11/02
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

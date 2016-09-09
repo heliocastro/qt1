@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qtabbar.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qtabbar.h</h1><br clear="all">
+This is the verbatim text of the qtabbar.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qtabbar.h,v 2.12.2.2 1998/09/03 20:14:48 hanord Exp $
+**
+** Definition of QTabBar class
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QTABBAR_H
+#define QTABBAR_H
+
+#ifndef QT_H
+#include "qwidget.h"
+#include "qpainter.h"
+#include "qlist.h"
+#endif // QT_H
+
+struct QTabPrivate;
+
+
+struct Q_EXPORT QTab
+{
+    QTab(): enabled( TRUE ), id( 0 ) {}
+    virtual ~QTab();
+
+    QString label;
+    // the bounding rectangle of this - may overlap with others
+    QRect r;
+    bool enabled;
+    int id;
+};
+
+
+class Q_EXPORT QTabBar: public QWidget
+{
+    Q_OBJECT
+
+public:
+    QTabBar( QWidget * parent = 0, const char * name = 0 );
+   ~QTabBar();
+
+    enum Shape { RoundedAbove, RoundedBelow,
+                 TriangularAbove, TriangularBelow };
+
+    Shape shape() const;
+    void setShape( Shape );
+
+    void show();
+
+    virtual int addTab( QTab * );
+
+    void setTabEnabled( int, bool );
+    bool isTabEnabled( int ) const;
+
+    QSize sizeHint() const;
+
+    int currentTab() const;
+    int keyboardFocusTab() const;
+
+    QTab * tab( int );
+
+public slots:
+    void setCurrentTab( int );
+    void setCurrentTab( QTab * );
+
+signals:
+    void  selected( int );
+
+protected:
+    virtual void paint( QPainter *, QTab *, bool ) const;
+    virtual QTab * selectTab( const QPoint &amp; p ) const;
+
+    void paintEvent( QPaintEvent * );
+    void mousePressEvent ( QMouseEvent * );
+    void mouseReleaseEvent ( QMouseEvent * );
+    void keyPressEvent( QKeyEvent * );
+
+    QListT&lt;QTab&gt; * tabList();
+
+private:
+    QListT&lt;QTab&gt; * l;
+    QTabPrivate * d;
+
+    void paintLabel( QPainter*, const QRect&amp;, QTab*, bool ) const;
+};
+
+
+#endif // QTABBAR_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

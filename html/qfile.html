@@ -1,0 +1,296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QFile Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QFile Class Reference</h1><br clear="all">
+<p>
+The QFile class is an I/O device that operates on files.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qfile-h.html">qfile.h</a>&gt;</code>
+<p>
+Inherits <a href="qiodevice.html">QIODevice</a>.
+<p><a href="qfile-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qfile.html#a0"><strong>QFile</strong></a> () </span>
+<li><span class="fn"><a href="qfile.html#a1"><strong>QFile</strong></a> ( const char * name ) </span>
+<li><span class="fn"><a href="qfile.html#a2"><strong>~QFile</strong></a> () </span>
+<li><span class="fn">const char* <a href="qfile.html#a3"><strong>name</strong></a> () const</span>
+<li><span class="fn">void <a href="qfile.html#a4"><strong>setName</strong></a> ( const char * name ) </span>
+<li><span class="fn">bool <a href="qfile.html#a5"><strong>exists</strong></a> () const</span>
+<li><span class="fn">bool <a href="qfile.html#a7"><strong>remove</strong></a> () </span>
+<li><span class="fn">virtual bool <a href="qfile.html#a9"><strong>open</strong></a> ( int ) </span>
+<li><span class="fn">bool <a href="qfile.html#b0"><strong>open</strong></a> ( int, FILE * ) </span>
+<li><span class="fn">bool <a href="qfile.html#b1"><strong>open</strong></a> ( int, int ) </span>
+<li><span class="fn">virtual void <a href="qfile.html#b2"><strong>close</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qfile.html#b3"><strong>flush</strong></a> () </span>
+<li><span class="fn">virtual uint <a href="qfile.html#b4"><strong>size</strong></a> () const</span>
+<li><span class="fn">virtual int <a href="qfile.html#b5"><strong>at</strong></a> () const</span>
+<li><span class="fn">virtual bool <a href="qfile.html#b6"><strong>at</strong></a> ( int ) </span>
+<li><span class="fn">virtual bool <a href="qfile.html#b7"><strong>atEnd</strong></a> () const</span>
+<li><span class="fn">virtual int <a href="qfile.html#b8"><strong>readBlock</strong></a> ( char * data, uint len ) </span>
+<li><span class="fn">virtual int <a href="qfile.html#b9"><strong>writeBlock</strong></a> ( const char * data, uint len ) </span>
+<li><span class="fn">virtual int <a href="qfile.html#c0"><strong>readLine</strong></a> ( char * data, uint maxlen ) </span>
+<li><span class="fn">virtual int <a href="qfile.html#c1"><strong>getch</strong></a> () </span>
+<li><span class="fn">virtual int <a href="qfile.html#c2"><strong>putch</strong></a> ( int ) </span>
+<li><span class="fn">virtual int <a href="qfile.html#c3"><strong>ungetch</strong></a> ( int ) </span>
+<li><span class="fn">int <a href="qfile.html#c4"><strong>handle</strong></a> () const</span>
+</ul>
+<h2>Static Public Members</h2>
+<ul>
+<li><span class="fn">bool <a href="qfile.html#c6"><strong>exists</strong></a> ( const char * fileName ) </span>
+<li><span class="fn">bool <a href="qfile.html#c7"><strong>remove</strong></a> ( const char * fileName ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QFile class is an I/O device that operates on files.
+<p>
+QFile is an I/O device for reading and writing binary and text files. A
+QFile may be used by itself (readBlock and writeBlock) or by more
+conveniently using <a href="qdatastream.html">QDataStream</a> or <a href="qtextstream.html">QTextStream</a>.
+<p>Here is a code fragment that uses QTextStream to read a text
+file line by line. It prints each line with a line number.
+<pre>    <a href="qfile.html">QFile</a> f("file.txt");
+    if ( f.<a href="qfile.html#a9">open</a>(IO_ReadOnly) ) {    // file opened successfully
+        <a href="qtextstream.html">QTextStream</a> t( &amp;f );        // use a text stream
+        <a href="qstring.html">QString</a> s;
+        int n = 1;
+        while ( !t.<a href="qtextstream.html#a8">eof</a>() ) {        // until end of file...
+            s = t.<a href="qtextstream.html#d3">readLine</a>();       // line of text excluding '\n'
+            printf( "%3d: %s\n", n++, (const char *)s );
+        }
+        f.<a href="qfile.html#b2">close</a>();
+    }
+</pre>
+<p>The <a href="qfileinfo.html">QFileInfo</a> class holds detailed information about a file, such as
+access permissions, file dates and file types.
+<p>The <a href="qdir.html">QDir</a> class manages directories and lists of file names.
+<p>See also:  <a href="qdatastream.html">QDataStream</a> and <a href="qtextstream.html">QTextStream</a>.
+<p>Examples:
+ <a href="application-application-cpp.html#QFile">application/application.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QFile::QFile ()</h3>
+<p>Constructs a QFile with no name.
+<h3 class="fn"><a name="a1"></a>QFile::QFile ( const char * name )</h3>
+<p>Constructs a QFile with a file name <em>name.</em>
+<p>See also:  <a href="qfile.html#a4">setName</a>().
+<h3 class="fn"><a name="a2"></a>QFile::~QFile ()</h3>
+<p>Destroys a QFile.  Calls <a href="qfile.html#b2">close</a>().
+<h3 class="fn">bool <a name="b6"></a>QFile::at ( int pos ) <code>[virtual]</code></h3>
+<p>Sets the file index to <em>pos.</em> Returns TRUE if successful, otherwise FALSE.
+<p>Example:
+<pre>    <a href="qfile.html">QFile</a> f( "data.bin" );
+    f.<a href="qfile.html#a9">open</a>( IO_ReadOnly );                      // index set to 0
+    f.<a href="qfile.html#b5">at</a>( 100 );                                // set index to 100
+    f.<a href="qfile.html#b5">at</a>( f.<a href="qfile.html#b5">at</a>()+50 );                          // set index to 150
+    f.<a href="qfile.html#b5">at</a>( f.<a href="qfile.html#b4">size</a>()-80 );                        // set index to 80 before EOF
+    f.<a href="qfile.html#b2">close</a>();
+</pre>
+<p><strong>Warning:</strong> The result is undefined if the file was <a href="qfile.html#a9">opened</a>
+using the <code>IO_Append</code> specifier.
+<p>See also:  <a href="qfile.html#b4">size</a>() and <a href="qfile.html#a9">open</a>().
+<p>Reimplemented from <a href="qiodevice.html#c5">QIODevice.</a>
+<h3 class="fn">int <a name="b5"></a>QFile::at () const <code>[virtual]</code></h3>
+<p>Returns the file index.
+<p>See also:  <a href="qfile.html#b4">size</a>().
+<p>Reimplemented from <a href="qiodevice.html#c4">QIODevice.</a>
+<h3 class="fn">bool <a name="b7"></a>QFile::atEnd () const <code>[virtual]</code></h3>
+<p>Returns TRUE if the end of file has been reached, otherwise FALSE.
+<p>See also:  <a href="qfile.html#b4">size</a>().
+<p>Reimplemented from <a href="qiodevice.html#c6">QIODevice.</a>
+<h3 class="fn">void <a name="b2"></a>QFile::close () <code>[virtual]</code></h3>
+<p>Closes an open file.
+<p>The file is closed even if it was opened with an existing file
+handle or a file descriptor, <em>except</em> that stdin, stdout and stderr
+are never closed.
+<p>See also:  <a href="qfile.html#a9">open</a>() and <a href="qtextstream.html">flush</a>().
+<p>Examples:
+ <a href="application-application-cpp.html#close">application/application.cpp</a>
+<p>Reimplemented from <a href="qiodevice.html#c1">QIODevice.</a>
+<h3 class="fn">bool <a name="a5"></a>QFile::exists () const</h3>
+<p>Returns TRUE if the file exists, otherwise FALSE.
+<p>See also:  <a href="qfile.html#a3">name</a>().
+<h3 class="fn">bool <a name="c6"></a>QFile::exists ( const char * fileName ) <code>[static]</code></h3>
+<p>Returns TRUE if the file given by <em>fileName</em> exists, otherwise FALSE.
+<h3 class="fn">void <a name="b3"></a>QFile::flush () <code>[virtual]</code></h3>
+<p>Flushes the file buffer to the disk.
+<p><a href="qfile.html#b2">close</a>() also flushes the file buffer.
+<p>Reimplemented from <a href="qiodevice.html#c2">QIODevice.</a>
+<h3 class="fn">int <a name="c1"></a>QFile::getch () <code>[virtual]</code></h3>
+<p>Reads a single byte/character from the file.
+<p>Returns the byte/character read, or -1 if the end of the file has been
+reached.
+<p>See also:  <a href="qfile.html#c2">putch</a>() and <a href="qfile.html#c3">ungetch</a>().
+<p>Reimplemented from <a href="qiodevice.html#d1">QIODevice.</a>
+<h3 class="fn">int <a name="c4"></a>QFile::handle () const</h3>
+<p>Returns the file handle of the file.
+<p>This is a small positive integer, suitable for use with C library
+functions such as fdopen() and fcntl(), as well as with <a href="qsocketnotifier.html">QSocketNotifier</a>.
+<p>If the file is not open or there is an error, handle() returns -1.
+<p>See also:  <a href="qsocketnotifier.html">QSocketNotifier</a>.
+<h3 class="fn">const char * <a name="a3"></a>QFile::name () const</h3>
+<p>Returns the name set by <a href="qfile.html#a4">setName</a>().
+<p>See also:  <a href="qfile.html#a4">setName</a>() and <a href="qfileinfo.html#b5">QFileInfo::fileName</a>().
+<h3 class="fn">bool <a name="a9"></a>QFile::open ( int m ) <code>[virtual]</code></h3>
+<p>Opens the file specified by the file name currently set, using the mode <em>m.</em>
+Returns TRUE if successful, otherwise FALSE.
+<p>The mode parameter <em>m</em> must be a combination of the following flags:
+<ul>
+<li><code>IO_Raw</code> specified raw (non-buffered) file access.
+<li><code>IO_ReadOnly</code> opens the file in read-only mode.
+<li><code>IO_WriteOnly</code> opens the file in write-only mode (and truncates).
+<li><code>IO_ReadWrite</code> opens the file in read/write mode, equivalent to
+<code>(IO_ReadOnly|IO_WriteOnly).</code>
+<li><code>IO_Append</code> opens the file in append mode. This mode is very useful
+when you want to write something to a log file. The file index is set to
+the end of the file. Note that the result is undefined if you position the
+file index manually using <a href="qfile.html#b5">at</a>() in append mode.
+<li><code>IO_Truncate</code> truncates the file.
+<li><code>IO_Translate</code> enables carriage returns and linefeed translation
+for text files under MS-DOS, Windows and OS/2.
+</ul>
+<p>The raw access mode is best when I/O is block-operated using 4kB block size
+or greater. Buffered access works better when reading small portions of
+data at a time.
+<p><strong>Important:</strong> When working with buffered files, data may
+not be written to the file at once. Call <a href="qtextstream.html">flush</a>
+to make sure the data is really written.<p><strong>Warning:</strong> We have experienced problems with some C libraries when a buffered
+file is opened for both reading and writing. If a read operation takes place
+immediately after a write operation, the read buffer contains garbage data.
+Worse, the same garbage is written to the file. Calling <a href="qtextstream.html">flush</a>() before
+<a href="qfile.html#b8">readBlock</a>() solved this problem.
+<p>If the file does not exist and <code>IO_WriteOnly</code> or <code>IO_ReadWrite</code> is
+specified, it is created.
+<p>Example:
+<pre>    <a href="qfile.html">QFile</a> f1( "/tmp/data.bin" );
+    <a href="qfile.html">QFile</a> f2( "readme.txt" );
+    f1.<a href="qfile.html#a9">open</a>( IO_Raw | IO_ReadWrite | IO_Append );
+    f2.<a href="qfile.html#a9">open</a>( IO_ReadOnly | IO_Translate );
+</pre>
+<p>See also:  <a href="qfile.html#a3">name</a>(), <a href="qfile.html#b2">close</a>(), <a href="qiodevice.html#b7">isOpen</a>() and <a href="qtextstream.html">flush</a>().
+<p>Examples:
+ <a href="application-application-cpp.html#open">application/application.cpp</a>
+<p>Reimplemented from <a href="qiodevice.html#c0">QIODevice.</a>
+<h3 class="fn">bool <a name="b0"></a>QFile::open ( int m, FILE * f )</h3>
+<p>Opens a file in the mode <em>m</em> using an existing file handle <em>f.</em>
+Returns TRUE if successful, otherwise FALSE.
+<p>Example:
+<pre>    #include &lt;stdio.h&gt;
+
+    void printError( const char *msg )
+    {
+        <a href="qfile.html">QFile</a> f;
+        f.<a href="qfile.html#a9">open</a>( IO_WriteOnly, stderr );
+        f.<a href="qfile.html#b9">writeBlock</a>( msg, <a href="qstring.html#a6">strlen</a>(msg) );       // write to stderr
+        f.<a href="qfile.html#b2">close</a>();
+    }
+</pre>
+<p>When a QFile is opened using this function, <a href="qfile.html#b2">close</a>() does not actually
+close the file, only flushes it.<p><strong>Warning:</strong> If <em>f</em> is <code>stdin, stdout, stderr,</code> you may not
+be able to seek.  See <a href="qiodevice.html#a6">QIODevice::isSequentialAccess</a>() for more
+information.
+<p>See also:  <a href="qfile.html#b2">close</a>().
+<h3 class="fn">bool <a name="b1"></a>QFile::open ( int m, int f )</h3>
+<p>Opens a file in the mode <em>m</em> using an existing file descriptor <em>f.</em>
+Returns TRUE if successful, otherwise FALSE.
+<p>When a QFile is opened using this function, <a href="qfile.html#b2">close</a>() does not actually
+close the file.<p><strong>Warning:</strong> If <em>f</em> is one of 0 (stdin), 1 (stdout) or 2 (stderr), you may not
+be able to seek. <a href="qfile.html#b4">size</a>() is set to <code>INT_MAX</code> (in limits.h).
+<p>See also:  <a href="qfile.html#b2">close</a>().
+<h3 class="fn">int <a name="c2"></a>QFile::putch ( int ch ) <code>[virtual]</code></h3>
+<p>Writes the character <em>ch</em> to the file.
+<p>Returns <em>ch,</em> or -1 if some error occurred.
+<p>See also:  <a href="qfile.html#c1">getch</a>() and <a href="qfile.html#c3">ungetch</a>().
+<p>Reimplemented from <a href="qiodevice.html#d2">QIODevice.</a>
+<h3 class="fn">int <a name="b8"></a>QFile::readBlock ( char * p, uint len ) <code>[virtual]</code></h3>
+<p>Reads at most <em>len</em> bytes from the file into <em>p</em> and returns the
+number of bytes actually read.
+<p>Returns -1 if a serious error occurred.<p><strong>Warning:</strong> We have experienced problems with some C libraries when a buffered
+file is opened for both reading and writing. If a read operation takes place
+immediately after a write operation, the read buffer contains garbage data.
+Worse, the same garbage is written to the file. Calling <a href="qtextstream.html">flush</a>() before
+readBlock() solved this problem.
+<p>See also:  <a href="qfile.html#b9">writeBlock</a>().
+<p>Reimplemented from <a href="qiodevice.html#c8">QIODevice.</a>
+<h3 class="fn">int <a name="c0"></a>QFile::readLine ( char * p, uint maxlen ) <code>[virtual]</code></h3>
+<p>Reads a line of text.
+<p>Reads bytes from the file until end-of-line is reached, or up to <em>maxlen</em> bytes, and returns the number of bytes read, or -1 in case of
+error.  The terminating newline is not stripped.
+<p>This function is efficient only for buffered files.  Avoid
+readLine() for files that have been opened with the <code>IO_Raw</code>
+flag.
+<p>See also:  <a href="qfile.html#b8">readBlock</a>() and <a href="qtextstream.html#d3">QTextStream::readLine</a>().
+<p>Reimplemented from <a href="qiodevice.html#d0">QIODevice.</a>
+<h3 class="fn">bool <a name="a7"></a>QFile::remove ()</h3>
+<p>Removes the file specified by the file name currently set.
+Returns TRUE if successful, otherwise FALSE.
+<p>The file is closed before it is removed.
+<h3 class="fn">bool <a name="c7"></a>QFile::remove ( const char * fileName ) <code>[static]</code></h3>
+<p>Removes the file <em>fileName.</em>
+Returns TRUE if successful, otherwise FALSE.
+<h3 class="fn">void <a name="a4"></a>QFile::setName ( const char * name )</h3>
+<p>Sets the name of the file. The name can include an absolute directory
+path or it can be a name or a path relative to the current directory.
+<p>Do not call this function if the file has already been opened.
+<p>Note that if the name is relative QFile does not associate it with the
+current directory.  If you change directory before calling <a href="qfile.html#a9">open</a>(), open
+uses the new current directory.
+<p>Example:
+<pre>     <a href="qfile.html">QFile</a> f;
+     <a href="qdir.html#f8">QDir::setCurrent</a>( "/tmp" );
+     f.<a href="qfile.html#a4">setName</a>( "readme.txt" );
+     <a href="qdir.html#f8">QDir::setCurrent</a>( "/home" );
+     f.<a href="qfile.html#a9">open</a>( IO_ReadOnly );        // opens "/home/readme.txt" under UNIX
+</pre>
+<p>Also note that the directory separator '/' works for all operating
+systems supported by Qt.
+<p>See also:  <a href="qfile.html#a3">name</a>(), <a href="qfileinfo.html">QFileInfo</a> and <a href="qdir.html">QDir</a>.
+<h3 class="fn">uint <a name="b4"></a>QFile::size () const <code>[virtual]</code></h3>
+<p>Returns the file size.
+<p>See also:  <a href="qfile.html#b5">at</a>().
+<p>Reimplemented from <a href="qiodevice.html#c3">QIODevice.</a>
+<h3 class="fn">int <a name="c3"></a>QFile::ungetch ( int ch ) <code>[virtual]</code></h3>
+<p>Puts the character <em>ch</em> back into the file and decrements the index if it
+is not zero.
+<p>This function is normally called to "undo" a <a href="qfile.html#c1">getch</a>() operation.
+<p>Returns <em>ch,</em> or -1 if some error occurred.
+<p>See also:  <a href="qfile.html#c1">getch</a>() and <a href="qfile.html#c2">putch</a>().
+<p>Reimplemented from <a href="qiodevice.html#d3">QIODevice.</a>
+<h3 class="fn">int <a name="b9"></a>QFile::writeBlock ( const char * p, uint len ) <code>[virtual]</code></h3>
+<p>Writes <em>len</em> bytes from <em>p</em> to the file and returns the number of
+bytes actually written.
+<p>Returns -1 if a serious error occurred.
+<p><strong>Important:</strong> When working with buffered files, data may
+not be written to the file at once. Call <a href="qtextstream.html">flush</a>
+to make sure the data is really written.
+<p>See also:  <a href="qfile.html#b8">readBlock</a>().
+<p>Reimplemented from <a href="qiodevice.html#c9">QIODevice.</a>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qfile.h: 1998/08/21
+<li>qfile.cpp: 1998/08/20
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

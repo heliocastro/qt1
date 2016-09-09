@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QSize Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QSize Class Reference</h1><br clear="all">
+<p>
+The QSize class defines the size of a two-dimensional object.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qsize-h.html">qsize.h</a>&gt;</code>
+<p><a href="qsize-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qsize.html#a0"><strong>QSize</strong></a> () </span>
+<li><span class="fn"><a href="qsize.html#a1"><strong>QSize</strong></a> ( int w, int h ) </span>
+<li><span class="fn">bool <a href="qsize.html#a2"><strong>isNull</strong></a> () const</span>
+<li><span class="fn">bool <a href="qsize.html#a3"><strong>isEmpty</strong></a> () const</span>
+<li><span class="fn">bool <a href="qsize.html#a4"><strong>isValid</strong></a> () const</span>
+<li><span class="fn">int <a href="qsize.html#a5"><strong>width</strong></a> () const</span>
+<li><span class="fn">int <a href="qsize.html#a6"><strong>height</strong></a> () const</span>
+<li><span class="fn">void <a href="qsize.html#a7"><strong>setWidth</strong></a> ( int w ) </span>
+<li><span class="fn">void <a href="qsize.html#a8"><strong>setHeight</strong></a> ( int h ) </span>
+<li><span class="fn">void <a href="qsize.html#a9"><strong>transpose</strong></a> () </span>
+<li><span class="fn">QSize <a href="qsize.html#b0"><strong>expandedTo</strong></a> ( const QSize &amp; ) const</span>
+<li><span class="fn">QSize <a href="qsize.html#b1"><strong>boundedTo</strong></a> ( const QSize &amp; ) const</span>
+<li><span class="fn">QCOORD&amp; <a href="qsize.html#b2"><strong>rwidth</strong></a> () </span>
+<li><span class="fn">QCOORD&amp; <a href="qsize.html#b3"><strong>rheight</strong></a> () </span>
+<li><span class="fn">QSize&amp; <a href="qsize.html#b4"><strong>operator+=</strong></a> ( const QSize &amp; ) </span>
+<li><span class="fn">QSize&amp; <a href="qsize.html#b5"><strong>operator-=</strong></a> ( const QSize &amp; ) </span>
+<li><span class="fn">QSize&amp; <a href="qsize.html#b6"><strong>operator*=</strong></a> ( int c ) </span>
+<li><span class="fn">QSize&amp; <a href="qsize.html#b7"><strong>operator*=</strong></a> ( float c ) </span>
+<li><span class="fn">QSize&amp; <a href="qsize.html#b8"><strong>operator/=</strong></a> ( int c ) </span>
+<li><span class="fn">QSize&amp; <a href="qsize.html#b9"><strong>operator/=</strong></a> ( float c ) </span>
+</ul>
+<h2>Static Public Members</h2>
+<ul>
+<li><span class="fn">void <strong>warningDivByZero</strong> () </span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>bool <a href="qsize.html#c9"><strong>operator==</strong></a> (const QSize &amp; s1, const QSize &amp; s2)
+<li>bool <a href="qsize.html#d0"><strong>operator!=</strong></a> (const QSize &amp; s1, const QSize &amp; s2)
+<li>QSize <a href="qsize.html#d1"><strong>operator+</strong></a> (const QSize &amp; s1, const QSize &amp; s2)
+<li>QSize <a href="qsize.html#d2"><strong>operator-</strong></a> (const QSize &amp; s1, const QSize &amp; s2)
+<li>QSize <a href="qsize.html#d3"><strong>operator*</strong></a> (const QSize &amp; s, int c)
+<li>QSize <a href="qsize.html#d4"><strong>operator*</strong></a> (int c, const QSize &amp; s)
+<li>QSize <a href="qsize.html#d5"><strong>operator*</strong></a> (const QSize &amp; s, float c)
+<li>QSize <a href="qsize.html#d6"><strong>operator*</strong></a> (float c, const QSize &amp; s)
+<li>QSize <a href="qsize.html#d7"><strong>operator/</strong></a> (const QSize &amp; s, int c)
+<li>QSize <a href="qsize.html#d8"><strong>operator/</strong></a> (const QSize &amp; s, float c)
+<li>QDataStream &amp; <a href="qsize.html#d9"><strong>operator&lt;&lt;</strong></a> (QDataStream &amp; s, const QSize &amp; sz)
+<li>QDataStream &amp; <a href="qsize.html#e0"><strong>operator&gt;&gt;</strong></a> (QDataStream &amp; s, QSize &amp; sz)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QSize class defines the size of a two-dimensional object.
+<p>
+A size is specified by a width and a height.
+<p>The coordinate type is QCOORD (defined in <a href="qwindowdefs-h.html">qwindowdefs.h</a> as <code>short).</code>
+The minimum value of QCOORD is QCOORD_MIN (-32768) and the maximum
+value is  QCOORD_MAX (32767).
+<p>See also:  <a href="qpoint.html">QPoint</a> and <a href="qrect.html">QRect</a>.
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#QSize">tictac/tictac.cpp</a>
+ <a href="xform-xform-cpp.html#QSize">xform/xform.cpp</a>
+ <a href="pref-pref-cpp.html#QSize">pref/pref.cpp</a>
+ <a href="progress-progress-cpp.html#QSize">progress/progress.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QSize::QSize ()</h3>
+<p>Constructs a size with invalid (negative) width and height.
+<h3 class="fn"><a name="a1"></a>QSize::QSize ( int w, int h )</h3>
+<p>Constructs a size with width <em>w</em> and height <em>h.</em>
+<h3 class="fn">QSize <a name="b1"></a>QSize::boundedTo ( const QSize &amp; otherSize ) const</h3>
+<p>Returns a size with the minimum width and height of this size and
+<em>otherSize.</em>
+<h3 class="fn">QSize <a name="b0"></a>QSize::expandedTo ( const QSize &amp; otherSize ) const</h3>
+<p>Returns a size with the maximum width and height of this size and
+<em>otherSize.</em>
+<h3 class="fn">int <a name="a6"></a>QSize::height () const</h3>
+<p>Returns the height.
+<p>See also:  <a href="qsize.html#a5">width</a>().
+<p>Examples:
+ <a href="pref-pref-cpp.html#height">pref/pref.cpp</a>
+<h3 class="fn">bool <a name="a3"></a>QSize::isEmpty () const</h3>
+<p>Returns TRUE if the width is <= 0 or the height is <= 0,
+otherwise FALSE.
+<h3 class="fn">bool <a name="a2"></a>QSize::isNull () const</h3>
+<p>Returns TRUE if the width is 0 and the height is 0, otherwise FALSE.
+<h3 class="fn">bool <a name="a4"></a>QSize::isValid () const</h3>
+<p>Returns TRUE if the width is equal to or greater than 0 and the height is
+equal to or greater than 0, otherwise FALSE.
+<h3 class="fn">QSize &amp; <a name="b7"></a>QSize::operator*= ( float c )</h3>
+<p>Multiplies both the width and height with <em>c</em> and returns a reference to
+the size.
+<p>Note that the result is truncated.
+<h3 class="fn">QSize &amp; <a name="b6"></a>QSize::operator*= ( int c )</h3>
+<p>Multiplies both the width and height with <em>c</em> and returns a reference to
+the size.
+<h3 class="fn">QSize &amp; <a name="b4"></a>QSize::operator+= ( const QSize &amp; s )</h3>
+<p>Adds <em>s</em> to the size and returns a reference to this size.
+<p>Example:
+<pre>    <a href="qsize.html">QSize</a> s(  3, 7 );
+    <a href="qsize.html">QSize</a> r( -1, 4 );
+    s += r;                     // s becomes (2,11)
+</pre>
+<h3 class="fn">QSize &amp; <a name="b5"></a>QSize::operator-= ( const QSize &amp; s )</h3>
+<p>Subtracts <em>s</em> from the size and returns a reference to this size.
+<p>Example:
+<pre>    <a href="qsize.html">QSize</a> s(  3, 7 );
+    <a href="qsize.html">QSize</a> r( -1, 4 );
+    s -= r;                     // s becomes (4,3)
+</pre>
+<h3 class="fn">QSize &amp; <a name="b9"></a>QSize::operator/= ( float c )</h3>
+<p>Divides both the width and height by <em>c</em> and returns a reference to the
+size.
+<p>Note that the result is truncated.
+<h3 class="fn">QSize &amp; <a name="b8"></a>QSize::operator/= ( int c )</h3>
+<p>Divides both the width and height by <em>c</em> and returns a reference to the
+size.
+<h3 class="fn">QCOORD &amp; <a name="b3"></a>QSize::rheight ()</h3>
+<p>Returns a reference to the height.
+<p>Using a reference makes it possible to directly manipulate the height.
+<p>Example:
+<pre>    <a href="qsize.html">QSize</a> s( 100, 10 );
+    s.<a href="qsize.html#b3">rheight</a>() += 5;           // s becomes (100,15)
+</pre>
+<p>See also:  <a href="qsize.html#b2">rwidth</a>().
+<h3 class="fn">QCOORD &amp; <a name="b2"></a>QSize::rwidth ()</h3>
+<p>Returns a reference to the width.
+<p>Using a reference makes it possible to directly manipulate the width.
+<p>Example:
+<pre>    <a href="qsize.html">QSize</a> s( 100, 10 );
+    s.<a href="qsize.html#b2">rwidth</a>() += 20;           // s becomes (120,10)
+</pre>
+<p>See also:  <a href="qsize.html#b3">rheight</a>().
+<h3 class="fn">void <a name="a8"></a>QSize::setHeight ( int h )</h3>
+<p>Sets the height to <em>h.</em>
+<p>See also:  <a href="qsize.html#a6">height</a>() and <a href="qsize.html#a7">setWidth</a>().
+<p>Examples:
+ <a href="pref-pref-cpp.html#setHeight">pref/pref.cpp</a>
+<h3 class="fn">void <a name="a7"></a>QSize::setWidth ( int w )</h3>
+<p>Sets the width to <em>w.</em>
+<p>See also:  <a href="qsize.html#a5">width</a>() and <a href="qsize.html#a8">setHeight</a>().
+<p>Examples:
+ <a href="pref-pref-cpp.html#setWidth">pref/pref.cpp</a>
+<h3 class="fn">void <a name="a9"></a>QSize::transpose ()</h3>
+<p>Swaps the values of width and height.
+<h3 class="fn">int <a name="a5"></a>QSize::width () const</h3>
+<p>Returns the width.
+<p>See also:  <a href="qsize.html#a6">height</a>().
+<p>Examples:
+ <a href="pref-pref-cpp.html#width">pref/pref.cpp</a>
+<hr><h2>Related Functions</h2>
+<h3>bool <a name="c9"></a>operator== (const QSize &amp; s1, const QSize &amp; s2)</h3>
+<p>Returns TRUE if <em>s1</em> and <em>s2</em> are equal, or FALSE if they are different.
+
+<h3>bool <a name="d0"></a>operator!= (const QSize &amp; s1, const QSize &amp; s2)</h3>
+<p>Returns TRUE if <em>s1</em> and <em>s2</em> are different, or FALSE if they are equal.
+
+<h3>QSize <a name="d1"></a>operator+ (const QSize &amp; s1, const QSize &amp; s2)</h3>
+<p>Returns the sum of <em>s1</em> and <em>s2;</em> each component is added separately.
+
+<h3>QSize <a name="d2"></a>operator- (const QSize &amp; s1, const QSize &amp; s2)</h3>
+<p>Returns <em>s2</em> subtracted from <em>s1;</em> each component is
+subtracted separately.
+
+<h3>QSize <a name="d3"></a>operator* (const QSize &amp; s, int c)</h3>
+<p>Multiplies <em>s</em> by <em>c</em> and returns the result.
+
+<h3>QSize <a name="d4"></a>operator* (int c, const QSize &amp; s)</h3>
+<p>Multiplies <em>s</em> by <em>c</em> and returns the result.
+
+<h3>QSize <a name="d5"></a>operator* (const QSize &amp; s, float c)</h3>
+<p>Multiplies <em>s</em> by <em>c</em> and returns the result.
+
+<h3>QSize <a name="d6"></a>operator* (float c, const QSize &amp; s)</h3>
+<p>Multiplies <em>s</em> by <em>c</em> and returns the result.
+
+<h3>QSize <a name="d7"></a>operator/ (const QSize &amp; s, int c)</h3>
+<p>Divides <em>s</em> by <em>c</em> and returns the result.
+
+<h3>QSize <a name="d8"></a>operator/ (const QSize &amp; s, float c)</h3>
+<p>Divides <em>s</em> by <em>c</em> and returns the result.
+<p>Note that the result is truncated.
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="d9"></a>operator&lt;&lt; (<a href="qdatastream.html">QDataStream</a> &amp; s, const QSize &amp; sz)</h3>
+<p>Writes the size to the stream and returns a reference to the stream.
+<p>Serialization format: [width (INT16), height (INT16)].
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="e0"></a>operator&gt;&gt; (<a href="qdatastream.html">QDataStream</a> &amp; s, QSize &amp; sz)</h3>
+<p>Reads the size from the stream and returns a reference to the stream.
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qsize.h: 1998/11/02
+<li>qsize.cpp: 1998/11/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

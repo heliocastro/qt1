@@ -1,0 +1,95 @@
+.TH QGCache 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QGCache \- Internal class for implementing QCache and QIntCache
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qgcache.h>\fR
+.PP
+Inherits QCollection.
+.PP
+Inherited by QCache and QIntCache.
+.PP
+.SS "Protected Members"
+.TP
+\fBQGCache\fR ( int maxCost, uint size, bool caseS, bool copyKeys, bool trivial ) 
+.TP
+\fBQGCache\fR ( const QGCache & ) 
+.TP
+\fB~QGCache\fR () 
+.TP
+QGCache& \fBoperator=\fR ( const QGCache & ) 
+.TP
+virtual uint \fBcount\fR () const
+.TP
+uint \fBsize\fR () const
+.TP
+int \fBmaxCost\fR () const
+.TP
+int \fBtotalCost\fR () const
+.TP
+void \fBsetMaxCost\fR ( int maxCost ) 
+.TP
+bool \fBinsert\fR ( const char * key, GCI, int cost, int priority ) 
+.TP
+bool \fBremove\fR ( const char * key ) 
+.TP
+GCI \fBtake\fR ( const char * key ) 
+.TP
+virtual void \fBclear\fR () 
+.TP
+GCI \fBfind\fR ( const char * key, bool ref=TRUE ) const
+.TP
+void \fBstatistics\fR () const
+.SH DESCRIPTION
+The QGCache class is an internal class for implementing QCache and QIntCache.
+.PP
+QGCache is a strictly internal class that acts as a base class for the collection classes QCache and QIntCache.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QGCache::QGCache ( const QGCache & ) \fC[protected]\fR"
+For internal use only.
+.SH "QGCache::QGCache ( int maxCost, uint size, bool caseS, bool copyKeys, bool trivial ) \fC[protected]\fR"
+For internal use only.
+.SH "QGCache::~QGCache () \fC[protected]\fR"
+For internal use only.
+.SH "void QGCache::clear () \fC[virtual protected]\fR"
+For internal use only.
+.PP
+Reimplemented from QCollection.
+.SH "uint QGCache::count () const \fC[virtual protected]\fR"
+For internal use only.
+.PP
+Reimplemented from QCollection.
+.SH "GCI QGCache::find ( const char * key, bool ref=TRUE ) const \fC[protected]\fR"
+For internal use only.
+.SH "bool QGCache::insert ( const char * key, GCI data, int cost, int priority ) \fC[protected]\fR"
+For internal use only.
+.SH "int QGCache::maxCost () const \fC[protected]\fR"
+For internal use only.
+.SH "QGCache & QGCache::operator= ( const QGCache & ) \fC[protected]\fR"
+For internal use only.
+.SH "bool QGCache::remove ( const char * key ) \fC[protected]\fR"
+For internal use only.
+.SH "void QGCache::setMaxCost ( int maxCost ) \fC[protected]\fR"
+For internal use only.
+.SH "uint QGCache::size () const \fC[protected]\fR"
+For internal use only.
+.SH "void QGCache::statistics () const \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGCache::take ( const char * key ) \fC[protected]\fR"
+For internal use only.
+.SH "int QGCache::totalCost () const \fC[protected]\fR"
+For internal use only.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qgcache.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

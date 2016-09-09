@@ -1,0 +1,168 @@
+.TH QIntCache 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QIntCache \- Template class that provides a cache based on \fClong\fR keys
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qintcache.h>\fR
+.PP
+Inherits QGCache.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QIntCache ( const QIntCache<type> & c )"
+.br
+.ti -1c
+.BI "QIntCache ( int " "maxCost" "=100, int " "size" "=17 )"
+.br
+.ti -1c
+.BI "\fB~QIntCache\fR ()"
+.br
+.ti -1c
+.BI "QIntCache<type>& operator= ( const QIntCache<type> & c )"
+.br
+.ti -1c
+.BI "int maxCost () const"
+.br
+.ti -1c
+.BI "int totalCost () const"
+.br
+.ti -1c
+.BI "void setMaxCost ( int m )"
+.br
+.ti -1c
+.BI "virtual uint count () const"
+.br
+.ti -1c
+.BI "uint size () const"
+.br
+.ti -1c
+.BI "bool isEmpty () const"
+.br
+.ti -1c
+.BI "bool insert ( long " "k" ", const type * " "d" ", long " "c" "=1, int " "p" "=0 )"
+.br
+.ti -1c
+.BI "bool remove ( long k )"
+.br
+.ti -1c
+.BI "type* take ( long k )"
+.br
+.ti -1c
+.BI "virtual void clear ()"
+.br
+.ti -1c
+.BI "type* find ( long " "k" ", bool " "ref" "=TRUE ) const"
+.br
+.ti -1c
+.BI "type* operator[] ( long k ) const"
+.br
+.ti -1c
+.BI "void statistics () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QIntCache class is a template class that provides a cache based on \fClong\fR keys.
+.PP
+QIntCache is implemented as both a template and a macro class. Define a template instance QIntCache<X> to create a cache that operates on pointers to X, or X*.
+.PP
+A cache is a least recently used (LRU) list of cache items. Each cache item has a cost. The sum of item costs, totalCost(), will not exceed the maximum cache cost, maxCost(). If inserting a new item would cause the total cost to exceed the maximum cost, the least recently used items in the cache are deleted.
+.PP
+Apart from insert, by far the most important function is find() (which also exists as operatior[]). This function looks up an item, returns it, and by default marks it as being the least recently used item.
+.PP
+There are also methods to remove() an object from the cache and delete it, and to take() an object out of the cache without deleting it.
+.PP
+QIntCache, as it must, takes over ownership of the items you insert. That implies that it will delete the items at its discretion, and that you must \fInot\fR delete them. There is one exception, however: If the cost of an object you try to insert() is higher than the allowed total cost of the cache, insert() returns FALSE and in this case you must delete the object yourself.
+.PP
+In addition to totalCost() and maxCost()/setMaxCost(), there are access functions to obtain the number of items in the cache (count()), the size of the hash array (size(), set using the constructor) and whether the cache is empty (you guessed it: isEmpty()). Finally, there is a statistics(), which prints various cache statistics on \fCstdout.\fR
+.PP
+There is also a QIntCacheIterator which may be used to traverse the items in the cache in arbritrary order.
+.PP
+See also: QIntCacheIterator, QCache and Collection Classes
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QIntCache::QIntCache ( const QIntCache<type> & c )"
+For internal use only.
+.SH "QIntCache::QIntCache ( int maxCost=100, int size=17 )"
+Constructs an empty cache with maximum allowed total cost \fImaxCost\fR and optimized to contain a bit less than \fIsize\fR items.
+.SH "QIntCache::~QIntCache ()"
+Destroys the object and all objects in it.
+.SH "void QIntCache::clear () \fC[virtual]\fR"
+Removes all items from the cache, and deletes them.
+.PP
+All cache iterators that operate this on cache are reset.
+.PP
+See also: remove() and take().
+.PP
+Reimplemented from QCollection.
+.SH "uint QIntCache::count () const \fC[virtual]\fR"
+Returns the number of items in the cache.
+.PP
+See also: totalCost().
+.PP
+Reimplemented from QCollection.
+.SH "type * QIntCache::find ( long k, bool ref=TRUE ) const"
+Returns the item associated with \\ k, or null if the key does not exist in the cache. If \fIref\fR is TRUE (the default), the item is moved to the front of the LRU list.
+.PP
+If there are two or more items with equal keys, then the one that was inserted last is returned.
+.SH "bool QIntCache::insert ( long k, const type * d, long c=1, int p=0 )"
+Inserts the item \fId\fR into the cache with key \fIk,\fR cost \fC(default\fR 1) and priority \fIp\fR (default 0). Returns TRUE if it succeeds and FALSE if it fails.
+.PP
+The cache's size is limited, and if the total cost is too high, QIntCache will delete some of the least-used objects.
+.PP
+\fBWarning:\fR If this function returns FALSE, you must delete \fId\fR yourself. Additionally, be very careful about using \fId\fR after calling this function, as any other insertions into the cache, from anywhere in the application, or within Qt itself, could cause the object to be discarded from the cache, and the pointer to become invalid.
+.SH "bool QIntCache::isEmpty () const"
+Returns TRUE if the cache is empty, or TRUE if there is at least one object in it.
+.SH "int QIntCache::maxCost () const"
+Returns the maximum allowed total cost of the cache.
+.PP
+See also: setMaxCost() and totalCost().
+.SH "QIntCache<type>& QIntCache::operator= ( const QIntCache<type> & c )"
+For internal use only.
+.SH "type * QIntCache::operator[] ( long k ) const"
+Returns the item associated with \fIk,\fR or null if \fIk\fR does not exist in the cache, and moves the item to the front of the LRU list.
+.PP
+If there are two or more items with equal keys, then the one that was inserted last is returned.
+.PP
+This is the same as find( k, TRUE ).
+.PP
+See also: find().
+.SH "bool QIntCache::remove ( long k )"
+Deletes the item associated with \fIk,\fR and returns TRUE if the item was present in the cache or FALSE if it was not.
+.PP
+If there are two or more items with equal keys, then the one that was inserted last is is deleted.
+.PP
+All iterators that refer to the removed item are set to point to the next item in the cache's traversal order.
+.PP
+See also: take() and clear().
+.SH "void QIntCache::setMaxCost ( int m )"
+Sets the maximum allowed total cost of the cache to \fIm.\fR If the current total cost is above \fIm,\fR some items are deleted immediately.
+.PP
+See also: maxCost() and totalCost().
+.SH "uint QIntCache::size () const"
+Returns the size of the hash array used to implement the cache. This should be a bit bigger than count() is likely to be.
+.SH "type * QIntCache::take ( long k )"
+Takes the item associated with \fIk\fR out of the cache without deleting it, and returns a pointer to the item taken out, or null if the key does not exist in the cache.
+.PP
+If there are two or more items with equal keys, then the one that was inserted last is taken.
+.PP
+All iterators that refer to the taken item are set to point to the next item in the cache's traversal order.
+.PP
+See also: remove() and clear().
+.SH "int QIntCache::totalCost () const"
+Returns the total cost of the items in the cache. This is an integer in the range 0 to maxCost().
+.PP
+See also:  setMaxCost().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qintcache.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,385 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QRect Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QRect Class Reference</h1><br clear="all">
+<p>
+The QRect class defines a rectangle in the plane.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qrect-h.html">qrect.h</a>&gt;</code>
+<p><a href="qrect-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qrect.html#a0"><strong>QRect</strong></a> () </span>
+<li><span class="fn"><a href="qrect.html#a1"><strong>QRect</strong></a> ( const QPoint &amp; topleft, const QPoint &amp; bottomright ) </span>
+<li><span class="fn"><a href="qrect.html#a2"><strong>QRect</strong></a> ( const QPoint &amp; topleft, const QSize &amp; size ) </span>
+<li><span class="fn"><a href="qrect.html#a3"><strong>QRect</strong></a> ( int left, int top, int width, int height ) </span>
+<li><span class="fn">bool <a href="qrect.html#a4"><strong>isNull</strong></a> () const</span>
+<li><span class="fn">bool <a href="qrect.html#a5"><strong>isEmpty</strong></a> () const</span>
+<li><span class="fn">bool <a href="qrect.html#a6"><strong>isValid</strong></a> () const</span>
+<li><span class="fn">QRect <a href="qrect.html#a7"><strong>normalize</strong></a> () const</span>
+<li><span class="fn">int <a href="qrect.html#a8"><strong>left</strong></a> () const</span>
+<li><span class="fn">int <a href="qrect.html#a9"><strong>top</strong></a> () const</span>
+<li><span class="fn">int <a href="qrect.html#b0"><strong>right</strong></a> () const</span>
+<li><span class="fn">int <a href="qrect.html#b1"><strong>bottom</strong></a> () const</span>
+<li><span class="fn">int <a href="qrect.html#b2"><strong>x</strong></a> () const</span>
+<li><span class="fn">int <a href="qrect.html#b3"><strong>y</strong></a> () const</span>
+<li><span class="fn">void <a href="qrect.html#b4"><strong>setLeft</strong></a> ( int pos ) </span>
+<li><span class="fn">void <a href="qrect.html#b5"><strong>setTop</strong></a> ( int pos ) </span>
+<li><span class="fn">void <a href="qrect.html#b6"><strong>setRight</strong></a> ( int pos ) </span>
+<li><span class="fn">void <a href="qrect.html#b7"><strong>setBottom</strong></a> ( int pos ) </span>
+<li><span class="fn">void <a href="qrect.html#b8"><strong>setX</strong></a> ( int x ) </span>
+<li><span class="fn">void <a href="qrect.html#b9"><strong>setY</strong></a> ( int y ) </span>
+<li><span class="fn">QPoint <a href="qrect.html#c0"><strong>topLeft</strong></a> () const</span>
+<li><span class="fn">QPoint <a href="qrect.html#c1"><strong>bottomRight</strong></a> () const</span>
+<li><span class="fn">QPoint <a href="qrect.html#c2"><strong>topRight</strong></a> () const</span>
+<li><span class="fn">QPoint <a href="qrect.html#c3"><strong>bottomLeft</strong></a> () const</span>
+<li><span class="fn">QPoint <a href="qrect.html#c4"><strong>center</strong></a> () const</span>
+<li><span class="fn">void <a href="qrect.html#c5"><strong>rect</strong></a> ( int * x, int * y, int * w, int * h ) const</span>
+<li><span class="fn">void <a href="qrect.html#c6"><strong>coords</strong></a> ( int * x1, int * y1, int * x2, int * y2 ) const</span>
+<li><span class="fn">void <a href="qrect.html#c7"><strong>moveTopLeft</strong></a> ( const QPoint &amp; p ) </span>
+<li><span class="fn">void <a href="qrect.html#c8"><strong>moveBottomRight</strong></a> ( const QPoint &amp; p ) </span>
+<li><span class="fn">void <a href="qrect.html#c9"><strong>moveTopRight</strong></a> ( const QPoint &amp; p ) </span>
+<li><span class="fn">void <a href="qrect.html#d0"><strong>moveBottomLeft</strong></a> ( const QPoint &amp; p ) </span>
+<li><span class="fn">void <a href="qrect.html#d1"><strong>moveCenter</strong></a> ( const QPoint &amp; p ) </span>
+<li><span class="fn">void <a href="qrect.html#d2"><strong>moveBy</strong></a> ( int dx, int dy ) </span>
+<li><span class="fn">void <a href="qrect.html#d3"><strong>setRect</strong></a> ( int x, int y, int w, int h ) </span>
+<li><span class="fn">void <a href="qrect.html#d4"><strong>setCoords</strong></a> ( int x1, int y1, int x2, int y2 ) </span>
+<li><span class="fn">QSize <a href="qrect.html#d5"><strong>size</strong></a> () const</span>
+<li><span class="fn">int <a href="qrect.html#d6"><strong>width</strong></a> () const</span>
+<li><span class="fn">int <a href="qrect.html#d7"><strong>height</strong></a> () const</span>
+<li><span class="fn">void <a href="qrect.html#d8"><strong>setWidth</strong></a> ( int w ) </span>
+<li><span class="fn">void <a href="qrect.html#d9"><strong>setHeight</strong></a> ( int h ) </span>
+<li><span class="fn">void <a href="qrect.html#e0"><strong>setSize</strong></a> ( const QSize &amp; s ) </span>
+<li><span class="fn">bool <a href="qrect.html#e1"><strong>contains</strong></a> ( const QPoint &amp; p, bool proper=FALSE ) const</span>
+<li><span class="fn">bool <a href="qrect.html#e2"><strong>contains</strong></a> ( const QRect &amp; r, bool proper=FALSE ) const</span>
+<li><span class="fn">QRect <a href="qrect.html#e3"><strong>unite</strong></a> ( const QRect &amp; r ) const</span>
+<li><span class="fn">QRect <a href="qrect.html#e4"><strong>intersect</strong></a> ( const QRect &amp; r ) const</span>
+<li><span class="fn">bool <a href="qrect.html#e5"><strong>intersects</strong></a> ( const QRect &amp; r ) const</span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>bool <a href="qrect.html#e8"><strong>operator==</strong></a> (const QRect &amp; r1, const QRect &amp; r2)
+<li>bool <a href="qrect.html#e9"><strong>operator!=</strong></a> (const QRect &amp; r1, const QRect &amp; r2)
+<li>QDataStream &amp; <a href="qrect.html#f0"><strong>operator&lt;&lt;</strong></a> (QDataStream &amp; s, const QRect &amp; r)
+<li>QDataStream &amp; <a href="qrect.html#f1"><strong>operator&gt;&gt;</strong></a> (QDataStream &amp; s, QRect &amp; r)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QRect class defines a rectangle in the plane.
+<p>
+A rectangle is internally represented as an upper left corner and a
+bottom right corner, but it is normally expressed as an upper left
+corner and a size.
+<p>The coordinate type is QCOORD (defined in <a href="qwindowdefs-h.html">qwindowdefs.h</a> as <code>short).</code>
+The minimum value of QCOORD is QCOORD_MIN (-32768) and the maximum
+value is  QCOORD_MAX (32767).
+<p>Note that the size (width and height) of a rectange might be
+different from what you are used to. If the top left corner and the
+bottom right corner are the same, then the height and the width of
+the rectangle will both be 1.
+<p>Generally, <em>width = right - left + 1</em> and <em>height = bottom
+- top + 1.</em> We designed it this way to make it correspond to
+rectangular spaces used by drawing functions, where the width and
+height denote a number of pixels. For example, drawing a rectangle
+with width and height 1 draws a single pixel.
+<p>The default coordinate system has origin (0,0) in the top left
+corner, the positive direction of the y axis is downwards and the
+positive x axis is from the left to the right.
+<p>See also:  <a href="qpoint.html">QPoint</a> and <a href="qsize.html">QSize</a>.
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#QRect">tictac/tictac.cpp</a>
+ <a href="forever-forever-cpp.html#QRect">forever/forever.cpp</a>
+ <a href="desktop-desktop-cpp.html#QRect">desktop/desktop.cpp</a>
+ <a href="tooltip-tooltip-cpp.html#QRect">tooltip/tooltip.cpp</a>
+ <a href="movies-main-cpp.html#QRect">movies/main.cpp</a>
+ <a href="xform-xform-cpp.html#QRect">xform/xform.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QRect::QRect ()</h3>
+<p>Constructs an empty rectangle.
+<h3 class="fn"><a name="a1"></a>QRect::QRect ( const <a href="qpoint.html">QPoint</a> &amp; topLeft, const <a href="qpoint.html">QPoint</a> &amp; bottomRight )</h3>
+<p>Constructs a rectangle with <em>topLeft</em> as the top left corner and
+<em>bottomRight</em> as the bottom right corner.
+<h3 class="fn"><a name="a2"></a>QRect::QRect ( const <a href="qpoint.html">QPoint</a> &amp; topLeft, const <a href="qsize.html">QSize</a> &amp; size )</h3>
+<p>Constructs a rectangle with <em>topLeft</em> as the top left corner and
+<em>size</em> as the rectangle size.
+<h3 class="fn"><a name="a3"></a>QRect::QRect ( int left, int top, int width, int height )</h3>
+<p>Constructs a rectangle with the <em>top, left</em> corner and <em>width</em> and <em>height.</em>
+<p>Example (creates three identical rectangles):
+<pre>    <a href="qrect.html">QRect</a> r1( <a href="qpoint.html">QPoint</a>(100,200), QPoint(110,215) );
+    <a href="qrect.html">QRect</a> r2( <a href="qpoint.html">QPoint</a>(100,200), QSize(11,16) );
+    <a href="qrect.html">QRect</a> r3( 100, 200, 11, 16 );
+</pre>
+<h3 class="fn">int <a name="b1"></a>QRect::bottom () const</h3>
+<p>Returns the bottom coordinate of the rectangle.
+<p>See also:  <a href="qrect.html#a9">top</a>(), <a href="qrect.html#b7">setBottom</a>(), <a href="qrect.html#c3">bottomLeft</a>() and <a href="qrect.html#c1">bottomRight</a>().
+<p>Examples:
+ <a href="desktop-desktop-cpp.html#bottom">desktop/desktop.cpp</a>
+<h3 class="fn"><a href="qpoint.html">QPoint</a> <a name="c3"></a>QRect::bottomLeft () const</h3>
+<p>Returns the bottom left position of the rectangle.
+<p>See also:  <a href="qrect.html#d0">moveBottomLeft</a>(), <a href="qrect.html#c1">bottomRight</a>(), <a href="qrect.html#c0">topLeft</a>(), <a href="qrect.html#c2">topRight</a>(), <a href="qrect.html#b1">bottom</a>() and <a href="qrect.html#a8">left</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#bottomLeft">tictac/tictac.cpp</a>
+<h3 class="fn"><a href="qpoint.html">QPoint</a> <a name="c1"></a>QRect::bottomRight () const</h3>
+<p>Returns the bottom right position of the rectangle.
+<p>See also:  <a href="qrect.html#c8">moveBottomRight</a>(), <a href="qrect.html#c3">bottomLeft</a>(), <a href="qrect.html#c0">topLeft</a>(), <a href="qrect.html#c2">topRight</a>(), <a href="qrect.html#b1">bottom</a>() and <a href="qrect.html#b0">right</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#bottomRight">tictac/tictac.cpp</a>
+<h3 class="fn"><a href="qpoint.html">QPoint</a> <a name="c4"></a>QRect::center () const</h3>
+<p>Returns the center point of the rectangle.
+<p>See also:  <a href="qrect.html#d1">moveCenter</a>(), <a href="qrect.html#c0">topLeft</a>(), <a href="qrect.html#c2">topRight</a>(), <a href="qrect.html#c3">bottomLeft</a>() and <a href="qrect.html#c1">bottomRight</a>().
+<p>Examples:
+ <a href="tooltip-tooltip-cpp.html#center">tooltip/tooltip.cpp</a>
+<h3 class="fn">bool <a name="e1"></a>QRect::contains ( const <a href="qpoint.html">QPoint</a> &amp; p, bool proper=FALSE ) const</h3>
+<p>Returns TRUE if the point <em>p</em> is inside or on the edge of the
+rectangle.
+<p>If <em>proper</em> is TRUE, this function returns TRUE only if <em>p</em> is
+inside (not on the edge).
+<h3 class="fn">bool <a name="e2"></a>QRect::contains ( const QRect &amp; r, bool proper=FALSE ) const</h3>
+<p>Returns TRUE if the rectangle <em>r</em> is inside this rectangle.
+<p>If <em>proper</em> is TRUE, this function returns TRUE only if <em>r</em> is
+entirely inside (not on the edge).
+<p>See also:  <a href="qrect.html#e3">unite</a>(), <a href="qrect.html#e4">intersect</a>() and <a href="qrect.html#e5">intersects</a>().
+<h3 class="fn">void <a name="c6"></a>QRect::coords ( int * xp1, int * yp1, int * xp2, int * yp2 ) const</h3>
+<p>Extracts the rectangle parameters as the top left point and the
+bottom right point.
+<p>See also:  <a href="qrect.html#d4">setCoords</a>() and <a href="qrect.html#c5">rect</a>().
+<h3 class="fn">int <a name="d7"></a>QRect::height () const</h3>
+<p>Returns the height of the rectangle.  The height includes both the
+top and bottom edges, ie. height = bottom - top + 1.
+<p>See also:  <a href="qrect.html#d6">width</a>(), <a href="qrect.html#d5">size</a>() and <a href="qrect.html#d9">setHeight</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#height">tictac/tictac.cpp</a>
+ <a href="desktop-desktop-cpp.html#height">desktop/desktop.cpp</a>
+ <a href="movies-main-cpp.html#height">movies/main.cpp</a>
+ <a href="xform-xform-cpp.html#height">xform/xform.cpp</a>
+<h3 class="fn">QRect <a name="e4"></a>QRect::intersect ( const QRect &amp; r ) const</h3>
+<p>Returns the intersection rectangle of this rectangle and <em>r.</em>
+<p>Returns an empty rectangle if there is no intersection.
+<p>See also:  <a href="qrect.html#a5">isEmpty</a>(), <a href="qrect.html#e5">intersects</a>(), <a href="qrect.html#e3">unite</a>() and <a href="qrect.html#e1">contains</a>().
+<h3 class="fn">bool <a name="e5"></a>QRect::intersects ( const QRect &amp; r ) const</h3>
+<p>Returns TRUE if this rectangle intersects with <em>r</em> (there is at
+least one pixel which is within both rectangles).
+<p>See also:  <a href="qrect.html#e4">intersect</a>() and <a href="qrect.html#e1">contains</a>().
+<h3 class="fn">bool <a name="a5"></a>QRect::isEmpty () const</h3>
+<p>Returns TRUE if the rectangle is empty, otherwise FALSE.
+<p>An empty rectangle has a <a href="qrect.html#a8">left</a>() &gt; <a href="qrect.html#b0">right</a>() or <a href="qrect.html#a9">top</a>() &gt; <a href="qrect.html#b1">bottom</a>().
+<p>An empty rectangle is not valid. <pre> isEmpty() == !isValid()</pre>
+<p>See also:  <a href="qrect.html#a4">isNull</a>() and <a href="qrect.html#a6">isValid</a>().
+<h3 class="fn">bool <a name="a4"></a>QRect::isNull () const</h3>
+<p>Returns TRUE if the rectangle is a null rectangle, otherwise FALSE.
+<p>A null rectangle has both the width and the height set to 0, that is
+<a href="qrect.html#b0">right</a>() == <a href="qrect.html#a8">left</a>() - 1 and <a href="qrect.html#b1">bottom</a>() == <a href="qrect.html#a9">top</a>() - 1.
+<p>Remember that if right() == left() and bottom() == top(), then the
+rectangle has width 1 and height 1.
+<p>A null rectangle is also empty.
+<p>A null rectangle is not valid.
+<p>See also:  <a href="qrect.html#a5">isEmpty</a>() and <a href="qrect.html#a6">isValid</a>().
+<h3 class="fn">bool <a name="a6"></a>QRect::isValid () const</h3>
+<p>Returns TRUE if the rectangle is valid, or FALSE if it is invalid (empty).
+<p>A valid rectangle has a <a href="qrect.html#a8">left</a>() &lt;= <a href="qrect.html#b0">right</a>() and <a href="qrect.html#a9">top</a>() &lt;= <a href="qrect.html#b1">bottom</a>().
+<p><pre> isValid() == !isEmpty()</pre>
+<p>See also:  <a href="qrect.html#a4">isNull</a>(), <a href="qrect.html#a5">isEmpty</a>() and <a href="qrect.html#a7">normalize</a>().
+<p>Examples:
+ <a href="tooltip-tooltip-cpp.html#isValid">tooltip/tooltip.cpp</a>
+<h3 class="fn">int <a name="a8"></a>QRect::left () const</h3>
+<p>Returns the left coordinate of the rectangle. Identical to <a href="qrect.html#b2">x</a>().
+<p>See also:  <a href="qrect.html#b2">x</a>(), <a href="qrect.html#a9">top</a>(), <a href="qrect.html#b0">right</a>(), <a href="qrect.html#b4">setLeft</a>(), <a href="qrect.html#c0">topLeft</a>() and <a href="qrect.html#c3">bottomLeft</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#left">tictac/tictac.cpp</a>
+ <a href="desktop-desktop-cpp.html#left">desktop/desktop.cpp</a>
+ <a href="xform-xform-cpp.html#left">xform/xform.cpp</a>
+<h3 class="fn">void <a name="d0"></a>QRect::moveBottomLeft ( const <a href="qpoint.html">QPoint</a> &amp; p )</h3>
+<p>Sets the bottom left position of the rectangle to <em>p,</em> leaving
+the size unchanged.
+<p>See also:  <a href="qrect.html#c3">bottomLeft</a>(), <a href="qrect.html#c8">moveBottomRight</a>(), <a href="qrect.html#c7">moveTopLeft</a>(), <a href="qrect.html#c9">moveTopRight</a>(), <a href="qrect.html#b7">setBottom</a>() and <a href="qrect.html#b4">setLeft</a>().
+<h3 class="fn">void <a name="c8"></a>QRect::moveBottomRight ( const <a href="qpoint.html">QPoint</a> &amp; p )</h3>
+<p>Sets the bottom right position of the rectangle to <em>p,</em> leaving the size
+unchanged.
+<p>See also:  <a href="qrect.html#c1">bottomRight</a>(), <a href="qrect.html#d0">moveBottomLeft</a>(), <a href="qrect.html#c7">moveTopLeft</a>(), <a href="qrect.html#c9">moveTopRight</a>(), <a href="qrect.html#b7">setBottom</a>() and <a href="qrect.html#b6">setRight</a>().
+<h3 class="fn">void <a name="d2"></a>QRect::moveBy ( int dx, int dy )</h3>
+<p>Moves the rectangle <em>dx</em> along the X axis and <em>dy</em> along the Y
+axis, relative to the current position. (Positive values moves the
+rectangle rightwards and/or downwards.).
+<p>Examples:
+ <a href="xform-xform-cpp.html#moveBy">xform/xform.cpp</a>
+<h3 class="fn">void <a name="d1"></a>QRect::moveCenter ( const <a href="qpoint.html">QPoint</a> &amp; p )</h3>
+<p>Sets the center point of the rectangle to <em>p,</em> leaving the size
+unchanged.
+<p>See also:  <a href="qrect.html#c4">center</a>(), <a href="qrect.html#c7">moveTopLeft</a>(), <a href="qrect.html#c9">moveTopRight</a>(), <a href="qrect.html#d0">moveBottomLeft</a>() and <a href="qrect.html#c8">moveBottomRight</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#moveCenter">tictac/tictac.cpp</a>
+<h3 class="fn">void <a name="c7"></a>QRect::moveTopLeft ( const <a href="qpoint.html">QPoint</a> &amp; p )</h3>
+<p>Sets the top left position of the rectangle to <em>p,</em> leaving the
+size unchanged.
+<p>See also:  <a href="qrect.html#c0">topLeft</a>(), <a href="qrect.html#c9">moveTopRight</a>(), <a href="qrect.html#d0">moveBottomLeft</a>(), <a href="qrect.html#c8">moveBottomRight</a>(), <a href="qrect.html#b5">setTop</a>() and <a href="qrect.html#b4">setLeft</a>().
+<p>Examples:
+ <a href="xform-xform-cpp.html#moveTopLeft">xform/xform.cpp</a>
+<h3 class="fn">void <a name="c9"></a>QRect::moveTopRight ( const <a href="qpoint.html">QPoint</a> &amp; p )</h3>
+<p>Sets the top right position of the rectangle to <em>p,</em> leaving the
+size unchanged.
+<p>See also:  <a href="qrect.html#c2">topRight</a>(), <a href="qrect.html#c7">moveTopLeft</a>(), <a href="qrect.html#d0">moveBottomLeft</a>(), <a href="qrect.html#c8">moveBottomRight</a>(), <a href="qrect.html#b5">setTop</a>() and <a href="qrect.html#b6">setRight</a>().
+<h3 class="fn">QRect <a name="a7"></a>QRect::normalize () const</h3>
+<p>Returns a normalized rectangle, i.e. one that has a non-negative width
+and height.
+<p>It swaps left and right if <a href="qrect.html#a8">left</a>() &gt; <a href="qrect.html#b0">right</a>(), and swaps top and bottom if
+<a href="qrect.html#a9">top</a>() &gt; <a href="qrect.html#b1">bottom</a>().
+<p>See also:  <a href="qrect.html#a6">isValid</a>().
+<h3 class="fn">void <a name="c5"></a>QRect::rect ( int * x, int * y, int * w, int * h ) const</h3>
+<p>Extracts the rectangle parameters as the position and the size.
+<p>See also:  <a href="qrect.html#d3">setRect</a>() and <a href="qrect.html#c6">coords</a>().
+<h3 class="fn">int <a name="b0"></a>QRect::right () const</h3>
+<p>Returns the right coordinate of the rectangle.
+<p>See also:  <a href="qrect.html#a8">left</a>(), <a href="qrect.html#b6">setRight</a>(), <a href="qrect.html#c2">topRight</a>() and <a href="qrect.html#c1">bottomRight</a>().
+<p>Examples:
+ <a href="desktop-desktop-cpp.html#right">desktop/desktop.cpp</a>
+<h3 class="fn">void <a name="b7"></a>QRect::setBottom ( int pos )</h3>
+<p>Sets the bottom edge of the rectangle.  May change the height,
+but will never change the top edge of the rectangle.
+<p>See also:  <a href="qrect.html#b1">bottom</a>(), <a href="qrect.html#b5">setTop</a>() and <a href="qrect.html#d9">setHeight</a>().
+<h3 class="fn">void <a name="d4"></a>QRect::setCoords ( int xp1, int yp1, int xp2, int yp2 )</h3>
+<p>Sets the coordinates of the rectangle's top left corner to <em>(xp1,yp1),</em>
+and the coordinates of its bottom right corner to <em>(xp2,yp2).</em>
+<p>See also:  <a href="qrect.html#c6">coords</a>() and <a href="qrect.html#d3">setRect</a>().
+<h3 class="fn">void <a name="d9"></a>QRect::setHeight ( int h )</h3>
+<p>Sets the height of the rectangle to <em>h.</em> The top edge is not
+moved, but the bottom edge may be moved.
+<p>See also:  <a href="qrect.html#d7">height</a>(), <a href="qrect.html#b5">setTop</a>(), <a href="qrect.html#b7">setBottom</a>() and <a href="qrect.html#e0">setSize</a>().
+<p>Examples:
+ <a href="desktop-desktop-cpp.html#setHeight">desktop/desktop.cpp</a>
+<h3 class="fn">void <a name="b4"></a>QRect::setLeft ( int pos )</h3>
+<p>Sets the left edge of the rectangle.  May change the width, but
+will never change the right edge of the rectangle.
+<p>Identical to <a href="qrect.html#b8">setX</a>().
+<p>See also:  <a href="qrect.html#a8">left</a>(), <a href="qrect.html#b5">setTop</a>() and <a href="qrect.html#d8">setWidth</a>().
+<h3 class="fn">void <a name="d3"></a>QRect::setRect ( int x, int y, int w, int h )</h3>
+<p>Sets the coordinates of the rectangle's top left corner to <em>(x,y),</em> and its size to (w,h).
+<p>See also:  <a href="qrect.html#c5">rect</a>() and <a href="qrect.html#d4">setCoords</a>().
+<h3 class="fn">void <a name="b6"></a>QRect::setRight ( int pos )</h3>
+<p>Sets the right edge of the rectangle.  May change the width, but
+will never change the left edge of the rectangle.
+<p>See also:  <a href="qrect.html#b0">right</a>(), <a href="qrect.html#b4">setLeft</a>() and <a href="qrect.html#d8">setWidth</a>().
+<h3 class="fn">void <a name="e0"></a>QRect::setSize ( const <a href="qsize.html">QSize</a> &amp; s )</h3>
+<p>Sets the size of the rectangle to <em>s.</em> The top left corner is not moved.
+<p>See also:  <a href="qrect.html#d5">size</a>(), <a href="qrect.html#d8">setWidth</a>() and <a href="qrect.html#d9">setHeight</a>().
+<p>Examples:
+ <a href="xform-xform-cpp.html#setSize">xform/xform.cpp</a>
+<h3 class="fn">void <a name="b5"></a>QRect::setTop ( int pos )</h3>
+<p>Sets the top edge of the rectangle.  May change the height, but
+will never change the bottom edge of the rectangle.
+<p>Identical to <a href="qrect.html#b9">setY</a>().
+<p>See also:  <a href="qrect.html#a9">top</a>(), <a href="qrect.html#b7">setBottom</a>() and <a href="qrect.html#d9">setHeight</a>().
+<h3 class="fn">void <a name="d8"></a>QRect::setWidth ( int w )</h3>
+<p>Sets the width of the rectangle to <em>w.</em> The right edge is
+changed, but not the left edge.
+<p>See also:  <a href="qrect.html#d6">width</a>(), <a href="qrect.html#b4">setLeft</a>(), <a href="qrect.html#b6">setRight</a>() and <a href="qrect.html#e0">setSize</a>().
+<p>Examples:
+ <a href="desktop-desktop-cpp.html#setWidth">desktop/desktop.cpp</a>
+<h3 class="fn">void <a name="b8"></a>QRect::setX ( int x )</h3>
+<p>Sets the x position of the rectangle (its left end).  May change
+the width, but will never change the right edge of the rectangle.
+<p>Identical to <a href="qrect.html#b4">setLeft</a>().
+<p>See also:  <a href="qrect.html#b2">x</a>() and <a href="qrect.html#b9">setY</a>().
+<h3 class="fn">void <a name="b9"></a>QRect::setY ( int y )</h3>
+<p>Sets the y position of the rectangle (its top).  May change the
+height, but will never change the bottom edge of the rectangle.
+<p>Identical to <a href="qrect.html#b5">setTop</a>().
+<p>See also:  <a href="qrect.html#b3">y</a>() and <a href="qrect.html#b8">setX</a>().
+<h3 class="fn"><a href="qsize.html">QSize</a> <a name="d5"></a>QRect::size () const</h3>
+<p>Returns the size of the rectangle.
+<p>See also:  <a href="qrect.html#d6">width</a>() and <a href="qrect.html#d7">height</a>().
+<p>Examples:
+ <a href="desktop-desktop-cpp.html#size">desktop/desktop.cpp</a>
+ <a href="movies-main-cpp.html#size">movies/main.cpp</a>
+<h3 class="fn">int <a name="a9"></a>QRect::top () const</h3>
+<p>Returns the top coordinate of the rectangle. Identical to <a href="qrect.html#b3">y</a>().
+<p>See also:  <a href="qrect.html#b3">y</a>(), <a href="qrect.html#a8">left</a>(), <a href="qrect.html#b1">bottom</a>(), <a href="qrect.html#b5">setTop</a>(), <a href="qrect.html#c0">topLeft</a>() and <a href="qrect.html#c2">topRight</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#top">tictac/tictac.cpp</a>
+ <a href="desktop-desktop-cpp.html#top">desktop/desktop.cpp</a>
+ <a href="xform-xform-cpp.html#top">xform/xform.cpp</a>
+<h3 class="fn"><a href="qpoint.html">QPoint</a> <a name="c0"></a>QRect::topLeft () const</h3>
+<p>Returns the top left position of the rectangle.
+<p>See also:  <a href="qrect.html#c7">moveTopLeft</a>(), <a href="qrect.html#c2">topRight</a>(), <a href="qrect.html#c3">bottomLeft</a>(), <a href="qrect.html#c1">bottomRight</a>(), <a href="qrect.html#a8">left</a>() and <a href="qrect.html#a9">top</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#topLeft">tictac/tictac.cpp</a>
+<h3 class="fn"><a href="qpoint.html">QPoint</a> <a name="c2"></a>QRect::topRight () const</h3>
+<p>Returns the top right position of the rectangle.
+<p>See also:  <a href="qrect.html#c9">moveTopRight</a>(), <a href="qrect.html#c0">topLeft</a>(), <a href="qrect.html#c3">bottomLeft</a>(), <a href="qrect.html#c1">bottomRight</a>(), <a href="qrect.html#a9">top</a>() and <a href="qrect.html#b0">right</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#topRight">tictac/tictac.cpp</a>
+<h3 class="fn">QRect <a name="e3"></a>QRect::unite ( const QRect &amp; r ) const</h3>
+<p>Returns the union rectangle of this rectangle and <em>r.</em>  The union
+rectangle of a nonempty rectangle and an empty or invalid rectangle
+is defined to be the nonempty rectangle.
+<p>See also:  <a href="qrect.html#e4">intersect</a>(), <a href="qrect.html#e5">intersects</a>() and <a href="qrect.html#e1">contains</a>().
+<p>Examples:
+ <a href="xform-xform-cpp.html#unite">xform/xform.cpp</a>
+<h3 class="fn">int <a name="d6"></a>QRect::width () const</h3>
+<p>Returns the width of the rectangle.  The width includes both the
+left and right edges, ie. width = right - left + 1.
+<p>See also:  <a href="qrect.html#d7">height</a>(), <a href="qrect.html#d5">size</a>() and <a href="qrect.html#d9">setHeight</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#width">tictac/tictac.cpp</a>
+ <a href="desktop-desktop-cpp.html#width">desktop/desktop.cpp</a>
+ <a href="movies-main-cpp.html#width">movies/main.cpp</a>
+ <a href="xform-xform-cpp.html#width">xform/xform.cpp</a>
+<h3 class="fn">int <a name="b2"></a>QRect::x () const</h3>
+<p>Returns the left coordinate of the rectangle.  Identical to <a href="qrect.html#a8">left</a>().
+<p>See also:  <a href="qrect.html#a8">left</a>(), <a href="qrect.html#b3">y</a>() and <a href="qrect.html#b8">setX</a>().
+<p>Examples:
+ <a href="desktop-desktop-cpp.html#x">desktop/desktop.cpp</a>
+ <a href="movies-main-cpp.html#x">movies/main.cpp</a>
+ <a href="xform-xform-cpp.html#x">xform/xform.cpp</a>
+<h3 class="fn">int <a name="b3"></a>QRect::y () const</h3>
+<p>Returns the top coordinate of the rectangle.  Identical to <a href="qrect.html#a9">top</a>().
+<p>See also:  <a href="qrect.html#a9">top</a>(), <a href="qrect.html#b2">x</a>() and <a href="qrect.html#b9">setY</a>().
+<p>Examples:
+ <a href="desktop-desktop-cpp.html#y">desktop/desktop.cpp</a>
+ <a href="movies-main-cpp.html#y">movies/main.cpp</a>
+ <a href="xform-xform-cpp.html#y">xform/xform.cpp</a>
+<hr><h2>Related Functions</h2>
+<h3>bool <a name="e8"></a>operator== (const QRect &amp; r1, const QRect &amp; r2)</h3>
+<p>Returns TRUE if <em>r1</em> and <em>r2</em> are equal, or FALSE if they are different.
+
+<h3>bool <a name="e9"></a>operator!= (const QRect &amp; r1, const QRect &amp; r2)</h3>
+<p>Returns TRUE if <em>r1</em> and <em>r2</em> are different, or FALSE if they are equal.
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="f0"></a>operator&lt;&lt; (<a href="qdatastream.html">QDataStream</a> &amp; s, const QRect &amp; r)</h3>
+<p>Writes a QRect to the stream and returns a reference to the stream.
+<p>Serialization format: [left (INT16), top (INT16), right (INT16),
+bottom (INT16)].
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="f1"></a>operator&gt;&gt; (<a href="qdatastream.html">QDataStream</a> &amp; s, QRect &amp; r)</h3>
+<p>Reads a QRect from the stream and returns a reference to the stream.
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qrect.h: 1998/08/25
+<li>qrect.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

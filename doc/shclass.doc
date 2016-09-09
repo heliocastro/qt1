@@ -1,0 +1,199 @@
+/****************************************************************************
+** $Id: shclass.doc,v 2.6 1998/03/31 09:05:36 aavit Exp $
+**
+** Qt Shared Classes Documentation
+**
+** Copyright (C) 1995-1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+/*!
+\page shclass.html
+
+<title>Qt Shared Classes</title>
+</head><body bgcolor="#ffffff">
+
+\postheader
+
+<h1 align=center>Shared Classes</h1><br clear="all">
+
+Many C++ classes in Qt utilize a data sharing mechanism to maximize
+resource usage and minimize copying of data. We use two techniques:
+explicit and implicit sharing.
+
+
+<h2>Overview</h2>
+
+A shared class consists of a pointer to a shared data block that contains:
+<ul>
+<li> A reference count.
+<li> The data.
+</ul>
+
+When a shared object is created, it sets the reference count to 1.  The
+reference count is incremented whenever a new object references the shared
+data, and decremented when the object dereferences the shared data.  The
+shared data is deleted when the reference count becomes zero.
+
+When dealing with shared objects, there are two ways of copying an object.
+We usually speak about \e deep and \e shallow copies.  A deep copy implies
+duplicating an object.  A shallow copy is a reference copy, we only copy a
+pointer to a shared data block.  Making a deep copy can be expensive in
+terms of memory and CPU.  Making a shallow copy is very fast, because it
+only involves setting a pointer and incrementing the reference count.
+
+Object assignment (operator=) for all shared objects is implemented as
+shallow copies.  A deep copy can be made by calling a copy() function.
+
+The benefit of sharing is that a program does not need to duplicate data
+when it is not required, which results in less memory usage and less
+copying of data. Objects can easily be assigned, sent as function
+arguments and returned from functions.
+
+Qt implements two types of sharing: \e explicit and \e implicit sharing.
+Explicit sharing means that the programmer must be aware of the fact that
+objects share common data.  Implicite sharing means that the sharing
+mechanism takes place behind the scenes and the programmer does not need
+to worry about it.
+
+
+<h2>A QString Example</h2>
+
+QString is an example of an shared class that uses explicit sharing.
+Example:
+\code
+  QString a = "one";    // 1)     a = "one"
+  QString b = "two";    // 2)     a = "one",    b = "two"
+  a = b;                // 3)   a,b = "two"
+  a[1] = 'a';           // 4)   a,b = "tao"
+  QString c = a;        // 5) a,b,c = "tao"
+  a.detach();           // 6)     a = "tao"   b,c = "tao"
+  a[1] = 'o';           // 7)     a = "too",  b,c = "tao"
+  b = a.copy();         // 8)     a = "too",    b = "too",  c = "tao"
+\endcode
+
+The assignment <code>a = b</code> on line 3 throws away <code>a</code>'s
+original shared block (the reference count becomes zero), sets
+<code>a</code>'s shared block to point to <code>b</code>'s shared block
+and increments the reference count.
+
+On line 4, the contents of \c a is modified. \c b is also modified,
+because \c a and \c b refer the same data block. This is the difference
+between explicit and implicit sharing (explained below).
+
+The \c a object detaches from the common data on line 6.  Detaching means
+to copy the shared data to make sure that an object has its own private
+data.  Therefore, modifying \c a on line 7 will not affect \c b or \c c.
+
+Finally, on line 8 we make a deep copy of \c a and assign it to \c b.
+
+
+<h2>Explicit vs. Implicit Sharing</h2>
+
+The difference between explicit and implicit sharing is that implicit
+sharing automatically detaches the object from a shared block if the
+object is about to change and the reference count is greater than
+one. Explicit sharing leaves this job to the programmer.  If an explicitly
+shared object is not detached, changing this object will change all other
+objects that refer the same data.
+
+Implicit sharing optimizes memory usage and copying of data without this
+side-effect.  Then, why didn't we implement implicite sharing for all
+shared classes?  The answer is that a class that allows direct access to
+its internal data (for efficiency reasons), like QString, cannot be
+implicitly shared, because it can be changed without letting QString know.
+
+An implicitly shared class has total control of its internal data.  In any
+member function that modify its data, it automatically detaches before
+modifying the data.
+
+The QPen class, which has implicit sharing, detaches from the shared data
+in all member functions that change the internal data.
+
+Code fragment:
+\code
+  void QPen::setStyle( PenStyle s )
+  {
+      detach();				// detach from common data
+      data->style = s;			// set the style member
+  }
+
+  void QPen::detach()
+  {
+      if ( data->count != 1 )		// only if >1 reference
+	  *this = copy();
+  }
+\endcode
+
+This is clearly not possible for QString, because the programmer can
+do the following:
+
+\code
+  QString s = "test";
+  s[0] = 'f';				// will modify s
+  *(s.data()+1) = 'i';			// will modify s
+\endcode
+
+If we should have monitored changes in a QString, the QString class would
+be unacceptably slow.
+
+
+<h2>Explicitly Shared Classes</h2>
+
+All classes that are instances of the QArray template class are explicitly
+shared:
+<ul>
+<li>\link QBitArray QBitArray\endlink
+<li>\link QByteArray QByteArray\endlink
+<li>\link QImage QImage\endlink (does not inherit QArray)
+<li>\link QPointArray QPointArray\endlink
+<li>\link QString QString\endlink
+<li>Any other instantiation of \link QArray QArray\<type\>\endlink
+</ul>
+
+These classes have a detach() function that can be called if you want your
+object to get a private copy of the shared data.  They also have a copy()
+function that returns a deep copy with reference count 1 of an object.
+
+
+<h2>Implicitly Shared Classes</h2>
+
+The Qt classes that are implicitly shared are:
+<ul>
+<li>\link QBitmap QBitmap\endlink
+<li>\link QBrush QBrush\endlink
+<li>\link QCursor QCursor\endlink
+<li>\link QFont QFont\endlink
+<li>\link QFontInfo QFontInfo\endlink
+<li>\link QFontMetrics QFontMetrics\endlink
+<li>\link QPen QPen\endlink
+<li>\link QPalette QPalette\endlink
+<li>\link QPixmap QPixmap\endlink
+<li>\link QRegion QRegion\endlink (not fully implemented)
+</ul>
+
+These classes automatically detach from common data if an object is about
+to be changed.  The programmer will not even notice that the objects are
+shared.  Thus you should treat separate instances of them as separate
+objects.  They will always behave as separate objects but with the added
+bonus of sharing data whenever possible.  For this reason, you can pass
+these classes as arguments to functions without having to think about the
+copying overhead.
+
+Example:
+\code
+  QPixmap p1, p2;
+  p1.load( "image.bmp" );
+  p2 = p1;			// p1 and p2 share data
+  QPainter paint;
+  paint.begin( &p2 );		// cuts p2 loose from p1
+  paint.drawText( 0,50, "Hi" );
+  paint.end();
+\endcode
+
+In this example, \c p1 and \c p2 share data until QPainter::begin() is
+called for \c p2, because painting a pixmap will modify it.  The same
+happens also if anything is \link ::bitBlt() bitBlt()\endlink'ed into \c p2.
+
+*/
+

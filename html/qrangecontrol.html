@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QRangeControl Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QRangeControl Class Reference</h1><br clear="all">
+<p>
+The QRangeControl class provides an integer value within a range.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qrangecontrol-h.html">qrangecontrol.h</a>&gt;</code>
+<p>Inherited by <a href="qscrollbar.html">QScrollBar</a>, <a href="qslider.html">QSlider</a> and <a href="qspinbox.html">QSpinBox</a>.
+<p><a href="qrangecontrol-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qrangecontrol.html#a0"><strong>QRangeControl</strong></a> () </span>
+<li><span class="fn"><a href="qrangecontrol.html#a1"><strong>QRangeControl</strong></a> ( int minValue, int maxValue, int lineStep, int pageStep, int value ) </span>
+<li><span class="fn">int <a href="qrangecontrol.html#a2"><strong>value</strong></a> () const</span>
+<li><span class="fn">void <a href="qrangecontrol.html#a3"><strong>setValue</strong></a> ( int ) </span>
+<li><span class="fn">void <a href="qrangecontrol.html#a4"><strong>addPage</strong></a> () </span>
+<li><span class="fn">void <a href="qrangecontrol.html#a5"><strong>subtractPage</strong></a> () </span>
+<li><span class="fn">void <a href="qrangecontrol.html#a6"><strong>addLine</strong></a> () </span>
+<li><span class="fn">void <a href="qrangecontrol.html#a7"><strong>subtractLine</strong></a> () </span>
+<li><span class="fn">int <a href="qrangecontrol.html#a8"><strong>minValue</strong></a> () const</span>
+<li><span class="fn">int <a href="qrangecontrol.html#a9"><strong>maxValue</strong></a> () const</span>
+<li><span class="fn">void <a href="qrangecontrol.html#b0"><strong>setRange</strong></a> ( int minValue, int maxValue ) </span>
+<li><span class="fn">int <a href="qrangecontrol.html#b1"><strong>lineStep</strong></a> () const</span>
+<li><span class="fn">int <a href="qrangecontrol.html#b2"><strong>pageStep</strong></a> () const</span>
+<li><span class="fn">void <a href="qrangecontrol.html#b3"><strong>setSteps</strong></a> ( int line, int page ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">void <a href="qrangecontrol.html#b4"><strong>directSetValue</strong></a> ( int val ) </span>
+<li><span class="fn">int <a href="qrangecontrol.html#b5"><strong>prevValue</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qrangecontrol.html#b6"><strong>valueChange</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qrangecontrol.html#b7"><strong>rangeChange</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qrangecontrol.html#b8"><strong>stepChange</strong></a> () </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QRangeControl class provides an integer value within a range.
+<p>
+This class has many functions to manipulate a value inside a range.
+It was specifically designed for the <a href="qscrollbar.html">QScrollBar</a> widget, but it can
+also be practical for other purposes.
+<p>The three virtual functions <a href="qrangecontrol.html#b6">valueChange</a>(), <a href="qrangecontrol.html#b7">rangeChange</a>() and <a href="qrangecontrol.html#b8">stepChange</a>()
+can be reimplemented in a subclass to detect range control changes.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QRangeControl::QRangeControl ()</h3>
+<p>Constructs a range control with min value 0, max value 99,
+line step 1, page step 10 and initial value 0.
+<h3 class="fn"><a name="a1"></a>QRangeControl::QRangeControl ( int minValue, int maxValue, int lineStep, int pageStep, int value )</h3>
+<p>Constructs a range control with the specified parameters.
+<h3 class="fn">void <a name="a6"></a>QRangeControl::addLine ()</h3>
+<p>Equivalent to <pre> setValue( value()+lineStep() )</pre>
+.
+<p>See also:  <a href="qrangecontrol.html#a7">subtractLine</a>().
+<h3 class="fn">void <a name="a4"></a>QRangeControl::addPage ()</h3>
+<p>Equivalent to <pre> setValue( value()+pageStep() )</pre>
+<p>See also:  <a href="qrangecontrol.html#a5">subtractPage</a>().
+<h3 class="fn">void <a name="b4"></a>QRangeControl::directSetValue ( int value ) <code>[protected]</code></h3>
+<p>Sets the range control value directly without calling <a href="qrangecontrol.html#b6">valueChange</a>().
+<p>Adjusts the value if it is less than the <a href="qrangecontrol.html#a8">min value</a>
+or greater than the <a href="qrangecontrol.html#a9">max value</a>.
+<p>See also:  <a href="qrangecontrol.html#a3">setValue</a>().
+<h3 class="fn">int <a name="b1"></a>QRangeControl::lineStep () const</h3>
+<p>Returns the current line step.
+<p>See also:  <a href="qrangecontrol.html#b3">setSteps</a>() and <a href="qrangecontrol.html#b2">pageStep</a>().
+<h3 class="fn">int <a name="a9"></a>QRangeControl::maxValue () const</h3>
+<p>Returns the current maximum value in the range.
+<p>See also:  <a href="qrangecontrol.html#b0">setRange</a>() and <a href="qrangecontrol.html#a8">minValue</a>().
+<h3 class="fn">int <a name="a8"></a>QRangeControl::minValue () const</h3>
+<p>Returns the current minimum value in the range.
+<p>See also:  <a href="qrangecontrol.html#b0">setRange</a>() and <a href="qrangecontrol.html#a9">maxValue</a>().
+<h3 class="fn">int <a name="b2"></a>QRangeControl::pageStep () const</h3>
+<p>Returns the current page step.
+<p>See also:  <a href="qrangecontrol.html#b3">setSteps</a>() and <a href="qrangecontrol.html#b1">lineStep</a>().
+<h3 class="fn">int <a name="b5"></a>QRangeControl::prevValue () const <code>[protected]</code></h3>
+<p>Returns the previous range control value.
+<p>See also:  <a href="qrangecontrol.html#a2">value</a>().
+<h3 class="fn">void <a name="b7"></a>QRangeControl::rangeChange () <code>[virtual protected]</code></h3>
+<p>This virtual function is called whenever the range control range
+changes. You can reimplment it if you want to be notified when the range
+changes. The default implementation does nothing.
+<p>See also:  <a href="qrangecontrol.html#b0">setRange</a>(), <a href="qrangecontrol.html#b6">valueChange</a>() and <a href="qrangecontrol.html#b8">stepChange</a>().
+<p>Reimplemented in <a href="qslider.html#c9">QSlider</a> and <a href="qscrollbar.html#c7">QScrollBar</a>.
+<h3 class="fn">void <a name="b0"></a>QRangeControl::setRange ( int minValue, int maxValue )</h3>
+<p>Sets the range min value to <em>minValue</em> and the max value to <em>maxValue.</em>
+<p>Calls the virtual <a href="qrangecontrol.html#b7">rangeChange</a>() function if the new min and max
+values are different from the previous setting.  Calls the virtual
+<a href="qrangecontrol.html#b6">valueChange</a>() function if the current value is outside the new range
+and has to be adjusted.
+<p>See also:  <a href="qrangecontrol.html#a8">minValue</a>() and <a href="qrangecontrol.html#a9">maxValue</a>().
+<p>Examples:
+ <a href="xform-xform-cpp.html#setRange">xform/xform.cpp</a>
+<h3 class="fn">void <a name="b3"></a>QRangeControl::setSteps ( int lineStep,int pageStep )</h3>
+<p>Sets the range line step to <em>lineStep</em> and page step to <em>pageStep.</em>
+<p>Calls the virtual <a href="qrangecontrol.html#b8">stepChange</a>() function if the new line step and/or page step
+are different from the previous setting.
+<p>See also:  <a href="qrangecontrol.html#b0">setRange</a>().
+<h3 class="fn">void <a name="a3"></a>QRangeControl::setValue ( int value )</h3>
+<p>Sets the range control value to <em>value.</em>
+<p>Adjusts the value if it is less than the <a href="qrangecontrol.html#a8">min value</a>
+or greater than the <a href="qrangecontrol.html#a9">max value</a>.
+<p>Calls the virtual <a href="qrangecontrol.html#b6">valueChange</a>() function if the value is different from the
+previous value.
+<h3 class="fn">void <a name="b8"></a>QRangeControl::stepChange () <code>[virtual protected]</code></h3>
+<p>This virtual function is called whenever the range control step value
+changes. You can reimplment it if you want to be notified when the step
+changes. The default implementation does nothing.
+<p>See also:  <a href="qrangecontrol.html#b3">setSteps</a>(), <a href="qrangecontrol.html#b7">rangeChange</a>() and <a href="qrangecontrol.html#b6">valueChange</a>().
+<p>Reimplemented in <a href="qscrollbar.html#c6">QScrollBar</a>.
+<h3 class="fn">void <a name="a7"></a>QRangeControl::subtractLine ()</h3>
+<p>Equivalent to <pre> setValue( value()-lineStep() )</pre>
+.
+<p>See also:  <a href="qrangecontrol.html#a6">addLine</a>().
+<h3 class="fn">void <a name="a5"></a>QRangeControl::subtractPage ()</h3>
+<p>Equivalent to <pre> setValue( value()-pageStep() )</pre>
+<p>See also:  <a href="qrangecontrol.html#a4">addPage</a>().
+<h3 class="fn">int <a name="a2"></a>QRangeControl::value () const</h3>
+<p>Returns the current range control value.
+<p>See also:  <a href="qrangecontrol.html#a3">setValue</a>() and <a href="qrangecontrol.html#b5">prevValue</a>().
+<p>Examples:
+ <a href="xform-xform-cpp.html#value">xform/xform.cpp</a>
+<h3 class="fn">void <a name="b6"></a>QRangeControl::valueChange () <code>[virtual protected]</code></h3>
+<p>This virtual function is called whenever the range control value changes.
+You can reimplment it if you want to be notified when the value changes.
+The default implementation does nothing.
+<p>See also:  <a href="qrangecontrol.html#a3">setValue</a>(), <a href="qrangecontrol.html#a4">addPage</a>(), <a href="qrangecontrol.html#a5">subtractPage</a>(), <a href="qrangecontrol.html#a6">addLine</a>(), <a href="qrangecontrol.html#a7">subtractLine</a>(), <a href="qrangecontrol.html#b7">rangeChange</a>() and <a href="qrangecontrol.html#b8">stepChange</a>().
+<p>Reimplemented in <a href="qslider.html#c8">QSlider</a> and <a href="qscrollbar.html#c5">QScrollBar</a>.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qrangecontrol.h: 1998/08/21
+<li>qrangecontrol.cpp: 1998/08/20
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,239 @@
+.TH QPushButton 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QPushButton \- Push button with a text or pixmap label
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qpushbutton.h>\fR
+.PP
+Inherits QButton.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QPushButton ( QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "QPushButton ( const char * " "text" ", QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "void setToggleButton ( bool )"
+.br
+.ti -1c
+.BI "bool autoDefault () const"
+.br
+.ti -1c
+.BI "void setAutoDefault ( bool autoDef )"
+.br
+.ti -1c
+.BI "bool isDefault () const"
+.br
+.ti -1c
+.BI "void setDefault ( bool def )"
+.br
+.ti -1c
+.BI "void setIsMenuButton ( bool )"
+.br
+.ti -1c
+.BI "bool isMenuButton () const"
+.br
+.ti -1c
+.BI "virtual QSize sizeHint () const"
+.br
+.ti -1c
+.BI "void move ( int " "x" ", int y )"
+.br
+.ti -1c
+.BI "void move ( const QPoint & p )"
+.br
+.ti -1c
+.BI "void resize ( int " "w" ", int h )"
+.br
+.ti -1c
+.BI "void resize ( const QSize & )"
+.br
+.ti -1c
+.BI "virtual void setGeometry ( int " "x" ", int " "y" ", int " "w" ", int h )"
+.br
+.ti -1c
+.BI "void setGeometry ( const QRect & )"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "void setOn ( bool )"
+.br
+.ti -1c
+.BI "void toggle ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void drawButton ( QPainter * )"
+.br
+.ti -1c
+.BI "virtual void drawButtonLabel ( QPainter * )"
+.br
+.ti -1c
+.BI "virtual void focusInEvent ( QFocusEvent * )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QPushButton widget provides a push button with a text or pixmap label.
+.PP
+A default push button in a dialog emits the clicked signal if the user presses the Enter key.
+.PP
+A push button has \fCTabFocus\fR as a default focusPolicy(), i.e. it can get keyboard focus by tabbing but not by clicking.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+See also: QRadioButton, QToolButton and GUI Design Handbook: Push Button
+.PP
+Examples:
+.(l
+tictac/tictac.cpp drawdemo/drawdemo.cpp xform/xform.cpp layout/layout.cpp qmag/qmag.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QPushButton::QPushButton ( QWidget * parent=0, const char * name=0 )"
+Constructs a push button with no text.
+.PP
+The \fIparent\fR and \fIname\fR arguments are sent to the QWidget constructor.
+.SH "QPushButton::QPushButton ( const char * text, QWidget * parent=0, const char * name=0 )"
+Constructs a push button with a text.
+.PP
+The \fIparent\fR and \fIname\fR arguments are sent to the QWidget constructor.
+.SH "bool QPushButton::autoDefault () const"
+Returns TRUE if the button is an auto-default button.
+.PP
+See also: setAutoDefault().
+.SH "void QPushButton::drawButton ( QPainter * paint ) \fC[virtual protected]\fR"
+Draws the push button, except its label.
+.PP
+See also: drawButtonLabel().
+.PP
+Reimplemented from QButton.
+.SH "void QPushButton::drawButtonLabel ( QPainter * paint ) \fC[virtual protected]\fR"
+Draws the push button label.
+.PP
+See also: drawButton().
+.PP
+Reimplemented from QButton.
+.SH "void QPushButton::focusInEvent ( QFocusEvent * e ) \fC[virtual protected]\fR"
+Handles focus in events for the push button.
+.PP
+Reimplemented from QWidget.
+.SH "bool QPushButton::isDefault () const"
+Returns TRUE if the button is default.
+.PP
+See also: setDefault().
+.SH "bool QPushButton::isMenuButton () const"
+Returns TRUE if this button indicates to the user that pressing it will pop up a menu, and FALSE otherwise. The default is FALSE.
+.PP
+See also: setIsMenuButton().
+.SH "void QPushButton::move ( const QPoint & p )"
+Reimplements QWidget::move() for internal purposes.
+.SH "void QPushButton::move ( int x, int y )"
+Reimplements QWidget::move() for internal purposes.
+.PP
+Examples:
+.(l
+drawdemo/drawdemo.cpp
+.)l
+.SH "void QPushButton::resize ( const QSize & s )"
+Reimplements QWidget::resize() for internal purposes.
+.SH "void QPushButton::resize ( int w, int h )"
+Reimplements QWidget::resize() for internal purposes.
+.PP
+Examples:
+.(l
+drawdemo/drawdemo.cpp
+.)l
+.SH "void QPushButton::setAutoDefault ( bool enable )"
+Sets the push buttons to an auto-default button if \fIenable\fR is TRUE, or to a normal button if \fIenable\fR is FALSE.
+.PP
+An auto-default button becomes the default push button automatically when it receives the keyboard input focus.
+.PP
+See also: autoDefault() and setDefault().
+.SH "void QPushButton::setDefault ( bool enable )"
+Sets the button to be the default button if \fIenable\fR is TRUE, or to be a normal button if \fIenable\fR is FALSE.
+.PP
+A default push button in a dialog emits the QButton::clicked() signal if the user presses the Enter key. Only one push button in the dialog can be default.
+.PP
+Default push buttons are only allowed in dialogs.
+.PP
+See also: isDefault(), setAutoDefault() and QDialog.
+.PP
+Examples:
+.(l
+xform/xform.cpp
+.)l
+.SH "void QPushButton::setGeometry ( const QRect & r )"
+Reimplements QWidget::setGeometry() for internal purposes.
+.SH "void QPushButton::setGeometry ( int x, int y, int w, int h ) \fC[virtual]\fR"
+Reimplements QWidget::setGeometry() for internal purposes.
+.PP
+Examples:
+.(l
+xform/xform.cpp qmag/qmag.cpp
+.)l
+.PP
+Reimplemented from QWidget.
+.SH "void QPushButton::setIsMenuButton ( bool enable )"
+Tells this button to draw a menu indication triangle if \fIenable\fR is TRUE, and to not draw one if \fIenable\fR is FALSE (the default).
+.PP
+setIsMenuButton() does not cause the button to do anything other than draw the menu indication.
+.PP
+See also: isMenuButton().
+.SH "void QPushButton::setOn ( bool enable ) \fC[slot]\fR"
+Switches a toggle button on if \fIenable\fR is TRUE or off if \fIenable\fR is FALSE.
+.PP
+See also: isOn(), toggle(), toggled() and isToggleButton().
+.PP
+Examples:
+.(l
+qmag/qmag.cpp
+.)l
+.SH "void QPushButton::setToggleButton ( bool enable )"
+Makes the push button a toggle button if \fIenable\fR is TRUE, or a normal push button if \fIenable\fR is FALSE.
+.PP
+Toggle buttons have an on/off state similar to check boxes. A push button is initially not a toggle button.
+.PP
+See also: setOn(), toggle(), isToggleButton() and toggled().
+.PP
+Examples:
+.(l
+qmag/qmag.cpp
+.)l
+.SH "QSize QPushButton::sizeHint () const \fC[virtual]\fR"
+Returns a size which fits the contents of the push button.
+.PP
+Examples:
+.(l
+layout/layout.cpp widgets/widgets.cpp
+.)l
+.PP
+Reimplemented from QWidget.
+.SH "void QPushButton::toggle () \fC[slot]\fR"
+Toggles the state of a toggle button.
+.PP
+See also:  isOn(), setOn(), toggled() and isToggleButton().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qpushbutton.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

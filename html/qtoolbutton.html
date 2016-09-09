@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QToolButton Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QToolButton Class Reference</h1><br clear="all">
+<p>
+The QToolButton class provides a push button whose appearance has been tailored for use in a <a href="qtoolbar.html">QToolBar</a>.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qtoolbutton-h.html">qtoolbutton.h</a>&gt;</code>
+<p>
+Inherits <a href="qbutton.html">QButton</a>.
+<p><a href="qtoolbutton-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qtoolbutton.html#a0"><strong>QToolButton</strong></a> ( QWidget * parent = 0, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qtoolbutton.html#a1"><strong>QToolButton</strong></a> ( const QPixmap &amp; pm, const char * textLabel, const char * grouptext, QObject * receiver, const char * slot, QToolBar * parent, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qtoolbutton.html#a2"><strong>QToolButton</strong></a> ( QIconSet s, const char * textLabel, const char * grouptext, QObject * receiver, const char * slot, QToolBar * parent, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qtoolbutton.html#a3"><strong>~QToolButton</strong></a> () </span>
+<li><span class="fn">virtual QSize <a href="qtoolbutton.html#a4"><strong>sizeHint</strong></a> () const</span>
+<li><span class="fn">void <a href="qtoolbutton.html#a5"><strong>setIconSet</strong></a> ( const QIconSet &amp; ) </span>
+<li><span class="fn">QIconSet <a href="qtoolbutton.html#a6"><strong>iconSet</strong></a> () const</span>
+<li><span class="fn">bool <a href="qtoolbutton.html#a7"><strong>usesBigPixmap</strong></a> () const</span>
+<li><span class="fn">bool <a href="qtoolbutton.html#a8"><strong>usesTextLabel</strong></a> () const</span>
+<li><span class="fn">const char* <a href="qtoolbutton.html#a9"><strong>textLabel</strong></a> () const</span>
+</ul>
+<h2>Public Slots</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qtoolbutton.html#b0"><strong>setUsesBigPixmap</strong></a> ( bool enable ) </span>
+<li><span class="fn">virtual void <a href="qtoolbutton.html#b1"><strong>setUsesTextLabel</strong></a> ( bool enable ) </span>
+<li><span class="fn">virtual void <a href="qtoolbutton.html#b2"><strong>setTextLabel</strong></a> ( const char *, bool = TRUE ) </span>
+<li><span class="fn">void <a href="qtoolbutton.html#b3"><strong>setToggleButton</strong></a> ( bool enable ) </span>
+<li><span class="fn">void <a href="qtoolbutton.html#b4"><strong>setOn</strong></a> ( bool enable ) </span>
+<li><span class="fn">void <a href="qtoolbutton.html#b5"><strong>toggle</strong></a> () </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qtoolbutton.html#b6"><strong>drawButton</strong></a> ( QPainter * ) </span>
+<li><span class="fn">virtual void <a href="qtoolbutton.html#b7"><strong>drawButtonLabel</strong></a> ( QPainter * ) </span>
+<li><span class="fn">virtual void <a href="qtoolbutton.html#b8"><strong>enterEvent</strong></a> ( QEvent * ) </span>
+<li><span class="fn">virtual void <a href="qtoolbutton.html#b9"><strong>leaveEvent</strong></a> ( QEvent * ) </span>
+<li><span class="fn">bool <a href="qtoolbutton.html#c0"><strong>uses3D</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QToolButton class provides a push button whose appearance has been tailored for use in a <a href="qtoolbar.html">QToolBar</a>.
+<p>
+This means that it implements the ridiculous Microsoft auto-raise
+feature using <a href="qiconset.html">QIconSet</a>.  Apart from that, it's pretty much like a
+<a href="qpushbutton.html">QPushButton</a>.  The two classes may at some point be merged.
+<p>See also:  <a href="qpushbutton.html">QPushButton</a>, <a href="qtoolbutton.html#a0">QToolButton</a> and <a href="guibooks.html#fowler">GUI Design Handbook: Push Button</a>
+<p>Examples:
+ <a href="application-application-cpp.html#QToolButton">application/application.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a2"></a>QToolButton::QToolButton ( <a href="qiconset.html">QIconSet</a> iconSet, const char * textLabel, const char * grouptext, <a href="qobject.html">QObject</a> * receiver, const char * slot, <a href="qtoolbar.html">QToolBar</a> * parent, const char * name = 0 )</h3>
+<p>Creates a tool button that is a child of <em>parent</em> (which must be
+a <a href="qtoolbar.html">QToolBar</a>) and named <em>name.</em>
+<p>The tool button will display <em>iconSet,</em> with text label or tool tip <em>textLabel</em> and status-bar message <em>grouptext,</em> connected to <em>slot</em>
+in object <em>receiver,</em> and returns the button.
+<h3 class="fn"><a name="a0"></a>QToolButton::QToolButton ( <a href="qwidget.html">QWidget</a> * parent = 0, const char * name = 0 )</h3>
+<p>Constructs an empty tool button.
+<h3 class="fn"><a name="a1"></a>QToolButton::QToolButton ( const <a href="qpixmap.html">QPixmap</a> &amp; pm, const char * textLabel, const char * grouptext, <a href="qobject.html">QObject</a> * receiver, const char * slot, <a href="qtoolbar.html">QToolBar</a> * parent, const char * name = 0 )</h3>
+<p>Creates a tool button that is a child of <em>parent</em> (which must be
+a <a href="qtoolbar.html">QToolBar</a>) and named <em>name.</em>
+<p>The tool button will display <em>pm,</em> with text label or tool tip <em>textLabel</em> and status-bar message <em>grouptext,</em> connected to <em>slot</em>
+in object <em>receiver,</em> and returns the button.
+<h3 class="fn"><a name="a3"></a>QToolButton::~QToolButton ()</h3>
+<p>Destroys the object and frees any allocated resources.
+<h3 class="fn">void <a name="b6"></a>QToolButton::drawButton ( <a href="qpainter.html">QPainter</a> * p ) <code>[virtual protected]</code></h3>
+<p>Draws the edges and decoration of the button (pretty much
+nothing) and calls <a href="qtoolbutton.html#b7">drawButtonLabel</a>().
+<p>See also:  <a href="qtoolbutton.html#b7">drawButtonLabel</a>() and <a href="qbutton.html#d1">QButton::paintEvent</a>().
+<p>Reimplemented from <a href="qbutton.html#c5">QButton.</a>
+<h3 class="fn">void <a name="b7"></a>QToolButton::drawButtonLabel ( <a href="qpainter.html">QPainter</a> * p ) <code>[virtual protected]</code></h3>
+<p>Draws the contents of the button (pixmap and optionally text).
+<p>See also:  <a href="qtoolbutton.html#b6">drawButton</a>() and <a href="qbutton.html#d1">QButton::paintEvent</a>().
+<p>Reimplemented from <a href="qbutton.html#c6">QButton.</a>
+<h3 class="fn">void <a name="b8"></a>QToolButton::enterEvent ( <a href="qevent.html">QEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Reimplemented to handle the automatic 3D effects in Windows style.
+<p>Reimplemented from <a href="qwidget.html#o2">QWidget.</a>
+<h3 class="fn"><a href="qiconset.html">QIconSet</a> <a name="a6"></a>QToolButton::iconSet () const</h3>
+<p>Returns a copy of the icon set in use.  If no icon set has been
+set, iconSeT() creates one from the <a href="qbutton.html#a4">pixmap</a>().
+<p>If the button doesn't have a pixmap either, iconSet()'s return value
+is meaningless.
+<p>See also:  <a href="qtoolbutton.html#a5">setIconSet</a>() and <a href="qiconset.html">QIconSet</a>.
+<h3 class="fn">void <a name="b9"></a>QToolButton::leaveEvent ( <a href="qevent.html">QEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Reimplemented to handle the automatic 3D effects in Windows style.
+<p>Reimplemented from <a href="qwidget.html#o3">QWidget.</a>
+<h3 class="fn">void <a name="a5"></a>QToolButton::setIconSet ( const <a href="qiconset.html">QIconSet</a> &amp; set )</h3>
+<p>Sets this tool button to display the icons in <em>set.</em>
+(<a href="qbutton.html#a5">setPixmap</a>() is effectively a wrapper for this function.)
+<p>QToolButton makes a copy of <em>set,</em> so you must delete <em>set</em>
+yourself.
+<p>See also:  <a href="qtoolbutton.html#a6">iconSet</a>() and <a href="qiconset.html">QIconSet</a>.
+<h3 class="fn">void <a name="b4"></a>QToolButton::setOn ( bool enable ) <code>[slot]</code></h3>
+<p>Sets this tool button to be on if <em>enable</em> is TRUE, and off it
+<em>enable</em> is FALSE.
+<p>This function has no effect on <a href="qbutton.html#a8">non-toggling
+buttons.</a>
+<p>See also:  <a href="qbutton.html#a8">isToggleButton</a>() and <a href="qtoolbutton.html#b5">toggle</a>().
+<h3 class="fn">void <a name="b2"></a>QToolButton::setTextLabel ( const char * newLabel, bool tipToo = TRUE ) <code>[virtual slot]</code></h3>
+<p>Sets the label of this button to <em>newLabel,</em> and automatically
+sets it as tool tip too if <em>tipToo</em> is TRUE.
+<h3 class="fn">void <a name="b3"></a>QToolButton::setToggleButton ( bool enable ) <code>[slot]</code></h3>
+<p>Makes the tool button a toggle button if <em>enable</em> is TRUE, or a normal
+tool button if <em>enable</em> is FALSE.
+<p>Toggle buttons have an on/off state similar to <a href="qcheckbox.html">check
+boxes.</a> A tool button is initially not a toggle button.
+<p>See also:  <a href="qtoolbutton.html#b4">setOn</a>(), <a href="qtoolbutton.html#b5">toggle</a>(), toggleButton() and <a href="qbutton.html#c1">toggled</a>().
+<h3 class="fn">void <a name="b0"></a>QToolButton::setUsesBigPixmap ( bool enable ) <code>[virtual slot]</code></h3>
+<p>Sets this button to use the big pixmaps provided by its <a href="qiconset.html">QIconSet</a>
+if <em>enable</em> is TRUE, and to use the small ones else.
+<p>QToolButton automatically connects this slot to the relevant signal
+in the <a href="qmainwindow.html">QMainWindow</a> in which is resides.
+<h3 class="fn">void <a name="b1"></a>QToolButton::setUsesTextLabel ( bool enable ) <code>[virtual slot]</code></h3>
+<p>Sets this button to draw a text label below the icon if <em>enable</em>
+is TRUE, and to not draw it if <em>enable</em> is FALSE.
+<p>QToolButton automatically connects this slot to the relevant signal
+in the <a href="qmainwindow.html">QMainWindow</a> in which is resides.
+<h3 class="fn"><a href="qsize.html">QSize</a> <a name="a4"></a>QToolButton::sizeHint () const <code>[virtual]</code></h3>
+<p>Returns a size suitable for this tool button.  This depends on
+<a href="qwidget.html#a3">GUI style,</a> <a href="qtoolbutton.html#a7">usesBigPixmap</a>(), <a href="qtoolbutton.html#a9">textLabel</a>() and
+<a href="qtoolbutton.html#a8">usesTextLabel</a>().
+<p>Reimplemented from <a href="qwidget.html#l7">QWidget.</a>
+<h3 class="fn">const char * <a name="a9"></a>QToolButton::textLabel () const</h3>
+<p>Returns the text label in use by this tool button, or 0.
+<p>See also:  <a href="qtoolbutton.html#b2">setTextLabel</a>(), <a href="qtoolbutton.html#a8">usesTextLabel</a>(), <a href="qtoolbutton.html#b1">setUsesTextLabel</a>() and <a href="qbutton.html#a3">setText</a>().
+<h3 class="fn">void <a name="b5"></a>QToolButton::toggle () <code>[slot]</code></h3>
+<p>Toggles the state of this tool button.
+<p>This function has no effect on <a href="qbutton.html#a8">non-toggling
+buttons.</a>
+<p>See also:  <a href="qbutton.html#a8">isToggleButton</a>() and toggle().
+<h3 class="fn">bool <a name="c0"></a>QToolButton::uses3D () const <code>[protected]</code></h3>
+<p>Returns TRUE if this button should be drawn using raised edges.
+<p>See also:  <a href="qtoolbutton.html#b6">drawButton</a>().
+<h3 class="fn">bool <a name="a7"></a>QToolButton::usesBigPixmap () const</h3>
+<p>Returns TRUE if this tool button uses the big (32-pixel) pixmaps,
+and FALSE if it does not.
+<p>See also:  <a href="qtoolbutton.html#b0">setUsesBigPixmap</a>(), <a href="qbutton.html#a5">setPixmap</a>() and usesTextLabel.
+<h3 class="fn">bool <a name="a8"></a>QToolButton::usesTextLabel () const</h3>
+<p>Returns TRUE if this tool button puts a text label below the button
+pixmap, and FALSE if it does not.
+<p>See also:  <a href="qtoolbutton.html#b1">setUsesTextLabel</a>(), <a href="qtoolbutton.html#b2">setTextLabel</a>() and <a href="qtoolbutton.html#a7">usesBigPixmap</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qtoolbutton.h: 1998/08/19
+<li>qtoolbutton.cpp: 1999/02/01
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

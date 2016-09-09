@@ -1,0 +1,136 @@
+.TH QClipboard 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QClipboard \- Access to the window system clipboard
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qclipboard.h>\fR
+.PP
+Inherits QObject.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "void clear ()"
+.br
+.ti -1c
+.BI "void* data ( const char * format ) const"
+.br
+.ti -1c
+.BI "void setData ( const char * " "format" ", void * )"
+.br
+.ti -1c
+.BI "const char* text () const"
+.br
+.ti -1c
+.BI "void setText ( const char * )"
+.br
+.ti -1c
+.BI "QPixmap* pixmap () const"
+.br
+.ti -1c
+.BI "void setPixmap ( const QPixmap & )"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void dataChanged ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void connectNotify ( const char * )"
+.br
+.ti -1c
+.BI "virtual bool event ( QEvent * )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QClipboard class provides access to the window system clipboard.
+.PP
+The clipboard offers a simple mechanism to copy and paste data between applications.
+.PP
+QClipboard supports these formats (a format is identified by a string):
+.TP
+"TEXT", zero-terminated char *.
+.TP
+"PIXMAP" as provided by QPixmap.
+.PP
+The "PIXMAP" format is not implemented in this version of Qt.
+.PP
+Only a single QClipboard object may exist in an application. This is because QClipboard is a shared window system resource. It is not possible to create a QClipboard object the standard C++ way (the constructor and destructor are private member functions, but accessible to QApplication since it is a friend class). Call QApplication::clipboard() to access the clipboard.
+.PP
+Example:
+.PP
+.nf
+.br
+    QClipboard *cb = QApplication::clipboard();
+.br
+    const char *text;
+.br
+.br
+    // Copy text from the clipboard (paste)
+.br
+    text = cb->text();
+.br
+    if ( text )
+.br
+        debug( "The clipboard contains: %s", text );
+.br
+.br
+    // Copy text into the clipboard
+.br
+    cb->setText( "This text can be pasted by other programs" );
+.fi
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "void QClipboard::clear ()"
+Clears the clipboard contents.
+.SH "void QClipboard::connectNotify ( const char * ) \fC[virtual protected]\fR"
+For internal use only.
+.PP
+Reimplemented from QObject.
+.SH "void * QClipboard::data ( const char * format ) const"
+Returns a pointer to the clipboard data, where \fIformat\fR is the clipboard format.
+.PP
+We recommend that you use text() or pixmap() instead.
+.SH "void QClipboard::dataChanged () \fC[signal]\fR"
+This signal is emitted when the clipboard data is changed.
+.SH "bool QClipboard::event ( QEvent * e ) \fC[virtual protected]\fR"
+Handles clipboard events (very platform-specific).
+.PP
+Reimplemented from QObject.
+.SH "QPixmap * QClipboard::pixmap () const"
+Returns the clipboard pixmap, or null if the clipboard does not contains any pixmap.
+.PP
+See also: setText().
+.SH "void QClipboard::setData ( const char * format, void * data )"
+Copies text into the clipboard, where \fIformat\fR is the clipboard format string and \fIdata\fR is the data to be copied.
+.PP
+We recommend that you use setText() or setPixmap() instead.
+.SH "void QClipboard::setPixmap ( const QPixmap & pixmap )"
+Copies \fIpixmap\fR into the clipboard.
+.PP
+See also: pixmap().
+.SH "void QClipboard::setText ( const char * text )"
+Copies \fItext\fR into the clipboard.
+.PP
+See also: text().
+.SH "const char * QClipboard::text () const"
+Returns the clipboard text, or null if the clipboard does not contains any text.
+.PP
+See also:  setText().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qclipboard.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QProgressDialog Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QProgressDialog Class Reference</h1><br clear="all">
+<p>
+Provides feedback on the progress of a slow operation.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qprogressdialog-h.html">qprogressdialog.h</a>&gt;</code>
+<p>
+Inherits <a href="qsemimodal.html">QSemiModal</a>.
+<p><a href="qprogressdialog-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qprogressdialog.html#a0"><strong>QProgressDialog</strong></a> ( QWidget * parent=0, const char * name=0, bool modal=FALSE, WFlags f=0 ) </span>
+<li><span class="fn"><a href="qprogressdialog.html#a1"><strong>QProgressDialog</strong></a> ( const char * labelText, const char * cancelButtonText, int totalSteps, QWidget * parent=0, const char * name=0, bool modal=FALSE, WFlags f=0 ) </span>
+<li><span class="fn"><a href="qprogressdialog.html#a2"><strong>~QProgressDialog</strong></a> () </span>
+<li><span class="fn">void <a href="qprogressdialog.html#a3"><strong>setLabel</strong></a> ( QLabel * ) </span>
+<li><span class="fn">void <a href="qprogressdialog.html#a4"><strong>setCancelButton</strong></a> ( QPushButton * ) </span>
+<li><span class="fn">void <a href="qprogressdialog.html#a5"><strong>setBar</strong></a> ( QProgressBar * ) </span>
+<li><span class="fn">bool <a href="qprogressdialog.html#a6"><strong>wasCancelled</strong></a> () const</span>
+<li><span class="fn">int <a href="qprogressdialog.html#a7"><strong>totalSteps</strong></a> () const</span>
+<li><span class="fn">int <a href="qprogressdialog.html#a8"><strong>progress</strong></a> () const</span>
+<li><span class="fn">virtual QSize <a href="qprogressdialog.html#a9"><strong>sizeHint</strong></a> () const</span>
+</ul>
+<h2>Public Slots</h2>
+<ul>
+<li><span class="fn">void <a href="qprogressdialog.html#b0"><strong>cancel</strong></a> () </span>
+<li><span class="fn">void <a href="qprogressdialog.html#b1"><strong>reset</strong></a> () </span>
+<li><span class="fn">void <a href="qprogressdialog.html#b2"><strong>setTotalSteps</strong></a> ( int totalSteps ) </span>
+<li><span class="fn">void <a href="qprogressdialog.html#b3"><strong>setProgress</strong></a> ( int progress ) </span>
+<li><span class="fn">void <a href="qprogressdialog.html#b4"><strong>setLabelText</strong></a> ( const char * ) </span>
+<li><span class="fn">void <a href="qprogressdialog.html#b5"><strong>setCancelButtonText</strong></a> ( const char * ) </span>
+<li><span class="fn">void <a href="qprogressdialog.html#b6"><strong>setMinimumDuration</strong></a> ( int ms ) </span>
+<li><span class="fn">int <a href="qprogressdialog.html#b7"><strong>minimumDuration</strong></a> () const</span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qprogressdialog.html#b8"><strong>cancelled</strong></a> () </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qprogressdialog.html#b9"><strong>resizeEvent</strong></a> ( QResizeEvent * ) </span>
+<li><span class="fn">virtual void <a href="qprogressdialog.html#c0"><strong>styleChange</strong></a> ( GUIStyle ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+Provides feedback on the progress of a slow operation.
+<p>
+A progress dialog is used to give the user an indication of how long an
+operation is going to take to perform, and to reassure them that the
+application has not frozen.
+<p>A potential problem with progress dialogs is that it is difficult to know
+when to use them, as operations take different amounts of time on different
+computer hardware.  QProgressDialog offers a solution to this problem:
+it estimates the time the operation will take (based on time for
+steps), and only shows itself if that estimate is beyond 3 seconds.
+<p>Example:
+<pre>    <a href="qprogressdialog.html">QProgressDialog</a> progress( "Copying files...", "Abort Copy", numFiles, this );
+    for (int i=0; i&lt;numFiles; i++) {
+        progress.<a href="qprogressdialog.html#b3">setProgress</a>( i );
+        if ( progress.<a href="qprogressdialog.html#a6">wasCancelled</a>() )
+            break;
+        ... // copy one file
+    }
+    progress.<a href="qprogressdialog.html#b3">setProgress</a>( numFiles );
+</pre>
+<p><img src=qprogdlg-m.gif> <img src=qprogdlg-w.gif>
+<p>See also:  <a href="qdialog.html">QDialog</a>, <a href="qprogressbar.html">QProgressBar</a> and <a href="guibooks.html#fowler">GUI Design Handbook: Progress Indicator</a>
+<p>Examples:
+ <a href="progress-progress-cpp.html#QProgressDialog">progress/progress.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QProgressDialog::QProgressDialog ( <a href="qwidget.html">QWidget</a> * creator=0, const char * name=0, bool modal=FALSE, WFlags f=0 )</h3>
+<p>Constructs a progress dialog.
+<p>Default settings:
+<ul>
+<li>The label text is empty.
+<li>The cancel button text is "Cancel".
+<li>The total number of steps is 100.
+</ul>
+<p><em>parent, name, modal,</em> and <em>f</em> are sent to the
+<a href="qsemimodal.html#a0">QSemiModal::QSemiModal</a>() constructor. Note that if <em>modal</em> is FALSE
+(the default), you will need to have an event loop proceeding for
+any redrawing of the dialog to occur.  If it is TRUE, the dialog
+ensures events are processed when needed.
+<p>See also:  <a href="qprogressdialog.html#b4">setLabelText</a>(), <a href="qprogressdialog.html#a3">setLabel</a>(), <a href="qprogressdialog.html#b5">setCancelButtonText</a>(), <a href="qprogressdialog.html#a4">setCancelButton</a>() and <a href="qprogressdialog.html#b2">setTotalSteps</a>().
+<h3 class="fn"><a name="a1"></a>QProgressDialog::QProgressDialog ( const char * labelText, const char * cancelButtonText, int totalSteps, <a href="qwidget.html">QWidget</a> * creator=0, const char * name=0, bool modal=FALSE, WFlags f=0 )</h3>
+<p>Constructs a progress dialog.
+<p>Arguments:
+<ul>
+<li><em>labelText</em> is text telling the user what is progressing.
+<li><em>cancelButtonText</em> is the text on the cancel button,
+or 0 if no cancel button is to be shown.
+<li><em>totalSteps</em> is the total number of steps in the operation of which
+this progress dialog shows the progress.  For example, if the operation
+is to examine 50 files, this value would be 50, then before examining
+the first file, call <a href="qprogressdialog.html#b3">setProgress</a>(0), and after examining the last file
+call setProgress(50).
+<li><em>name, modal,</em> and <em>f</em> are sent to the
+<a href="qsemimodal.html#a0">QSemiModal::QSemiModal</a>() constructor. Note that if <em>modal</em> is FALSE (the
+default), you will need to have an event loop proceeding for any
+redrawing of the dialog to occur.  If it is TRUE, the dialog ensures
+events are processed when needed.
+</ul>
+<p>See also:  <a href="qprogressdialog.html#b4">setLabelText</a>(), <a href="qprogressdialog.html#a3">setLabel</a>(), <a href="qprogressdialog.html#b5">setCancelButtonText</a>(), <a href="qprogressdialog.html#a4">setCancelButton</a>() and <a href="qprogressdialog.html#b2">setTotalSteps</a>().
+<h3 class="fn"><a name="a2"></a>QProgressDialog::~QProgressDialog ()</h3>
+<p>Destroys the progress dialog.
+<h3 class="fn">void <a name="b0"></a>QProgressDialog::cancel () <code>[slot]</code></h3>
+<p>Reset the progress dialog.  <a href="qprogressdialog.html#a6">wasCancelled</a>() becomes TRUE until
+the progress dialog is reset.
+The progress dialog becomes hidden.
+<h3 class="fn">void <a name="b8"></a>QProgressDialog::cancelled () <code>[signal]</code></h3>
+<p>This signal is emitted when the cancel button is clicked.
+It is connected to the <a href="qprogressdialog.html#b0">cancel</a>() slot by default.
+<p>See also:  <a href="qprogressdialog.html#a6">wasCancelled</a>().
+<h3 class="fn">int <a name="b7"></a>QProgressDialog::minimumDuration () const <code>[slot]</code></h3>
+<p>Returns the currently set minimum duration for the QProgressDialog
+<p>See also:  <a href="qprogressdialog.html#b6">setMinimumDuration</a>().
+<h3 class="fn">int <a name="a8"></a>QProgressDialog::progress () const</h3>
+<p>Returns the current amount of progress, or -1 if the progress counting
+has not started.
+<p>See also:  <a href="qprogressdialog.html#b3">setProgress</a>().
+<h3 class="fn">void <a name="b1"></a>QProgressDialog::reset () <code>[slot]</code></h3>
+<p>Reset the progress dialog.
+The progress dialog becomes hidden.
+<h3 class="fn">void <a name="b9"></a>QProgressDialog::resizeEvent ( <a href="qresizeevent.html">QResizeEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles resize events for the progress dialog, sizing the label,
+dialog, and cancellation button.
+<p>Reimplemented from <a href="qwidget.html#o6">QWidget.</a>
+<h3 class="fn">void <a name="a5"></a>QProgressDialog::setBar ( <a href="qprogressbar.html">QProgressBar</a> * bar )</h3>
+<p>Sets the progress bar widget. The progress dialog resizes to fit.  The
+progress bar becomes owned by the progress dialog and will be deleted
+when necessary.
+<h3 class="fn">void <a name="a4"></a>QProgressDialog::setCancelButton ( <a href="qpushbutton.html">QPushButton</a> * cancelButton )</h3>
+<p>Sets the cancellation button.  The button becomes owned by the
+progress dialog and will be deleted when necessary,
+so do not pass the address of an object on the stack.
+<p>See also:  <a href="qprogressdialog.html#b5">setCancelButtonText</a>().
+<h3 class="fn">void <a name="b5"></a>QProgressDialog::setCancelButtonText ( const char * cancelButtonText ) <code>[slot]</code></h3>
+<p>Sets the cancellation button text.
+<p>See also:  <a href="qprogressdialog.html#a4">setCancelButton</a>().
+<h3 class="fn">void <a name="a3"></a>QProgressDialog::setLabel ( <a href="qlabel.html">QLabel</a> * label )</h3>
+<p>Sets the label. The progress dialog resizes to fit.
+The label becomes owned by the
+progress dialog and will be deleted when necessary,
+so do not pass the address of an object on the stack.
+<p>See also:  <a href="qprogressdialog.html#b4">setLabelText</a>().
+<p>Examples:
+ <a href="progress-progress-cpp.html#setLabel">progress/progress.cpp</a>
+<h3 class="fn">void <a name="b4"></a>QProgressDialog::setLabelText ( const char * text ) <code>[slot]</code></h3>
+<p>Sets the label text. The progress dialog resizes to fit.
+<p>See also:  <a href="qprogressdialog.html#a3">setLabel</a>().
+<h3 class="fn">void <a name="b6"></a>QProgressDialog::setMinimumDuration ( int ms ) <code>[slot]</code></h3>
+<p>The dialog will not appear if the anticipated duration of the
+progressing task is less than <em>ms</em> milliseconds.
+<p>If set to 0 the dialog is always shown as soon as any progress
+is set.
+<h3 class="fn">void <a name="b3"></a>QProgressDialog::setProgress ( int progress ) <code>[slot]</code></h3>
+<p>Sets the current amount of progress made to <em>prog</em> units of the
+total number of steps.  For the progress dialog to work correctly,
+you must at least call this with the parameter 0 initially, then
+later with <a href="qprogressdialog.html#a7">QProgressDialog::totalSteps</a>(), and you may call it any
+number of times in between.<p><strong>Warning:</strong> If the progress dialog is modal
+(see <a href="qprogressdialog.html#a0">QProgressDialog::QProgressDialog</a>()),
+this function calls <a href="qapplication.html#d0">QApplication::processEvents</a>(), so take care that
+this does not cause undesirable re-entrancy to your code. For example,
+don't use a QProgressDialog inside a <a href="qwidget.html#o4">paintEvent</a>()!
+<p>See also:  <a href="qprogressdialog.html#a8">progress</a>().
+<p>Examples:
+ <a href="progress-progress-cpp.html#setProgress">progress/progress.cpp</a>
+<h3 class="fn">void <a name="b2"></a>QProgressDialog::setTotalSteps ( int totalSteps ) <code>[slot]</code></h3>
+<p>Sets the total number of steps.
+<p>See also:  <a href="qprogressdialog.html#a7">totalSteps</a>() and <a href="qprogressbar.html#a7">QProgressBar::setTotalSteps</a>().
+<h3 class="fn"><a href="qsize.html">QSize</a> <a name="a9"></a>QProgressDialog::sizeHint () const <code>[virtual]</code></h3>
+<p>Returns a size which fits the contents of the progress dialog.
+The progress dialog resizes itself as required, so this should not
+be needed in user code.
+<p>Reimplemented from <a href="qwidget.html#l7">QWidget.</a>
+<h3 class="fn">void <a name="c0"></a>QProgressDialog::styleChange ( GUIStyle s ) <code>[virtual protected]</code></h3>
+<p>Ensures layout conforms to style of GUI.
+<p>Reimplemented from <a href="qwidget.html#o8">QWidget.</a>
+<h3 class="fn">int <a name="a7"></a>QProgressDialog::totalSteps () const</h3>
+<p>Returns the total number of steps.
+<p>See also:  <a href="qprogressdialog.html#b2">setTotalSteps</a>() and <a href="qprogressbar.html#a2">QProgressBar::totalSteps</a>().
+<p>Examples:
+ <a href="progress-progress-cpp.html#totalSteps">progress/progress.cpp</a>
+<h3 class="fn">bool <a name="a6"></a>QProgressDialog::wasCancelled () const</h3>
+<p>Returns the TRUE if the dialog was cancelled, otherwise FALSE.
+<p>See also:  <a href="qprogressdialog.html#b3">setProgress</a>(), <a href="qprogressdialog.html#b0">cancel</a>() and <a href="qprogressdialog.html#b8">cancelled</a>().
+<p>Examples:
+ <a href="progress-progress-cpp.html#wasCancelled">progress/progress.cpp</a>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qprogressdialog.h: 1998/08/21
+<li>qprogressdialog.cpp: 1998/08/18
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

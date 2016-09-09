@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QDateTime Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QDateTime Class Reference</h1><br clear="all">
+<p>
+The QDateTime class combines <a href="qdate.html">QDate</a> and <a href="qtime.html">QTime</a> into a single class.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qdatetime-h.html">qdatetime.h</a>&gt;</code>
+<p><a href="qdatetime-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qdatetime.html#a0"><strong>QDateTime</strong></a> () </span>
+<li><span class="fn"><a href="qdatetime.html#a1"><strong>QDateTime</strong></a> ( const QDate &amp; ) </span>
+<li><span class="fn"><a href="qdatetime.html#a2"><strong>QDateTime</strong></a> ( const QDate &amp;, const QTime &amp; ) </span>
+<li><span class="fn">bool <a href="qdatetime.html#a3"><strong>isNull</strong></a> () const</span>
+<li><span class="fn">bool <a href="qdatetime.html#a4"><strong>isValid</strong></a> () const</span>
+<li><span class="fn">QDate <a href="qdatetime.html#a5"><strong>date</strong></a> () const</span>
+<li><span class="fn">QTime <a href="qdatetime.html#a6"><strong>time</strong></a> () const</span>
+<li><span class="fn">void <a href="qdatetime.html#a7"><strong>setDate</strong></a> ( const QDate &amp; date ) </span>
+<li><span class="fn">void <a href="qdatetime.html#a8"><strong>setTime</strong></a> ( const QTime &amp; time ) </span>
+<li><span class="fn">void <a href="qdatetime.html#a9"><strong>setTime_t</strong></a> ( uint secsSince1Jan1970UTC ) </span>
+<li><span class="fn">QString <a href="qdatetime.html#b0"><strong>toString</strong></a> () const</span>
+<li><span class="fn">QDateTime <a href="qdatetime.html#b1"><strong>addDays</strong></a> ( int days ) const</span>
+<li><span class="fn">QDateTime <a href="qdatetime.html#b2"><strong>addSecs</strong></a> ( int secs ) const</span>
+<li><span class="fn">int <a href="qdatetime.html#b3"><strong>daysTo</strong></a> ( const QDateTime &amp; ) const</span>
+<li><span class="fn">int <a href="qdatetime.html#b4"><strong>secsTo</strong></a> ( const QDateTime &amp; ) const</span>
+<li><span class="fn">bool <a href="qdatetime.html#b5"><strong>operator==</strong></a> ( const QDateTime &amp; dt ) const</span>
+<li><span class="fn">bool <a href="qdatetime.html#b6"><strong>operator!=</strong></a> ( const QDateTime &amp; dt ) const</span>
+<li><span class="fn">bool <a href="qdatetime.html#b7"><strong>operator&lt;</strong></a> ( const QDateTime &amp; dt ) const</span>
+<li><span class="fn">bool <a href="qdatetime.html#b8"><strong>operator&lt;=</strong></a> ( const QDateTime &amp; dt ) const</span>
+<li><span class="fn">bool <a href="qdatetime.html#b9"><strong>operator&gt;</strong></a> ( const QDateTime &amp; dt ) const</span>
+<li><span class="fn">bool <a href="qdatetime.html#c0"><strong>operator&gt;=</strong></a> ( const QDateTime &amp; dt ) const</span>
+</ul>
+<h2>Static Public Members</h2>
+<ul>
+<li><span class="fn">QDateTime <a href="qdatetime.html#c4"><strong>currentDateTime</strong></a> () </span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>QDataStream &amp; <a href="qdatetime.html#c5"><strong>operator&lt;&lt;</strong></a> (QDataStream &amp; s, const QDateTime &amp; dt)
+<li>QDataStream &amp; <a href="qdatetime.html#c6"><strong>operator&gt;&gt;</strong></a> (QDataStream &amp; s, QDateTime &amp; dt)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QDateTime class combines <a href="qdate.html">QDate</a> and <a href="qtime.html">QTime</a> into a single class.
+<p>
+QDateTime provides high precision date and time functions since it can work
+with Gregorian dates up to about year 8000.
+<p>Most countries that use the Gregorian calendar switched to it between 1550
+and 1920.
+<p>See also:  <a href="qdate.html">QDate</a> and <a href="qtime.html">QTime</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QDateTime::QDateTime ()</h3>
+<p>Constructs a null datetime (i.e. null date and null time).  A null
+datetime is invalid, since the date is invalid.
+<h3 class="fn"><a name="a1"></a>QDateTime::QDateTime ( const <a href="qdate.html">QDate</a> &amp; date )</h3>
+<p>Constructs a datetime with date <em>date</em> and null time (00:00:00.000).
+<h3 class="fn"><a name="a2"></a>QDateTime::QDateTime ( const <a href="qdate.html">QDate</a> &amp; date, const <a href="qtime.html">QTime</a> &amp; time )</h3>
+<p>Constructs a datetime with date <em>date</em> and time <em>time.</em>
+<h3 class="fn">QDateTime <a name="b1"></a>QDateTime::addDays ( int ndays ) const</h3>
+<p>Returns the datetime plus <em>ndays</em> days.
+<p>See also:  <a href="qdatetime.html#b3">daysTo</a>().
+<h3 class="fn">QDateTime <a name="b2"></a>QDateTime::addSecs ( int nsecs ) const</h3>
+<p>Returns the datetime plus <em>nsecs</em> seconds.
+<p>See also:  <a href="qdatetime.html#b4">secsTo</a>().
+<h3 class="fn">QDateTime <a name="c4"></a>QDateTime::currentDateTime () <code>[static]</code></h3>
+<p>Returns the current datetime.
+<p>See also:  <a href="qdate.html#d0">QDate::currentDate</a>() and <a href="qtime.html#c8">QTime::currentTime</a>().
+<h3 class="fn"><a href="qdate.html">QDate</a> <a name="a5"></a>QDateTime::date () const</h3>
+<p>Returns the date part of this datetime.
+<p>See also:  <a href="qdatetime.html#a6">time</a>().
+<h3 class="fn">int <a name="b3"></a>QDateTime::daysTo ( const QDateTime &amp; dt ) const</h3>
+<p>Returns the number of days from this datetime to <em>dt,</em> which is
+negative if <em>dt</em> is in the past.
+<p>See also:  <a href="qdatetime.html#b1">addDays</a>() and <a href="qdatetime.html#b4">secsTo</a>().
+<h3 class="fn">bool <a name="a3"></a>QDateTime::isNull () const</h3>
+<p>Returns TRUE if both the date and the time are null.  A null date is invalid.
+<p>See also:  <a href="qdate.html#a2">QDate::isNull</a>() and <a href="qtime.html#a2">QTime::isNull</a>().
+<h3 class="fn">bool <a name="a4"></a>QDateTime::isValid () const</h3>
+<p>Returns TRUE if both the date and the time are value.
+<p>See also:  <a href="qdate.html#a3">QDate::isValid</a>() and <a href="qtime.html#a3">QTime::isValid</a>().
+<h3 class="fn">bool <a name="b6"></a>QDateTime::operator!= ( const QDateTime &amp; dt ) const</h3>
+<p>Returns TRUE if this datetime is different from <em>dt,</em> or FALSE if
+they are equal.
+<p>See also:  <a href="qdatetime.html#b5">operator==</a>().
+<h3 class="fn">bool <a name="b7"></a>QDateTime::operator&lt; ( const QDateTime &amp; dt ) const</h3>
+<p>Returns TRUE if this datetime is before <em>dt,</em> otherwise FALSE.
+<h3 class="fn">bool <a name="b8"></a>QDateTime::operator&lt;= ( const QDateTime &amp; dt ) const</h3>
+<p>Returns TRUE if this datetime is before or equal to <em>dt,</em> otherwise
+FALSE.
+<h3 class="fn">bool <a name="b5"></a>QDateTime::operator== ( const QDateTime &amp; dt ) const</h3>
+<p>Returns TRUE if this datetime is equal to <em>dt,</em> or FALSE if
+they are different.
+<p>See also:  <a href="qdatetime.html#b6">operator!=</a>().
+<h3 class="fn">bool <a name="b9"></a>QDateTime::operator&gt; ( const QDateTime &amp; dt ) const</h3>
+<p>Returns TRUE if this datetime is after <em>dt,</em> otherwise FALSE.
+<h3 class="fn">bool <a name="c0"></a>QDateTime::operator&gt;= ( const QDateTime &amp; dt ) const</h3>
+<p>Returns TRUE if this datetime is equal to or after <em>dt,</em> otherwise
+FALSE.
+<h3 class="fn">int <a name="b4"></a>QDateTime::secsTo ( const QDateTime &amp; dt ) const</h3>
+<p>Returns the number of seconds from this datetime to <em>dt,</em> which is
+negative if <em>t</em> is in the past.
+<p>Example:
+<pre>    <a href="qdatetime.html">QDateTime</a> dt = QDateTime::currentDateTime();
+    <a href="qdatetime.html">QDateTime</a> x( <a href="qdate.html">QDate</a>(dt.year(),12,24), QTime(17,00) );
+    <a href="qapplication.html#j4">debug</a>( "There are %d seconds to Christmas", dt.<a href="qdatetime.html#b4">secsTo</a>(x) );
+</pre>
+<p>See also:  <a href="qdatetime.html#b2">addSecs</a>(), <a href="qdatetime.html#b3">daysTo</a>() and <a href="qtime.html#b1">QTime::secsTo</a>().
+<h3 class="fn">void <a name="a7"></a>QDateTime::setDate ( const <a href="qdate.html">QDate</a> &amp; date )</h3>
+<p>Sets the date part of this datetime.
+<p>See also:  <a href="qdatetime.html#a8">setTime</a>().
+<h3 class="fn">void <a name="a8"></a>QDateTime::setTime ( const <a href="qtime.html">QTime</a> &amp; time )</h3>
+<p>Sets the time part of this datetime.
+<p>See also:  <a href="qdatetime.html#a7">setDate</a>().
+<h3 class="fn">void <a name="a9"></a>QDateTime::setTime_t ( uint secsSince1Jan1970UTC )</h3>
+<p>Sets the local date and time given the number of seconds that have passed
+since 00:00:00 on January 1, 1970, Coordinated Universal Time (UTC).
+On systems that do not support timezones this function will behave as if
+local time were UTC.
+<h3 class="fn"><a href="qtime.html">QTime</a> <a name="a6"></a>QDateTime::time () const</h3>
+<p>Returns the time part of this datetime.
+<p>See also:  <a href="qdatetime.html#a5">date</a>().
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="b0"></a>QDateTime::toString () const</h3>
+<p>Returns the datetime as a string.
+<p>The string format is "Sat May 20 1995 03:40:13".
+<hr><h2>Related Functions</h2>
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="c5"></a>operator&lt;&lt; (<a href="qdatastream.html">QDataStream</a> &amp; s, const QDateTime &amp; dt)</h3>
+<p>Writes a datetime to the stream.
+<p>Serialization format: [<a href="qdate.html">QDate</a> <a href="qtime.html">QTime</a>].
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="c6"></a>operator&gt;&gt; (<a href="qdatastream.html">QDataStream</a> &amp; s, QDateTime &amp; dt)</h3>
+<p>Reads a datetime from the stream.
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qdatetime.h: 1998/08/25
+<li>qdatetime.cpp: 1999/02/15
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

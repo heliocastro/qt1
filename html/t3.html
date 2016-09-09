@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>
+Qt Tutorial - Chapter 3
+</title></head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Chapter 3: Family Values</h1><br clear="all">
+<p>
+<center><img src="t3.gif" alt="Screenshot of tutorial three"></center>
+<p>
+This example shows how to create mother and child widgets.
+<p>
+We'll keep it simple and use just a single mother (uh, family values?)
+and a lone child.
+<p>
+<pre>/****************************************************************
+**
+** Qt tutorial 3
+**
+****************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+
+int main( int argc, char **argv )
+{
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+    <a href="qwidget.html">QWidget</a> w;
+    w.<a href="qwidget.html#l3">resize</a>( 200, 120 );
+
+    <a href="qpushbutton.html">QPushButton</a> quit( "Quit", &amp;w );
+    quit.<a href="qpushbutton.html#b0">move</a>( 62, 40 );
+    quit.<a href="qpushbutton.html#b2">resize</a>( 75, 30 );
+    quit.<a href="qwidget.html#f9">setFont</a>( <a href="qfont.html">QFont</a>( "Times", 18, QFont::Bold ) );
+
+    <a href="qobject.html#f2">QObject::connect</a>( &amp;quit, SIGNAL(clicked()), &amp;a, SLOT(quit()) );
+
+    a.<a href="qapplication.html#b9">setMainWidget</a>( &amp;w );
+    w.<a href="qwidget.html#k2">show</a>();
+    return a.<a href="qapplication.html#c9">exec</a>();
+}
+</pre>
+<p>
+<h2>Line by Line Walk-Through</h2>
+<p>
+<pre>
+        <a href="qwidget.html">QWidget</a> w;</pre>
+<p>
+Here we simply create a widget.  Note that we did not have to
+include <code>qwidget.h,</code> because we have included qpushbutton.h and
+QPushButton is a subclass of QWidget (see <a href="hierarchy.html">
+Class Hierarchy</a>).
+<p>
+A QWidget does not handle any events, it simply displays itself using
+its <a href="qwidget.html#f2">background color</a> and
+<a href="qwidget.html#h2">caption.</a>
+<p>
+<pre>
+        w.<a href="qwidget.html#l3">resize</a>( 200, 120 );
+</pre>
+<p>
+We set the width to 200 pixels and the height to 120 pixels.
+<p>
+<pre>
+        <a href="qpushbutton.html">QPushButton</a> quit( "Quit", &amp;w );
+</pre>
+<p>
+A child is born.
+<p>
+This QPushButton is created with both a text, "Quit", and a mother, w.
+A child widget is always on top of its mother.  When displayed, it is
+clipped by its mother's bounds.
+<p>
+<pre>
+        quit.<a href="qpushbutton.html#b0">move</a>( 62, 40 );
+</pre>
+<p>
+The child is moved to a position of 62,40, relative to its mother's top
+left corner (excluding the window frame).  The coordinate is as usual for
+a visual display, x increases to the right and y increases downwards.
+<p>
+<pre>
+        w.<a href="qwidget.html#k2">show</a>();</pre>
+<p>
+When a widget is shown, it will call show for all its children (except
+those you have done an explicit <a href="qwidget.html#k3">hide()</a>
+on).
+<p>
+<h2>Behavior</h2>
+<p>
+Note that if you resize the widget, the button is not resized, unlike
+the programs in the first two chapters.  That's because the top level
+widget is a QWidget, which does not react to resizing.
+<p>
+If you're using X11, you will see the same effect if you invoke
+the program with -geometry.
+<p>
+<h2>Excercises</h2>
+<p>
+Try changing the arguments to quit.move() and/or quit.resize().  What
+happens if quit is partly "outside" w?
+<p>
+For X11 users:
+<p>
+Also try moving the w.resize() to after the quit.move/resize, and to
+after <a href="qapplication.html#b9">a.setMainWidget()</a>.
+Does -geometry still work?
+<p>
+You may now go on to <a href="t4.html">chapter four.</a>
+<p>
+[<a href="t2.html">Previous tutorial</a>]
+[<a href="t4.html">Next tutorial</a>]
+[<a href="tutorial.html">Main tutorial page</a>]
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

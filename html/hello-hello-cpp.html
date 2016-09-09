@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - hello/hello.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Hello, World</h1><br clear="all">
+
+  This example brings up the words "Hello, World" moving up and down,
+  and in different colors.
+
+  <hr>
+
+  <pre>/****************************************************************************
+** &#36;Id&#58; hello.h,v 1.4 1998/05/21 19:24:53 agulbra Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#ifndef HELLO_H
+#define HELLO_H
+
+#include &lt;<a href="qwidget-h.html">qwidget.h</a>&gt;
+
+class Hello : public QWidget
+{
+    Q_OBJECT
+public:
+    Hello( const char *text, QWidget *parent=0, const char *name=0 );
+signals:
+    void clicked();
+protected:
+    void mouseReleaseEvent( <a href="qmouseevent.html">QMouseEvent</a> * );
+    void paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * );
+private slots:
+    void animate();
+private:
+    <a href="qstring.html">QString</a> t;
+    int     b;
+};
+
+#endif
+</pre>
+
+<pre>/****************************************************************************
+** &#36;Id&#58; hello.cpp,v 2.5 1998/06/16 11:39:32 warwick Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "hello.h"
+#include &lt;<a name="qpushbutton.h"></a><a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a name="qtimer.h"></a><a href="qtimer-h.html">qtimer.h</a>&gt;
+#include &lt;<a name="qpainter.h"></a><a href="qpainter-h.html">qpainter.h</a>&gt;
+#include &lt;<a name="qpixmap.h"></a><a href="qpixmap-h.html">qpixmap.h</a>&gt;
+
+/*
+  Constructs a Hello widget. Starts a 40 ms animation timer.
+*/
+
+Hello::Hello( const char *text, QWidget *parent, const char *name )
+    : <a name="QWidget"></a><a href="qwidget.html">QWidget</a>(parent,name), t(text), b(0)
+{
+    <a name="QTimer"></a><a href="qtimer.html">QTimer</a> *timer = new <a href="qtimer.html">QTimer</a>(this);
+    <a name="connect"></a><a href="qobject.html#f2">connect</a>( timer, SIGNAL(timeout()), SLOT(<a name="animate"></a><a href="#86">animate</a>()) );
+    timer-&gt;<a name="start"></a><a href="qtimer.html#a3">start</a>( 40 );
+
+    <a name="resize"></a><a href="qwidget.html#l3">resize</a>( 200, 100 );
+}
+
+/*
+  This private slot is called each time the timer fires.
+*/
+
+void <a name="86"></a>Hello::animate()
+{
+    b = (b + 1) &amp; 15;
+    <a name="repaint"></a><a href="qwidget.html#k0">repaint</a>( FALSE );
+}
+
+/*
+  Handles mouse button release events for the Hello widget.
+
+  We emit the clicked() signal when the mouse is released inside
+  the widget.
+*/
+
+void <a name="87"></a>Hello::mouseReleaseEvent( <a name="QMouseEvent"></a><a href="qmouseevent.html">QMouseEvent</a> *e )
+{
+    if ( rect().contains( e-&gt;<a name="pos"></a><a href="qmouseevent.html#a2">pos</a>() ) )
+        emit clicked();
+}
+
+/*
+  Handles paint events for the Hello widget.
+
+  Flicker-free update. The text is first drawn in the pixmap and the
+  pixmap is then blt'ed to the screen.
+*/
+
+void <a name="88"></a>Hello::paintEvent( <a name="QPaintEvent"></a><a href="qpaintevent.html">QPaintEvent</a> * )
+{
+    static int sin_tbl[16] = {
+        0, 38, 71, 92, 100, 92, 71, 38, 0, -38, -71, -92, -100, -92, -71, -38};
+
+    if ( t.isEmpty() )
+        return;
+
+    // 1: Compute some sizes, positions etc.
+    <a name="QFontMetrics"></a><a href="qfontmetrics.html">QFontMetrics</a> fm = fontMetrics();
+    int w = fm.<a name="width"></a><a href="qfontmetrics.html#b7">width</a>(t) + 20;
+    int h = fm.<a name="height"></a><a href="qfontmetrics.html#a8">height</a>() * 2;
+    int pmx = width()/2 - w/2;
+    int pmy = height()/2 - h/2;
+
+    // 2: Create the pixmap and fill it with the widget's background
+    <a name="QPixmap"></a><a href="qpixmap.html">QPixmap</a> pm( w, h );
+    pm.<a name="fill"></a><a href="qpixmap.html#b7">fill</a>( this, pmx, pmy );
+
+    // 3: Paint the pixmap. Cool wave effect
+    <a name="QPainter"></a><a href="qpainter.html">QPainter</a> p;
+    int x = 10;
+    int y = h/2 + fm.<a name="descent"></a><a href="qfontmetrics.html#a7">descent</a>();
+    int i = 0;
+    p.<a name="begin"></a><a href="qpainter.html#b0">begin</a>( &amp;pm );
+    p.<a name="setFont"></a><a href="qpainter.html#c2">setFont</a>( <a name="font"></a><a href="qwidget.html#f8">font</a>() );
+    while ( t[i] ) {
+        int i16 = (b+i) &amp; 15;
+        p.<a name="setPen"></a><a href="qpainter.html#c4">setPen</a>( <a name="QColor"></a><a href="qcolor.html">QColor</a>((15-i16)*16,255,255,QColor::Hsv) );
+        p.<a name="drawText"></a><a href="qpainter.html#l4">drawText</a>( x, y-sin_tbl[i16]*h/800, &amp;t[i], 1 );
+        x += fm.<a href="qfontmetrics.html#b7">width</a>( t[i] );
+        i++;
+    }
+    p.<a name="end"></a><a href="qpainter.html#b2">end</a>();
+
+    // 4: Copy the pixmap to the Hello widget
+    <a name="bitBlt"></a><a href="qpaintdevice.html#b2">bitBlt</a>( this, pmx, pmy, &amp;pm );
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - menu/menu.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Using menus</h1><br clear="all">
+
+  This example demontrates simple use of menus (a menu bar and
+  pull-down menus).  Qt also supports popup menus, but this example
+  doesn't contain any.
+<pre>/****************************************************************************
+** &#36;Id&#58; menu.cpp,v 2.15 1998/06/16 11:39:33 warwick Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "menu.h"
+#include &lt;<a name="qpopupmenu.h"></a><a href="qpopupmenu-h.html">qpopupmenu.h</a>&gt;
+#include &lt;<a name="qkeycode.h"></a><a href="qkeycode-h.html">qkeycode.h</a>&gt;
+#include &lt;<a name="qapplication.h"></a><a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a name="qmessagebox.h"></a><a href="qmessagebox-h.html">qmessagebox.h</a>&gt;
+#include &lt;<a name="qpixmap.h"></a><a href="qpixmap-h.html">qpixmap.h</a>&gt;
+
+/* XPM */
+static const char * p1_xpm[] = {
+"16 16 3 1",
+"       c None",
+".      c #000000000000",
+"X      c #FFFFFFFF0000",
+"                ",
+"                ",
+"         ....   ",
+"        .XXXX.  ",
+" .............. ",
+" .XXXXXXXXXXXX. ",
+" .XXXXXXXXXXXX. ",
+" .XXXXXXXXXXXX. ",
+" .XXXXXXXXXXXX. ",
+" .XXXXXXXXXXXX. ",
+" .XXXXXXXXXXXX. ",
+" .XXXXXXXXXXXX. ",
+" .XXXXXXXXXXXX. ",
+" .XXXXXXXXXXXX. ",
+" .............. ",
+"                "};
+
+/* XPM */
+static const char * p2_xpm[] = {
+"16 16 3 1",
+"       c None",
+".      c #000000000000",
+"X      c #FFFFFFFFFFFF",
+"                ",
+"   ......       ",
+"   .XXX.X.      ",
+"   .XXX.XX.     ",
+"   .XXX.XXX.    ",
+"   .XXX.....    ",
+"   .XXXXXXX.    ",
+"   .XXXXXXX.    ",
+"   .XXXXXXX.    ",
+"   .XXXXXXX.    ",
+"   .XXXXXXX.    ",
+"   .XXXXXXX.    ",
+"   .XXXXXXX.    ",
+"   .........    ",
+"                ",
+"                "};
+
+/* XPM */
+static const char * p3_xpm[] = {
+"16 16 3 1",
+"       c None",
+".      c #000000000000",
+"X      c #FFFFFFFFFFFF",
+"                ",
+"                ",
+"   .........    ",
+"  ...........   ",
+"  ........ ..   ",
+"  ...........   ",
+"  ...........   ",
+"  ...........   ",
+"  ...........   ",
+"  ...XXXXX...   ",
+"  ...XXXXX...   ",
+"  ...XXXXX...   ",
+"  ...XXXXX...   ",
+"   .........    ",
+"                ",
+"                "};
+
+MenuExample::MenuExample( <a name="QWidget"></a><a href="qwidget.html">QWidget</a> *parent, const char *name )
+    : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    <a name="QPixmap"></a><a href="qpixmap.html">QPixmap</a> p1( p1_xpm );
+    <a href="qpixmap.html">QPixmap</a> p2( p2_xpm );
+    <a href="qpixmap.html">QPixmap</a> p3( p3_xpm );
+
+    <a name="QPopupMenu"></a><a href="qpopupmenu.html">QPopupMenu</a> *print = new <a href="qpopupmenu.html">QPopupMenu</a>;
+    CHECK_PTR( print );
+    print-&gt;<a name="insertItem"></a><a href="qmenudata.html#a8">insertItem</a>( "&amp;Print to printer", this, SLOT(<a name="printer"></a><a href="#140">printer</a>()) );
+    print-&gt;<a href="qmenudata.html#a8">insertItem</a>( "Print to &amp;file", this, SLOT(<a name="file"></a><a href="#141">file</a>()) );
+    print-&gt;<a href="qmenudata.html#a8">insertItem</a>( "Print to fa&amp;x", this, SLOT(<a name="fax"></a><a href="#142">fax</a>()) );
+    print-&gt;<a name="insertSeparator"></a><a href="qmenudata.html#b5">insertSeparator</a>();
+    print-&gt;<a href="qmenudata.html#a8">insertItem</a>( "Printer &amp;Setup", this, SLOT(<a name="printerSetup"></a><a href="#143">printerSetup</a>()) );
+
+    <a href="qpopupmenu.html">QPopupMenu</a> *file = new <a href="qpopupmenu.html">QPopupMenu</a>();
+    CHECK_PTR( file );
+    file-&gt;<a href="qmenudata.html#a8">insertItem</a>( p1, "&amp;Open",  this, SLOT(<a name="open"></a><a href="#129">open</a>()), CTRL+Key_O );
+    file-&gt;<a href="qmenudata.html#a8">insertItem</a>( p2, "&amp;New", this, SLOT(<a name="news"></a><a href="#130">news</a>()), CTRL+Key_N );
+    file-&gt;<a href="qmenudata.html#a8">insertItem</a>( p3, "&amp;Save", this, SLOT(<a name="save"></a><a href="#131">save</a>()), CTRL+Key_S );
+    file-&gt;<a href="qmenudata.html#a8">insertItem</a>( "&amp;Close", this, SLOT(<a name="closeDoc"></a><a href="#132">closeDoc</a>()), CTRL+Key_W );
+    file-&gt;<a href="qmenudata.html#b5">insertSeparator</a>();
+    file-&gt;<a href="qmenudata.html#a8">insertItem</a>( "&amp;Print", print, CTRL+Key_P );
+    file-&gt;<a href="qmenudata.html#b5">insertSeparator</a>();
+    file-&gt;<a href="qmenudata.html#a8">insertItem</a>( "E&amp;xit",  qApp, SLOT(quit()), CTRL+Key_Q );
+
+    <a href="qpopupmenu.html">QPopupMenu</a> *edit = new <a href="qpopupmenu.html">QPopupMenu</a>();
+    CHECK_PTR( edit );
+    int undoID = edit-&gt;<a href="qmenudata.html#a8">insertItem</a>( "&amp;Undo", this, SLOT(<a name="undo"></a><a href="#133">undo</a>()) );
+    int redoID = edit-&gt;<a href="qmenudata.html#a8">insertItem</a>( "&amp;Redo", this, SLOT(<a name="redo"></a><a href="#134">redo</a>()) );
+    edit-&gt;<a name="setItemEnabled"></a><a href="qmenudata.html#c7">setItemEnabled</a>( undoID, FALSE );
+    edit-&gt;<a href="qmenudata.html#c7">setItemEnabled</a>( redoID, FALSE );
+
+    options = new <a href="qpopupmenu.html">QPopupMenu</a>();
+    CHECK_PTR( options );
+    options-&gt;insertItem( "&amp;Normal Font", this, SLOT(<a name="normal"></a><a href="#135">normal</a>()) );
+    options-&gt;insertSeparator();
+    boldID = options-&gt;insertItem( "&amp;Bold", this, SLOT(<a name="bold"></a><a href="#136">bold</a>()) );
+    underlineID = options-&gt;insertItem( "&amp;Underline", this, SLOT(<a name="underline"></a><a href="#137">underline</a>()) );
+    isBold = FALSE;
+    isUnderline = FALSE;
+    options-&gt;setCheckable( TRUE );
+
+    <a href="qpopupmenu.html">QPopupMenu</a> *help = new <a href="qpopupmenu.html">QPopupMenu</a>;
+    CHECK_PTR( help );
+    help-&gt;<a href="qmenudata.html#a8">insertItem</a>( "&amp;About", this, SLOT(<a name="about"></a><a href="#138">about</a>()), CTRL+Key_H );
+    help-&gt;<a href="qmenudata.html#a8">insertItem</a>( "About &amp;Qt", this, SLOT(<a name="aboutQt"></a><a href="#139">aboutQt</a>()) );
+
+    menu = new <a name="QMenuBar"></a><a href="qmenubar.html">QMenuBar</a>( this );
+    CHECK_PTR( menu );
+    menu-&gt;insertItem( "&amp;File", file );
+    menu-&gt;insertItem( "&amp;Edit", edit );
+    menu-&gt;insertItem( "&amp;Options", options );
+    menu-&gt;insertSeparator();
+    menu-&gt;insertItem( "&amp;Help", help );
+    menu-&gt;setSeparator( QMenuBar::InWindowsStyle );
+
+    label = new <a name="QLabel"></a><a href="qlabel.html">QLabel</a>( this );
+    CHECK_PTR( label );
+    label-&gt;setGeometry( 20, <a name="rect"></a><a href="qwidget.html#c1">rect</a>().center().y()-20, <a name="width"></a><a href="qwidget.html#b9">width</a>()-40, 40 );
+    label-&gt;setFrameStyle( QFrame::Box | QFrame::Raised );
+    label-&gt;setLineWidth( 1 );
+    label-&gt;setAlignment( AlignCenter );
+
+    <a name="connect"></a><a href="qobject.html#f2">connect</a>( this,  SIGNAL(explain(const char *)),
+             label, SLOT(setText(const char *)) );
+
+    <a name="setMinimumSize"></a><a href="qwidget.html#c6">setMinimumSize</a>( 100, 80 );
+}
+
+void <a name="129"></a>MenuExample::open()
+{
+    emit explain( "File/Open selected" );
+}
+
+void <a name="130"></a>MenuExample::news()
+{
+    emit explain( "File/New selected" );
+}
+
+void <a name="131"></a>MenuExample::save()
+{
+    emit explain( "File/Save selected" );
+}
+
+void <a name="132"></a>MenuExample::closeDoc()
+{
+    emit explain( "File/Close selected" );
+}
+
+void <a name="133"></a>MenuExample::undo()
+{
+    emit explain( "Edit/Undo selected" );
+}
+
+void <a name="134"></a>MenuExample::redo()
+{
+    emit explain( "Edit/Redo selected" );
+}
+
+void <a name="135"></a>MenuExample::normal()
+{
+    isBold = FALSE;
+    isUnderline = FALSE;
+    options-&gt;setItemChecked( boldID, isBold );
+    options-&gt;setItemChecked( underlineID, isUnderline );
+    emit explain( "Options/Normal selected" );
+}
+
+void <a name="136"></a>MenuExample::bold()
+{
+    isBold = !isBold;
+    options-&gt;setItemChecked( boldID, isBold );
+    emit explain( "Options/Bold selected" );
+}
+
+void <a name="137"></a>MenuExample::underline()
+{
+    isUnderline = !isUnderline;
+    options-&gt;setItemChecked( underlineID, isUnderline );
+    emit explain( "Options/Underline selected" );
+}
+
+void <a name="138"></a>MenuExample::about()
+{
+    <a name="QMessageBox::about"></a><a href="qmessagebox.html#d6">QMessageBox::about</a>( this, "Qt Menu Example",
+                        "This example demonstrates simple use of Qt menus.\n"
+                        "You can cut and paste lines from it to your own\n"
+                        "programs." );
+}
+
+void <a name="139"></a>MenuExample::aboutQt()
+{
+    <a name="QMessageBox::aboutQt"></a><a href="qmessagebox.html#e0">QMessageBox::aboutQt</a>( this, "Qt Menu Example" );
+}
+
+void <a name="140"></a>MenuExample::printer()
+{
+    emit explain( "File/Printer/Print selected" );
+}
+
+void <a name="141"></a>MenuExample::file()
+{
+    emit explain( "File/Printer/Print To File selected" );
+}
+
+void <a name="142"></a>MenuExample::fax()
+{
+    emit explain( "File/Printer/Print To Fax selected" );
+}
+
+void <a name="143"></a>MenuExample::printerSetup()
+{
+    emit explain( "File/Printer/Printer Setup selected" );
+}
+
+void <a name="144"></a>MenuExample::resizeEvent( <a name="QResizeEvent"></a><a href="qresizeevent.html">QResizeEvent</a> * )
+{
+    label-&gt;setGeometry( 20, <a href="qwidget.html#c1">rect</a>().center().y()-20, <a href="qwidget.html#b9">width</a>()-40, 40 );
+}
+
+int main( int argc, char ** argv )
+{
+    <a name="QApplication"></a><a href="qapplication.html">QApplication</a> a( argc, argv );
+    MenuExample m;
+
+    a.<a name="setMainWidget"></a><a href="qapplication.html#b9">setMainWidget</a>( &amp;m );
+    m.<a name="show"></a><a href="qwidget.html#k2">show</a>();
+    return a.<a name="exec"></a><a href="qapplication.html#c9">exec</a>();
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

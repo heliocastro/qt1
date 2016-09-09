@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QDataSource Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QDataSource Class Reference</h1><br clear="all">
+<p>
+A QDataSource is an asynchronous producer of data.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qasyncio-h.html">qasyncio.h</a>&gt;</code>
+<p>
+Inherits <a href="qasyncio.html">QAsyncIO</a>.
+<p>Inherited by <a href="qiodevicesource.html">QIODeviceSource</a>.
+<p><a href="qdatasource-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn">virtual int <a href="qdatasource.html#a0"><strong>readyToSend</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qdatasource.html#a1"><strong>sendTo</strong></a> ( QDataSink *, int count ) </span>
+<li><span class="fn">void <a href="qdatasource.html#a2"><strong>maybeReady</strong></a> () </span>
+<li><span class="fn">virtual bool <a href="qdatasource.html#a3"><strong>rewindable</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qdatasource.html#a4"><strong>enableRewind</strong></a> ( bool ) </span>
+<li><span class="fn">virtual void <a href="qdatasource.html#a5"><strong>rewind</strong></a> () </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+A QDataSource is an asynchronous producer of data.
+<p>
+A data source is an object which provides data from some source in an
+asynchronous manner.  This means that at some time not determined by
+the data source, blocks of data will be taken from it for processing.
+The data source is able to limit the maximum size of such blocks which
+it is currently able to provide.
+<p>See also:  <a href="qasyncio.html">QAsyncIO</a>, <a href="qdatasink.html">QDataSink</a> and <a href="qdatapump.html">QDataPump</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn">void <a name="a4"></a>QDataSource::enableRewind ( bool ) <code>[virtual]</code></h3>
+<p>If this function is called with <em>on</em> set to TRUE, and <a href="qdatasource.html#a3">rewindable</a>()
+is TRUE, then the data source must take measures to allow the <a href="qdatasource.html#a5">rewind</a>()
+function to subsequently operate as described.  If rewindable() is FALSE,
+the function should call QDataSource::enableRewind(), which aborts with
+a <a href="qapplication.html#j6">fatal</a>() error.
+<p>For example, a network connection may choose to utilize a disk cache
+of input only if rewinding is enabled before the first buffer-full of
+data is discarded, returning FALSE in rewindable() if that first buffer
+is discarded.
+<p>Reimplemented in <a href="qiodevicesource.html#a5">QIODeviceSource</a>.
+<h3 class="fn">void <a name="a2"></a>QDataSource::maybeReady ()</h3>
+<p>This should be called whenever <a href="qdatasource.html#a0">readyToSend</a>() might have become non-zero.
+It is merely calls <a href="qasyncio.html#a2">QAsyncIO::ready</a>() if readyToSend() is non-zero.
+<h3 class="fn">int <a name="a0"></a>QDataSource::readyToSend () <code>[virtual]</code></h3>
+<p>The data source should return a value indicating how much data it is ready
+to provide.  This may be 0.  If the data source knows it will never be
+able to provide any more data (until after a <a href="qdatasource.html#a5">rewind</a>()), it may return -1.
+<p>Reimplemented in <a href="qiodevicesource.html#a2">QIODeviceSource</a>.
+<h3 class="fn">void <a name="a5"></a>QDataSource::rewind () <code>[virtual]</code></h3>
+<p>This function rewinds the data source.  This may only be called if
+<a href="qdatasource.html#a4">enableRewind</a>(TRUE) has been previously called.
+<h3 class="fn">bool <a name="a3"></a>QDataSource::rewindable () const <code>[virtual]</code></h3>
+<p>This function should return TRUE if the data source can be rewound.
+<p>The default returns FALSE.
+<p>Reimplemented in <a href="qiodevicesource.html#a4">QIODeviceSource</a>.
+<h3 class="fn">void <a name="a1"></a>QDataSource::sendTo ( <a href="qdatasink.html">QDataSink</a> *, int count ) <code>[virtual]</code></h3>
+<p>This function is called to extract data from the source, by sending
+it to the given data sink.  The count will be no more than the amount
+indicated by the most recent call to <a href="qdatasource.html#a0">readyToSend</a>().  The source must
+use all the provided data, and the sink will be prepared to accept at
+least this much data.
+<p>Reimplemented in <a href="qiodevicesource.html#a3">QIODeviceSource</a>.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qasyncio.h: 1998/08/19
+<li>qasyncio.cpp: 1998/08/12
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

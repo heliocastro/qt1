@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QDoubleValidator Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QDoubleValidator Class Reference</h1><br clear="all">
+<p>
+The QDoubleValidator class provides range checking of floating-point numbers.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qvalidator-h.html">qvalidator.h</a>&gt;</code>
+<p>
+Inherits <a href="qvalidator.html">QValidator</a>.
+<p><a href="qdoublevalidator-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qdoublevalidator.html#a0"><strong>QDoubleValidator</strong></a> ( QWidget * parent, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qdoublevalidator.html#a1"><strong>QDoubleValidator</strong></a> ( double bottom, double top, int decimals, QWidget * parent, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qdoublevalidator.html#a2"><strong>~QDoubleValidator</strong></a> () </span>
+<li><span class="fn">virtual QValidator::State <a href="qvalidator.html#a2"><strong>validate</strong></a> ( QString &amp;, int &amp; ) </span>
+<li><span class="fn">virtual void <a href="qdoublevalidator.html#a4"><strong>setRange</strong></a> ( double bottom, double top, int decimals = 0 ) </span>
+<li><span class="fn">double <a href="qdoublevalidator.html#a5"><strong>bottom</strong></a> () const</span>
+<li><span class="fn">double <a href="qdoublevalidator.html#a6"><strong>top</strong></a> () const</span>
+<li><span class="fn">int <a href="qdoublevalidator.html#a7"><strong>decimals</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QDoubleValidator class provides range checking of floating-point numbers.
+<p>
+QDoubleValidator provides an upper bound, a lower bound, and a limit
+on the number of digits after the decimal point.  It does not
+provide a <a href="qvalidator.html#a3">fixup</a>() function.
+<p>See also:  <a href="qintvalidator.html">QIntValidator</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QDoubleValidator::QDoubleValidator ( <a href="qwidget.html">QWidget</a> * parent, const char * name = 0 )</h3>
+<p>Creates a validator object which accepts all double from 2.7182818
+to 3.1415926 (please, no bug reports) with at most seven digits after
+the decimal point.
+<p>This constructor is not meant to be useful; it is provided for
+completeness.
+<h3 class="fn"><a name="a1"></a>QDoubleValidator::QDoubleValidator ( double bottom, double top, int decimals, <a href="qwidget.html">QWidget</a> * parent, const char * name = 0 )</h3>
+<p>Creates a validator object which accepts all doubles from <em>bottom</em> up to and including <em>top</em> with at most <em>decimals</em> digits
+after the decimal point.
+<h3 class="fn"><a name="a2"></a>QDoubleValidator::~QDoubleValidator ()</h3>
+<p>Deletes the validator and frees any storage and other resources
+used.
+<h3 class="fn">double <a name="a5"></a>QDoubleValidator::bottom () const</h3>
+<p>Returns the lowest valid number according to this validator.
+<p>See also:  <a href="qdoublevalidator.html#a6">top</a>(), <a href="qdoublevalidator.html#a7">decimals</a>() and <a href="qdoublevalidator.html#a4">setRange</a>().
+<h3 class="fn">int <a name="a7"></a>QDoubleValidator::decimals () const</h3>
+<p>Returns the largest number of digits a valid number can have after
+its decimal point.
+<p>See also:  <a href="qdoublevalidator.html#a5">bottom</a>(), <a href="qdoublevalidator.html#a6">top</a>() and <a href="qdoublevalidator.html#a4">setRange</a>().
+<h3 class="fn">void <a name="a4"></a>QDoubleValidator::setRange ( double bottom, double top, int decimals = 0 ) <code>[virtual]</code></h3>
+<p>Sets the validator to accept numbers from <em>bottom</em> up to and
+including <em>top</em> with at most <em>decimals</em> digits after the decimal
+point.
+<h3 class="fn">double <a name="a6"></a>QDoubleValidator::top () const</h3>
+<p>Returns the highest valid number according to this validator.
+<p>See also:  <a href="qdoublevalidator.html#a5">bottom</a>(), decimals and <a href="qdoublevalidator.html#a4">setRange</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qvalidator.h: 1998/08/19
+<li>qvalidator.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

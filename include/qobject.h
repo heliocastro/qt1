@@ -1,0 +1,184 @@
+/****************************************************************************
+** $Id: qobject.h,v 2.11.2.3 1998/10/19 12:08:19 eiriken Exp $
+**
+** Definition of QObject class
+**
+** Created : 930418
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QOBJECT_H
+#define QOBJECT_H
+
+#ifndef QT_H
+#include "qobjectdefs.h"
+#include "qstring.h"
+#include "qevent.h"
+#endif // QT_H
+
+
+class Q_EXPORT QObject					// base class for Q objects
+{
+public:
+    QObject( QObject *parent=0, const char *name=0 );
+    virtual ~QObject();
+
+    virtual bool event( QEvent * );
+    virtual bool eventFilter( QObject *, QEvent * );
+
+    const char * tr( const char * ) const;
+
+    virtual QMetaObject *metaObject() const { return metaObj; }
+    virtual const char	*className()  const;
+
+    bool	isA( const char * )	 const;
+    bool	inherits( const char * ) const;
+
+    const char *name()		  const { return objname; }
+    const char *name( const char * defaultName ) const { return objname
+							     ? objname
+							     : defaultName; }
+
+    void	setName( const char *name );
+    bool	isWidgetType()	  const { return isWidget; }
+    bool	highPriority()	  const { return hiPriority; }
+
+    bool	signalsBlocked()  const { return blockSig; }
+    void	blockSignals( bool b );
+
+    int		startTimer( int interval );
+    void	killTimer( int id );
+    void	killTimers();
+
+    const QObjectList *children() const { return childObjects; }
+    QObjectList	      *queryList( const char *inheritsClass = 0,
+				  const char *objName = 0,
+				  bool regexpMatch = TRUE,
+				  bool recursiveSearch = TRUE );
+
+    void	insertChild( QObject * );
+    void	removeChild( QObject * );
+
+    void	installEventFilter( const QObject * );
+    void	removeEventFilter( const QObject * );
+
+    static bool connect( const QObject *sender, const char *signal,
+			 const QObject *receiver, const char *member );
+    bool	connect( const QObject *sender, const char *signal,
+			 const char *member ) const;
+    static bool disconnect( const QObject *sender, const char *signal,
+			    const QObject *receiver, const char *member );
+    bool	disconnect( const char *signal=0,
+			    const QObject *receiver=0, const char *member=0 );
+    bool	disconnect( const QObject *receiver, const char *member=0 );
+
+    void	dumpObjectTree();
+    void	dumpObjectInfo();
+
+signals:
+    void	destroyed();
+
+public:
+    QObject	*parent() const { return parentObj; }
+
+protected:
+    bool	activate_filters( QEvent * );
+    QConnectionList *receivers( const char *signal ) const;
+    void	activate_signal( const char *signal );
+    void	activate_signal( const char *signal, short );
+    void	activate_signal( const char *signal, int );
+    void	activate_signal( const char *signal, long );
+    void	activate_signal( const char *signal, const char * );
+    const QObject *sender();
+
+    virtual void initMetaObject();
+
+    virtual void timerEvent( QTimerEvent * );
+
+    virtual void connectNotify( const char *signal );
+   virtual void disconnectNotify( const char *signal );
+    virtual bool checkConnectArgs( const char *signal, const QObject *receiver,
+				   const char *member );
+
+    static  void badSuperclassWarning( const char *className,
+				       const char *superclassName );
+
+    uint	isSignal   : 1;
+    uint	isWidget   : 1;
+    uint	hiPriority : 1;
+    uint	pendTimer  : 1;
+    uint	pendEvent  : 1;
+    uint	blockSig   : 1;
+
+private slots:
+    void	cleanupEventFilter();
+
+private:
+    QMetaObject *queryMetaObject() const;
+    static QMetaObject *metaObj;
+    char	*objname;
+    QObject	*parentObj;
+    QObjectList *childObjects;
+    QSignalDict *connections;
+    QObjectList *senderObjects;
+    QObjectList *eventFilters;
+    QObject	*sigSender;
+
+    friend class QApplication;
+    friend class QWidget;
+    friend class QSignal;
+    friend class QSenderObject;
+
+private:	// Disabled copy constructor and operator=
+#if defined(Q_DISABLE_COPY)
+    QObject( const QObject & );
+    QObject &operator=( const QObject & );
+#endif
+};
+
+
+inline bool QObject::connect( const QObject *sender, const char *signal,
+			      const char *member ) const
+{
+    return connect( sender, signal, this, member );
+}
+
+inline bool QObject::disconnect( const char *signal,
+				 const QObject *receiver, const char *member )
+{
+    return disconnect( this, signal, receiver, member );
+}
+
+inline bool QObject::disconnect( const QObject *receiver, const char *member )
+{
+    return disconnect( this, 0, receiver, member );
+}
+
+inline const QObject *QObject::sender()
+{
+    return sigSender;
+}
+
+
+class Q_EXPORT QSenderObject : public QObject		// object for sending signals
+{
+public:
+    void setSender( QObject *s ) { sigSender=s; }
+};
+
+
+#endif // QOBJECT_H

@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QMainWindow Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QMainWindow Class Reference</h1><br clear="all">
+<p>
+The QMainWindow class provides a typical application window, with a menu bar, some tool bars and a status bar.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qmainwindow-h.html">qmainwindow.h</a>&gt;</code>
+<p>
+Inherits <a href="qwidget.html">QWidget</a>.
+<p><a href="qmainwindow-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qmainwindow.html#a0"><strong>QMainWindow</strong></a> ( QWidget * parent = 0, const char * name = 0, WFlags f = 0 ) </span>
+<li><span class="fn"><a href="qmainwindow.html#a1"><strong>~QMainWindow</strong></a> () </span>
+<li><span class="fn">QMenuBar* <a href="qmainwindow.html#a2"><strong>menuBar</strong></a> () const</span>
+<li><span class="fn">QStatusBar* <a href="qmainwindow.html#a3"><strong>statusBar</strong></a> () const</span>
+<li><span class="fn">QToolTipGroup* <a href="qmainwindow.html#a4"><strong>toolTipGroup</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qmainwindow.html#a5"><strong>setCentralWidget</strong></a> ( QWidget * ) </span>
+<li><span class="fn">QWidget* <a href="qmainwindow.html#a6"><strong>centralWidget</strong></a> () const</span>
+<li><span class="fn">enum <strong><a name="ToolBarDock"></a>ToolBarDock</strong> { Unmanaged, TornOff, Top, Bottom, Right, Left }</span>
+<li><span class="fn">void <a href="qmainwindow.html#a7"><strong>setDockEnabled</strong></a> ( ToolBarDock dock, bool enable ) </span>
+<li><span class="fn">bool <a href="qmainwindow.html#a8"><strong>isDockEnabled</strong></a> ( ToolBarDock dock ) const</span>
+<li><span class="fn">void <a href="qmainwindow.html#a9"><strong>addToolBar</strong></a> ( QToolBar *, const char * label, ToolBarDock = Top, bool newLine = FALSE ) </span>
+<li><span class="fn">void <a href="qmainwindow.html#b0"><strong>removeToolBar</strong></a> ( QToolBar * ) </span>
+<li><span class="fn">virtual void <a href="qmainwindow.html#b1"><strong>show</strong></a> () </span>
+<li><span class="fn">bool <a href="qmainwindow.html#b2"><strong>rightJustification</strong></a> () const</span>
+<li><span class="fn">bool <a href="qmainwindow.html#b3"><strong>usesBigPixmaps</strong></a> () const</span>
+<li><span class="fn">virtual bool <a href="qmainwindow.html#b4"><strong>eventFilter</strong></a> ( QObject *, QEvent * ) </span>
+</ul>
+<h2>Public Slots</h2>
+<ul>
+<li><span class="fn">void <a href="qmainwindow.html#b5"><strong>setRightJustification</strong></a> ( bool ) </span>
+<li><span class="fn">void <a href="qmainwindow.html#b6"><strong>setUsesBigPixmaps</strong></a> ( bool ) </span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qmainwindow.html#b7"><strong>pixmapSizeChanged</strong></a> ( bool ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qmainwindow.html#b9"><strong>paintEvent</strong></a> ( QPaintEvent * ) </span>
+<li><span class="fn">virtual bool <a href="qmainwindow.html#c0"><strong>event</strong></a> ( QEvent * ) </span>
+</ul>
+<h2>Protected Slots</h2>
+<ul>
+<li><span class="fn">void <a href="qmainwindow.html#b8"><strong>setUpLayout</strong></a> () </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QMainWindow class provides a typical application window, with a menu bar, some tool bars and a status bar.
+<p>
+In addition, you need the large central widget, which you supply and
+tell QMainWindow about using <a href="qmainwindow.html#a5">setCentralWidget</a>(), and perhaps a few
+tool bars, which you can add using <a href="qmainwindow.html#a9">addToolBar</a>().
+<p>The central widget is not touched by QMainWindow.  QMainWindow
+manages its geometry, and that is all.  For example, the
+<a href="application-application-cpp.html#QMainWindow">application/application.cpp</a> exmple (an editor) sets a <a href="qmultilineedit.html">QMultiLineEdit</a>
+to be the central widget.
+<p>QMainWindow automatically detects the creation of a menu bar or
+status bar if you specify the QMainWindow as parent, or you can use
+the provided <a href="qmainwindow.html#a2">menuBar</a>() and <a href="qmainwindow.html#a3">statusBar</a>() functions.  menuBar() and
+statusBar() create a suitable widget if one doesn't exist, and
+updates the window's layout to make space.
+<p>QMainWindow also provides a <a href="qtooltipgroup.html">QToolTipGroup</a> connected to the status
+bar.  <a href="qmainwindow.html#a4">toolTipGroup</a>() provides access to the QToolTipGroup, but there
+is no way to set the tool tip group.
+<p>By default, QMainWindow only allows toolbars above the central
+widget.  You can use <a href="qmainwindow.html#a7">setDockEnabled</a>() to allow toolbars in other
+docks (a <em>dock</em> is a place where toolbars can stay).  Currently,
+only <code>Top, Left, Right</code> and <code>Bottom</code> are meaningful.
+<p>Several functions let you change the appearance of a QMainWindow
+globally: <a href="qmainwindow.html#b5">setRightJustification</a>() determines whether QMainWindow
+should ensure that the toolbars fill the available space,
+<a href="qmainwindow.html#b6">setUsesBigPixmaps</a>() determines whether <a href="qtoolbutton.html">QToolButton</a> (and other
+classes) should draw small or large pixmaps (see <a href="qiconset.html">QIconSet</a> for more
+about that).
+<p>The current release of QMainWindow does not provide draggable
+toolbars.  This feature is planned for inclusion in one of the next
+releases.
+<p><img src=qmainwindow-m.gif> <img src=qmainwindow-w.gif>
+<p>See also:  <a href="qtoolbar.html">QToolBar</a>, <a href="qstatusbar.html">QStatusBar</a>, <a href="qmenubar.html">QMenuBar</a>, <a href="qtooltipgroup.html">QToolTipGroup</a> and <a href="qdialog.html">QDialog</a>.
+<p>Examples:
+ <a href="application-application-cpp.html#QMainWindow">application/application.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QMainWindow::QMainWindow ( <a href="qwidget.html">QWidget</a> * parent = 0, const char * name = 0, WFlags f = 0 )</h3>
+<p>Constructs an empty main window.
+<h3 class="fn"><a name="a1"></a>QMainWindow::~QMainWindow ()</h3>
+<p>Destroys the object and frees any allocated resources.
+<h3 class="fn">void <a name="a9"></a>QMainWindow::addToolBar ( <a href="qtoolbar.html">QToolBar</a> * toolBar, const char * label, <a href="qmainwindow.html">ToolBarDock</a> edge = Top, bool nl = FALSE )</h3>
+<p>Adds <em>toolbar</em> to this the <em>edge</em> window of this window.
+<h3 class="fn"><a href="qwidget.html">QWidget</a> * <a name="a6"></a>QMainWindow::centralWidget () const</h3>
+<p>Returns a pointer to the main child of this main widget.  The
+main child is the big widget around which the tool bars are
+arranged.
+<p>See also:  <a href="qmainwindow.html#a5">setCentralWidget</a>().
+<h3 class="fn">bool <a name="c0"></a>QMainWindow::event ( <a href="qevent.html">QEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Monitors events to ensure layout is updated.
+<p>Reimplemented from <a href="qobject.html#a2">QObject.</a>
+<h3 class="fn">bool <a name="b4"></a>QMainWindow::eventFilter ( <a href="qobject.html">QObject</a> * o, <a href="qevent.html">QEvent</a> * e ) <code>[virtual]</code></h3>
+<p>Monitors events to ensure layout is updated.
+<p>Reimplemented from <a href="qobject.html#a3">QObject.</a>
+<h3 class="fn">bool <a name="a8"></a>QMainWindow::isDockEnabled ( <a href="qmainwindow.html">ToolBarDock</a> dock ) const</h3>
+<p>Returns TRUE if <em>dock</em> is enabled, or FALSE if it is not.
+<p>See also:  <a href="qmainwindow.html#a7">setDockEnabled</a>().
+<h3 class="fn"><a href="qmenubar.html">QMenuBar</a> * <a name="a2"></a>QMainWindow::menuBar () const</h3>
+<p>Returns the menu bar for this window.  If there isn't any,
+menuBar() creates an empty menu bar on the fly.
+<p>See also:  <a href="qmainwindow.html#a3">statusBar</a>().
+<p>Examples:
+ <a href="application-application-cpp.html#menuBar">application/application.cpp</a>
+<h3 class="fn">void <a name="b9"></a>QMainWindow::paintEvent ( <a href="qpaintevent.html">QPaintEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Reimplemented from <a href="qwidget.html#o4">QWidget.</a>
+<h3 class="fn">void <a name="b7"></a>QMainWindow::pixmapSizeChanged ( bool ) <code>[signal]</code></h3>
+<p>This signal is called whenever the <a href="qmainwindow.html#b6">setUsesBigPixmaps</a>() is called
+with a value which is different from the current setting.  All
+relevant widgets must connect to this signal.
+<h3 class="fn">void <a name="b0"></a>QMainWindow::removeToolBar ( <a href="qtoolbar.html">QToolBar</a> * toolBar )</h3>
+<p>Removes <em>toolBar</em> from this main window, if <em>toolBar</em> is
+non-null and known by this main window.
+<h3 class="fn">bool <a name="b2"></a>QMainWindow::rightJustification () const</h3>
+<p>Returns TRUE if this main windows right-justifies its toolbars, and
+FALSE if it uses a ragged right edge.
+<p>The default is to use a ragged right edge.
+<p>("Right edge" sometimes means "bottom edge".)
+<p>See also:  <a href="qmainwindow.html#b5">setRightJustification</a>().
+<h3 class="fn">void <a name="a5"></a>QMainWindow::setCentralWidget ( <a href="qwidget.html">QWidget</a> * w ) <code>[virtual]</code></h3>
+<p>Sets the central widget for this window to <em>w.</em>  The centail
+widget is the one around which the toolbars etc. are arranged.
+<p>Examples:
+ <a href="application-application-cpp.html#setCentralWidget">application/application.cpp</a>
+<h3 class="fn">void <a name="a7"></a>QMainWindow::setDockEnabled ( <a href="qmainwindow.html">ToolBarDock</a> dock, bool enable )</h3>
+<p>Sets <em>dock</em> to be available if <em>enable</em> is TRUE, and not
+available if <em>enable</em> is FALSE.
+<p>The user can drag a toolbar to any enabled dock.
+<h3 class="fn">void <a name="b5"></a>QMainWindow::setRightJustification ( bool enable ) <code>[slot]</code></h3>
+<p>Sets this main window to expand its toolbars to fill all
+available space if <em>enable</em> is TRUE, and to give the toolbars just
+the space they need if <em>enable</em> is FALSE.
+<p>The default is FALSE.
+<p>See also:  <a href="qmainwindow.html#b2">rightJustification</a>();.
+<h3 class="fn">void <a name="b8"></a>QMainWindow::setUpLayout () <code>[protected slot]</code></h3>
+<p>Sets up the <a href="qboxlayout.html">geometry management</a> of this
+window.  Called automatically when needed, so you should never need
+to call this.
+<h3 class="fn">void <a name="b6"></a>QMainWindow::setUsesBigPixmaps ( bool enable ) <code>[slot]</code></h3>
+<p>Sets tool buttons in this main windows to use big pixmaps if <em>enable</em> is TRUE, and small pixmaps if <em>enable</em> is FALSE.
+<p>The default is FALSE.
+<p>Tool buttons and other interested widgets are responsible for
+reading the correct state on startup, and for connecting to this
+widget's <a href="qmainwindow.html#b7">pixmapSizeChanged</a>() signal.
+<p>See also:  <a href="qtoolbutton.html#b0">QToolButton::setUsesBigPixmap</a>().
+<h3 class="fn">void <a name="b1"></a>QMainWindow::show () <code>[virtual]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Examples:
+ <a href="application-application-cpp.html#show">application/application.cpp</a>
+<p>Reimplemented from <a href="qwidget.html#k2">QWidget.</a>
+<h3 class="fn"><a href="qstatusbar.html">QStatusBar</a> * <a name="a3"></a>QMainWindow::statusBar () const</h3>
+<p>Returns the status bar for this window.  If there isn't any,
+statusBar() creates an empty status bar on the fly, and if necessary
+a tool tip group too.
+<p>See also:  <a href="qmainwindow.html#c3">setMenuBar</a>(), statusBar() and <a href="qmainwindow.html#a4">toolTipGroup</a>().
+<p>Examples:
+ <a href="application-application-cpp.html#statusBar">application/application.cpp</a>
+<h3 class="fn"><a href="qtooltipgroup.html">QToolTipGroup</a> * <a name="a4"></a>QMainWindow::toolTipGroup () const</h3>
+<p>Returns the tool tip group for this window.  If there isn't any,
+<a href="qmainwindow.html#a2">menuBar</a>() creates an empty tool tip group on the fly.
+<p>See also:  <a href="qmainwindow.html#a2">menuBar</a>() and <a href="qmainwindow.html#a3">statusBar</a>().
+<h3 class="fn">bool <a name="b3"></a>QMainWindow::usesBigPixmaps () const</h3>
+<p>Returns the state last set by <a href="qmainwindow.html#b6">setUsesBigPixmaps</a>().  The initial
+state is FALSE.
+<p>See also:  <a href="qmainwindow.html#b6">setUsesBigPixmaps</a>();.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qmainwindow.h: 1998/08/19
+<li>qmainwindow.cpp: 1998/11/01
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QLCDNumber Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QLCDNumber Class Reference</h1><br clear="all">
+<p>
+The QLCDNumber widget displays a number with LCD-like digits.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qlcdnumber-h.html">qlcdnumber.h</a>&gt;</code>
+<p>
+Inherits <a href="qframe.html">QFrame</a>.
+<p><a href="qlcdnumber-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qlcdnumber.html#a0"><strong>QLCDNumber</strong></a> ( QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qlcdnumber.html#a1"><strong>QLCDNumber</strong></a> ( uint numDigits, QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qlcdnumber.html#a2"><strong>~QLCDNumber</strong></a> () </span>
+<li><span class="fn">bool <a href="qlcdnumber.html#a3"><strong>smallDecimalPoint</strong></a> () const</span>
+<li><span class="fn">int <a href="qlcdnumber.html#a4"><strong>numDigits</strong></a> () const</span>
+<li><span class="fn">void <a href="qlcdnumber.html#a5"><strong>setNumDigits</strong></a> ( int nDigits ) </span>
+<li><span class="fn">bool <a href="qlcdnumber.html#a6"><strong>checkOverflow</strong></a> ( double num ) const</span>
+<li><span class="fn">bool <a href="qlcdnumber.html#a7"><strong>checkOverflow</strong></a> ( int num ) const</span>
+<li><span class="fn">Mode <a href="qlcdnumber.html#a8"><strong>mode</strong></a> () const</span>
+<li><span class="fn">void <a href="qlcdnumber.html#a9"><strong>setMode</strong></a> ( Mode ) </span>
+<li><span class="fn">SegmentStyle <a href="qlcdnumber.html#b0"><strong>segmentStyle</strong></a> () const</span>
+<li><span class="fn">void <a href="qlcdnumber.html#b1"><strong>setSegmentStyle</strong></a> ( SegmentStyle ) </span>
+<li><span class="fn">double <a href="qlcdnumber.html#b2"><strong>value</strong></a> () const</span>
+<li><span class="fn">int <a href="qlcdnumber.html#b3"><strong>intValue</strong></a> () const</span>
+<li><span class="fn">virtual QSize <a href="qlcdnumber.html#b4"><strong>sizeHint</strong></a> () const</span>
+</ul>
+<h2>Public Slots</h2>
+<ul>
+<li><span class="fn">void <a href="qlcdnumber.html#b5"><strong>display</strong></a> ( int num ) </span>
+<li><span class="fn">void <a href="qlcdnumber.html#b6"><strong>display</strong></a> ( double num ) </span>
+<li><span class="fn">void <a href="qlcdnumber.html#b7"><strong>display</strong></a> ( const char * str ) </span>
+<li><span class="fn">void <a href="qlcdnumber.html#b8"><strong>setHexMode</strong></a> () </span>
+<li><span class="fn">void <a href="qlcdnumber.html#b9"><strong>setDecMode</strong></a> () </span>
+<li><span class="fn">void <a href="qlcdnumber.html#c0"><strong>setOctMode</strong></a> () </span>
+<li><span class="fn">void <a href="qlcdnumber.html#c1"><strong>setBinMode</strong></a> () </span>
+<li><span class="fn">void <a href="qlcdnumber.html#c2"><strong>setSmallDecimalPoint</strong></a> ( bool ) </span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qlcdnumber.html#c3"><strong>overflow</strong></a> () </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qlcdnumber.html#c4"><strong>resizeEvent</strong></a> ( QResizeEvent * ) </span>
+<li><span class="fn">virtual void <a href="qlcdnumber.html#c5"><strong>drawContents</strong></a> ( QPainter * ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QLCDNumber widget displays a number with LCD-like digits.
+<p>
+It can display a number in just about any size, in decimal,
+hexadecimal, octal or binary notation, and is easy to connect to
+data sources via the <a href="qlcdnumber.html#b5">display</a>() slot, which is overloaded to take any
+of five argument types.
+<p>There are also slots to change the <a href="qlcdnumber.html#a9">notation mode</a> and <a href="qlcdnumber.html#c2">decimal point mode.</a>
+<p>QLCDNumber emits the <a href="qlcdnumber.html#c3">overflow</a>() signal when it is asked to display
+something beyond its range.  The range is set by <a href="qlcdnumber.html#a5">setNumDigits</a>() (but
+<a href="qlcdnumber.html#c2">setSmallDecimalPoint</a>() influences it too).
+<p>These digits and other symbols can be shown: 0/O, 1, 2, 3, 4, 5/S,
+6, 7, 8, 9/g, minus, decimal point, A, B, C, D, E, F, h, H, L, o, P,
+r, u, U, Y, colon, degree sign (which is specified as single quote
+in the string) and space.  QLCDNumber substitutes spaces for illegal
+characters.
+<p>It is impossible to retrieve the contents of a QLCDNumber object.
+If you need to, we recommend that you connect the signals which feed
+the display() slot to another slot as well and store the value
+there.<p><strong>Warning:</strong> The current version of QLCDNumber does not work well
+with background pixmaps.
+<p>Incidentally, QLCDNumber is the very oldest part of Qt, tracing back
+to a BASIC program on the <a
+href=http://www.nvg.unit.no/spectrum/>Sinclair Spectrum</a>.
+<p><img src=qlcdnum-m.gif> <img src=qlcdnum-w.gif>
+<p>See also:  <a href="qlabel.html">QLabel</a> and <a href="qframe.html">QFrame</a>.
+<p>Examples:
+ <a href="dclock-dclock-cpp.html#QLCDNumber">dclock/dclock.cpp</a>
+ <a href="xform-xform-cpp.html#QLCDNumber">xform/xform.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QLCDNumber::QLCDNumber ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs an LCD number, sets the number of digits to 5, the base
+to decimal, the decimal point mode to 'small' and the frame style to
+a raised box. The <a href="qlcdnumber.html#b0">segmentStyle</a>() is set to <code>Outline.</code>
+<p>The <em>parent</em> and <em>name</em> arguments are passed to the <a href="qframe.html">QFrame</a> constructor.
+<p>See also:  <a href="qlcdnumber.html#a5">setNumDigits</a>() and <a href="qlcdnumber.html#c2">setSmallDecimalPoint</a>().
+<h3 class="fn"><a name="a1"></a>QLCDNumber::QLCDNumber ( uint numDigits, <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs an LCD number, sets the number of digits to <em>numDigits,</em> the
+base to decimal, the decimal point mode to 'small' and the frame style
+to a raised box.  The <a href="qlcdnumber.html#b0">segmentStyle</a>() is set to <code>Outline.</code>
+<p>The <em>parent</em> and <em>name</em> arguments are passed to the <a href="qframe.html">QFrame</a> constructor.
+<p>See also:  <a href="qlcdnumber.html#a5">setNumDigits</a>() and <a href="qlcdnumber.html#c2">setSmallDecimalPoint</a>().
+<h3 class="fn"><a name="a2"></a>QLCDNumber::~QLCDNumber ()</h3>
+<p>Destroys the LCD number.
+<h3 class="fn">bool <a name="a6"></a>QLCDNumber::checkOverflow ( double num ) const</h3>
+<p>Returns TRUE if <em>num</em> is too big to be displayed in its entirety,
+FALSE otherwise.
+<p>See also:  <a href="qlcdnumber.html#b5">display</a>(), <a href="qlcdnumber.html#a4">numDigits</a>() and <a href="qlcdnumber.html#a3">smallDecimalPoint</a>().
+<h3 class="fn">bool <a name="a7"></a>QLCDNumber::checkOverflow ( int num ) const</h3>
+<p>Returns TRUE if <em>num</em> is too big to be displayed in its entirety,
+FALSE otherwise.
+<p>See also:  <a href="qlcdnumber.html#b5">display</a>(), <a href="qlcdnumber.html#a4">numDigits</a>() and <a href="qlcdnumber.html#a3">smallDecimalPoint</a>().
+<h3 class="fn">void <a name="b5"></a>QLCDNumber::display ( int num ) <code>[slot]</code></h3>
+<p>Sets the contents of the display to <em>num.</em>
+<p>See also:  <a href="qlcdnumber.html#a9">setMode</a>() and <a href="qlcdnumber.html#a3">smallDecimalPoint</a>().
+<p>Examples:
+ <a href="dclock-dclock-cpp.html#display">dclock/dclock.cpp</a>
+ <a href="xform-xform-cpp.html#display">xform/xform.cpp</a>
+<h3 class="fn">void <a name="b7"></a>QLCDNumber::display ( const char * s ) <code>[slot]</code></h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<p>This version of the function disregards <a href="qlcdnumber.html#a8">mode</a>() and <a href="qlcdnumber.html#a3">smallDecimalPoint</a>().
+<p>These digits and other symbols can be shown: 0/O, 1, 2, 3, 4, 5/S,
+6, 7, 8, 9/g, minus, decimal point, A, B, C, D, E, F, h, H, L, o, P,
+r, u, U, Y, colon, degree sign (which is specified as single quote
+in the string) and space.  QLCDNumber substitutes spaces for illegal
+characters.
+<h3 class="fn">void <a name="b6"></a>QLCDNumber::display ( double num ) <code>[slot]</code></h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<h3 class="fn">void <a name="c5"></a>QLCDNumber::drawContents ( <a href="qpainter.html">QPainter</a> * p ) <code>[virtual protected]</code></h3>
+<p>Draws the LCD number using painter <em>p.</em>  This function is called from
+<a href="qframe.html#b7">QFrame::paintEvent</a>().
+<p>Reimplemented from <a href="qframe.html#c0">QFrame.</a>
+<h3 class="fn">int <a name="b3"></a>QLCDNumber::intValue () const</h3>
+<p>Returns the last value set by one of the <a href="qlcdnumber.html#b5">display</a>() slots rounded to the
+nearest integer.
+<p>If display(const char *) was the last called, 0 is returned.
+<p>See also:  <a href="qlcdnumber.html#b2">value</a>() and <a href="qlcdnumber.html#b5">display</a>().
+<h3 class="fn">QLCDNumber::Mode <a name="a8"></a>QLCDNumber::mode() const</h3>
+<p>Returns the current display mode, which is one of <code>BIN, OCT, DEC</code>
+and <code>HEX.</code>
+<p>See also:  <a href="qlcdnumber.html#a9">setMode</a>() and <a href="qlcdnumber.html#a3">smallDecimalPoint</a>().
+<h3 class="fn">int <a name="a4"></a>QLCDNumber::numDigits () const</h3>
+<p>Returns the current number of digits.  If <a href="qlcdnumber.html#a3">smallDecimalPoint</a>() is
+FALSE, the decimal point occupies one digit position.
+<p>See also:  <a href="qlcdnumber.html#a5">setNumDigits</a>() and <a href="qlcdnumber.html#a3">smallDecimalPoint</a>().
+<h3 class="fn">void <a name="c3"></a>QLCDNumber::overflow () <code>[signal]</code></h3>
+<p>This signal is emitted whenever the QLCDNumber is asked to display a
+too large number or a too long string.
+<p>It is never emitted by <a href="qlcdnumber.html#a5">setNumDigits</a>().
+<h3 class="fn">void <a name="c4"></a>QLCDNumber::resizeEvent ( <a href="qresizeevent.html">QResizeEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles resize Events for the QLCDNumber.
+<p>Reimplemented from <a href="qwidget.html#o6">QWidget.</a>
+<h3 class="fn">QLCDNumber::SegmentStyle <a name="b0"></a>QLCDNumber::segmentStyle() const</h3>
+<p>Returns the style of the QLCDNumber.
+<p>See also:  <a href="qlcdnumber.html#b1">setSegmentStyle</a>().
+<h3 class="fn">void <a name="c1"></a>QLCDNumber::setBinMode () <code>[slot]</code></h3>
+<p>Calls <a href="qlcdnumber.html#a9">setMode</a>( BIN ). Provided for convenience (e.g. for connecting
+buttons to this).
+<p>See also:  <a href="qlcdnumber.html#a9">setMode</a>(), <a href="qlcdnumber.html#b8">setHexMode</a>(), <a href="qlcdnumber.html#b9">setDecMode</a>(), <a href="qlcdnumber.html#c0">setOctMode</a>() and <a href="qlcdnumber.html#a8">mode</a>().
+<h3 class="fn">void <a name="b9"></a>QLCDNumber::setDecMode () <code>[slot]</code></h3>
+<p>Calls <a href="qlcdnumber.html#a9">setMode</a>( DEC ). Provided for convenience (e.g. for connecting
+buttons to this).
+<p>See also:  <a href="qlcdnumber.html#a9">setMode</a>(), <a href="qlcdnumber.html#b8">setHexMode</a>(), <a href="qlcdnumber.html#c0">setOctMode</a>(), <a href="qlcdnumber.html#c1">setBinMode</a>() and <a href="qlcdnumber.html#a8">mode</a>().
+<h3 class="fn">void <a name="b8"></a>QLCDNumber::setHexMode () <code>[slot]</code></h3>
+<p>Calls <a href="qlcdnumber.html#a9">setMode</a>( HEX ). Provided for convenience (e.g. for connecting
+buttons to this).
+<p>See also:  <a href="qlcdnumber.html#a9">setMode</a>(), <a href="qlcdnumber.html#b9">setDecMode</a>(), <a href="qlcdnumber.html#c0">setOctMode</a>(), <a href="qlcdnumber.html#c1">setBinMode</a>() and <a href="qlcdnumber.html#a8">mode</a>().
+<h3 class="fn">void <a name="a9"></a>QLCDNumber::setMode ( Mode m )</h3>
+<p>Sets the display mode to <em>m,</em> which must be one of <code>BIN, OCT, DEC</code>
+and <code>HEX.</code>  All four modes can display both integers, floating-point
+numbers and strings (subject to character set limitations).
+<p>The display is set to "0".
+<p>Example:
+<pre>    myLcd.setMode( QLCDNumber::HEX );
+</pre>
+<p>See also:  <a href="qlcdnumber.html#a8">mode</a>(), <a href="qlcdnumber.html#b8">setHexMode</a>(), <a href="qlcdnumber.html#b9">setDecMode</a>(), <a href="qlcdnumber.html#c0">setOctMode</a>(), <a href="qlcdnumber.html#c1">setBinMode</a>(), <a href="qlcdnumber.html#c2">setSmallDecimalPoint</a>() and <a href="qlcdnumber.html#b5">display</a>().
+<h3 class="fn">void <a name="a5"></a>QLCDNumber::setNumDigits ( int numDigits )</h3>
+<p>Sets the number of digits shown to <em>numDigits,</em> which is forced
+into the [0-99] range.
+<p>If <a href="qlcdnumber.html#a3">smallDecimalPoint</a>() is TRUE, <em>numDigits</em> can be shown.  If it is
+FALSE, only <em>numDigits-1</em> digits can be shown.
+<p>See also:  <a href="qlcdnumber.html#a4">numDigits</a>(), <a href="qlcdnumber.html#a9">setMode</a>(), <a href="qlcdnumber.html#c2">setSmallDecimalPoint</a>() and <a href="qlcdnumber.html#c3">overflow</a>().
+<h3 class="fn">void <a name="c0"></a>QLCDNumber::setOctMode () <code>[slot]</code></h3>
+<p>Calls <a href="qlcdnumber.html#a9">setMode</a>( OCT ). Provided for convenience (e.g. for connecting
+buttons to this).
+<p>See also:  <a href="qlcdnumber.html#a9">setMode</a>(), <a href="qlcdnumber.html#b8">setHexMode</a>(), <a href="qlcdnumber.html#b9">setDecMode</a>(), <a href="qlcdnumber.html#c1">setBinMode</a>() and <a href="qlcdnumber.html#a8">mode</a>().
+<h3 class="fn">void <a name="b1"></a>QLCDNumber::setSegmentStyle ( SegmentStyle s )</h3>
+<p>Sets the style of the QLCDNumber to <em>s.</em>
+<ul>
+<li><code>Outline</code> gives raised segments filled with the background color.
+<li><code>Filled</code> gives raised segments filled with the foreground color.
+<li><code>Flat</code> gives flat segments filled with the foreground color.
+</ul>
+<p><code>Outline</code> and <code>Filled</code> will additionally use <a href="qcolorgroup.html#a5">QColorGroup::light</a>()
+and <a href="qcolorgroup.html#a7">QColorGroup::dark</a>() for shadow effects.
+<p>See also:  <a href="qlcdnumber.html#b0">segmentStyle</a>().
+<h3 class="fn">void <a name="c2"></a>QLCDNumber::setSmallDecimalPoint ( bool b ) <code>[slot]</code></h3>
+<p>If <em>b</em> is TRUE, the decimal point is drawn between two digits.
+If <em>b</em> is FALSE, the decimal point is drawn in a digit position.
+<p>The inter-digit space is made slightly wider when the decimal point
+is drawn between the digits.
+<p>The display is set to "0.0".
+<p>See also:  <a href="qlcdnumber.html#a3">smallDecimalPoint</a>() and <a href="qlcdnumber.html#a9">setMode</a>().
+<h3 class="fn"><a href="qsize.html">QSize</a> <a name="b4"></a>QLCDNumber::sizeHint () const <code>[virtual]</code></h3>
+<p>Returns a suitable size for this LCD number.  The size hint is on
+the small side, so as to be usable as minimum size.
+<p>The size hint takes <a href="qlcdnumber.html#a4">numDigits</a>() and <a href="qlcdnumber.html#a3">smallDecimalPoint</a>() into
+consideration.
+<p>See also:  <a href="qlcdnumber.html#a5">setNumDigits</a>(), <a href="qlcdnumber.html#c2">setSmallDecimalPoint</a>() and <a href="qwidget.html#c6">setMinimumSize</a>().
+<p>Reimplemented from <a href="qwidget.html#l7">QWidget.</a>
+<h3 class="fn">bool <a name="a3"></a>QLCDNumber::smallDecimalPoint () const</h3>
+<p>Returns TRUE if the decimal point is currently drawn between two
+digit positions, and FALSE if it is drawn in a digit position.
+<p>See also:  <a href="qlcdnumber.html#c2">setSmallDecimalPoint</a>() and <a href="qlcdnumber.html#a8">mode</a>().
+<h3 class="fn">double <a name="b2"></a>QLCDNumber::value () const</h3>
+<p>Returns the last value set by one of the <a href="qlcdnumber.html#b5">display</a>() slots.
+<p>If display(const char *) was the last called, 0 is returned.
+<p>See also:  <a href="qlcdnumber.html#b3">intValue</a>() and <a href="qlcdnumber.html#b5">display</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qlcdnumber.h: 1998/08/21
+<li>qlcdnumber.cpp: 1998/08/19
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

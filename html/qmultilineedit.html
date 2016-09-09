@@ -1,0 +1,400 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QMultiLineEdit Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QMultiLineEdit Class Reference</h1><br clear="all">
+<p>
+The QMultiLineEdit widget is a simple editor for inputting text.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qmultilinedit-h.html">qmultilinedit.h</a>&gt;</code>
+<p>
+Inherits <a href="qtableview.html">QTableView</a>.
+<p><a href="qmultilineedit-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qmultilineedit.html#a0"><strong>QMultiLineEdit</strong></a> ( QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qmultilineedit.html#a1"><strong>~QMultiLineEdit</strong></a> () </span>
+<li><span class="fn">const char* <a href="qmultilineedit.html#a2"><strong>textLine</strong></a> ( int line ) const</span>
+<li><span class="fn">QString <a href="qmultilineedit.html#a3"><strong>text</strong></a> () const</span>
+<li><span class="fn">int <a href="qmultilineedit.html#a4"><strong>numLines</strong></a> () const</span>
+<li><span class="fn">bool <a href="qmultilineedit.html#a5"><strong>isReadOnly</strong></a> () const</span>
+<li><span class="fn">bool <a href="qmultilineedit.html#a6"><strong>isOverwriteMode</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#a7"><strong>setFont</strong></a> ( const QFont &amp; font ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#a8"><strong>insertLine</strong></a> ( const char * s, int line = -1 ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#a9"><strong>insertAt</strong></a> ( const char * s, int line, int col ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#b0"><strong>removeLine</strong></a> ( int line ) </span>
+<li><span class="fn">void <a href="qmultilineedit.html#b1"><strong>cursorPosition</strong></a> ( int * line, int * col ) const</span>
+<li><span class="fn">void <a href="qmultilineedit.html#b2"><strong>setCursorPosition</strong></a> ( int line, int col, bool mark = FALSE ) </span>
+<li><span class="fn">void <a href="qmultilineedit.html#b3"><strong>getCursorPosition</strong></a> ( int * line, int * col ) </span>
+<li><span class="fn">bool <a href="qmultilineedit.html#b4"><strong>atBeginning</strong></a> () const</span>
+<li><span class="fn">bool <a href="qmultilineedit.html#b5"><strong>atEnd</strong></a> () const</span>
+<li><span class="fn">bool <a href="qmultilineedit.html#b6"><strong>autoUpdate</strong></a> () const</span>
+<li><span class="fn">void <a href="qmultilineedit.html#b7"><strong>setAutoUpdate</strong></a> ( bool ) </span>
+<li><span class="fn">void <a href="qmultilineedit.html#b8"><strong>setFixedVisibleLines</strong></a> ( int lines ) </span>
+<li><span class="fn">int <a href="qmultilineedit.html#b9"><strong>maxLineWidth</strong></a> () const</span>
+</ul>
+<h2>Public Slots</h2>
+<ul>
+<li><span class="fn">void <a href="qmultilineedit.html#c0"><strong>clear</strong></a> () </span>
+<li><span class="fn">void <a href="qmultilineedit.html#c1"><strong>setText</strong></a> ( const char * ) </span>
+<li><span class="fn">void <a href="qmultilineedit.html#c2"><strong>append</strong></a> ( const char * ) </span>
+<li><span class="fn">void <a href="qmultilineedit.html#c3"><strong>deselect</strong></a> () </span>
+<li><span class="fn">void <a href="qmultilineedit.html#c4"><strong>selectAll</strong></a> () </span>
+<li><span class="fn">void <a href="qmultilineedit.html#c5"><strong>setReadOnly</strong></a> ( bool ) </span>
+<li><span class="fn">void <a href="qmultilineedit.html#c6"><strong>setOverwriteMode</strong></a> ( bool ) </span>
+<li><span class="fn">void <a href="qmultilineedit.html#c7"><strong>paste</strong></a> () </span>
+<li><span class="fn">void <a href="qmultilineedit.html#c8"><strong>copyText</strong></a> () </span>
+<li><span class="fn">void <a href="qmultilineedit.html#c9"><strong>cut</strong></a> () </span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qmultilineedit.html#d0"><strong>textChanged</strong></a> () </span>
+<li><span class="fn">void <a href="qmultilineedit.html#d1"><strong>returnPressed</strong></a> () </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#d2"><strong>paintCell</strong></a> ( QPainter *, int row, int col ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#d3"><strong>mousePressEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#d4"><strong>mouseMoveEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#d5"><strong>mouseReleaseEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#d6"><strong>mouseDoubleClickEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#d7"><strong>keyPressEvent</strong></a> ( QKeyEvent * ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#d8"><strong>focusInEvent</strong></a> ( QFocusEvent * ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#d9"><strong>focusOutEvent</strong></a> ( QFocusEvent * ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#e0"><strong>timerEvent</strong></a> ( QTimerEvent * ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#e1"><strong>leaveEvent</strong></a> ( QEvent * ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#e2"><strong>resizeEvent</strong></a> ( QResizeEvent * ) </span>
+<li><span class="fn">bool <a href="qmultilineedit.html#e3"><strong>hasMarkedText</strong></a> () const</span>
+<li><span class="fn">QString <a href="qmultilineedit.html#e4"><strong>markedText</strong></a> () const</span>
+<li><span class="fn">int <a href="qmultilineedit.html#e5"><strong>textWidth</strong></a> ( int ) </span>
+<li><span class="fn">int <a href="qmultilineedit.html#e6"><strong>textWidth</strong></a> ( QString * ) </span>
+<li><span class="fn">QPoint <a href="qmultilineedit.html#e7"><strong>cursorPoint</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#e8"><strong>insertChar</strong></a> ( char ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#e9"><strong>newLine</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#f0"><strong>killLine</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#f1"><strong>pageUp</strong></a> ( bool mark=FALSE ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#f2"><strong>pageDown</strong></a> ( bool mark=FALSE ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#f3"><strong>cursorLeft</strong></a> ( bool mark=FALSE, bool wrap = TRUE ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#f4"><strong>cursorRight</strong></a> ( bool mark=FALSE, bool wrap = TRUE ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#f5"><strong>cursorUp</strong></a> ( bool mark=FALSE ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#f6"><strong>cursorDown</strong></a> ( bool mark=FALSE ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#f7"><strong>backspace</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#f8"><strong>del</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#f9"><strong>home</strong></a> ( bool mark=FALSE ) </span>
+<li><span class="fn">virtual void <a href="qmultilineedit.html#g0"><strong>end</strong></a> ( bool mark=FALSE ) </span>
+<li><span class="fn">bool <a href="qmultilineedit.html#g1"><strong>getMarkedRegion</strong></a> ( int * line1, int * col1, int * line2, int * col2 ) const</span>
+<li><span class="fn">int <a href="qmultilineedit.html#g2"><strong>lineLength</strong></a> ( int row ) const</span>
+<li><span class="fn">QString* <a href="qmultilineedit.html#g3"><strong>getString</strong></a> ( int row ) const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QMultiLineEdit widget is a simple editor for inputting text.
+<p>
+The QMultiLineEdit widget provides multiple line text input and display.
+It is intended for moderate amounts of text. There are no arbitrary
+limitations, but if you try to handle megabytes of data, performance
+will suffer.
+<p>This widget can be used to display text by calling <a href="qmultilineedit.html#c5">setReadOnly</a>(TRUE)
+<p>The default key bindings are described in <a href="qmultilineedit.html#d7">keyPressEvent</a>(); they cannot
+be customized except by inheriting the class.
+<p><img src=qmlined-m.gif> <img src=qmlined-w.gif>
+<p>Examples:
+ <a href="mainlyMotif-editor-cpp.html#QMultiLineEdit">mainlyMotif/editor.cpp</a>
+ <a href="mainlyQt-editor-cpp.html#QMultiLineEdit">mainlyQt/editor.cpp</a>
+ <a href="application-application-cpp.html#QMultiLineEdit">application/application.cpp</a>
+ <a href="pref-pref-cpp.html#QMultiLineEdit">pref/pref.cpp</a>
+ <a href="layout-layout-cpp.html#QMultiLineEdit">layout/layout.cpp</a>
+ <a href="mainlyXt-editor-cpp.html#QMultiLineEdit">mainlyXt/editor.cpp</a>
+ <a href="widgets-widgets-cpp.html#QMultiLineEdit">widgets/widgets.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QMultiLineEdit::QMultiLineEdit ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Creates a new, empty, QMultiLineEdit.
+<h3 class="fn"><a name="a1"></a>QMultiLineEdit::~QMultiLineEdit ()</h3>
+<p>Destroys the QMultiLineEdit.
+<h3 class="fn">void <a name="c2"></a>QMultiLineEdit::append ( const char * s ) <code>[slot]</code></h3>
+<p>Appends <em>s</em> to the text.
+<h3 class="fn">bool <a name="b4"></a>QMultiLineEdit::atBeginning () const</h3>
+<p>Returns TRUE if the cursor is placed at the beginning of the text.
+<h3 class="fn">bool <a name="b5"></a>QMultiLineEdit::atEnd () const</h3>
+<p>Returns TRUE if the cursor is placed at the end of the text.
+<h3 class="fn">bool <a name="b6"></a>QMultiLineEdit::autoUpdate () const</h3>
+<p>Returns TRUE if the view updates itself automatically whenever it
+is changed in some way.
+<p>See also:  <a href="qmultilineedit.html#b7">setAutoUpdate</a>().
+<h3 class="fn">void <a name="f7"></a>QMultiLineEdit::backspace () <code>[virtual protected]</code></h3>
+<p>Deletes the character on the left side of the text cursor and moves
+the cursor one position to the left. If a text has been marked by
+the user (e.g. by clicking and dragging) the cursor is put at the
+beginning of the marked text and the marked text is removed.
+<p>See also:  <a href="qmultilineedit.html#f8">del</a>().
+<h3 class="fn">void <a name="c0"></a>QMultiLineEdit::clear () <code>[slot]</code></h3>
+<p>Removes all text.
+<h3 class="fn">void <a name="c8"></a>QMultiLineEdit::copyText () <code>[slot]</code></h3>
+<p>Copies the marked text to the clipboard.
+<h3 class="fn">void <a name="f6"></a>QMultiLineEdit::cursorDown ( bool mark=FALSE ) <code>[virtual protected]</code></h3>
+<p>Moves the cursor one line down.  If <em>mark</em> is TRUE, the text
+is marked.
+<p>See also:  cursorDown(), <a href="qmultilineedit.html#f3">cursorLeft</a>() and <a href="qmultilineedit.html#f4">cursorRight</a>().
+<h3 class="fn">void <a name="f3"></a>QMultiLineEdit::cursorLeft ( bool mark=FALSE, bool wrap = TRUE ) <code>[virtual protected]</code></h3>
+<p>Moves the cursor one character to the left. If <em>mark</em> is TRUE, the text
+is marked. If <em>wrap</em> is TRUE, the cursor moves to the end of the
+previous line  if it is placed at the beginning of the current line.
+<p>See also:  <a href="qmultilineedit.html#f4">cursorRight</a>(), <a href="qmultilineedit.html#f5">cursorUp</a>() and <a href="qmultilineedit.html#f6">cursorDown</a>().
+<h3 class="fn"><a href="qpoint.html">QPoint</a> <a name="e7"></a>QMultiLineEdit::cursorPoint () const <code>[protected]</code></h3>
+<p>Returns the top center point where the cursor is drawn.
+<h3 class="fn">void <a name="b1"></a>QMultiLineEdit::cursorPosition ( int * line, int * col ) const</h3>
+<p>Sets <em>line</em> to the current line and <em>col</em> to the current character
+position within that line.
+<p>See also:  <a href="qmultilineedit.html#b2">setCursorPosition</a>().
+<h3 class="fn">void <a name="f4"></a>QMultiLineEdit::cursorRight ( bool mark=FALSE, bool wrap = TRUE ) <code>[virtual protected]</code></h3>
+<p>Moves the cursor one character to the right.  If <em>mark</em> is TRUE, the text
+is marked. If <em>wrap</em> is TRUE, the cursor moves to the beginning of the next
+line if it is placed at the end of the current line.
+<p>See also:  <a href="qmultilineedit.html#f3">cursorLeft</a>(), <a href="qmultilineedit.html#f5">cursorUp</a>() and <a href="qmultilineedit.html#f6">cursorDown</a>().
+<h3 class="fn">void <a name="f5"></a>QMultiLineEdit::cursorUp ( bool mark=FALSE ) <code>[virtual protected]</code></h3>
+<p>Moves the cursor up one line.  If <em>mark</em> is TRUE, the text
+is marked.
+<p>See also:  <a href="qmultilineedit.html#f6">cursorDown</a>(), <a href="qmultilineedit.html#f3">cursorLeft</a>() and <a href="qmultilineedit.html#f4">cursorRight</a>().
+<h3 class="fn">void <a name="c9"></a>QMultiLineEdit::cut () <code>[slot]</code></h3>
+<p>Copies the selected text to the clipboard and deletes the selected text.
+<h3 class="fn">void <a name="f8"></a>QMultiLineEdit::del () <code>[virtual protected]</code></h3>
+<p>Deletes the character on the right side of the text cursor. If a
+text has been marked by the user (e.g. by clicking and dragging) the
+cursor is put at the beginning of the marked text and the marked
+text is removed.
+<p>See also:  <a href="qmultilineedit.html#f7">backspace</a>().
+<h3 class="fn">void <a name="c3"></a>QMultiLineEdit::deselect () <code>[slot]</code></h3>
+<p>Deselects all text (i.e. removes marking) and leaves the cursor at the
+current position.
+<h3 class="fn">void <a name="g0"></a>QMultiLineEdit::end ( bool mark=FALSE ) <code>[virtual protected]</code></h3>
+<p>Moves the text cursor to the right end of the line. If mark is TRUE
+text is marked towards the last position.  If it is FALSE and the
+cursor is moved, all marked text is unmarked.
+<p>See also:  <a href="qmultilineedit.html#f9">home</a>().
+<h3 class="fn">void <a name="d8"></a>QMultiLineEdit::focusInEvent ( <a href="qfocusevent.html">QFocusEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Starts the cursor blinking.
+<p>Reimplemented from <a href="qwidget.html#o0">QWidget.</a>
+<h3 class="fn">void <a name="d9"></a>QMultiLineEdit::focusOutEvent ( <a href="qfocusevent.html">QFocusEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>stops the cursor blinking.
+<p>Reimplemented from <a href="qwidget.html#o1">QWidget.</a>
+<h3 class="fn">void <a name="b3"></a>QMultiLineEdit::getCursorPosition ( int * line, int * col )</h3>
+<p>Sets <em>line</em> to the current line and <em>col</em> to the current character
+position within that line.
+<p>OBSOLETE - Use <a href="qmultilineedit.html#b1">cursorPosition</a>() instead.
+<h3 class="fn">bool <a name="g1"></a>QMultiLineEdit::getMarkedRegion ( int * line1, int * col1, int * line2, int * col2 ) const <code>[protected]</code></h3>
+<p>If there is marked text, sets <em>line1, col1, line2</em> and <em>col2</em>
+to the start and end of the marked region and returns TRUE. Returns
+FALSE if there is no marked text.
+<h3 class="fn"><a href="qstring.html">QString</a> * <a name="g3"></a>QMultiLineEdit::getString ( int line ) const <code>[protected]</code></h3>
+<p>Returns a pointer to the text at line <em>line.</em>
+<h3 class="fn">bool <a name="e3"></a>QMultiLineEdit::hasMarkedText () const <code>[protected]</code></h3>
+<p>Returns TRUE if there is marked text.
+<h3 class="fn">void <a name="f9"></a>QMultiLineEdit::home ( bool mark=FALSE ) <code>[virtual protected]</code></h3>
+<p>Moves the text cursor to the left end of the line. If <em>mark</em> is
+TRUE, text is marked towards the first position. If it is FALSE and
+the cursor is moved, all marked text is unmarked.
+<p>See also:  <a href="qmultilineedit.html#g0">end</a>().
+<h3 class="fn">void <a name="a9"></a>QMultiLineEdit::insertAt ( const char * txt, int line, int col ) <code>[virtual]</code></h3>
+<p>Inserts <em>txt</em> at line number <em>line,</em> after character number <em>col</em>
+in the line.
+If <em>txt</em> contains newline characters, new lines are inserted.
+<p>The cursor position is adjusted. If the insertion position is equal to
+the cursor poition, the cursor is placed after the end of the new text.
+<h3 class="fn">void <a name="e8"></a>QMultiLineEdit::insertChar ( char c ) <code>[virtual protected]</code></h3>
+<p>Inserts <em>c</em> at the current cursor position.
+<h3 class="fn">void <a name="a8"></a>QMultiLineEdit::insertLine ( const char * txt, int line = -1 ) <code>[virtual]</code></h3>
+<p>Inserts <em>txt</em> at line number <em>line.</em> If <em>line</em> is less than zero,
+or larger than the number of rows, the new text is put at the end.
+If <em>txt</em> contains newline characters, several lines are inserted.
+<p>The cursor position is not changed.
+<h3 class="fn">bool <a name="a6"></a>QMultiLineEdit::isOverwriteMode () const</h3>
+<p>Returns TRUE if this multi line edit is in overwrite mode, i.e.
+if characters typed replace characters in the editor.
+<p>See also:  <a href="qmultilineedit.html#c6">setOverwriteMode</a>().
+<h3 class="fn">bool <a name="a5"></a>QMultiLineEdit::isReadOnly () const</h3>
+<p>Returns FALSE if this multi line edit accepts text input.
+Scrolling and cursor movements are accepted in any case.
+<p>See also:  <a href="qmultilineedit.html#c5">setReadOnly</a>() and <a href="qwidget.html#a9">QWidget::isEnabled</a>().
+<h3 class="fn">void <a name="d7"></a>QMultiLineEdit::keyPressEvent ( <a href="qkeyevent.html">QKeyEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>The key press event handler converts a key press to some line editor
+action.
+<p>Here are the default key bindings when <a href="qmultilineedit.html#a5">isReadOnly</a>() is FALSE:
+<ul>
+<li><i> Left Arrow </i> Move the cursor one character leftwards
+<li><i> Right Arrow </i> Move the cursor one character rightwards
+<li><i> Up Arrow </i> Move the cursor one line upwards
+<li><i> Down Arrow </i> Move the cursor one line downwards
+<li><i> Page Up </i> Move the cursor one page upwards
+<li><i> Page Down </i> Move the cursor one page downwards
+<li><i> Backspace </i> Delete the character to the left of the cursor
+<li><i> Home </i> Move the cursor to the beginning of the line
+<li><i> End </i>       Move the cursor to the end of the line
+<li><i> Delete </i> Delete the character to the right of the cursor
+<li><i> Shift - Left Arrow </i> Mark text one character leftwards
+<li><i> Shift - Right Arrow </i> Mark text one character rightwards
+<li><i> Control-A </i> Move the cursor to the beginning of the line
+<li><i> Control-B </i> Move the cursor one character leftwards
+<li><i> Control-C </i> Copy the marked text to the clipboard.
+<li><i> Control-D </i> Delete the character to the right of the cursor
+<li><i> Control-E </i> Move the cursor to the end of the line
+<li><i> Control-F </i> Move the cursor one character rightwards
+<li><i> Control-H </i> Delete the character to the left of the cursor
+<li><i> Control-K </i> Delete to end of line
+<li><i> Control-N </i> Move the cursor one line downwards
+<li><i> Control-P </i> Move the cursor one line upwards
+<li><i> Control-V </i> Paste the clipboard text into line edit.
+<li><i> Control-X </i> Cut the marked text, copy to clipboard.
+</ul>
+All other keys with valid ASCII codes insert themselves into the line.
+<p>Here are the default key bindings when isReadOnly() is TRUE:
+<ul>
+<li><i> Left Arrow </i> Scrolls the table rightwards
+<li><i> Right Arrow </i> Scrolls the table rightwards
+<li><i> Up Arrow </i> Scrolls the table one line downwards
+<li><i> Down Arrow </i> Scrolls the table one line upwards
+<li><i> Page Up </i> Scrolls the table one page downwards
+<li><i> Page Down </i> Scrolls the table one page upwards
+</ul>
+<p>Reimplemented from <a href="qwidget.html#n8">QWidget.</a>
+<h3 class="fn">void <a name="f0"></a>QMultiLineEdit::killLine () <code>[virtual protected]</code></h3>
+<p>Deletes text from the current cursor position to the end of the line.
+<h3 class="fn">void <a name="e1"></a>QMultiLineEdit::leaveEvent ( <a href="qevent.html">QEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles auto-copy of selection (X11 only).
+<p>Reimplemented from <a href="qwidget.html#o3">QWidget.</a>
+<h3 class="fn">int <a name="g2"></a>QMultiLineEdit::lineLength ( int line ) const <code>[protected]</code></h3>
+<p>Returns the number of characters at line number <em>line.</em>
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="e4"></a>QMultiLineEdit::markedText () const <code>[protected]</code></h3>
+<p>Returns a copy of the marked text.
+<h3 class="fn">int <a name="b9"></a>QMultiLineEdit::maxLineWidth () const</h3>
+<p>Returns the width in pixels of the longest text line in this editor.
+<h3 class="fn">void <a name="d6"></a>QMultiLineEdit::mouseDoubleClickEvent ( <a href="qmouseevent.html">QMouseEvent</a> * m ) <code>[virtual protected]</code></h3>
+<p>Handles double click events.
+<p>Reimplemented from <a href="qwidget.html#n6">QWidget.</a>
+<h3 class="fn">void <a name="d4"></a>QMultiLineEdit::mouseMoveEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse move events.
+<p>Reimplemented from <a href="qwidget.html#n7">QWidget.</a>
+<h3 class="fn">void <a name="d3"></a>QMultiLineEdit::mousePressEvent ( <a href="qmouseevent.html">QMouseEvent</a> * m ) <code>[virtual protected]</code></h3>
+<p>Handles mouse press events.
+<p>Reimplemented from <a href="qwidget.html#n4">QWidget.</a>
+<h3 class="fn">void <a name="d5"></a>QMultiLineEdit::mouseReleaseEvent ( <a href="qmouseevent.html">QMouseEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles mouse release events.
+<p>Reimplemented from <a href="qwidget.html#n5">QWidget.</a>
+<h3 class="fn">void <a name="e9"></a>QMultiLineEdit::newLine () <code>[virtual protected]</code></h3>
+<p>Makes a line break at the current cursor position.
+<h3 class="fn">int <a name="a4"></a>QMultiLineEdit::numLines () const</h3>
+<p>Returns the number of lines in the editor. The count includes any
+empty lines at top and bottom, so for an empty editor this method
+will return 1.
+<h3 class="fn">void <a name="f2"></a>QMultiLineEdit::pageDown ( bool mark=FALSE ) <code>[virtual protected]</code></h3>
+<p>Moves the cursor one page down.  If <em>mark</em> is TRUE, the text
+is marked.
+<h3 class="fn">void <a name="f1"></a>QMultiLineEdit::pageUp ( bool mark=FALSE ) <code>[virtual protected]</code></h3>
+<p>Moves the cursor one page up.  If <em>mark</em> is TRUE, the text
+is marked.
+<h3 class="fn">void <a name="d2"></a>QMultiLineEdit::paintCell ( <a href="qpainter.html">QPainter</a> * painter, int row, int ) <code>[virtual protected]</code></h3>
+<p>Implements the basic drawing logic.
+<p>Reimplemented from <a href="qtableview.html#f1">QTableView.</a>
+<h3 class="fn">void <a name="c7"></a>QMultiLineEdit::paste () <code>[slot]</code></h3>
+<p>Copies text from the clipboard onto the current cursor position.
+Any marked text is first deleted.
+<h3 class="fn">void <a name="b0"></a>QMultiLineEdit::removeLine ( int line ) <code>[virtual]</code></h3>
+<p>Deletes the line at line number <em>line.</em> If <em>line</em> is less than zero, or larger than the number of lines,
+no line is deleted.
+<h3 class="fn">void <a name="e2"></a>QMultiLineEdit::resizeEvent ( <a href="qresizeevent.html">QResizeEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Reimplemented to set the column width, so that <a href="qtableview.html#a3">repaint</a>(FALSE) is safe.
+<p>Reimplemented from <a href="qwidget.html#o6">QWidget.</a>
+<h3 class="fn">void <a name="d1"></a>QMultiLineEdit::returnPressed () <code>[signal]</code></h3>
+<p>This signal is emitted when the user presses the return or enter
+key. It is not emitted if <a href="qmultilineedit.html#a5">isReadOnly</a>() is TRUE.
+<p>See also:  <a href="qmultilineedit.html#d0">textChanged</a>().
+<h3 class="fn">void <a name="c4"></a>QMultiLineEdit::selectAll () <code>[slot]</code></h3>
+<p>Selects all text without moving the cursor.
+<h3 class="fn">void <a name="b7"></a>QMultiLineEdit::setAutoUpdate ( bool enable )</h3>
+<p>Sets the auto-update option of multi-line editor to <em>enable.</em>
+<p>If <em>enable</em> is TRUE (this is the default) then the editor updates
+itself automatically whenever it has changed in some way (generally,
+when text has been inserted or deleted).
+<p>If <em>enable</em> is FALSE, the view does NOT repaint itself, or update
+its internal state variables itself when it is changed.  This can be
+useful to avoid flicker during large changes, and is singularly
+useless otherwise: Disable auto-update, do the changes, re-enable
+auto-update, and call <a href="qtableview.html#a3">repaint</a>().<p><strong>Warning:</strong> Do not leave the view in this state for a long time
+(i.e. between events ). If, for example, the user interacts with the
+view when auto-update is off, strange things can happen.
+<p>Setting auto-update to TRUE does not repaint the view, you must call
+repaint() to do this.
+<p>See also:  <a href="qmultilineedit.html#b6">autoUpdate</a>() and <a href="qtableview.html#a3">repaint</a>().
+<h3 class="fn">void <a name="b2"></a>QMultiLineEdit::setCursorPosition ( int line, int col, bool mark = FALSE )</h3>
+<p>Sets the cursor position to character number <em>col</em> in line number <em>line.</em>
+The parameters are adjusted to lie within the legal range.
+<p>If <em>mark</em> is FALSE, the selection is cleared. otherwise it is extended
+<p>See also:  <a href="qmultilineedit.html#b1">cursorPosition</a>().
+<h3 class="fn">void <a name="b8"></a>QMultiLineEdit::setFixedVisibleLines ( int lines )</h3>
+<p>Sets the fixed height of the QMultiLineEdit so that <em>lines</em> text lines
+are visible given the current font.
+<p>See also:  <a href="qwidget.html#e2">setFixedHeight</a>().
+<h3 class="fn">void <a name="a7"></a>QMultiLineEdit::setFont ( const <a href="qfont.html">QFont</a> &amp; font ) <code>[virtual]</code></h3>
+<p>Reimplements <a href="qwidget.html#f9">QWidget::setFont</a>() to update the list box line height.
+<p>Reimplemented from <a href="qwidget.html#f9">QWidget.</a>
+<h3 class="fn">void <a name="c6"></a>QMultiLineEdit::setOverwriteMode ( bool on ) <code>[slot]</code></h3>
+<p>Sets overwrite mode if <em>on</em> is TRUE. Overwrite mode means
+that characters typed replace characters in the editor.
+<p>See also:  <a href="qmultilineedit.html#a6">isOverwriteMode</a>().
+<h3 class="fn">void <a name="c5"></a>QMultiLineEdit::setReadOnly ( bool on ) <code>[slot]</code></h3>
+<p>If <em>on</em> is FALSE, this multi line edit accepts text input.
+Scrolling and cursor movements are accepted in any case.
+<p>See also:  inputEnabled() and <a href="qwidget.html#b2">QWidget::setEnabled</a>().
+<h3 class="fn">void <a name="c1"></a>QMultiLineEdit::setText ( const char * s ) <code>[slot]</code></h3>
+<p>Sets the text to <em>s,</em> removing old text, if any.
+<p>Examples:
+ <a href="mainlyMotif-editor-cpp.html#setText">mainlyMotif/editor.cpp</a>
+ <a href="mainlyQt-editor-cpp.html#setText">mainlyQt/editor.cpp</a>
+ <a href="mainlyXt-editor-cpp.html#setText">mainlyXt/editor.cpp</a>
+ <a href="widgets-widgets-cpp.html#setText">widgets/widgets.cpp</a>
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="a3"></a>QMultiLineEdit::text () const</h3>
+<p>Returns a copy of the whole text. If the multi line edit contains no
+text, the empty string is returned.
+<h3 class="fn">void <a name="d0"></a>QMultiLineEdit::textChanged () <code>[signal]</code></h3>
+<p>This signal is emitted when the text is changed by an event or by a
+slot. Note that the signal is not emitted when you call a non-slot
+function such as <a href="qmultilineedit.html#a8">insertLine</a>().
+<p>See also:  <a href="qmultilineedit.html#d1">returnPressed</a>().
+<h3 class="fn">const char * <a name="a2"></a>QMultiLineEdit::textLine ( int line ) const</h3>
+<p>Returns the text at line number <em>line,</em> or 0 if <em>line</em> is invalid.
+<h3 class="fn">int <a name="e6"></a>QMultiLineEdit::textWidth ( <a href="qstring.html">QString</a> * s ) <code>[protected]</code></h3>
+<p>Returns the width in pixels of the string <em>s.</em>
+NOTE: only appropriate for whole lines.
+<h3 class="fn">int <a name="e5"></a>QMultiLineEdit::textWidth ( int line ) <code>[protected]</code></h3>
+<p>Returns the width in pixels of the text at line <em>line.</em>
+<h3 class="fn">void <a name="e0"></a>QMultiLineEdit::timerEvent ( <a href="qtimerevent.html">QTimerEvent</a> * t ) <code>[virtual protected]</code></h3>
+<p>Cursor blinking, drag scrolling.
+<p>Reimplemented from <a href="qobject.html#e3">QObject.</a>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qmultilinedit.h: 1998/10/28
+<li>qmultilinedit.cpp: 1999/01/29
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

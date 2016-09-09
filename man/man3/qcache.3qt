@@ -1,0 +1,170 @@
+.TH QCache 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QCache \- Template class that provides a cache based on \fCchar*\fR keys
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qcache.h>\fR
+.PP
+Inherits QGCache.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QCache ( const QCache<type> & c )"
+.br
+.ti -1c
+.BI "QCache ( int " "maxCost" "=100, int " "size" "=17, bool " "cs" "=TRUE, bool " "ck" "=TRUE )"
+.br
+.ti -1c
+.BI "\fB~QCache\fR ()"
+.br
+.ti -1c
+.BI "QCache<type>& operator= ( const QCache<type> & c )"
+.br
+.ti -1c
+.BI "int maxCost () const"
+.br
+.ti -1c
+.BI "int totalCost () const"
+.br
+.ti -1c
+.BI "void setMaxCost ( int m )"
+.br
+.ti -1c
+.BI "virtual uint count () const"
+.br
+.ti -1c
+.BI "uint size () const"
+.br
+.ti -1c
+.BI "bool isEmpty () const"
+.br
+.ti -1c
+.BI "bool insert ( const char * " "k" ", const type * " "d" ", int " "c" "=1, int " "p" "=0 )"
+.br
+.ti -1c
+.BI "bool remove ( const char * k )"
+.br
+.ti -1c
+.BI "type* take ( const char * k )"
+.br
+.ti -1c
+.BI "virtual void clear ()"
+.br
+.ti -1c
+.BI "type* find ( const char * " "k" ", bool " "ref" "=TRUE ) const"
+.br
+.ti -1c
+.BI "type* operator[] ( const char * k ) const"
+.br
+.ti -1c
+.BI "void statistics () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QCache class is a template class that provides a cache based on \fCchar*\fR keys.
+.PP
+QCache is implemented as both a template and a macro class. Define a template instance QCache<X> to create a cache that operates on pointers to X, or X*.
+.PP
+A cache is a least recently used (LRU) list of cache items. Each cache item has a cost. The sum of item costs, totalCost(), will not exceed the maximum cache cost, maxCost(). If inserting a new item would cause the total cost to exceed the maximum cost, the least recently used items in the cache are deleted.
+.PP
+Apart from insert, by far the most important function is find() (which also exists as operatior[]). This function looks up an item, returns it, and by default marks it as being the least recently used item.
+.PP
+There are also methods to remove() an object from the cache and delete it, and to take() an object out of the cache without deleting it.
+.PP
+The keys for the cache can be case-sensitive or not, or deeply copied or not. The constructor lets you decide.
+.PP
+QCache, as it must, takes over ownership of the items you insert. That implies that it will delete the items at its discretion, and that you must \fInot\fR delete them. There is one exception, however: If the cost of an object you try to insert() is higher than the allowed total cost of the cache, insert() returns FALSE and in this case you must delete the object yourself.
+.PP
+In addition to totalCost() and maxCost()/setMaxCost(), there are access functions to obtain the number of items in the cache (count()), the size of the hash array (size(), set using the constructor) and whether the cache is empty (you guessed it: isEmpty()). Finally, there is a statistics(), which prints various cache statistics on \fCstdout.\fR
+.PP
+There is also a QCacheIterator which may be used to traverse the items in the cache in arbritrary order.
+.PP
+See also: QCacheIterator, QIntCache and Collection Classes
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QCache::QCache ( const QCache<type> & c )"
+For internal use only.
+.SH "QCache::QCache ( int maxCost=100, int size=17, bool cs=TRUE, bool ck=TRUE )"
+Constructs an empty cache with maximum allowed total cost \fImaxCost,\fR optimized to contain a bit less than \fIsize\fR items, with case-sensitive keys if \fIcs\fR is TRUE (the default) and case-insensitive keys if \fIcs\fR is FALSE, and whose keys are deeply copied on insertion (the default) and shallowly copied of \fIck\fR is FALSE.
+.SH "QCache::~QCache ()"
+Destroys the object and all objects in it.
+.SH "void QCache::clear () \fC[virtual]\fR"
+Removes all items from the cache, and deletes them.
+.PP
+All cache iterators that operate this on cache are reset.
+.PP
+See also: remove() and take().
+.PP
+Reimplemented from QCollection.
+.SH "uint QCache::count () const \fC[virtual]\fR"
+Returns the number of items in the cache.
+.PP
+See also: totalCost().
+.PP
+Reimplemented from QCollection.
+.SH "type * QCache::find ( const char * k, bool ref=TRUE ) const"
+Returns the item associated with \\ k, or null if the key does not exist in the cache. If \fIref\fR is TRUE (the default), the item is moved to the front of the LRU list.
+.PP
+If there are two or more items with equal keys, then the one that was inserted last is returned.
+.SH "bool QCache::insert ( const char * k, const type * d, int c=1, int p=0 )"
+Inserts the item \fId\fR into the cache with key \fIk,\fR cost \fCand\fR priority \fIp,\fR and returns TRUE if it is successful and FALSE if it fails.
+.PP
+The cache's size is limited, and if the total cost is too high, QCache will delete some of the least-used objects.
+.PP
+\fBWarning:\fR If this function returns FALSE, you must delete \fId\fR yourself. Additionally, be very careful about using \fId\fR after calling this function, as any other insertions into the cache, from anywhere in the application, or within Qt itself, could cause the object to be discarded from the cache, and the pointer to become invalid.
+.SH "bool QCache::isEmpty () const"
+Returns TRUE if the cache is empty, or TRUE if there is at least one object in it.
+.SH "int QCache::maxCost () const"
+Returns the maximum allowed total cost of the cache.
+.PP
+See also: setMaxCost() and totalCost().
+.SH "QCache<type>& QCache::operator= ( const QCache<type> & c )"
+For internal use only.
+.SH "type * QCache::operator[] ( const char * k ) const"
+Returns the item associated with \fIk,\fR or null if \fIk\fR does not exist in the cache, and moves the item to the front of the LRU list.
+.PP
+If there are two or more items with equal keys, then the one that was inserted last is returned.
+.PP
+This is the same as find( k, TRUE ).
+.PP
+See also: find().
+.SH "bool QCache::remove ( const char * k )"
+Deletes the item associated with \fIk,\fR and returns TRUE if the item was present in the cache or FALSE if it was not.
+.PP
+If there are two or more items with equal keys, then the one that was inserted last is is deleted.
+.PP
+All iterators that refer to the removed item are set to point to the next item in the cache's traversal order.
+.PP
+See also: take() and clear().
+.SH "void QCache::setMaxCost ( int m )"
+Sets the maximum allowed total cost of the cache to \fIm.\fR If the current total cost is above \fIm,\fR some items are deleted immediately.
+.PP
+See also: maxCost() and totalCost().
+.SH "uint QCache::size () const"
+Returns the size of the hash array used to implement the cache. This should be a bit bigger than count() is likely to be.
+.SH "type * QCache::take ( const char * k )"
+Takes the item associated with \fIk\fR out of the cache without deleting it, and returns a pointer to the item taken out, or null if the key does not exist in the cache.
+.PP
+If there are two or more items with equal keys, then the one that was inserted last is taken.
+.PP
+All iterators that refer to the taken item are set to point to the next item in the cache's traversal order.
+.PP
+See also: remove() and clear().
+.SH "int QCache::totalCost () const"
+Returns the total cost of the items in the cache. This is an integer in the range 0 to maxCost().
+.PP
+See also:  setMaxCost().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qcache.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

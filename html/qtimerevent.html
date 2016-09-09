@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QTimerEvent Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QTimerEvent Class Reference</h1><br clear="all">
+<p>
+The QTimerEvent class contains parameters that describe a timer event.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qevent-h.html">qevent.h</a>&gt;</code>
+<p>
+Inherits <a href="qevent.html">QEvent</a>.
+<p><a href="qtimerevent-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qtimerevent.html#a0"><strong>QTimerEvent</strong></a> ( int timerId ) </span>
+<li><span class="fn">int <a href="qtimerevent.html#a1"><strong>timerId</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QTimerEvent class contains parameters that describe a timer event.
+<p>
+Timer events are sent at regular intervals to objects that have
+started one or more timers.  Each timer has a unique identifier.
+<p>If interval is 0, then the timer event occurs
+once every time there are no more window system events to process.
+<p>The <a href="qtimer.html">QTimer</a> class provides a high-level programming interface with one-shot
+timers and timer signals instead of events.
+<p>The event handler <a href="qobject.html#e3">QObject::timerEvent</a>() receives timer events.
+<p>See also:  <a href="qtimer.html">QTimer</a>, <a href="qobject.html#e3">QObject::timerEvent</a>(), <a href="qobject.html#b6">QObject::startTimer</a>(), <a href="qobject.html#b7">QObject::killTimer</a>() and <a href="qobject.html#b8">QObject::killTimers</a>().
+<p>Examples:
+ <a href="dclock-dclock-cpp.html#QTimerEvent">dclock/dclock.cpp</a>
+ <a href="grapher-grapher-cpp.html#QTimerEvent">grapher/grapher.cpp</a>
+ <a href="forever-forever-cpp.html#QTimerEvent">forever/forever.cpp</a>
+ <a href="progress-progress-cpp.html#QTimerEvent">progress/progress.cpp</a>
+ <a href="qmag-qmag-cpp.html#QTimerEvent">qmag/qmag.cpp</a>
+ <a href="biff-biff-cpp.html#QTimerEvent">biff/biff.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QTimerEvent::QTimerEvent ( int timerId )</h3>
+<p>Constructs a timer event object with the timer identifier set to <em>timerId.</em>
+<h3 class="fn">int <a name="a1"></a>QTimerEvent::timerId () const</h3>
+<p>Returns the unique timer identifier, which is the same identifier as
+returned from <a href="qobject.html#b6">QObject::startTimer</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qevent.h: 1998/10/05
+<li>qdnd_x11.cpp: 1998/12/17
+<li>qevent.cpp: 1999/01/13
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

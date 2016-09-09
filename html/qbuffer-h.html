@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qbuffer.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qbuffer.h</h1><br clear="all">
+This is the verbatim text of the qbuffer.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qbuffer.h,v 2.6.2.3 1998/08/25 09:20:54 hanord Exp $
+**
+** Definition of QBuffer class
+**
+** Created : 930812
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QBUFFER_H
+#define QBUFFER_H
+
+#ifndef QT_H
+#include "qiodevice.h"
+#include "qstring.h"
+#endif // QT_H
+
+
+class Q_EXPORT QBuffer : public QIODevice
+{
+public:
+    QBuffer();
+    QBuffer( QByteArray );
+   ~QBuffer();
+
+    QByteArray buffer() const;
+    bool  setBuffer( QByteArray );
+
+    bool  open( int );
+    void  close();
+    void  flush();
+
+    uint  size() const;
+    int   at()   const;
+    bool  at( int );
+
+    int   readBlock( char *p, uint );
+    int   writeBlock( const char *p, uint );
+    int   readLine( char *p, uint );
+
+    int   getch();
+    int   putch( int );
+    int   ungetch( int );
+
+protected:
+    QByteArray a;
+
+private:
+    uint  a_len;
+    uint  a_inc;
+
+private:        // Disabled copy constructor and operator=
+#if defined(Q_DISABLE_COPY)
+    QBuffer( const QBuffer &amp; );
+    QBuffer &amp;operator=( const QBuffer &amp; );
+#endif
+};
+
+
+inline QByteArray QBuffer::buffer() const
+{ return a; }
+
+inline uint QBuffer::size() const
+{ return a.size(); }
+
+inline int QBuffer::at() const
+{ return index; }
+
+
+#endif // QBUFFER_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

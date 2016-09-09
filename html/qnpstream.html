@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QNPStream Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QNPStream Class Reference</h1><br clear="all">
+<p>
+A stream of data provided to a <a href="qnpinstance.html">QNPInstance</a> by the browser.
+This class is part of the <b>Qt NSPlugin Extension.</b>
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qnp-h.html">qnp.h</a>&gt;</code>
+<p><a href="qnpstream-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qnpstream.html#a0"><strong>~QNPStream</strong></a> () </span>
+<li><span class="fn">const char* <a href="qnpstream.html#a1"><strong>url</strong></a> () const</span>
+<li><span class="fn">uint <a href="qnpstream.html#a2"><strong>end</strong></a> () const</span>
+<li><span class="fn">uint <a href="qnpstream.html#a3"><strong>lastModified</strong></a> () const</span>
+<li><span class="fn">const char* <a href="qnpstream.html#a4"><strong>type</strong></a> () const</span>
+<li><span class="fn">bool <a href="qnpstream.html#a5"><strong>seekable</strong></a> () const</span>
+<li><span class="fn">bool <a href="qnpstream.html#a6"><strong>okay</strong></a> () const</span>
+<li><span class="fn">bool <a href="qnpstream.html#a7"><strong>complete</strong></a> () const</span>
+<li><span class="fn">void <a href="qnpstream.html#a8"><strong>requestRead</strong></a> ( int offset, uint length ) </span>
+<li><span class="fn">int <a href="qnpstream.html#a9"><strong>write</strong></a> ( int len, void * buffer ) </span>
+<li><span class="fn">QNPInstance* <a href="qnpstream.html#b0"><strong>instance</strong></a> () </span>
+<li><span class="fn"><a href="qnpstream.html#b1"><strong>QNPStream</strong></a> ( QNPInstance *, const char *, _NPStream *, bool ) </span>
+<li><span class="fn">void <a href="qnpstream.html#b2"><strong>setOkay</strong></a> ( bool ) </span>
+<li><span class="fn">void <a href="qnpstream.html#b3"><strong>setComplete</strong></a> ( bool ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+This class is defined in the <b>Qt NSPlugin Extension</b>, which can be found in the <tt>qt/extensions</tt> directory.
+It is not included in the main Qt API.
+<p>
+A stream of data provided to a <a href="qnpinstance.html">QNPInstance</a> by the browser.
+<p>
+Note that this is neither a <a href="qtextstream.html">QTextStream</a> or a <a href="qdatastream.html">QDataStream</a>.
+<p>See also:  <a href="qnpinstance.html#b1">QNPInstance::write</a>() and <a href="qnpinstance.html#a9">QNPInstance::newStreamCreated</a>().
+<p>Examples:
+ <a href="qtimage-qtimage-cpp.html#QNPStream">qtimage/qtimage.cpp</a>
+ <a href="grapher-grapher-cpp.html#QNPStream">grapher/grapher.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="b1"></a>QNPStream::QNPStream ( <a href="qnpinstance.html">QNPInstance</a> * in,const char * mt, _NPStream * st, bool se )</h3>
+<p>Creates a stream.  Plugins should not call this, but rather
+<a href="qnpinstance.html#b6">QNPInstance::newStream</a>() if a stream is required.
+<h3 class="fn"><a name="a0"></a>QNPStream::~QNPStream ()</h3>
+<p>Destroys the stream.
+<h3 class="fn">bool <a name="a7"></a>QNPStream::complete () const</h3>
+<p>Returns TRUE if the stream has received all the data from
+the source.
+<h3 class="fn">uint <a name="a2"></a>QNPStream::end () const</h3>
+<p>Returns the length of the stream (???).
+<h3 class="fn"><a href="qnpinstance.html">QNPInstance</a>* <a name="b0"></a>QNPStream::instance ()</h3>
+<p>Returns the <a href="qnpinstance.html">QNPInstance</a> for which this stream was created.
+<h3 class="fn">uint <a name="a3"></a>QNPStream::lastModified () const</h3>
+<p>Returns the time when the source of the stream was last modified.
+<h3 class="fn">bool <a name="a6"></a>QNPStream::okay () const</h3>
+<p>Returns TRUE if no errors have occurred on the stream.
+<h3 class="fn">void <a name="a8"></a>QNPStream::requestRead ( int offset, uint length )</h3>
+<p>Requests the given section of the stream be sent to the
+<a href="qnpinstance.html#b1">QNPInstance::write</a>() function of the <a href="qnpstream.html#b0">instance</a>() of this stream.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgst.htm#npnrequestread>
+Netscape: NPN_RequestRead method</a>
+<h3 class="fn">bool <a name="a5"></a>QNPStream::seekable () const</h3>
+<p>Returns TRUE if the stream is seekable.
+<h3 class="fn">void <a name="b3"></a>QNPStream::setComplete ( bool y )</h3>
+<p>For internal use only.
+<h3 class="fn">void <a name="b2"></a>QNPStream::setOkay ( bool y )</h3>
+<p>For internal use only.
+<h3 class="fn">const char* <a name="a4"></a>QNPStream::type () const</h3>
+<p>Returns the MIME type of the stream.
+<h3 class="fn">const char* <a name="a1"></a>QNPStream::url () const</h3>
+<p>Returns the URL from which the stream was created.
+<h3 class="fn">int <a name="a9"></a>QNPStream::write ( int len, void * buffer )</h3>
+<p>Writes data <em>to</em> the stream.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgst.htm#npnwrite>
+Netscape: NPN_Write method</a>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qnp.h: 1998/07/03
+<li>qnp.cpp: 1998/09/22
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

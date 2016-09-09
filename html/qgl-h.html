@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qgl.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qgl.h</h1><br clear="all">
+This is the verbatim text of the qgl.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qgl.h,v 1.9.2.6 1999/01/28 12:26:14 aavit Exp $
+**
+** Definition of OpenGL classes for Qt
+**
+** Created : 970112
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QGL_H
+#define QGL_H
+
+
+#define QGL_VERSION     400
+#define QGL_VERSION_STR "4.0b"
+
+const char *qGLVersion();
+
+
+#ifndef QT_H
+#include &lt;qwidget.h&gt;
+#endif // QT_H
+
+#if !(defined(Q_WGL) || defined(Q_GLX))
+#if defined(_OS_WIN32_)
+#define Q_WGL
+#else
+#define Q_GLX
+#endif
+#endif
+#if defined(Q_WGL)
+#include &lt;windows.h&gt;
+#endif
+#include &lt;GL/gl.h&gt;
+#include &lt;GL/glu.h&gt;
+
+
+class QPixmap;
+
+// Namespace class:
+class QGL
+{
+public:
+    enum FormatOption {
+        DoubleBuffer            = 0x0001,
+        DepthBuffer             = 0x0002,
+        Rgba                    = 0x0004,
+        AlphaChannel            = 0x0008,
+        AccumBuffer             = 0x0010,
+        StencilBuffer           = 0x0020,
+        StereoBuffers           = 0x0040,
+        DirectRendering         = 0x0080,
+        SingleBuffer            = DoubleBuffer  &lt;&lt; 16,
+        NoDepthBuffer           = DepthBuffer   &lt;&lt; 16,
+        ColorIndex              = Rgba          &lt;&lt; 16,
+        NoAlphaChannel          = AlphaChannel  &lt;&lt; 16,
+        NoAccumBuffer           = AccumBuffer   &lt;&lt; 16,
+        NoStencilBuffer         = StencilBuffer &lt;&lt; 16,
+        NoStereoBuffers         = StereoBuffers &lt;&lt; 16,
+        IndirectRendering       = DirectRendering &lt;&lt; 16
+    };
+};
+
+
+
+class QGLFormat : public QGL
+{
+public:
+    QGLFormat();
+    QGLFormat( int options );
+
+    bool                doubleBuffer() const;
+    void                setDoubleBuffer( bool enable );
+    bool                depth() const;
+    void                setDepth( bool enable );
+    bool                rgba() const;
+    void                setRgba( bool enable );
+    bool                alpha() const;
+    void                setAlpha( bool enable );
+    bool                accum() const;
+    void                setAccum( bool enable );
+    bool                stencil() const;
+    void                setStencil( bool enable );
+    bool                stereo() const;
+    void                setStereo( bool enable );
+    bool                directRendering() const;
+    void                setDirectRendering( bool enable );
+
+    void                setOption( FormatOption opt );
+    bool                testOption( FormatOption opt ) const;
+    
+    static QGLFormat    defaultFormat();
+    static void         setDefaultFormat( const QGLFormat&amp; f );
+
+    static bool         hasOpenGL();
+
+    friend bool         operator==( const QGLFormat&amp;, const QGLFormat&amp; );
+    friend bool         operator!=( const QGLFormat&amp;, const QGLFormat&amp; );
+    
+private:
+    uint opts;
+};
+
+
+
+class QGLContext : public QGL
+{
+public:
+    QGLContext( const QGLFormat&amp; format, QPaintDevice* device );
+    virtual ~QGLContext();
+
+    virtual bool        create( const QGLContext* shareContext = 0 );
+    bool                isValid() const;
+    bool                isSharing() const;
+    virtual void        reset();
+
+    QGLFormat           format() const;
+    virtual void        setFormat( const QGLFormat&amp; format );
+
+    virtual void        makeCurrent();
+    virtual void        swapBuffers();
+
+    QPaintDevice*       device() const;
+
+protected:
+    virtual bool        chooseContext( const QGLContext* shareContext = 0 );
+    virtual void        doneCurrent();
+
+#if defined(Q_WGL)
+    virtual int         choosePixelFormat( void* pfd, HANDLE pdc );
+#elif defined(Q_GLX)
+    virtual void*       tryVisual( const QGLFormat&amp; f );
+    virtual void*       chooseVisual();
+#endif
+
+    bool                deviceIsPixmap() const;
+    bool                windowCreated() const;
+    void                setWindowCreated( bool on );
+    bool                initialized() const;
+    void                setInitialized( bool on );
+
+protected:
+#if defined(Q_WGL)
+    HANDLE              rc;
+    HANDLE              dc;
+    HANDLE              win;
+#elif defined(Q_GLX)
+    void*               vi;
+    void*               cx;
+    Q_UINT32            gpm;
+#endif
+
+    QGLFormat           glFormat;
+    
+private:
+    bool                valid;
+    bool                sharing;
+    bool                initDone;
+    bool                crWin;
+    QPaintDevice*       paintDevice;
+
+private:
+    friend class QGLWidget;
+    
+private:        // Disabled copy constructor and operator=
+    QGLContext() {}
+    QGLContext( const QGLContext&amp; ) {}
+    QGLContext&amp;         operator=( const QGLContext&amp; ) { return *this; }
+};
+
+
+class QGLWidget : public QWidget, public QGL
+{
+    Q_OBJECT
+public:
+    QGLWidget( QWidget* parent=0, const char* name=0,
+               const QGLWidget* shareWidget = 0, WFlags f=0 );
+    QGLWidget( const QGLFormat&amp; format, QWidget* parent=0, const char* name=0,
+               const QGLWidget* shareWidget = 0, WFlags f=0 );
+   ~QGLWidget();
+
+    bool                isValid() const;
+    bool                isSharing() const;
+    virtual void        makeCurrent();
+
+    bool                doubleBuffer() const;
+    virtual void        swapBuffers();
+
+    QGLFormat           format() const;
+    virtual void        setFormat( const QGLFormat&amp; format );
+
+    const QGLContext*   context() const;
+    virtual void        setContext( QGLContext* context,
+                                    const QGLContext* shareContext = 0,
+                                    bool deleteOldContext = TRUE );
+
+    virtual QPixmap     renderPixmap( int w = 0, int h = 0,
+                                      bool useContext = FALSE );
+
+public slots:
+    virtual void        updateGL();
+
+protected:
+    virtual void        initializeGL();
+    virtual void        paintGL();
+    virtual void        resizeGL( int w, int h );
+
+    void                setAutoBufferSwap( bool on );
+    bool                autoBufferSwap() const;
+
+    void                paintEvent( QPaintEvent* );
+    void                resizeEvent( QResizeEvent* );
+
+    virtual void        glInit();
+    virtual void        glDraw();
+    
+private:
+    QGLContext*         glcx;
+    bool                autoSwap;
+
+private:        // Disabled copy constructor and operator=
+#if defined(Q_DISABLE_COPY)
+    QGLWidget( const QGLWidget&amp; );
+    QGLWidget&amp;          operator=( const QGLWidget&amp; );
+#endif
+};
+
+
+//
+// QGLFormat inline functions
+//
+
+inline bool QGLFormat::doubleBuffer() const
+{
+    return testOption( DoubleBuffer );
+}
+
+inline bool QGLFormat::depth() const
+{
+    return testOption( DepthBuffer );
+}
+
+inline bool QGLFormat::rgba() const
+{
+    return testOption( Rgba );
+}
+
+inline bool QGLFormat::alpha() const
+{
+    return testOption( AlphaChannel );
+}
+
+inline bool QGLFormat::accum() const
+{
+    return testOption( AccumBuffer );
+}
+
+inline bool QGLFormat::stencil() const
+{
+    return testOption( StencilBuffer );
+}
+
+inline bool QGLFormat::stereo() const
+{
+    return testOption( StereoBuffers );
+}
+
+inline bool QGLFormat::directRendering() const
+{
+    return testOption( DirectRendering );
+}
+
+//
+// QGLContext inline functions
+//
+
+inline bool QGLContext::isValid() const
+{
+    return valid;
+}
+inline bool QGLContext::isSharing() const
+{
+    return sharing;
+}
+inline QGLFormat QGLContext::format() const
+{
+    return glFormat;
+}
+
+inline QPaintDevice* QGLContext::device() const
+{
+    return paintDevice;
+}
+
+inline bool QGLContext::deviceIsPixmap() const
+{
+    return paintDevice-&gt;devType() == PDT_PIXMAP;
+}
+
+
+inline bool QGLContext::windowCreated() const
+{
+    return crWin;
+}
+
+
+inline void QGLContext::setWindowCreated( bool on )
+{
+    crWin = on;
+}
+
+inline bool QGLContext::initialized() const
+{
+    return initDone;
+}
+
+inline void QGLContext::setInitialized( bool on )
+{
+    initDone = on;
+}
+
+//
+// QGLWidget inline functions
+//
+
+inline QGLFormat QGLWidget::format() const
+{
+    return glcx-&gt;format();
+}
+
+inline const QGLContext *QGLWidget::context() const
+{
+    return glcx;
+}
+
+inline bool QGLWidget::doubleBuffer() const
+{
+    return glcx-&gt;format().doubleBuffer();
+}
+
+inline void QGLWidget::setAutoBufferSwap( bool on )
+{
+    autoSwap = on;
+}
+
+inline bool QGLWidget::autoBufferSwap() const
+{
+    return autoSwap;
+}
+
+
+#endif // QGL_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

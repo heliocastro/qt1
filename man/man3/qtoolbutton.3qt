@@ -1,0 +1,199 @@
+.TH QToolButton 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QToolButton \- Push button whose appearance has been tailored for use in a QToolBar
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qtoolbutton.h>\fR
+.PP
+Inherits QButton.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QToolButton ( QWidget * " "parent" " = 0, const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "QToolButton ( const QPixmap & " "pm" ", const char * " "textLabel" ", const char * " "grouptext" ", QObject * " "receiver" ", const char * " "slot" ", QToolBar * " "parent" ", const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "QToolButton ( QIconSet " "s" ", const char * " "textLabel" ", const char * " "grouptext" ", QObject * " "receiver" ", const char * " "slot" ", QToolBar * " "parent" ", const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "\fB~QToolButton\fR ()"
+.br
+.ti -1c
+.BI "virtual QSize sizeHint () const"
+.br
+.ti -1c
+.BI "void setIconSet ( const QIconSet & )"
+.br
+.ti -1c
+.BI "QIconSet iconSet () const"
+.br
+.ti -1c
+.BI "bool usesBigPixmap () const"
+.br
+.ti -1c
+.BI "bool usesTextLabel () const"
+.br
+.ti -1c
+.BI "const char* textLabel () const"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "virtual void setUsesBigPixmap ( bool enable )"
+.br
+.ti -1c
+.BI "virtual void setUsesTextLabel ( bool enable )"
+.br
+.ti -1c
+.BI "virtual void setTextLabel ( const char *, bool = TRUE )"
+.br
+.ti -1c
+.BI "void setToggleButton ( bool enable )"
+.br
+.ti -1c
+.BI "void setOn ( bool enable )"
+.br
+.ti -1c
+.BI "void toggle ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void drawButton ( QPainter * )"
+.br
+.ti -1c
+.BI "virtual void drawButtonLabel ( QPainter * )"
+.br
+.ti -1c
+.BI "virtual void enterEvent ( QEvent * )"
+.br
+.ti -1c
+.BI "virtual void leaveEvent ( QEvent * )"
+.br
+.ti -1c
+.BI "bool uses3D () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QToolButton class provides a push button whose appearance has been tailored for use in a QToolBar.
+.PP
+This means that it implements the ridiculous Microsoft auto-raise feature using QIconSet. Apart from that, it's pretty much like a QPushButton. The two classes may at some point be merged.
+.PP
+See also: QPushButton, QToolButton and GUI Design Handbook: Push Button
+.PP
+Examples:
+.(l
+application/application.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QToolButton::QToolButton ( QIconSet iconSet, const char * textLabel, const char * grouptext, QObject * receiver, const char * slot, QToolBar * parent, const char * name = 0 )"
+Creates a tool button that is a child of \fIparent\fR (which must be a QToolBar) and named \fIname.\fR
+.PP
+The tool button will display \fIiconSet,\fR with text label or tool tip \fItextLabel\fR and status-bar message \fIgrouptext,\fR connected to \fIslot\fR in object \fIreceiver,\fR and returns the button.
+.SH "QToolButton::QToolButton ( QWidget * parent = 0, const char * name = 0 )"
+Constructs an empty tool button.
+.SH "QToolButton::QToolButton ( const QPixmap & pm, const char * textLabel, const char * grouptext, QObject * receiver, const char * slot, QToolBar * parent, const char * name = 0 )"
+Creates a tool button that is a child of \fIparent\fR (which must be a QToolBar) and named \fIname.\fR
+.PP
+The tool button will display \fIpm,\fR with text label or tool tip \fItextLabel\fR and status-bar message \fIgrouptext,\fR connected to \fIslot\fR in object \fIreceiver,\fR and returns the button.
+.SH "QToolButton::~QToolButton ()"
+Destroys the object and frees any allocated resources.
+.SH "void QToolButton::drawButton ( QPainter * p ) \fC[virtual protected]\fR"
+Draws the edges and decoration of the button (pretty much nothing) and calls drawButtonLabel().
+.PP
+See also: drawButtonLabel() and QButton::paintEvent().
+.PP
+Reimplemented from QButton.
+.SH "void QToolButton::drawButtonLabel ( QPainter * p ) \fC[virtual protected]\fR"
+Draws the contents of the button (pixmap and optionally text).
+.PP
+See also: drawButton() and QButton::paintEvent().
+.PP
+Reimplemented from QButton.
+.SH "void QToolButton::enterEvent ( QEvent * e ) \fC[virtual protected]\fR"
+Reimplemented to handle the automatic 3D effects in Windows style.
+.PP
+Reimplemented from QWidget.
+.SH "QIconSet QToolButton::iconSet () const"
+Returns a copy of the icon set in use. If no icon set has been set, iconSeT() creates one from the pixmap().
+.PP
+If the button doesn't have a pixmap either, iconSet()'s return value is meaningless.
+.PP
+See also: setIconSet() and QIconSet.
+.SH "void QToolButton::leaveEvent ( QEvent * e ) \fC[virtual protected]\fR"
+Reimplemented to handle the automatic 3D effects in Windows style.
+.PP
+Reimplemented from QWidget.
+.SH "void QToolButton::setIconSet ( const QIconSet & set )"
+Sets this tool button to display the icons in \fIset.\fR (setPixmap() is effectively a wrapper for this function.)
+.PP
+QToolButton makes a copy of \fIset,\fR so you must delete \fIset\fR yourself.
+.PP
+See also: iconSet() and QIconSet.
+.SH "void QToolButton::setOn ( bool enable ) \fC[slot]\fR"
+Sets this tool button to be on if \fIenable\fR is TRUE, and off it \fIenable\fR is FALSE.
+.PP
+This function has no effect on non-toggling buttons.
+.PP
+See also: isToggleButton() and toggle().
+.SH "void QToolButton::setTextLabel ( const char * newLabel, bool tipToo = TRUE ) \fC[virtual slot]\fR"
+Sets the label of this button to \fInewLabel,\fR and automatically sets it as tool tip too if \fItipToo\fR is TRUE.
+.SH "void QToolButton::setToggleButton ( bool enable ) \fC[slot]\fR"
+Makes the tool button a toggle button if \fIenable\fR is TRUE, or a normal tool button if \fIenable\fR is FALSE.
+.PP
+Toggle buttons have an on/off state similar to check boxes. A tool button is initially not a toggle button.
+.PP
+See also: setOn(), toggle(), toggleButton() and toggled().
+.SH "void QToolButton::setUsesBigPixmap ( bool enable ) \fC[virtual slot]\fR"
+Sets this button to use the big pixmaps provided by its QIconSet if \fIenable\fR is TRUE, and to use the small ones else.
+.PP
+QToolButton automatically connects this slot to the relevant signal in the QMainWindow in which is resides.
+.SH "void QToolButton::setUsesTextLabel ( bool enable ) \fC[virtual slot]\fR"
+Sets this button to draw a text label below the icon if \fIenable\fR is TRUE, and to not draw it if \fIenable\fR is FALSE.
+.PP
+QToolButton automatically connects this slot to the relevant signal in the QMainWindow in which is resides.
+.SH "QSize QToolButton::sizeHint () const \fC[virtual]\fR"
+Returns a size suitable for this tool button. This depends on GUI style, usesBigPixmap(), textLabel() and usesTextLabel().
+.PP
+Reimplemented from QWidget.
+.SH "const char * QToolButton::textLabel () const"
+Returns the text label in use by this tool button, or 0.
+.PP
+See also: setTextLabel(), usesTextLabel(), setUsesTextLabel() and setText().
+.SH "void QToolButton::toggle () \fC[slot]\fR"
+Toggles the state of this tool button.
+.PP
+This function has no effect on non-toggling buttons.
+.PP
+See also: isToggleButton() and toggle().
+.SH "bool QToolButton::uses3D () const \fC[protected]\fR"
+Returns TRUE if this button should be drawn using raised edges.
+.PP
+See also: drawButton().
+.SH "bool QToolButton::usesBigPixmap () const"
+Returns TRUE if this tool button uses the big (32-pixel) pixmaps, and FALSE if it does not.
+.PP
+See also: setUsesBigPixmap(), setPixmap() and usesTextLabel.
+.SH "bool QToolButton::usesTextLabel () const"
+Returns TRUE if this tool button puts a text label below the button pixmap, and FALSE if it does not.
+.PP
+See also:  setUsesTextLabel(), setTextLabel() and usesBigPixmap().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qtoolbutton.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

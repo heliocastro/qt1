@@ -1,0 +1,311 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QFontMetrics Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QFontMetrics Class Reference</h1><br clear="all">
+<p>
+The QFontMetrics class provides font metrics information about fonts.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qfontmetrics-h.html">qfontmetrics.h</a>&gt;</code>
+<p><a href="qfontmetrics-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qfontmetrics.html#a2"><strong>QFontMetrics</strong></a> ( const QFont &amp; ) </span>
+<li><span class="fn"><a href="qfontmetrics.html#a3"><strong>QFontMetrics</strong></a> ( const QFontMetrics &amp; ) </span>
+<li><span class="fn"><a href="qfontmetrics.html#a4"><strong>~QFontMetrics</strong></a> () </span>
+<li><span class="fn">QFontMetrics&amp; <a href="qfontmetrics.html#a5"><strong>operator=</strong></a> ( const QFontMetrics &amp; ) </span>
+<li><span class="fn">int <a href="qfontmetrics.html#a6"><strong>ascent</strong></a> () const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#a7"><strong>descent</strong></a> () const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#a8"><strong>height</strong></a> () const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#a9"><strong>leading</strong></a> () const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#b0"><strong>lineSpacing</strong></a> () const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#b1"><strong>minLeftBearing</strong></a> () const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#b2"><strong>minRightBearing</strong></a> () const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#b3"><strong>maxWidth</strong></a> () const</span>
+<li><span class="fn">bool <a href="qfontmetrics.html#b4"><strong>inFont</strong></a> ( char ) const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#b5"><strong>leftBearing</strong></a> ( char ) const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#b6"><strong>rightBearing</strong></a> ( char ) const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#b7"><strong>width</strong></a> ( const char *, int len = -1 ) const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#b8"><strong>width</strong></a> ( char ) const</span>
+<li><span class="fn">QRect <a href="qfontmetrics.html#b9"><strong>boundingRect</strong></a> ( const char *, int len = -1 ) const</span>
+<li><span class="fn">QRect <a href="qfontmetrics.html#c0"><strong>boundingRect</strong></a> ( char ) const</span>
+<li><span class="fn">QRect <a href="qfontmetrics.html#c1"><strong>boundingRect</strong></a> ( int x, int y, int w, int h, int flags, const char * str, int len=-1, int tabstops=0, int * tabarray=0, char ** intern=0 ) const</span>
+<li><span class="fn">QSize <a href="qfontmetrics.html#c2"><strong>size</strong></a> ( int flags, const char * str, int len=-1, int tabstops=0, int * tabarray=0, char ** intern=0 ) const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#c3"><strong>underlinePos</strong></a> () const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#c4"><strong>strikeOutPos</strong></a> () const</span>
+<li><span class="fn">int <a href="qfontmetrics.html#c5"><strong>lineWidth</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QFontMetrics class provides font metrics information about fonts.
+<p>
+QFontMetrics functions calculate size of characters and strings for a given
+font.
+<p>There are three ways you can create a QFontMetrics object:
+<ol>
+<li> The QFontMetrics constructor with a <a href="qfont.html">QFont</a>
+creates a font metrics object for a screen-compatible font,
+i.e. the font must not be a printer font.
+<li> <a href="qwidget.html#g0">QWidget::fontMetrics</a>() returns the font metrics for a
+widget's current font. The font metrics object is automatically
+updated if somebody sets a new widget font.
+<em>Please read the note below.</em>
+<li> <a href="qpainter.html#b9">QPainter::fontMetrics</a>() returns the font metrics for a
+painter's current font. The font metrics object is automatically
+updated if somebody sets a new painter font.
+<em>Please read the note below.</em>
+</ol>
+<p>Example:
+<pre>    <a href="qfont.html">QFont</a> font("times",24);
+    <a href="qfontmetrics.html">QFontMetrics</a> fm(font);
+    int w = fm.<a href="qfontmetrics.html#b7">width</a>("What's the width of this text");
+    int h = fm.<a href="qfontmetrics.html#a8">height</a>();
+</pre>
+<p><strong>NOTE: In Qt 2.0 the font metrics object will no longer be
+automatically updated when the widget or painter gets a new font.</strong>
+Make sure you program does not depend on this feature.
+<p><strong>About efficiency:</strong> We recommend that you use
+the QFontMetrics constructor if you can. This is more efficient
+than getting the font metrics from a widget or a painter. The
+QWidget::fontMetrics() and QPainter::fontMetrics() will become faster
+in Qt 2.0, when we have removed the automatic update policy.
+<p>See also:  <a href="qfont.html">QFont</a> and <a href="qfontinfo.html">QFontInfo</a>.
+<p>Examples:
+ <a href="grapher-grapher-cpp.html#QFontMetrics">grapher/grapher.cpp</a>
+ <a href="drawdemo-drawdemo-cpp.html#QFontMetrics">drawdemo/drawdemo.cpp</a>
+ <a href="hello-hello-cpp.html#QFontMetrics">hello/hello.cpp</a>
+ <a href="movies-main-cpp.html#QFontMetrics">movies/main.cpp</a>
+ <a href="xform-xform-cpp.html#QFontMetrics">xform/xform.cpp</a>
+ <a href="application-application-cpp.html#QFontMetrics">application/application.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a2"></a>QFontMetrics::QFontMetrics ( const <a href="qfont.html">QFont</a> &amp; font )</h3>
+<p>Constructs a font metrics object for <em>font.</em>
+<p>The font must be screen-compatible, i.e. a font you use when drawing
+text in <a href="qwidget.html">widgets</a> or <a href="qpixmap.html">pixmaps</a>.
+If <em>font</em> is a printer font, you'll probably get wrong results.
+<p>Use the <a href="qpainter.html#b9">QPainter::fontMetrics</a>() to get the font metrics when painting.
+This is a little slower than using this constructor, but it always
+gives correct results.
+<h3 class="fn"><a name="a3"></a>QFontMetrics::QFontMetrics ( const QFontMetrics &amp; fm )</h3>
+<p>Constructs a copy of <em>fm.</em>
+<h3 class="fn"><a name="a4"></a>QFontMetrics::~QFontMetrics ()</h3>
+<p>Destroys the font metrics object.
+<h3 class="fn">int <a name="a6"></a>QFontMetrics::ascent () const</h3>
+<p>Returns the maximum ascent of the font.
+<p>The ascent is the distance from the base line to the uppermost line
+where pixels may be drawn.
+<p>See also:  <a href="qfontmetrics.html#a7">descent</a>().
+<p>Examples:
+ <a href="drawdemo-drawdemo-cpp.html#ascent">drawdemo/drawdemo.cpp</a>
+<h3 class="fn"><a href="qrect.html">QRect</a> <a name="c0"></a>QFontMetrics::boundingRect ( char ch ) const</h3>
+<p>Returns the bounding rectangle of <em>ch</em> relative to the leftmost
+point on the base line.
+<p>Note that the bounding rectangle may extend to the left of (0,0),
+e.g. for italicized fonts, and that the text output may cover <em>all</em>
+pixels in the bounding rectangle.
+<p>Note that the rectangle usually extends both above and below the
+base line.
+<p>See also:  <a href="qfontmetrics.html#b7">width</a>().
+<h3 class="fn"><a href="qrect.html">QRect</a> <a name="b9"></a>QFontMetrics::boundingRect ( const char * str, int len = -1 ) const</h3>
+<p>Returns the bounding rectangle of the first <em>len</em> characters of <em>str,</em>
+which is the set of pixels the text would cover if drawn at (0,0).
+<p>If <em>len</em> is negative (default value), the whole string is used.
+<p>Note that the bounding rectangle may extend to the left of (0,0),
+e.g. for italicized fonts, and that the text output may cover <em>all</em>
+pixels in the bounding rectangle.
+<p>Newline characters are processed as regular characters, <em>not</em> as
+linebreaks.
+<p>Due to the different actual character heights, the height of the
+bounding rectangle of "Yes" and "yes" may be different.
+<p>See also:  <a href="qfontmetrics.html#b7">width</a>() and <a href="qpainter.html#l8">QPainter::boundingRect</a>().
+<p>Examples:
+ <a href="xform-xform-cpp.html#boundingRect">xform/xform.cpp</a>
+<h3 class="fn"><a href="qrect.html">QRect</a> <a name="c1"></a>QFontMetrics::boundingRect ( int x, int y, int w, int h, int flags, const char * str, int len=-1, int tabstops=0, int * tabarray=0, char ** intern=0 ) const</h3>
+<p>Returns the bounding rectangle of the first <em>len</em> characters of <em>str,</em>
+which is the set of pixels the text would cover if drawn at (0,0).
+<p>If <em>len</em> is negative (default value), the whole string is used.
+<p>The <em>flags</em> argument is
+the bitwise OR of the following flags:  <ul>
+<li> <code>AlignLeft</code> aligns to the left border.
+<li> <code>AlignRight</code> aligns to the right border.
+<li> <code>AlignHCenter</code> aligns horizontally centered.
+<li> <code>AlignTop</code> aligns to the top border.
+<li> <code>AlignBottom</code> aligns to the bottom border.
+<li> <code>AlignVCenter</code> aligns vertically centered
+<li> <code>AlignCenter</code> (= <code>AlignHCenter</code> | AlignVCenter)
+<li> <code>SingleLine</code> ignores newline characters in the text.
+<li> <code>ExpandTabs</code> expands tabulators.
+<li> <code>ShowPrefix</code> interprets "&x" as "x" underlined.
+<li> <code>WordBreak</code> breaks the text to fit the rectangle.
+</ul>
+<p>Horizontal alignment defaults to AlignLeft and vertical alignment
+defaults to AlignTop.
+<p>If several of the horizontal or several of the vertical alignment flags
+are set, the resulting alignment is undefined.
+<p>These flags are defined in <a href="qwindowdefs-h.html">qwindowdefs.h</a>.
+<p>If <code>ExpandTabs</code> is set in <em>flags,</em> then:
+if <em>tabarray</em> is non.zero, it specifies a 0-terminated sequence
+of pixel-positions for tabs; otherwise
+if <em>tabstops</em> is non-zero, it is used as the tab spacing (in pixels).
+<p>Note that the bounding rectangle may extend to the left of (0,0),
+e.g. for italicized fonts, and that the text output may cover <em>all</em>
+pixels in the bounding rectangle.
+<p>Newline characters are processed as linebreaks.
+<p>Despite the different actual character heights, the heights of the
+bounding rectangles of "Yes" and "yes" are the same.
+<p>The bounding rectangle given by this function is somewhat larger
+than that calculated by the simpler <a href="qfontmetrics.html#b9">boundingRect</a>() function.  This
+function uses the <a href="qfontmetrics.html#b1">maximum left</a> and
+<a href="qfontmetrics.html#b2">right</a> font bearings as is necessary
+for multi-line text to align correctly.  Also, fontHeight() and
+<a href="qfontmetrics.html#b0">lineSpacing</a>() are used to calculate the height, rather than
+individual character heights.
+<p>The <em>internal</em> argument is for internal purposes.
+<p>See also:  <a href="qfontmetrics.html#b7">width</a>() and <a href="qpainter.html#l8">QPainter::boundingRect</a>().
+<h3 class="fn">int <a name="a7"></a>QFontMetrics::descent () const</h3>
+<p>Returns the maximum descent of the font.
+<p>The descent is the distance from the base line to the lowermost line
+where pixels may be drawn. (Note that this is different from X, which
+adds 1 pixel.)
+<p>See also:  <a href="qfontmetrics.html#a6">ascent</a>().
+<p>Examples:
+ <a href="drawdemo-drawdemo-cpp.html#descent">drawdemo/drawdemo.cpp</a>
+ <a href="hello-hello-cpp.html#descent">hello/hello.cpp</a>
+<h3 class="fn">int <a name="a8"></a>QFontMetrics::height () const</h3>
+<p>Returns the height of the font.
+<p>This is always equal to <a href="qfontmetrics.html#a6">ascent</a>()+<a href="qfontmetrics.html#a7">descent</a>()+1 (the 1 is for the base line).
+<p>See also:  <a href="qfontmetrics.html#a9">leading</a>() and <a href="qfontmetrics.html#b0">lineSpacing</a>().
+<p>Examples:
+ <a href="grapher-grapher-cpp.html#height">grapher/grapher.cpp</a>
+ <a href="hello-hello-cpp.html#height">hello/hello.cpp</a>
+<h3 class="fn">bool <a name="b4"></a>QFontMetrics::inFont ( char ch ) const</h3>
+<p>Returns TRUE if <em>ch</em> is a valid character in the font.
+<h3 class="fn">int <a name="a9"></a>QFontMetrics::leading () const</h3>
+<p>Returns the leading of the font.
+<p>This is the natural inter-line spacing.
+<p>See also:  <a href="qfontmetrics.html#a8">height</a>() and <a href="qfontmetrics.html#b0">lineSpacing</a>().
+<h3 class="fn">int <a name="b5"></a>QFontMetrics::leftBearing ( char ch ) const</h3>
+<p>Returns the left bearing of character <em>ch</em> in the font.
+<p>The left bearing is the rightward distance of the left-most pixel
+of the character from the logical origin of the character.
+This value is negative if the pixels of the character extend
+to the left of the logical origin.
+<p><em>See <a href="qfontmetrics.html#b7">width</a>(char) for a graphical description of this metric.</em>
+<p>See also:  <a href="qfontmetrics.html#b6">rightBearing</a>(char), <a href="qfontmetrics.html#b1">minLeftBearing</a>() and <a href="qfontmetrics.html#b7">width</a>().
+<h3 class="fn">int <a name="b0"></a>QFontMetrics::lineSpacing () const</h3>
+<p>Returns the distance from one base line to the next.
+<p>This value is always equal to <a href="qfontmetrics.html#a9">leading</a>()+<a href="qfontmetrics.html#a8">height</a>().
+<p>See also:  <a href="qfontmetrics.html#a8">height</a>() and <a href="qfontmetrics.html#a9">leading</a>().
+<p>Examples:
+ <a href="application-application-cpp.html#lineSpacing">application/application.cpp</a>
+<h3 class="fn">int <a name="c5"></a>QFontMetrics::lineWidth () const</h3>
+<p>Returns the width of the underline and strike-out lines, adjusted for
+the point size of the font.
+<p>See also:  <a href="qfontmetrics.html#c3">underlinePos</a>() and <a href="qfontmetrics.html#c4">strikeOutPos</a>().
+<h3 class="fn">int <a name="b3"></a>QFontMetrics::maxWidth () const</h3>
+<p>Returns the width of the widest character in the font.
+<h3 class="fn">int <a name="b1"></a>QFontMetrics::minLeftBearing () const</h3>
+<p>Returns the minimum left bearing of the font.
+<p>This is the smallest <a href="qfontmetrics.html#b5">leftBearing</a>(char)
+of all characters in the font.
+<p>See also:  <a href="qfontmetrics.html#b2">minRightBearing</a>() and <a href="qfontmetrics.html#b5">leftBearing</a>(char).
+<h3 class="fn">int <a name="b2"></a>QFontMetrics::minRightBearing () const</h3>
+<p>Returns the minimum right bearing of the font.
+<p>This is the smallest <a href="qfontmetrics.html#b6">rightBearing</a>(char)
+of all characters in the font.
+<p>See also:  <a href="qfontmetrics.html#b1">minLeftBearing</a>() and <a href="qfontmetrics.html#b6">rightBearing</a>(char).
+<h3 class="fn">QFontMetrics &amp; <a name="a5"></a>QFontMetrics::operator= ( const QFontMetrics &amp; fm )</h3>
+<p>Font metrics assignment.
+<h3 class="fn">int <a name="b6"></a>QFontMetrics::rightBearing ( char ch ) const</h3>
+<p>Returns the right bearing of character <em>ch</em> in the font.
+<p>The right bearing is the leftward distance of the right-most pixel
+of the character from the logical origin of a subsequent character.
+This value is negative if the pixels of the character extend
+to the right of the <a href="qfontmetrics.html#b7">width</a>() of the character.
+<p><em>See width() for a graphical description of this metric.</em>
+<p>See also:  <a href="qfontmetrics.html#b5">leftBearing</a>(char), <a href="qfontmetrics.html#b2">minRightBearing</a>() and <a href="qfontmetrics.html#b7">width</a>().
+<h3 class="fn"><a href="qsize.html">QSize</a> <a name="c2"></a>QFontMetrics::size ( int flags, const char * str, int len=-1, int tabstops=0, int * tabarray=0, char ** intern=0 ) const</h3>
+<p>Returns the size in pixels of the first <em>len</em> characters of <em>str.</em>
+<p>If <em>len</em> is negative (default value), the whole string is used.
+<p>The <em>flags</em> argument is
+the bitwise OR of the following flags:  <ul>
+<li> <code>SingleLine</code> ignores newline characters in the text.
+<li> <code>ExpandTabs</code> expands tabulators.
+<li> <code>ShowPrefix</code> interprets "&x" as "x" underlined.
+<li> <code>WordBreak</code> breaks the text to fit the rectangle.
+</ul>
+<p>These flags are defined in <a href="qwindowdefs-h.html">qwindowdefs.h</a>.
+<p>If <code>ExpandTabs</code> is set in <em>flags,</em> then:
+if <em>tabarray</em> is non.zero, it specifies a 0-terminated sequence
+of pixel-positions for tabs; otherwise
+if <em>tabstops</em> is non-zero, it is used as the tab spacing (in pixels).
+<p>Newline characters are processed as linebreaks.
+<p>Despite the different actual character heights, the heights of the
+bounding rectangles of "Yes" and "yes" are the same.
+<p>The <em>internal</em> argument is for internal purposes.
+<p>See also:  <a href="qfontmetrics.html#b9">boundingRect</a>().
+<h3 class="fn">int <a name="c4"></a>QFontMetrics::strikeOutPos () const</h3>
+<p>Returns the distance from the base line to where the strike-out line
+should be drawn.
+<p>See also:  <a href="qfontmetrics.html#c3">underlinePos</a>() and <a href="qfontmetrics.html#c5">lineWidth</a>().
+<h3 class="fn">int <a name="c3"></a>QFontMetrics::underlinePos () const</h3>
+<p>Returns the distance from the base line to where an underscore should be
+drawn.
+<p>See also:  <a href="qfontmetrics.html#c4">strikeOutPos</a>() and <a href="qfontmetrics.html#c5">lineWidth</a>().
+<h3 class="fn">int <a name="b8"></a>QFontMetrics::width ( char ch ) const</h3>
+<p>Returns the logical width of a <em>ch</em> in pixels.  This is
+a distance appropriate for drawing a subsequent character
+after <em>ch.</em>
+<p><img src=bearings.gif align=right>
+Some of the metrics are described in the image to the right.
+The tall dark rectangle covers the logical <a href="qfontmetrics.html#b7">width</a>() of a character.
+The shorter
+pale rectangles cover the
+<a href="qfontmetrics.html#b5">left</a> and
+<a href="qfontmetrics.html#b6">right</a> bearings
+of the characters.  Notice that the bearings of "f" in this particular
+font are both negative, while the bearings of "o" are both positive.
+<p>See also:  <a href="qfontmetrics.html#b9">boundingRect</a>().
+<h3 class="fn">int <a name="b7"></a>QFontMetrics::width ( const char * str, int len = -1 ) const</h3>
+<p>Returns the width in pixels of the first <em>len</em> characters of <em>str.</em>
+<p>If <em>len</em> is negative (default value), the whole string is used.
+<p>Note that this value is <em>not</em> equal to <a href="qfontmetrics.html#b9">boundingRect</a>().width();
+boundingRect() returns a rectangle describing the pixels this string
+will cover whereas width() returns the distance to where the next string
+should be drawn.  Thus, width(stra)+width(strb) is always equal to
+width(strcat(stra, strb)).  This is almost never the case with
+boundingRect().
+<p>See also:  <a href="qfontmetrics.html#b9">boundingRect</a>().
+<p>Examples:
+ <a href="drawdemo-drawdemo-cpp.html#width">drawdemo/drawdemo.cpp</a>
+ <a href="hello-hello-cpp.html#width">hello/hello.cpp</a>
+ <a href="movies-main-cpp.html#width">movies/main.cpp</a>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qfontmetrics.h: 1998/08/19
+<li>qfont.cpp: 1998/11/20
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

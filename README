@@ -1,0 +1,58 @@
+          QT FREE EDITION 1.44 SOURCE CODE DISTRIBUTION
+
+This is the official release of Qt Free Edition version 1.44.
+
+You may use Qt Free Edition for software development free of charge
+only if you develop Free (non-proprietary) Software. The LICENSE file
+explains what you may or may not do with Qt Free Edition.
+
+Qt Free Edition may only be used on the X Window System.
+
+If you are using Qt for developing commercial, proprietary, or other
+non-free software, you must have have a license for Qt Professional
+Edition. Please see http://www.troll.no/purchase.html for how to obtain
+this. Qt Professional Edition is also supported on Microsoft Windows.
+
+This Qt version has binary compatibility with all previous 1.x stable
+releases.  This means that software compiled with one of those older
+libraries will run with the new dynamic library. 
+
+The INSTALL file explains how to install Qt.
+
+If you want to enable built-in GIF image reading support in Qt, consult
+the header file qt_gif.h in qt/include.
+
+Qt Free Edition is currently supported on Linux, Solaris, SunOS,
+FreeBSD, OSF/1, Irix, BSD/OS, NetBSD, SCO, HP-UX and AIX. If you want
+to port Qt to a new platform, please read the PORTING file.
+
+The Qt Reference Documentation is available in HTML format in the
+qt/html directory. Start your favorite Web browser with the
+html/index.html file. The class reference doc. is also included in
+Unix man format in the qt/man directory.
+
+If you are new to Qt it is a good idea to read the tutorial. It is located
+in html/tutorial.html. The tutorial directory contains the programs used
+in the tutorial.
+
+All the above documentation is also available in postscript format
+from our web server, see http://www.troll.no/dl/ or
+ftp://ftp.troll.no/qt/postscript/
+
+The example programs in the examples directory demonstrate some Qt
+features. You can study these examples to get an overview of how Qt
+programs can be written, or look at html/examples.html with your
+browser.
+
+See the FAQ for frequently asked questions about Qt; html/faq.html.
+
+If you find any bugs, send a report to qt-bugs@troll.no.
+
+If you want to join the Qt user forum mailing list, send a message to
+qt-interest-request@troll.no containing a single word "subscribe".  If
+you want to be added to our announcements mailing list (no spam), send
+a message to qt-announce-request@troll.no containing a single word
+"subscribe".
+
+If you are interested in the Qt Professional Edition, please write
+to sales@troll.no.  Other mail can be sent to info@troll.no.

@@ -1,0 +1,62 @@
+.TH QXtApplication 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QXtApplication \- Allows mixing of Xt/Motif and Qt widgets [Qt Xt/Motif Extension]
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qxt.h>\fR
+.PP
+Inherits QApplication.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QXtApplication ( int & " "argc" ", char ** " "argv" ", const char * " "appclass" "=0, XrmOptionDescRec * " "options" "=0, int " "num_options" "=0, const char ** " "resources" "=0 )"
+.br
+.ti -1c
+.BI "QXtApplication ( Display * )"
+.br
+.ti -1c
+.BI "\fB~QXtApplication\fR ()"
+.br
+.ti -1c
+.BI "bool x11EventFilter ( XEvent * )"
+.br
+.in -1c
+.SH DESCRIPTION
+This class is defined in the \fBQt Xt/Motif Extension\fR, which can be found in the \fCqt/extensions\fR directory. It is not included in the main Qt API.
+.PP
+Allows mixing of Xt/Motif and Qt widgets.
+.PP
+The QXtApplication and QXtWidget classes allow old Xt or Motif widgets to be used in new Qt applications. They also allow Qt widgets to be used in primarily Xt/Motif applications. The facility is intended to aid migration from Xt/Motif to the more comfortable Qt system.
+.PP
+Examples:
+.(l
+mainlyMotif/editor.cpp mainlyQt/editor.cpp mainlyXt/editor.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QXtApplication::QXtApplication ( Display * display )"
+Constructs a QApplication from the \fIdisplay\fR of an already-initialized Xt application.
+.PP
+Use this constructor when introducing Qt widgets into an existing Xt/Motif application.
+.SH "QXtApplication::QXtApplication ( int & argc, char ** argv, const char * appclass=0, XrmOptionDescRec * options=0, int num_options=0, const char ** resources=0 )"
+Constructs a QApplication and initializes the Xt toolkit. The \fIappclass, options, num_options,\fR and \fIresources\fR arguments are passed on to XtAppSetFallbackResources and XtDisplayInitialize.
+.PP
+Use this constructor when writing a new Qt application which needs to use some existing Xt/Motif widgets.
+.SH "QXtApplication::~QXtApplication ()"
+Destructs the application. Does not close the Xt toolkit.
+.SH "bool QXtApplication::x11EventFilter ( XEvent * ev )"
+Reimplemented to pass client messages to Xt.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qxtapplication.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

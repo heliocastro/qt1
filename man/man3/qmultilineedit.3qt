@@ -1,0 +1,523 @@
+.TH QMultiLineEdit 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QMultiLineEdit \- Simple editor for inputting text
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qmultilinedit.h>\fR
+.PP
+Inherits QTableView.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QMultiLineEdit ( QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QMultiLineEdit\fR ()"
+.br
+.ti -1c
+.BI "const char* textLine ( int line ) const"
+.br
+.ti -1c
+.BI "QString text () const"
+.br
+.ti -1c
+.BI "int numLines () const"
+.br
+.ti -1c
+.BI "bool isReadOnly () const"
+.br
+.ti -1c
+.BI "bool isOverwriteMode () const"
+.br
+.ti -1c
+.BI "virtual void setFont ( const QFont & font )"
+.br
+.ti -1c
+.BI "virtual void insertLine ( const char * " "s" ", int " "line" " = -1 )"
+.br
+.ti -1c
+.BI "virtual void insertAt ( const char * " "s" ", int " "line" ", int col )"
+.br
+.ti -1c
+.BI "virtual void removeLine ( int line )"
+.br
+.ti -1c
+.BI "void cursorPosition ( int * " "line" ", int * col ) const"
+.br
+.ti -1c
+.BI "void setCursorPosition ( int " "line" ", int " "col" ", bool " "mark" " = FALSE )"
+.br
+.ti -1c
+.BI "void getCursorPosition ( int * " "line" ", int * col )"
+.br
+.ti -1c
+.BI "bool atBeginning () const"
+.br
+.ti -1c
+.BI "bool atEnd () const"
+.br
+.ti -1c
+.BI "bool autoUpdate () const"
+.br
+.ti -1c
+.BI "void setAutoUpdate ( bool )"
+.br
+.ti -1c
+.BI "void setFixedVisibleLines ( int lines )"
+.br
+.ti -1c
+.BI "int maxLineWidth () const"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "void clear ()"
+.br
+.ti -1c
+.BI "void setText ( const char * )"
+.br
+.ti -1c
+.BI "void append ( const char * )"
+.br
+.ti -1c
+.BI "void deselect ()"
+.br
+.ti -1c
+.BI "void selectAll ()"
+.br
+.ti -1c
+.BI "void setReadOnly ( bool )"
+.br
+.ti -1c
+.BI "void setOverwriteMode ( bool )"
+.br
+.ti -1c
+.BI "void paste ()"
+.br
+.ti -1c
+.BI "void copyText ()"
+.br
+.ti -1c
+.BI "void cut ()"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void textChanged ()"
+.br
+.ti -1c
+.BI "void returnPressed ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void paintCell ( QPainter *, int " "row" ", int col )"
+.br
+.ti -1c
+.BI "virtual void mousePressEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseMoveEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseReleaseEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseDoubleClickEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void keyPressEvent ( QKeyEvent * )"
+.br
+.ti -1c
+.BI "virtual void focusInEvent ( QFocusEvent * )"
+.br
+.ti -1c
+.BI "virtual void focusOutEvent ( QFocusEvent * )"
+.br
+.ti -1c
+.BI "virtual void timerEvent ( QTimerEvent * )"
+.br
+.ti -1c
+.BI "virtual void leaveEvent ( QEvent * )"
+.br
+.ti -1c
+.BI "virtual void resizeEvent ( QResizeEvent * )"
+.br
+.ti -1c
+.BI "bool hasMarkedText () const"
+.br
+.ti -1c
+.BI "QString markedText () const"
+.br
+.ti -1c
+.BI "int textWidth ( int )"
+.br
+.ti -1c
+.BI "int textWidth ( QString * )"
+.br
+.ti -1c
+.BI "QPoint cursorPoint () const"
+.br
+.ti -1c
+.BI "virtual void insertChar ( char )"
+.br
+.ti -1c
+.BI "virtual void newLine ()"
+.br
+.ti -1c
+.BI "virtual void killLine ()"
+.br
+.ti -1c
+.BI "virtual void pageUp ( bool " "mark" "=FALSE )"
+.br
+.ti -1c
+.BI "virtual void pageDown ( bool " "mark" "=FALSE )"
+.br
+.ti -1c
+.BI "virtual void cursorLeft ( bool " "mark" "=FALSE, bool " "wrap" " = TRUE )"
+.br
+.ti -1c
+.BI "virtual void cursorRight ( bool " "mark" "=FALSE, bool " "wrap" " = TRUE )"
+.br
+.ti -1c
+.BI "virtual void cursorUp ( bool " "mark" "=FALSE )"
+.br
+.ti -1c
+.BI "virtual void cursorDown ( bool " "mark" "=FALSE )"
+.br
+.ti -1c
+.BI "virtual void backspace ()"
+.br
+.ti -1c
+.BI "virtual void del ()"
+.br
+.ti -1c
+.BI "virtual void home ( bool " "mark" "=FALSE )"
+.br
+.ti -1c
+.BI "virtual void end ( bool " "mark" "=FALSE )"
+.br
+.ti -1c
+.BI "bool getMarkedRegion ( int * " "line1" ", int * " "col1" ", int * " "line2" ", int * col2 ) const"
+.br
+.ti -1c
+.BI "int lineLength ( int row ) const"
+.br
+.ti -1c
+.BI "QString* getString ( int row ) const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QMultiLineEdit widget is a simple editor for inputting text.
+.PP
+The QMultiLineEdit widget provides multiple line text input and display. It is intended for moderate amounts of text. There are no arbitrary limitations, but if you try to handle megabytes of data, performance will suffer.
+.PP
+This widget can be used to display text by calling setReadOnly(TRUE)
+.PP
+The default key bindings are described in keyPressEvent(); they cannot be customized except by inheriting the class.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+Examples:
+.(l
+mainlyMotif/editor.cpp mainlyQt/editor.cpp application/application.cpp pref/pref.cpp layout/layout.cpp mainlyXt/editor.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QMultiLineEdit::QMultiLineEdit ( QWidget * parent=0, const char * name=0 )"
+Creates a new, empty, QMultiLineEdit.
+.SH "QMultiLineEdit::~QMultiLineEdit ()"
+Destroys the QMultiLineEdit.
+.SH "void QMultiLineEdit::append ( const char * s ) \fC[slot]\fR"
+Appends \fIs\fR to the text.
+.SH "bool QMultiLineEdit::atBeginning () const"
+Returns TRUE if the cursor is placed at the beginning of the text.
+.SH "bool QMultiLineEdit::atEnd () const"
+Returns TRUE if the cursor is placed at the end of the text.
+.SH "bool QMultiLineEdit::autoUpdate () const"
+Returns TRUE if the view updates itself automatically whenever it is changed in some way.
+.PP
+See also: setAutoUpdate().
+.SH "void QMultiLineEdit::backspace () \fC[virtual protected]\fR"
+Deletes the character on the left side of the text cursor and moves the cursor one position to the left. If a text has been marked by the user (e.g. by clicking and dragging) the cursor is put at the beginning of the marked text and the marked text is removed.
+.PP
+See also: del().
+.SH "void QMultiLineEdit::clear () \fC[slot]\fR"
+Removes all text.
+.SH "void QMultiLineEdit::copyText () \fC[slot]\fR"
+Copies the marked text to the clipboard.
+.SH "void QMultiLineEdit::cursorDown ( bool mark=FALSE ) \fC[virtual protected]\fR"
+Moves the cursor one line down. If \fImark\fR is TRUE, the text is marked.
+.PP
+See also: cursorDown(), cursorLeft() and cursorRight().
+.SH "void QMultiLineEdit::cursorLeft ( bool mark=FALSE, bool wrap = TRUE ) \fC[virtual protected]\fR"
+Moves the cursor one character to the left. If \fImark\fR is TRUE, the text is marked. If \fIwrap\fR is TRUE, the cursor moves to the end of the previous line if it is placed at the beginning of the current line.
+.PP
+See also: cursorRight(), cursorUp() and cursorDown().
+.SH "QPoint QMultiLineEdit::cursorPoint () const \fC[protected]\fR"
+Returns the top center point where the cursor is drawn.
+.SH "void QMultiLineEdit::cursorPosition ( int * line, int * col ) const"
+Sets \fIline\fR to the current line and \fIcol\fR to the current character position within that line.
+.PP
+See also: setCursorPosition().
+.SH "void QMultiLineEdit::cursorRight ( bool mark=FALSE, bool wrap = TRUE ) \fC[virtual protected]\fR"
+Moves the cursor one character to the right. If \fImark\fR is TRUE, the text is marked. If \fIwrap\fR is TRUE, the cursor moves to the beginning of the next line if it is placed at the end of the current line.
+.PP
+See also: cursorLeft(), cursorUp() and cursorDown().
+.SH "void QMultiLineEdit::cursorUp ( bool mark=FALSE ) \fC[virtual protected]\fR"
+Moves the cursor up one line. If \fImark\fR is TRUE, the text is marked.
+.PP
+See also: cursorDown(), cursorLeft() and cursorRight().
+.SH "void QMultiLineEdit::cut () \fC[slot]\fR"
+Copies the selected text to the clipboard and deletes the selected text.
+.SH "void QMultiLineEdit::del () \fC[virtual protected]\fR"
+Deletes the character on the right side of the text cursor. If a text has been marked by the user (e.g. by clicking and dragging) the cursor is put at the beginning of the marked text and the marked text is removed.
+.PP
+See also: backspace().
+.SH "void QMultiLineEdit::deselect () \fC[slot]\fR"
+Deselects all text (i.e. removes marking) and leaves the cursor at the current position.
+.SH "void QMultiLineEdit::end ( bool mark=FALSE ) \fC[virtual protected]\fR"
+Moves the text cursor to the right end of the line. If mark is TRUE text is marked towards the last position. If it is FALSE and the cursor is moved, all marked text is unmarked.
+.PP
+See also: home().
+.SH "void QMultiLineEdit::focusInEvent ( QFocusEvent * ) \fC[virtual protected]\fR"
+Starts the cursor blinking.
+.PP
+Reimplemented from QWidget.
+.SH "void QMultiLineEdit::focusOutEvent ( QFocusEvent * ) \fC[virtual protected]\fR"
+stops the cursor blinking.
+.PP
+Reimplemented from QWidget.
+.SH "void QMultiLineEdit::getCursorPosition ( int * line, int * col )"
+Sets \fIline\fR to the current line and \fIcol\fR to the current character position within that line.
+.PP
+OBSOLETE - Use cursorPosition() instead.
+.SH "bool QMultiLineEdit::getMarkedRegion ( int * line1, int * col1, int * line2, int * col2 ) const \fC[protected]\fR"
+If there is marked text, sets \fIline1, col1, line2\fR and \fIcol2\fR to the start and end of the marked region and returns TRUE. Returns FALSE if there is no marked text.
+.SH "QString * QMultiLineEdit::getString ( int line ) const \fC[protected]\fR"
+Returns a pointer to the text at line \fIline.\fR
+.SH "bool QMultiLineEdit::hasMarkedText () const \fC[protected]\fR"
+Returns TRUE if there is marked text.
+.SH "void QMultiLineEdit::home ( bool mark=FALSE ) \fC[virtual protected]\fR"
+Moves the text cursor to the left end of the line. If \fImark\fR is TRUE, text is marked towards the first position. If it is FALSE and the cursor is moved, all marked text is unmarked.
+.PP
+See also: end().
+.SH "void QMultiLineEdit::insertAt ( const char * txt, int line, int col ) \fC[virtual]\fR"
+Inserts \fItxt\fR at line number \fIline,\fR after character number \fIcol\fR in the line. If \fItxt\fR contains newline characters, new lines are inserted.
+.PP
+The cursor position is adjusted. If the insertion position is equal to the cursor poition, the cursor is placed after the end of the new text.
+.SH "void QMultiLineEdit::insertChar ( char c ) \fC[virtual protected]\fR"
+Inserts \fIc\fR at the current cursor position.
+.SH "void QMultiLineEdit::insertLine ( const char * txt, int line = -1 ) \fC[virtual]\fR"
+Inserts \fItxt\fR at line number \fIline.\fR If \fIline\fR is less than zero, or larger than the number of rows, the new text is put at the end. If \fItxt\fR contains newline characters, several lines are inserted.
+.PP
+The cursor position is not changed.
+.SH "bool QMultiLineEdit::isOverwriteMode () const"
+Returns TRUE if this multi line edit is in overwrite mode, i.e. if characters typed replace characters in the editor.
+.PP
+See also: setOverwriteMode().
+.SH "bool QMultiLineEdit::isReadOnly () const"
+Returns FALSE if this multi line edit accepts text input. Scrolling and cursor movements are accepted in any case.
+.PP
+See also: setReadOnly() and QWidget::isEnabled().
+.SH "void QMultiLineEdit::keyPressEvent ( QKeyEvent * e ) \fC[virtual protected]\fR"
+The key press event handler converts a key press to some line editor action.
+.PP
+Here are the default key bindings when isReadOnly() is FALSE:
+.TP
+\fI Left Arrow \fR Move the cursor one character leftwards
+.TP
+\fI Right Arrow \fR Move the cursor one character rightwards
+.TP
+\fI Up Arrow \fR Move the cursor one line upwards
+.TP
+\fI Down Arrow \fR Move the cursor one line downwards
+.TP
+\fI Page Up \fR Move the cursor one page upwards
+.TP
+\fI Page Down \fR Move the cursor one page downwards
+.TP
+\fI Backspace \fR Delete the character to the left of the cursor
+.TP
+\fI Home \fR Move the cursor to the beginning of the line
+.TP
+\fI End \fR Move the cursor to the end of the line
+.TP
+\fI Delete \fR Delete the character to the right of the cursor
+.TP
+\fI Shift - Left Arrow \fR Mark text one character leftwards
+.TP
+\fI Shift - Right Arrow \fR Mark text one character rightwards
+.TP
+\fI Control-A \fR Move the cursor to the beginning of the line
+.TP
+\fI Control-B \fR Move the cursor one character leftwards
+.TP
+\fI Control-C \fR Copy the marked text to the clipboard.
+.TP
+\fI Control-D \fR Delete the character to the right of the cursor
+.TP
+\fI Control-E \fR Move the cursor to the end of the line
+.TP
+\fI Control-F \fR Move the cursor one character rightwards
+.TP
+\fI Control-H \fR Delete the character to the left of the cursor
+.TP
+\fI Control-K \fR Delete to end of line
+.TP
+\fI Control-N \fR Move the cursor one line downwards
+.TP
+\fI Control-P \fR Move the cursor one line upwards
+.TP
+\fI Control-V \fR Paste the clipboard text into line edit.
+.TP
+\fI Control-X \fR Cut the marked text, copy to clipboard. All other keys with valid ASCII codes insert themselves into the line.
+.PP
+Here are the default key bindings when isReadOnly() is TRUE:
+.TP
+\fI Left Arrow \fR Scrolls the table rightwards
+.TP
+\fI Right Arrow \fR Scrolls the table rightwards
+.TP
+\fI Up Arrow \fR Scrolls the table one line downwards
+.TP
+\fI Down Arrow \fR Scrolls the table one line upwards
+.TP
+\fI Page Up \fR Scrolls the table one page downwards
+.TP
+\fI Page Down \fR Scrolls the table one page upwards
+.PP
+Reimplemented from QWidget.
+.SH "void QMultiLineEdit::killLine () \fC[virtual protected]\fR"
+Deletes text from the current cursor position to the end of the line.
+.SH "void QMultiLineEdit::leaveEvent ( QEvent * ) \fC[virtual protected]\fR"
+Handles auto-copy of selection (X11 only).
+.PP
+Reimplemented from QWidget.
+.SH "int QMultiLineEdit::lineLength ( int line ) const \fC[protected]\fR"
+Returns the number of characters at line number \fIline.\fR
+.SH "QString QMultiLineEdit::markedText () const \fC[protected]\fR"
+Returns a copy of the marked text.
+.SH "int QMultiLineEdit::maxLineWidth () const"
+Returns the width in pixels of the longest text line in this editor.
+.SH "void QMultiLineEdit::mouseDoubleClickEvent ( QMouseEvent * m ) \fC[virtual protected]\fR"
+Handles double click events.
+.PP
+Reimplemented from QWidget.
+.SH "void QMultiLineEdit::mouseMoveEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse move events.
+.PP
+Reimplemented from QWidget.
+.SH "void QMultiLineEdit::mousePressEvent ( QMouseEvent * m ) \fC[virtual protected]\fR"
+Handles mouse press events.
+.PP
+Reimplemented from QWidget.
+.SH "void QMultiLineEdit::mouseReleaseEvent ( QMouseEvent * ) \fC[virtual protected]\fR"
+Handles mouse release events.
+.PP
+Reimplemented from QWidget.
+.SH "void QMultiLineEdit::newLine () \fC[virtual protected]\fR"
+Makes a line break at the current cursor position.
+.SH "int QMultiLineEdit::numLines () const"
+Returns the number of lines in the editor. The count includes any empty lines at top and bottom, so for an empty editor this method will return 1.
+.SH "void QMultiLineEdit::pageDown ( bool mark=FALSE ) \fC[virtual protected]\fR"
+Moves the cursor one page down. If \fImark\fR is TRUE, the text is marked.
+.SH "void QMultiLineEdit::pageUp ( bool mark=FALSE ) \fC[virtual protected]\fR"
+Moves the cursor one page up. If \fImark\fR is TRUE, the text is marked.
+.SH "void QMultiLineEdit::paintCell ( QPainter * painter, int row, int ) \fC[virtual protected]\fR"
+Implements the basic drawing logic.
+.PP
+Reimplemented from QTableView.
+.SH "void QMultiLineEdit::paste () \fC[slot]\fR"
+Copies text from the clipboard onto the current cursor position. Any marked text is first deleted.
+.SH "void QMultiLineEdit::removeLine ( int line ) \fC[virtual]\fR"
+Deletes the line at line number \fIline.\fR If \fIline\fR is less than zero, or larger than the number of lines, no line is deleted.
+.SH "void QMultiLineEdit::resizeEvent ( QResizeEvent * e ) \fC[virtual protected]\fR"
+Reimplemented to set the column width, so that repaint(FALSE) is safe.
+.PP
+Reimplemented from QWidget.
+.SH "void QMultiLineEdit::returnPressed () \fC[signal]\fR"
+This signal is emitted when the user presses the return or enter key. It is not emitted if isReadOnly() is TRUE.
+.PP
+See also: textChanged().
+.SH "void QMultiLineEdit::selectAll () \fC[slot]\fR"
+Selects all text without moving the cursor.
+.SH "void QMultiLineEdit::setAutoUpdate ( bool enable )"
+Sets the auto-update option of multi-line editor to \fIenable.\fR
+.PP
+If \fIenable\fR is TRUE (this is the default) then the editor updates itself automatically whenever it has changed in some way (generally, when text has been inserted or deleted).
+.PP
+If \fIenable\fR is FALSE, the view does NOT repaint itself, or update its internal state variables itself when it is changed. This can be useful to avoid flicker during large changes, and is singularly useless otherwise: Disable auto-update, do the changes, re-enable auto-update, and call repaint().
+.PP
+\fBWarning:\fR Do not leave the view in this state for a long time (i.e. between events ). If, for example, the user interacts with the view when auto-update is off, strange things can happen.
+.PP
+Setting auto-update to TRUE does not repaint the view, you must call repaint() to do this.
+.PP
+See also: autoUpdate() and repaint().
+.SH "void QMultiLineEdit::setCursorPosition ( int line, int col, bool mark = FALSE )"
+Sets the cursor position to character number \fIcol\fR in line number \fIline.\fR The parameters are adjusted to lie within the legal range.
+.PP
+If \fImark\fR is FALSE, the selection is cleared. otherwise it is extended
+.PP
+See also: cursorPosition().
+.SH "void QMultiLineEdit::setFixedVisibleLines ( int lines )"
+Sets the fixed height of the QMultiLineEdit so that \fIlines\fR text lines are visible given the current font.
+.PP
+See also: setFixedHeight().
+.SH "void QMultiLineEdit::setFont ( const QFont & font ) \fC[virtual]\fR"
+Reimplements QWidget::setFont() to update the list box line height.
+.PP
+Reimplemented from QWidget.
+.SH "void QMultiLineEdit::setOverwriteMode ( bool on ) \fC[slot]\fR"
+Sets overwrite mode if \fIon\fR is TRUE. Overwrite mode means that characters typed replace characters in the editor.
+.PP
+See also: isOverwriteMode().
+.SH "void QMultiLineEdit::setReadOnly ( bool on ) \fC[slot]\fR"
+If \fIon\fR is FALSE, this multi line edit accepts text input. Scrolling and cursor movements are accepted in any case.
+.PP
+See also: inputEnabled() and QWidget::setEnabled().
+.SH "void QMultiLineEdit::setText ( const char * s ) \fC[slot]\fR"
+Sets the text to \fIs,\fR removing old text, if any.
+.PP
+Examples:
+.(l
+mainlyMotif/editor.cpp mainlyQt/editor.cpp mainlyXt/editor.cpp widgets/widgets.cpp
+.)l
+.SH "QString QMultiLineEdit::text () const"
+Returns a copy of the whole text. If the multi line edit contains no text, the empty string is returned.
+.SH "void QMultiLineEdit::textChanged () \fC[signal]\fR"
+This signal is emitted when the text is changed by an event or by a slot. Note that the signal is not emitted when you call a non-slot function such as insertLine().
+.PP
+See also: returnPressed().
+.SH "const char * QMultiLineEdit::textLine ( int line ) const"
+Returns the text at line number \fIline,\fR or 0 if \fIline\fR is invalid.
+.SH "int QMultiLineEdit::textWidth ( QString * s ) \fC[protected]\fR"
+Returns the width in pixels of the string \fIs.\fR NOTE: only appropriate for whole lines.
+.SH "int QMultiLineEdit::textWidth ( int line ) \fC[protected]\fR"
+Returns the width in pixels of the text at line \fIline.\fR
+.SH "void QMultiLineEdit::timerEvent ( QTimerEvent * t ) \fC[virtual protected]\fR"
+Cursor blinking, drag scrolling.
+.PP
+Reimplemented from QObject.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qmultilineedit.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

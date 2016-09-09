@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QFocusData Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QFocusData Class Reference</h1><br clear="all">
+<p>
+Maintains the list of widgets which can take focus.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qfocusdata-h.html">qfocusdata.h</a>&gt;</code>
+<p><a href="qfocusdata-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn">QWidget* <a href="qfocusdata.html#a0"><strong>focusWidget</strong></a> () const</span>
+<li><span class="fn">QWidget* <a href="qfocusdata.html#a1"><strong>home</strong></a> () </span>
+<li><span class="fn">QWidget* <a href="qfocusdata.html#a2"><strong>next</strong></a> () </span>
+<li><span class="fn">QWidget* <a href="qfocusdata.html#a3"><strong>prev</strong></a> () </span>
+<li><span class="fn">int <a href="qfocusdata.html#a4"><strong>count</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+Maintains the list of widgets which can take focus.
+<p>
+This read-only list always contains at least one widget (the
+top-level widget, actually).  It provides a simple cursor, which can
+be reset to the current focus widget using <a href="qfocusdata.html#a1">home</a>(), or moved to its
+neighboring widgets using <a href="qfocusdata.html#a2">next</a>() and <a href="qfocusdata.html#a3">prev</a>(), and a <a href="qfocusdata.html#a4">count</a>() of
+widgets in the list.
+<p>Note that some widgets in the list may not accept focus.  Widgets
+are added to the list as necessary, but not removed from it.  This
+lets widgets change focus policy dynamically without disrupting the
+focus chain the user sees: When a widget disables and re-enables tab
+focus, its position in the focus chain does not change.
+<p>When reimplementing <a href="qwidget.html#q3">QWidget::focusNextPrevChild</a>() to provide special
+focus flow, you will usually call <a href="qwidget.html#q5">QWidget::focusData</a>() to retrieve
+the focus data stored at the top-level widget - the focus data for
+that hierarchy of widgets.
+<p>The cursor may change at any time; this class is not thread-safe.
+<p>See also:  <a href="qwidget.html#q3">QWidget::focusNextPrevChild</a>(), <a href="qwidget.html#u1">QWidget::setTabOrder</a>() and <a href="qwidget.html#i0">QWidget::setFocusPolicy</a>().
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn">int <a name="a4"></a>QFocusData::count () const</h3>
+<p>Returns a count of the number of widgets in the hierarchy which accept focus.
+<h3 class="fn"><a href="qwidget.html">QWidget</a>* <a name="a0"></a>QFocusData::focusWidget () const</h3>
+<p>Returns the widgets in the hierarchy which currently has focus.
+<h3 class="fn"><a href="qwidget.html">QWidget</a>* <a name="a1"></a>QFocusData::home ()</h3>
+<p>Moves the cursor to the <a href="qfocusdata.html#a0">focusWidget</a>() and returns that widget.
+You must call this before <a href="qfocusdata.html#a2">next</a>() or <a href="qfocusdata.html#a3">prev</a>() to iterate meaningfully.
+<h3 class="fn"><a href="qwidget.html">QWidget</a>* <a name="a2"></a>QFocusData::next ()</h3>
+<p>Moves the cursor to the right.  Note that the focus widgets
+are a <em>loop</em> of widgets.  If you keep calling next(), it will
+loop, without ever returning 0.
+<h3 class="fn"><a href="qwidget.html">QWidget</a>* <a name="a3"></a>QFocusData::prev ()</h3>
+<p>Moves the cursor to the left.  Note that the focus widgets
+are a <em>loop</em> of widgets.  If you keep calling prev(), it will
+loop, without ever returning 0.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qfocusdata.h: 1998/08/25
+<li>qfocusdata.cpp: 1998/08/12
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

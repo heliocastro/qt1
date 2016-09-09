@@ -1,0 +1,75 @@
+.TH QTextDrag 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QTextDrag \- The QTextDrag provides a drag-and-drop object for transferring plain text
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qdragobject.h>\fR
+.PP
+Inherits QStoredDrag.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QTextDrag ( const char *, QWidget * " "dragSource" " = 0, const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "QTextDrag ( QWidget * " "dragSource" " = 0, const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "\fB~QTextDrag\fR ()"
+.br
+.ti -1c
+.BI "void setText ( const char * )"
+.br
+.in -1c
+.SS "Static Public Members"
+.in +1c
+.ti -1c
+.BI "bool canDecode ( QDragMoveEvent * e )"
+.br
+.ti -1c
+.BI "bool decode ( QDropEvent * " "e" ", QString & s )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QTextDrag provides a drag-and-drop object for transferring plain text.
+.PP
+Plain text is defined as single- or multi-line US-ASCII or an unspecified 8-bit character set.
+.PP
+Qt provides no built-in mechanism for delivering only single-line or only US-ASCII text.
+.PP
+Drag&Drop text does \fInot\fR have a NUL terminator when it is dropped onto the target.
+.PP
+For detailed information about drag-and-drop, see the QDragObject class.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QTextDrag::QTextDrag ( QWidget * dragSource = 0, const char * name = 0 )"
+Creates a default text drag object. \fIdragSource\fR must be the drag source, \fIname\fR is the object name.
+.SH "QTextDrag::QTextDrag ( const char * text, QWidget * dragSource = 0, const char * name = 0 )"
+Creates a text drag object and sets it to \fItext. dragSource\fR must be the drag source, \fIname\fR is the object name.
+.SH "QTextDrag::~QTextDrag ()"
+Destroys the text drag object and frees all allocated resources.
+.SH "bool QTextDrag::canDecode ( QDragMoveEvent * e ) \fC[static]\fR"
+Returns TRUE if the information in \fIe\fR can be decoded into a QString.
+.PP
+See also: decode().
+.SH "bool QTextDrag::decode ( QDropEvent * e, QString & str ) \fC[static]\fR"
+Attempts to decode the dropped information in \fIe\fR into \fIstr,\fR returning TRUE if successful.
+.PP
+See also: decode().
+.SH "void QTextDrag::setText ( const char * text )"
+Sets the text to be dragged.  You will need to call this if you did
+not pass the text during construction.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qtextdrag.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

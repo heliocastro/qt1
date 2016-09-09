@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QCacheIterator Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QCacheIterator Class Reference</h1><br clear="all">
+<p>
+The QCacheIterator class provides an iterator for <a href="qcache.html">QCache</a> collections.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qcache-h.html">qcache.h</a>&gt;</code>
+<p>
+Inherits <a href="qgcacheiterator.html">QGCacheIterator</a>.
+<p><a href="qcacheiterator-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qcacheiterator.html#a0"><strong>QCacheIterator</strong></a> ( const QCache&lt;type&gt; &amp; cache ) </span>
+<li><span class="fn"><a href="qcacheiterator.html#a1"><strong>QCacheIterator</strong></a> ( const QCacheIterator&lt;type&gt; &amp; ci ) </span>
+<li><span class="fn">QCacheIterator&lt;type&gt;&amp; <a href="qcacheiterator.html#a2"><strong>operator=</strong></a> ( const QCacheIterator&lt;type&gt; &amp; ci ) </span>
+<li><span class="fn">uint <a href="qcacheiterator.html#a3"><strong>count</strong></a> () const</span>
+<li><span class="fn">bool <a href="qcacheiterator.html#a4"><strong>isEmpty</strong></a> () const</span>
+<li><span class="fn">bool <a href="qgcacheiterator.html#a5"><strong>atFirst</strong></a> () const</span>
+<li><span class="fn">bool <a href="qgcacheiterator.html#a6"><strong>atLast</strong></a> () const</span>
+<li><span class="fn">type* <a href="qcacheiterator.html#a7"><strong>toFirst</strong></a> () </span>
+<li><span class="fn">type* <a href="qcacheiterator.html#a8"><strong>toLast</strong></a> () </span>
+<li><span class="fn">operator <a href=qcacheiterator.html#b7><strong>type*</strong></a> ()const</span>
+<li><span class="fn">type* <a href="qcacheiterator.html#a9"><strong>current</strong></a> () const</span>
+<li><span class="fn">const char* <a href="qcacheiterator.html#b0"><strong>currentKey</strong></a> () const</span>
+<li><span class="fn">type* <a href="qcacheiterator.html#b1"><strong>operator</strong></a> () </span>
+<li><span class="fn">type* <a href="qcacheiterator.html#b2"><strong>operator++</strong></a> () </span>
+<li><span class="fn">type* <a href="qcacheiterator.html#b3"><strong>operator+=</strong></a> ( uint jump ) </span>
+<li><span class="fn">type* <a href="qcacheiterator.html#b4"><strong>operator--</strong></a> () </span>
+<li><span class="fn">type* <a href="qcacheiterator.html#b5"><strong>operator-=</strong></a> ( uint jump ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QCacheIterator class provides an iterator for <a href="qcache.html">QCache</a> collections.
+<p>
+Note that the traversal order is arbitrary, you are not guaranteed
+any particular order.  If new objects are inserted into the cache
+while the iterator is active, the iterator may or may not see them.
+<p>Multiple iterators are completely independent, even when they
+operate on the same QCache. QCache updates all iterators that refer
+an item when that itam is removed.
+<p>QCacheIterator provides an <a href="qcacheiterator.html#b2">operator++</a>(), and an <a href="qcacheiterator.html#b3">operator+=</a>() to
+traverse the cache, <a href="qcacheiterator.html#a9">current</a>() and <a href="qcacheiterator.html#b0">currentKey</a>() to access the current
+cache item and its key, <a href="qgcacheiterator.html#a5">atFirst</a>() <a href="qgcacheiterator.html#a6">atLast</a>() which return TRUE if the
+iterator points to the first/last item in the cache, <a href="qcacheiterator.html#a4">isEmpty</a>() which
+returns TRUE if the cache is empty and finally <a href="qcacheiterator.html#a3">count</a>() which returns
+the number of items in the cache.
+<p>Note that atFirst() and atLast() refer to the iterator's arbitrary
+ordering, not to the cache's internal LRU list.
+<p>See also:  <a href="qcache.html">QCache</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QCacheIterator::QCacheIterator ( const <a href="qcache.html">QCache</a>&lt;type&gt; &amp; cache )</h3>
+<p>Constructs an iterator for <em>cache.</em>  The current iterator item is
+set to point on the first item in the <em>cache</em> (or rather, the first
+item is defined to be the item at which this constructor sets the
+iterator to point).
+<h3 class="fn"><a name="a1"></a>QCacheIterator::QCacheIterator ( const QCacheIterator&lt;type&gt; &amp; ci )</h3>
+<p>Constructs an iterator for the same cache as <em>ci.</em>  The new
+iterator starts at the same item as ci.<a href="qcacheiterator.html#a9">current</a>(), but moves
+independently thereafter.
+<h3 class="fn"><a name="b7"></a>QCacheIterator::operator type * () const</h3>
+<p>Cast operator. Returns a pointer to the current iterator item.
+Same as <a href="qcacheiterator.html#a9">current</a>().
+<h3 class="fn">uint <a name="a3"></a>QCacheIterator::count () const</h3>
+<p>Returns the number of items in the cache on whichthis iterator operates.
+<p>See also:  <a href="qcacheiterator.html#a4">isEmpty</a>().
+<h3 class="fn">type * <a name="a9"></a>QCacheIterator::current () const</h3>
+<p>Returns a pointer to the current iterator item.
+<h3 class="fn">const char * <a name="b0"></a>QCacheIterator::currentKey () const</h3>
+<p>Returns a pointer to the key for the current iterator item.
+<h3 class="fn">bool <a name="a4"></a>QCacheIterator::isEmpty () const</h3>
+<p>Returns TRUE if the cache is empty, i.e. <a href="qcacheiterator.html#a3">count</a>() == 0, otherwise
+FALSE.
+<p>See also:  <a href="qcacheiterator.html#a3">count</a>().
+<h3 class="fn">type * <a name="b1"></a>QCacheIterator::operator() ()</h3>
+<p>Makes the succeeding item current and returns the original current
+item.
+<p>If the current iterator item was the last item in the cache or if it
+was null, null is returned.
+<h3 class="fn">type * <a name="b2"></a>QCacheIterator::operator++ ()</h3>
+<p>Prefix ++ makes the iterator point to the item just after <em><a href="qcacheiterator.html#a9">current</a>(),</em> and makes that the new current item for the iterator.  If
+current() was the last item, <a href="qcacheiterator.html#b4">operator--</a>() returns 0.
+<h3 class="fn">type * <a name="b3"></a>QCacheIterator::operator+= ( uint jump )</h3>
+<p>Returns the item <em>jump</em> positions after the current item, or null if
+it is beyond the last item.  Makes this the current item.
+<h3 class="fn">type * <a name="b4"></a>QCacheIterator::operator-- ()</h3>
+<p>Prefix -- makes the iterator point to the item just before <em><a href="qcacheiterator.html#a9">current</a>(),</em> and makes that the new current item for the iterator.  If
+current() was the first item, operator--() returns 0.
+<h3 class="fn">type * <a name="b5"></a>QCacheIterator::operator-= ( uint jump )</h3>
+<p>Returns the item <em>jump</em> positions before the current item, or null if
+it is beyond the first item.  Makes this the current item.
+<h3 class="fn">QCacheIterator&lt;type&gt;&amp; <a name="a2"></a>QCacheIterator::operator= ( const QCacheIterator&lt;type&gt; &amp; ci )</h3>
+<p>Makes this an iterator for the same cache as <em>ci.</em>  The new
+iterator starts at the same item as ci.<a href="qcacheiterator.html#a9">current</a>(), but moves
+independently thereafter.
+<h3 class="fn">type * <a name="a7"></a>QCacheIterator::toFirst ()</h3>
+<p>Sets the iterator to point to the first item in the cache and
+returns a pointer to the item.
+<p>Sets the iterator to null and returns null if if the cache is empty.
+<p>See also:  <a href="qcacheiterator.html#a8">toLast</a>() and <a href="qcacheiterator.html#a4">isEmpty</a>().
+<h3 class="fn">type * <a name="a8"></a>QCacheIterator::toLast ()</h3>
+<p>Sets the iterator to point to the last item in the cache and
+returns a pointer to the item.
+<p>Sets the iterator to null and returns null if if the cache is empty.
+<p>See also:  toLast() and <a href="qcacheiterator.html#a4">isEmpty</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qcache.h: 1998/08/27
+<li>qcache.doc: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

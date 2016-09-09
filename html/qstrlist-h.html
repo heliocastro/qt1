@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qstrlist.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qstrlist.h</h1><br clear="all">
+This is the verbatim text of the qstrlist.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qstrlist.h,v 2.12.2.3 1998/08/25 09:20:55 hanord Exp $
+**
+** Definition of QStrList, QStrIList and QStrListIterator classes
+**
+** Created : 920730
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QSTRLIST_H
+#define QSTRLIST_H
+
+#ifndef QT_H
+#include "qstring.h"
+#include "qlist.h"
+#include "qdatastream.h"
+#endif // QT_H
+
+
+#if defined(DEFAULT_TEMPLATECLASS)
+#if defined(Q_TEMPLATEDLL)
+template class Q_EXPORT QList&lt;char&gt;;
+template class Q_EXPORT QListIterator&lt;char&gt;;
+#endif
+typedef QList&lt;char&gt;                     QStrListBase;
+typedef QListIterator&lt;char&gt;             QStrListIterator;
+#else
+typedef Q_DECLARE(QListM,char)          QStrListBase;
+typedef Q_DECLARE(QListIteratorM,char)  QStrListIterator;
+#endif
+
+
+class Q_EXPORT QStrList : public QStrListBase
+{
+public:
+    QStrList( bool deepCopies=TRUE ) { dc = deepCopies; }
+    QStrList( const QStrList &amp; );
+   ~QStrList()                  { clear(); }
+    QStrList&amp; operator=( const QStrList &amp; );
+
+private:
+    GCI   newItem( GCI d )      { return dc ? qstrdup( (const char*)d ) : d; }
+    void  deleteItem( GCI d )   { if ( dc ) delete[] (char*)d; }
+    int   compareItems( GCI s1, GCI s2 )
+                                { return strcmp((const char*)s1,
+                                                (const char*)s2); }
+    QDataStream &amp;read( QDataStream &amp;s, GCI &amp;d )
+                                { s &gt;&gt; (char *&amp;)d; return s; }
+    QDataStream &amp;write( QDataStream &amp;s, GCI d ) const
+                                { return s &lt;&lt; (const char *)d; }
+    bool  dc;
+};
+
+
+class Q_EXPORT QStrIList : public QStrList      // case insensitive string list
+{
+public:
+    QStrIList( bool deepCopies=TRUE ) : QStrList( deepCopies ) {}
+   ~QStrIList()                 { clear(); }
+private:
+    int   compareItems( GCI s1, GCI s2 )
+                                { return stricmp((const char*)s1,
+                                                 (const char*)s2); }
+};
+
+
+inline QStrList &amp; QStrList::operator=( const QStrList &amp;strList )
+{
+    clear();
+    dc = strList.dc;
+    QStrListBase::operator=(strList);
+    return *this;
+}
+
+inline QStrList::QStrList( const QStrList &amp;strList )
+    : QStrListBase( strList )
+{
+    dc = FALSE;
+    operator=(strList);
+}
+
+
+#endif // QSTRLIST_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

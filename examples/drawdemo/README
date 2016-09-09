@@ -1,0 +1,4 @@
+The drawdemo program demonstrates several drawing functions and printer
+output.
+
+You can easily add your own drawing functions.  See "ourDrawFunctions".

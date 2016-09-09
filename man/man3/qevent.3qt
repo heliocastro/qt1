@@ -1,0 +1,54 @@
+.TH QEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QEvent \- Base class of all event classes. Event objects contain event parameters
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherited by QChildEvent, QCloseEvent, QCustomEvent, QDragLeaveEvent, QDragMoveEvent, QDragResponseEvent, QDropEvent, QFocusEvent, QHideEvent, QKeyEvent, QMouseEvent, QMoveEvent, QPaintEvent, QResizeEvent, QShowEvent and QTimerEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QEvent ( int type )"
+.br
+.ti -1c
+.BI "\fB~QEvent\fR ()"
+.br
+.ti -1c
+.BI "int type () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QEvent class is base class of all event classes. Event objects contain event parameters.
+.PP
+The main event loop of Qt fetches native window system events from the event queue, translates them into QEvent and sends the translated events to QObjects.
+.PP
+Generally, events come from the underlying window system, but it is also possible to manually send events through the QApplication class using QApplication::sendEvent() and QApplication::postEvent().
+.PP
+QObject received events by having its QObject::event() function called. The default implementation simply calls QObject::timerEvent() for timer events and ignores all other events. QWidget reimplements event() and dispatches incoming events to various event handles such as QWidget::keyPressEvent() and QWidget::mouseMoveEvent().
+.PP
+The basic QEvent only contains an event type parameter. Subclasses of QEvent contain additional parameters that descripe the particular event.
+.PP
+See also: QObject::event(), QObject::installEventFilter(), QWidget::event(), QApplication::sendEvent(), QApplcation::postEvent() and QApplication::processEvents().
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QEvent::QEvent ( int type )"
+Contructs an event object with a \fItype.\fR The file qevent.h lists all event types.
+.SH "QEvent::~QEvent ()"
+Destroys the event. Reports an error if the event has been posted.
+.SH "int QEvent::type () const"
+Returns the event type.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

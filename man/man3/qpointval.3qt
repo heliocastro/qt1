@@ -1,0 +1,73 @@
+.TH QPointVal 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QPointVal \- Internal class, used with QPointArray
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qpointarray.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QPointVal ( QPointData * ptr )"
+.br
+.ti -1c
+.BI "bool operator== ( const QPointVal & point ) const"
+.br
+.ti -1c
+.BI "bool operator!= ( const QPointVal & point ) const"
+.br
+.ti -1c
+.BI "QPointVal& operator= ( const QPointVal & point )"
+.br
+.ti -1c
+.BI "QPointVal& operator= ( const QPoint & point )"
+.br
+.ti -1c
+.BI "QPointVal& operator+= ( const QPoint & point )"
+.br
+.ti -1c
+.BI "QPointVal& operator-= ( const QPoint & point )"
+.br
+.ti -1c
+.BI "operator QPoint ()const"
+.br
+.ti -1c
+.BI "int \fBx\fR () const"
+.br
+.ti -1c
+.BI "int \fBy\fR () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QPointVal class is an internal class, used with QPointArray.
+.PP
+The QPointVal is required by the indexing [] operator on point arrays. It is probably a bad idea to use it in any other context.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QPointVal::QPointVal ( QPointData * ptr )"
+Constructs a reference to an element in a QPointArray. This is what QPointArray::operator[] contructs its return value with.
+.SH "QPointVal::operator QPoint () const"
+Returns the value of the point referenced by this QPointVal.
+.SH "QPointVal& QPointVal::operator+= ( const QPoint & point )"
+Vector-adds a given point to the value referenced by this QPointVal.
+.SH "QPointVal& QPointVal::operator-= ( const QPoint & point )"
+Vector-subtracts a given point to the value referenced by this QPointVal.
+.SH "QPointVal& QPointVal::operator= ( const QPoint & point )"
+Assigns a given point to the value referenced by this QPointVal.
+.SH "int QPointVal::x () const"
+Returns the X coordinate of the point referenced by this QPointVal.
+.SH "int QPointVal::y () const"
+Returns the Y coordinate of the point referenced by this QPointVal.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qpointval.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

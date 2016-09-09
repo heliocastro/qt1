@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QLayout Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QLayout Class Reference</h1><br clear="all">
+<p>
+The QLayout class is the base class of geometry specifiers.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qlayout-h.html">qlayout.h</a>&gt;</code>
+<p>
+Inherits <a href="qobject.html">QObject</a>.
+<p>Inherited by <a href="qboxlayout.html">QBoxLayout</a> and <a href="qgridlayout.html">QGridLayout</a>.
+<p><a href="qlayout-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn">virtual <a href="qlayout.html#a0"><strong>~QLayout</strong></a> () </span>
+<li><span class="fn">int <a href="qlayout.html#a1"><strong>defaultBorder</strong></a> () const</span>
+<li><span class="fn">enum { unlimited = QCOORD_MAX }</span>
+<li><span class="fn">virtual bool <a href="qlayout.html#a2"><strong>activate</strong></a> () </span>
+<li><span class="fn">void <a href="qlayout.html#a3"><strong>freeze</strong></a> ( int w, int h ) </span>
+<li><span class="fn">void <a href="qlayout.html#a4"><strong>freeze</strong></a> () </span>
+<li><span class="fn">void <a href="qlayout.html#a5"><strong>setMenuBar</strong></a> ( QMenuBar * w ) </span>
+<li><span class="fn">QWidget* <a href="qlayout.html#a6"><strong>mainWidget</strong></a> () </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn"><a href="qlayout.html#a7"><strong>QLayout</strong></a> ( QWidget * parent, int border, int autoBorder, const char * name ) </span>
+<li><span class="fn"><a href="qlayout.html#a8"><strong>QLayout</strong></a> ( int autoBorder = -1, const char * name=0 ) </span>
+<li><span class="fn">QGManager* <a href="qlayout.html#a9"><strong>basicManager</strong></a> () </span>
+<li><span class="fn">virtual QChain* <a href="qlayout.html#b0"><strong>mainVerticalChain</strong></a> () </span>
+<li><span class="fn">virtual QChain* <a href="qlayout.html#b1"><strong>mainHorizontalChain</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qlayout.html#b2"><strong>initGM</strong></a> () </span>
+<li><span class="fn">void <a href="qlayout.html#b3"><strong>addChildLayout</strong></a> ( QLayout * ) </span>
+</ul>
+<h2>Static Protected Members</h2>
+<ul>
+<li><span class="fn">QChain* <a href="qlayout.html#b8"><strong>verChain</strong></a> ( QLayout * l ) </span>
+<li><span class="fn">QChain* <a href="qlayout.html#b7"><strong>horChain</strong></a> ( QLayout * l ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QLayout class is the base class of geometry specifiers.
+<p>
+This is an abstract base class. The concrete layout managers
+<a href="qboxlayout.html">QBoxLayout</a> and <a href="qgridlayout.html">QGridLayout</a> inherit from this one and make QLayout's
+functionality avaialble in friendly APIs.
+<p>Most users of Q*Layout are likely to use some of the basic functions
+provided by QLayout, such as <ul><li><a href="qlayout.html#a2">activate</a>(), which compiles the
+layout into an internal representation and activates the result,
+<li> <a href="qlayout.html#a5">setMenuBar</a>(), which is necessary to manage a menu bar because
+of the special properties of menu bars, and <li> <a href="qlayout.html#a3">freeze</a>(), which
+allows you to freeze the widget's size and layout. </ul>
+<p>Geometry management stops when the layout manager is deleted.
+<p>To make a new layout manager, you need to implement the functions
+<a href="qlayout.html#b0">mainVerticalChain</a>(), <a href="qlayout.html#b1">mainHorizontalChain</a>() and <a href="qlayout.html#b2">initGM</a>().
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a7"></a>QLayout::QLayout ( <a href="qwidget.html">QWidget</a> * parent, int border, int autoBorder, const char * name ) <code>[protected]</code></h3>
+<p>Creates a new top-level QLayout with main widget <em>parent. parent</em> may not be 0.
+<p><em>border</em> is the number of pixels between the edge of the widget and
+the managed children.  <em>autoBorder</em> sets the value of <a href="qlayout.html#a1">defaultBorder</a>(), which
+is interpreted by subclasses.  If <em>autoBorder</em> is -1 the value
+of <em>border</em> is used.
+<p><em>name</em> is the internal object name
+<p>Having several top-level layouts for the same widget will cause
+considerable confusion.
+<h3 class="fn"><a name="a8"></a>QLayout::QLayout ( int autoBorder = -1, const char * name=0 ) <code>[protected]</code></h3>
+<p>Constructs a new child QLayout,
+If <em>autoBorder</em> is -1, this QLayout inherits <em>parent's</em>
+<a href="qlayout.html#a1">defaultBorder</a>(), otherwise <em>autoBorder</em> is used.
+<h3 class="fn"><a name="a0"></a>QLayout::~QLayout () <code>[virtual]</code></h3>
+<p>Deletes all children layouts. Geometry management stops when
+a toplevel layout is deleted.
+<h3 class="fn">bool <a name="a2"></a>QLayout::activate () <code>[virtual]</code></h3>
+<p>Starts geometry management - analogous to show() for widgets.
+This function should only be called for top level layouts.
+<p>Examples:
+ <a href="pref-pref-cpp.html#activate">pref/pref.cpp</a>
+ <a href="layout-layout-cpp.html#activate">layout/layout.cpp</a>
+ <a href="widgets-widgets-cpp.html#activate">widgets/widgets.cpp</a>
+<h3 class="fn">void <a name="b3"></a>QLayout::addChildLayout ( QLayout * l ) <code>[protected]</code></h3>
+<p>This function is called from addLayout functions in subclasses,
+to add <em>l</em> layout as a sublayout.
+<h3 class="fn"><a href="qgmanager.html">QGManager</a> * <a name="a9"></a>QLayout::basicManager () <code>[protected]</code></h3>
+<p>Returns the <a href="qgmanager.html">QGManager</a> for this layout. Returns 0 if
+this is a child layout which has not been inserted yet.
+<h3 class="fn">int <a name="a1"></a>QLayout::defaultBorder () const</h3>
+<p>Returns the default border for the geometry manager.
+<h3 class="fn">void <a name="a3"></a>QLayout::freeze ( int w, int h )</h3>
+<p>Fixes the size of the main widget and distributes the available
+space to the child widgets. For widgets which should not be
+resizable, but where a QLayout subclass is used to set up the initial
+geometry.
+<p>A frozen layout cannot be unfrozen, the only sensible thing to do
+is to delete it.
+<p>The size is adjusted to a valid value. Thus freeze(0,0) fixes the
+widget to its minimum size.
+<h3 class="fn">void <a name="a4"></a>QLayout::freeze ()</h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<p>This version of the method fixes the main widget at its minimum size.
+You can also achieve this with <a href="qlayout.html#a3">freeze</a>( 0, 0 );.
+<h3 class="fn">QChain * <a name="b7"></a>QLayout::horChain ( QLayout * ) <code>[static protected]</code></h3>
+<p>This function works around a dubious feature in
+the C++ language definition, to provide access to <a href="qlayout.html#b1">mainHorizontalChain</a>().
+<h3 class="fn">void <a name="b2"></a>QLayout::initGM () <code>[virtual protected]</code></h3>
+<p>Implement this function to do what's necessary to initialize chains,
+once the layout has a <a href="qlayout.html#a9">basicManager</a>().
+<p>Reimplemented in <a href="qgridlayout.html#b5">QGridLayout</a> and <a href="qboxlayout.html#b1">QBoxLayout</a>.
+<h3 class="fn">QChain * <a name="b1"></a>QLayout::mainHorizontalChain () <code>[virtual protected]</code></h3>
+<p>Implement this function to return the main horizontal chain.
+<p>Reimplemented in <a href="qgridlayout.html#b4">QGridLayout</a> and <a href="qboxlayout.html#b0">QBoxLayout</a>.
+<h3 class="fn">QChain * <a name="b0"></a>QLayout::mainVerticalChain () <code>[virtual protected]</code></h3>
+<p>Implement this function to return the main vertical chain.
+<p>Reimplemented in <a href="qgridlayout.html#b3">QGridLayout</a> and <a href="qboxlayout.html#a9">QBoxLayout</a>.
+<h3 class="fn"><a href="qwidget.html">QWidget</a> * <a name="a6"></a>QLayout::mainWidget ()</h3>
+<p>Returns the main widget of this layout, or 0 if this layout is
+a sub-layout which is not yet inserted.
+<h3 class="fn">void <a name="a5"></a>QLayout::setMenuBar ( <a href="qmenubar.html">QMenuBar</a> * w )</h3>
+<p>Makes the geometry manager take account of the menu bar <em>w.</em> All
+child widgets are placed below the bottom edge of the menu bar.
+<p>A menu bar does its own geometry managing, never do addWidget()
+on a menu bar.
+<p>Examples:
+ <a href="widgets-widgets-cpp.html#setMenuBar">widgets/widgets.cpp</a>
+<h3 class="fn">QChain * <a name="b8"></a>QLayout::verChain ( QLayout * ) <code>[static protected]</code></h3>
+<p>This function works around a dubious feature in
+the C++ language definition, to provide access to <a href="qlayout.html#b0">mainVerticalChain</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qlayout.h: 1998/08/21
+<li>qlayout.cpp: 1998/09/21
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

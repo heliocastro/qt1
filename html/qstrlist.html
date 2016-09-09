@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QStrList Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QStrList Class Reference</h1><br clear="all">
+<p>
+The QStrList class provides a doubly linked list of <code>char*.</code>
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qstrlist-h.html">qstrlist.h</a>&gt;</code>
+<p>
+Inherits <a href="qlist.html">QList</a>.
+<p>Inherited by <a href="qstrilist.html">QStrIList</a>.
+<p><a href="qstrlist-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qstrlist.html#a0"><strong>QStrList</strong></a> ( bool deepCopies=TRUE ) </span>
+<li><span class="fn"><a href="qstrlist.html#a1"><strong>QStrList</strong></a> ( const QStrList &amp; ) </span>
+<li><span class="fn"><a href="qstrlist.html#a2"><strong>~QStrList</strong></a> () </span>
+<li><span class="fn">QStrList&amp; <a href="qstrlist.html#a3"><strong>operator=</strong></a> ( const QStrList &amp; ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QStrList class provides a doubly linked list of <code>char*.</code>
+<p>
+This class is a <a href="qlist.html">QList</a>&lt;char&gt; instance (a list of char*).
+<p>QStrList can make deep or shallow copies of the strings that are inserted.
+<p>A deep copy means to allocate space for the string and then copy the string
+data into it.  A shallow copy is just a copy of the pointer value and not
+the string data.
+<p>The disadvantage with shallow copies is that since a pointer can only
+be deleted once, the program must put all strings in a central place and 
+know when it is safe to delete them (i.e. when the strings are no longer
+referenced by other parts of the program).  This can make the program
+more complex.  The advantage of shallow copies is that shallow copies
+consume far less memory than deep copies.  It is also much faster
+to copy a pointer (typically 4 or 8 bytes) than to copy string data.
+<p>The virtual <a href="qglist.html#d8">compareItems</a>() function is reimplemented and does a
+case sensitive string comparision.
+The <a href="qlist.html#a7">inSort</a>() function will insert strings in a sorted order.
+<p>The QStrListIterator class is an iterator for QStrList.
+<p>Examples:
+ <a href="showimg-showimg-cpp.html#QStrList">showimg/showimg.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QStrList::QStrList ( bool deepCopies=TRUE )</h3>
+<p>Constructs an empty list of strings.  Will make deep copies of all inserted
+strings if <em>deepCopies</em> is TRUE, or uses shallow copies if <em>deepCopies</em>
+is FALSE.
+<h3 class="fn"><a name="a1"></a>QStrList::QStrList ( const QStrList &amp; list )</h3>
+<p>Constructs a copy of <em>list.</em>
+<p>If <em>list</em> has deep copies, this list will also get deep copies.
+Only the pointers are copied (shallow copy) if the other list does not
+use deep copies.
+<h3 class="fn"><a name="a2"></a>QStrList::~QStrList ()</h3>
+<p>Destroys the list.  All strings are removed.
+<h3 class="fn">QStrList&amp; <a name="a3"></a>QStrList::operator= ( const QStrList &amp; list )</h3>
+<p>Assigns <em>list</em> to this list and returns a reference to this list.
+<p>If <em>list</em> has deep copies, this list will also get deep copies.
+Only the pointers are copied (shallow copy) if the other list does not
+use deep copies.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qstrlist.h: 1998/08/25
+<li>qlist.doc: 1998/08/25
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

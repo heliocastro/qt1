@@ -1,0 +1,305 @@
+/****************************************************************************
+** $Id: indices.doc,v 2.21 1998/07/08 15:26:30 agulbra Exp $
+**
+** Miscellaneous index pages
+**
+** Copyright (C) 1995-1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+#if defined(DEBUG)
+static char ident[] = "$Id: indices.doc,v 2.21 1998/07/08 15:26:30 agulbra Exp $";
+#endif
+
+/*! \page index.html
+
+<title>Qt Reference Documentation</title>
+</head><body bgcolor="#ffffff">
+
+\postheader
+
+<h1 align="center">
+Reference Documentation
+</h1><br clear="all">
+
+<br clear="all"><table border=0><tr>
+
+<td width="50%" valign="top">
+
+<strong>The Qt API:</strong><ul>
+<li><a href="classes.html">Alphabetical Class List</a>
+<li><a href="annotated.html">Annotated Class List</a>
+<li><a href="topicals.html">Structure Overview</a>
+<li><a href="hierarchy.html">Inheritance Hierarchy</a>
+<li><a href="functions.html">Alphabetical Function Index</a> (long)
+<li><a href="headers.html">Header File Index</a>
+<li><a href="pictures.html">Widget Screenshots</a>
+</ul>
+
+<td width="50%" valign="top">
+
+<strong>Using Qt:</strong><ul>
+<li><a href="tutorial.html">Tutorial</a>
+<li><a href="examples.html">Example Programs</a>
+<li><a href="metaobjects.html">Introduction to Signals and Slots</a>
+<li><a href="moc.html">Using the Meta Object Compiler (moc)</a>
+<li><a href="debug.html">Debugging Techniques</a>
+</ul>
+
+</td></tr><tr><td width="50%" valign="top">
+
+<strong>Qt Extensions:</strong><ul>
+<li><a href="qgl.html">OpenGL 3D Graphics Support</a>
+<li><a href="nsplugin.html">Netscape/Explorer Plugin Support</a>
+<li><a href="imageio.html">Image File Formats Support</a>
+<li><a href="xt.html">Xt/Motif Legacy Code Support</a>
+</ul>
+
+<td width="50%" valign="top">
+
+<strong>Further Information:</strong><ul>
+<li><a href="troll.html">Troll Tech Contact Information</a>
+<li><a href="mailinglists.html">Qt Mailing Lists</a>
+<li><a href="credits.html">Credits</a>
+<li><a href="http://www.troll.no/developer/">Developers' Homepage</a> <small>[external]</small>
+</ul>
+
+</tr></table>
+
+<h2 align=center><u>About Qt</u></h2>
+
+<strong>Qt</strong><sup><code>TM</code></sup> is a multi-platform C++
+GUI toolkit. It is a product of <a href="troll.html">Troll
+Tech</a>. It is supported on all major variants of Microsoft Windows
+and Unix/X Windows.
+
+<strong>Qt Professional Edition</strong> is provided for commercial
+software development. It is provided with upgrades and technical
+support. For the latest prices, please see the Troll Tech web site, <a
+href="http://www.troll.no/pricing.html">Pricing and Availability</a>
+page, or contact <a href="mailto:sales@troll.no">sales@troll.no</a>.
+
+<strong>Qt Free Edition</strong> is the Unix/X11 version of Qt
+available for development of <em>free software</em> only. It is
+provided free of charge under the <a href="license.html">Qt Free
+Edition License</a>. The latest version is available for <a
+href="http://www.troll.no/dl/qtfree-dl.html">download</a>.
+
+*/
+
+
+/*! \page topicals.html
+
+<title>Qt API Structure Overview</title>
+</head><body bgcolor="#ffffff">
+
+\postheader
+
+<h1 align="center">API Structure Overview</h1><br clear="all">
+
+The Qt API consists the following modules:
+
+<h2>Ready-To-Use GUI Components</h2>
+
+<dl>
+
+<dt><a href="application.html">Application Classes</a>
+<dd>Top-level GUI classes.
+
+<dt><a href="realwidgets.html">Widgets</a>
+<dd>The GUI primitives like buttons, listboxes, scrollbars etc.
+
+<dt><a href="dialogs.html">Dialogs</a>
+<dd>Ready-made pop-up dialogs
+
+<dt><a href="geomanagement.html">Geometry Management</a>
+<dd>Classes handling automatic resizing and moving of widgets
+
+</dl>
+
+
+<h2>GUI Component Framework</h2>
+
+<dl>
+
+<dt><a href="abstractwidgets.html">Abstract Widgets</a>
+<dd>Abstract widget classes available for subclassing.
+
+<dt><a href="drawing.html">Drawing Classes</a>
+<dd>Classes providing drawing primitives
+
+<dt><a href="fonts.html">Font Classes</a>
+<dd>Classes related to the handling of text fonts
+
+<dt><a href="kernel.html">Kernel</a>
+<dd>Classes providing access to the low-level parts of Qt
+
+<dt><a href="misc.html">Miscellaneous</a>
+<dd>Various other useful classes 
+
+</dl>
+
+
+<h2>Utilities</h2>
+
+<dl>
+
+<dt><a href="tools.html">General Tool Classes</a>
+<dd>Generic collection classes like list, queue, stack, string etc.
+
+<dt><a href="io.html">I/O Handling</a>
+<dd>Classes providing OS-independent I/O and file and directory handling.
+
+<dt><a href="images.html">Image Handling</a>
+<dd>Digital image coding, decoding and manipulation
+
+<dt><a href="time.html">Time And Date Handling</a>
+<dd>OS-independent Classes for handling date and time. 
+
+</dl>
+
+*/
+
+/*! \defgroup tools.html
+
+<h1 align="center">The Tool Classes</h1><br clear="all">
+
+The tool classes are general-purpose collection classes that may be used
+independently of the GUI classes.
+
+<p>In particular, these classes do not depend on QApplication at all,
+and so can be used in non-GUI programs.  
+
+<p>See also the <a href="collection.html">introduction to Qt collection
+classes</a>.
+
+*/
+
+/*! \defgroup fonts.html
+
+<h1 align="center">Font-related Classes</h1><br clear="all">
+
+These classes are used to manipulate fonts.  See also <a
+href="fontmatch.html">Font matching.</a>
+
+*/
+
+/*! \defgroup io.html
+
+<h1 align="center">I/O Classes</h1><br clear="all">
+
+These classes are used to handle input and output to and from external
+devices, files etc., as well as manipulating files and directories.
+
+*/
+
+/*! \defgroup realwidgets.html
+
+<h1 align="center">Widgets</h1><br clear="all">
+
+These widgets are meant for direct use.  There are also some <a
+href="abstractwidgets.html">abstract widget classes,</a> meant for
+subclassing, and some <a href="dialogs.html">more complex widgets.</a>
+
+*/
+
+/*! \defgroup abstractwidgets.html
+
+<h1 align="center">Abstract Widget Classes</h1><br clear="all">
+
+These classes are abstract widgets; they are generally not usable in
+themselves, but provide functionality that can be used by inheriting
+these classes.
+
+*/
+
+/*! \defgroup dialogs.html
+
+<h1 align="center">Dialog Classes</h1><br clear="all">
+
+These classes are complex widgets, composed of simpler widgets; dialog
+boxes, generally.
+
+*/
+
+/*! \defgroup images.html
+
+<h1 align="center">Image Processing Classes</h1><br clear="all">
+
+These classes are used for manipulating images.
+
+*/
+
+/*! \defgroup drawing.html
+
+<h1 align="center">Drawing Classes</h1><br clear="all">
+
+These classes provide powerful graphics drawing primitives. 
+
+<p>See also this introduction to the <a href="coordsys.html">Qt
+coordinate system</a>.
+
+*/
+
+
+/*! \defgroup shared.html
+
+<h1 align="center">Implicitly Shared Classes</h1><br clear="all">
+
+These classes are normally-heavy classes which in Qt have been
+optimized by the use of reference counter and common data so they can
+be passed around.
+
+The only important effect is that the classes listed here <em>can</em>
+be passed around as arguments, even though they may seem heavyweight.
+
+*/
+
+/*! \defgroup time.html
+
+<h1 align="center">Time and Date</h1><br clear="all">
+
+These classes provide system-independent date and time abtractions.
+
+<p>Also available: <a href="y2k.html">Qt Year 2000 Compliance Statement</a>. 
+*/
+
+
+/*! \defgroup application.html
+
+<h1 align="center">Application Parts</h1><br clear="all">
+
+These classes provide the top level application GUI functionality,
+like main window, menu and tool bars, tool tip help etc.
+
+*/
+
+
+/*! \defgroup geomanagement.html
+
+<h1 align="center">Geometry Management</h1><br clear="all">
+
+These classes provide automatic geometry management of widgets.
+
+*/
+
+
+/*! \defgroup kernel.html
+
+<h1 align="center">Kernel Classes</h1><br clear="all">
+
+These classes provide access to low-level parts of the window system
+
+*/
+
+
+/*! \defgroup misc.html
+
+<h1 align="center">Miscellaneous Classes</h1><br clear="all">
+
+Useful classes not fitting into any other category.
+
+*/
+
+
+

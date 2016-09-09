@@ -1,0 +1,119 @@
+.TH QKeyEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QKeyEvent \- Parameters that describe a key event
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherits QEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QKeyEvent ( int " "type" ", int " "key" ", int " "ascii" ", int state )"
+.br
+.ti -1c
+.BI "int key () const"
+.br
+.ti -1c
+.BI "int ascii () const"
+.br
+.ti -1c
+.BI "int state () const"
+.br
+.ti -1c
+.BI "bool isAccepted () const"
+.br
+.ti -1c
+.BI "void accept ()"
+.br
+.ti -1c
+.BI "void ignore ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QKeyEvent class contains parameters that describe a key event.
+.PP
+Key events occur when a key is pressed or released when a widget has keyboard input focus.
+.PP
+A key event contains a special accept flag which tells whether the receiver wants the key. You should call QKeyEvent::ignore() if the key press or release event is not handled by your widget.
+.PP
+The QWidget::setEnable() function can be used to enable or disable mouse and keyboard events for a widget.
+.PP
+The event handlers QWidget::keyPressEvent() and QWidget::keyReleaseEvent() receive key events.
+.PP
+See also: QFocusEvent and QWidget::grabKeyboard().
+.PP
+Examples:
+.(l
+table/table.cpp picture/picture.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QKeyEvent::QKeyEvent ( int type, int key, int ascii, int state )"
+Constructs a key event object.
+.PP
+The \fItype\fR parameter must be \fCEvent_KeyPress\fR or \fCEvent_KeyRelease.\fR
+.PP
+If \fIkey\fR is 0, the event is not a result of a known key (e.g. it may be the result of a compose sequence or keyboard macro).
+.PP
+The accept flag is set to TRUE.
+.SH "void QKeyEvent::accept ()"
+Sets the accept flag of the key event object.
+.PP
+Setting the accept parameter indicates that the receiver of the event wants the key event. Unwanted key events are sent to the parent widget.
+.PP
+The accept flag is set by default.
+.PP
+See also: ignore().
+.SH "int QKeyEvent::ascii () const"
+Returns the ASCII code of the key that was pressed or released.
+.PP
+Examples:
+.(l
+picture/picture.cpp
+.)l
+.SH "void QKeyEvent::ignore ()"
+Clears the accept flag parameter of the key event object.
+.PP
+Clearing the accept parameter indicates that the event receiver does not want the key event. Unwanted key events are sent to the parent widget.
+.PP
+The accept flag is set by default.
+.PP
+See also: accept().
+.PP
+Examples:
+.(l
+table/table.cpp
+.)l
+.SH "bool QKeyEvent::isAccepted () const"
+Returns TRUE if the receiver of the event wants to keep the key.
+.SH "int QKeyEvent::key () const"
+Returns the code of the key that was pressed or released.
+.PP
+The header file qkeycode.h lists the possible keyboard codes. These codes are independent of the underlying window system.
+.PP
+Key code 0 means that the event is not a result of a known key (e.g. it may be the result of a compose sequence or keyboard macro).
+.PP
+Examples:
+.(l
+table/table.cpp
+.)l
+.SH "int QKeyEvent::state () const"
+Returns the keyboard modifier flags.
+.PP
+The returned value is \fCShiftButton, ControlButton\fR and \fCAltButton\fR
+OR'ed together.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qkeyevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

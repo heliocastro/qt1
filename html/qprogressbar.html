@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QProgressBar Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QProgressBar Class Reference</h1><br clear="all">
+<p>
+The QProgressBar widget provides a horizontal progress bar.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qprogressbar-h.html">qprogressbar.h</a>&gt;</code>
+<p>
+Inherits <a href="qframe.html">QFrame</a>.
+<p><a href="qprogressbar-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qprogressbar.html#a0"><strong>QProgressBar</strong></a> ( QWidget * parent=0, const char * name=0, WFlags f=0 ) </span>
+<li><span class="fn"><a href="qprogressbar.html#a1"><strong>QProgressBar</strong></a> ( int totalSteps, QWidget * parent=0, const char * name=0, WFlags f=0 ) </span>
+<li><span class="fn">int <a href="qprogressbar.html#a2"><strong>totalSteps</strong></a> () const</span>
+<li><span class="fn">int <a href="qprogressbar.html#a3"><strong>progress</strong></a> () const</span>
+<li><span class="fn">virtual QSize <a href="qprogressbar.html#a4"><strong>sizeHint</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qwidget.html#k2"><strong>show</strong></a> () </span>
+</ul>
+<h2>Public Slots</h2>
+<ul>
+<li><span class="fn">void <a href="qprogressbar.html#a6"><strong>reset</strong></a> () </span>
+<li><span class="fn">void <a href="qprogressbar.html#a7"><strong>setTotalSteps</strong></a> ( int totalSteps ) </span>
+<li><span class="fn">void <a href="qprogressbar.html#a8"><strong>setProgress</strong></a> ( int progress ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qprogressbar.html#a9"><strong>drawContents</strong></a> ( QPainter * ) </span>
+<li><span class="fn">virtual bool <a href="qprogressbar.html#b0"><strong>setIndicator</strong></a> ( QString &amp; progress_str, int progress, int totalSteps ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QProgressBar widget provides a horizontal progress bar.
+<p>
+A progress bar is used to give the user an indication of progress
+of an operation. To reassure them that the application has not crashed.
+<p>QProgressBar only implements the basic progress display, while
+<a href="qprogressdialog.html">QProgressDialog</a> provides a fuller encapsulation.
+<p><img src=qprogbar-m.gif> <img src=qprogbar-w.gif>
+<p>See also:  <a href="qprogressdialog.html">QProgressDialog</a> and <a href="guibooks.html#fowler">GUI Design Handbook: Progress Indicator</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QProgressBar::QProgressBar ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0, WFlags f=0 )</h3>
+<p>Constructs a progress bar.
+<p>The total number of steps is set to 100 by default.
+<p><em>parent, name</em> and <em>f</em> are sent to the <a href="qframe.html#a0">QFrame::QFrame</a>()
+constructor.
+<p>See also:  <a href="qprogressbar.html#a7">setTotalSteps</a>().
+<h3 class="fn"><a name="a1"></a>QProgressBar::QProgressBar ( int totalSteps, <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0, WFlags f=0 )</h3>
+<p>Constructs a progress bar.
+<p><em>totalSteps</em> is the total number of steps in the operation of which
+this progress bar shows the progress.  For example, if the operation
+is to examine 50 files, this value would be 50, then before
+examining the first file, call <a href="qprogressbar.html#a8">setProgress</a>(0), and after examining
+the last file call setProgress(50).
+<p><em>parent, name</em> and <em>f</em> are sent to the <a href="qframe.html#a0">QFrame::QFrame</a>()
+constructor.
+<p>See also:  <a href="qprogressbar.html#a7">setTotalSteps</a>() and <a href="qprogressbar.html#a8">setProgress</a>().
+<h3 class="fn">void <a name="a9"></a>QProgressBar::drawContents ( <a href="qpainter.html">QPainter</a> * p ) <code>[virtual protected]</code></h3>
+<p>Handles paint events for the progress bar.
+In WindowsStyle, <a href="qcolorgroup.html#a9">colorGroup().text()</a>
+and <a href="qapplication.html#g9">QApplication::winStyleHighlightColor</a>() are used.  In MotifStyle,
+<a href="qcolorgroup.html#b0">colorGroup().base()</a> is also used.
+<p>Reimplemented from <a href="qframe.html#c0">QFrame.</a>
+<h3 class="fn">int <a name="a3"></a>QProgressBar::progress () const</h3>
+<p>Returns the current amount of progress, or -1 if the progress counting
+has not started.
+<p>See also:  <a href="qprogressbar.html#a8">setProgress</a>().
+<h3 class="fn">void <a name="a6"></a>QProgressBar::reset () <code>[slot]</code></h3>
+<p>Reset the progress bar.
+The progress bar `rewinds'.
+<h3 class="fn">bool <a name="b0"></a>QProgressBar::setIndicator ( <a href="qstring.html">QString</a> &amp; indicator, int progress, int totalSteps ) <code>[virtual protected]</code></h3>
+<p>This method is called to generate the text displayed in the center of
+the progress bar.
+<p>The progress may be negative, indicating that the bar is in the "reset" state
+before any progress is set.
+<p>The default implementation it is the percentage of completion or blank in the
+reset state.
+<p>This method should return FALSE if the string is unchanged since the
+last call to the method, to allow efficient repainting of the
+progress bar.
+<h3 class="fn">void <a name="a8"></a>QProgressBar::setProgress ( int progress ) <code>[slot]</code></h3>
+<p>Sets the current amount of progress made to <em>progress</em> units of the
+total number of steps.
+<p>See also:  <a href="qprogressbar.html#a3">progress</a>() and <a href="qprogressbar.html#a2">totalSteps</a>().
+<h3 class="fn">void <a name="a7"></a>QProgressBar::setTotalSteps ( int totalSteps ) <code>[slot]</code></h3>
+<p>Sets the total number of steps to <em>totalSteps.</em>
+<p>See also:  <a href="qprogressbar.html#a2">totalSteps</a>().
+<h3 class="fn"><a href="qsize.html">QSize</a> <a name="a4"></a>QProgressBar::sizeHint () const <code>[virtual]</code></h3>
+<p>Returns a size which fits the contents of the progress bar.
+<p>Reimplemented from <a href="qwidget.html#l7">QWidget.</a>
+<h3 class="fn">int <a name="a2"></a>QProgressBar::totalSteps () const</h3>
+<p>Returns the total number of steps.
+<p>See also:  <a href="qprogressbar.html#a7">setTotalSteps</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qprogressbar.h: 1998/08/21
+<li>qprogressbar.cpp: 1998/08/12
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

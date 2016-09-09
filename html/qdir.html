@@ -1,0 +1,535 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QDir Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QDir Class Reference</h1><br clear="all">
+<p>
+Traverses directory structures and contents in a platform-independent way.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qdir-h.html">qdir.h</a>&gt;</code>
+<p><a href="qdir-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qdir.html#a0"><strong>QDir</strong></a> () </span>
+<li><span class="fn"><a href="qdir.html#a1"><strong>QDir</strong></a> ( const char * path, const char * nameFilter = 0, int sortSpec = Name | IgnoreCase, int filterSpec = All ) </span>
+<li><span class="fn"><a href="qdir.html#a2"><strong>QDir</strong></a> ( const QDir &amp; ) </span>
+<li><span class="fn"><a href="qdir.html#a3"><strong>~QDir</strong></a> () </span>
+<li><span class="fn">QDir&amp; <a href="qdir.html#a4"><strong>operator=</strong></a> ( const QDir &amp; ) </span>
+<li><span class="fn">QDir&amp; <a href="qdir.html#a5"><strong>operator=</strong></a> ( const char * path ) </span>
+<li><span class="fn">void <a href="qdir.html#a6"><strong>setPath</strong></a> ( const char * path ) </span>
+<li><span class="fn">const char* <a href="qdir.html#a7"><strong>path</strong></a> () const</span>
+<li><span class="fn">QString <a href="qdir.html#a8"><strong>absPath</strong></a> () const</span>
+<li><span class="fn">QString <a href="qdir.html#a9"><strong>canonicalPath</strong></a> () const</span>
+<li><span class="fn">QString <a href="qdir.html#b0"><strong>dirName</strong></a> () const</span>
+<li><span class="fn">QString <a href="qdir.html#b1"><strong>filePath</strong></a> ( const char * fileName, bool acceptAbsPath = TRUE ) const</span>
+<li><span class="fn">QString <a href="qdir.html#b2"><strong>absFilePath</strong></a> ( const char * fileName, bool acceptAbsPath = TRUE ) const</span>
+<li><span class="fn">bool <a href="qdir.html#b4"><strong>cd</strong></a> ( const char * dirName, bool acceptAbsPath = TRUE ) </span>
+<li><span class="fn">bool <a href="qdir.html#b5"><strong>cdUp</strong></a> () </span>
+<li><span class="fn">const char* <a href="qdir.html#b6"><strong>nameFilter</strong></a> () const</span>
+<li><span class="fn">void <a href="qdir.html#b7"><strong>setNameFilter</strong></a> ( const char * nameFilter ) </span>
+<li><span class="fn">FilterSpec <a href="qdir.html#b8"><strong>filter</strong></a> () const</span>
+<li><span class="fn">void <a href="qdir.html#b9"><strong>setFilter</strong></a> ( int filterSpec ) </span>
+<li><span class="fn">SortSpec <a href="qdir.html#c0"><strong>sorting</strong></a> () const</span>
+<li><span class="fn">void <a href="qdir.html#c1"><strong>setSorting</strong></a> ( int sortSpec ) </span>
+<li><span class="fn">bool <a href="qdir.html#c2"><strong>matchAllDirs</strong></a> () const</span>
+<li><span class="fn">void <a href="qdir.html#c3"><strong>setMatchAllDirs</strong></a> ( bool ) </span>
+<li><span class="fn">uint <a href="qdir.html#c4"><strong>count</strong></a> () const</span>
+<li><span class="fn">const char* <a href="qdir.html#c5"><strong>operator[]</strong></a> ( int ) const</span>
+<li><span class="fn">const QStrList* <a href="qdir.html#c6"><strong>entryList</strong></a> ( int filterSpec = DefaultFilter, int sortSpec = DefaultSort ) const</span>
+<li><span class="fn">const QStrList* <a href="qdir.html#c7"><strong>entryList</strong></a> ( const char * nameFilter, int filterSpec = DefaultFilter, int sortSpec = DefaultSort ) const</span>
+<li><span class="fn">const QFileInfoList* <a href="qdir.html#c8"><strong>entryInfoList</strong></a> ( int filterSpec = DefaultFilter, int sortSpec = DefaultSort ) const</span>
+<li><span class="fn">const QFileInfoList* <a href="qdir.html#c9"><strong>entryInfoList</strong></a> ( const char * nameFilter, int filterSpec = DefaultFilter, int sortSpec = DefaultSort ) const</span>
+<li><span class="fn">bool <a href="qdir.html#d1"><strong>mkdir</strong></a> ( const char * dirName, bool acceptAbsPath = TRUE ) const</span>
+<li><span class="fn">bool <a href="qdir.html#d2"><strong>rmdir</strong></a> ( const char * dirName, bool acceptAbsPath = TRUE ) const</span>
+<li><span class="fn">bool <a href="qdir.html#d3"><strong>isReadable</strong></a> () const</span>
+<li><span class="fn">bool <a href="qdir.html#d4"><strong>exists</strong></a> () const</span>
+<li><span class="fn">bool <a href="qdir.html#d5"><strong>isRoot</strong></a> () const</span>
+<li><span class="fn">bool <a href="qdir.html#d6"><strong>isRelative</strong></a> () const</span>
+<li><span class="fn">void <a href="qdir.html#d7"><strong>convertToAbs</strong></a> () </span>
+<li><span class="fn">bool <a href="qdir.html#d8"><strong>operator==</strong></a> ( const QDir &amp; ) const</span>
+<li><span class="fn">bool <a href="qdir.html#d9"><strong>operator!=</strong></a> ( const QDir &amp; ) const</span>
+<li><span class="fn">bool <a href="qdir.html#e0"><strong>remove</strong></a> ( const char * fileName, bool acceptAbsPath = TRUE ) </span>
+<li><span class="fn">bool <a href="qdir.html#e1"><strong>rename</strong></a> ( const char * name, const char * newName, bool acceptAbsPaths = TRUE ) </span>
+<li><span class="fn">bool <a href="qdir.html#e2"><strong>exists</strong></a> ( const char * name, bool acceptAbsPath = TRUE ) </span>
+</ul>
+<h2>Static Public Members</h2>
+<ul>
+<li><span class="fn">QString <a href="qdir.html#f6"><strong>convertSeparators</strong></a> ( const char * pathName ) </span>
+<li><span class="fn">const QFileInfoList* <a href="qdir.html#g8"><strong>drives</strong></a> () </span>
+<li><span class="fn">char <a href="qdir.html#f7"><strong>separator</strong></a> () </span>
+<li><span class="fn">bool <a href="qdir.html#f8"><strong>setCurrent</strong></a> ( const char * path ) </span>
+<li><span class="fn">QDir <a href="qdir.html#f9"><strong>current</strong></a> () </span>
+<li><span class="fn">QDir <a href="qdir.html#g0"><strong>home</strong></a> () </span>
+<li><span class="fn">QDir <a href="qdir.html#g1"><strong>root</strong></a> () </span>
+<li><span class="fn">QString <a href="qdir.html#g2"><strong>currentDirPath</strong></a> () </span>
+<li><span class="fn">QString <a href="qdir.html#g3"><strong>homeDirPath</strong></a> () </span>
+<li><span class="fn">QString <a href="qdir.html#g4"><strong>rootDirPath</strong></a> () </span>
+<li><span class="fn">bool <a href="qdir.html#g5"><strong>match</strong></a> ( const char * filter, const char * fileName ) </span>
+<li><span class="fn">QString <a href="qdir.html#g6"><strong>cleanDirPath</strong></a> ( const char * dirPath ) </span>
+<li><span class="fn">bool <a href="qdir.html#g7"><strong>isRelativePath</strong></a> ( const char * path ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+Traverses directory structures and contents in a platform-independent way.
+<p>
+A QDir can point to a file using either a relative or an absolute file
+path. Absolute file paths begin with the directory separator ('/') or a
+drive specification (not applicable to UNIX).  Relative file names begin
+with a directory name or a file name and specify a path relative to the
+current directory.
+<p>An example of an absolute path is the string "/tmp/quartz", a relative
+path might look like "src/fatlib". You can use the function <a href="qdir.html#d6">isRelative</a>()
+to check if a QDir is using a relative or an absolute file path. You can
+call the function <a href="qdir.html#d7">convertToAbs</a>() to convert a relative QDir to an
+absolute one.
+<p>The directory "example" under the current directory is checked for existence
+in the example below:
+<p><pre>    <a href="qdir.html">QDir</a> d( "example" );                        // "./example"
+    if ( !d.<a href="qdir.html#d4">exists</a>() )
+        <a href="qapplication.html#j5">warning</a>( "Cannot find the example directory" );
+</pre>
+<p>If you always use '/' as a directory separator, Qt will translate your
+paths to conform to the underlying operating system.
+<p><a href="qdir.html#b4">cd</a>() and <a href="qdir.html#b5">cdUp</a>() can be used to navigate the directory tree. Note that the
+logical cd and cdUp operations are not performed if the new directory does
+not exist.
+<p>Example:
+<pre>    <a href="qdir.html">QDir</a> d = QDir::root();                      // "/"
+    if ( !d.<a href="qdir.html#b4">cd</a>("tmp") ) {                       // "/tmp"
+        <a href="qapplication.html#j5">warning</a>( "Cannot find the \"/tmp\" directory" );
+    } else {
+        <a href="qfile.html">QFile</a> f( d.<a href="qdir.html#b1">filePath</a>("ex1.txt") );       // "/tmp/ex1.txt"
+        if ( !f.<a href="qfile.html#a9">open</a>(IO_ReadWrite) )
+            <a href="qapplication.html#j5">warning</a>( "Cannot create the file %s", f.<a href="qfile.html#a3">name</a>() );
+    }
+</pre>
+<p>To read the contents of a directory you can use the <a href="qdir.html#c6">entryList</a>() and
+<a href="qdir.html#c8">entryInfoList</a>() functions.
+<p>Example:
+<pre>    #include &lt;stdio.h&gt;
+    #include &lt;qdir.h&gt;
+
+    //
+    // This program scans the current directory and lists all files
+    // that are not symbolic links, sorted by size with the smallest files
+    // first.
+    //
+
+    int main( int argc, char **argv )
+    {
+        <a href="qdir.html">QDir</a> d;
+        d.<a href="qdir.html#b9">setFilter</a>( QDir::Files | QDir::Hidden | QDir::NoSymLinks );
+        d.<a href="qdir.html#c1">setSorting</a>( QDir::Size | QDir::Reversed );
+
+        const QFileInfoList *list = d.<a href="qdir.html#c8">entryInfoList</a>();
+        QFileInfoListIterator it( *list );      // create list iterator
+        <a href="qfileinfo.html">QFileInfo</a> *fi;                          // pointer for traversing
+
+        printf( "     BYTES FILENAME\n" );      // print header
+        while ( (fi=it.current()) ) {           // for each file...
+            printf( "%10li %s\n", fi-&gt;<a href="qfileinfo.html#d5">size</a>(), fi-&gt;<a href="qfileinfo.html#b5">fileName</a>().data() );
+            ++it;                               // goto next list element
+        }
+    }
+</pre>
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#QDir">dirview/dirview.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QDir::QDir ()</h3>
+<p>Constructs a QDir pointing to the current directory.
+<p>See also:  <a href="qdir.html#g2">currentDirPath</a>().
+<h3 class="fn"><a name="a2"></a>QDir::QDir ( const QDir &amp; d )</h3>
+<p>Constructs a QDir that is a copy of the given directory.
+<p>See also:  <a href="qdir.html#a4">operator=</a>().
+<h3 class="fn"><a name="a1"></a>QDir::QDir ( const char * path, const char * nameFilter = 0, int sortSpec = Name | IgnoreCase, int filterSpec = All )</h3>
+<p>Constructs a QDir.
+<p>Arguments:
+<ul>
+<li><em>path</em> is the directory.
+<li><em>nameFilter</em> is the file name filter.
+<li><em>sortSpec</em> is the sort specification, which describes how to
+sort the files in the directory.
+<li><em>filterSpec</em> is the filter specification, which describes how
+to filter the files in the directory.
+</ul>
+Most of these arguments (except <em>path)</em> have optional values.
+<p>Example:
+<pre>    // lists all files in /tmp
+
+    <a href="qdir.html">QDir</a> d( "/tmp" );
+    for ( int i=0; i&lt;d.<a href="qdir.html#c4">count</a>(); i++ )
+        printf( "%s\n", d[i] );
+</pre>
+<p>If <em>path</em> is "" or null, the directory is set to "." (the current
+directory).  If <em>nameFilter</em> is "" or null, it is set to "*" (all
+files).
+<p>No check is made to ensure that the directory exists.
+<p>See also:  <a href="qdir.html#d4">exists</a>(), <a href="qdir.html#a6">setPath</a>(), <a href="qdir.html#b7">setNameFilter</a>(), <a href="qdir.html#b9">setFilter</a>() and <a href="qdir.html#c1">setSorting</a>().
+<h3 class="fn"><a name="a3"></a>QDir::~QDir ()</h3>
+<p>Destroys the QDir and cleans up.
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="b2"></a>QDir::absFilePath ( const char * fileName, bool acceptAbsPath = TRUE ) const</h3>
+<p>Returns the absolute path name of a file in the directory. Does NOT check if
+the file actually exists in the directory. Redundant multiple separators
+or "." and ".." directories in <em>fileName</em> will NOT be removed (see
+<a href="qdir.html#g6">cleanDirPath</a>()).
+<p>If <em>acceptAbsPath</em> is TRUE a <em>fileName</em> starting with a separator
+('/') will be returned without change.
+if <em>acceptAbsPath</em> is FALSE an absolute path will be appended to
+the directory path.
+<p>See also:  <a href="qdir.html#b1">filePath</a>().
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="a8"></a>QDir::absPath () const</h3>
+<p>Returns the absolute (a path that starts with '/') path, which may
+contain symbolic links, but never contains redundant ".", ".." or
+multiple separators.
+<p>See also:  <a href="qdir.html#a6">setPath</a>(), <a href="qdir.html#a9">canonicalPath</a>(), <a href="qdir.html#d4">exists</a>(), <a href="qdir.html#g6">cleanDirPath</a>(), <a href="qdir.html#b0">dirName</a>() and <a href="qdir.html#b2">absFilePath</a>().
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="a9"></a>QDir::canonicalPath () const</h3>
+<p>Returns the canonical path, i.e. a path without symbolic links.
+<p>On systems that do not have symbolic links this function will
+always return the same string that absPath returns.
+If the canonical path does not exist a null string is returned.
+<p>See also:  <a href="qdir.html#a7">path</a>(), <a href="qdir.html#a8">absPath</a>(), <a href="qdir.html#d4">exists</a>(), <a href="qdir.html#g6">cleanDirPath</a>(), <a href="qdir.html#b0">dirName</a>(), <a href="qdir.html#b2">absFilePath</a>() and <a href="qstring.html#c0">QString::isNull</a>().
+<h3 class="fn">bool <a name="b4"></a>QDir::cd ( const char * dirName, bool acceptAbsPath = TRUE )</h3>
+<p>Changes directory by descending into the given directory. Returns
+TRUE if the new directory exists and is readable. Note that the logical
+cd operation is NOT performed if the new directory does not exist.
+<p>If <em>acceptAbsPath</em> is TRUE a path starting with a separator ('/')
+will cd to the absolute directory, if <em>acceptAbsPath</em> is FALSE
+any number of separators at the beginning of <em>dirName</em> will be removed.
+<p>Example:
+<pre>  <a href="qdir.html">QDir</a> d = QDir::home();  // now points to home directory
+  if ( !d.<a href="qdir.html#b4">cd</a>("c++") ) {   // now points to "c++" under home directory if OK
+      <a href="qfileinfo.html">QFileInfo</a> fi( d, "c++" );
+      if ( fi.<a href="qfileinfo.html#b0">exists</a>() ) {
+          if ( fi.<a href="qfileinfo.html#c7">isDir</a>() )
+              <a href="qapplication.html#j5">warning</a>( "Cannot cd into \"%s\".", (char*)d.<a href="qdir.html#b2">absFilePath</a>("c++") );
+          else
+              <a href="qapplication.html#j5">warning</a>( "Cannot create directory \"%s\"\n"
+                       "A file named \"c++\" already exists in \"%s\"",
+                       (const char *)d.<a href="qdir.html#b2">absFilePath</a>("c++"),
+                       (const char *)d.<a href="qdir.html#a7">path</a>() );
+          return;
+      } else {
+          <a href="qapplication.html#j5">warning</a>( "Creating directory \"%s\"",
+                   (const char *) d.<a href="qdir.html#b2">absFilePath</a>("c++") );
+          if ( !d.<a href="qdir.html#d1">mkdir</a>( "c++" ) ) {
+              <a href="qapplication.html#j5">warning</a>("Could not create directory \"%s\"",
+                      (const char *)d.<a href="qdir.html#b2">absFilePath</a>("c++") );
+              return;
+          }
+      }
+  }
+</pre>
+<p>Calling cd( ".." ) is equivalent to calling <a href="qdir.html#b5">cdUp</a>().
+<p>See also:  <a href="qdir.html#b5">cdUp</a>(), <a href="qdir.html#d3">isReadable</a>(), <a href="qdir.html#d4">exists</a>() and <a href="qdir.html#a7">path</a>().
+<h3 class="fn">bool <a name="b5"></a>QDir::cdUp ()</h3>
+<p>Changes directory by moving one directory up the path followed to arrive
+at the current directory.
+<p>Returns TRUE if the new directory exists and is readable. Note that the
+logical cdUp() operation is not performed if the new directory does not
+exist.
+<p>See also:  <a href="qdir.html#b4">cd</a>(), <a href="qdir.html#d3">isReadable</a>(), <a href="qdir.html#d4">exists</a>() and <a href="qdir.html#a7">path</a>().
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="g6"></a>QDir::cleanDirPath ( const char * filePath ) <code>[static]</code></h3>
+<p>Removes all multiple directory separators ('/') and resolves
+any "." or ".." found in the path.
+<p>Symbolic links are kept.  This function does not return the
+canonical path.
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="f6"></a>QDir::convertSeparators ( const char * pathName ) <code>[static]</code></h3>
+<p>Converts the '/' separators in <em>pathName</em> to system native
+separators.  Returns the translated string.
+<p>On Windows, convertSeparators("c:/winnt/system32") returns
+"c:\winnt\system32".
+<p>No conversion is done on UNIX.
+<h3 class="fn">void <a name="d7"></a>QDir::convertToAbs ()</h3>
+<p>Converts the directory path to an absolute path. If it is already
+absolute nothing is done.
+<p>See also:  <a href="qdir.html#d6">isRelative</a>().
+<h3 class="fn">uint <a name="c4"></a>QDir::count () const</h3>
+<p>Returns the number of files that was found.
+Equivalent to <a href="qdir.html#c6">entryList</a>()->count().
+<p>See also:  operator[] and <a href="qdir.html#c6">entryList</a>().
+<h3 class="fn">QDir <a name="f9"></a>QDir::current () <code>[static]</code></h3>
+<p>Returns the current directory.
+<p>See also:  <a href="qdir.html#g2">currentDirPath</a>() and <a href="qdir.html#a0">QDir::QDir</a>().
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="g2"></a>QDir::currentDirPath () <code>[static]</code></h3>
+<p>Returns the absolute path of the current directory.
+<p>See also:  <a href="qdir.html#f9">current</a>().
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="b0"></a>QDir::dirName () const</h3>
+<p>Returns the name of the directory, this is NOT the same as the path, e.g.
+a directory with the name "mail", might have the path "/var/spool/mail".
+If the directory has no name (e.g. the root directory) a null string is
+returned.
+<p>No check is made to ensure that a directory with this name actually exists.
+<p>See also:  <a href="qdir.html#a7">path</a>(), <a href="qdir.html#a8">absPath</a>(), <a href="qdir.html#b2">absFilePath</a>(), <a href="qdir.html#d4">exists</a>() and <a href="qstring.html#c0">QString::isNull</a>().
+<h3 class="fn">const QFileInfoList * <a name="g8"></a>QDir::drives () <code>[static]</code></h3>
+<p>Returns a list if the root directories on this system.  On
+win32, this returns a number of <a href="qfileinfo.html">QFileInfo</a> objects containing "C:/",
+"D:/" etc.  On other operating systems, it returns a list containing
+just one root directory (e.g. "/").
+<h3 class="fn">const QFileInfoList * <a name="c9"></a>QDir::entryInfoList ( const char * nameFilter, int filterSpec = DefaultFilter, int sortSpec = DefaultSort ) const</h3>
+<p>Returns a list of <a href="qfileinfo.html">QFileInfo</a> objects for all files and directories in
+the directory pointed to using the <a href="qdir.html#c1">setSorting</a>(), <a href="qdir.html#b9">setFilter</a>() and
+<a href="qdir.html#b7">setNameFilter</a>() specifications.
+<p>The the filter and sorting specifications can be overridden using the
+<em>nameFilter, filterSpec</em> and <em>sortSpec</em> arguments.
+<p>Returns 0 if the directory is unreadable or does not exist.
+<p>See also:  <a href="qdir.html#c6">entryList</a>(), <a href="qdir.html#b7">setNameFilter</a>(), <a href="qdir.html#c1">setSorting</a>() and <a href="qdir.html#b9">setFilter</a>().
+<h3 class="fn">const QFileInfoList * <a name="c8"></a>QDir::entryInfoList ( int filterSpec = DefaultFilter, int sortSpec = DefaultSort ) const</h3>
+<p>Returns a list of <a href="qfileinfo.html">QFileInfo</a> objects for all files and directories in
+the directory pointed to using the <a href="qdir.html#c1">setSorting</a>(), <a href="qdir.html#b9">setFilter</a>() and
+<a href="qdir.html#b7">setNameFilter</a>() specifications.
+<p>The the filter and sorting specifications can be overridden using the
+<em>filterSpec</em> and <em>sortSpec</em> arguments.
+<p>Returns 0 if the directory is unreadable or does not exist.
+<p>See also:  <a href="qdir.html#c6">entryList</a>(), <a href="qdir.html#b7">setNameFilter</a>(), <a href="qdir.html#c1">setSorting</a>() and <a href="qdir.html#b9">setFilter</a>().
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#entryInfoList">dirview/dirview.cpp</a>
+<h3 class="fn">const <a href="qstrlist.html">QStrList</a> * <a name="c7"></a>QDir::entryList ( const char * nameFilter, int filterSpec = DefaultFilter, int sortSpec = DefaultSort ) const</h3>
+<p>Returns a list of the names of all files and directories in the directory
+pointed to using the <a href="qdir.html#c1">setSorting</a>(), <a href="qdir.html#b9">setFilter</a>() and <a href="qdir.html#b7">setNameFilter</a>()
+specifications.
+<p>The the filter and sorting specifications can be overridden using the
+<em>nameFilter, filterSpec</em> and <em>sortSpec</em> arguments.
+<p>Returns 0 if the directory is unreadable or does not exist.
+<p>See also:  <a href="qdir.html#c8">entryInfoList</a>(), <a href="qdir.html#b7">setNameFilter</a>(), <a href="qdir.html#c1">setSorting</a>() and <a href="qdir.html#b9">setFilter</a>().
+<h3 class="fn">const <a href="qstrlist.html">QStrList</a> * <a name="c6"></a>QDir::entryList ( int filterSpec = DefaultFilter, int sortSpec = DefaultSort ) const</h3>
+<p>Returns a list of the names of all files and directories in the directory
+pointed to using the <a href="qdir.html#c1">setSorting</a>(), <a href="qdir.html#b9">setFilter</a>() and <a href="qdir.html#b7">setNameFilter</a>()
+specifications.
+<p>The the filter and sorting specifications can be overridden using the
+<em>filterSpec</em> and <em>sortSpec</em> arguments.
+<p>Returns 0 if the directory is unreadable or does not exist.
+<p>See also:  <a href="qdir.html#c8">entryInfoList</a>(), <a href="qdir.html#b7">setNameFilter</a>(), <a href="qdir.html#c1">setSorting</a>() and <a href="qdir.html#b9">setFilter</a>().
+<h3 class="fn">bool <a name="d4"></a>QDir::exists () const</h3>
+<p>Returns TRUE if the directory exists. (If a file with the same
+name is found this function will of course return FALSE).
+<p>See also:  <a href="qfileinfo.html#b0">QFileInfo::exists</a>() and <a href="qfile.html#a5">QFile::exists</a>().
+<h3 class="fn">bool <a name="e2"></a>QDir::exists ( const char * name, bool acceptAbsPath = TRUE )</h3>
+<p>Checks for existence of a file.
+<p>If <em>acceptAbsPaths</em> is TRUE a path starting with a separator ('/')
+will check the file with the absolute path, if <em>acceptAbsPath</em> is FALSE
+any number of separators at the beginning of <em>name</em> will be removed.
+<p>Returns TRUE if the file exists, otherwise FALSE.
+<p>See also:  <a href="qfileinfo.html#b0">QFileInfo::exists</a>() and <a href="qfile.html#a5">QFile::exists</a>().
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="b1"></a>QDir::filePath ( const char * fileName, bool acceptAbsPath = TRUE ) const</h3>
+<p>Returns the path name of a file in the directory. Does NOT check if
+the file actually exists in the directory. If the QDir is relative
+the returned path name will also be relative. Redundant multiple separators
+or "." and ".." directories in <em>fileName</em> will not be removed (see
+<a href="qdir.html#g6">cleanDirPath</a>()).
+<p>If <em>acceptAbsPath</em> is TRUE a <em>fileName</em> starting with a separator
+('/') will be returned without change.
+If <em>acceptAbsPath</em> is FALSE an absolute path will be appended to
+the directory path.
+<p>See also:  <a href="qdir.html#b2">absFilePath</a>(), <a href="qdir.html#d6">isRelative</a>() and <a href="qdir.html#a9">canonicalPath</a>().
+<h3 class="fn">QDir::FilterSpec <a name="b8"></a>QDir::filter() const</h3>
+<p>Returns the value set by <a href="qdir.html#b9">setFilter</a>()
+<p>See also:  <a href="qdir.html#b9">setFilter</a>().
+<h3 class="fn">QDir <a name="g0"></a>QDir::home () <code>[static]</code></h3>
+<p>Returns the home directory.
+<p>See also:  <a href="qdir.html#g3">homeDirPath</a>().
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="g3"></a>QDir::homeDirPath () <code>[static]</code></h3>
+<p>Returns the absolute path for the user's home directory,
+<p>See also:  <a href="qdir.html#g0">home</a>().
+<h3 class="fn">bool <a name="d3"></a>QDir::isReadable () const</h3>
+<p>Returns TRUE if the directory is readable AND we can open files by
+name. This function will return FALSE if only one of these is present.<p><strong>Warning:</strong> A FALSE value from this function is not a guarantee that files
+in the directory are not accessible.
+<p>See also:  <a href="qfileinfo.html#c1">QFileInfo::isReadable</a>().
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#isReadable">dirview/dirview.cpp</a>
+<h3 class="fn">bool <a name="d6"></a>QDir::isRelative () const</h3>
+<p>Returns TRUE if the directory path is relative to the current directory,
+FALSE if the path is absolute (e.g. under UNIX a path is relative if it
+does not start with a '/').
+<p>According to Einstein this function should always return TRUE.
+<p>See also:  <a href="qdir.html#d7">convertToAbs</a>().
+<h3 class="fn">bool <a name="g7"></a>QDir::isRelativePath ( const char * path ) <code>[static]</code></h3>
+<p>Returns TRUE if the path is relative, FALSE if it is absolute.
+<p>See also:  <a href="qdir.html#d6">isRelative</a>().
+<h3 class="fn">bool <a name="d5"></a>QDir::isRoot () const</h3>
+<p>Returns TRUE if the directory is the root directory, otherwise FALSE.
+<p>Note: If the directory is a symbolic link to the root directory this
+function returns FALSE. If you want to test for this you can use
+<a href="qdir.html#a9">canonicalPath</a>():
+<p>Example:
+<pre>    <a href="qdir.html">QDir</a> d( "/tmp/root_link" );
+    d = d.<a href="qdir.html#a9">canonicalPath</a>();
+    if ( d.<a href="qdir.html#d5">isRoot</a>() )
+        <a href="qapplication.html#j5">warning</a>( "It IS a root link!" );
+</pre>
+<p>See also:  <a href="qdir.html#g1">root</a>() and <a href="qdir.html#g4">rootDirPath</a>().
+<h3 class="fn">bool <a name="g5"></a>QDir::match ( const char * filter, const char * fileName ) <code>[static]</code></h3>
+<p>Returns TRUE if the <em>fileName</em> matches the wildcard <em>filter.</em>
+<p>See also:  <a href="qregexp.html">QRegExp</a>.
+<h3 class="fn">bool <a name="c2"></a>QDir::matchAllDirs () const</h3>
+<p>Returns the value set by <a href="qdir.html#c3">setMatchAllDirs</a>()
+<p>See also:  <a href="qdir.html#c3">setMatchAllDirs</a>().
+<h3 class="fn">bool <a name="d1"></a>QDir::mkdir ( const char * dirName, bool acceptAbsPath = TRUE ) const</h3>
+<p>Creates a directory.
+<p>If <em>acceptAbsPath</em> is TRUE a path starting with a separator ('/')
+will create the absolute directory, if <em>acceptAbsPath</em> is FALSE
+any number of separators at the beginning of <em>dirName</em> will be removed.
+<p>Returns TRUE if successful, otherwise FALSE.
+<p>See also:  <a href="qdir.html#d2">rmdir</a>().
+<h3 class="fn">const char * <a name="b6"></a>QDir::nameFilter () const</h3>
+<p>Returns the string set by <a href="qdir.html#b7">setNameFilter</a>()
+<p>See also:  <a href="qdir.html#b7">setNameFilter</a>().
+<h3 class="fn">bool <a name="d9"></a>QDir::operator!= ( const QDir &amp; d ) const</h3>
+<p>Returns TRUE if the <em>d</em> and this dir havee different path or
+different sort/filter settings, otherwise FALSE.
+<h3 class="fn">QDir &amp; <a name="a4"></a>QDir::operator= ( const QDir &amp; d )</h3>
+<p>Makes a copy of d and assigns it to this QDir.
+<h3 class="fn">QDir &amp; <a name="a5"></a>QDir::operator= ( const char * path )</h3>
+<p>Sets the directory path to be the given path.
+<h3 class="fn">bool <a name="d8"></a>QDir::operator== ( const QDir &amp; d ) const</h3>
+<p>Returns TRUE if the <em>d</em> and this dir have the same path and all sort
+and filter settings are equal, otherwise FALSE.
+<h3 class="fn">const char * <a name="c5"></a>QDir::operator[] ( int index ) const</h3>
+<p>Returns the file name at position <em>index</em> in the list of found file
+names.
+Equivalent to <a href="qdir.html#c6">entryList</a>()->at(index).
+<p>Returns null if the <em>index</em> is out of range or if the entryList()
+function failed.
+<p>See also:  <a href="qdir.html#c4">count</a>() and <a href="qdir.html#c6">entryList</a>().
+<h3 class="fn">const char * <a name="a7"></a>QDir::path () const</h3>
+<p>Returns the path, this may contain symbolic links, but never contains
+redundant ".", ".." or multiple separators.
+<p>The returned path can be either absolute or relative (see <a href="qdir.html#a6">setPath</a>()).
+<p>See also:  <a href="qdir.html#a6">setPath</a>(), <a href="qdir.html#a8">absPath</a>(), <a href="qdir.html#d4">exists</a>(), <a href="qdir.html#g6">cleanDirPath</a>(), <a href="qdir.html#b0">dirName</a>(), <a href="qdir.html#b2">absFilePath</a>() and <a href="qdir.html#f6">convertSeparators</a>().
+<h3 class="fn">bool <a name="e0"></a>QDir::remove ( const char * fileName, bool acceptAbsPath = TRUE )</h3>
+<p>Removes a file.
+<p>If <em>acceptAbsPath</em> is TRUE a path starting with a separator ('/')
+will remove the file with the absolute path, if <em>acceptAbsPath</em> is FALSE
+any number of separators at the beginning of <em>fileName</em> will be removed.
+<p>Returns TRUE if successful, otherwise FALSE.
+<h3 class="fn">bool <a name="e1"></a>QDir::rename ( const char * name, const char * newName, bool acceptAbsPaths = TRUE )</h3>
+<p>Renames a file.
+<p>If <em>acceptAbsPaths</em> is TRUE a path starting with a separator ('/')
+will rename the file with the absolute path, if <em>acceptAbsPath</em> is FALSE
+any number of separators at the beginning of <em>name</em> will be removed.
+<p>Returns TRUE if successful, otherwise FALSE.
+<p>On most file systems, rename() fails only if oldName does not exist
+or if <em>newName</em> and <em>oldName</em> are not on the same partition, but
+there are also other reasons why rename() can fail.  For example, on
+at least one file system rename() fails if newName points to an open
+file.
+<h3 class="fn">bool <a name="d2"></a>QDir::rmdir ( const char * dirName, bool acceptAbsPath = TRUE ) const</h3>
+<p>Removes a directory.
+<p>If <em>acceptAbsPath</em> is TRUE a path starting with a separator ('/')
+will remove the absolute directory, if <em>acceptAbsPath</em> is FALSE
+any number of separators at the beginning of <em>dirName</em> will be removed.
+<p>The directory must be empty for rmdir() to succeed.
+<p>Returns TRUE if successful, otherwise FALSE.
+<p>See also:  <a href="qdir.html#d1">mkdir</a>().
+<h3 class="fn">QDir <a name="g1"></a>QDir::root () <code>[static]</code></h3>
+<p>Returns the root directory.
+<p>See also:  <a href="qdir.html#g4">rootDirPath</a>() and <a href="qdir.html#g8">drives</a>().
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="g4"></a>QDir::rootDirPath () <code>[static]</code></h3>
+<p>Returns the absolute path for the root directory ("/" under UNIX).
+<p>See also:  <a href="qdir.html#g1">root</a>() and <a href="qdir.html#g8">drives</a>().
+<h3 class="fn">char <a name="f7"></a>QDir::separator () <code>[static]</code></h3>
+<p>Returns the native directory separator; '/' under UNIX and '\' under
+MS-DOS, Windows NT and OS/2.
+<p>You do not need to use this function to build file paths. If you always
+use '/', Qt will translate your paths to conform to the underlying
+operating system.
+<h3 class="fn">bool <a name="f8"></a>QDir::setCurrent ( const char * path ) <code>[static]</code></h3>
+<p>Sets the the current directory. Returns TRUE if successful.
+<h3 class="fn">void <a name="b9"></a>QDir::setFilter ( int filterSpec )</h3>
+<p>Sets the filter used by <a href="qdir.html#c6">entryList</a>() and <a href="qdir.html#c8">entryInfoList</a>(). The filter is used
+to specify the kind of files that should be returned by entryList() and
+entryInfoList(). The filter is specified by or-ing values from the enum
+FilterSpec. The different values are:
+<p><dl compact>
+<dt>Dirs<dd> List directories only.
+<dt>Files<dd> List files only.
+<dt>Drives<dd> List drives.
+<dt>NoSymLinks<dd> Do not list symbolic links.
+<p><dt>Readable<dd> List files with read permission.
+<dt>Writable<dd> List files with write permission.
+<dt>Executable<dd> List files with execute permission.
+<p>Setting none of the three flags above is equivalent to setting all of them.
+<p><dt>Modified<dd> Only list files that have been modified (does nothing
+under UNIX).
+<dt>Hidden<dd> List hidden files also (.* under UNIX).
+<dt>System<dd> List system files (does nothing under UNIX).
+<p></dl>
+<p>See also:  <a href="qdir.html#b6">nameFilter</a>().
+<h3 class="fn">void <a name="c3"></a>QDir::setMatchAllDirs ( bool enable )</h3>
+<p>If <em>enable</em> is TRUE, all directories will be listed (even if they do not
+match the filter or the name filter), otherwise only matched directories
+will be listed.
+<p>See also:  <a href="qdir.html#c2">matchAllDirs</a>().
+<p>Bugs and limitations:
+<ul>
+<li>Currently, directories that do not match the filter will not be
+included (the name filter will be ignored as expected).
+</ul>
+<h3 class="fn">void <a name="b7"></a>QDir::setNameFilter ( const char * nameFilter )</h3>
+<p>Sets the name filter used by <a href="qdir.html#c6">entryList</a>() and <a href="qdir.html#c8">entryInfoList</a>().
+<p>The name filter is a wildcarding filter that understands "*" and "?"
+wildcards, if you want entryList() and entryInfoList() to list all files
+ending with ".cpp", you simply call dir.setNameFilter("*.cpp");
+<p>See also:  <a href="qdir.html#b6">nameFilter</a>().
+<h3 class="fn">void <a name="a6"></a>QDir::setPath ( const char * path )</h3>
+<p>Sets the path of the directory. The path is cleaned of redundant ".", ".."
+and multiple separators. No check is made to ensure that a directory
+with this path exists.
+<p>The path can be either absolute or relative. Absolute paths begin with the
+directory separator ('/') or a drive specification (not
+applicable to UNIX).
+Relative file names begin with a directory name or a file name and specify
+a path relative to the current directory. An example of
+an absolute path is the string "/tmp/quartz", a relative path might look like
+"src/fatlib". You can use the function <a href="qdir.html#d6">isRelative</a>() to check if a QDir
+is using a relative or an absolute file path. You can call the function
+<a href="qdir.html#d7">convertToAbs</a>() to convert a relative QDir to an absolute one.
+<p>See also:  <a href="qdir.html#a7">path</a>(), <a href="qdir.html#a8">absPath</a>(), exists, <a href="qdir.html#g6">cleanDirPath</a>(), <a href="qdir.html#b0">dirName</a>(), <a href="qdir.html#b2">absFilePath</a>(), <a href="qdir.html#d6">isRelative</a>() and <a href="qdir.html#d7">convertToAbs</a>().
+<h3 class="fn">void <a name="c1"></a>QDir::setSorting ( int sortSpec )</h3>
+<p>Sets the sorting order used by <a href="qdir.html#c6">entryList</a>() and <a href="qdir.html#c8">entryInfoList</a>().
+<p>The <em>sortSpec</em> is specified by or-ing values from the enum
+SortSpec. The different values are:
+<p>One of these:
+<dl compact>
+<dt>Name<dd> Sort by name (alphabetical order).
+<dt>Time<dd> Sort by time (most recent first).
+<dt>Size<dd> Sort by size (largest first).
+<dt>Unsorted<dd> Use the operating system order (UNIX does NOT sort
+alphabetically).
+<p>ORed with zero or more of these:
+<p><dt>DirsFirst<dd> Always put directory names first.
+<dt>Reversed<dd> Reverse sort order.
+<dt>IgnoreCase<dd> Ignore case when sorting by name.
+</dl>
+<h3 class="fn">QDir::SortSpec <a name="c0"></a>QDir::sorting() const</h3>
+<p>Returns the value set by <a href="qdir.html#c1">setSorting</a>()
+<p>See also:  <a href="qdir.html#c1">setSorting</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qdir.h: 1998/08/19
+<li>qdir.cpp: 1999/02/22
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

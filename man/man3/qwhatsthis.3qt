@@ -1,0 +1,75 @@
+.TH QWhatsThis 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QWhatsThis \- Simple description of any widget, e.g. answering the question "what's this?"
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qwhatsthis.h>\fR
+.PP
+.SS "Static Public Members"
+.TP
+void \fBadd\fR ( QWidget *, const char *, bool deepCopy = TRUE ) 
+.TP
+void \fBadd\fR ( QWidget *, const QPixmap &, const char *, const char *, bool deepCopy = TRUE ) 
+.TP
+void \fBremove\fR ( QWidget * ) 
+.TP
+const char* \fBtextFor\fR ( QWidget * ) 
+.TP
+QToolButton* \fBwhatsThisButton\fR ( QWidget * parent ) 
+.SH DESCRIPTION
+The QWhatsThis class provides a simple description of any widget, e.g. answering the question "what's this?"
+.PP
+What's This help lies between tool tips and fully-blown online help systems: 
+.TP
+Tool Tips - flyweight help, extremely brief, entirely integrated in the user interface. 
+.TP
+What's This? - also lightweight, but can encompass a three-paragraph explanation. 
+.TP
+Online Help - can encompass any amount of information, but is typically a little slower to call up, a little separated from the user's work, and often users feel that using online help is a digression from their real task. 
+.PP
+QWhatsThis, then, offers a single window with a single explanatory text, which pops up quickly when the user asks "what's this?", and goes away as soon as the user does something else. There are two ways to make QWhatsThis pop up: Click a "What's This?" button and then click on some other widget to get help for that other widget, or press Shift-F1 to get help for the widget that has keyboard focus.
+.PP
+QWhatsThis provides functions to add() and remove() What's This help for a widget, and it provides a function to create a What's This button suitable for typical tool bars.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+More functionality will be provided in the coming releases of Qt.
+.PP
+See also: QToolTip.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "void QWhatsThis::add ( QWidget * widget, const QPixmap & icon, const char * title, const char * text, bool deepCopy = TRUE ) \fC[static]\fR"
+Adds \fItext\fR as What's This help for \fIwidget,\fR with title line \fItitle\fR and icon \fIicon.\fR If \fIdeepCopy\fR is TRUE, QWhatsThis makes a deep copy of \fItitle\fR and \fItext;\fR if it is FALSE QWhatsThis just copies the pointers.
+.SH "void QWhatsThis::add ( QWidget * widget, const char * text, bool deepCopy = TRUE ) \fC[static]\fR"
+Adds \fItext\fR as What's This help for \fIwidget.\fR If \fIdeepCopy\fR is TRUE, QWhatsThis makes a deep copy of the string; if it is FALSE QWhatsThis just copies the pointer \fItext.\fR
+.PP
+Examples:
+.(l
+application/application.cpp
+.)l
+.SH "void QWhatsThis::remove ( QWidget * widget ) \fC[static]\fR"
+Removes the What's This help for \fIwidget.\fR
+.PP
+See also: add().
+.SH "const char * QWhatsThis::textFor ( QWidget * widget ) \fC[static]\fR"
+Returns the text (not the title) for \fIwidget,\fR or 0 if there isn't any What's This help for \fIwidget.\fR
+.PP
+See also: add().
+.SH "QToolButton * QWhatsThis::whatsThisButton ( QWidget * parent ) \fC[static]\fR"
+Returns a pointer to a specially configured QToolButton, suitable for use to enter What's This mode.
+.PP
+See also:  QToolButton.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qwhatsthis.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

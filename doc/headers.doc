@@ -1,0 +1,30 @@
+/****************************************************************************
+** $Id: headers.doc,v 1.5 1998/05/05 13:50:05 warwick Exp $
+**
+** Documentation for class overview
+**
+** Copyright (C) 1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+#if defined(DEBUG)
+static char ident[] = "$Id: headers.doc,v 1.5 1998/05/05 13:50:05 warwick Exp $";
+#endif
+
+
+/*!
+\page headers.html
+
+<title>Qt Documentation</title>
+</head><body bgcolor="#ffffff">
+
+\postheader
+
+<h1 align=center>Header File Index</h1><br clear="all">
+
+<p>Here are the header files that make up the Qt API:
+
+<multicol cols=4>
+\headerfilelist
+</multicol>
+*/

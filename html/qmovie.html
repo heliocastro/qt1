@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QMovie Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QMovie Class Reference</h1><br clear="all">
+<p>
+Incrementally loads an animation or image, signalling as it progresses.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qmovie-h.html">qmovie.h</a>&gt;</code>
+<p><a href="qmovie-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qmovie.html#a0"><strong>QMovie</strong></a> () </span>
+<li><span class="fn"><a href="qmovie.html#a1"><strong>QMovie</strong></a> ( QDataSource *, int bufsize=1024 ) </span>
+<li><span class="fn"><a href="qmovie.html#a2"><strong>QMovie</strong></a> ( const char * fileName, int bufsize=1024 ) </span>
+<li><span class="fn"><a href="qmovie.html#a3"><strong>QMovie</strong></a> ( QByteArray data, int bufsize=1024 ) </span>
+<li><span class="fn"><a href="qmovie.html#a4"><strong>QMovie</strong></a> ( const QMovie &amp; ) </span>
+<li><span class="fn"><a href="qmovie.html#a5"><strong>~QMovie</strong></a> () </span>
+<li><span class="fn">QMovie&amp; <a href="qmovie.html#a6"><strong>operator=</strong></a> ( const QMovie &amp; ) </span>
+<li><span class="fn">const QColor&amp; <a href="qmovie.html#a7"><strong>backgroundColor</strong></a> () const</span>
+<li><span class="fn">void <a href="qmovie.html#a8"><strong>setBackgroundColor</strong></a> ( const QColor &amp; ) </span>
+<li><span class="fn">const QRect&amp; <a href="qmovie.html#a9"><strong>getValidRect</strong></a> () const</span>
+<li><span class="fn">const QPixmap&amp; <a href="qmovie.html#b0"><strong>framePixmap</strong></a> () const</span>
+<li><span class="fn">bool <a href="qmovie.html#b1"><strong>isNull</strong></a> () const</span>
+<li><span class="fn">int <a href="qmovie.html#b2"><strong>frameNumber</strong></a> () const</span>
+<li><span class="fn">int <a href="qmovie.html#b3"><strong>steps</strong></a> () const</span>
+<li><span class="fn">bool <a href="qmovie.html#b4"><strong>paused</strong></a> () const</span>
+<li><span class="fn">bool <a href="qmovie.html#b5"><strong>finished</strong></a> () const</span>
+<li><span class="fn">bool <a href="qmovie.html#b6"><strong>running</strong></a> () const</span>
+<li><span class="fn">void <a href="qmovie.html#b7"><strong>unpause</strong></a> () </span>
+<li><span class="fn">void <a href="qmovie.html#b8"><strong>pause</strong></a> () </span>
+<li><span class="fn">void <a href="qmovie.html#b9"><strong>step</strong></a> () </span>
+<li><span class="fn">void <a href="qmovie.html#c0"><strong>step</strong></a> ( int ) </span>
+<li><span class="fn">void <a href="qmovie.html#c1"><strong>restart</strong></a> () </span>
+<li><span class="fn">int <a href="qmovie.html#c2"><strong>speed</strong></a> () const</span>
+<li><span class="fn">void <a href="qmovie.html#c3"><strong>setSpeed</strong></a> ( int ) </span>
+<li><span class="fn">void <a href="qmovie.html#c4"><strong>connectResize</strong></a> ( QObject * receiver, const char * member ) </span>
+<li><span class="fn">void <a href="qmovie.html#c5"><strong>disconnectResize</strong></a> ( QObject * receiver, const char * member ) </span>
+<li><span class="fn">void <a href="qmovie.html#c6"><strong>connectUpdate</strong></a> ( QObject * receiver, const char * member ) </span>
+<li><span class="fn">void <a href="qmovie.html#c7"><strong>disconnectUpdate</strong></a> ( QObject * receiver, const char * member ) </span>
+<li><span class="fn">void <a href="qmovie.html#c8"><strong>connectStatus</strong></a> ( QObject * receiver, const char * member ) </span>
+<li><span class="fn">void <a href="qmovie.html#c9"><strong>disconnectStatus</strong></a> ( QObject * receiver, const char * member=0 ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+Incrementally loads an animation or image, signalling as it progresses.
+<p>
+A QMovie provides a <a href="qpixmap.html">QPixmap</a> as the <a href="qmovie.html#b0">framePixmap</a>(), and connections can
+be made via <a href="qmovie.html#c4">connectResize</a>() and <a href="qmovie.html#c6">connectUpdate</a>() to receive notification
+of size and pixmap changes.  All decoding is driven by
+the normal event processing mechanisms.  The simplest way to display
+a QMovie, is to use a <a href="qlabel.html">QLabel</a> and <a href="qlabel.html#b8">QLabel::setMovie</a>().
+<p>The movie begins playing as soon as the QMovie is created (actually,
+once control returns to the event loop).  When the last frame in the
+movie has been played, it may loop back to the start if such looping
+is defined in the input source.
+<p>QMovie objects are explicitly shared.  This means that a QMovie copied
+from another QMovie will be displaying the same frame at all times.
+If one shared movie pauses, all pause.  To make <em>independent</em> movies,
+they must be constructed separately.
+<p>The set of data formats supported by QMovie is determined by the decoder
+factories which have been installed, and the format of the input is
+determined as the input is decoded.
+<p>In Qt 1.30, the decoder factory interface is not available for adding
+support for new formats. Only GIF support is installed.  The GIF decoder
+supports interlaced images, transparency, looping, image-restore
+disposal, local color maps, and background colors.  The Netscape looping
+extension is obeyed.
+<p>Archives of animated GIFs and tools for building them can be found
+at <a href=http://www.yahoo.com/Arts/Visual_Arts/Animation/Computer_Animation/Animated_GIFs/>
+Yahoo!</a>.
+<p>We are required to state: The Graphics Interchange Format(c) is the
+Copyright property of CompuServe Incorporated. GIF(sm) is a Service
+Mark property of CompuServe Incorporated.<p><strong>Warning:</strong> Unisys has changed its position regarding GIF.  If you are
+in a country where Unisys holds a patent on LZW compression and/or
+decompression, Unisys may require a license from you.  These
+countries include Canada, Japan, the USA, France, Germany, Italy and
+the UK.  There is more information on Unisys web site: <a
+href="http://corp2.unisys.com/LeadStory/lzwfaq.html">Overview of
+Unisys' position.</a> GIF support may be removed in a future version
+of Qt.  We recommend using the PNG format, which is available in the
+<a href="imageio.html">Qt Image IO Extension</a> package.
+<p><img src="qmovie.gif">
+<p>See also:  <a href="qlabel.html#b8">QLabel::setMovie</a>().
+<p>Examples:
+ <a href="movies-main-cpp.html#QMovie">movies/main.cpp</a>
+ <a href="widgets-widgets-cpp.html#QMovie">widgets/widgets.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QMovie::QMovie ()</h3>
+<p>Creates a null QMovie.  The only interesting thing to do to such
+a movie is to assign another movie to it.
+<p>See also:  <a href="qmovie.html#b1">isNull</a>().
+<h3 class="fn"><a name="a1"></a>QMovie::QMovie ( <a href="qdatasource.html">QDataSource</a> * src, int bufsize=1024 )</h3>
+<p>Creates a QMovie which reads an image sequence from the given
+<a href="qdatasource.html">QDataSource</a>.  The source must be allocated dynamically,
+as it becomes owned by the QMovie, and will be destroyed
+when the movie is destroyed.
+The movie starts playing as soon as event processing continues.
+<p>The <em>bufsize</em> argument sets the maximum amount of data the movie
+will transfer from the data source per event loop.  The lower this
+value, the better interleaved the movie playback will be with other
+event processing, but the slower the overall processing.
+<h3 class="fn"><a name="a4"></a>QMovie::QMovie ( const QMovie &amp; movie )</h3>
+<p>Constructs a movie that uses the same data as another movie.
+QMovies use explicit sharing, so operations on the copy will
+effect the same operations on the original.
+<h3 class="fn"><a name="a3"></a>QMovie::QMovie ( <a href="qbytearray.html">QByteArray</a> data, int bufsize=1024 )</h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<p>Creates a QMovie which reads an image sequence from given data.
+<h3 class="fn"><a name="a2"></a>QMovie::QMovie ( const char * fileName, int bufsize=1024 )</h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<p>Creates a QMovie which reads an image sequence from the named file.
+<h3 class="fn"><a name="a5"></a>QMovie::~QMovie ()</h3>
+<p>Destroys the QMovie.  If this is the last reference to the data of the
+movie, that will also be destroyed.
+<h3 class="fn">const <a href="qcolor.html">QColor</a>&amp; <a name="a7"></a>QMovie::backgroundColor () const</h3>
+<p>Returns the background color of the movie set by <a href="qmovie.html#a8">setBackgroundColor</a>().
+<h3 class="fn">void <a name="c4"></a>QMovie::connectResize ( <a href="qobject.html">QObject</a> * receiver, const char * member )</h3>
+<p>Connects the given member, of type <pre> void member(const QSize&amp;)
+</pre>
+<p>such that it is signalled when the movie changes size.
+<p>Note that due to the explicit sharing of QMovie objects, these connections
+persist until they are explicitly disconnected with <a href="qmovie.html#c5">disconnectResize</a>(), or
+until <em>every</em> shared copy of the movie is deleted.
+<h3 class="fn">void <a name="c8"></a>QMovie::connectStatus ( <a href="qobject.html">QObject</a> * receiver, const char * member )</h3>
+<p>Connects the given member, of type <pre> void member(int)
+</pre>
+<p>such that it is signalled when the movie changes status.  The status
+code are negative for errors and positive for information, and they
+are currently:
+<p><ul>
+<li> <code>QMovie::SourceEmpty</code> - signalled if the input cannot be read.
+<li> <code>QMovie::UnrecognizedFormat</code> - signalled if the input data is unrecognized.
+<li> <code>QMovie::Paused</code> - signalled when the movie is paused by a call to <a href="qmovie.html#b4">paused</a>(),
+or by after <a href="qmovie.html#b9">stepping</a> pauses.
+<li> <code>QMovie::EndOfFrame</code> - signalled at end-of-frame, after any update and Paused signals.
+<li> <code>QMovie::EndOfLoop</code> - signalled at end-of-loop, after any update signals,
+EndOfFrame, but before EndOfMovie.
+<li> <code>QMovie::EndOfMovie</code> - signalled when the movie completes and is not about
+to loop.
+</ul>
+<p>More status messages may be added in the future, so a general test for
+error would test for negative.
+<p>Note that due to the explicit sharing of QMovie objects, these connections
+persist until they are explicitly disconnected with <a href="qmovie.html#c9">disconnectStatus</a>(), or
+until <em>every</em> shared copy of the movie is deleted.
+<p>Examples:
+ <a href="widgets-widgets-cpp.html#connectStatus">widgets/widgets.cpp</a>
+<h3 class="fn">void <a name="c6"></a>QMovie::connectUpdate ( <a href="qobject.html">QObject</a> * receiver, const char * member )</h3>
+<p>Connects the given member, of type <pre> void member(const QRect&amp;)
+</pre>
+<p>such that it is signalled when an area of the <a href="qmovie.html#b0">framePixmap</a>() has
+changed since the previous frame.
+<p>Note that due to the explicit sharing of QMovie objects, these connections
+persist until they are explicitly disconnected with <a href="qmovie.html#c7">disconnectUpdate</a>(), or
+until <em>every</em> shared copy of the movie is deleted.
+<p>Examples:
+ <a href="widgets-widgets-cpp.html#connectUpdate">widgets/widgets.cpp</a>
+<h3 class="fn">void <a name="c5"></a>QMovie::disconnectResize ( <a href="qobject.html">QObject</a> * receiver, const char * member )</h3>
+<p>Disconnects the given member, or all members if member is zero,
+previously connected by
+<a href="qmovie.html#c4">connectResize</a>().
+<h3 class="fn">void <a name="c9"></a>QMovie::disconnectStatus ( <a href="qobject.html">QObject</a> * receiver, const char * member=0 )</h3>
+<p>Disconnects the given member, or all members if member is zero,
+previously connected by
+<a href="qmovie.html#c8">connectStatus</a>().
+<h3 class="fn">void <a name="c7"></a>QMovie::disconnectUpdate ( <a href="qobject.html">QObject</a> * receiver, const char * member )</h3>
+<p>Disconnects the given member, or all members if member is zero,
+previously connected by
+<a href="qmovie.html#c6">connectUpdate</a>().
+<h3 class="fn">bool <a name="b5"></a>QMovie::finished () const</h3>
+<p>Returns TRUE if the image is no longer playing - this happens when all
+loops of all frames is complete.
+<h3 class="fn">int <a name="b2"></a>QMovie::frameNumber () const</h3>
+<p>Returns the number of times EndOfFrame has been emitted since the
+start of the current loop of the movie.  Thus, before
+any EndOfFrame has been emitted, the value will be 0,
+within slots processing the first signal, frameNumber() will be 1, and
+so on.
+<h3 class="fn">const <a href="qpixmap.html">QPixmap</a>&amp; <a name="b0"></a>QMovie::framePixmap () const</h3>
+<p>Returns the current frame of the movie.  It is not generally useful to
+keep a copy of this pixmap.  Better to keep a copy of the QMovie and
+get the framePixmap() only when needed for drawing.
+<p>Examples:
+ <a href="widgets-widgets-cpp.html#framePixmap">widgets/widgets.cpp</a>
+<h3 class="fn">const <a href="qrect.html">QRect</a>&amp; <a name="a9"></a>QMovie::getValidRect () const</h3>
+<p>Returns the area of the pixmap for which pixels have been generated.
+<h3 class="fn">bool <a name="b1"></a>QMovie::isNull () const</h3>
+<p>Returns TRUE if the movie is null.
+<h3 class="fn">QMovie&amp; <a name="a6"></a>QMovie::operator= ( const QMovie &amp; movie )</h3>
+<p>Makes this movie use the same data as another movie.
+QMovies use explicit sharing.
+<h3 class="fn">void <a name="b8"></a>QMovie::pause ()</h3>
+<p>Pauses the progress of the animation.
+<p>See also:  <a href="qmovie.html#b7">unpause</a>().
+<h3 class="fn">bool <a name="b4"></a>QMovie::paused () const</h3>
+<p>Returns TRUE if the image is paused.
+<h3 class="fn">void <a name="c1"></a>QMovie::restart ()</h3>
+<p>Rewinds the movie to the beginning.  If the movie has not been paused,
+it begins playing again.
+<h3 class="fn">bool <a name="b6"></a>QMovie::running () const</h3>
+<p>Returns TRUE if the image is not single-stepping, not paused,
+and not finished.
+<h3 class="fn">void <a name="a8"></a>QMovie::setBackgroundColor ( const <a href="qcolor.html">QColor</a> &amp; c )</h3>
+<p>Set the background color of the pixmap.  If the background color
+isValid(), the pixmap will never have a mask, as the background
+color will be used in transparent regions of the image.
+<p>See also:  <a href="qmovie.html#a7">backgroundColor</a>().
+<h3 class="fn">void <a name="c3"></a>QMovie::setSpeed ( int percent )</h3>
+<p>Sets the speed-up factor of the movie.  This is a percentage of the
+speed dictated by the input data format.  The default is 100 percent.
+<p>Examples:
+ <a href="widgets-widgets-cpp.html#setSpeed">widgets/widgets.cpp</a>
+<h3 class="fn">int <a name="c2"></a>QMovie::speed () const</h3>
+<p>Returns the speed-up factor of the movie.  The default is 100 percent.
+<p>See also:  <a href="qmovie.html#c3">setSpeed</a>().
+<h3 class="fn">void <a name="b9"></a>QMovie::step ()</h3>
+<p>Steps forward 1 frame, then pauses.
+<h3 class="fn">void <a name="c0"></a>QMovie::step ( int steps )</h3>
+<p>Steps forward, showing the given number of frames, then pauses.
+<h3 class="fn">int <a name="b3"></a>QMovie::steps () const</h3>
+<p>Returns the number of steps remaining after a call to <a href="qmovie.html#b9">step</a>(), 0 if paused,
+or a negative value if the movie is running normally or is finished.
+<h3 class="fn">void <a name="b7"></a>QMovie::unpause ()</h3>
+<p>Unpauses the progress of the animation.
+<p>See also:  <a href="qmovie.html#b8">pause</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qmovie.h: 1998/08/19
+<li>qmovie.cpp: 1998/11/13
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

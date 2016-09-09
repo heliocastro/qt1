@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - mainlyXt/editor.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Editor Example</h1>
+  <p>
+  This example shows two simple text editors, with most of the
+  program written in Xt.  One editor is a Qt QMultiLineEdit, the
+  other is an Athena Widgets text widget.  They are bound together
+  in an Xt form widget.
+<pre>#include "<a name="qxt.h"></a><a href="qxt-h.html">qxt.h</a>"
+#include &lt;<a name="qmultilinedit.h"></a><a href="qmultilinedit-h.html">qmultilinedit.h</a>&gt;
+#include &lt;<a name="qpainter.h"></a><a href="qpainter-h.html">qpainter.h</a>&gt;
+#include &lt;<a name="qmessagebox.h"></a><a href="qmessagebox-h.html">qmessagebox.h</a>&gt;
+#include &lt;X11/Shell.h&gt;
+#include &lt;X11/StringDefs.h&gt;
+#include &lt;X11/Xaw/Form.h&gt;
+#include &lt;X11/Xaw/AsciiText.h&gt;
+
+static const char* QTEDMSG =
+    "This is a Qt widget.\nIt is a QMultiLineEdit.";
+
+static const char* XTEDMSG =
+    "This is an Xt widget.\nIt is an asciiTextWidgetClass.";
+
+class EncapsulatedQtWidget : public QXtWidget {
+    <a name="QMultiLineEdit"></a><a href="qmultilineedit.html">QMultiLineEdit</a>* mle;
+public:
+    EncapsulatedQtWidget(Widget parent) :
+        <a name="QXtWidget"></a><a href="qxtwidget.html">QXtWidget</a>("editor", parent, TRUE)
+    {
+        mle = new <a href="qmultilineedit.html">QMultiLineEdit</a>(this);
+        mle-&gt;<a name="setText"></a><a href="qmultilineedit.html#c1">setText</a>(QTEDMSG);
+    }
+
+    void resizeEvent(<a name="QResizeEvent"></a><a href="qresizeevent.html">QResizeEvent</a>*)
+    {
+        mle-&gt;<a name="resize"></a><a href="qwidget.html#l4">resize</a>(width(),height());
+    }
+};
+
+main(int argc, char** argv)
+{
+    XtAppContext app;
+
+    Widget toplevel = XtAppInitialize(
+        &amp;app, "Editors",
+        0, 0, &amp;argc, argv, 0, 0, 0);
+    <a name="QXtApplication"></a><a href="qxtapplication.html">QXtApplication</a> qapp(XtDisplay(toplevel));
+
+    Widget form = XtVaCreateManagedWidget("form", formWidgetClass, toplevel, 0);
+
+    EncapsulatedQtWidget qtchild(form);
+
+    Arg args[20];
+    Cardinal nargs=0;
+    XtSetArg(args[nargs], XtNwidth, 200);                    nargs++;
+    XtSetArg(args[nargs], XtNheight, 200);                   nargs++;
+    XtSetValues(qtchild.<a name="xtWidget"></a><a href="qxtwidget.html#a5">xtWidget</a>(), args, nargs);
+
+    nargs=0;
+    XtSetArg(args[nargs], XtNeditType, XawtextEdit);         nargs++;
+    XtSetArg(args[nargs], XtNstring, XTEDMSG);               nargs++;
+    XtSetArg(args[nargs], XtNwidth, 200);                    nargs++;
+    XtSetArg(args[nargs], XtNheight, 200);                   nargs++;
+    XtSetArg(args[nargs], XtNfromHoriz, qtchild.<a href="qxtwidget.html#a5">xtWidget</a>()); nargs++;
+    Widget xtchild = XtCreateManagedWidget("editor", asciiTextWidgetClass,
+        form, args, nargs);
+
+    XtRealizeWidget(toplevel);
+    XtAppMainLoop(app);
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

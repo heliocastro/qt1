@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>Qt tutorial - t14/gamebrd.h</title>
+</head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Source code for <a href="t14.html">tutorial 14</a>: gamebrd.h</h1><br clear="all">
+<hr>
+<pre>/****************************************************************
+**
+** Definition of GameBoard class, Qt tutorial 14
+**
+****************************************************************/
+
+#ifndef GAMEBRD_H
+#define GAMEBRD_H
+
+#include &lt;<a href="qwidget-h.html">qwidget.h</a>&gt;
+
+class QPushButton;
+class LCDRange;
+class QLCDNumber;
+class QFrame;
+class CannonField;
+
+#include "lcdrange.h"
+#include "cannon.h"
+
+class GameBoard : public QWidget
+{
+    Q_OBJECT
+public:
+    GameBoard( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+protected:
+    void  resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * );
+protected slots:
+    void  fire();
+    void  hit();
+    void  missed();
+    void  newGame();
+private:
+    <a href="qpushbutton.html">QPushButton</a> *quit;
+    <a href="qpushbutton.html">QPushButton</a> *shoot;
+    <a href="qpushbutton.html">QPushButton</a> *restart;
+    LCDRange    *angle;
+    LCDRange    *force;
+    <a href="qlcdnumber.html">QLCDNumber</a>  *hits;
+    <a href="qlcdnumber.html">QLCDNumber</a>  *shotsLeft;
+    <a href="qframe.html">QFrame</a>      *frame;
+    CannonField *cannonField;
+};
+
+#endif // GAMEBRD_H
+</pre>
+<p>
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

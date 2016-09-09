@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QBitmap Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QBitmap Class Reference</h1><br clear="all">
+<p>
+The QBitmap class provides monochrome (1 bit depth) pixmaps.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qbitmap-h.html">qbitmap.h</a>&gt;</code>
+<p>
+Inherits <a href="qpixmap.html">QPixmap</a>.
+<p><a href="qbitmap-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qbitmap.html#a0"><strong>QBitmap</strong></a> () </span>
+<li><span class="fn"><a href="qbitmap.html#a1"><strong>QBitmap</strong></a> ( int w, int h, bool clear = FALSE ) </span>
+<li><span class="fn"><a href="qbitmap.html#a2"><strong>QBitmap</strong></a> ( const QSize &amp;, bool clear = FALSE ) </span>
+<li><span class="fn"><a href="qbitmap.html#a3"><strong>QBitmap</strong></a> ( int w, int h, const uchar * bits, bool isXbitmap=FALSE ) </span>
+<li><span class="fn"><a href="qbitmap.html#a4"><strong>QBitmap</strong></a> ( const QSize &amp;, const uchar * bits, bool isXbitmap=FALSE ) </span>
+<li><span class="fn"><a href="qbitmap.html#a5"><strong>QBitmap</strong></a> ( const QBitmap &amp; ) </span>
+<li><span class="fn"><a href="qbitmap.html#a6"><strong>QBitmap</strong></a> ( const char * fileName, const char * format=0 ) </span>
+<li><span class="fn">QBitmap&amp; <a href="qbitmap.html#a7"><strong>operator=</strong></a> ( const QBitmap &amp; ) </span>
+<li><span class="fn">QBitmap&amp; <a href="qbitmap.html#a8"><strong>operator=</strong></a> ( const QPixmap &amp; ) </span>
+<li><span class="fn">QBitmap&amp; <a href="qbitmap.html#a9"><strong>operator=</strong></a> ( const QImage &amp; ) </span>
+<li><span class="fn">QBitmap <a href="qbitmap.html#b0"><strong>xForm</strong></a> ( const QWMatrix &amp; ) const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QBitmap class provides monochrome (1 bit depth) pixmaps.
+<p>
+The QBitmap class is a monochrome off-screen paint device, used mainly
+for creating custom <a href="qcursor.html">mouse cursors</a> or <a href="qbrush.html">brushes</a>.
+<p>A QBitmap is a <a href="qpixmap.html">QPixmap</a> with the <a href="qpixmap.html#b5">depth</a> 1.
+If a pixmap with a depth greater than 1 is assigned to a bitmap, the
+bitmap will be automatically dithered.  A QBitmap is guaranteed to always
+have the depth 1, unless it is a <a href="qpixmap.html#b0">null</a>
+bitmap (has depth 0).
+<p>When drawing in a QBitmap (or QPixmap with depth 1), we recommend using
+the global <code>color0</code> and <code>color1</code> <a href="qcolor.html">QColor</a> objects.  Painting with <code>color0</code> sets the bitmap bits to 0, and painting with <code>color1</code> sets the
+bits to 1.  For a bitmap, 0-bits indicate background (or white) and
+1-bits indicate foreground (or black).  Using the <code>black</code> and <code>white</code>
+QColor objects make no sense, because the <a href="qcolor.html#c6">pixel
+value</a> is not necessarily 0 for black and 1 for white.
+<p>Just like the QPixmap class, QBitmap is optimized by the use of <a href="shclass.html">implicit sharing</a>, so it is very efficient to pass
+QBitmap objects as arguments.
+<p>See also:  <a href="qpixmap.html">QPixmap</a>, <a href="qpainter.html#k0">QPainter::drawPixmap</a>(), <a href="qpaintdevice.html#b2">bitBlt</a>() and <a href="shclass.html">Shared Classes</a>
+<p>Examples:
+ <a href="cursor-cursor-cpp.html#QBitmap">cursor/cursor.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QBitmap::QBitmap ()</h3>
+<p>Constructs a null bitmap.
+<p>See also:  <a href="qpixmap.html#b0">QPixmap::isNull</a>().
+<h3 class="fn"><a name="a2"></a>QBitmap::QBitmap ( const <a href="qsize.html">QSize</a> &amp; size, bool clear = FALSE )</h3>
+<p>Overloaded constructor; takes a <a href="qsize.html">QSize</a> parameter instead of <em>(w,h).</em>
+<h3 class="fn"><a name="a4"></a>QBitmap::QBitmap ( const <a href="qsize.html">QSize</a> &amp; size, const uchar * bits, bool isXbitmap=FALSE )</h3>
+<p>Overloaded constructor; takes a <a href="qsize.html">QSize</a> parameter instead of <em>(w,h).</em>
+<h3 class="fn"><a name="a5"></a>QBitmap::QBitmap ( const QBitmap &amp; bitmap )</h3>
+<p>Constructs a bitmap which is a copy of <em>bitmap.</em>
+<h3 class="fn"><a name="a6"></a>QBitmap::QBitmap ( const char * fileName, const char * format=0 )</h3>
+<p>Constructs a pixmap from the file <em>fileName.</em> If the file does not
+exist, or is of an unknown format, the pixmap becomes a null pixmap.
+<p>The parameters are passed on to <a href="qpixmap.html#d4">QPixmap::load</a>().
+<p>See also:  <a href="qpixmap.html#b0">QPixmap::isNull</a>(), <a href="qpixmap.html#d4">QPixmap::load</a>(), <a href="qpixmap.html#d6">QPixmap::loadFromData</a>(), <a href="qpixmap.html#d8">QPixmap::save</a>() and <a href="qpixmap.html#f3">QPixmap::imageFormat</a>().
+<h3 class="fn"><a name="a1"></a>QBitmap::QBitmap ( int w, int h, bool clear = FALSE )</h3>
+<p>Constructs a bitmap with <em>w</em> width and <em>h</em> height.
+<p>The contents of the bitmap is uninitialized if <em>clear</em> is FALSE, otherwise
+it is filled with pixel value 0 (the <a href="qcolor.html">QColor</a> <code>color0).</code>
+<h3 class="fn"><a name="a3"></a>QBitmap::QBitmap ( int w, int h, const uchar * bits, bool isXbitmap=FALSE )</h3>
+<p>Constructs a bitmap with <em>w</em> width and <em>h</em> height and sets the contents
+to <em>bits.</em>
+<p>The <em>isXbitmap</em> should be TRUE if <em>bits</em> was generated by the
+X11 bitmap program.  The X bitmap bit order is little endian.
+The <a href="qimage.html">QImage</a> documentation discusses bit order of monochrome images.
+<p>Example (creates an arrow bitmap):
+<pre>    uchar arrow_bits[] = { 0x3f, 0x1f, 0x0f, 0x1f, 0x3b, 0x71, 0xe0, 0xc0 };
+    <a href="qbitmap.html">QBitmap</a> bm( 8, 8, arrow_bits, TRUE );
+</pre>
+<h3 class="fn">QBitmap &amp; <a name="a9"></a>QBitmap::operator= ( const <a href="qimage.html">QImage</a> &amp; image )</h3>
+<p>Converts the image <em>image</em> to a bitmap that is assigned to this bitmap.
+Returns a reference to the bitmap.
+<p>Dithering will be performed if the image has a
+<a href="qimage.html#c0">depth</a> greater than 1.
+<h3 class="fn">QBitmap &amp; <a name="a8"></a>QBitmap::operator= ( const <a href="qpixmap.html">QPixmap</a> &amp; pixmap )</h3>
+<p>Assigns the pixmap <em>pixmap</em> to this bitmap and returns a reference to this
+bitmap.
+<p>Dithering will be performed if the pixmap has a
+<a href="qpixmap.html#b5">depth</a> greater than 1.
+<h3 class="fn">QBitmap &amp; <a name="a7"></a>QBitmap::operator= ( const QBitmap &amp; bitmap )</h3>
+<p>Assigns the bitmap <em>bitmap</em> to this bitmap and returns a reference to this
+bitmap.
+<h3 class="fn">QBitmap <a name="b0"></a>QBitmap::xForm ( const <a href="qwmatrix.html">QWMatrix</a> &amp; matrix ) const</h3>
+<p>Returns a copy of the bitmap that is transformed using <em>matrix.</em>
+<p>This function does exactly the same as <a href="qpixmap.html#c7">QPixmap::xForm</a>(), except that
+it returns a QBitmap instead of a <a href="qpixmap.html">QPixmap</a>.
+<p>See also:  <a href="qpixmap.html#c7">QPixmap::xForm</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qbitmap.h: 1998/08/25
+<li>qbitmap.cpp: 1998/09/21
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

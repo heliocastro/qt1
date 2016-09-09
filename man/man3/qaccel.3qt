@@ -1,0 +1,214 @@
+.TH QAccel 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QAccel \- Handles keyboard accelerator keys
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qaccel.h>\fR
+.PP
+Inherits QObject.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QAccel ( QWidget * " "parent" ", const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QAccel\fR ()"
+.br
+.ti -1c
+.BI "bool isEnabled () const"
+.br
+.ti -1c
+.BI "void setEnabled ( bool )"
+.br
+.ti -1c
+.BI "uint count () const"
+.br
+.ti -1c
+.BI "int insertItem ( int " "key" ", int " "id" "=-1 )"
+.br
+.ti -1c
+.BI "void removeItem ( int id )"
+.br
+.ti -1c
+.BI "void clear ()"
+.br
+.ti -1c
+.BI "int key ( int id )"
+.br
+.ti -1c
+.BI "int findKey ( int key ) const"
+.br
+.ti -1c
+.BI "bool isItemEnabled ( int id ) const"
+.br
+.ti -1c
+.BI "void setItemEnabled ( int " "id" ", bool enable )"
+.br
+.ti -1c
+.BI "bool connectItem ( int " "id" ", const QObject * " "receiver" ", const char * member )"
+.br
+.ti -1c
+.BI "bool disconnectItem ( int " "id" ", const QObject * " "receiver" ", const char * member )"
+.br
+.ti -1c
+.BI "void repairEventFilter ()"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void activated ( int id )"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual bool eventFilter ( QObject *, QEvent * )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QAccel class handles keyboard accelerator keys.
+.PP
+A QAccel contains a list of accelerator items. Each accelerator item consists of an identifier and a keyboard code combined with modifiers (\fCSHIFT, CTRL, ALT\fR or \fCASCII_ACCEL).\fR
+.PP
+For example, \fCCTRL + Key_P\fR could be a shortcut for printing a document. The key codes are listed in qkeycode.h.
+.PP
+When pressed, an accelerator key sends out the signal activated() with a number that identifies this particular accelerator item. Accelerator items can also be individually connected, so that two different keys will activate two different slots (see connectItem()).
+.PP
+A QAccel object handles key events to the top level window containing \fIparent,\fR and hence to any child widgets of that window. Note that the accelerator will be deleted only when the \fIparent\fR is deleted, and will consume relevant key events until then.
+.PP
+Example:
+.PP
+.nf
+.br
+     QAccel *a = new QAccel( myWindow );        // create accels for myWindow
+.br
+     a->connectItem( a->insertItem(Key_P+CTRL), // adds Ctrl+P accelerator
+.br
+                     myWindow,                  // connected to myWindow's
+.br
+                     SLOT(printDoc()) );        // printDoc() slot
+.fi
+.PP
+See also: QKeyEvent, QWidget::keyPressEvent(), QMenuData::setAccel(), QButton::setAccel() and GUI Design Handbook: Keyboard Shortcuts,
+.PP
+Examples:
+.(l
+application/application.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QAccel::QAccel ( QWidget * parent, const char * name=0 )"
+Creates a QAccel object with a parent widget and a name.
+.SH "QAccel::~QAccel ()"
+Destroys the accelerator object.
+.SH "void QAccel::activated ( int id ) \fC[signal]\fR"
+This signal is emitted when an accelerator key is pressed. \fIid\fR is a number that identifies this particular accelerator item.
+.SH "void QAccel::clear ()"
+Removes all accelerator items.
+.SH "bool QAccel::connectItem ( int id, const QObject * receiver, const char * member )"
+Connects an accelerator item to a slot/signal in another object.
+.PP
+Arguments:
+.TP
+\fIid\fR is the accelerator item id.
+.TP
+\fIreceiver\fR is the object to receive a signal.
+.TP
+\fImember\fR is a slot or signal function in the receiver.
+.PP
+.nf
+.br
+    a->connectItem( 201, mainView, SLOT(quit()) );
+.fi
+.PP
+See also: disconnectItem().
+.PP
+Examples:
+.(l
+application/application.cpp
+.)l
+.SH "uint QAccel::count () const"
+Returns the number of accelerator items.
+.SH "bool QAccel::disconnectItem ( int id, const QObject * receiver, const char * member )"
+Disconnects an accelerator item from a function in another object.
+.PP
+See also: connectItem().
+.SH "bool QAccel::eventFilter ( QObject *, QEvent * e ) \fC[virtual protected]\fR"
+Processes accelerator events intended for the top level widget.
+.PP
+Reimplemented from QObject.
+.SH "int QAccel::findKey ( int key ) const"
+Returns the identifier of the accelerator item with the key code \fIkey,\fR or -1 if the item cannot be found.
+.SH "int QAccel::insertItem ( int key, int id=-1 )"
+Inserts an accelerator item and returns the item's identifier.
+.PP
+Arguments:
+.TP
+\fIkey\fR is a key code plus a combination of SHIFT, CTRL and ALT.
+.TP
+\fIid\fR is the accelerator item id. If \fIid\fR is negative, then the item will be assigned a unique identifier.
+.PP
+.nf
+.br
+    QAccel *a = new QAccel( myWindow );         // create accels for myWindow
+.br
+    a->insertItem( Key_P + CTRL, 200 );         // Ctrl+P to print document
+.br
+    a->insertItem( Key_X + ALT , 201 );         // Alt+X  to quit
+.br
+    a->insertItem( ASCII_ACCEL + 'q', 202 );    // ASCII 'q' to quit
+.br
+    a->insertItem( Key_D );                     // gets id 3
+.br
+    a->insertItem( Key_P + CTRL + SHIFT );      // gets id 4
+.fi
+.PP
+Examples:
+.(l
+application/application.cpp
+.)l
+.SH "bool QAccel::isEnabled () const"
+Returns TRUE if the accelerator is enabled, or FALSE if it is disabled.
+.PP
+See also: setEnabled() and isItemEnabled().
+.SH "bool QAccel::isItemEnabled ( int id ) const"
+Returns TRUE if the accelerator item with the identifier \fIid\fR is enabled. Returns FALSE if the item is disabled or cannot be found.
+.PP
+See also: setItemEnabled() and isEnabled().
+.SH "int QAccel::key ( int id )"
+Returns the key code of the accelerator item with the identifier \fIid,\fR or zero if the id cannot be found.
+.SH "void QAccel::removeItem ( int id )"
+Removes the accelerator item with the identifier \fIid.\fR
+.SH "void QAccel::repairEventFilter ()"
+Make sure that the accelerator is watching the correct event filter. Used by QWidget::recreate().
+.SH "void QAccel::setEnabled ( bool enable )"
+Enables the accelerator if \fIenable\fR is TRUE, or disables it if \fIenable\fR is FALSE.
+.PP
+Individual keys can also be enabled or disabled.
+.PP
+See also: isEnabled() and setItemEnabled().
+.SH "void QAccel::setItemEnabled ( int id, bool enable )"
+Enables or disables an accelerator item.
+.PP
+Arguments:
+.TP
+\fIid\fR is the item identifier.
+.TP
+\fIenable\fR specifies whether the item should be enabled or disabled.
+.PP
+See also:  isItemEnabled() and isEnabled().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qaccel.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

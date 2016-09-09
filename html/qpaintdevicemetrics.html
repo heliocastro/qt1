@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QPaintDeviceMetrics Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QPaintDeviceMetrics Class Reference</h1><br clear="all">
+<p>
+The QPaintDeviceMetrics class provides information about a paint device.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qpaintdevicemetrics-h.html">qpaintdevicemetrics.h</a>&gt;</code>
+<p><a href="qpaintdevicemetrics-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qpaintdevicemetrics.html#a0"><strong>QPaintDeviceMetrics</strong></a> ( const QPaintDevice * ) </span>
+<li><span class="fn">int <a href="qpaintdevicemetrics.html#a1"><strong>width</strong></a> () const</span>
+<li><span class="fn">int <a href="qpaintdevicemetrics.html#a2"><strong>height</strong></a> () const</span>
+<li><span class="fn">int <a href="qpaintdevicemetrics.html#a3"><strong>widthMM</strong></a> () const</span>
+<li><span class="fn">int <a href="qpaintdevicemetrics.html#a4"><strong>heightMM</strong></a> () const</span>
+<li><span class="fn">int <a href="qpaintdevicemetrics.html#a5"><strong>numColors</strong></a> () const</span>
+<li><span class="fn">int <a href="qpaintdevicemetrics.html#a6"><strong>depth</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QPaintDeviceMetrics class provides information about a paint device.
+<p>
+Sometimes it is necessary to obtain information about the
+physical size of a paint device when drawing graphics.
+<p>Example:
+<pre>    <a href="qpaintdevicemetrics.html">QPaintDeviceMetrics</a> pdm( myWidget );
+    float aspect = (float)pdm.<a href="qpaintdevicemetrics.html#a3">widthMM</a> / (float)pdm.<a href="qpaintdevicemetrics.html#a4">heightMM</a>();
+</pre>
+<p>Examples:
+ <a href="application-application-cpp.html#QPaintDeviceMetrics">application/application.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QPaintDeviceMetrics::QPaintDeviceMetrics ( const <a href="qpaintdevice.html">QPaintDevice</a> * pd )</h3>
+<p>Constructs a metric for the paint device <em>pd.</em>
+<h3 class="fn">int <a name="a6"></a>QPaintDeviceMetrics::depth () const</h3>
+<p>Returns the bit depth (number of bit planes) of the paint device.
+<h3 class="fn">int <a name="a2"></a>QPaintDeviceMetrics::height () const</h3>
+<p>Returns the height of the paint device, in default coordinate system
+units (e.g. pixels for <a href="qpixmap.html">QPixmap</a> and <a href="qwidget.html">QWidget</a>).
+<p>Examples:
+ <a href="application-application-cpp.html#height">application/application.cpp</a>
+<h3 class="fn">int <a name="a4"></a>QPaintDeviceMetrics::heightMM () const</h3>
+<p>Returns the height of the paint device, measured in millimeters.
+<h3 class="fn">int <a name="a5"></a>QPaintDeviceMetrics::numColors () const</h3>
+<p>Returns the number of different colors available for the paint device.
+<h3 class="fn">int <a name="a1"></a>QPaintDeviceMetrics::width () const</h3>
+<p>Returns the width of the paint device, in default coordinate system
+units (e.g. pixels for <a href="qpixmap.html">QPixmap</a> and <a href="qwidget.html">QWidget</a>).
+<p>Examples:
+ <a href="application-application-cpp.html#width">application/application.cpp</a>
+<h3 class="fn">int <a name="a3"></a>QPaintDeviceMetrics::widthMM () const</h3>
+<p>Returns the width of the paint device, measured in millimeters.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qpaintdevicemetrics.h: 1998/08/19
+<li>qpaintdevicemetrics.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

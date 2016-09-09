@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qlcdnumber.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qlcdnumber.h</h1><br clear="all">
+This is the verbatim text of the qlcdnumber.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qlcdnumber.h,v 2.9.2.2 1998/08/21 19:13:25 hanord Exp $
+**
+** Definition of QLCDNumber class
+**
+** Created : 940518
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QLCDNUMBER_H
+#define QLCDNUMBER_H
+
+#ifndef QT_H
+#include "qframe.h"
+#include "qbitarray.h"
+#endif // QT_H
+
+
+class Q_EXPORT QLCDNumber : public QFrame               // LCD number widget
+{
+    Q_OBJECT
+public:
+    QLCDNumber( QWidget *parent=0, const char *name=0 );
+    QLCDNumber( uint numDigits, QWidget *parent=0, const char *name=0 );
+   ~QLCDNumber();
+
+    enum Mode { HEX, DEC, OCT, BIN };
+    enum SegmentStyle { Outline, Filled, Flat };
+
+    bool    smallDecimalPoint() const;
+
+    int     numDigits() const;
+    void    setNumDigits( int nDigits );
+
+    bool    checkOverflow( double num ) const;
+    bool    checkOverflow( int    num ) const;
+
+    Mode mode() const;
+    void    setMode( Mode );
+
+    SegmentStyle segmentStyle() const;
+    void    setSegmentStyle( SegmentStyle );
+
+    double  value() const;
+    int     intValue() const;
+    
+    QSize sizeHint() const;
+
+public slots:
+    void    display( int num );
+    void    display( double num );
+    void    display( const char *str );
+    void    setHexMode();
+    void    setDecMode();
+    void    setOctMode();
+    void    setBinMode();
+    void    setSmallDecimalPoint( bool );
+
+signals:
+    void    overflow();
+
+protected:
+    void    resizeEvent( QResizeEvent * );
+    void    drawContents( QPainter * );
+
+private:
+    void    init();
+    void    internalDisplay( const char * );
+    void    drawString( const char *, QPainter &amp;, QBitArray * = 0,
+                        bool = TRUE );
+    void    drawDigit( const QPoint &amp;, QPainter &amp;, int, char, char = ' ' );
+    void    drawSegment( const QPoint &amp;, char, QPainter &amp;, int, bool = FALSE );
+
+    int     ndigits;
+    double  val;
+    uint    base        : 2;
+    uint    smallPoint  : 1;
+    uint    fill        : 1;
+    uint    shadow      : 1;
+    QString digitStr;
+    QBitArray points;
+
+private:        // Disabled copy constructor and operator=
+#if defined(Q_DISABLE_COPY)
+    QLCDNumber( const QLCDNumber &amp; );
+    QLCDNumber &amp;operator=( const QLCDNumber &amp; );
+#endif
+};
+
+inline bool QLCDNumber::smallDecimalPoint() const
+{ return (bool)smallPoint; }
+
+inline int QLCDNumber::numDigits() const
+{ return ndigits; }
+
+
+#endif // QLCDNUMBER_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

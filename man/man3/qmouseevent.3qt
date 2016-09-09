@@ -1,0 +1,137 @@
+.TH QMouseEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QMouseEvent \- Parameters that describe a mouse event
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherits QEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QMouseEvent ( int " "type" ", const QPoint & " "pos" ", int " "button" ", int state )"
+.br
+.ti -1c
+.BI "QMouseEvent ( int " "type" ", const QPoint & " "pos" ", const QPoint & " "globalPos" ", int " "button" ", int state )"
+.br
+.ti -1c
+.BI "const QPoint& pos () const"
+.br
+.ti -1c
+.BI "const QPoint& globalPos () const"
+.br
+.ti -1c
+.BI "int \fBx\fR () const"
+.br
+.ti -1c
+.BI "int \fBy\fR () const"
+.br
+.ti -1c
+.BI "int globalX () const"
+.br
+.ti -1c
+.BI "int globalY () const"
+.br
+.ti -1c
+.BI "int button () const"
+.br
+.ti -1c
+.BI "int state () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QMouseEvent class contains parameters that describe a mouse event.
+.PP
+Mouse events occur when a mouse button is pressed or released inside a widget, or when the mouse cursor is moved.
+.PP
+Mouse move events will only occur when some mouse button is pressed down, unless mouse tracking has been enabled.
+.PP
+Qt makes an automatic mouse grab when a mouse button is pressed inside a widget, and the widget will continue to receive mouse events until the last mouse button is released.
+.PP
+The QWidget::setEnable() function can be used to enable or disable mouse and keyboard events for a widget.
+.PP
+The QCursor widget has static functions for reading and setting the position of the mouse cursor.
+.PP
+The event handlers QWidget::mousePressEvent(), QWidget::mouseReleaseEvent(), QWidget::mouseDoubleClickEvent() and QWidget::mouseMoveEvent() receive mouse events.
+.PP
+See also: QWidget::setMouseTracking() and QWidget::grabMouse().
+.PP
+Examples:
+.(l
+qtimage/qtimage.cpp table/table.cpp life/life.cpp dclock/dclock.cpp connect/connect.cpp trivial/trivial.cpp tooltip/tooltip.cpp hello/hello.cpp movies/main.cpp qmag/qmag.cpp showimg/showimg.cpp biff/biff.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QMouseEvent::QMouseEvent ( int type, const QPoint & pos, int button, int state )"
+Constructs a mouse event object.
+.PP
+The type parameter must be \fCEvent_MouseButtonPress, Event_MouseButtonRelease, Event_MouseButtonDblClick\fR or \fCEvent_MouseMove.\fR
+.SH "int QMouseEvent::button () const"
+Returns the button that caused the event.
+.PP
+Possible return values are \fCLeftButton, RightButton, MidButton\fR and \fCNoButton.\fR
+.PP
+Note that the returned value is always \fCNoButton\fR (0) for mouse move events.
+.PP
+See also: state().
+.PP
+Examples:
+.(l
+dclock/dclock.cpp movies/main.cpp widgets/widgets.cpp
+.)l
+.SH "const QPoint & QMouseEvent::globalPos () const"
+Returns the global position of the mouse pointer at the time of the event
+.PP
+See also: globalX() and globalY().
+.SH "int QMouseEvent::globalX () const"
+Returns the global X position of the mouse pointer at the time of the event
+.PP
+See also: globalY() and globalPos().
+.SH "int QMouseEvent::globalY () const"
+Returns the global Y position of the mouse pointer at the time of the event
+.PP
+See also: globalX() and globalPos().
+.SH "const QPoint & QMouseEvent::pos () const"
+Returns the position of the mouse pointer, relative to the widget that received the event.
+.PP
+See also: x() and y().
+.PP
+Examples:
+.(l
+qtimage/qtimage.cpp connect/connect.cpp tooltip/tooltip.cpp hello/hello.cpp qmag/qmag.cpp
+.)l
+.SH "int QMouseEvent::state () const"
+Returns the button state (a combination of mouse buttons and keyboard modifiers), i.e. what buttons and keys were being held depressed immediately before the event was generated.
+.PP
+Note that this means that for \fCEvent_MouseButtonPress\fR and \fCEvent_MouseButtonDblClick,\fR the flag for the button() itself will not be set in the state; while for \fCEvent_MouseButtonRelease,\fR it will.
+.PP
+The returned value is \fCLeftButton, RightButton, MidButton, ShiftButton, ControlButton\fR and \fCAltButton\fR OR'ed together.
+.PP
+See also: button().
+.PP
+Examples:
+.(l
+movies/main.cpp widgets/widgets.cpp
+.)l
+.SH "int QMouseEvent::x () const"
+Returns the X position of the mouse pointer, relative to the widget that received the event.
+.PP
+See also: y() and pos().
+.SH "int QMouseEvent::y () const"
+Returns the Y position of the mouse pointer, relative to the widget that received the event.
+.PP
+See also:  x() and pos().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qmouseevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

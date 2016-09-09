@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QListBoxPixmap Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QListBoxPixmap Class Reference</h1><br clear="all">
+<p>
+The QListBoxPixmap class provides list box items with a pixmap.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qlistbox-h.html">qlistbox.h</a>&gt;</code>
+<p>
+Inherits <a href="qlistboxitem.html">QListBoxItem</a>.
+<p><a href="qlistboxpixmap-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qlistboxpixmap.html#a0"><strong>QListBoxPixmap</strong></a> ( const QPixmap &amp; ) </span>
+<li><span class="fn"><a href="qlistboxpixmap.html#a1"><strong>~QListBoxPixmap</strong></a> () </span>
+<li><span class="fn">virtual const QPixmap* <a href="qlistboxpixmap.html#a2"><strong>pixmap</strong></a> () const</span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qlistboxpixmap.html#a3"><strong>paint</strong></a> ( QPainter * ) </span>
+<li><span class="fn">virtual int <a href="qlistboxpixmap.html#a4"><strong>height</strong></a> ( const QListBox * ) const</span>
+<li><span class="fn">virtual int <a href="qlistboxpixmap.html#a5"><strong>width</strong></a> ( const QListBox * ) const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QListBoxPixmap class provides list box items with a pixmap.
+<p>
+See also:  <a href="qlistbox.html">QListBox</a> and <a href="qlistboxitem.html">QListBoxItem</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QListBoxPixmap::QListBoxPixmap ( const <a href="qpixmap.html">QPixmap</a> &amp; pixmap )</h3>
+<p>Creates a new list box item showing the pixmap <em>pixmap.</em>
+<h3 class="fn"><a name="a1"></a>QListBoxPixmap::~QListBoxPixmap ()</h3>
+<p>Destroys the item.
+<h3 class="fn">int <a name="a4"></a>QListBoxPixmap::height ( const <a href="qlistbox.html">QListBox</a> * ) const <code>[virtual protected]</code></h3>
+<p>Returns the height of the pixmap.
+<p>See also:  <a href="qlistboxpixmap.html#a3">paint</a>() and <a href="qlistboxpixmap.html#a5">width</a>().
+<p>Reimplemented from <a href="qlistboxitem.html#a4">QListBoxItem.</a>
+<h3 class="fn">void <a name="a3"></a>QListBoxPixmap::paint ( <a href="qpainter.html">QPainter</a> * p ) <code>[virtual protected]</code></h3>
+<p>Draws the pixmap using painter <em>p.</em>
+<p>Reimplemented from <a href="qlistboxitem.html#a6">QListBoxItem.</a>
+<h3 class="fn">const <a href="qpixmap.html">QPixmap</a> * <a name="a2"></a>QListBoxPixmap::pixmap () const <code>[virtual]</code></h3>
+<p>Returns the pixmap connected with the item.
+<p>Reimplemented from <a href="qlistboxitem.html#a3">QListBoxItem.</a>
+<h3 class="fn">int <a name="a5"></a>QListBoxPixmap::width ( const <a href="qlistbox.html">QListBox</a> * ) const <code>[virtual protected]</code></h3>
+<p>Returns the width of the pixmap.
+<p>See also:  <a href="qlistboxpixmap.html#a3">paint</a>() and <a href="qlistboxpixmap.html#a4">height</a>().
+<p>Reimplemented from <a href="qlistboxitem.html#a5">QListBoxItem.</a>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qlistbox.h: 1998/08/21
+<li>qlistbox.cpp: 1999/02/13
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

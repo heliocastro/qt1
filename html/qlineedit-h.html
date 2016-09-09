@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qlineedit.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qlineedit.h</h1><br clear="all">
+This is the verbatim text of the qlineedit.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/**********************************************************************
+** &#36;Id&#58; qlineedit.h,v 2.29.2.4 1998/10/23 13:54:32 agulbra Exp $
+**
+** Definition of QLineEdit widget class
+**
+** Created : 941011
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QLINEEDIT_H
+#define QLINEEDIT_H
+
+struct QLineEditPrivate;
+
+class QComboBox;
+class QValidator;
+
+
+#ifndef QT_H
+#include "qwidget.h"
+#include "qstring.h"
+#endif // QT_H
+
+
+class Q_EXPORT QLineEdit : public QWidget
+{
+    Q_OBJECT
+public:
+    QLineEdit( QWidget *parent=0, const char *name=0 );
+   ~QLineEdit();
+
+    const char *text() const;
+    int         maxLength()     const;
+    void        setMaxLength( int );
+
+    void        setFrame( bool );
+    bool        frame() const;
+
+    enum        EchoMode { Normal, NoEcho, Password };
+    void        setEchoMode( EchoMode );
+    EchoMode    echoMode() const;
+
+    void        setValidator( QValidator * );
+    QValidator * validator() const;
+
+    QSize       sizeHint() const;
+
+    void        setEnabled( bool );
+    void        setFont( const QFont &amp; );
+    void        setPalette( const QPalette &amp; );
+
+    void        setSelection( int, int );
+    void        setCursorPosition( int );
+    int         cursorPosition() const;
+
+    bool        validateAndSet( const char *, int, int, int );
+
+    void        cut();
+    void        copy() const;
+    void        paste();
+
+public slots:
+    void        setText( const char * );
+    void        selectAll();
+    void        deselect();
+
+    void        clearValidator();
+
+    void        insert( const char * );
+
+    void        clear();
+
+signals:
+    void        textChanged( const char * );
+    void        returnPressed();
+
+protected:
+    void        mousePressEvent( QMouseEvent * );
+    void        mouseMoveEvent( QMouseEvent * );
+    void        mouseReleaseEvent( QMouseEvent * );
+    void        mouseDoubleClickEvent( QMouseEvent * );
+    void        keyPressEvent( QKeyEvent * );
+    void        focusInEvent( QFocusEvent * );
+    void        focusOutEvent( QFocusEvent * );
+    void        paintEvent( QPaintEvent * );
+    void        timerEvent( QTimerEvent * );
+    void        resizeEvent( QResizeEvent * );
+    void        leaveEvent( QEvent * );
+
+    bool        event( QEvent * );
+
+    bool        hasMarkedText() const;
+    QString     markedText() const;
+
+
+    void        repaintArea( int, int );
+
+private slots:
+    void        clipboardChanged();
+    void        blinkSlot();
+    void        dragScrollSlot();
+
+private:
+    // obsolete
+    void        paint( const QRect&amp; clip, bool frame = FALSE );
+    void        pixmapPaint( const QRect&amp; clip );
+    // kept
+    void        paintText( QPainter *, const QSize &amp;, bool frame = FALSE );
+    // to be replaced by publics
+    void        cursorLeft( bool mark, int steps = 1 );
+    void        cursorRight( bool mark, int steps = 1 );
+    void        backspace();
+    void        del();
+    void        home( bool mark );
+    void        end( bool mark );
+    // kept
+    void        newMark( int pos, bool copy=TRUE );
+    void        markWord( int pos );
+    void        copyText();
+    int         lastCharVisible() const;
+    int         minMark() const;
+    int         maxMark() const;
+
+    QString     tbuf;
+    QLineEditPrivate * d;
+    int         cursorPos;
+    int         offset;
+    int         maxLen;
+    int         markAnchor;
+    int         markDrag;
+    bool        cursorOn;
+    bool        dragScrolling;
+    bool        scrollingLeft;
+
+private:        // Disabled copy constructor and operator=
+#if defined(Q_DISABLE_COPY)
+    QLineEdit( const QLineEdit &amp; );
+    QLineEdit &amp;operator=( const QLineEdit &amp; );
+#endif
+
+    friend class QComboBox;
+};
+
+
+#endif // QLINEEDIT_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

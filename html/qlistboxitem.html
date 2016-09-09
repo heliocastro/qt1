@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QListBoxItem Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QListBoxItem Class Reference</h1><br clear="all">
+<p>
+This is the base class of all list box items.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qlistbox-h.html">qlistbox.h</a>&gt;</code>
+<p>Inherited by <a href="qlistboxpixmap.html">QListBoxPixmap</a> and <a href="qlistboxtext.html">QListBoxText</a>.
+<p><a href="qlistboxitem-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qlistboxitem.html#a0"><strong>QListBoxItem</strong></a> () </span>
+<li><span class="fn">virtual <a href="qlistboxitem.html#a1"><strong>~QListBoxItem</strong></a> () </span>
+<li><span class="fn">virtual const char* <a href="qlistboxitem.html#a2"><strong>text</strong></a> () const</span>
+<li><span class="fn">virtual const QPixmap* <a href="qlistboxitem.html#a3"><strong>pixmap</strong></a> () const</span>
+<li><span class="fn">virtual int <a href="qlistboxitem.html#a4"><strong>height</strong></a> ( const QListBox * ) const</span>
+<li><span class="fn">virtual int <a href="qlistboxitem.html#a5"><strong>width</strong></a> ( const QListBox * ) const</span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qlistboxitem.html#a6"><strong>paint</strong></a> ( QPainter * ) </span>
+<li><span class="fn">void <a href="qlistboxitem.html#a7"><strong>setText</strong></a> ( const char * text ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+This is the base class of all list box items.
+<p>
+This class is the abstract base class of all list box items. If you
+need to insert customized items into a <a href="qlistbox.html">QListBox</a>, you must inherit
+this class and reimplement <a href="qlistboxitem.html#a6">paint</a>(), <a href="qlistboxitem.html#a4">height</a>() and <a href="qlistboxitem.html#a5">width</a>().
+<p>The following shows how to define a list box item which shows a
+pixmap and a text:
+<pre>    class MyListBoxItem : public QListBoxItem
+    {
+    public:
+        MyListBoxItem( const char *s, const QPixmap p )
+            : <a href="qlistboxitem.html">QListBoxItem</a>(), pm(p)
+            { setText( s ); }
+
+    protected:
+        virtual void paint( <a href="qpainter.html">QPainter</a> * );
+        virtual int height( const QListBox * ) const;
+        virtual int width( const QListBox * ) const;
+        virtual const QPixmap *pixmap() { return &amp;pm; }
+
+    private:
+        <a href="qpixmap.html">QPixmap</a> pm;
+    };
+
+    void MyListBoxItem::paint( <a href="qpainter.html">QPainter</a> *p )
+    {
+        p-&gt;<a href="qpainter.html#k0">drawPixmap</a>( 3, 0, pm );
+        <a href="qfontmetrics.html">QFontMetrics</a> fm = p-&gt;<a href="qpainter.html#b9">fontMetrics</a>();
+        int yPos;                       // vertical text position
+        if ( pm.<a href="qpixmap.html#b2">height</a>() &lt; fm.<a href="qfontmetrics.html#a8">height</a>() )
+            yPos = fm.<a href="qfontmetrics.html#a6">ascent</a>() + fm.<a href="qfontmetrics.html#a9">leading</a>()/2;
+        else
+            yPos = pm.<a href="qpixmap.html#b2">height</a>()/2 - fm.<a href="qfontmetrics.html#a8">height</a>()/2 + fm.<a href="qfontmetrics.html#a6">ascent</a>();
+        p-&gt;<a href="qpainter.html#l4">drawText</a>( pm.<a href="qpixmap.html#b1">width</a>() + 5, yPos, <a href="qlistboxitem.html#a2">text</a>() );
+    }
+
+    int MyListBoxItem::height(const QListBox *lb ) const
+    {
+        return QMAX( pm.<a href="qpixmap.html#b2">height</a>(), lb-&gt;fontMetrics().lineSpacing() + 1 );
+    }
+
+    int MyListBoxItem::width(const QListBox *lb ) const
+    {
+        return pm.<a href="qpixmap.html#b1">width</a>() + lb-&gt;fontMetrics().width( <a href="qlistboxitem.html#a2">text</a>() ) + 6;
+    }
+</pre>
+<p>See also:  <a href="qlistbox.html">QListBox</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QListBoxItem::QListBoxItem ()</h3>
+<p>Constructs an empty list box item.
+<h3 class="fn"><a name="a1"></a>QListBoxItem::~QListBoxItem () <code>[virtual]</code></h3>
+<p>Destroys the list box item.
+<h3 class="fn">int <a name="a4"></a>QListBoxItem::height ( const <a href="qlistbox.html">QListBox</a> * ) const <code>[virtual]</code></h3>
+<p>Implement this function to return the height of your item
+<p>See also:  <a href="qlistboxitem.html#a6">paint</a>() and <a href="qlistboxitem.html#a5">width</a>().
+<p>Reimplemented in <a href="qlistboxpixmap.html#a4">QListBoxPixmap</a> and <a href="qlistboxtext.html#a3">QListBoxText</a>.
+<h3 class="fn">void <a name="a6"></a>QListBoxItem::paint ( <a href="qpainter.html">QPainter</a> * p ) <code>[virtual protected]</code></h3>
+<p>Implement this function to draw your item.
+<p>See also:  <a href="qlistboxitem.html#a4">height</a>() and <a href="qlistboxitem.html#a5">width</a>().
+<p>Reimplemented in <a href="qlistboxpixmap.html#a3">QListBoxPixmap</a> and <a href="qlistboxtext.html#a2">QListBoxText</a>.
+<h3 class="fn">const <a href="qpixmap.html">QPixmap</a> * <a name="a3"></a>QListBoxItem::pixmap () const <code>[virtual]</code></h3>
+<p>Returns the pixmap connected with the item, if any.
+<p>The default implementation of this function returns a null pointer.
+<p>Reimplemented in <a href="qlistboxpixmap.html#a2">QListBoxPixmap</a>.
+<h3 class="fn">void <a name="a7"></a>QListBoxItem::setText ( const char * text ) <code>[protected]</code></h3>
+<p>Sets the text of the widget, which is used for sorting.
+The text is not shown unless explicitly drawn in <a href="qlistboxitem.html#a6">paint</a>().
+<p>See also:  <a href="qlistboxitem.html#a2">text</a>().
+<h3 class="fn">const char * <a name="a2"></a>QListBoxItem::text () const <code>[virtual]</code></h3>
+<p>Returns the text of the item, which is used for sorting.
+<p>See also:  <a href="qlistboxitem.html#a7">setText</a>().
+<h3 class="fn">int <a name="a5"></a>QListBoxItem::width ( const <a href="qlistbox.html">QListBox</a> * ) const <code>[virtual]</code></h3>
+<p>Implement this function to return the width of your item
+<p>See also:  <a href="qlistboxitem.html#a6">paint</a>() and <a href="qlistboxitem.html#a4">height</a>().
+<p>Reimplemented in <a href="qlistboxpixmap.html#a5">QListBoxPixmap</a> and <a href="qlistboxtext.html#a4">QListBoxText</a>.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qlistbox.h: 1998/08/21
+<li>qlistbox.cpp: 1999/02/13
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

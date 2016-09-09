@@ -1,0 +1,327 @@
+.TH QFrame 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QFrame \- The base class of widgets that have an (optional) frame
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qframe.h>\fR
+.PP
+Inherits QWidget.
+.PP
+Inherited by QGroupBox, QLCDNumber, QLabel, QMenuBar, QProgressBar, QScrollView, QSpinBox, QSplitter, QTableView and QWidgetStack.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QFrame ( QWidget * " "parent" "=0, const char * " "name" "=0, WFlags " "f" "=0, bool " "allowLines" "=TRUE )"
+.br
+.ti -1c
+.BI "enum { NoFrame = 0, Box = 0x0001, Panel = 0x0002, WinPanel = 0x0003, HLine = 0x0004, VLine = 0x0005, MShape = 0x000f, Plain = 0x0010, Raised = 0x0020, Sunken = 0x0030, MShadow = 0x00f0 }"
+.br
+.ti -1c
+.BI "int frameStyle () const"
+.br
+.ti -1c
+.BI "int frameShape () const"
+.br
+.ti -1c
+.BI "int frameShadow () const"
+.br
+.ti -1c
+.BI "void setFrameStyle ( int )"
+.br
+.ti -1c
+.BI "bool lineShapesOk () const"
+.br
+.ti -1c
+.BI "int lineWidth () const"
+.br
+.ti -1c
+.BI "void setLineWidth ( int )"
+.br
+.ti -1c
+.BI "int margin () const"
+.br
+.ti -1c
+.BI "void setMargin ( int )"
+.br
+.ti -1c
+.BI "int midLineWidth () const"
+.br
+.ti -1c
+.BI "void setMidLineWidth ( int )"
+.br
+.ti -1c
+.BI "int frameWidth () const"
+.br
+.ti -1c
+.BI "QRect frameRect () const"
+.br
+.ti -1c
+.BI "QRect contentsRect () const"
+.br
+.ti -1c
+.BI "virtual QSize sizeHint () const"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "void setFrameRect ( const QRect & )"
+.br
+.ti -1c
+.BI "virtual void paintEvent ( QPaintEvent * )"
+.br
+.ti -1c
+.BI "virtual void resizeEvent ( QResizeEvent * )"
+.br
+.ti -1c
+.BI "virtual void drawFrame ( QPainter * )"
+.br
+.ti -1c
+.BI "virtual void drawContents ( QPainter * )"
+.br
+.ti -1c
+.BI "virtual void frameChanged ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QFrame class is the base class of widgets that have an (optional) frame.
+.PP
+It draws a label and calls a virtual function, drawContents(), to fill in the frame. This function is reimplemented by essentially all subclasses. There are also two other less useful functions, drawFrame() and frameChanged().
+.PP
+QMenuBar uses this to "raise" the menu bar above the surrounding screen:
+.PP
+.nf
+.br
+    if ( style() == MotifStyle ) {
+.br
+        setFrameStyle( QFrame::Panel | QFrame::Raised );
+.br
+        setLineWidth( 2 );
+.br
+    } else {
+.br
+        setFrameStyle( QFrame::NoFrame );
+.br
+    }
+.fi
+.PP
+The QFrame class can also be used directly for creating simple frames without any contents, for example like this:
+.PP
+.nf
+.br
+    QFrame *emptyFrame = new QFrame( parentWidget );
+.br
+    emptyFrame->setFrameStyle( Panel | Sunken );
+.br
+    emptyFrame->setLineWidth( 2 );
+.fi
+.PP
+A frame widget has three attributes: frame style, a line width and a mid-line width.
+.PP
+The frame style is specified by a frame shape and a shadow style. The frame shapes are \fCNoFrame, Box, Panel, WinPanel, HLine\fR and \fCVLine,\fR and the shadow styles are \fCPlain, Raised\fR and \fCSunken.\fR
+.PP
+The line width is the width of the frame border.
+.PP
+The mid-line width specifies the width of an extra line in the middle of the frame, that uses a third color to obtain a special 3D effect. Notice that a mid-line is only drawn for \fCBox, HLine\fR and \fCVLine\fR frames that are raised or sunken.
+.PP
+This table shows the most useful combinations of styles and widths (and some rather useless ones):
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+For obvious reasons, \fCNoFrame\fR isn't shown. The gray areas next to the \fCVLine\fR and \fCHLine\fR examples are there because the widgets are taller/wider than the natural width of the lines. frameWidth() returns the natural width of the line.
+.PP
+The labels on the top and right are QLabel objects with frameStyle() \fCRaised|Panel\fR and lineWidth() 1.
+.PP
+Examples:
+.(l
+tictac/tictac.cpp life/life.cpp movies/main.cpp xform/xform.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QFrame::QFrame ( QWidget * parent=0, const char * name=0, WFlags f=0, bool allowLines=TRUE )"
+Constructs a frame widget with frame style \fCNoFrame\fR and a 1 pixel frame width.
+.PP
+The \fIallowLines\fR argument can be set to FALSE to disallow \fCHLine\fR and \fCVLine\fR shapes.
+.PP
+The \fIparent, name\fR and \fIf\fR arguments are passed to the QWidget constructor.
+.SH "QRect QFrame::contentsRect () const"
+Returns the rectangle inside the frame.
+.PP
+See also: frameRect() and drawContents().
+.SH "void QFrame::drawContents ( QPainter * ) \fC[virtual protected]\fR"
+Virtual function that draws the contents of the frame.
+.PP
+The QPainter is already open when you get it, and you must leave it open. Painter transformations are switched off on entry. If you transform the painter, remember to take the frame into account and reset transformation before returning.
+.PP
+This function is reimplemented by subclasses that draw something inside the frame. It should draw only inside contentsRect(). The default function does nothing.
+.PP
+See also: contentsRect() and QPainter::setClipRect().
+.PP
+Reimplemented in QLCDNumber, QMenuBar, QLabel and QProgressBar.
+.SH "void QFrame::drawFrame ( QPainter * p ) \fC[virtual protected]\fR"
+Draws the frame using the current frame attributes and color group. The rectangle inside the frame is not affected.
+.PP
+This function is virtual, but in general you do not need to reimplement it. If you do, note that the QPainter is already open and must remain open.
+.PP
+See also: frameRect(), contentsRect(), drawContents(), frameStyle() and setPalette().
+.PP
+Examples:
+.(l
+life/life.cpp
+.)l
+.SH "void QFrame::frameChanged () \fC[virtual protected]\fR"
+Virtual function that is called when the frame style, line width or mid-line width changes.
+.PP
+This function can be reimplemented by subclasses that need to know when the frame attributes change.
+.PP
+Reimplemented in QScrollView and QWidgetStack.
+.SH "QRect QFrame::frameRect () const"
+Returns the frame rectangle.
+.PP
+The default frame rectangle is equivalent to the widget rectangle.
+.PP
+See also: setFrameRect().
+.SH "int QFrame::frameShadow () const"
+Returns the frame shadow value from the frame style.
+.PP
+See also: frameStyle() and frameShape().
+.SH "int QFrame::frameShape () const"
+Returns the frame shape value from the frame style.
+.PP
+See also: frameStyle() and frameShadow().
+.SH "int QFrame::frameStyle () const"
+Returns the frame style.
+.PP
+The default value is QFrame::NoFrame.
+.PP
+See also: setFrameStyle(), frameShape() and frameShadow().
+.SH "int QFrame::frameWidth () const"
+Returns the width of the frame that is drawn.
+.PP
+Note that the frame width depends on the frame style, not only the line width and the mid line width. For example, the style \fCNoFrame\fR always has a frame width 0, while the style \fCPanel\fR has a frame width equivalent to the line width.
+.PP
+See also: lineWidth(), midLineWidth() and frameStyle().
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH "bool QFrame::lineShapesOk () const"
+Returns TRUE if line shapes (\fCHLine\fR or \fCVLine)\fR are allowed, or FALSE if they are not allowed.
+.PP
+It is only possible to disallow line shapes in the constructor. The default value is TRUE.
+.SH "int QFrame::lineWidth () const"
+Returns the line width. (Note that the \fItotal\fR line width for \fCHLine\fR and \fCVLine\fR is given by frameWidth(), not lineWidth().)
+.PP
+The default value is 1.
+.PP
+See also: setLineWidth(), midLineWidth() and frameWidth().
+.SH "int QFrame::margin () const"
+Returns the width of the margin. The margin is the distance between the innermost pixel of the frame and the outermost pixel of contentsRect(). It is included in frameWidth().
+.PP
+The margin is filled according to backgroundMode().
+.PP
+The default value is 0.
+.PP
+See also: setMargin(), lineWidth() and frameWidth().
+.SH "int QFrame::midLineWidth () const"
+Returns the width of the mid-line.
+.PP
+The default value is 0.
+.PP
+See also: setMidLineWidth(), lineWidth() and frameWidth().
+.SH "void QFrame::paintEvent ( QPaintEvent * event ) \fC[virtual protected]\fR"
+Handles paint events for the frame.
+.PP
+Paints the frame and the contents.
+.PP
+Opens the painter on the frame and calls first drawFrame(), then drawContents().
+.PP
+Reimplemented from QWidget.
+.SH "void QFrame::resizeEvent ( QResizeEvent * e ) \fC[virtual protected]\fR"
+Handles resize events for the frame.
+.PP
+Adjusts the frame rectangle for the resized widget. The frame rectangle is elastic, the surrounding area is static.
+.PP
+The resulting frame rectangle may be null or invalid. You can use setMinimumSize() to avoid that possibility.
+.PP
+Nothing is done if the frame rectangle is a null rectangle already.
+.PP
+Reimplemented from QWidget.
+.SH "void QFrame::setFrameRect ( const QRect & r ) \fC[protected]\fR"
+Sets the frame rectangle to \fIr.\fR
+.PP
+The frame rectangle is the rectangle the frame is drawn in. By default, this is the entire widget. Calling setFrameRect() does \fInot\fR cause a widget update.
+.PP
+If \fIr\fR is a null rectangle (for example \fCQRect(0,0,0,0)\fR), then the frame rectangle is equivalent to the widget rectangle.
+.PP
+See also: frameRect() and contentsRect().
+.SH "void QFrame::setFrameStyle ( int style )"
+Sets the frame style to \fIstyle.\fR
+.PP
+The \fIstyle\fR is the bitwise OR between a frame shape and a frame shadow style. See the illustration in the class documentation.
+.PP
+The frame shapes are:
+.TP
+\fCNoFrame\fR draws nothing. Naturally, you should not specify a shadow style if you use this.
+.TP
+\fCBox\fR draws a rectangular box. The contents appear to be level with the surrounding screen, but the border itself may be raised or sunken.
+.TP
+\fCPanel\fR draws a rectangular panel that can be raised or sunken.
+.TP
+\fCWinPanel\fR draws a rectangular panel that can be raised or sunken. Specifying this shape sets the line width to 2 pixels. WinPanel provides fancy Windows 95-like shadows.
+.TP
+\fCHLine\fR draws a horizontal line (vertically centered).
+.TP
+\fCVLine\fR draws a vertical line (horizontally centered).
+.PP
+The shadow styles are:
+.TP
+\fCPlain\fR draws using the palette foreground color (without any 3D effect).
+.TP
+\fCRaised\fR draws a 3D raised line using the light and dark colors of the current color group.
+.TP
+\fCSunken\fR draws a 3D sunken line using the light and dark colors of the current color group.
+.PP
+If a mid-line width greater than 0 is specified, an additional line is drawn for \fCRaised\fR or \fCSunken Box, HLine\fR and \fCVLine\fR frames. The mid color of the current color group is used for drawing middle lines.
+.PP
+\fBWarning:\fR Attempts to set the frame style to \fCHLine\fR or \fCVLine\fR (with any shadow style) are disregarded unless line shapes are allowed. Line shapes are allowed by default.
+.PP
+See also: Illustration, frameStyle(), lineShapesOk(), colorGroup() and QColorGroup.
+.PP
+Examples:
+.(l
+tictac/tictac.cpp dclock/dclock.cpp xform/xform.cpp cursor/cursor.cpp layout/layout.cpp widgets/widgets.cpp
+.)l
+.SH "void QFrame::setLineWidth ( int w )"
+Sets the line width to \fIw.\fR
+.PP
+See also: frameWidth(), lineWidth() and setMidLineWidth().
+.PP
+Examples:
+.(l
+dclock/dclock.cpp xform/xform.cpp
+.)l
+.SH "void QFrame::setMargin ( int w )"
+Sets the width of the margin to \fIw.\fR
+.PP
+See also: margin() and setLineWidth().
+.SH "void QFrame::setMidLineWidth ( int w )"
+Sets the width of the mid-line to \fIw.\fR
+.PP
+See also:  midLineWidth() and setLineWidth().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qframe.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

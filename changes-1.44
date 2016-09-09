@@ -1,0 +1,76 @@
+Here is a list of user-visible changes in Qt from 1.43 to 1.44.  The
+usual bugfixes have been added.
+
+****************************************************************************
+* 			     New classes				   *
+****************************************************************************
+
+None.
+
+****************************************************************************
+*		       Enhancements from 1.43 to 1.44			   *
+****************************************************************************
+
+When clicking the mouse outside a popup widget, the clicked widget gets
+the event.
+
+Fixed focus rectangle in windows style for listboxes with multi selection
+enabled (focus was not visible before).
+
+Drag and drop fixes on Windows.
+
+QListView drawing fixes.
+
+QPrinter fixes on Windows involving pixmaps, images and fonts and
+QPainter::setWindow/viewport.
+
+QDateTime::addSecs() overflow fixed for nsecs >2,147,483.
+
+QString operator+(char,const QString &) fixed.
+
+QIconSet memory leak fixed.
+
+QToolButton memory leak fixed.
+
+QWhatsThis memory leak fixed.
+
+Now WStyle_DialogBorder maps again to something unresizable on Windows
+(advantage: you can get rid of the WStyle_Title).
+
+****************************************************************************
+*               Changes that might affect runtime behavior                 *
+****************************************************************************
+
+GIF image reading has been turned off by default.  See README and qt_gif.h
+for more information.
+
+****************************************************************************
+*               Changes that might generate compile errors                 *
+*                        when compiling old code                           *
+****************************************************************************
+
+None.
+
+****************************************************************************
+*               Type changes that might generate warnings:                 *
+****************************************************************************
+
+None.
+
+****************************************************************************
+* 			Deprecated functions				   *
+****************************************************************************
+
+None.
+
+****************************************************************************
+*			 New global functions				   *
+****************************************************************************
+
+None.
+
+****************************************************************************
+*      New public/protected functions added to existing classes            *
+****************************************************************************
+
+None.

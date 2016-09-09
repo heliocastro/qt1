@@ -1,0 +1,106 @@
+.TH QQueue 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QQueue \- Template class that provides a queue
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qqueue.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QQueue ()"
+.br
+.ti -1c
+.BI "QQueue ( const QQueue<type> & queue )"
+.br
+.ti -1c
+.BI "\fB~QQueue\fR ()"
+.br
+.ti -1c
+.BI "QQueue<type>& operator= ( const QQueue<type> & queue )"
+.br
+.ti -1c
+.BI "bool autoDelete () const"
+.br
+.ti -1c
+.BI "void setAutoDelete ( bool enable )"
+.br
+.ti -1c
+.BI "virtual uint count () const"
+.br
+.ti -1c
+.BI "bool isEmpty () const"
+.br
+.ti -1c
+.BI "void enqueue ( const type * d )"
+.br
+.ti -1c
+.BI "type* dequeue ()"
+.br
+.ti -1c
+.BI "bool remove ()"
+.br
+.ti -1c
+.BI "virtual void clear ()"
+.br
+.ti -1c
+.BI "type* head () const"
+.br
+.ti -1c
+.BI "operator \fBtype*\fR ()const"
+.br
+.ti -1c
+.BI "type* current () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QQueue class is a template class that provides a queue.
+.PP
+QQueue is implemented as both a template and a macro class. Define a template instance QQueue<X> to create a queue that operates on pointers to X, or X*.
+.PP
+A stack is a collection that can be used to enqueue and dequeue items.
+.PP
+See also: Collection Classes
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QQueue::QQueue ()"
+Creates an empty queue.
+.SH "QQueue::QQueue ( const QQueue<type> & queue )"
+Creates a queue from another.
+.PP
+Only the pointers are copied.
+.SH "QQueue::~QQueue ()"
+Destroys the list. Items in the list are destroyed if autoDelete() is TRUE.
+.SH "QQueue::operator type* () const"
+Returns a reference to the first item in the queue. The queue is not changed.
+.SH "type* QQueue::current () const"
+Returns a reference to the first item in the queue. The queue is not changed.
+.SH "type* QQueue::dequeue ()"
+Removes the front item from the queue. Last in, last out.
+.SH "void QQueue::enqueue ( const type * d )"
+Adds an item to the queue. Last in, last out.
+.SH "type* QQueue::head () const"
+Returns a reference to the first item in the queue. The queue is not changed.
+.SH "bool QQueue::isEmpty () const"
+Returns TRUE if there are no items to be dequeued
+.SH "QQueue<type>& QQueue::operator= ( const QQueue<type> & queue )"
+Assigns \fIqueue\fR to this queue and returns a reference to this queue.
+.PP
+This queue is first cleared, then each item in \fIqueue\fR is enqueued to this queue. Only the pointers are copied (shallow copy).
+.SH "bool QQueue::remove ()"
+Removes the front item from the queue.  Last in, last out.
+The item is deleted if autoDelete() is TRUE.
+Returns TRUE if there was an item to remove.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qqueue.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

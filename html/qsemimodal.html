@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QSemiModal Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QSemiModal Class Reference</h1><br clear="all">
+<p>
+The QSemiModal class is the base class of semi-modal dialog windows.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qsemimodal-h.html">qsemimodal.h</a>&gt;</code>
+<p>
+Inherits <a href="qwidget.html">QWidget</a>.
+<p>Inherited by <a href="qprogressdialog.html">QProgressDialog</a>.
+<p><a href="qsemimodal-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qsemimodal.html#a0"><strong>QSemiModal</strong></a> ( QWidget * parent=0, const char * name=0, bool modal=FALSE, WFlags f=0 ) </span>
+<li><span class="fn"><a href="qsemimodal.html#a1"><strong>~QSemiModal</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qsemimodal.html#a2"><strong>show</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qsemimodal.html#a3"><strong>move</strong></a> ( int x, int y ) </span>
+<li><span class="fn">void <a href="qsemimodal.html#a4"><strong>move</strong></a> ( const QPoint &amp; p ) </span>
+<li><span class="fn">virtual void <a href="qsemimodal.html#a5"><strong>resize</strong></a> ( int w, int h ) </span>
+<li><span class="fn">void <a href="qsemimodal.html#a6"><strong>resize</strong></a> ( const QSize &amp; ) </span>
+<li><span class="fn">virtual void <a href="qsemimodal.html#a7"><strong>setGeometry</strong></a> ( int x, int y, int w, int h ) </span>
+<li><span class="fn">void <a href="qsemimodal.html#a8"><strong>setGeometry</strong></a> ( const QRect &amp; ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QSemiModal class is the base class of semi-modal dialog windows.
+<p>
+The semi-modal dialog window can disable events to other windows while
+it is open.  To enable this, the QSemiModal must be constructed with
+TRUE for the <em>modal</em> argument, which is FALSE by default, for consistency
+with <a href="qdialog.html">QDialog</a>.
+Such a QSemiModal is modal like QDialog, but it does not have
+its own event loop and has no concept of a default button.
+<p>Note that the parent widget has a different meaning for semi-modal
+dialogs than for other types of widgets. A semi-modal dialog is
+placed on top of the parent widget. The dialog is centered on the
+screen if the parent widget is zero.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QSemiModal::QSemiModal ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0, bool modal=FALSE, WFlags f=0 )</h3>
+<p>Constructs a semi-modal dialog named <em>name,</em> which has a parent
+widget <em>parent.</em>  If <em>modal</em> is FALSE (the default), the only
+behaviour different to a <a href="qwidget.html">QWidget</a> is automatic sizing and positioning.
+<h3 class="fn"><a name="a1"></a>QSemiModal::~QSemiModal ()</h3>
+<p>Destroys the QSemiModal and all its children.
+<h3 class="fn">void <a name="a4"></a>QSemiModal::move ( const <a href="qpoint.html">QPoint</a> &amp; p )</h3>
+<p>Reimplements <a href="qwidget.html#l1">QWidget::move</a>() for internal purposes.
+<h3 class="fn">void <a name="a3"></a>QSemiModal::move ( int x, int y ) <code>[virtual]</code></h3>
+<p>Reimplements <a href="qwidget.html#l1">QWidget::move</a>() for internal purposes.
+<p>Reimplemented from <a href="qwidget.html#l1">QWidget.</a>
+<h3 class="fn">void <a name="a6"></a>QSemiModal::resize ( const <a href="qsize.html">QSize</a> &amp; s )</h3>
+<p>Reimplements <a href="qwidget.html#l3">QWidget::resize</a>() for internal purposes.
+<h3 class="fn">void <a name="a5"></a>QSemiModal::resize ( int w, int h ) <code>[virtual]</code></h3>
+<p>Reimplements <a href="qwidget.html#l3">QWidget::resize</a>() for internal purposes.
+<p>Reimplemented from <a href="qwidget.html#l3">QWidget.</a>
+<h3 class="fn">void <a name="a8"></a>QSemiModal::setGeometry ( const <a href="qrect.html">QRect</a> &amp; r )</h3>
+<p>Reimplements <a href="qwidget.html#l5">QWidget::setGeometry</a>() for internal purposes.
+<h3 class="fn">void <a name="a7"></a>QSemiModal::setGeometry ( int x, int y, int w, int h ) <code>[virtual]</code></h3>
+<p>Reimplements <a href="qwidget.html#l5">QWidget::setGeometry</a>() for internal purposes.
+<p>Reimplemented from <a href="qwidget.html#l5">QWidget.</a>
+<h3 class="fn">void <a name="a2"></a>QSemiModal::show () <code>[virtual]</code></h3>
+<p>Shows the widget.
+This implementation also does automatic resizing and automatic
+positioning. If you have not already resized or moved the dialog, it
+will find a size that fits the contents and a position near the middle
+of the screen (or centered relative to the parent widget if any).
+<p>Reimplemented from <a href="qwidget.html#k2">QWidget.</a>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qsemimodal.h: 1998/08/21
+<li>qsemimodal.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

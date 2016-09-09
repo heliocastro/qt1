@@ -1,0 +1,126 @@
+.TH QIconSet 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QIconSet \- Set of icons (normal, disabled, various sizes) for e.g. buttons
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qiconset.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QIconSet ( const QPixmap &, Size = Automatic )"
+.br
+.ti -1c
+.BI "QIconSet ( const QIconSet & )"
+.br
+.ti -1c
+.BI "virtual \fB~QIconSet\fR ()"
+.br
+.ti -1c
+.BI "void reset ( const QPixmap &, Size )"
+.br
+.ti -1c
+.BI "void setPixmap ( const QPixmap &, Size, Mode = Normal )"
+.br
+.ti -1c
+.BI "void setPixmap ( const char *, Size, Mode = Normal )"
+.br
+.ti -1c
+.BI "QPixmap pixmap ( Size, Mode ) const"
+.br
+.ti -1c
+.BI "QPixmap pixmap () const"
+.br
+.ti -1c
+.BI "bool isGenerated ( Size, Mode ) const"
+.br
+.ti -1c
+.BI "void detach ()"
+.br
+.ti -1c
+.BI "QIconSet& operator= ( const QIconSet & )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QIconSet class provides a set of icons (normal, disabled, various sizes) for e.g. buttons.
+.PP
+QIconSet must be fed at least one icon, and can generate the other icons from the ones it is fed, or use programmer-specified icons.
+.PP
+Using the icon or icons specified, QIconSet generates a set of six icons: 
+.TP
+Small, normal
+.TP
+Small, disabled
+.TP
+Small, active
+.TP
+Large, normal
+.TP
+Large, disabled
+.TP
+Large, active
+.PP
+You can set any of the icons using setPixmap() and when you retrieve one using pixmap(), QIconSet will compute and cache that from the closest other icon.
+.PP
+The \fCDisabled\fR appearance is computed using a "shadow" algorithm which produces results very similar to that used in of Microsoft Windows 95.
+.PP
+The \fCActive\fR appearance is identical to the \fCNormal\fR appearance unless you use setPixmap() to set it to something special.
+.PP
+QIconSet provides a function, isGenerated(), that indicates whether an icon was set by the application programmer or computed by QIconSet itself.
+.PP
+In Qt 1.41 only QToolButton uses QIconSet. In Qt 2.0 we will use it in more classes, including the menu system.
+.PP
+See also: QPixmap, QLabel, QToolButton, GUI Design Handbook: Iconic Label,, <q, href="http://www.microsoft.com/clipgallerylive/icons.asp">Microsoft, Icon and Gallery.</a>
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QIconSet::QIconSet ( const QPixmap & defaultPixmap, Size defaultSize = Automatic )"
+Constructs an icon set that will generate its members from \fIdefaultPixmap,\fR which is assumed to be of \fIdefaultSize.\fR
+.PP
+The default for \fIdefaultSize\fR is \fCAutomatic,\fR which means that QIconSet will determine the icon's size from its actual size.
+.PP
+See also: reset().
+.SH "QIconSet::QIconSet ( const QIconSet & other )"
+Constructs an a copy of \fIother.\fR This is very fast.
+.PP
+See also: detach().
+.SH "QIconSet::~QIconSet () \fC[virtual]\fR"
+Destroys the icon set and frees any allocated resources.
+.SH "void QIconSet::detach ()"
+Detaches this icon set from others with which it may share data. You should never need to call this function; reset() and setPixmap() call it as necessary. It exists merely so that the copy constructor and operator= can be faster.
+.SH "bool QIconSet::isGenerated ( Size s, Mode m ) const"
+Returns TRUE if the variant with size \fIs\fR and mode \fIm\fR was automatically generated, and FALSE if it was not.
+.SH "QIconSet & QIconSet::operator= ( const QIconSet & p )"
+Assigns \fIother\fR to this icon set and returns a reference to this icon set.
+.PP
+This is very fast.
+.PP
+See also: detach().
+.SH "QPixmap QIconSet::pixmap () const"
+Returns the pixmap originally provided to the constructor or reset().
+.PP
+See also: reset().
+.SH "QPixmap QIconSet::pixmap ( Size s, Mode m ) const"
+Returns a pixmap with size \fIs\fR and mode \fIm,\fR generating one if needed.
+.SH "void QIconSet::reset ( const QPixmap & pm, Size s )"
+Set this icon set to display \fIpm,\fR which is assumed to be in size \fIs.\fR If \fIs\fR is \fCAutomatic,\fR QIconSet guesses the size from the size of \fIpm\fR using and unspecified algorithm.
+.SH "void QIconSet::setPixmap ( const QPixmap & pm, Size s, Mode m = Normal )"
+Sets this icon set to display \fIpn\fR in size \fIs/mode m,\fR and perhaps to use \fIpm\fR for deriving some other varieties.
+.PP
+\fIs\fR must be Large or Small; it cannot be Automatic.
+.SH "void QIconSet::setPixmap ( const char * fileName, Size s, Mode m = Normal )"
+Sets this icon set to load \fIfileName\fR as a pixmap and display it
+in size \fIs/mode m,\fR and perhaps to use \fIpm\fR for deriving some
+other varieties.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qiconset.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

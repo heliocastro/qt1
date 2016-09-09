@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qdatetime.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qdatetime.h</h1><br clear="all">
+This is the verbatim text of the qdatetime.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qdatetime.h,v 2.5.2.2 1998/08/25 09:20:54 hanord Exp $
+**
+** Definition of date and time classes
+**
+** Created : 940124
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QDATETIME_H
+#define QDATETIME_H
+
+#ifndef QT_H
+#include "qstring.h"
+#endif // QT_H
+
+
+/*****************************************************************************
+  QDate class
+ *****************************************************************************/
+
+class Q_EXPORT QDate
+{
+public:
+    QDate()  { jd=0; }                          // set null date
+    QDate( int y, int m, int d );               // set date
+
+    bool   isNull()      const { return jd == 0; }
+    bool   isValid()     const;                 // valid date
+
+    int    year()        const;                 // 1752..
+    int    month()       const;                 // 1..12
+    int    day()         const;                 // 1..31
+    int    dayOfWeek()   const;                 // 1..7 (monday==1)
+    int    dayOfYear()   const;                 // 1..365
+    int    daysInMonth() const;                 // 28..31
+    int    daysInYear()  const;                 // 365 or 366
+
+    virtual const char *monthName( int month ) const;
+    virtual const char *dayName( int weekday ) const;
+
+    QString toString()   const;
+
+    bool   setYMD( int y, int m, int d );
+
+    QDate  addDays( int days )          const;
+    int    daysTo( const QDate &amp; )      const;
+
+    bool   operator==( const QDate &amp;d ) const { return jd == d.jd; }
+    bool   operator!=( const QDate &amp;d ) const { return jd != d.jd; }
+    bool   operator&lt;( const QDate &amp;d )  const { return jd &lt; d.jd; }
+    bool   operator&lt;=( const QDate &amp;d ) const { return jd &lt;= d.jd; }
+    bool   operator&gt;( const QDate &amp;d )  const { return jd &gt; d.jd; }
+    bool   operator&gt;=( const QDate &amp;d ) const { return jd &gt;= d.jd; }
+
+    static QDate currentDate();
+    static bool  isValid( int y, int m, int d );
+    static bool  leapYear( int year );
+
+protected:
+    static uint  greg2jul( int y, int m, int d );
+    static void  jul2greg( uint jd, int &amp;y, int &amp;m, int &amp;d );
+private:
+    static const char *monthNames[];
+    static const char *weekdayNames[];
+    uint         jd;
+    friend class QDateTime;
+    friend Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QDate &amp; );
+    friend Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QDate &amp; );
+};
+
+
+/*****************************************************************************
+  QTime class
+ *****************************************************************************/
+
+class Q_EXPORT QTime
+{
+public:
+    QTime() { ds=0; }                           // set null time
+    QTime( int h, int m, int s=0, int ms=0 );   // set time
+
+    bool   isNull()      const { return ds == 0; }
+    bool   isValid()     const;                 // valid time
+
+    int    hour()        const;                 // 0..23
+    int    minute()      const;                 // 0..59
+    int    second()      const;                 // 0..59
+    int    msec()        const;                 // 0..999
+
+    QString toString()   const;
+
+    bool   setHMS( int h, int m, int s, int ms=0 );
+
+    QTime  addSecs( int secs )          const;
+    int    secsTo( const QTime &amp; )      const;
+    QTime  addMSecs( int ms )           const;
+    int    msecsTo( const QTime &amp; )     const;
+
+    bool   operator==( const QTime &amp;d ) const { return ds == d.ds; }
+    bool   operator!=( const QTime &amp;d ) const { return ds != d.ds; }
+    bool   operator&lt;( const QTime &amp;d )  const { return ds &lt; d.ds; }
+    bool   operator&lt;=( const QTime &amp;d ) const { return ds &lt;= d.ds; }
+    bool   operator&gt;( const QTime &amp;d )  const { return ds &gt; d.ds; }
+    bool   operator&gt;=( const QTime &amp;d ) const { return ds &gt;= d.ds; }
+
+    static QTime currentTime();
+    static bool  isValid( int h, int m, int s, int ms=0 );
+
+    void   start();
+    int    restart();
+    int    elapsed();
+
+private:
+    static bool currentTime( QTime * );
+
+    uint   ds;
+    friend class QDateTime;
+    friend Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QTime &amp; );
+    friend Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QTime &amp; );
+};
+
+
+/*****************************************************************************
+  QDateTime class
+ *****************************************************************************/
+
+class Q_EXPORT QDateTime
+{
+public:
+    QDateTime() {}                              // set null date and null time
+    QDateTime( const QDate &amp; );
+    QDateTime( const QDate &amp;, const QTime &amp; );
+
+    bool   isNull()     const           { return d.isNull() &amp;&amp; t.isNull(); }
+    bool   isValid()    const           { return d.isValid() &amp;&amp; t.isValid(); }
+
+    QDate  date()       const           { return d; }
+    QTime  time()       const           { return t; }
+    void   setDate( const QDate &amp;date ) { d=date; }
+    void   setTime( const QTime &amp;time ) { t=time; }
+    void   setTime_t( uint secsSince1Jan1970UTC );
+
+    QString toString()  const;
+
+    QDateTime addDays( int days )       const;
+    QDateTime addSecs( int secs )       const;
+    int    daysTo( const QDateTime &amp; )  const;
+    int    secsTo( const QDateTime &amp; )  const;
+
+    bool   operator==( const QDateTime &amp;dt ) const;
+    bool   operator!=( const QDateTime &amp;dt ) const;
+    bool   operator&lt;( const QDateTime &amp;dt )  const;
+    bool   operator&lt;=( const QDateTime &amp;dt ) const;
+    bool   operator&gt;( const QDateTime &amp;dt )  const;
+    bool   operator&gt;=( const QDateTime &amp;dt ) const;
+
+    static QDateTime currentDateTime();
+
+private:
+    QDate  d;
+    QTime  t;
+    friend Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QDateTime &amp;);
+    friend Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QDateTime &amp; );
+};
+
+
+/*****************************************************************************
+  Date and time stream functions
+ *****************************************************************************/
+
+Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QDate &amp; );
+Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QDate &amp; );
+Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QTime &amp; );
+Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QTime &amp; );
+Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QDateTime &amp; );
+Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QDateTime &amp; );
+
+
+#endif // QDATETIME_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,172 @@
+.TH QListBoxItem 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QListBoxItem \- This is the base class of all list box items
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qlistbox.h>\fR
+.PP
+Inherited by QListBoxPixmap and QListBoxText.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QListBoxItem ()"
+.br
+.ti -1c
+.BI "virtual \fB~QListBoxItem\fR ()"
+.br
+.ti -1c
+.BI "virtual const char* text () const"
+.br
+.ti -1c
+.BI "virtual const QPixmap* pixmap () const"
+.br
+.ti -1c
+.BI "virtual int height ( const QListBox * ) const"
+.br
+.ti -1c
+.BI "virtual int width ( const QListBox * ) const"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void paint ( QPainter * )"
+.br
+.ti -1c
+.BI "void setText ( const char * text )"
+.br
+.in -1c
+.SH DESCRIPTION
+This is the base class of all list box items.
+.PP
+This class is the abstract base class of all list box items. If you need to insert customized items into a QListBox, you must inherit this class and reimplement paint(), height() and width().
+.PP
+The following shows how to define a list box item which shows a pixmap and a text:
+.PP
+.nf
+.br
+    class MyListBoxItem : public QListBoxItem
+.br
+    {
+.br
+    public:
+.br
+        MyListBoxItem( const char *s, const QPixmap p )
+.br
+            : QListBoxItem(), pm(p)
+.br
+            { setText( s ); }
+.br
+.br
+    protected:
+.br
+        virtual void paint( QPainter * );
+.br
+        virtual int height( const QListBox * ) const;
+.br
+        virtual int width( const QListBox * ) const;
+.br
+        virtual const QPixmap *pixmap() { return &pm; }
+.br
+.br
+    private:
+.br
+        QPixmap pm;
+.br
+    };
+.br
+.br
+    void MyListBoxItem::paint( QPainter *p )
+.br
+    {
+.br
+        p->drawPixmap( 3, 0, pm );
+.br
+        QFontMetrics fm = p->fontMetrics();
+.br
+        int yPos;                       // vertical text position
+.br
+        if ( pm.height() < fm.height() )
+.br
+            yPos = fm.ascent() + fm.leading()/2;
+.br
+        else
+.br
+            yPos = pm.height()/2 - fm.height()/2 + fm.ascent();
+.br
+        p->drawText( pm.width() + 5, yPos, text() );
+.br
+    }
+.br
+.br
+    int MyListBoxItem::height(const QListBox *lb ) const
+.br
+    {
+.br
+        return QMAX( pm.height(), lb->fontMetrics().lineSpacing() + 1 );
+.br
+    }
+.br
+.br
+    int MyListBoxItem::width(const QListBox *lb ) const
+.br
+    {
+.br
+        return pm.width() + lb->fontMetrics().width( text() ) + 6;
+.br
+    }
+.fi
+.PP
+See also: QListBox.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QListBoxItem::QListBoxItem ()"
+Constructs an empty list box item.
+.SH "QListBoxItem::~QListBoxItem () \fC[virtual]\fR"
+Destroys the list box item.
+.SH "int QListBoxItem::height ( const QListBox * ) const \fC[virtual]\fR"
+Implement this function to return the height of your item
+.PP
+See also: paint() and width().
+.PP
+Reimplemented in QListBoxPixmap and QListBoxText.
+.SH "void QListBoxItem::paint ( QPainter * p ) \fC[virtual protected]\fR"
+Implement this function to draw your item.
+.PP
+See also: height() and width().
+.PP
+Reimplemented in QListBoxPixmap and QListBoxText.
+.SH "const QPixmap * QListBoxItem::pixmap () const \fC[virtual]\fR"
+Returns the pixmap connected with the item, if any.
+.PP
+The default implementation of this function returns a null pointer.
+.PP
+Reimplemented in QListBoxPixmap.
+.SH "void QListBoxItem::setText ( const char * text ) \fC[protected]\fR"
+Sets the text of the widget, which is used for sorting. The text is not shown unless explicitly drawn in paint().
+.PP
+See also: text().
+.SH "const char * QListBoxItem::text () const \fC[virtual]\fR"
+Returns the text of the item, which is used for sorting.
+.PP
+See also: setText().
+.SH "int QListBoxItem::width ( const QListBox * ) const \fC[virtual]\fR"
+Implement this function to return the width of your item
+.PP
+See also: paint() and height().
+.PP
+Reimplemented in QListBoxPixmap and QListBoxText.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qlistboxitem.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

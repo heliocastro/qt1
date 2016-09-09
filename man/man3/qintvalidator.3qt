@@ -1,0 +1,70 @@
+.TH QIntValidator 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QIntValidator \- Range checking of integers
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qvalidator.h>\fR
+.PP
+Inherits QValidator.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QIntValidator ( QWidget * " "parent" ", const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "QIntValidator ( int " "bottom" ", int " "top" ", QWidget * " "parent" ", const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "\fB~QIntValidator\fR ()"
+.br
+.ti -1c
+.BI "virtual QValidator::State validate ( QString &, int & )"
+.br
+.ti -1c
+.BI "virtual void setRange ( int " "bottom" ", int top )"
+.br
+.ti -1c
+.BI "int bottom () const"
+.br
+.ti -1c
+.BI "int top () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QIntValidator class provides range checking of integers.
+.PP
+QIntValidator provides a lower and an upper bound. It does not provide a fixup() function.
+.PP
+See also: QDoubleValidator.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QIntValidator::QIntValidator ( QWidget * parent, const char * name = 0 )"
+Creates a validator object which accepts all integers.
+.SH "QIntValidator::QIntValidator ( int bottom, int top, QWidget * parent, const char * name = 0 )"
+Creates a validator object which accepts all integers from \fIbottom\fR up to and including \fItop.\fR
+.SH "QIntValidator::~QIntValidator ()"
+Deletes the validator and frees up any storage used.
+.SH "int QIntValidator::bottom () const"
+Returns the lowest valid number according to this validator.
+.PP
+See also: top() and setRange().
+.SH "void QIntValidator::setRange ( int bottom, int top ) \fC[virtual]\fR"
+Sets the validator to accept only number from \fIbottom\fR up to an including \fItop.\fR
+.SH "int QIntValidator::top () const"
+Returns the highest valid number according to this validator.
+.PP
+See also:  bottom() and setRange().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qintvalidator.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

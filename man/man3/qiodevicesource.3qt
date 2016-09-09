@@ -1,0 +1,72 @@
+.TH QIODeviceSource 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QIODeviceSource \- A QIODeviceSource is a QDataSource that draws data from a QIODevice
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qasyncio.h>\fR
+.PP
+Inherits QDataSource.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QIODeviceSource ( QIODevice *, int " "bufsize" "=4096 )"
+.br
+.ti -1c
+.BI "\fB~QIODeviceSource\fR ()"
+.br
+.ti -1c
+.BI "virtual int readyToSend ()"
+.br
+.ti -1c
+.BI "virtual void sendTo ( QDataSink * " "sink" ", int n )"
+.br
+.ti -1c
+.BI "virtual bool rewindable () const"
+.br
+.ti -1c
+.BI "virtual void enableRewind ( bool on )"
+.br
+.ti -1c
+.BI "virtual void rewind ()"
+.br
+.in -1c
+.SH DESCRIPTION
+A QIODeviceSource is a QDataSource that draws data from a QIODevice
+.PP
+This class encapsulates retrieving data from a QIODevice (such as a QFile).
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QIODeviceSource::QIODeviceSource ( QIODevice * device, int buffer_size=4096 )"
+Constructs a QIODeviceSource from a pointer to an QIODevice. The QIODevice \fImust\fR be dynamically allocated, becomes owned by the QIODeviceSource, and will be deleted when the QIODeviceSource destructs. \fIbuffer_size\fR determines the size of buffering to use between asynchronous operations. The higher \fIbuffer_size,\fR the more efficient but the less interleaved the operation will be with other processing.
+.SH "QIODeviceSource::~QIODeviceSource ()"
+Destroys the QIODeviceSource, deleting the QIODevice from which it was constructed.
+.SH "void QIODeviceSource::enableRewind ( bool on ) \fC[virtual]\fR"
+Enables rewinding. No special action is taken.
+.PP
+Reimplemented from QDataSource.
+.SH "int QIODeviceSource::readyToSend () \fC[virtual]\fR"
+Ready until end-of-file.
+.PP
+Reimplemented from QDataSource.
+.SH "bool QIODeviceSource::rewindable () const \fC[virtual]\fR"
+All QIODeviceSource's are rewindable.
+.PP
+Reimplemented from QDataSource.
+.SH "void QIODeviceSource::sendTo ( QDataSink * sink, int n ) \fC[virtual]\fR"
+Reads and sends a block of data.
+.PP
+Reimplemented from QDataSource.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qiodevicesource.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

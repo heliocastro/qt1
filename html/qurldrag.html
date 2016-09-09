@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QUrlDrag Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QUrlDrag Class Reference</h1><br clear="all">
+<p>
+Provides for drag-and-drop of a list of file references.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qdragobject-h.html">qdragobject.h</a>&gt;</code>
+<p>
+Inherits <a href="qstoreddrag.html">QStoredDrag</a>.
+<p><a href="qurldrag-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qurldrag.html#a0"><strong>QUrlDrag</strong></a> ( QStrList urls, QWidget * dragSource = 0, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qurldrag.html#a1"><strong>QUrlDrag</strong></a> ( QWidget * dragSource = 0, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qurldrag.html#a2"><strong>~QUrlDrag</strong></a> () </span>
+<li><span class="fn">void <a href="qurldrag.html#a3"><strong>setUrls</strong></a> ( QStrList urls ) </span>
+</ul>
+<h2>Static Public Members</h2>
+<ul>
+<li><span class="fn">QString <a href="qurldrag.html#b0"><strong>urlToLocalFile</strong></a> ( const char * ) </span>
+<li><span class="fn">bool <a href="qurldrag.html#a8"><strong>canDecode</strong></a> ( QDragMoveEvent * e ) </span>
+<li><span class="fn">bool <a href="qurldrag.html#a9"><strong>decode</strong></a> ( QDropEvent * e, QStrList &amp; i ) </span>
+<li><span class="fn">bool <a href="qurldrag.html#b1"><strong>decodeLocalFiles</strong></a> ( QDropEvent * e, QStrList &amp; i ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+Provides for drag-and-drop of a list of file references.
+<p>
+URLs are a useful way to refer to files that may be distributed
+across multiple machines.  Much of the time a URL will refer to
+a file on a machine local to both the drag source and the
+drop target, and so the URL will be equivalent to passing a
+filename, but more extensible.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QUrlDrag::QUrlDrag ( <a href="qstrlist.html">QStrList</a> urls, <a href="qwidget.html">QWidget</a> * dragSource = 0, const char * name = 0 )</h3>
+<p>Creates an object to drag the list of urls in <em>urls.</em>
+The <em>dragSource</em> and <em>name</em> arguments are passed on to
+<a href="qstoreddrag.html">QStoredDrag</a>.
+<h3 class="fn"><a name="a1"></a>QUrlDrag::QUrlDrag ( <a href="qwidget.html">QWidget</a> * dragSource = 0, const char * name = 0 )</h3>
+<p>Creates a object to drag.  You will need to call
+<a href="qurldrag.html#a3">setUrls</a>() before you start the <a href="qdragobject.html#a9">drag</a>().
+<h3 class="fn"><a name="a2"></a>QUrlDrag::~QUrlDrag ()</h3>
+<p>Destroys the object.
+<h3 class="fn">bool <a name="a8"></a>QUrlDrag::canDecode ( <a href="qdragmoveevent.html">QDragMoveEvent</a> * e ) <code>[static]</code></h3>
+<p>Returns TRUE if <a href="qurldrag.html#a9">decode</a>() would be able to decode <em>e.</em>
+<h3 class="fn">bool <a name="a9"></a>QUrlDrag::decode ( <a href="qdropevent.html">QDropEvent</a> * e, <a href="qstrlist.html">QStrList</a> &amp; l ) <code>[static]</code></h3>
+<p>Decodes URLs from <em>e,</em> placing the result in <em>l</em> (which is first cleared).
+<p>Returns TRUE if the event contained a valid list of URLs.
+<h3 class="fn">bool <a name="b1"></a>QUrlDrag::decodeLocalFiles ( <a href="qdropevent.html">QDropEvent</a> * e, <a href="qstrlist.html">QStrList</a> &amp; l ) <code>[static]</code></h3>
+<p>Decodes URLs from <em>e,</em> converts them to local files if they refer to
+local files, and places them in <em>l</em> (which is first cleared).
+<p>Returns TRUE if the event contained a valid list of URLs.
+The list will be empty if no URLs were local files.
+<h3 class="fn">void <a name="a3"></a>QUrlDrag::setUrls ( <a href="qstrlist.html">QStrList</a> urls )</h3>
+<p>Changes the list of <em>urls</em> to be dragged.
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="b0"></a>QUrlDrag::urlToLocalFile ( const char * url ) <code>[static]</code></h3>
+<p>Returns the name of a local file equivalent to <em>url,</em>
+or a null string if <em>url</em> is not a local file.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qdragobject.h: 1998/08/19
+<li>qdragobject.cpp: 1998/12/07
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

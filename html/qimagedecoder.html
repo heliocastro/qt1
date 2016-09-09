@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QImageDecoder Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QImageDecoder Class Reference</h1><br clear="all">
+<p>
+Incremental image decoder for all supported image formats.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qasyncimageio-h.html">qasyncimageio.h</a>&gt;</code>
+<p><a href="qimagedecoder-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qimagedecoder.html#a0"><strong>QImageDecoder</strong></a> ( QImageConsumer * c ) </span>
+<li><span class="fn"><a href="qimagedecoder.html#a1"><strong>~QImageDecoder</strong></a> () </span>
+<li><span class="fn">const QImage&amp; <a href="qimagedecoder.html#a2"><strong>image</strong></a> () </span>
+<li><span class="fn">int <a href="qimagedecoder.html#a3"><strong>decode</strong></a> ( const uchar * buffer, int length ) </span>
+</ul>
+<h2>Static Public Members</h2>
+<ul>
+<li><span class="fn">const char* <a href="qimagedecoder.html#a8"><strong>formatName</strong></a> ( const uchar * buffer, int length ) </span>
+<li><span class="fn">QStrList <a href="qimagedecoder.html#a9"><strong>inputFormats</strong></a> () </span>
+<li><span class="fn">void <a href="qimagedecoder.html#b0"><strong>registerDecoderFactory</strong></a> ( QImageFormatType * ) </span>
+<li><span class="fn">void <a href="qimagedecoder.html#b1"><strong>unregisterDecoderFactory</strong></a> ( QImageFormatType * ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+Incremental image decoder for all supported image formats.
+<p>
+New formats are installed by creating objects of class
+<a href="qimageformattype.html">QImageFormatType</a>, and the <a href="qmovie.html">QMovie</a> class can be used for using
+all installed incremental image formats; QImageDecoder is only
+useful for creating new ways of feeding data to an <a href="qimageconsumer.html">QImageConsumer</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QImageDecoder::QImageDecoder ( <a href="qimageconsumer.html">QImageConsumer</a> * c )</h3>
+<p>Constructs a QImageDecoder which will send change information to
+a given <a href="qimageconsumer.html">QImageConsumer</a>.
+<h3 class="fn"><a name="a1"></a>QImageDecoder::~QImageDecoder ()</h3>
+<p>Destroys a QImageDecoder.  The image it built is destroyed.  The decoder
+built by the factory for the file format is destroyed. The consumer
+for which it decoded the image is <em>not</em> destroyed.
+<h3 class="fn">int <a name="a3"></a>QImageDecoder::decode ( const uchar * buffer, int length )</h3>
+<p>Call this function to decode some data into image changes.  The data
+will be decoded, sending change information to the <a href="qimageconsumer.html">QImageConsumer</a> of
+this QImageDecoder, until one of the change functions of the consumer
+returns FALSE.
+<p>Returns the number of bytes consumed, 0 if consumption is complete,
+and -1 if decoding fails dur to invalid data.
+<h3 class="fn">const char* <a name="a8"></a>QImageDecoder::formatName ( const uchar * buffer, int length ) <code>[static]</code></h3>
+<p>Call this function to find the name of the format of the given header.
+The returned string is statically allocated.
+<p>Returns 0 if the format is not recognized.
+<h3 class="fn">const <a href="qimage.html">QImage</a>&amp; <a name="a2"></a>QImageDecoder::image ()</h3>
+<p>Returns the image currently being decoded.
+<h3 class="fn"><a href="qstrlist.html">QStrList</a> <a name="a9"></a>QImageDecoder::inputFormats () <code>[static]</code></h3>
+<p>Returns a sorted list of formats for which asynchronous loading is supported.
+<h3 class="fn">void <a name="b0"></a>QImageDecoder::registerDecoderFactory ( <a href="qimageformattype.html">QImageFormatType</a> * f ) <code>[static]</code></h3>
+<p>Registers a new <a href="qimageformattype.html">QImageFormatType</a>.  This is not needed in
+application code as factories call this themselves.
+<h3 class="fn">void <a name="b1"></a>QImageDecoder::unregisterDecoderFactory ( <a href="qimageformattype.html">QImageFormatType</a> * f ) <code>[static]</code></h3>
+<p>Unregisters a new <a href="qimageformattype.html">QImageFormatType</a>.  This is not needed in
+application code as factories call this themselves.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qasyncimageio.h: 1999/02/12
+<li>qasyncimageio.cpp: 1999/02/13
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

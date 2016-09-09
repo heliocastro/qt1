@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - application/application.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>A Complete Application Window</h1><br clear="all">
+
+  This example program looks like a complete modern application.  It
+  has a menu bar, it has a tool bar, it has a status bar.
+
+  It also illustrates use of QPrinter.  Oh yes, and you can edit text
+  with it.
+<pre>/****************************************************************************
+** &#36;Id&#58; application.cpp,v 1.16.2.1 1999/02/01 19:58:21 hanord Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "application.h"
+
+#include &lt;<a name="qpixmap.h"></a><a href="qpixmap-h.html">qpixmap.h</a>&gt;
+#include &lt;<a name="qtoolbar.h"></a><a href="qtoolbar-h.html">qtoolbar.h</a>&gt;
+#include &lt;<a name="qtoolbutton.h"></a><a href="qtoolbutton-h.html">qtoolbutton.h</a>&gt;
+#include &lt;<a name="qpopupmenu.h"></a><a href="qpopupmenu-h.html">qpopupmenu.h</a>&gt;
+#include &lt;<a name="qmenubar.h"></a><a href="qmenubar-h.html">qmenubar.h</a>&gt;
+#include &lt;<a name="qkeycode.h"></a><a href="qkeycode-h.html">qkeycode.h</a>&gt;
+#include &lt;<a name="qmultilinedit.h"></a><a href="qmultilinedit-h.html">qmultilinedit.h</a>&gt;
+#include &lt;<a name="qfile.h"></a><a href="qfile-h.html">qfile.h</a>&gt;
+#include &lt;<a name="qfiledialog.h"></a><a href="qfiledialog-h.html">qfiledialog.h</a>&gt;
+#include &lt;<a name="qstatusbar.h"></a><a href="qstatusbar-h.html">qstatusbar.h</a>&gt;
+#include &lt;<a name="qmessagebox.h"></a><a href="qmessagebox-h.html">qmessagebox.h</a>&gt;
+#include &lt;<a name="qprinter.h"></a><a href="qprinter-h.html">qprinter.h</a>&gt;
+#include &lt;<a name="qapplication.h"></a><a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a name="qaccel.h"></a><a href="qaccel-h.html">qaccel.h</a>&gt;
+#include &lt;<a name="qtextstream.h"></a><a href="qtextstream-h.html">qtextstream.h</a>&gt;
+#include &lt;<a name="qpainter.h"></a><a href="qpainter-h.html">qpainter.h</a>&gt;
+#include &lt;<a name="qpaintdevicemetrics.h"></a><a href="qpaintdevicemetrics-h.html">qpaintdevicemetrics.h</a>&gt;
+#include &lt;<a name="qwhatsthis.h"></a><a href="qwhatsthis-h.html">qwhatsthis.h</a>&gt;
+
+#include "filesave.xpm"
+#include "fileopen.xpm"
+#include "fileprint.xpm"
+
+const char * fileOpenText = "Click this button to open a new file.\n\n"
+"You can also select the Open command from the File menu.";
+const char * fileSaveText = "Click this button to save the file you are "
+"editing.  You will be prompted for a file name.\n\n"
+"You can also select the Save command from the File menu.\n\n"
+"Note that implementing this function is left as an exercise for the reader.";
+const char * filePrintText = "Click this button to print the file you "
+"are editing.\n\n"
+"You can also select the Print command from the File menu.";
+
+ApplicationWindow::ApplicationWindow()
+    : <a name="QMainWindow"></a><a href="qmainwindow.html">QMainWindow</a>( 0, "example application main window" )
+{
+    printer = new <a name="QPrinter"></a><a href="qprinter.html">QPrinter</a>;
+    printer-&gt;setMinMax( 1, 10 );
+    <a name="QPixmap"></a><a href="qpixmap.html">QPixmap</a> openIcon, saveIcon, printIcon;
+
+    fileTools = new <a name="QToolBar"></a><a href="qtoolbar.html">QToolBar</a>( this, "file operations" );
+
+    openIcon = QPixmap( fileopen );
+    <a name="QToolButton"></a><a href="qtoolbutton.html">QToolButton</a> * fileOpen = new <a href="qtoolbutton.html">QToolButton</a>( openIcon, "Open File", 0,
+                                              this, SLOT(<a name="load"></a><a href="#120">load</a>()),
+                                              fileTools, "open file" );
+
+    saveIcon = QPixmap( filesave );
+    <a href="qtoolbutton.html">QToolButton</a> * fileSave = new <a href="qtoolbutton.html">QToolButton</a>( saveIcon, "Save File", 0,
+                                              this, SLOT(<a name="save"></a><a href="#121">save</a>()),
+                                              fileTools, "save file" );
+
+    printIcon = QPixmap( fileprint );
+    <a href="qtoolbutton.html">QToolButton</a> * filePrint = new <a href="qtoolbutton.html">QToolButton</a>( printIcon, "Print File", 0,
+                                               this, SLOT(<a name="print"></a><a href="#122">print</a>()),
+                                               fileTools, "print file" );
+
+    (void)QWhatsThis::whatsThisButton( fileTools );
+    <a name="QWhatsThis::add"></a><a href="qwhatsthis.html#a5">QWhatsThis::add</a>( fileOpen, fileOpenText, FALSE );
+    <a href="qwhatsthis.html#a5">QWhatsThis::add</a>( fileSave, fileSaveText, FALSE );
+    <a href="qwhatsthis.html#a5">QWhatsThis::add</a>( filePrint, filePrintText, FALSE );
+
+    <a name="QPopupMenu"></a><a href="qpopupmenu.html">QPopupMenu</a> * file = new <a href="qpopupmenu.html">QPopupMenu</a>();
+    <a name="menuBar"></a><a href="qmainwindow.html#a2">menuBar</a>()-&gt;insertItem( "&amp;File", file );
+
+    file-&gt;<a name="insertItem"></a><a href="qmenudata.html#a8">insertItem</a>( "New", this, SLOT(<a name="newDoc"></a><a href="#118">newDoc</a>()), CTRL+Key_N );
+    file-&gt;<a href="qmenudata.html#a8">insertItem</a>( openIcon, "Open", this, SLOT(<a href=#120>load</a>()), CTRL+Key_O );
+    file-&gt;<a href="qmenudata.html#a8">insertItem</a>( saveIcon, "Save", this, SLOT(<a href=#121>save</a>()), CTRL+Key_S );
+    file-&gt;<a name="insertSeparator"></a><a href="qmenudata.html#b5">insertSeparator</a>();
+    file-&gt;<a href="qmenudata.html#a8">insertItem</a>( printIcon, "Print", this, SLOT(<a href=#122>print</a>()), CTRL+Key_P );
+    file-&gt;<a href="qmenudata.html#b5">insertSeparator</a>();
+    file-&gt;<a href="qmenudata.html#a8">insertItem</a>( "Close", this, SLOT(<a name="closeDoc"></a><a href="#123">closeDoc</a>()), CTRL+Key_W );
+    file-&gt;<a href="qmenudata.html#a8">insertItem</a>( "Quit", qApp, SLOT(quit()), CTRL+Key_Q );
+
+    controls = new <a href="qpopupmenu.html">QPopupMenu</a>();
+    <a href="qmainwindow.html#a2">menuBar</a>()-&gt;insertItem( "&amp;Controls", controls );
+
+    mb = controls-&gt;insertItem( "Menu bar", this, SLOT(<a name="toggleMenuBar"></a><a href="#124">toggleMenuBar</a>()), CTRL+Key_M);
+    // Now an accelerator for when the menubar is invisible!
+    <a name="QAccel"></a><a href="qaccel.html">QAccel</a>* a = new <a href="qaccel.html">QAccel</a>(this);
+    a-&gt;<a name="connectItem"></a><a href="qaccel.html#b2">connectItem</a>( a-&gt;<a name="insertItem"></a><a href="qaccel.html#a5">insertItem</a>( CTRL+Key_M ), this, SLOT(<a href=#124>toggleMenuBar</a>()) );
+
+    tb = controls-&gt;insertItem( "Tool bar", this, SLOT(<a name="toggleToolBar"></a><a href="#125">toggleToolBar</a>()), CTRL+Key_T);
+    sb = controls-&gt;insertItem( "Status bar", this, SLOT(<a name="toggleStatusBar"></a><a href="#126">toggleStatusBar</a>()), CTRL+Key_B);
+    controls-&gt;setCheckable( TRUE );
+    controls-&gt;setItemChecked( mb, TRUE );
+    controls-&gt;setItemChecked( tb, TRUE );
+    controls-&gt;setItemChecked( sb, TRUE );
+
+    e = new <a name="QMultiLineEdit"></a><a href="qmultilineedit.html">QMultiLineEdit</a>( this, "editor" );
+    e-&gt;setFocus();
+    <a name="setCentralWidget"></a><a href="qmainwindow.html#a5">setCentralWidget</a>( e );
+    <a name="statusBar"></a><a href="qmainwindow.html#a3">statusBar</a>()-&gt;message( "Ready", 2000 );
+}
+
+/*! Destroys the object and frees any allocated resources.
+
+*/
+
+ApplicationWindow::~ApplicationWindow()
+{
+    delete printer;
+}
+
+void <a name="118"></a>ApplicationWindow::newDoc()
+{
+    ApplicationWindow *ed = new ApplicationWindow;
+    ed-&gt;<a name="resize"></a><a href="qwidget.html#l4">resize</a>( 400, 400 );
+    ed-&gt;<a name="show"></a><a href="qmainwindow.html#b1">show</a>();
+}
+
+void <a name="120"></a>ApplicationWindow::load()
+{
+    <a name="QString"></a><a href="qstring.html">QString</a> fn = QFileDialog::getOpenFileName(0,0,this);
+    if ( !fn.<a name="isEmpty"></a><a href="qstring.html#c1">isEmpty</a>() )
+        <a href=#120>load</a>( fn );
+    else
+        <a href="qmainwindow.html#a3">statusBar</a>()-&gt;message( "Loading aborted", 2000 );
+}
+
+void <a name="120"></a>ApplicationWindow::load( const char *fileName )
+{
+    <a name="QFile"></a><a href="qfile.html">QFile</a> f( fileName );
+    if ( !f.<a name="open"></a><a href="qfile.html#a9">open</a>( IO_ReadOnly ) )
+        return;
+
+    e-&gt;setAutoUpdate( FALSE );
+    e-&gt;clear();
+
+    <a name="QTextStream"></a><a href="qtextstream.html">QTextStream</a> t(&amp;f);
+    while ( !t.<a name="eof"></a><a href="qtextstream.html#a8">eof</a>() ) {
+        <a href="qstring.html">QString</a> s = t.<a name="readLine"></a><a href="qtextstream.html#d3">readLine</a>();
+        e-&gt;append( s );
+    }
+    f.<a name="close"></a><a href="qfile.html#b2">close</a>();
+
+    e-&gt;setAutoUpdate( TRUE );
+    e-&gt;repaint();
+    <a name="setCaption"></a><a href="qwidget.html#h2">setCaption</a>( fileName );
+    <a href="qstring.html">QString</a> s;
+    s.<a name="sprintf"></a><a href="qstring.html#c7">sprintf</a>( "Loaded document %s", fileName );
+    <a href="qmainwindow.html#a3">statusBar</a>()-&gt;message( s, 2000 );
+}
+
+void <a name="121"></a>ApplicationWindow::save()
+{
+    <a href="qmainwindow.html#a3">statusBar</a>()-&gt;message( "File-&gt;Save is not implemented" );
+    <a name="QMessageBox::message"></a><a href="qmessagebox.html#d1">QMessageBox::message</a>( "Note", "Left as an exercise for the user." );
+}
+
+void <a name="122"></a>ApplicationWindow::print()
+{
+    const int MARGIN = 10;
+    int pageNo = 1;
+
+    if ( printer-&gt;setup(this) ) {               // printer dialog
+        <a href="qmainwindow.html#a3">statusBar</a>()-&gt;message( "Printing..." );
+        <a name="QPainter"></a><a href="qpainter.html">QPainter</a> p;
+        p.<a name="begin"></a><a href="qpainter.html#b0">begin</a>( printer );                     // paint on printer
+        p.<a name="setFont"></a><a href="qpainter.html#c2">setFont</a>( e-&gt;font() );
+        int yPos        = 0;                    // y position for each line
+        <a name="QFontMetrics"></a><a href="qfontmetrics.html">QFontMetrics</a> fm = p.<a name="fontMetrics"></a><a href="qpainter.html#b9">fontMetrics</a>();
+        <a name="QPaintDeviceMetrics"></a><a href="qpaintdevicemetrics.html">QPaintDeviceMetrics</a> metrics( printer ); // need width/height
+                                                 // of printer surface
+        for( int i = 0 ; i &lt; e-&gt;numLines() ; i++ ) {
+            if ( MARGIN + yPos &gt; metrics.<a name="height"></a><a href="qpaintdevicemetrics.html#a2">height</a>() - MARGIN ) {
+                <a href="qstring.html">QString</a> msg;
+                msg.<a href="qstring.html#c7">sprintf</a>( "Printing (page %d)...", ++pageNo );
+                <a href="qmainwindow.html#a3">statusBar</a>()-&gt;message( msg );
+                printer-&gt;newPage();             // no more room on this page
+                yPos = 0;                       // back to top of page
+            }
+            p.<a name="drawText"></a><a href="qpainter.html#l4">drawText</a>( MARGIN, MARGIN + yPos,
+                        metrics.<a name="width"></a><a href="qpaintdevicemetrics.html#a1">width</a>(), fm.<a name="lineSpacing"></a><a href="qfontmetrics.html#b0">lineSpacing</a>(),
+                        ExpandTabs | DontClip,
+                        e-&gt;textLine( i ) );
+            yPos = yPos + fm.<a href="qfontmetrics.html#b0">lineSpacing</a>();
+        }
+        p.<a name="end"></a><a href="qpainter.html#b2">end</a>();                                // send job to printer
+        <a href="qmainwindow.html#a3">statusBar</a>()-&gt;message( "Printing completed", 2000 );
+    } else {
+        <a href="qmainwindow.html#a3">statusBar</a>()-&gt;message( "Printing aborted", 2000 );
+    }
+
+}
+
+void <a name="123"></a>ApplicationWindow::closeDoc()
+{
+    <a name="close"></a><a href="qwidget.html#k5">close</a>( TRUE ); // close AND DELETE!
+}
+
+void <a name="124"></a>ApplicationWindow::toggleMenuBar()
+{
+    if ( menuBar()-&gt;isVisible() ) {
+        <a href="qmainwindow.html#a2">menuBar</a>()-&gt;hide();
+        controls-&gt;setItemChecked( mb, FALSE );
+    } else {
+        <a href="qmainwindow.html#a2">menuBar</a>()-&gt;show();
+        controls-&gt;setItemChecked( mb, TRUE );
+    }
+}
+
+void <a name="125"></a>ApplicationWindow::toggleToolBar()
+{
+    if ( fileTools-&gt;isVisible() ) {
+        fileTools-&gt;hide();
+        controls-&gt;setItemChecked( tb, FALSE );
+    } else {
+        fileTools-&gt;show();
+        controls-&gt;setItemChecked( tb, TRUE );
+    }
+}
+
+void <a name="126"></a>ApplicationWindow::toggleStatusBar()
+{
+    if ( statusBar()-&gt;isVisible() ) {
+        <a href="qmainwindow.html#a3">statusBar</a>()-&gt;hide();
+        controls-&gt;setItemChecked( sb, FALSE );
+    } else {
+        <a href="qmainwindow.html#a3">statusBar</a>()-&gt;show();
+        controls-&gt;setItemChecked( sb, TRUE );
+    }
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

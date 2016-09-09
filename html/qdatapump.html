@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QDataPump Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QDataPump Class Reference</h1><br clear="all">
+<p>
+Moves data from a <a href="qdatasource.html">QDataSource</a> to a <a href="qdatasink.html">QDataSink</a> during event processing.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qasyncio-h.html">qasyncio.h</a>&gt;</code>
+<p>
+Inherits <a href="qobject.html">QObject</a>.
+<p><a href="qdatapump-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qdatapump.html#a0"><strong>QDataPump</strong></a> ( QDataSource *, QDataSink * ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+Moves data from a <a href="qdatasource.html">QDataSource</a> to a <a href="qdatasink.html">QDataSink</a> during event processing.
+<p>
+For a QDataSource to provide data to a QDataSink, a controller must exist
+to examine the <a href="qdatasource.html#a0">QDataSource::readyToSend</a>() and <a href="qdatasink.html#a0">QDataSink::readyToReceive</a>()
+methods and respond to the QASyncIO::activate() signal of the source and
+sink.  One very useful way to do this is interleaved with other event
+processing.  QDataPump provides this - create a pipe between a source
+and a sink, and data will be moved during subsequent event processing.
+<p>Note that each source can only provide data to one sink and each sink
+can only receive data from one source (although it is quite possible
+to write a multiplexing sink that is multiple sources).
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QDataPump::QDataPump ( <a href="qdatasource.html">QDataSource</a> * data_source, <a href="qdatasink.html">QDataSink</a> * data_sink )</h3>
+<p>Creates a QDataPump to move data from a given <em>data_source</em>
+to a given <em>data_sink.</em>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qasyncio.h: 1998/08/19
+<li>qasyncio.cpp: 1998/08/12
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

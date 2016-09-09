@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QLabel Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QLabel Class Reference</h1><br clear="all">
+<p>
+The QLabel widget displays a static text or pixmap.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qlabel-h.html">qlabel.h</a>&gt;</code>
+<p>
+Inherits <a href="qframe.html">QFrame</a>.
+<p><a href="qlabel-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qlabel.html#a0"><strong>QLabel</strong></a> ( QWidget * parent=0, const char * name=0, WFlags f=0 ) </span>
+<li><span class="fn"><a href="qlabel.html#a1"><strong>QLabel</strong></a> ( const char * text, QWidget * parent=0, const char * name=0, WFlags f=0 ) </span>
+<li><span class="fn"><a href="qlabel.html#a2"><strong>QLabel</strong></a> ( QWidget * buddy, const char * text, QWidget * parent, const char * name=0, WFlags f=0 ) </span>
+<li><span class="fn"><a href="qlabel.html#a3"><strong>~QLabel</strong></a> () </span>
+<li><span class="fn">const char* <a href="qlabel.html#a4"><strong>text</strong></a> () const</span>
+<li><span class="fn">QPixmap* <a href="qlabel.html#a5"><strong>pixmap</strong></a> () const</span>
+<li><span class="fn">QMovie* <a href="qlabel.html#a6"><strong>movie</strong></a> () const</span>
+<li><span class="fn">int <a href="qlabel.html#a7"><strong>alignment</strong></a> () const</span>
+<li><span class="fn">void <a href="qlabel.html#a8"><strong>setAlignment</strong></a> ( int ) </span>
+<li><span class="fn">int <a href="qlabel.html#a9"><strong>margin</strong></a> () const</span>
+<li><span class="fn">void <a href="qlabel.html#b0"><strong>setMargin</strong></a> ( int ) </span>
+<li><span class="fn">bool <a href="qlabel.html#b1"><strong>autoResize</strong></a> () const</span>
+<li><span class="fn">void <a href="qlabel.html#b2"><strong>setAutoResize</strong></a> ( bool ) </span>
+<li><span class="fn">virtual QSize <a href="qlabel.html#b3"><strong>sizeHint</strong></a> () const</span>
+<li><span class="fn">void <a href="qlabel.html#b4"><strong>setBuddy</strong></a> ( QWidget * ) </span>
+<li><span class="fn">QWidget* <a href="qlabel.html#b5"><strong>buddy</strong></a> () const</span>
+</ul>
+<h2>Public Slots</h2>
+<ul>
+<li><span class="fn">void <a href="qlabel.html#b6"><strong>setText</strong></a> ( const char * ) </span>
+<li><span class="fn">void <a href="qlabel.html#b7"><strong>setPixmap</strong></a> ( const QPixmap &amp; ) </span>
+<li><span class="fn">void <a href="qlabel.html#b8"><strong>setMovie</strong></a> ( const QMovie &amp; ) </span>
+<li><span class="fn">void <a href="qlabel.html#b9"><strong>setNum</strong></a> ( int ) </span>
+<li><span class="fn">void <a href="qlabel.html#c0"><strong>setNum</strong></a> ( double ) </span>
+<li><span class="fn">void <a href="qlabel.html#c1"><strong>clear</strong></a> () </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qlabel.html#c2"><strong>drawContents</strong></a> ( QPainter * ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QLabel widget displays a static text or pixmap.
+<p>
+A label is a static text or pixmap field.
+<p>It can have a frame (since QLabel inherits <a href="qframe.html">QFrame</a>) and a "buddy" and
+an accelerator for moving keyboard focus to the buddy.
+<p>The contents of a label can be specified as a normal text, as a
+numeric value (which is internally converted to a text) or, as a
+pixmap.  If the label is normal text and one of the letters is
+prefixed with '&', you can also specify a <em>buddy</em> for the label:
+<p><pre>     <a href="qlineedit.html">QLineEdit</a> * phone = new <a href="qlineedit.html">QLineEdit</a>( this, "phone number" );
+     <a href="qlabel.html">QLabel</a> * phoneLabel = new <a href="qlabel.html">QLabel</a>( phone, "&amp;Phone", this );
+</pre>
+<p>In this example, keyboard focus is transferred to the label's buddy
+(the <a href="qlineedit.html">QLineEdit</a>) when the user presses <dfn>Alt-P.</dfn> This is
+handy for many dialogs.  You can also use the <a href="qlabel.html#b4">setBuddy</a>() function to
+accomplish the same means.
+<p>A label can be aligned in many different ways. The alignment setting
+specifies where to position the contents relative to the frame
+rectangle.  See <a href="qlabel.html#a8">setAlignment</a>() for a description of the alignment
+flags.
+<p>Enabling auto-resizing make the label resize itself whenever the
+contents change.  The top left corner does not move.
+<p>This code sets up a sunken panel with a two-line text in the bottom
+right corner:
+<p><pre>    <a href="qlabel.html">QLabel</a> *label = new <a href="qlabel.html">QLabel</a>;
+    label-&gt;<a href="qframe.html#a4">setFrameStyle</a>( QFrame::Panel | QFrame::Sunken );
+    label-&gt;<a href="qlabel.html#b6">setText</a>( "first line\nsecond line" );
+    label-&gt;<a href="qlabel.html#a8">setAlignment</a>( AlignBottom | AlignRight );
+</pre>
+<p>Both lines are <a href="qtextstream.html">flush</a> with the right side of the label.
+<p><img src=qlabel-m.gif> <img src=qlabel-w.gif>
+<p>See also:  <a href="qlineedit.html">QLineEdit</a>, <a href="qmovie.html">QMovie</a> and <a href="guibooks.html#fowler">GUI Design Handbook: Label</a>
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#QLabel">tictac/tictac.cpp</a>
+ <a href="forever-forever-cpp.html#QLabel">forever/forever.cpp</a>
+ <a href="movies-main-cpp.html#QLabel">movies/main.cpp</a>
+ <a href="xform-xform-cpp.html#QLabel">xform/xform.cpp</a>
+ <a href="menu-menu-cpp.html#QLabel">menu/menu.cpp</a>
+ <a href="pref-pref-cpp.html#QLabel">pref/pref.cpp</a>
+ <a href="progress-progress-cpp.html#QLabel">progress/progress.cpp</a>
+ <a href="cursor-cursor-cpp.html#QLabel">cursor/cursor.cpp</a>
+ <a href="layout-layout-cpp.html#QLabel">layout/layout.cpp</a>
+ <a href="qmag-qmag-cpp.html#QLabel">qmag/qmag.cpp</a>
+ <a href="showimg-showimg-cpp.html#QLabel">showimg/showimg.cpp</a>
+ <a href="widgets-widgets-cpp.html#QLabel">widgets/widgets.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a2"></a>QLabel::QLabel ( <a href="qwidget.html">QWidget</a> * buddy, const char * text, <a href="qwidget.html">QWidget</a> * parent, const char * name=0, WFlags f=0 )</h3>
+<p>Constructs a label with an accelerator key.
+<p>The <em>parent, name</em> and <em>f</em> arguments are passed to the <a href="qframe.html">QFrame</a>
+constructor. Note that the <em>parent</em> argument does <em>not</em> default
+to 0.
+<p>In a dialog, you might create two data entry widgets and a label
+for each, and set up the geometry so each label is just to the left
+of its data entry widget (its "buddy"), somewhat like this:
+<p><pre>    <a href="qlineedit.html">QLineEdit</a> *name    = new <a href="qlineedit.html">QLineEdit</a>( this );
+    <a href="qlabel.html">QLabel</a>    *name_l  = new <a href="qlabel.html">QLabel</a>( name, "&amp;Name:", this );
+    <a href="qlineedit.html">QLineEdit</a> *phone   = new <a href="qlineedit.html">QLineEdit</a>( this );
+    <a href="qlabel.html">QLabel</a>    *phone_l = new <a href="qlabel.html">QLabel</a>( phone, "&amp;Phone:", this );
+    // geometry management setup not shown
+</pre>
+<p>With the code above, the focus jumps to the Name field when the user
+presses Alt-N, and to the Phone field when the user presses Alt-P.
+<p>See also:  <a href="qlabel.html#b6">setText</a>() and <a href="qlabel.html#b4">setBuddy</a>().
+<h3 class="fn"><a name="a0"></a>QLabel::QLabel ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0, WFlags f=0 )</h3>
+<p>Constructs an empty label which is left-aligned, vertically centered,
+has an automatic margin and with manual resizing.
+<p>The <em>parent, name</em> and <em>f</em> arguments are passed to the <a href="qframe.html">QFrame</a>
+constructor.
+<p>See also:  <a href="qlabel.html#a8">setAlignment</a>(), <a href="qframe.html#a4">setFrameStyle</a>(), <a href="qlabel.html#b0">setMargin</a>() and <a href="qlabel.html#b2">setAutoResize</a>().
+<h3 class="fn"><a name="a1"></a>QLabel::QLabel ( const char * text, <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0, WFlags f=0 )</h3>
+<p>Constructs a label with a text. The label is left-aligned, vertically
+centered, has an automatic margin and with manual resizing.
+<p>The <em>parent, name</em> and <em>f</em> arguments are passed to the <a href="qframe.html">QFrame</a>
+constructor.
+<p>See also:  <a href="qlabel.html#a8">setAlignment</a>(), <a href="qframe.html#a4">setFrameStyle</a>(), <a href="qlabel.html#b0">setMargin</a>() and <a href="qlabel.html#b2">setAutoResize</a>().
+<h3 class="fn"><a name="a3"></a>QLabel::~QLabel ()</h3>
+<p>Destroys the label.
+<h3 class="fn">int <a name="a7"></a>QLabel::alignment () const</h3>
+<p>Returns the alignment setting.
+<p>The default alignment is <code>AlignLeft | AlignVCenter |
+ExpandTabs</code> if the label doesn't have a buddy and
+<code>AlignLeft | AlignVCenter | ExpandTabs | ShowPrefix </code> if
+the label has a buddy.
+<p>See also:  <a href="qlabel.html#a8">setAlignment</a>().
+<h3 class="fn">bool <a name="b1"></a>QLabel::autoResize () const</h3>
+<p>Returns TRUE if auto-resizing is enabled, or FALSE if auto-resizing is
+disabled.
+<p>Auto-resizing is disabled by default.
+<p>See also:  <a href="qlabel.html#b2">setAutoResize</a>().
+<h3 class="fn"><a href="qwidget.html">QWidget</a> * <a name="b5"></a>QLabel::buddy () const</h3>
+<p>Returns the buddy of this label.
+<h3 class="fn">void <a name="c1"></a>QLabel::clear () <code>[slot]</code></h3>
+<p>Clears the label.  Equivalent with <a href="qlabel.html#b6">setText</a>( "" ).
+<h3 class="fn">void <a name="c2"></a>QLabel::drawContents ( <a href="qpainter.html">QPainter</a> * p ) <code>[virtual protected]</code></h3>
+<p>Draws the label contents using the painter <em>p.</em>
+<p>Reimplemented from <a href="qframe.html#c0">QFrame.</a>
+<h3 class="fn">int <a name="a9"></a>QLabel::margin () const</h3>
+<p>Returns the margin of the label.
+<p>See also:  <a href="qlabel.html#b0">setMargin</a>().
+<h3 class="fn"><a href="qmovie.html">QMovie</a>* <a name="a6"></a>QLabel::movie () const</h3>
+<p>Returns the <a href="qmovie.html">QMovie</a> currently displaying in the label, or 0
+if none has been set.
+<p>Examples:
+ <a href="widgets-widgets-cpp.html#movie">widgets/widgets.cpp</a>
+<h3 class="fn"><a href="qpixmap.html">QPixmap</a> * <a name="a5"></a>QLabel::pixmap () const</h3>
+<p>Returns the label pixmap.
+<p>See also:  <a href="qlabel.html#b7">setPixmap</a>().
+<h3 class="fn">void <a name="a8"></a>QLabel::setAlignment ( int alignment )</h3>
+<p>Sets the alignment of the label contents and redraws itself.
+<p>The <em>alignment</em> is the bitwise OR of the following flags:
+<ul>
+<li> <code>AlignLeft</code> aligns to the left border.
+<li> <code>AlignRight</code> aligns to the right border.
+<li> <code>AlignHCenter</code> aligns horizontally centered.
+<li> <code>AlignTop</code> aligns to the top border.
+<li> <code>AlignBottom</code> aligns to the bottom border.
+<li> <code>AlignVCenter</code> aligns vertically centered
+<li> <code>AlignCenter</code> (= <code>AlignHCenter</code> | AlignVCenter)
+<li> <code>ExpandTabs</code> expands tabulators.
+<li> <code>WordBreak</code> enables automatic word breaking.
+</ul>
+<p>If the label has a buddy, <code>ShowPrefix</code> is forced to TRUE.
+<p>See also:  <a href="qlabel.html#a7">alignment</a>(), <a href="qlabel.html#b4">setBuddy</a>() and <a href="qlabel.html#b6">setText</a>().
+<p>Examples:
+ <a href="cursor-cursor-cpp.html#setAlignment">cursor/cursor.cpp</a>
+ <a href="layout-layout-cpp.html#setAlignment">layout/layout.cpp</a>
+ <a href="qmag-qmag-cpp.html#setAlignment">qmag/qmag.cpp</a>
+ <a href="widgets-widgets-cpp.html#setAlignment">widgets/widgets.cpp</a>
+<h3 class="fn">void <a name="b2"></a>QLabel::setAutoResize ( bool enable )</h3>
+<p>Enables auto-resizing if <em>enable</em> is TRUE, or disables it if <em>enable</em> is FALSE.
+<p>When auto-resizing is enabled, the label will resize itself whenever the
+contents change.  The top left corner is not moved.
+<p>See also:  <a href="qlabel.html#b1">autoResize</a>() and <a href="qwidget.html#l8">adjustSize</a>().
+<p>Examples:
+ <a href="forever-forever-cpp.html#setAutoResize">forever/forever.cpp</a>
+<h3 class="fn">void <a name="b4"></a>QLabel::setBuddy ( <a href="qwidget.html">QWidget</a> * buddy )</h3>
+<p>Sets the buddy of this label to <em>buddy.</em>
+<p>When the user presses the accelerator key indicated by this label,
+the keyboard focus is transferred to the label's buddy.
+<p>See also:  label() and <a href="qlabel.html#b6">setText</a>().
+<p>Examples:
+ <a href="pref-pref-cpp.html#setBuddy">pref/pref.cpp</a>
+ <a href="layout-layout-cpp.html#setBuddy">layout/layout.cpp</a>
+<h3 class="fn">void <a name="b0"></a>QLabel::setMargin ( int margin )</h3>
+<p>Sets the margin of the label to <em>margin</em> pixels.
+<p>The margin applies to the left edge if <a href="qlabel.html#a7">alignment</a>() is <code>AlignLeft,</code>
+to the right edge if alignment() is <code>AlignRight,</code> to the top edge
+if alignment() is <code>AlignTop,</code> and to to the bottom edge if
+alignment() is <code>AlignBottom.</code>
+<p>If <em>margin</em> is negative (as it is by default), the label computes the
+margin as follows: If the <a href="qframe.html#b2">frame width</a> is zero,
+the effective margin becomes 0. If the frame style is greater than zero,
+the effective margin becomes half the width of the "x" character (of the
+widget's current <a href="qwidget.html#f8">font</a>.
+<p>Setting a non-negative margin gives the specified margin in pixels.
+<p>See also:  <a href="qlabel.html#a9">margin</a>(), <a href="qframe.html#b2">frameWidth</a>() and <a href="qwidget.html#f8">font</a>().
+<p>Examples:
+ <a href="movies-main-cpp.html#setMargin">movies/main.cpp</a>
+ <a href="widgets-widgets-cpp.html#setMargin">widgets/widgets.cpp</a>
+<h3 class="fn">void <a name="b8"></a>QLabel::setMovie ( const <a href="qmovie.html">QMovie</a> &amp; movie ) <code>[slot]</code></h3>
+<p>Sets a <a href="qmovie.html">QMovie</a> to display in the label, or removes any existing movie
+if the given movie <a href="qmovie.html#b1">QMovie::isNull</a>().
+<p>Any current pixmap or text label is cleared.
+<p>If the label has a buddy, the accelerator is disabled since the
+movie doesn't contain any suitable character.
+<p>Examples:
+ <a href="widgets-widgets-cpp.html#setMovie">widgets/widgets.cpp</a>
+<h3 class="fn">void <a name="c0"></a>QLabel::setNum ( double num ) <code>[slot]</code></h3>
+<p>Sets the label contents to <em>num</em> (converts it to text) and redraws the
+contents.
+<p>If the label has a buddy, the accelerator is disabled since the
+number doesn't contain any suitable character.
+<p>The label resizes itself if auto-resizing is enabled.
+<p>See also:  <a href="qlabel.html#b2">setAutoResize</a>().
+<h3 class="fn">void <a name="b9"></a>QLabel::setNum ( int num ) <code>[slot]</code></h3>
+<p>Sets the label contents to <em>num</em> (converts it to text) and redraws the
+contents.
+<p>If the label has a buddy, the accelerator is disabled since the
+number doesn't contain any suitable character.
+<p>The label resizes itself if auto-resizing is enabled.  Nothing
+happens if <em>num</em> reads the same as the current label.
+<p>See also:  <a href="qlabel.html#b2">setAutoResize</a>().
+<h3 class="fn">void <a name="b7"></a>QLabel::setPixmap ( const <a href="qpixmap.html">QPixmap</a> &amp; pixmap ) <code>[slot]</code></h3>
+<p>Sets the label contents to <em>pixmap</em> and redraws the contents.
+<p>If the label has a buddy, the accelerator is disabled since the
+pixmap doesn't contain any suitable character.
+<p>The label resizes itself if auto-resizing is enabled.  Nothing
+happens if <em>pixmap</em> is the same as the current label.
+<p>See also:  <a href="qlabel.html#a5">pixmap</a>(), <a href="qlabel.html#b6">setText</a>() and <a href="qlabel.html#b2">setAutoResize</a>().
+<h3 class="fn">void <a name="b6"></a>QLabel::setText ( const char * text ) <code>[slot]</code></h3>
+<p>Sets the label contents to <em>text,</em> updates the optional
+accelerator and redraws the contents.
+<p>The label resizes itself if auto-resizing is enabled.  Nothing
+happens if <em>text</em> is the same as the current label.
+<p>See also:  <a href="qlabel.html#a4">text</a>(), <a href="qlabel.html#b7">setPixmap</a>() and <a href="qlabel.html#b2">setAutoResize</a>().
+<p>Examples:
+ <a href="forever-forever-cpp.html#setText">forever/forever.cpp</a>
+ <a href="xform-xform-cpp.html#setText">xform/xform.cpp</a>
+ <a href="pref-pref-cpp.html#setText">pref/pref.cpp</a>
+ <a href="cursor-cursor-cpp.html#setText">cursor/cursor.cpp</a>
+ <a href="layout-layout-cpp.html#setText">layout/layout.cpp</a>
+ <a href="qmag-qmag-cpp.html#setText">qmag/qmag.cpp</a>
+ <a href="widgets-widgets-cpp.html#setText">widgets/widgets.cpp</a>
+<h3 class="fn"><a href="qsize.html">QSize</a> <a name="b3"></a>QLabel::sizeHint () const <code>[virtual]</code></h3>
+<p>Returns a size which fits the contents of the label.
+<p>Bugs and limitations:
+<ul>
+<li>Does not work well with the WordBreak flag
+</ul>
+<p>Examples:
+ <a href="pref-pref-cpp.html#sizeHint">pref/pref.cpp</a>
+ <a href="layout-layout-cpp.html#sizeHint">layout/layout.cpp</a>
+ <a href="widgets-widgets-cpp.html#sizeHint">widgets/widgets.cpp</a>
+<p>Reimplemented from <a href="qwidget.html#l7">QWidget.</a>
+<h3 class="fn">const char * <a name="a4"></a>QLabel::text () const</h3>
+<p>Returns the label text.
+<p>See also:  <a href="qlabel.html#b6">setText</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qlabel.h: 1998/08/21
+<li>qlabel.cpp: 1999/01/13
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

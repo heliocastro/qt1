@@ -1,0 +1,445 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QListViewItem Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QListViewItem Class Reference</h1><br clear="all">
+<p>
+The QListViewItem class implements a list view item.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qlistview-h.html">qlistview.h</a>&gt;</code>
+<p>Inherited by <a href="qchecklistitem.html">QCheckListItem</a>.
+<p><a href="qlistviewitem-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qlistviewitem.html#a0"><strong>QListViewItem</strong></a> ( QListView * parent ) </span>
+<li><span class="fn"><a href="qlistviewitem.html#a1"><strong>QListViewItem</strong></a> ( QListViewItem * parent ) </span>
+<li><span class="fn"><a href="qlistviewitem.html#a2"><strong>QListViewItem</strong></a> ( QListView * parent, QListViewItem * after ) </span>
+<li><span class="fn"><a href="qlistviewitem.html#a3"><strong>QListViewItem</strong></a> ( QListViewItem * parent, QListViewItem * after ) </span>
+<li><span class="fn"><a href="qlistviewitem.html#a4"><strong>QListViewItem</strong></a> ( QListView * parent, const char *, const char * = 0, const char * = 0, const char * = 0, const char * = 0, const char * = 0, const char * = 0, const char * = 0 ) </span>
+<li><span class="fn"><a href="qlistviewitem.html#a5"><strong>QListViewItem</strong></a> ( QListViewItem * parent, const char *, const char * = 0, const char * = 0, const char * = 0, const char * = 0, const char * = 0, const char * = 0, const char * = 0 ) </span>
+<li><span class="fn"><a href="qlistviewitem.html#a6"><strong>QListViewItem</strong></a> ( QListView * parent, QListViewItem * after, const char *, const char * = 0, const char * = 0, const char * = 0, const char * = 0, const char * = 0, const char * = 0, const char * = 0 ) </span>
+<li><span class="fn"><a href="qlistviewitem.html#a7"><strong>QListViewItem</strong></a> ( QListViewItem * parent, QListViewItem * after, const char *, const char * = 0, const char * = 0, const char * = 0, const char * = 0, const char * = 0, const char * = 0, const char * = 0 ) </span>
+<li><span class="fn">virtual <a href="qlistviewitem.html#a8"><strong>~QListViewItem</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#a9"><strong>insertItem</strong></a> ( QListViewItem * ) </span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#b0"><strong>removeItem</strong></a> ( QListViewItem * ) </span>
+<li><span class="fn">int <a href="qlistviewitem.html#b1"><strong>height</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#b2"><strong>invalidateHeight</strong></a> () </span>
+<li><span class="fn">int <a href="qlistviewitem.html#b3"><strong>totalHeight</strong></a> () const</span>
+<li><span class="fn">virtual int <a href="qlistviewitem.html#b4"><strong>width</strong></a> ( const QFontMetrics &amp;, const QListView *, int column ) const</span>
+<li><span class="fn">void <a href="qlistviewitem.html#b5"><strong>widthChanged</strong></a> ( int column=-1 ) const</span>
+<li><span class="fn">int <a href="qlistviewitem.html#b6"><strong>depth</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#b7"><strong>setText</strong></a> ( int, const char * ) </span>
+<li><span class="fn">virtual const char* <a href="qlistviewitem.html#b8"><strong>text</strong></a> ( int ) const</span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#b9"><strong>setPixmap</strong></a> ( int, const QPixmap &amp; ) </span>
+<li><span class="fn">virtual const QPixmap* <a href="qlistviewitem.html#c0"><strong>pixmap</strong></a> ( int ) const</span>
+<li><span class="fn">virtual const char* <a href="qlistviewitem.html#c1"><strong>key</strong></a> ( int, bool ) const</span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#c2"><strong>sortChildItems</strong></a> ( int, bool ) </span>
+<li><span class="fn">int <a href="qlistviewitem.html#c3"><strong>childCount</strong></a> () const</span>
+<li><span class="fn">bool <a href="qlistviewitem.html#c4"><strong>isOpen</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#c5"><strong>setOpen</strong></a> ( bool ) </span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#c6"><strong>setup</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#c7"><strong>setSelected</strong></a> ( bool ) </span>
+<li><span class="fn">bool <a href="qlistviewitem.html#c8"><strong>isSelected</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#c9"><strong>paintCell</strong></a> ( QPainter *, const QColorGroup &amp; cg, int column, int width, int alignment ) </span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#d0"><strong>paintBranches</strong></a> ( QPainter * p, const QColorGroup &amp; cg, int w, int y, int h, GUIStyle s ) </span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#d1"><strong>paintFocus</strong></a> ( QPainter *, const QColorGroup &amp; cg, const QRect &amp; r ) </span>
+<li><span class="fn">QListViewItem* <a href="qlistviewitem.html#d2"><strong>firstChild</strong></a> () const</span>
+<li><span class="fn">QListViewItem* <a href="qlistviewitem.html#d3"><strong>nextSibling</strong></a> () const</span>
+<li><span class="fn">QListViewItem* <a href="qlistviewitem.html#d4"><strong>parent</strong></a> () const</span>
+<li><span class="fn">QListViewItem* <a href="qlistviewitem.html#d5"><strong>itemAbove</strong></a> () </span>
+<li><span class="fn">QListViewItem* <a href="qlistviewitem.html#d6"><strong>itemBelow</strong></a> () </span>
+<li><span class="fn">int <a href="qlistviewitem.html#d7"><strong>itemPos</strong></a> () const</span>
+<li><span class="fn">QListView* <a href="qlistviewitem.html#d8"><strong>listView</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#d9"><strong>setSelectable</strong></a> ( bool enable ) </span>
+<li><span class="fn">bool <a href="qlistviewitem.html#e0"><strong>isSelectable</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#e1"><strong>setExpandable</strong></a> ( bool ) </span>
+<li><span class="fn">bool <a href="qlistviewitem.html#e2"><strong>isExpandable</strong></a> () </span>
+<li><span class="fn">void <a href="qlistviewitem.html#e3"><strong>repaint</strong></a> () const</span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#e4"><strong>enforceSortOrder</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#e5"><strong>setHeight</strong></a> ( int ) </span>
+<li><span class="fn">virtual void <a href="qlistviewitem.html#e6"><strong>activate</strong></a> () </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QListViewItem class implements a list view item.
+<p>
+A list viev item is a multi-column object capable of displaying
+itself.  Its design has the following main goals: <ul> <li> Work
+quickly and well for <em>large</em> sets of data. <li> Be easy to use in
+the simple case. </ul>
+<p>The simplest way to use QListViewItem is to construct one with a few
+constant strings.  This creates an item which is a child of <em>parent,</em> with two fixed-content strings, and discards the pointer to
+it:
+<p><pre>     (void) new <a href="qlistviewitem.html">QListViewItem</a>( parent, "first column", "second column" );
+</pre>
+<p>This object will be deleted when <em>parent</em> is deleted, as for <a href="qobject.html">QObjects.</a>
+<p>The parent is either another QListViewItem or a <a href="qlistview.html">QListView</a>.  If the
+parent is a QListView, this item is a top-level item within that
+QListView.  If the parent is another QListViewItem, this item
+becomes a child of the parent item.
+<p>If you keep the pointer, you can set or change the texts using
+<a href="qlistviewitem.html#b7">setText</a>(), add pixmaps using <a href="qlistviewitem.html#b9">setPixmap</a>(), change its mode using
+<a href="qlistviewitem.html#d9">setSelectable</a>(), <a href="qlistviewitem.html#c7">setSelected</a>(), <a href="qlistviewitem.html#c5">setOpen</a>() and <a href="qlistviewitem.html#e1">setExpandable</a>(),
+change its height using <a href="qlistviewitem.html#e5">setHeight</a>(), and do much tree traversal.
+The set* functions in QListView also affect QListViewItem, of
+course.
+<p>You can traverse the tree as if it were a doubly linked list using
+<a href="qlistviewitem.html#d5">itemAbove</a>() and <a href="qlistviewitem.html#d6">itemBelow</a>(); they return pointers to the items
+directly above and below this item on the screen (even if none of
+the three are actually visible at the moment).
+<p>You can also traverse it as a tree, using <a href="qlistviewitem.html#d4">parent</a>(), <a href="qlistviewitem.html#d2">firstChild</a>() and
+<a href="qlistviewitem.html#d3">nextSibling</a>().  This code does something to each of an item's
+children:
+<p><pre>    <a href="qlistviewitem.html">QListViewItem</a> * myChild = myItem-&gt;firstChild();
+    while( myChild ) {
+        doSomething( myChild );
+        myChild = myChild-&gt;<a href="qlistviewitem.html#d3">nextSibling</a>();
+    }
+</pre>
+<p>Note that the order of the children will change when the sorting
+order changes, and is undefined if the items are not visible.  You
+can however call <a href="qlistviewitem.html#e4">enforceSortOrder</a>() at any time, and QListView will
+always call it before it needs to show an item.
+<p>Many programs will need to reimplement QListViewItem.  The most
+commonly reimplemented functions are: <ul> <li> <a href="qlistviewitem.html#b8">text</a>() returns the
+text in a column.  Many subclasses will compute that on the
+fly. <li> <a href="qlistviewitem.html#c1">key</a>() is used for sorting.  The default key() simply calls
+text(), but judicious use of key can be used to sort by e.g. date
+(as <a href="qfiledialog.html">QFileDialog</a> does).  <li> <a href="qlistviewitem.html#c6">setup</a>() is called before showing the
+item, and whenever e.g. the font changes. <li> <a href="qlistviewitem.html#e6">activate</a>() is called
+whenever the user clicks on the item or presses space when the item
+is the currently highlighted item.</ul>
+<p>Some subclasses call setExpandable( TRUE ) even when they have no
+children, and populate themselves when setup() is called.  The
+<a href="dirview-dirview-cpp.html#QListViewItem">dirview/dirview.cpp</a> example program uses precisely this technique to
+start up quickly: The files and subdirectories in a directory aren't
+entered into the tree until they need to.
+<p>This example shows a number of root items in a QListView.  These
+items are actually subclassed from QListViewItem: The file size,
+type etc. are computed on the fly.
+<p><img src="listview.gif" width="518" height="82" alt="Example List View">
+<p>The next example shows a fraction of the dirview example.  Again,
+the Directory/Symbolic Link column is computed on the fly.  None of
+the items are root items; the <em>usr</em> item is a child of the root and
+the <em>X11</em> item is a child of the <em>usr</em> item.
+<p><img src="treeview.gif" width="227" height="261" alt="Example Tree View">
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#QListViewItem">dirview/dirview.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QListViewItem::QListViewItem ( <a href="qlistview.html">QListView</a> * parent )</h3>
+<p>Create a new list view item in the <a href="qlistview.html">QListView</a> <em>parent</em> and first
+in the parent's list of children.
+<h3 class="fn"><a name="a2"></a>QListViewItem::QListViewItem ( <a href="qlistview.html">QListView</a> * parent, QListViewItem * after )</h3>
+<p>Constructs an empty list view item which is a child of <em>parent</em>
+and is after <em>after</em> in the parent's list of children.
+<h3 class="fn"><a name="a6"></a>QListViewItem::QListViewItem ( <a href="qlistview.html">QListView</a> * parent, QListViewItem * after, const char * label1, const char * label2 = 0, const char * label3 = 0, const char * label4 = 0, const char * label5 = 0, const char * label6 = 0, const char * label7 = 0, const char * label8 = 0 )</h3>
+<p>Creates a new list view item in the <a href="qlistview.html">QListView</a> <em>parent,</em>
+after item <em>after,</em> with at most 8 constant strings as contents.
+<p>Note that the order is changed according to <a href="qlistviewitem.html#c1">QListViewItem::key</a>()
+unless the list view's sorting is disabled using
+<a href="qlistview.html#d8">QListView::setSorting</a>( -1 ).
+<h3 class="fn"><a name="a4"></a>QListViewItem::QListViewItem ( <a href="qlistview.html">QListView</a> * parent, const char * label1, const char * label2 = 0, const char * label3 = 0, const char * label4 = 0, const char * label5 = 0, const char * label6 = 0, const char * label7 = 0, const char * label8 = 0 )</h3>
+<p>Creates a new list view item in the <a href="qlistview.html">QListView</a> <em>parent, parent,</em> with at most 8 constant strings as contents.
+<p><pre>     (void)new <a href="qlistviewitem.html">QListViewItem</a>( lv, "/", "Root directory" );
+</pre>
+<h3 class="fn"><a name="a1"></a>QListViewItem::QListViewItem ( QListViewItem * parent )</h3>
+<p>Create a new list view item which is a child of <em>parent</em> and first
+in the parent's list of children.
+<h3 class="fn"><a name="a3"></a>QListViewItem::QListViewItem ( QListViewItem * parent, QListViewItem * after )</h3>
+<p>Constructs an empty list view item which is a child of <em>parent</em>
+and is after <em>after</em> in the parent's list of children.
+<h3 class="fn"><a name="a7"></a>QListViewItem::QListViewItem ( QListViewItem * parent, QListViewItem * after, const char * label1, const char * label2 = 0, const char * label3 = 0, const char * label4 = 0, const char * label5 = 0, const char * label6 = 0, const char * label7 = 0, const char * label8 = 0 )</h3>
+<p>Creates a new list view item that's a child of the QListViewItem
+<em>parent,</em> after item <em>after,</em> with at most 8 constant strings as
+contents.
+<p>Note that the order is changed according to <a href="qlistviewitem.html#c1">QListViewItem::key</a>()
+unless the list view's sorting is disabled using
+<a href="qlistview.html#d8">QListView::setSorting</a>( -1 ).
+<h3 class="fn"><a name="a5"></a>QListViewItem::QListViewItem ( QListViewItem * parent, const char * label1, const char * label2 = 0, const char * label3 = 0, const char * label4 = 0, const char * label5 = 0, const char * label6 = 0, const char * label7 = 0, const char * label8 = 0 )</h3>
+<p>Creates a new list view item that's a child of the QListViewItem
+<em>parent,</em> with at most 8 constant strings as contents.  Possible
+example in a threaded news or e-mail reader:
+<p><pre>     (void)new <a href="qlistviewitem.html">QListViewItem</a>( parentMessage, author, subject );
+</pre>
+<h3 class="fn"><a name="a8"></a>QListViewItem::~QListViewItem () <code>[virtual]</code></h3>
+<p>Deletes this item and all children of it, freeing up all
+allocated resources.
+<h3 class="fn">void <a name="e6"></a>QListViewItem::activate () <code>[virtual protected]</code></h3>
+<p>This virtual function is called whenever the user clicks on this
+item or presses Space on it. The default implementation does
+nothing.
+<p>Reimplemented in <a href="qchecklistitem.html#b3">QCheckListItem</a>.
+<h3 class="fn">int <a name="c3"></a>QListViewItem::childCount () const</h3>
+<p>Returns the current number of children of this item.
+<h3 class="fn">int <a name="b6"></a>QListViewItem::depth () const</h3>
+<p>Returns the depth of this item.
+<h3 class="fn">void <a name="e4"></a>QListViewItem::enforceSortOrder () const <code>[virtual protected]</code></h3>
+<p>Makes sure that this object's children are sorted appropriately.
+<p>This only works if every item in the chain from the root item to
+this item is sorted appropriately.
+<p>See also:  <a href="qlistviewitem.html#c2">sortChildItems</a>().
+<h3 class="fn">QListViewItem* <a name="d2"></a>QListViewItem::firstChild () const</h3>
+<p>Returns a pointer to the first (top) child of this item.
+<p>Note that the children are not guaranteed to be sorted properly.
+<a href="qlistview.html">QListView</a> and QListViewItem try to postpone or avoid sorting to the
+greatest degree possible, in order to keep the user interface
+snappy.
+<p>See also:  <a href="qlistviewitem.html#d3">nextSibling</a>().
+<h3 class="fn">int <a name="b1"></a>QListViewItem::height () const</h3>
+<p>Returns the height of this item in pixels.  This does not include
+the height of any children; <a href="qlistviewitem.html#b3">totalHeight</a>() returns that.
+<h3 class="fn">void <a name="a9"></a>QListViewItem::insertItem ( QListViewItem * newChild ) <code>[virtual]</code></h3>
+<p>Inserts <em>newChild</em> into its list of children.  Called by the
+constructor of <em>newChild.</em>
+<h3 class="fn">void <a name="b2"></a>QListViewItem::invalidateHeight () <code>[virtual]</code></h3>
+<p>Invalidates the cached total height of this item including
+all open children.
+<p>See also:  <a href="qlistviewitem.html#e5">setHeight</a>(), ownHeight() and <a href="qlistviewitem.html#b3">totalHeight</a>().
+<h3 class="fn">bool <a name="e2"></a>QListViewItem::isExpandable ()</h3>
+<p>{ return expnadable; }
+<p>Returns TRUE if this item is expandable even when it has no
+children.
+<h3 class="fn">bool <a name="c4"></a>QListViewItem::isOpen () const</h3>
+<p>Returns TRUE if this list view item has children <em>and</em> they are
+potentially visible, or FALSE if the item has no children or they
+are hidden.
+<p>See also:  <a href="qlistviewitem.html#c5">setOpen</a>().
+<h3 class="fn">bool <a name="e0"></a>QListViewItem::isSelectable () const</h3>
+<p>Returns TRUE if the item is selectable (as it is by default) and
+FALSE if it isn't.
+<p>See also:  <a href="qlistviewitem.html#d9">setSelectable</a>().
+<h3 class="fn">bool <a name="c8"></a>QListViewItem::isSelected () const</h3>
+<p>Returns TRUE if this item is selected, or FALSE if it is not.
+<p>See also:  setSelection(), selectionChanged() and <a href="qlistviewitem.html#c7">QListViewItem::setSelected</a>().
+<h3 class="fn">QListViewItem * <a name="d5"></a>QListViewItem::itemAbove ()</h3>
+<p>Returns a pointer to the item immediately above this item on the
+screen.  This is usually the item's closest older sibling, but may
+also be its parent or its next older sibling's youngest child, or
+something else if anyoftheabove-><a href="qlistviewitem.html#b1">height</a>() returns 0.
+<p>This function assumes that all parents of this item are open
+(ie. that this item is visible, or can be made visible by
+scrolling).
+<p>See also:  <a href="qlistviewitem.html#d6">itemBelow</a>() and itemRect().
+<h3 class="fn">QListViewItem * <a name="d6"></a>QListViewItem::itemBelow ()</h3>
+<p>Returns a pointer to the item immediately below this item on the
+screen.  This is usually the item's eldest child, but may also be
+its next younger sibling, its parent's next younger sibling,
+granparent's etc., or something else if anyoftheabove-><a href="qlistviewitem.html#b1">height</a>()
+returns 0.
+<p>This function assumes that all parents of this item are open
+(ie. that this item is visible, or can be made visible by
+scrolling).
+<p>See also:  <a href="qlistviewitem.html#d5">itemAbove</a>() and itemRect().
+<h3 class="fn">int <a name="d7"></a>QListViewItem::itemPos () const</h3>
+<p>Returns the y coordinate of <em>item</em> in the list view's
+coordinate system.  This functions is normally much slower than
+<a href="qlistview.html#b7">QListView::itemAt</a>(), but it works for all items, while
+QListView::itemAt() normally works only for items on the screen.
+<p>See also:  <a href="qlistview.html#b7">QListView::itemAt</a>(), <a href="qlistview.html#b8">QListView::itemRect</a>() and <a href="qlistview.html#b9">QListView::itemPos</a>().
+<h3 class="fn">const char * <a name="c1"></a>QListViewItem::key ( int column, bool ascending ) const <code>[virtual]</code></h3>
+<p>Returns a key that can be used for sorting by column <em>column.</em>
+The default implementation returns <a href="qlistviewitem.html#b8">text</a>().  Derived classes may
+also incorporate the order indicated by <em>ascending</em> into this
+key, although this is not recommended.
+<p>QListViewItem immediately copies the return value of this function,
+so it's safe to return a pointer to a static variable.
+<p>You can use this function to sort by non-alphabetic data.  This code
+excerpt sort by file modification date, for example
+<p><pre>    if ( column == 3 ) {
+        <a href="qdatetime.html">QDateTime</a> epoch( <a href="qdate.html">QDate</a>( 1980, 1, 1 ) );
+        tmpString.sprintf( "%08d", epoch.<a href="qdatetime.html#b4">secsTo</a>( myFile.lastModified() ) );
+    } else {
+        // ....
+    }
+    return tmpString;
+</pre>
+<p>See also:  <a href="qlistviewitem.html#c2">sortChildItems</a>().
+<h3 class="fn"><a href="qlistview.html">QListView</a> * <a name="d8"></a>QListViewItem::listView () const</h3>
+<p>Returns a pointer to the listview containing this item.
+<h3 class="fn">QListViewItem* <a name="d3"></a>QListViewItem::nextSibling () const</h3>
+<p>Returns a pointer to the next sibling (below this one) of this
+item.
+<p>Note that the siblings are not guaranteed to be sorted properly.
+<a href="qlistview.html">QListView</a> and QListViewItem try to postpone or avoid sorting to the
+greatest degree possible, in order to keep the user interface
+snappy.
+<p>See also:  <a href="qlistviewitem.html#d2">firstChild</a>().
+<h3 class="fn">void <a name="d0"></a>QListViewItem::paintBranches ( <a href="qpainter.html">QPainter</a> * p, const <a href="qcolorgroup.html">QColorGroup</a> &amp; cg, int w, int y, int h, GUIStyle s ) <code>[virtual]</code></h3>
+<p>Paints a set of branches from this item to (some of) its children.
+<p><em>p</em> is set up with clipping and translation so that you can draw
+only in the rectangle you need to; <em>cg</em> is the color group to use,
+0,top is the top left corner of the update rectangle, w-1,top is the
+top right corner, 0,bottom-1 is the bottom left corner and the
+bottom right corner is left as an excercise for the reader.
+<p>The update rectangle is in an undefined state when this function is
+called; this function must draw on <em>all</em> of the pixels.
+<p>See also:  <a href="qlistviewitem.html#c9">paintCell</a>() and <a href="qlistview.html#g0">QListView::drawContentsOffset</a>().
+<p>Reimplemented in <a href="qchecklistitem.html#b2">QCheckListItem</a>.
+<h3 class="fn">void <a name="c9"></a>QListViewItem::paintCell ( <a href="qpainter.html">QPainter</a> * p, const <a href="qcolorgroup.html">QColorGroup</a> &amp; cg, int column, int width, int align ) <code>[virtual]</code></h3>
+<p>This virtual function paints the contents of one column of one item.
+<p><em>p</em> is a <a href="qpainter.html">QPainter</a> open on the relevant paint device.  <em>pa</em> is
+translated so 0, 0 is the top left pixel in the cell and <em>width-1,</em>
+<a href="qlistviewitem.html#b1">height</a>()-1 is the bottom right pixel <em>in</em> the cell.  The other
+properties of <em>p</em> (pen, brush etc) are undefined.  <em>cg</em> is the
+color group to use.  <em>column</em> is the logical column number within
+the item that is to be painted; 0 is the column which may contain a
+tree.
+<p>This function may use <a href="qlistview.html#d5">QListView::itemMargin</a>() for readability
+spacing on the left and right sides of information such as text,
+and should honour <a href="qlistviewitem.html#c8">isSelected</a>() and <a href="qlistview.html#d3">QListView::allColumnsShowFocus</a>().
+<p>If you reimplement this function, you should also reimplement
+<a href="qlistviewitem.html#b4">width</a>().
+<p>The rectangle to be painted is in an undefined state when this
+function is called, so you <em>must</em> draw on all the pixels.
+<p>See also:  <a href="qlistviewitem.html#d0">paintBranches</a>() and <a href="qlistview.html#g0">QListView::drawContentsOffset</a>().
+<p>Reimplemented in <a href="qchecklistitem.html#a4">QCheckListItem</a>.
+<h3 class="fn">void <a name="d1"></a>QListViewItem::paintFocus ( <a href="qpainter.html">QPainter</a> * p, const <a href="qcolorgroup.html">QColorGroup</a> &amp; cg, const <a href="qrect.html">QRect</a> &amp; r ) <code>[virtual]</code></h3>
+<p>Paints a focus indication on the rectangle <em>r</em> using painter <em>p</em>
+and colors <em>cg.</em>
+<p><em>p</em> is already clipped.
+<p>See also:  <a href="qlistviewitem.html#c9">paintCell</a>(), <a href="qlistviewitem.html#d0">paintBranches</a>() and <a href="qlistview.html#d2">QListView::setAllColumnsShowFocus</a>().
+<h3 class="fn">QListViewItem* <a name="d4"></a>QListViewItem::parent () const</h3>
+<p>Returns a pointer to the parent of this item.
+<p>See also:  <a href="qlistviewitem.html#d2">firstChild</a>() and <a href="qlistviewitem.html#d3">nextSibling</a>().
+<h3 class="fn">const <a href="qpixmap.html">QPixmap</a> * <a name="c0"></a>QListViewItem::pixmap ( int column ) const <code>[virtual]</code></h3>
+<p>Returns a pointer to the pixmap for <em>column,</em> or a null pointer
+if there is no pixmap for <em>column.</em>
+<p>See also:  <a href="qlistviewitem.html#b7">setText</a>() and <a href="qlistviewitem.html#b9">setPixmap</a>().
+<h3 class="fn">void <a name="b0"></a>QListViewItem::removeItem ( QListViewItem * tbg ) <code>[virtual]</code></h3>
+<p>Removes <em>tbg</em> from this object's list of children.  This is
+normally called by tbg's destructor.
+<h3 class="fn">void <a name="e3"></a>QListViewItem::repaint () const</h3>
+<p>Repaints this item on the screen, if it is currently visible.
+<h3 class="fn">void <a name="e1"></a>QListViewItem::setExpandable ( bool enable ) <code>[virtual]</code></h3>
+<p>Sets this item to be expandable even if it has no children if <em>enable</em> is TRUE, and to be expandable only if it has children if <em>enable</em> is FALSE (the default).
+<p>The dirview example uses this in the canonical fashion: It checks
+whether the directory is empty in <a href="qlistviewitem.html#c6">setup</a>() and calls
+setExpandable(TRUE) if not, and in <a href="qlistviewitem.html#c5">setOpen</a>() it reads the contents
+of the directory and inserts items accordingly.  This strategy means
+that dirview can display the entire file system without reading very
+much at start-up.
+<p>Note that root items are not expandable by the user unless
+<a href="qlistview.html#d6">QListView::setRootIsDecorated</a>() is set to TRUE.
+<p>See also:  <a href="qlistviewitem.html#d9">setSelectable</a>().
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#setExpandable">dirview/dirview.cpp</a>
+<h3 class="fn">void <a name="e5"></a>QListViewItem::setHeight ( int height ) <code>[virtual protected]</code></h3>
+<p>Sets this item's own height to <em>height</em> pixels.  This implictly
+changes <a href="qlistviewitem.html#b3">totalHeight</a>() too.
+<p>Note that e.g. a font change causes this height to be overwitten
+unless you reimplement <a href="qlistviewitem.html#c6">setup</a>().
+<p>See also:  ownHeight(), <a href="qlistviewitem.html#b3">totalHeight</a>() and <a href="qlistviewitem.html#c4">isOpen</a>();.
+<h3 class="fn">void <a name="c5"></a>QListViewItem::setOpen ( bool o ) <code>[virtual]</code></h3>
+<p>Sets this item to be open (its children are visible) if <em>o</em> is
+TRUE, and to be closed (its children are not visible) if <em>o</em> is
+FALSE.
+<p>Also does some bookeeping.
+<p>See also:  ownHeight() and <a href="qlistviewitem.html#b3">totalHeight</a>().
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#QListViewItem::setOpen">dirview/dirview.cpp</a>
+<h3 class="fn">void <a name="b9"></a>QListViewItem::setPixmap ( int column, const <a href="qpixmap.html">QPixmap</a> &amp; pm ) <code>[virtual]</code></h3>
+<p>Sets the pixmap in column <em>column</em> to <em>pm,</em> if <em>pm</em> is
+non-null and <em>column</em> is non-negative.
+<p>See also:  <a href="qlistviewitem.html#c0">pixmap</a>() and <a href="qlistviewitem.html#b7">setText</a>().
+<h3 class="fn">void <a name="d9"></a>QListViewItem::setSelectable ( bool enable ) <code>[virtual]</code></h3>
+<p>Sets this items to be selectable if <em>enable</em> is TRUE (the
+default) or not to be selectable if <em>enable</em> is FALSE.
+<p>The user is not able to select a non-selectable item using either
+the keyboard or mouse.  The application programmer still can, of
+course.
+<p>See also:  <a href="qlistviewitem.html#e0">isSelectable</a>().
+<h3 class="fn">void <a name="c7"></a>QListViewItem::setSelected ( bool s ) <code>[virtual]</code></h3>
+<p>Sets this item to be selected <em>s</em> is TRUE, and to not be
+selected if <em>o</em> is FALSE.
+<p>This function does not maintain any invariants or repaint anything -
+<a href="qlistview.html#c4">QListView::setSelected</a>() does that.
+<p>See also:  ownHeight() and <a href="qlistviewitem.html#b3">totalHeight</a>().
+<h3 class="fn">void <a name="b7"></a>QListViewItem::setText ( int column, const char * text ) <code>[virtual]</code></h3>
+<p>Sets the text in column <em>column</em> to <em>text,</em> if <em>column</em> is a
+valid column number and <em>text</em> is non-null.
+<p>If <em><a href="qlistviewitem.html#b8">text</a>()</em> has been reimplemented, this function may be a no-op.
+<p>See also:  <a href="qlistviewitem.html#b8">text</a>() and <a href="qlistviewitem.html#c1">key</a>().
+<h3 class="fn">void <a name="c6"></a>QListViewItem::setup () <code>[virtual]</code></h3>
+<p>This virtual function is called before the first time <a href="qlistview.html">QListView</a>
+needs to know the height or any other graphical attribute of this
+object, and whenever the font, GUI style or colors of the list view
+change.
+<p>The default calls <a href="qlistviewitem.html#b5">widthChanged</a>() and sets the item's height to the
+height of a single line of text in the list view's font.  (If you
+use icons, multi-line text etc. you will probably need to call
+<a href="qlistviewitem.html#e5">setHeight</a>() yourself or reimplement this.).
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#QListViewItem::setup">dirview/dirview.cpp</a>
+<p>Reimplemented in <a href="qchecklistitem.html#a6">QCheckListItem</a>.
+<h3 class="fn">void <a name="c2"></a>QListViewItem::sortChildItems ( int column, bool ascending ) <code>[virtual]</code></h3>
+<p>Sorts the children of this item by the return values of
+<a href="qlistviewitem.html#c1">key</a>(<em>column, ascending),</em> in ascending order if <em>ascending</em>
+is TRUE and in descending order of <em>descending</em> is FALSE.
+<p>Asks some of the children to sort their children.  (<a href="qlistview.html">QListView</a> and
+QListViewItem ensure that all on-screen objects are properly sorted,
+but may avoid or defer sorting other objects in order to be more
+responsive.)
+<p>See also:  <a href="qlistviewitem.html#c1">key</a>().
+<h3 class="fn">const char * <a name="b8"></a>QListViewItem::text ( int column ) const <code>[virtual]</code></h3>
+<p>Returns the text in column <em>column,</em> or else 0.
+<p>The returned pointer must be copied or used at once so that
+reimplementations of this function are at liberty to e.g. return a
+pointer into a static buffer.
+<p>See also:  <a href="qlistviewitem.html#c1">key</a>() and <a href="qlistviewitem.html#c9">paintCell</a>().
+<p>Reimplemented in <a href="qchecklistitem.html#b1">QCheckListItem</a>.
+<h3 class="fn">int <a name="b3"></a>QListViewItem::totalHeight () const</h3>
+<p>Returns the total height of this object, including any visible
+children.  This height is recomputed lazily and cached for as long
+as possible.
+<p>setOwnHeight() can be used to set the item's own height, <a href="qlistviewitem.html#c5">setOpen</a>()
+to show or hide its children, and <a href="qlistviewitem.html#b2">invalidateHeight</a>() to invalidate
+the cached height.
+<p>See also:  <a href="qlistviewitem.html#b1">height</a>().
+<h3 class="fn">int <a name="b4"></a>QListViewItem::width ( const <a href="qfontmetrics.html">QFontMetrics</a> &amp; fm, const <a href="qlistview.html">QListView</a> * lv, int c ) const <code>[virtual]</code></h3>
+<p>Returns the number of pixels of width required to draw column <em>c</em>
+of listview <em>lv,</em> using the metrics <em>fm</em> without cropping.
+The list view containing this item may use
+this information, depending on the <a href="qlistview.html#b2">QListView::WidthMode</a> settings
+for the column.
+<p>The default implementation returns the width of the bounding
+rectangle of the text of column <em>c.</em>
+<p>See also:  <a href="qlistviewitem.html#d8">listView</a>(), <a href="qlistviewitem.html#b5">widthChanged</a>(), <a href="qlistview.html#b2">QListView::setColumnWidthMode</a>() and <a href="qlistview.html#d5">QListView::itemMargin</a>().
+<h3 class="fn">void <a name="b5"></a>QListViewItem::widthChanged ( int c=-1 ) const</h3>
+<p>Call this function when the value of <a href="qlistviewitem.html#b4">width</a>() may have changed
+for column <em>c.</em>  Normally, you should call this if <a href="qlistviewitem.html#b8">text</a>(c) changes.
+Passing -1 for <em>c</em> indicates all columns may have changed.
+For efficiency, you should do this if more than one
+call to widthChanged() is required.
+<p>See also:  <a href="qlistviewitem.html#b4">width</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qlistview.h: 1998/10/14
+<li>qlistview.cpp: 1999/02/13
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

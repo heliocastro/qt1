@@ -1,0 +1,594 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qpainter.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qpainter.h</h1><br clear="all">
+This is the verbatim text of the qpainter.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qpainter.h,v 2.27.2.2 1998/08/21 19:13:23 hanord Exp $
+**
+** Definition of QPainter class
+**
+** Created : 940112
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QPAINTER_H
+#define QPAINTER_H
+
+
+#ifndef QT_H
+#include "qpaintdevice.h"
+#include "qcolor.h"
+#include "qfontmetrics.h"
+#include "qfontinfo.h"
+#include "qregion.h"
+#include "qpen.h"
+#include "qbrush.h"
+#include "qpointarray.h"
+#include "qwmatrix.h"
+#endif // QT_H
+
+
+enum BGMode                                     // background mode
+    { TransparentMode, OpaqueMode };
+
+enum PaintUnit                                  // paint unit
+    { PixelUnit, LoMetricUnit, HiMetricUnit, LoEnglishUnit, HiEnglishUnit,
+      TwipsUnit };
+
+
+#if defined(_WS_WIN_)
+struct QWinFont;
+#endif
+
+
+class Q_EXPORT QPainter                                 // painter class
+{
+public:
+    QPainter();
+    QPainter( const QPaintDevice * );
+    QPainter( const QPaintDevice *, const QWidget * );
+   ~QPainter();
+
+    bool        begin( const QPaintDevice * );
+    bool        begin( const QPaintDevice *, const QWidget * );
+    bool        end();
+    QPaintDevice *device() const;
+
+    static void redirect( QPaintDevice *pdev, QPaintDevice *replacement );
+
+    bool        isActive() const;
+
+    void        flush();
+    void        save();
+    void        restore();
+
+  // Drawing tools
+
+    QFontMetrics fontMetrics()  const;
+    QFontInfo    fontInfo()     const;
+
+    const QFont &amp;font()         const;
+    void        setFont( const QFont &amp; );
+    const QPen &amp;pen()           const;
+    void        setPen( const QPen &amp; );
+    void        setPen( PenStyle );
+    void        setPen( const QColor &amp; );
+    const QBrush &amp;brush()       const;
+    void        setBrush( const QBrush &amp; );
+    void        setBrush( BrushStyle );
+    void        setBrush( const QColor &amp; );
+
+  // Drawing attributes/modes
+
+    const QColor &amp;backgroundColor() const;
+    void        setBackgroundColor( const QColor &amp; );
+    BGMode      backgroundMode() const;
+    void        setBackgroundMode( BGMode );
+    RasterOp    rasterOp()      const;
+    void        setRasterOp( RasterOp );
+    const QPoint &amp;brushOrigin() const;
+    void        setBrushOrigin( int x, int y );
+    void        setBrushOrigin( const QPoint &amp; );
+
+  // Scaling and transformations
+
+//    PaintUnit unit()         const;           // get set painter unit
+//    void      setUnit( PaintUnit );           // NOT IMPLEMENTED!!!
+
+    void        setViewXForm( bool );           // set xform on/off
+    bool        hasViewXForm() const;
+    QRect       window()       const;           // get window
+    void        setWindow( const QRect &amp; );     // set window
+    void        setWindow( int x, int y, int w, int h );
+    QRect       viewport()   const;             // get viewport
+    void        setViewport( const QRect &amp; );   // set viewport
+    void        setViewport( int x, int y, int w, int h );
+
+    void        setWorldXForm( bool );          // set world xform on/off
+    bool        hasWorldXForm() const;
+    const QWMatrix &amp;worldMatrix() const;        // get/set world xform matrix
+    void        setWorldMatrix( const QWMatrix &amp;, bool combine=FALSE );
+
+    void        translate( float dx, float dy );
+    void        scale( float sx, float sy );
+    void        shear( float sh, float sv );
+    void        rotate( float a );
+    void        resetXForm();
+
+    QPoint      xForm( const QPoint &amp; ) const;  // map virtual -&gt; device
+    QRect       xForm( const QRect &amp; )  const;
+    QPointArray xForm( const QPointArray &amp; ) const;
+    QPointArray xForm( const QPointArray &amp;, int index, int npoints ) const;
+    QPoint      xFormDev( const QPoint &amp; ) const; // map device -&gt; virtual
+    QRect       xFormDev( const QRect &amp; )  const;
+    QPointArray xFormDev( const QPointArray &amp; ) const;
+    QPointArray xFormDev( const QPointArray &amp;, int index, int npoints ) const;
+
+  // Clipping
+
+    void        setClipping( bool );            // set clipping on/off
+    bool        hasClipping() const;
+    const QRegion &amp;clipRegion() const;
+    void        setClipRect( const QRect &amp; );   // set clip rectangle
+    void        setClipRect( int x, int y, int w, int h );
+    void        setClipRegion( const QRegion &amp;);// set clip region
+
+  // Graphics drawing functions
+
+    void        drawPoint( int x, int y );
+    void        drawPoint( const QPoint &amp; );
+    void        drawPoints( const QPointArray&amp; a,
+                            int index=0, int npoints=-1 );
+    void        moveTo( int x, int y );
+    void        moveTo( const QPoint &amp; );
+    void        lineTo( int x, int y );
+    void        lineTo( const QPoint &amp; );
+    void        drawLine( int x1, int y1, int x2, int y2 );
+    void        drawLine( const QPoint &amp;, const QPoint &amp; );
+    void        drawRect( int x, int y, int w, int h );
+    void        drawRect( const QRect &amp; );
+    void        drawWinFocusRect( int x, int y, int w, int h );
+    void        drawWinFocusRect( int x, int y, int w, int h,
+                                  const QColor &amp;bgColor );
+    void        drawWinFocusRect( const QRect &amp; );
+    void        drawWinFocusRect( const QRect &amp;,
+                                  const QColor &amp;bgColor );
+    void        drawRoundRect( int x, int y, int w, int h, int, int );
+    void        drawRoundRect( const QRect &amp;, int, int );
+    void        drawEllipse( int x, int y, int w, int h );
+    void        drawEllipse( const QRect &amp; );
+    void        drawArc( int x, int y, int w, int h, int a, int alen );
+    void        drawArc( const QRect &amp;, int a, int alen );
+    void        drawPie( int x, int y, int w, int h, int a, int alen );
+    void        drawPie( const QRect &amp;, int a, int alen );
+    void        drawChord( int x, int y, int w, int h, int a, int alen );
+    void        drawChord( const QRect &amp;, int a, int alen );
+    void        drawLineSegments( const QPointArray &amp;,
+                                  int index=0, int nlines=-1 );
+    void        drawPolyline( const QPointArray &amp;,
+                              int index=0, int npoints=-1 );
+    void        drawPolygon( const QPointArray &amp;, bool winding=FALSE,
+                             int index=0, int npoints=-1 );
+    void        drawQuadBezier( const QPointArray &amp;, int index=0 );
+    void        drawPixmap( int x, int y, const QPixmap &amp;,
+                            int sx=0, int sy=0, int sw=-1, int sh=-1 );
+    void        drawPixmap( const QPoint &amp;, const QPixmap &amp;,
+                            const QRect &amp;sr );
+    void        drawPixmap( const QPoint &amp;, const QPixmap &amp; );
+    void        drawImage( int x, int y, const QImage &amp;,
+                           int sx=0, int sy=0, int sw=-1, int sh=-1 );
+    void        drawImage( const QPoint &amp;, const QImage &amp;,
+                           const QRect &amp;sr );
+    void        drawImage( const QPoint &amp;, const QImage &amp; );
+    void        drawTiledPixmap( int x, int y, int w, int h, const QPixmap &amp;,
+                                 int sx=0, int sy=0 );
+    void        drawTiledPixmap( const QRect &amp;, const QPixmap &amp;,
+                                 const QPoint &amp; );
+    void        drawTiledPixmap( const QRect &amp;, const QPixmap &amp; );
+    void        drawPicture( const QPicture &amp; );
+
+    void        fillRect( int x, int y, int w, int h, const QBrush &amp; );
+    void        fillRect( const QRect &amp;, const QBrush &amp; );
+    void        eraseRect( int x, int y, int w, int h );
+    void        eraseRect( const QRect &amp; );
+
+  // Text drawing functions
+
+    void        drawText( int x, int y, const char *str, int len = -1 );
+    void        drawText( const QPoint &amp;, const char *str, int len = -1 );
+    void        drawText( int x, int y, int w, int h, int flags,
+                          const char *str, int len = -1, QRect *br=0,
+                          char **internal=0 );
+    void        drawText( const QRect &amp;, int flags,
+                          const char *str, int len = -1, QRect *br=0,
+                          char **internal=0 );
+
+  // Text drawing functions
+
+    QRect       boundingRect( int x, int y, int w, int h, int flags,
+                              const char *str, int len = -1, char **intern=0 );
+    QRect       boundingRect( const QRect &amp;, int flags,
+                              const char *str, int len = -1, char **intern=0 );
+
+    int         tabStops() const;
+    void        setTabStops( int );
+    int        *tabArray() const;
+    void        setTabArray( int * );
+
+    HANDLE      handle() const;
+
+    static void initialize();
+    static void cleanup();
+
+private:
+    void        init();
+    void        updateFont();
+    void        updatePen();
+    void        updateBrush();
+    void        updateXForm();
+    void        updateInvXForm();
+    void        map( int, int, int *rx, int *ry ) const;
+    void        map( int, int, int, int, int *, int *, int *, int * ) const;
+    void        mapInv( int, int, int *, int * ) const;
+    void        mapInv( int, int, int, int, int *, int *, int *, int * ) const;
+    void        drawPolyInternal( const QPointArray &amp;, bool close=TRUE );
+    void        drawWinFocusRect( int x, int y, int w, int h, bool xorPaint,
+                                  const QColor &amp;penColor );
+
+    enum { IsActive=0x01, ExtDev=0x02, IsStartingUp=0x04, NoCache=0x08,
+           VxF=0x10, WxF=0x20, ClipOn=0x40, SafePolygon=0x80, MonoDev=0x100,
+           DirtyFont=0x200, DirtyPen=0x400, DirtyBrush=0x800,
+           RGBColor=0x1000, FontMet=0x2000, FontInf=0x4000, CtorBegin=0x8000 };
+    ushort      flags;
+    bool        testf( ushort b ) const { return (flags&amp;b)!=0; }
+    void        setf( ushort b )        { flags |= b; }
+    void        setf( ushort b, bool v );
+    void        clearf( ushort b )      { flags &amp;= (ushort)(~b); }
+    void        fix_neg_rect( int *x, int *y, int *w, int *h );
+
+    QPaintDevice *pdev;
+    QColor      bg_col;
+    uchar       bg_mode;
+    uchar       rop;
+    uchar       pu;
+    QPoint      bro;
+    QFont       cfont;
+    QPen        cpen;
+    QBrush      cbrush;
+    QRegion     crgn;
+    int         tabstops;
+    int        *tabarray;
+    int         tabarraylen;
+    QCOORD      wx, wy, ww, wh;
+    QCOORD      vx, vy, vw, vh;
+    QWMatrix    wxmat;
+    int         wm11, wm12, wm21, wm22, wdx, wdy;
+    int         im11, im12, im21, im22, idx, idy;
+    int         txop;
+    bool        txinv;
+    void       *penRef;                         // pen cache ref
+    void       *brushRef;                       // brush cache ref
+    void       *ps_stack;
+    void        killPStack();
+
+protected:
+#if defined(_WS_WIN_)
+    HDC         hdc;                            // device context
+    HANDLE      hpen;                           // current pen
+    HANDLE      hbrush;                         // current brush
+    HANDLE      hbrushbm;                       // current brush bitmap
+    HANDLE      holdpal;
+    uint        pixmapBrush     : 1;
+    uint        nocolBrush      : 1;
+    QWinFont   *winFont;
+    void       *textMetric();
+    void        nativeXForm( bool );
+#elif defined(_WS_PM_)
+    HPS         hps;                            // presentation space
+    int         dh;                             // device height
+    long        lctrl;                          // outline/fill control
+    void        updateCtrl();                   // update lctrl
+#elif defined(_WS_X11_)
+    Display    *dpy;                            // current display
+    WId         hd;                             // handle to drawable
+    GC          gc;                             // graphics context (standard)
+    GC          gc_brush;                       // graphics contect for brush
+    QPoint      curPt;                          // current point
+#endif
+    friend class QFontMetrics;
+    friend class QFontInfo;
+    friend void qt_format_text( const QFontMetrics&amp; fm, int x, int y, int w, int h,
+                     int tf, const char *str, int len, QRect *brect,
+                     int tabstops, int* tabarray, int tabarraylen,
+                     char **internal, QPainter* painter );
+
+private:        // Disabled copy constructor and operator=
+#if defined(Q_DISABLE_COPY)
+    QPainter( const QPainter &amp; );
+    QPainter &amp;operator=( const QPainter &amp; );
+#endif
+};
+
+
+/*****************************************************************************
+  QPainter member functions
+ *****************************************************************************/
+
+inline QPaintDevice *QPainter::device() const
+{
+    return pdev;
+}
+
+inline bool QPainter::isActive() const
+{
+    return testf(IsActive);
+}
+
+inline QFontMetrics QPainter::fontMetrics() const
+{
+    return QFontMetrics(this);
+}
+
+inline QFontInfo QPainter::fontInfo() const
+{
+    return QFontInfo(this);
+}
+
+inline const QFont &amp;QPainter::font() const
+{
+    return cfont;
+}
+
+inline const QPen &amp;QPainter::pen() const
+{
+    return cpen;
+}
+
+inline const QBrush &amp;QPainter::brush() const
+{
+    return cbrush;
+}
+
+/*
+inline PaintUnit QPainter::unit() const
+{
+    return (PaintUnit)pu;
+}
+*/
+
+inline const QColor &amp;QPainter::backgroundColor() const
+{
+    return bg_col;
+}
+
+inline BGMode QPainter::backgroundMode() const
+{
+    return (BGMode)bg_mode;
+}
+
+inline RasterOp QPainter::rasterOp() const
+{
+    return (RasterOp)rop;
+}
+
+inline const QPoint &amp;QPainter::brushOrigin() const
+{
+    return bro;
+}
+
+inline bool QPainter::hasViewXForm() const
+{
+    return testf(VxF);
+}
+
+inline bool QPainter::hasWorldXForm() const
+{
+    return testf(WxF);
+}
+
+inline bool QPainter::hasClipping() const
+{
+    return testf(ClipOn);
+}
+
+inline const QRegion &amp;QPainter::clipRegion() const
+{
+    return crgn;
+}
+
+inline int QPainter::tabStops() const
+{
+    return tabstops;
+}
+
+inline int *QPainter::tabArray() const
+{
+    return tabarray;
+}
+
+inline HANDLE QPainter::handle() const
+{
+#if defined(_WS_WIN_)
+    return hdc;
+#elif defined(_WS_PM_)
+    return hps;
+#elif defined(_WS_X11_)
+    return hd;
+#endif
+}
+
+
+inline void QPainter::setBrushOrigin( const QPoint &amp;p )
+{
+    setBrushOrigin( p.x(), p.y() );
+}
+
+inline void QPainter::setWindow( const QRect &amp;r )
+{
+    setWindow( r.x(), r.y(), r.width(), r.height() );
+}
+
+inline void QPainter::setViewport( const QRect &amp;r )
+{
+    setViewport( r.x(), r.y(), r.width(), r.height() );
+}
+
+inline void QPainter::setClipRect( int x, int y, int w, int h )
+{
+    setClipRect( QRect(x,y,w,h) );
+}
+
+inline void QPainter::drawPoint( const QPoint &amp;p )
+{
+    drawPoint( p.x(), p.y() );
+}
+
+inline void QPainter::moveTo( const QPoint &amp;p )
+{
+    moveTo( p.x(), p.y() );
+}
+
+inline void QPainter::lineTo( const QPoint &amp;p )
+{
+    lineTo( p.x(), p.y() );
+}
+
+inline void QPainter::drawLine( const QPoint &amp;p1, const QPoint &amp;p2 )
+{
+    drawLine( p1.x(), p1.y(), p2.x(), p2.y() );
+}
+
+inline void QPainter::drawRect( const QRect &amp;r )
+{
+    drawRect( r.x(), r.y(), r.width(), r.height() );
+}
+
+inline void QPainter::drawWinFocusRect( const QRect &amp;r )
+{
+    drawWinFocusRect( r.x(), r.y(), r.width(), r.height() );
+}
+
+inline void QPainter::drawWinFocusRect( const QRect &amp;r,const QColor &amp;penColor )
+{
+    drawWinFocusRect( r.x(), r.y(), r.width(), r.height(), penColor );
+}
+
+inline void QPainter::drawRoundRect( const QRect &amp;r, int xRnd, int yRnd )
+{
+    drawRoundRect( r.x(), r.y(), r.width(), r.height(), xRnd, yRnd );
+}
+
+inline void QPainter::drawEllipse( const QRect &amp;r )
+{
+    drawEllipse( r.x(), r.y(), r.width(), r.height() );
+}
+
+inline void QPainter::drawArc( const QRect &amp;r, int a, int alen )
+{
+    drawArc( r.x(), r.y(), r.width(), r.height(), a, alen );
+}
+
+inline void QPainter::drawPie( const QRect &amp;r, int a, int alen )
+{
+    drawPie( r.x(), r.y(), r.width(), r.height(), a, alen );
+}
+
+inline void QPainter::drawChord( const QRect &amp;r, int a, int alen )
+{
+    drawChord( r.x(), r.y(), r.width(), r.height(), a, alen );
+}
+
+inline void QPainter::drawPixmap( const QPoint &amp;p, const QPixmap &amp;pm,
+                                  const QRect &amp;sr )
+{
+    drawPixmap( p.x(), p.y(), pm, sr.x(), sr.y(), sr.width(), sr.height() );
+}
+
+inline void QPainter::drawImage( const QPoint &amp;p, const QImage &amp;pm,
+                                 const QRect &amp;sr )
+{
+    drawImage( p.x(), p.y(), pm, sr.x(), sr.y(), sr.width(), sr.height() );
+}
+
+inline void QPainter::drawTiledPixmap( const QRect &amp;r, const QPixmap &amp;pm,
+                                       const QPoint &amp;sp )
+{
+    drawTiledPixmap( r.x(), r.y(), r.width(), r.height(), pm, sp.x(), sp.y() );
+}
+
+inline void QPainter::drawTiledPixmap( const QRect &amp;r, const QPixmap &amp;pm )
+{
+    drawTiledPixmap( r.x(), r.y(), r.width(), r.height(), pm, 0, 0 );
+}
+
+inline void QPainter::fillRect( const QRect &amp;r, const QBrush &amp;brush )
+{
+    fillRect( r.x(), r.y(), r.width(), r.height(), brush );
+}
+
+inline void QPainter::eraseRect( int x, int y, int w, int h )
+{
+    fillRect( x, y, w, h, backgroundColor() );
+}
+
+inline void QPainter::eraseRect( const QRect &amp;r )
+{
+    fillRect( r.x(), r.y(), r.width(), r.height(), backgroundColor() );
+}
+
+inline void QPainter::drawText( const QPoint &amp;p, const char *s, int len )
+{
+    drawText( p.x(), p.y(), s, len );
+}
+
+inline void QPainter::drawText( const QRect &amp;r, int tf,
+                                const char *str, int len, QRect *br, char **i )
+{
+    drawText( r.x(), r.y(), r.width(), r.height(), tf, str, len, br, i );
+}
+
+inline QRect QPainter::boundingRect( const QRect &amp;r, int tf,
+                                     const char *str, int len, char **i )
+{
+    return boundingRect( r.x(), r.y(), r.width(), r.height(), tf, str, len,
+                         i );
+}
+
+
+#endif // QPAINTER_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

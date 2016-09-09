@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - life/life.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Conway's Game of Life</h1><br clear="all">
+
+  We'll include just the main widget from Life; there are also a
+  rudimentary main() and a dialog which wraps this widget in a QSlider
+  to set the speed as well as Pause and Quit buttons.
+
+.  The class definition:
+
+  <pre>/****************************************************************************
+** &#36;Id&#58; life.h,v 2.2 1998/05/21 19:24:54 agulbra Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#ifndef LIFE_H
+#define LIFE_H
+
+#include &lt;<a href="qframe-h.html">qframe.h</a>&gt;
+
+class LifeWidget : public QFrame
+{
+    Q_OBJECT
+public:
+    LifeWidget( <a href="qwidget.html">QWidget</a> *parent = 0, const char *name = 0 );
+
+    void        setPoint( int i, int j );
+
+    int         maxCol() { return maxi; }
+    int         maxRow() { return maxj; }
+
+public slots:
+    void        nextGeneration();
+    void        clear();
+
+protected:
+    virtual void paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * );
+    virtual void mouseMoveEvent( <a href="qmouseevent.html">QMouseEvent</a> * );
+    virtual void mousePressEvent( <a href="qmouseevent.html">QMouseEvent</a> * );
+    virtual void resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * );
+    void         mouseHandle( const QPoint &amp;pos );
+
+private:
+    enum { SCALE = 10, MAXSIZE = 50, MINSIZE = 10, BORDER = 5 };
+
+    bool        cells[2][MAXSIZE + 2][MAXSIZE + 2];
+    int         current;
+    int         maxi, maxj;
+
+    static int pos2index( int x )
+    {
+        return ( x - BORDER ) / SCALE + 1;
+    }
+    static int index2pos( int i )
+    {
+        return  ( i - 1 ) * SCALE + BORDER;
+    }
+
+};
+
+#endif // LIFE_H
+</pre>
+
+
+  And the implementation of the member functions:
+<pre>/****************************************************************************
+** &#36;Id&#58; life.cpp,v 2.5 1998/06/16 11:39:33 warwick Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "life.h"
+
+#include &lt;<a name="qpainter.h"></a><a href="qpainter-h.html">qpainter.h</a>&gt;
+#include &lt;<a name="qdrawutil.h"></a><a href="qdrawutil-h.html">qdrawutil.h</a>&gt;
+#include &lt;<a name="qcheckbox.h"></a><a href="qcheckbox-h.html">qcheckbox.h</a>&gt;
+#include &lt;<a name="qevent.h"></a><a href="qevent-h.html">qevent.h</a>&gt;
+#include &lt;<a name="qapplication.h"></a><a href="qapplication-h.html">qapplication.h</a>&gt;
+
+// The main game of life widget
+
+LifeWidget::LifeWidget( <a name="QWidget"></a><a href="qwidget.html">QWidget</a> *parent, const char *name )
+    : <a name="QFrame"></a><a href="qframe.html">QFrame</a>( parent, name )
+{
+    maxi = maxj = 50;
+    <a name="setMinimumSize"></a><a href="qwidget.html#c6">setMinimumSize</a>( MINSIZE * SCALE + 2 * BORDER,
+                   MINSIZE * SCALE + 2 * BORDER );
+    <a name="setMaximumSize"></a><a href="qwidget.html#c8">setMaximumSize</a>( MAXSIZE * SCALE + 2 * BORDER,
+                   MAXSIZE * SCALE + 2 * BORDER );
+    <a name="setSizeIncrement"></a><a href="qwidget.html#d7">setSizeIncrement</a>( SCALE, SCALE);
+
+    <a name="clear"></a><a href="#28">clear</a>();
+    <a name="resize"></a><a href="qwidget.html#l4">resize</a>( maxi * SCALE + 2 * BORDER , maxj * SCALE + 2 * BORDER );
+
+}
+
+void <a name="28"></a>LifeWidget::clear()
+{
+    current = 0;
+    for ( int t = 0; t &lt; 2; t++ )
+        for ( int i = 0; i &lt; MAXSIZE + 2; i++ )
+            for ( int j = 0; j &lt; MAXSIZE + 2; j++ )
+                cells[t][i][j] = FALSE;
+
+    <a name="repaint"></a><a href="qwidget.html#k1">repaint</a>();
+}
+
+// We assume that the size will never be beyond the maximum size set
+// this is not in general true, but in practice it's good enough for
+// this program
+
+void <a name="29"></a>LifeWidget::resizeEvent( <a name="QResizeEvent"></a><a href="qresizeevent.html">QResizeEvent</a> * e )
+{
+    maxi = (e-&gt;size().width()  - 2 * BORDER) / SCALE;
+    maxj = (e-&gt;size().height() - 2 * BORDER) / SCALE;
+}
+
+void <a name="30"></a>LifeWidget::setPoint( int i, int j )
+{
+    if ( i &lt; 1 || i &gt; maxi || j &lt; 1 || j &gt; maxi )
+        return;
+    cells[current][i][j] = TRUE;
+    <a href="qwidget.html#k1">repaint</a>( index2pos(i), index2pos(j), SCALE, SCALE, FALSE );
+}
+
+void <a name="31"></a>LifeWidget::mouseHandle( const QPoint &amp;pos )
+{
+    int i = pos2index( pos.x() );
+    int j = pos2index( pos.y() );
+    <a name="setPoint"></a><a href="#30">setPoint</a>( i, j );
+}
+
+void <a name="32"></a>LifeWidget::mouseMoveEvent( <a name="QMouseEvent"></a><a href="qmouseevent.html">QMouseEvent</a> *e )
+{
+    <a name="mouseHandle"></a><a href="#31">mouseHandle</a>( e-&gt;pos() );
+}
+
+void <a name="33"></a>LifeWidget::mousePressEvent( <a href="qmouseevent.html">QMouseEvent</a> *e )
+{
+    if ( e-&gt;button() == LeftButton )
+        <a href=#31>mouseHandle</a>( e-&gt;pos() );
+}
+
+void <a name="34"></a>LifeWidget::nextGeneration()
+{
+    for ( int i = 1; i &lt;= MAXSIZE; i++ ) {
+        for ( int j = 1; j &lt;= MAXSIZE; j++ ) {
+            int t = cells[current][i - 1][j - 1]
+            + cells[current][i - 1][j]
+            + cells[current][i - 1][j + 1]
+            + cells[current][i][j - 1]
+            + cells[current][i][j + 1]
+            + cells[current][i + 1][j - 1]
+            + cells[current][i + 1][j]
+            + cells[current][i + 1][j + 1];
+
+            cells[!current][i][j] = ( t == 3 ||
+                                      t == 2 &amp;&amp; cells[current][i][j] );
+        }
+    }
+    current = !current;
+    <a href="qwidget.html#k1">repaint</a>( FALSE );           // repaint without erase
+}
+
+//
+// Normally you implement drawContents() instead since LifeWidget
+// inherits QFrame.
+//
+
+void <a name="35"></a>LifeWidget::paintEvent( <a name="QPaintEvent"></a><a href="qpaintevent.html">QPaintEvent</a> * e )
+{
+    int starti = pos2index( e-&gt;<a name="rect"></a><a href="qpaintevent.html#a1">rect</a>().left() );
+    int stopi  = pos2index( e-&gt;<a href="qpaintevent.html#a1">rect</a>().right() );
+    int startj = pos2index( e-&gt;<a href="qpaintevent.html#a1">rect</a>().top() );
+    int stopj  = pos2index( e-&gt;<a href="qpaintevent.html#a1">rect</a>().bottom() );
+
+    if (stopi &gt; maxi)
+        stopi = maxi;
+    if (stopj &gt; maxj)
+        stopj = maxj;
+
+    <a name="QPainter"></a><a href="qpainter.html">QPainter</a> paint( this );
+    for ( int i = starti; i &lt;= stopi; i++ ) {
+        for ( int j = startj; j &lt;= stopj; j++ ) {
+            if ( cells[current][i][j] )
+                // could avoid this if cells[!current][i][j] and this
+                // is a repaint(FALSE)... probably not worth it
+                <a name="qDrawShadePanel"></a><a href="qpainter.html#a2">qDrawShadePanel</a>( &amp;paint, index2pos( i ), index2pos( j ),
+                                 SCALE - 1, SCALE - 1, <a name="colorGroup"></a><a href="qwidget.html#f5">colorGroup</a>() );
+            else if ( cells[!current][i][j] )
+                paint.<a name="eraseRect"></a><a href="qpainter.html#l2">eraseRect</a>( index2pos( i ), index2pos( j ),
+                                 SCALE - 1, SCALE - 1);
+        }
+    }
+    <a name="drawFrame"></a><a href="qframe.html#b9">drawFrame</a>( &amp;paint );
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

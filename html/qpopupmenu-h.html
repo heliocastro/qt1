@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qpopupmenu.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qpopupmenu.h</h1><br clear="all">
+This is the verbatim text of the qpopupmenu.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qpopupmenu.h,v 2.15.2.3 1999/01/25 16:56:03 ettrich Exp $
+**
+** Definition of QPopupMenu class
+**
+** Created : 941128
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QPOPUPMENU_H
+#define QPOPUPMENU_H
+
+#ifndef QT_H
+#include "qtableview.h"
+#include "qmenudata.h"
+#endif // QT_H
+
+
+class Q_EXPORT QPopupMenu : public QTableView, public QMenuData
+{
+friend class QMenuData;
+friend class QMenuBar;
+    Q_OBJECT
+public:
+    QPopupMenu( QWidget *parent=0, const char *name=0 );
+   ~QPopupMenu();
+
+    void        popup( const QPoint &amp; pos, int indexAtPoint = 0 );// open popup
+    void        updateItem( int id );
+
+    void        setCheckable( bool );
+    bool        isCheckable() const;
+
+    void        setFont( const QFont &amp; );       // reimplemented set font
+    void        show();                         // reimplemented show
+    void        hide();                         // reimplemented hide
+
+    int         exec();
+    int         exec( const QPoint &amp; pos, int indexAtPoint = 0 );// modal popup
+
+    void        setActiveItem( int );
+
+    int idAt( int index ) const { return QMenuData::idAt( index ); }
+    int idAt( const QPoint&amp; pos ) const;
+
+signals:
+    void        activated( int itemId );
+    void        highlighted( int itemId );
+    void        activatedRedirect( int itemId );// to parent menu
+    void        highlightedRedirect( int itemId );
+    void        aboutToShow();
+
+protected:
+    int         cellHeight( int );
+    int         cellWidth( int );
+    void        paintCell( QPainter *, int, int );
+
+    void        paintEvent( QPaintEvent * );
+    void        mousePressEvent( QMouseEvent * );
+    void        mouseReleaseEvent( QMouseEvent * );
+    void        mouseMoveEvent( QMouseEvent * );
+    void        keyPressEvent( QKeyEvent * );
+    void        timerEvent( QTimerEvent * );
+
+private slots:
+    void        subActivated( int itemId );
+    void        subHighlighted( int itemId );
+    void        accelActivated( int itemId );
+    void        accelDestroyed();
+    void        modalActivation( int );
+
+    void        subMenuTimer();
+
+private:
+    void        menuContentsChanged();
+    void        menuStateChanged();
+    void        menuInsPopup( QPopupMenu * );
+    void        menuDelPopup( QPopupMenu * );
+    void        frameChanged();
+
+    void        paintAll();
+    void        actSig( int );
+    void        hilitSig( int );
+    void        setFirstItemActive();
+    void        hideAllPopups();
+    void        hidePopups();
+    bool        tryMenuBar( QMouseEvent * );
+    void        byeMenuBar();
+
+    int         itemAtPos( const QPoint &amp; );
+    int         itemPos( int index );
+    void        updateSize();
+    void        updateRow( int row );
+    void        updateAccel( QWidget * );
+    void        enableAccel( bool );
+
+    void        setTabMark( int );
+    int         tabMark();
+    void        setCheckableFlag( bool );
+
+    QMenuItem  *selfItem;
+    QAccel     *autoaccel;
+    bool        accelDisabled;
+    int         popupActive;
+    int         tabCheck;
+
+private:        // Disabled copy constructor and operator=
+#if defined(Q_DISABLE_COPY)
+    QPopupMenu( const QPopupMenu &amp; );
+    QPopupMenu &amp;operator=( const QPopupMenu &amp; );
+#endif
+};
+
+
+#endif // QPOPUPMENU_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

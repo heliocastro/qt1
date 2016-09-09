@@ -1,0 +1,408 @@
+.TH QFile 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QFile \- I/O device that operates on files
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qfile.h>\fR
+.PP
+Inherits QIODevice.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QFile ()"
+.br
+.ti -1c
+.BI "QFile ( const char * name )"
+.br
+.ti -1c
+.BI "\fB~QFile\fR ()"
+.br
+.ti -1c
+.BI "const char* name () const"
+.br
+.ti -1c
+.BI "void setName ( const char * name )"
+.br
+.ti -1c
+.BI "bool exists () const"
+.br
+.ti -1c
+.BI "bool remove ()"
+.br
+.ti -1c
+.BI "virtual bool open ( int )"
+.br
+.ti -1c
+.BI "bool open ( int, FILE * )"
+.br
+.ti -1c
+.BI "bool open ( int, int )"
+.br
+.ti -1c
+.BI "virtual void close ()"
+.br
+.ti -1c
+.BI "virtual void flush ()"
+.br
+.ti -1c
+.BI "virtual uint size () const"
+.br
+.ti -1c
+.BI "virtual int at () const"
+.br
+.ti -1c
+.BI "virtual bool at ( int )"
+.br
+.ti -1c
+.BI "virtual bool atEnd () const"
+.br
+.ti -1c
+.BI "virtual int readBlock ( char * " "data" ", uint len )"
+.br
+.ti -1c
+.BI "virtual int writeBlock ( const char * " "data" ", uint len )"
+.br
+.ti -1c
+.BI "virtual int readLine ( char * " "data" ", uint maxlen )"
+.br
+.ti -1c
+.BI "virtual int getch ()"
+.br
+.ti -1c
+.BI "virtual int putch ( int )"
+.br
+.ti -1c
+.BI "virtual int ungetch ( int )"
+.br
+.ti -1c
+.BI "int handle () const"
+.br
+.in -1c
+.SS "Static Public Members"
+.in +1c
+.ti -1c
+.BI "bool exists ( const char * fileName )"
+.br
+.ti -1c
+.BI "bool remove ( const char * fileName )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QFile class is an I/O device that operates on files.
+.PP
+QFile is an I/O device for reading and writing binary and text files. A QFile may be used by itself (readBlock and writeBlock) or by more conveniently using QDataStream or QTextStream.
+.PP
+Here is a code fragment that uses QTextStream to read a text file line by line. It prints each line with a line number.
+.PP
+.nf
+.br
+    QFile f("file.txt");
+.br
+    if ( f.open(IO_ReadOnly) ) {    // file opened successfully
+.br
+        QTextStream t( &f );        // use a text stream
+.br
+        QString s;
+.br
+        int n = 1;
+.br
+        while ( !t.eof() ) {        // until end of file...
+.br
+            s = t.readLine();       // line of text excluding '\\n'
+.br
+            printf( "%3d: %s\\n", n++, (const char *)s );
+.br
+        }
+.br
+        f.close();
+.br
+    }
+.fi
+.PP
+The QFileInfo class holds detailed information about a file, such as access permissions, file dates and file types.
+.PP
+The QDir class manages directories and lists of file names.
+.PP
+See also: QDataStream and QTextStream.
+.PP
+Examples:
+.(l
+application/application.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QFile::QFile ()"
+Constructs a QFile with no name.
+.SH "QFile::QFile ( const char * name )"
+Constructs a QFile with a file name \fIname.\fR
+.PP
+See also: setName().
+.SH "QFile::~QFile ()"
+Destroys a QFile. Calls close().
+.SH "bool QFile::at ( int pos ) \fC[virtual]\fR"
+Sets the file index to \fIpos.\fR Returns TRUE if successful, otherwise FALSE.
+.PP
+Example:
+.PP
+.nf
+.br
+    QFile f( "data.bin" );
+.br
+    f.open( IO_ReadOnly );                      // index set to 0
+.br
+    f.at( 100 );                                // set index to 100
+.br
+    f.at( f.at()+50 );                          // set index to 150
+.br
+    f.at( f.size()-80 );                        // set index to 80 before EOF
+.br
+    f.close();
+.fi
+.PP
+\fBWarning:\fR The result is undefined if the file was opened using the \fCIO_Append\fR specifier.
+.PP
+See also: size() and open().
+.PP
+Reimplemented from QIODevice.
+.SH "int QFile::at () const \fC[virtual]\fR"
+Returns the file index.
+.PP
+See also: size().
+.PP
+Reimplemented from QIODevice.
+.SH "bool QFile::atEnd () const \fC[virtual]\fR"
+Returns TRUE if the end of file has been reached, otherwise FALSE.
+.PP
+See also: size().
+.PP
+Reimplemented from QIODevice.
+.SH "void QFile::close () \fC[virtual]\fR"
+Closes an open file.
+.PP
+The file is closed even if it was opened with an existing file handle or a file descriptor, \fIexcept\fR that stdin, stdout and stderr are never closed.
+.PP
+See also: open() and flush().
+.PP
+Examples:
+.(l
+application/application.cpp
+.)l
+.PP
+Reimplemented from QIODevice.
+.SH "bool QFile::exists () const"
+Returns TRUE if the file exists, otherwise FALSE.
+.PP
+See also: name().
+.SH "bool QFile::exists ( const char * fileName ) \fC[static]\fR"
+Returns TRUE if the file given by \fIfileName\fR exists, otherwise FALSE.
+.SH "void QFile::flush () \fC[virtual]\fR"
+Flushes the file buffer to the disk.
+.PP
+close() also flushes the file buffer.
+.PP
+Reimplemented from QIODevice.
+.SH "int QFile::getch () \fC[virtual]\fR"
+Reads a single byte/character from the file.
+.PP
+Returns the byte/character read, or -1 if the end of the file has been reached.
+.PP
+See also: putch() and ungetch().
+.PP
+Reimplemented from QIODevice.
+.SH "int QFile::handle () const"
+Returns the file handle of the file.
+.PP
+This is a small positive integer, suitable for use with C library functions such as fdopen() and fcntl(), as well as with QSocketNotifier.
+.PP
+If the file is not open or there is an error, handle() returns -1.
+.PP
+See also: QSocketNotifier.
+.SH "const char * QFile::name () const"
+Returns the name set by setName().
+.PP
+See also: setName() and QFileInfo::fileName().
+.SH "bool QFile::open ( int m ) \fC[virtual]\fR"
+Opens the file specified by the file name currently set, using the mode \fIm.\fR Returns TRUE if successful, otherwise FALSE.
+.PP
+The mode parameter \fIm\fR must be a combination of the following flags:
+.TP
+\fCIO_Raw\fR specified raw (non-buffered) file access.
+.TP
+\fCIO_ReadOnly\fR opens the file in read-only mode.
+.TP
+\fCIO_WriteOnly\fR opens the file in write-only mode (and truncates).
+.TP
+\fCIO_ReadWrite\fR opens the file in read/write mode, equivalent to \fC(IO_ReadOnly|IO_WriteOnly).\fR
+.TP
+\fCIO_Append\fR opens the file in append mode. This mode is very useful when you want to write something to a log file. The file index is set to the end of the file. Note that the result is undefined if you position the file index manually using at() in append mode.
+.TP
+\fCIO_Truncate\fR truncates the file.
+.TP
+\fCIO_Translate\fR enables carriage returns and linefeed translation for text files under MS-DOS, Windows and OS/2.
+.PP
+The raw access mode is best when I/O is block-operated using 4kB block size or greater. Buffered access works better when reading small portions of data at a time.
+.PP
+\fBImportant:\fR When working with buffered files, data may not be written to the file at once. Call flush to make sure the data is really written.
+.PP
+\fBWarning:\fR We have experienced problems with some C libraries when a buffered file is opened for both reading and writing. If a read operation takes place immediately after a write operation, the read buffer contains garbage data. Worse, the same garbage is written to the file. Calling flush() before readBlock() solved this problem.
+.PP
+If the file does not exist and \fCIO_WriteOnly\fR or \fCIO_ReadWrite\fR is specified, it is created.
+.PP
+Example:
+.PP
+.nf
+.br
+    QFile f1( "/tmp/data.bin" );
+.br
+    QFile f2( "readme.txt" );
+.br
+    f1.open( IO_Raw | IO_ReadWrite | IO_Append );
+.br
+    f2.open( IO_ReadOnly | IO_Translate );
+.fi
+.PP
+See also: name(), close(), isOpen() and flush().
+.PP
+Examples:
+.(l
+application/application.cpp
+.)l
+.PP
+Reimplemented from QIODevice.
+.SH "bool QFile::open ( int m, FILE * f )"
+Opens a file in the mode \fIm\fR using an existing file handle \fIf.\fR Returns TRUE if successful, otherwise FALSE.
+.PP
+Example:
+.PP
+.nf
+.br
+    #include <stdio.h>
+.br
+.br
+    void printError( const char *msg )
+.br
+    {
+.br
+        QFile f;
+.br
+        f.open( IO_WriteOnly, stderr );
+.br
+        f.writeBlock( msg, strlen(msg) );       // write to stderr
+.br
+        f.close();
+.br
+    }
+.fi
+.PP
+When a QFile is opened using this function, close() does not actually close the file, only flushes it.
+.PP
+\fBWarning:\fR If \fIf\fR is \fCstdin, stdout, stderr,\fR you may not be able to seek. See QIODevice::isSequentialAccess() for more information.
+.PP
+See also: close().
+.SH "bool QFile::open ( int m, int f )"
+Opens a file in the mode \fIm\fR using an existing file descriptor \fIf.\fR Returns TRUE if successful, otherwise FALSE.
+.PP
+When a QFile is opened using this function, close() does not actually close the file.
+.PP
+\fBWarning:\fR If \fIf\fR is one of 0 (stdin), 1 (stdout) or 2 (stderr), you may not be able to seek. size() is set to \fCINT_MAX\fR (in limits.h).
+.PP
+See also: close().
+.SH "int QFile::putch ( int ch ) \fC[virtual]\fR"
+Writes the character \fIch\fR to the file.
+.PP
+Returns \fIch,\fR or -1 if some error occurred.
+.PP
+See also: getch() and ungetch().
+.PP
+Reimplemented from QIODevice.
+.SH "int QFile::readBlock ( char * p, uint len ) \fC[virtual]\fR"
+Reads at most \fIlen\fR bytes from the file into \fIp\fR and returns the number of bytes actually read.
+.PP
+Returns -1 if a serious error occurred.
+.PP
+\fBWarning:\fR We have experienced problems with some C libraries when a buffered file is opened for both reading and writing. If a read operation takes place immediately after a write operation, the read buffer contains garbage data. Worse, the same garbage is written to the file. Calling flush() before readBlock() solved this problem.
+.PP
+See also: writeBlock().
+.PP
+Reimplemented from QIODevice.
+.SH "int QFile::readLine ( char * p, uint maxlen ) \fC[virtual]\fR"
+Reads a line of text.
+.PP
+Reads bytes from the file until end-of-line is reached, or up to \fImaxlen\fR bytes, and returns the number of bytes read, or -1 in case of error. The terminating newline is not stripped.
+.PP
+This function is efficient only for buffered files. Avoid readLine() for files that have been opened with the \fCIO_Raw\fR flag.
+.PP
+See also: readBlock() and QTextStream::readLine().
+.PP
+Reimplemented from QIODevice.
+.SH "bool QFile::remove ()"
+Removes the file specified by the file name currently set. Returns TRUE if successful, otherwise FALSE.
+.PP
+The file is closed before it is removed.
+.SH "bool QFile::remove ( const char * fileName ) \fC[static]\fR"
+Removes the file \fIfileName.\fR Returns TRUE if successful, otherwise FALSE.
+.SH "void QFile::setName ( const char * name )"
+Sets the name of the file. The name can include an absolute directory path or it can be a name or a path relative to the current directory.
+.PP
+Do not call this function if the file has already been opened.
+.PP
+Note that if the name is relative QFile does not associate it with the current directory. If you change directory before calling open(), open uses the new current directory.
+.PP
+Example:
+.PP
+.nf
+.br
+     QFile f;
+.br
+     QDir::setCurrent( "/tmp" );
+.br
+     f.setName( "readme.txt" );
+.br
+     QDir::setCurrent( "/home" );
+.br
+     f.open( IO_ReadOnly );        // opens "/home/readme.txt" under UNIX
+.fi
+.PP
+Also note that the directory separator '/' works for all operating systems supported by Qt.
+.PP
+See also: name(), QFileInfo and QDir.
+.SH "uint QFile::size () const \fC[virtual]\fR"
+Returns the file size.
+.PP
+See also: at().
+.PP
+Reimplemented from QIODevice.
+.SH "int QFile::ungetch ( int ch ) \fC[virtual]\fR"
+Puts the character \fIch\fR back into the file and decrements the index if it is not zero.
+.PP
+This function is normally called to "undo" a getch() operation.
+.PP
+Returns \fIch,\fR or -1 if some error occurred.
+.PP
+See also: getch() and putch().
+.PP
+Reimplemented from QIODevice.
+.SH "int QFile::writeBlock ( const char * p, uint len ) \fC[virtual]\fR"
+Writes \fIlen\fR bytes from \fIp\fR to the file and returns the number of bytes actually written.
+.PP
+Returns -1 if a serious error occurred.
+.PP
+\fBImportant:\fR When working with buffered files, data may not be written to the file at once. Call flush to make sure the data is really written.
+.PP
+See also: readBlock().
+.PP
+Reimplemented from QIODevice.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qfile.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

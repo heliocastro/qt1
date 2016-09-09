@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>Qt tutorial - t8/cannon.cpp</title>
+</head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Source code for <a href="t8.html">tutorial 8</a>: cannon.cpp</h1><br clear="all">
+<hr>
+<pre>/****************************************************************
+**
+** Implementation CannonField class, Qt tutorial 8
+**
+****************************************************************/
+
+#include "cannon.h"
+
+CannonField::CannonField( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    ang = 45;
+}
+
+void <a name="390"></a>CannonField::setAngle( int degrees )
+{
+    if ( degrees &lt; 5 )
+        degrees = 5;
+    if ( degrees &gt; 70 )
+        degrees = 70;
+    if ( ang == degrees )
+        return;
+    ang = degrees;
+    <a href="qwidget.html#k0">repaint</a>();
+    emit angleChanged( ang );
+}
+
+void <a name="391"></a>CannonField::paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * )
+{
+    <a href="qstring.html">QString</a> s;
+    s.<a href="qstring.html#c7">sprintf</a>( "Angle = %i", ang );
+    <a href="qwidget.html#m4">drawText</a>( 200, 100, s );
+}
+</pre>
+<p>
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

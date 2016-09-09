@@ -1,0 +1,540 @@
+.TH QComboBox 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QComboBox \- Combined button and popup list
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qcombobox.h>\fR
+.PP
+Inherits QWidget.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QComboBox ( QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "QComboBox ( bool " "rw" ", QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QComboBox\fR ()"
+.br
+.ti -1c
+.BI "int count () const"
+.br
+.ti -1c
+.BI "void insertStrList ( const QStrList *, int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "void insertStrList ( const char **, int " "numStrings" "=-1, int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "void insertItem ( const char * " "text" ", int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "void insertItem ( const QPixmap & " "pixmap" ", int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "void removeItem ( int index )"
+.br
+.ti -1c
+.BI "void clear ()"
+.br
+.ti -1c
+.BI "const char* currentText () const"
+.br
+.ti -1c
+.BI "const char* text ( int index ) const"
+.br
+.ti -1c
+.BI "const QPixmap* pixmap ( int index ) const"
+.br
+.ti -1c
+.BI "void changeItem ( const char * " "text" ", int index )"
+.br
+.ti -1c
+.BI "void changeItem ( const QPixmap & " "pixmap" ", int index )"
+.br
+.ti -1c
+.BI "int currentItem () const"
+.br
+.ti -1c
+.BI "void setCurrentItem ( int index )"
+.br
+.ti -1c
+.BI "bool autoResize () const"
+.br
+.ti -1c
+.BI "void setAutoResize ( bool )"
+.br
+.ti -1c
+.BI "virtual QSize sizeHint () const"
+.br
+.ti -1c
+.BI "virtual void setBackgroundColor ( const QColor & )"
+.br
+.ti -1c
+.BI "virtual void setPalette ( const QPalette & )"
+.br
+.ti -1c
+.BI "virtual void setFont ( const QFont & )"
+.br
+.ti -1c
+.BI "virtual void setEnabled ( bool )"
+.br
+.ti -1c
+.BI "void setSizeLimit ( int )"
+.br
+.ti -1c
+.BI "int sizeLimit () const"
+.br
+.ti -1c
+.BI "void setMaxCount ( int )"
+.br
+.ti -1c
+.BI "int maxCount () const"
+.br
+.ti -1c
+.BI "enum Policy { NoInsertion, AtTop, AtCurrent, AtBottom, AfterCurrent, BeforeCurrent }"
+.br
+.ti -1c
+.BI "void setInsertionPolicy ( Policy policy )"
+.br
+.ti -1c
+.BI "Policy insertionPolicy () const"
+.br
+.ti -1c
+.BI "virtual void setStyle ( GUIStyle )"
+.br
+.ti -1c
+.BI "void setValidator ( QValidator * )"
+.br
+.ti -1c
+.BI "QValidator* validator () const"
+.br
+.ti -1c
+.BI "void setListBox ( QListBox * )"
+.br
+.ti -1c
+.BI "QListBox* listBox () const"
+.br
+.ti -1c
+.BI "void setAutoCompletion ( bool )"
+.br
+.ti -1c
+.BI "bool autoCompletion () const"
+.br
+.ti -1c
+.BI "virtual bool eventFilter ( QObject * " "object" ", QEvent * event )"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "void clearValidator ()"
+.br
+.ti -1c
+.BI "void clearEdit ()"
+.br
+.ti -1c
+.BI "void setEditText ( const char * )"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void activated ( int index )"
+.br
+.ti -1c
+.BI "void highlighted ( int index )"
+.br
+.ti -1c
+.BI "void activated ( const char * )"
+.br
+.ti -1c
+.BI "void highlighted ( const char * )"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void paintEvent ( QPaintEvent * )"
+.br
+.ti -1c
+.BI "virtual void resizeEvent ( QResizeEvent * )"
+.br
+.ti -1c
+.BI "virtual void mousePressEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseMoveEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseReleaseEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseDoubleClickEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void keyPressEvent ( QKeyEvent * e )"
+.br
+.ti -1c
+.BI "virtual void focusInEvent ( QFocusEvent * e )"
+.br
+.ti -1c
+.BI "void popup ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QComboBox widget is a combined button and popup list.
+.PP
+A combo box may be defined as a selection widget which displays the current selection, and which can pop up a list of possible selections. Some combo boxes also allow the user to select arbitrary strings, using a line editor.
+.PP
+Since combo boxes occupy little screen space and always display the current selection, they are very well suited to displaying and selecting modes (such as font family and size): The user can always see what mode he/she is in, and the majority of the screen space is available for real work.
+.PP
+QComboBox supports three different appearances: Motif 1.x, Motif 2.0 and Windows 95. In Motif 1.x, a combo box was called XmOptionMenu. In Motif 2.0, OSF introduced an improved combo box and named that XmComboBox. QComboBox provides both.
+.PP
+QComboBox provides two different constructors. The simplest one creates an old-style combo box in Motif style:
+.PP
+.nf
+.br
+      QComboBox * c = new QCombBox( this, "read-only combo" );
+.fi
+.PP
+The other one creates a new-style combo box in Motif style, and can create both read-only and read-write combo boxes:
+.PP
+.nf
+.br
+      QComboBox * c1 = new QCombBox( FALSE, this, "read-only combo" );
+.br
+      QComboBox * c2 = new QCombBox( TRUE, this, "read-write combo" );
+.fi
+.PP
+New-style combo boxes use a list box in both Motif and Windows styles, and both the content size and the on-screen size of the list box can be limited. Old-style combo boxes use a popup in Motif style, and that popup will happily grow larger than the desktop if you put enough data in it.
+.PP
+The two constructors create identical-looking combos in Windows style.
+.PP
+Read-only combo boxes can contain pixmaps as well as texts; the insert() and changeItem() functions are suitably overloaded. If you try to insert a pixmap in a read-write combo box, QComboBox simply ignores you. For read-write combo boxes, the function clearEdit() is provided, to clear the displayed string without changing the combo box' contents.
+.PP
+A combo box emits two signals, activated() and highlighted(), when a new item has been activated (selected) or highlighted (set to current). Both signals exist in two versions, one with a \fCchar*\fR argument and one with an \fCint\fR argument. If the user highlights or activates a pixmap, only the \fCint\fR signals are emitted.
+.PP
+Read-write combo boxes offer four policies for dealing with typed input: 
+.TP
+\fCNoInsertion\fR means to simply emit the activated() signal, 
+.TP
+\fCAtBottom\fR means to insert the string at the bottom of the combo box and emit activated(), 
+.TP
+\fCAtTop\fR means to insert the string at the top of the combo box and emit activated(), and finally 
+.TP
+\fCAtCurrent\fR means to replace the previously selected item with the typed string, and emit activated(). If inserting the typed string would cause the combo box to breach its content size limit, the item at the other end of the list is deleted. The default insertion policy is \fCAtBottom,\fR you can change it using setInsertionPolicy().
+.PP
+It is possible to constrain the input to an editable combo box using QValidator; see setValidator(). By default, all input is accepted.
+.PP
+A combo box has a default focusPolicy() of \fCTabFocus,\fR i.e. it will not grab focus if clicked. This differs from both Windows and Motif.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+(Motif 1, read-only)
+.br
+.ce 1
+.B "[Image Omitted]"
+.PP
+(Motif 2, read-write)
+.br
+.ce 1
+.B "[Image Omitted]"
+.PP
+(Motif 2, read-only)
+.br
+.ce 1
+.B "[Image Omitted]"
+.PP
+(Windows style)
+.PP
+See also: QLineEdit, QListBox, QSpinBox, QRadioButton, QButtonGroup, GUI Design Handbook: Combo Box, and GUI Design Handbook: Drop-Down List Box.
+.PP
+Examples:
+.(l
+tictac/tictac.cpp qmag/qmag.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QComboBox::QComboBox ( QWidget * parent=0, const char * name=0 )"
+Constructs a combo box widget with a parent and a name.
+.PP
+This constructor creates a popup menu if the program uses Motif look and feel; this is compatible with Motif 1.x.
+.SH "QComboBox::QComboBox ( bool rw, QWidget * parent=0, const char * name=0 )"
+Constructs a combo box with a maximum size and either Motif 2.0 or Windows look and feel.
+.PP
+The input field can be edited if \fIrw\fR is TRUE, otherwise the user may only choose one of the items in the combo box.
+.SH "QComboBox::~QComboBox ()"
+Destroys the combo box.
+.SH "void QComboBox::activated ( const char * string ) \fC[signal]\fR"
+This signal is emitted when a new item has been activated (selected). \fIstring\fR is the activated string.
+.PP
+You can also use activated(int) signal, but be aware that its argument meaningful only for selected strings, not for typed strings.
+.SH "void QComboBox::activated ( int index ) \fC[signal]\fR"
+This signal is emitted when a new item has been activated (selected). The \fIindex\fR is the position of the item in the popup list.
+.SH "bool QComboBox::autoCompletion () const"
+Returns TRUE if this combo box is in auto-completion mode.
+.PP
+See also: setAutoCompletion().
+.SH "bool QComboBox::autoResize () const"
+Returns TRUE if auto-resizing is enabled, or FALSE if auto-resizing is disabled.
+.PP
+Auto-resizing is disabled by default.
+.PP
+See also: setAutoResize().
+.SH "void QComboBox::changeItem ( const QPixmap & im, int index )"
+Replaces the item at position \fIindex\fR with a pixmap, unless the combo box is writable.
+.PP
+See also: insertItem().
+.SH "void QComboBox::changeItem ( const char * t, int index )"
+Replaces the item at position \fIindex\fR with a text.
+.SH "void QComboBox::clear ()"
+Removes all combo box items.
+.SH "void QComboBox::clearEdit () \fC[slot]\fR"
+Clears the line edit without changing the combo's contents. Does nothing if the combo isn't editable.
+.PP
+This is particularly handy when using a combo box as a line edit with history. For example you can connect the combo's activated() signal to clearEdit() in order to present the user with a new, empty line as soon as return is pressed.
+.PP
+See also: setEditText().
+.SH "void QComboBox::clearValidator () \fC[slot]\fR"
+This slot is equivalent to setValidator( 0 ).
+.SH "int QComboBox::count () const"
+Returns the number of items in the combo box.
+.SH "int QComboBox::currentItem () const"
+Returns the index of the current combo box item.
+.PP
+See also: setCurrentItem().
+.SH "const char * QComboBox::currentText () const"
+Returns the text item being edited, or the current text item if the combo box is not editable.
+.PP
+See also: text().
+.SH "bool QComboBox::eventFilter ( QObject * object, QEvent * event ) \fC[virtual]\fR"
+This event filter is used to manipulate the line editor in magic ways. In Qt 2.0 it will all change, until then binary compatibility lays down the law.
+.PP
+The event filter steals events from the popup or listbox when they are popped up. It makes the popup stay up after a short click in motif style. In windows style it toggles the arrow button of the combo box field, and activates an item and takes down the listbox when the mouse button is released.
+.PP
+Reimplemented from QObject.
+.SH "void QComboBox::focusInEvent ( QFocusEvent * ) \fC[virtual protected]\fR"
+Handles focus in events.
+.PP
+Reimplemented from QWidget.
+.SH "void QComboBox::highlighted ( const char * string ) \fC[signal]\fR"
+This signal is emitted when a new item has been highlighted. \fIstring\fR is the highlighted string.
+.PP
+You can also use highlighted(int) signal.
+.SH "void QComboBox::highlighted ( int index ) \fC[signal]\fR"
+This signal is emitted when a new item has been set to current. The \fIindex\fR is the position of the item in the popup list.
+.SH "void QComboBox::insertItem ( const QPixmap & pixmap, int index=-1 )"
+Inserts a pixmap item at position \fIindex.\fR The item will be appended if \fIindex\fR is negative.
+.PP
+If the combo box is writable, the pixmap is not inserted.
+.SH "void QComboBox::insertItem ( const char * t, int index=-1 )"
+Inserts a text item at position \fIindex.\fR The item will be appended if \fIindex\fR is negative.
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH "void QComboBox::insertStrList ( const QStrList * list, int index=-1 )"
+Inserts the list of strings at the index \fIindex\fR in the combo box.
+.PP
+Examples:
+.(l
+qmag/qmag.cpp
+.)l
+.SH "void QComboBox::insertStrList ( const char ** strings, int numStrings=-1, int index=-1 )"
+Inserts the array of strings at the index \fIindex\fR in the combo box.
+.PP
+The \fInumStrings\fR argument is the number of strings. If \fInumStrings\fR is -1 (default), the \fIstrs\fR array must be terminated with 0.
+.PP
+Example:
+.PP
+.nf
+.br
+    static const char *items[] = { "red", "green", "blue", 0 };
+.br
+    combo->insertStrList( items );
+.fi
+.SH "QComboBox::Policy QComboBox::insertionPolicy() const"
+Returns the current insertion policy of the combo box.
+.PP
+See also: setPolicy().
+.SH "void QComboBox::keyPressEvent ( QKeyEvent * e ) \fC[virtual protected]\fR"
+Handles key press events for the combo box.
+.PP
+In Motif style, up and down change the selected item and both enter and return pops up the list. In Windows style, all four arrow keys change the selected item, and Space pops up the list.
+.PP
+Reimplemented from QWidget.
+.SH "QListBox * QComboBox::listBox () const"
+Returns the current list box, or 0 if there is no list box currently. (QComboBox can use QPopupMenu instead of QListBox.) Provided to match setListBox().
+.PP
+See also: setListBox().
+.SH "int QComboBox::maxCount () const"
+Returns the current maximum size of the combo box. By default, there is no limit, so this function returns INT_MAX.
+.PP
+See also: setMaxCount() and count().
+.SH "void QComboBox::mouseDoubleClickEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse double click events for the combo box.
+.PP
+Reimplemented from QWidget.
+.SH "void QComboBox::mouseMoveEvent ( QMouseEvent * ) \fC[virtual protected]\fR"
+Handles mouse move events for the combo box.
+.PP
+Reimplemented from QWidget.
+.SH "void QComboBox::mousePressEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse press events for the combo box.
+.PP
+Reimplemented from QWidget.
+.SH "void QComboBox::mouseReleaseEvent ( QMouseEvent * ) \fC[virtual protected]\fR"
+Handles mouse release events for the combo box.
+.PP
+Reimplemented from QWidget.
+.SH "void QComboBox::paintEvent ( QPaintEvent * event ) \fC[virtual protected]\fR"
+Handles paint events for the combo box.
+.PP
+Reimplemented from QWidget.
+.SH "const QPixmap * QComboBox::pixmap ( int index ) const"
+Returns the pixmap item at a given index, or 0 if the item is not a pixmap.
+.SH "void QComboBox::popup () \fC[protected]\fR"
+Popups the combo box popup list. If the list is empty, inserts a single, empty, string.
+.SH "void QComboBox::removeItem ( int index )"
+Removes the item at position \fIindex.\fR
+.SH "void QComboBox::resizeEvent ( QResizeEvent * ) \fC[virtual protected]\fR"
+Handles resize events for the combo box.
+.PP
+Reimplemented from QWidget.
+.SH "void QComboBox::setAutoCompletion ( bool enable )"
+Sets this combo box to offer auto-completion while the user is editing if \fIenable\fR is TRUE, or not to offer auto-completion of \fIenable\fR is FALSE (the default).
+.PP
+The combo box uses the list of items as candidates for completion.
+.PP
+See also: autoCompletion() and setEditText().
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH "void QComboBox::setAutoResize ( bool enable )"
+Enables auto-resizing if \fIenable\fR is TRUE, or disables it if \fIenable\fR is FALSE.
+.PP
+When auto-resizing is enabled, the combo box button will resize itself whenever the current combo box item change.
+.PP
+See also: autoResize() and adjustSize().
+.SH "void QComboBox::setBackgroundColor ( const QColor & color ) \fC[virtual]\fR"
+Reimplements QWidget::setBackgroundColor().
+.PP
+Sets the background color for both the combo box button and the combo box popup list.
+.PP
+Reimplemented from QWidget.
+.SH "void QComboBox::setCurrentItem ( int index )"
+Sets the current combo box item. This is the item to be displayed on the combo box button.
+.PP
+See also: currentItem().
+.PP
+Examples:
+.(l
+qmag/qmag.cpp
+.)l
+.SH "void QComboBox::setEditText ( const char * newText ) \fC[slot]\fR"
+Sets the text in the embedded line edit to \fInewText\fR without changing the combo's contents. Does nothing if the combo isn't editable.
+.PP
+This is useful e.g. for providing a good starting point for the user's editing and entering the change in the combo only when the user presses enter.
+.PP
+See also: clearEditText() and insertItem().
+.SH "void QComboBox::setEnabled ( bool enable ) \fC[virtual]\fR"
+Reimplemented for internal purposes.
+.PP
+Reimplemented from QWidget.
+.SH "void QComboBox::setFont ( const QFont & font ) \fC[virtual]\fR"
+Reimplements QWidget::setFont().
+.PP
+Sets the font for both the combo box button and the combo box popup list.
+.PP
+Reimplemented from QWidget.
+.SH "void QComboBox::setInsertionPolicy ( Policy policy )"
+Sets the insertion policy of the combo box to \fIpolicy.\fR
+.PP
+The insertion policy governs where items typed in by the user are inserted in the list. The possible values are 
+.TP
+\fCNoInsertion:\fR Strings typed by the user aren't inserted anywhere 
+.TP
+\fCAtTop:\fR Strings typed by the user are inserted above the top item in the list 
+.TP
+AtCurrent: Strings typed by the user replace the last selected item 
+.TP
+AtBottom: Strings typed by the user are inserted at the bottom of the list. 
+.PP
+The default insertion policy is \fCAtBottom.\fR
+.PP
+See also: policy().
+.SH "void QComboBox::setListBox ( QListBox * newListBox )"
+Sets the combo box to use \fInewListBox\fR instead of the current list box or popup. As a site effect, clears the combo box of its current contents.
+.PP
+\fBWarning:\fR QComboBox assumes that newListBox->text(n) returns non-null for 0 <= n < newListbox->count(). This assumption is necessary becuase of the line edit in QComboBox.
+.SH "void QComboBox::setMaxCount ( int count )"
+Sets the maximum number of items the combo box can hold to \fIcount.\fR
+.PP
+If \fIcount\fR is smaller than the current number of items, the list is truncated at the end. There is no limit by default.
+.PP
+See also: maxCount() and count().
+.SH "void QComboBox::setPalette ( const QPalette & palette ) \fC[virtual]\fR"
+Reimplements QWidget::setPalette().
+.PP
+Sets the palette for both the combo box button and the combo box popup list.
+.PP
+Reimplemented from QWidget.
+.SH "void QComboBox::setSizeLimit ( int lines )"
+Sets the maximum on-screen size of the combo box to \fIlines.\fR This is disregarded in Motif 1.x style. The default limit is ten lines.
+.PP
+If the number of items in the combo box is/grows larger than \fClines,\fR a list box is added.
+.PP
+See also: sizeLimit(), count() and setMaxCount().
+.SH "void QComboBox::setStyle ( GUIStyle s ) \fC[virtual]\fR"
+Reimplemented for implementational reasons.
+.PP
+Note that QComboBox always turns into a new-style Motif combo box when it is changed from Windows to Motif style (even if it was an old-style combo box before).
+.PP
+Reimplemented from QWidget.
+.SH "void QComboBox::setValidator ( QValidator * v )"
+Sets this combo box to be editable only as allowed by \fIv.\fR
+.PP
+This function does nothing if the combo is not editable.
+.PP
+See also: validator(), clearValidator() and QValidator.
+.SH "QSize QComboBox::sizeHint () const \fC[virtual]\fR"
+Returns a size which fits the contents of the combo box button.
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.PP
+Reimplemented from QWidget.
+.SH "int QComboBox::sizeLimit () const"
+Returns the current maximum on-screen size of the combo box. The default is ten lines.
+.PP
+See also: setSizeLimit(), count() and maxCount().
+.SH "const char * QComboBox::text ( int index ) const"
+Returns the text item at a given index, or 0 if the item is not a string.
+.PP
+See also: currentText().
+.SH "QValidator * QComboBox::validator () const"
+Returns the validator which constrains editing for this combo box if there is any, or else 0.
+.PP
+See also:  setValidator(), clearValidator() and QValidator.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qcombobox.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

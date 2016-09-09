@@ -1,0 +1,85 @@
+.TH QToolTipGroup 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QToolTipGroup \- Collects tool tips into natural groups
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qtooltip.h>\fR
+.PP
+Inherits QObject.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QToolTipGroup ( QObject * " "parent" ", const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "\fB~QToolTipGroup\fR ()"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void showTip ( const char * )"
+.br
+.ti -1c
+.BI "void removeTip ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QToolTipGroup class collects tool tips into natural groups.
+.PP
+Tool tips can display \fItwo\fR texts, the one in the tip and optionally another one, typically in a status bar. QToolTipGroup provides a way to link tool tips to this status bar.
+.PP
+QToolTipGroup has practically no API, it is only used as an argument to QToolTip's member functions, for example like this:
+.PP
+.nf
+.br
+    QToolTipGroup * g = new QToolTipGroup( this, "tool tip relay" );
+.br
+    connect( g, SIGNAL(showTip(const char *)),
+.br
+             myLabel, SLOT(setText(const char *)) );
+.br
+    connect( g, SIGNAL(removeTip()),
+.br
+             myLabel, SLOT(clear()) );
+.br
+    QToolTip::add( giraffeButton, "feed giraffe",
+.br
+                   g, "Give the giraffe a meal" );
+.br
+    QToolTip::add( gorillaButton, "feed gorilla",
+.br
+                   g, "Give the gorilla a meal" );
+.fi
+.PP
+This example makes the object myLabel (which you have to supply) display (one assumes, though you can make myLabel do anything, of course) the strings "Give the giraffe a meal" and "Give the gorilla a meal" while the relevant tool tips are being displayed.
+.PP
+Deleting a tool tip group removes the tool tips in it.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QToolTipGroup::QToolTipGroup ( QObject * parent, const char * name = 0 )"
+Constructs a tool tip group.
+.SH "QToolTipGroup::~QToolTipGroup ()"
+Destroy this tool tip groups and all tool tips in it.
+.SH "void QToolTipGroup::removeTip () \fC[signal]\fR"
+This signal is emitted when a tool tip in this group is hidden. See the QToolTipGroup documentation for an example of use.
+.PP
+See also: showTip().
+.SH "void QToolTipGroup::showTip ( const char * longText ) \fC[signal]\fR"
+This signal is emitted when one of the tool tips in the group is displayed. \fIlongText\fR is the supplementary text for the displayed tool tip.
+.PP
+See also:  removeTip().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qtooltipgroup.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

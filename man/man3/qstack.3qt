@@ -1,0 +1,101 @@
+.TH QStack 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QStack \- Template class that provides a stack
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qstack.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QStack ()"
+.br
+.ti -1c
+.BI "QStack ( const QStack<type> & s )"
+.br
+.ti -1c
+.BI "\fB~QStack\fR ()"
+.br
+.ti -1c
+.BI "QStack<type>& operator= ( const QStack<type> & s )"
+.br
+.ti -1c
+.BI "bool autoDelete () const"
+.br
+.ti -1c
+.BI "void setAutoDelete ( bool enable )"
+.br
+.ti -1c
+.BI "virtual uint count () const"
+.br
+.ti -1c
+.BI "bool isEmpty () const"
+.br
+.ti -1c
+.BI "void push ( const type * d )"
+.br
+.ti -1c
+.BI "type* pop ()"
+.br
+.ti -1c
+.BI "bool remove ()"
+.br
+.ti -1c
+.BI "virtual void clear ()"
+.br
+.ti -1c
+.BI "type* top () const"
+.br
+.ti -1c
+.BI "operator \fBtype*\fR ()const"
+.br
+.ti -1c
+.BI "type* current () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QStack class is a template class that provides a stack.
+.PP
+QStack is implemented as both a template and a macro class. Define a template instance QStack<X> to create a stack that operates on pointers to X, or X*.
+.PP
+A stack is a collection that can be used to push and pop items.
+.PP
+See also: Collection Classes
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QStack::QStack ()"
+Creates and empty stack.
+.SH "QStack::QStack ( const QStack<type> & s )"
+Creates a stack by making a shallow copy of another stack.
+.SH "QStack::~QStack ()"
+Destroys the stack. All items will be deleted if autoDelete() is TRUE.
+.SH "QStack::operator type* () const"
+Returns a reference to the top item on the stack (most recently pushed). The stack is not changed.
+.SH "type* QStack::current () const"
+Returns a reference to the top item on the stack (most recently pushed). The stack is not changed.
+.SH "bool QStack::isEmpty () const"
+Returns TRUE is the stack contains no elements to be popped
+.SH "QStack<type>& QStack::operator= ( const QStack<type> & s )"
+Sets the contents of this stack by making a shallow copy of another stack. Elements currently in this stack will be deleted if autoDelete() is TRUE.
+.SH "type* QStack::pop ()"
+Removes the top item from the stack and returns it.
+.SH "void QStack::push ( const type * d )"
+Adds an element to the top of the stack. Last in, first out.
+.SH "bool QStack::remove ()"
+Removes the top item from the stack and deletes it if if autoDelete() is TRUE. Returns TRUE if there was an item to pop.
+.SH "type* QStack::top () const"
+Returns a reference to the top item on the stack (most recently pushed).
+The stack is not changed.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qstack.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

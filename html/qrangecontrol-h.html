@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qrangecontrol.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qrangecontrol.h</h1><br clear="all">
+This is the verbatim text of the qrangecontrol.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qrangecontrol.h,v 2.4.2.3 1998/08/21 19:13:26 hanord Exp $
+**
+** Definition of QRangeControl class
+**
+** Created : 940427
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QRANGECONTROL_H
+#define QRANGECONTROL_H
+
+#include "qglobal.h"
+
+class Q_EXPORT QRangeControl
+{
+public:
+    QRangeControl();
+    QRangeControl( int minValue, int maxValue,
+                   int lineStep, int pageStep, int value );
+
+    int         value()         const;
+    void        setValue( int );
+    void        addPage();
+    void        subtractPage();
+    void        addLine();
+    void        subtractLine();
+
+    int         minValue()      const;
+    int         maxValue()      const;
+    void        setRange( int minValue, int maxValue );
+
+    int         lineStep()      const;
+    int         pageStep()      const;
+    void        setSteps( int line, int page );
+
+protected:
+    void        directSetValue( int val );
+    int         prevValue()     const;
+
+    virtual void valueChange();
+    virtual void rangeChange();
+    virtual void stepChange();
+
+private:
+    void        adjustValue();
+
+    int         minVal, maxVal;
+    int         line, page;
+    int         val, prevVal;
+
+private:        // Disabled copy constructor and operator=
+#if defined(Q_DISABLE_COPY)
+    QRangeControl( const QRangeControl &amp; );
+    QRangeControl &amp;operator=( const QRangeControl &amp; );
+#endif
+};
+
+
+inline int QRangeControl::value() const
+{ return val; }
+
+inline int QRangeControl::prevValue() const
+{ return prevVal; }
+
+inline int QRangeControl::minValue() const
+{ return minVal; }
+
+inline int QRangeControl::maxValue() const
+{ return maxVal; }
+
+inline int QRangeControl::lineStep() const
+{ return line; }
+
+inline int QRangeControl::pageStep() const
+{ return page; }
+
+
+#endif // QRANGECONTROL_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

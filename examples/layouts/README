@@ -1,0 +1,12 @@
+These examples show how to make widgets that automatically lay out
+their children. There are four classes:
+
+ QtHBox		lays out its children horizontally.
+ QtVBox		lays out its children vertically.
+ QtButtonRow	lays out its children horizontally, giving them equal size.
+ QtLabelled	draws a labelled frame around its child.
+
+You can use these widgets in your programs without restrictions.
+
+Widgets similar to these may or may not be part of later versions of the
+Qt library.

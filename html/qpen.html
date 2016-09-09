@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QPen Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QPen Class Reference</h1><br clear="all">
+<p>
+The QPen class defines how a <a href="qpainter.html">QPainter</a> should draw lines and outlines of shapes.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qpen-h.html">qpen.h</a>&gt;</code>
+<p><a href="qpen-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qpen.html#a0"><strong>QPen</strong></a> () </span>
+<li><span class="fn"><a href="qpen.html#a1"><strong>QPen</strong></a> ( PenStyle ) </span>
+<li><span class="fn"><a href="qpen.html#a2"><strong>QPen</strong></a> ( const QColor &amp; color, uint width=0, PenStyle style=SolidLine ) </span>
+<li><span class="fn"><a href="qpen.html#a3"><strong>QPen</strong></a> ( const QPen &amp; ) </span>
+<li><span class="fn"><a href="qpen.html#a4"><strong>~QPen</strong></a> () </span>
+<li><span class="fn">QPen&amp; <a href="qpen.html#a5"><strong>operator=</strong></a> ( const QPen &amp; ) </span>
+<li><span class="fn">PenStyle <a href="qpen.html#a6"><strong>style</strong></a> () const</span>
+<li><span class="fn">void <a href="qpen.html#a7"><strong>setStyle</strong></a> ( PenStyle ) </span>
+<li><span class="fn">uint <a href="qpen.html#a8"><strong>width</strong></a> () const</span>
+<li><span class="fn">void <a href="qpen.html#a9"><strong>setWidth</strong></a> ( uint ) </span>
+<li><span class="fn">const QColor&amp; <a href="qpen.html#b0"><strong>color</strong></a> () const</span>
+<li><span class="fn">void <a href="qpen.html#b1"><strong>setColor</strong></a> ( const QColor &amp; ) </span>
+<li><span class="fn">bool <a href="qpen.html#b2"><strong>operator==</strong></a> ( const QPen &amp; p ) const</span>
+<li><span class="fn">bool <a href="qpen.html#b3"><strong>operator!=</strong></a> ( const QPen &amp; p ) const</span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>QDataStream &amp; <a href="qpen.html#b7"><strong>operator&lt;&lt;</strong></a> (QDataStream &amp; s, const QPen &amp; p)
+<li>QDataStream &amp; <a href="qpen.html#b8"><strong>operator&gt;&gt;</strong></a> (QDataStream &amp; s, QPen &amp; p)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QPen class defines how a <a href="qpainter.html">QPainter</a> should draw lines and outlines of shapes.
+<p>
+A pen has a style, a width and a color.
+<p>The pen style defines the line type. The default pen style is <code>SolidPen.</code>
+Setting the style to <code>NoPen</code> tells the painter to not draw lines or
+outlines.
+<p>The pen width defines the line width. The default line width is 0,
+which draws a 1-pixel line very fast, but with lower presicion than
+with a line width of 1. Setting the line width to 1 or more draws
+lines that are precise, but drawing is slower.
+<p>The pen color defines the color of lines and text. The default line
+color is black.  The <a href="qcolor.html">QColor</a> documentation lists predefined colors.
+<p>Use the <a href="qbrush.html">QBrush</a> class for specifying fill styles.
+<p>Example:
+<pre>    <a href="qpainter.html">QPainter</a> painter;
+    <a href="qpen.html">QPen</a>     pen( red, 2 );             // red solid line, 2 pixel width
+    painter.<a href="qpainter.html#b0">begin</a>( &amp;anyPaintDevice );   // paint something
+    painter.<a href="qpainter.html#c4">setPen</a>( pen );              // set the red, fat pen
+    painter.<a href="qpainter.html#i0">drawRect</a>( 40,30, 200,100 ); // draw rectangle
+    painter.<a href="qpainter.html#c4">setPen</a>( blue );             // set blue pen, 0 pixel width
+    painter.<a href="qpainter.html#h8">drawLine</a>( 40,30, 240,130 ); // draw diagonal in rectangle
+    painter.<a href="qpainter.html#b2">end</a>();                      // painting done
+</pre>
+<p>See the <a href="qpen.html#a7">setStyle</a>() function for a complete list of pen styles.
+<p>See also:  <a href="qpainter.html">QPainter</a> and <a href="qpainter.html#c4">QPainter::setPen</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#QPen">tictac/tictac.cpp</a>
+ <a href="desktop-desktop-cpp.html#QPen">desktop/desktop.cpp</a>
+ <a href="progress-progress-cpp.html#QPen">progress/progress.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QPen::QPen ()</h3>
+<p>Constructs a default black solid line pen with 0 width.
+<h3 class="fn"><a name="a1"></a>QPen::QPen ( PenStyle style )</h3>
+<p>Constructs a  pen black with 0 width and a specified style.
+<p>See also:  <a href="qpen.html#a7">setStyle</a>().
+<h3 class="fn"><a name="a2"></a>QPen::QPen ( const <a href="qcolor.html">QColor</a> &amp; color, uint width=0, PenStyle style=SolidLine )</h3>
+<p>Constructs a pen with a specified color, width and style.
+<p>See also:  <a href="qpen.html#a9">setWidth</a>(), <a href="qpen.html#a7">setStyle</a>() and <a href="qpen.html#b1">setColor</a>().
+<h3 class="fn"><a name="a3"></a>QPen::QPen ( const QPen &amp; p )</h3>
+<p>Constructs a pen which is a copy of <em>p.</em>
+<h3 class="fn"><a name="a4"></a>QPen::~QPen ()</h3>
+<p>Destroys the pen.
+<h3 class="fn">const <a href="qcolor.html">QColor</a> &amp; <a name="b0"></a>QPen::color () const</h3>
+<p>Returns the pen color.
+<p>See also:  <a href="qpen.html#b1">setColor</a>().
+<h3 class="fn">bool <a name="b3"></a>QPen::operator!= ( const QPen &amp; p ) const</h3>
+<p>Returns TRUE if the pen is different from <em>p,</em> or FALSE if the pens are
+equal.
+<p>Two pens are different if they have different styles, widths or colors.
+<p>See also:  <a href="qpen.html#b2">operator==</a>().
+<h3 class="fn">QPen &amp; <a name="a5"></a>QPen::operator= ( const QPen &amp; p )</h3>
+<p>Assigns <em>c</em> to this pen and returns a reference to this pen.
+<h3 class="fn">bool <a name="b2"></a>QPen::operator== ( const QPen &amp; p ) const</h3>
+<p>Returns TRUE if the pen is equal to <em>p,</em> or FALSE if the pens are
+different.
+<p>Two pens are equal if they have equal styles, widths and colors.
+<p>See also:  <a href="qpen.html#b3">operator!=</a>().
+<h3 class="fn">void <a name="b1"></a>QPen::setColor ( const <a href="qcolor.html">QColor</a> &amp; c )</h3>
+<p>Sets the pen color to <em>c.</em>
+<p>See also:  <a href="qpen.html#b0">color</a>().
+<p>Examples:
+ <a href="progress-progress-cpp.html#setColor">progress/progress.cpp</a>
+<h3 class="fn">void <a name="a7"></a>QPen::setStyle ( PenStyle s )</h3>
+<p>Sets the pen style to <em>s.</em>
+<p>The pen styles are:
+<ul>
+<li> <code>NoPen</code>  no outline is drawn.
+<li> <code>SolidLine</code>  solid line (default).
+<li> <code>DashLine</code>  - - - (dashes) line.
+<li> <code>DotLine</code>  * * * (dots) line.
+<li> <code>DashDotLine</code>  - * - * line.
+<li> <code>DashDotDotLine</code>  - ** - ** line.
+</ul>
+<p>See also:  <a href="qpen.html#a6">style</a>().
+<h3 class="fn">void <a name="a9"></a>QPen::setWidth ( uint w )</h3>
+<p>Sets the pen width to <em>w.</em>
+<p>See also:  <a href="qpen.html#a8">width</a>().
+<p>Examples:
+ <a href="progress-progress-cpp.html#setWidth">progress/progress.cpp</a>
+<h3 class="fn">PenStyle <a name="a6"></a>QPen::style () const</h3>
+<p>Returns the pen style.
+<p>See also:  <a href="qpen.html#a7">setStyle</a>().
+<h3 class="fn">uint <a name="a8"></a>QPen::width () const</h3>
+<p>Returns the pen width.
+<p>See also:  <a href="qpen.html#a9">setWidth</a>().
+<hr><h2>Related Functions</h2>
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="b7"></a>operator&lt;&lt; (<a href="qdatastream.html">QDataStream</a> &amp; s, const QPen &amp; p)</h3>
+<p>Writes a pen to the stream and returns a reference to the stream.
+<p>The serialization format is:
+<ol>
+<li> The pen style (UINT8)
+<li> The pen width (UINT8)
+<li> The pen color (<a href="qcolor.html">QColor</a>)
+</ol>
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="b8"></a>operator&gt;&gt; (<a href="qdatastream.html">QDataStream</a> &amp; s, QPen &amp; p)</h3>
+<p>Reads a pen from the stream and returns a reference to the stream.
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qpen.h: 1998/08/25
+<li>qpainter.cpp: 1998/12/15
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

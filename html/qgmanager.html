@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QGManager Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QGManager Class Reference</h1><br clear="all">
+<p>
+The QGManager class provides one-dimensional geometry management.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qgmanager-h.html">qgmanager.h</a>&gt;</code>
+<p>
+Inherits <a href="qobject.html">QObject</a>.
+<p><a href="qgmanager-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qgmanager.html#a0"><strong>QGManager</strong></a> ( QWidget * parent, const char * name=0 ) </span>
+<li><span class="fn"><a href="qgmanager.html#a1"><strong>~QGManager</strong></a> () </span>
+<li><span class="fn">void <a href="qgmanager.html#a2"><strong>setBorder</strong></a> ( int b ) </span>
+<li><span class="fn">enum { unlimited = QCOORD_MAX }</span>
+<li><span class="fn">QChain* <a href="qgmanager.html#a3"><strong>newSerChain</strong></a> ( Direction ) </span>
+<li><span class="fn">QChain* <a href="qgmanager.html#a4"><strong>newParChain</strong></a> ( Direction ) </span>
+<li><span class="fn">bool <a href="qgmanager.html#a5"><strong>add</strong></a> ( QChain * destination, QChain * source, int stretch = 0 ) </span>
+<li><span class="fn">bool <a href="qgmanager.html#a6"><strong>addWidget</strong></a> ( QChain *, QWidget *, int stretch = 0 ) </span>
+<li><span class="fn">bool <a href="qgmanager.html#a7"><strong>addSpacing</strong></a> ( QChain *, int minSize, int stretch = 0, int maxSize = unlimited ) </span>
+<li><span class="fn">bool <a href="qgmanager.html#a8"><strong>addBranch</strong></a> ( QChain * destination, QChain * branch, int fromIndex, int toIndex ) </span>
+<li><span class="fn">void <a href="qgmanager.html#a9"><strong>setStretch</strong></a> ( QChain *, int ) </span>
+<li><span class="fn">bool <a href="qgmanager.html#b0"><strong>activate</strong></a> () </span>
+<li><span class="fn">void <a href="qgmanager.html#b1"><strong>freeze</strong></a> ( int w = 0, int h = 0 ) </span>
+<li><span class="fn">void <a href="qgmanager.html#b2"><strong>unFreeze</strong></a> () </span>
+<li><span class="fn">QChain* <a href="qgmanager.html#b3"><strong>xChain</strong></a> () </span>
+<li><span class="fn">QChain* <a href="qgmanager.html#b4"><strong>yChain</strong></a> () </span>
+<li><span class="fn">void <a href="qgmanager.html#b5"><strong>setMenuBar</strong></a> ( QWidget * w ) </span>
+<li><span class="fn">QWidget* <a href="qgmanager.html#b6"><strong>mainWidget</strong></a> () </span>
+<li><span class="fn">void <a href="qgmanager.html#b7"><strong>remove</strong></a> ( QWidget * w ) </span>
+<li><span class="fn">void <a href="qgmanager.html#b8"><strong>setName</strong></a> ( QChain *, const char * ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual bool <a href="qgmanager.html#b9"><strong>eventFilter</strong></a> ( QObject *, QEvent * ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QGManager class provides one-dimensional geometry management.
+<p>
+This class is intended for those who write geometry managers and
+graphical designers. <strong>It is not for the faint of
+heart. </strong> The <a href="qhboxlayout.html">QHBoxLayout</a>, <a href="qvboxlayout.html">QVBoxLayout</a> and <a href="qgridlayout.html">QGridLayout</a> classes are
+available for normal application programming.
+<p>Each dimension (horizontal and vertical) is handled independently. Widgets
+are organized in chains, which can be parallel or serial.
+<p>In a serial chain, elements are added one after another. Available
+space is divided among the elements according to stretch and
+max-/minsize.
+<p>In parallel chains, elements are added on top of each other. All
+elements are given the full length of the chain, and are placed at
+the same position.
+<p>See also:  <a href="qhboxlayout.html">QHBoxLayout</a>, <a href="qvboxlayout.html">QVBoxLayout</a> and <a href="qgridlayout.html">QGridLayout</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QGManager::QGManager ( <a href="qwidget.html">QWidget</a> * parent, const char * name=0 )</h3>
+<p>Creates a new QGManager which manages <em>parent's</em> children.
+<h3 class="fn"><a name="a1"></a>QGManager::~QGManager ()</h3>
+<p>Destroys the QGManager, deleting all <a href="qgmanager.html#a5">add</a>()ed chains.
+<h3 class="fn">bool <a name="b0"></a>QGManager::activate ()</h3>
+<p>Starts geometry management.
+<h3 class="fn">bool <a name="a5"></a>QGManager::add ( QChain * destination, QChain * source, int stretch = 0 )</h3>
+<p>Adds the chain <em>source</em> to the chain <em>destination.</em>
+<h3 class="fn">bool <a name="a8"></a>QGManager::addBranch ( QChain * destination, QChain * branch, int fromIndex, int toIndex )</h3>
+<p>Adds <em>branch</em> to <em>destination</em> as a branch going from <em>fromIndex</em>
+to <em>toIndex.</em> A branch is a chain that is anchored at two locations
+in a serial chain. The branch does not influence the main chain;
+if the branch's minimum size is greater than the minimum distance
+between the anchors, things will look ugly.
+<p>The branch goes from the beginning of the item at <em>fromIndex</em> to the
+end of the item at <em>toIndex.</em> Note: remember to count spacing when
+calculating indices.
+<h3 class="fn">bool <a name="a7"></a>QGManager::addSpacing ( QChain * d, int minSize, int stretch = 0, int maxSize = unlimited )</h3>
+<p>Adds the spacing  <em>w</em> to the chain <em>d.</em> If <em>d</em> is a serial chain, this
+means screen space between widgets. If <em>d</em> is parallel, this influences
+the maximum and minimum size.
+<h3 class="fn">bool <a name="a6"></a>QGManager::addWidget ( QChain * d, <a href="qwidget.html">QWidget</a> * w, int stretch = 0 )</h3>
+<p>Adds the widget  <em>w</em> to the chain <em>d.</em>
+<h3 class="fn">bool <a name="b9"></a>QGManager::eventFilter ( <a href="qobject.html">QObject</a> * o, <a href="qevent.html">QEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Grabs all resize events for my parent, and does child widget resizing.
+<p>Reimplemented from <a href="qobject.html#a3">QObject.</a>
+<h3 class="fn">void <a name="b1"></a>QGManager::freeze ( int w = 0, int h = 0 )</h3>
+<p>Fixes the size of the main widget and distributes the available
+space to the child widgets. The size is adjusted to a valid
+value. Thus freeze(0,0) (the default) will fix the widget to its
+minimum size.
+<h3 class="fn"><a href="qwidget.html">QWidget</a> * <a name="b6"></a>QGManager::mainWidget ()</h3>
+<p>Returns the main widget of the manager.
+<h3 class="fn">QChain * <a name="a4"></a>QGManager::newParChain ( Direction d )</h3>
+<p>Creates a new QChain which is <em>parallel.</em>
+<h3 class="fn">QChain * <a name="a3"></a>QGManager::newSerChain ( Direction d )</h3>
+<p>Creates a new QChain which is <em>serial.</em>
+<h3 class="fn">void <a name="b7"></a>QGManager::remove ( <a href="qwidget.html">QWidget</a> * w )</h3>
+<p>Removes the widget <em>w</em> from geometry management. Will not remove spacing
+around the widget. This function is called automatically if the
+widget is deleted.
+<h3 class="fn">void <a name="a2"></a>QGManager::setBorder ( int b )</h3>
+<p>Sets the border around the edge of the widget. <em>b</em> is the number of
+pixels between the edge of the widget and the area controlled by the
+manager.
+<h3 class="fn">void <a name="b5"></a>QGManager::setMenuBar ( <a href="qwidget.html">QWidget</a> * w )</h3>
+<p>Makes the geometry manager take account of the menu bar <em>w.</em> All
+child widgets are placed below the bottom edge of the menu bar.
+<h3 class="fn">void <a name="b8"></a>QGManager::setName ( QChain * chain, const char * name )</h3>
+<p>Sets the name of <em>chain</em> to <em>name.</em> The name is used for debugging
+purposes.
+<h3 class="fn">void <a name="a9"></a>QGManager::setStretch ( QChain * c, int s )</h3>
+<p>Sets the stretch factor on <em>c</em> to <em>s.</em> This stretch factor is
+overridden by <a href="qgmanager.html#a5">add</a>(), so there's no point in calling this function
+before you add() the chain.
+<p>See also:  <a href="qgmanager.html#a5">add</a>().
+<h3 class="fn">void <a name="b2"></a>QGManager::unFreeze ()</h3>
+<p>Undoes the effect of a previous <a href="qgmanager.html#b1">freeze</a>(). The main widget will
+now again be resizable.
+<h3 class="fn">QChain * <a name="b3"></a>QGManager::xChain ()</h3>
+<p>Returns the main horizontal chain of the manager. All horizontal chains
+should be inserted into this chain or one of its descendants, otherwise
+they will be ignored.
+<h3 class="fn">QChain * <a name="b4"></a>QGManager::yChain ()</h3>
+<p>Returns the main vertical chain of the manager. All vertical chains
+should be inserted into this chain or one of its descendants, otherwise
+they will be ignored.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qgmanager.h: 1998/08/21
+<li>qgmanager.cpp: 1998/10/29
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

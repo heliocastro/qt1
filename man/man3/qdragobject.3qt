@@ -1,0 +1,152 @@
+.TH QDragObject 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QDragObject \- The QDragObject encapsulates MIME-based drag-and-drop interaction
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qdragobject.h>\fR
+.PP
+Inherits QObject.
+.PP
+Inherited by QImageDrag and QStoredDrag.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QDragObject ( QWidget * " "dragSource" " = 0, const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "\fB~QDragObject\fR ()"
+.br
+.ti -1c
+.BI "bool drag ()"
+.br
+.ti -1c
+.BI "bool dragMove ()"
+.br
+.ti -1c
+.BI "void dragCopy ()"
+.br
+.ti -1c
+.BI "virtual bool provides ( const char * ) const"
+.br
+.ti -1c
+.BI "virtual const char* format ( int ) const"
+.br
+.ti -1c
+.BI "virtual QByteArray encodedData ( const char * ) const"
+.br
+.ti -1c
+.BI "void setPixmap ( QPixmap )"
+.br
+.ti -1c
+.BI "void setPixmap ( QPixmap, QPoint hotspot )"
+.br
+.ti -1c
+.BI "QPixmap pixmap () const"
+.br
+.ti -1c
+.BI "QPoint pixmapHotSpot () const"
+.br
+.ti -1c
+.BI "QWidget* source ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual bool drag ( DragMode )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QDragObject encapsulates MIME-based drag-and-drop interaction.
+.PP
+Drag-and-drop in Qt uses the MIME open standard, to allow independently developers applications to exchange information.
+.PP
+To start a drag, for example in a mouse motion event, create an object of the QDragObject subclass appropriate for your media, such as QTextDrag for text and QImageDrag for images. Then call the drag() method. This is all you need for simple dragging of existing types.
+.PP
+To be able to receive media dropped on a widget, multiply-inherit the QDropSite class and override the dragEnterEvent(), dragMoveEvent(), dragLeaveEvent(), and dropEvent() event handler methods.
+.PP
+Support for specific media types is provided by subclasses of QDragObject. For example, QTextDrag provides support for the "\fCtext/plain\fR" MIME type (ordinary unformated text), QImageDrag provides for "\fCimage/\fR\fC*\fR", where \fC*\fR is all the image formats that Qt supports, and the QUrlDrag subclass provides "\fCurl/url\fR", a standard format for transfering a list of filenames.
+.PP
+To implement drag-and-drop of some type of media for which there is no available QDragObject subclass, the first and most important step is to look for existing formats that are appropriate - the Internet Assigned Numbers Authority (IANA) provides a hierarchical list of MIME media types at the Information Sciences Institute (ISI). This maximizes inter-operability of your software.
+.PP
+To support an additional media type, subclass either QDragObject or QStoredDrag. Subclass QDragObject when you need to provide support for multiple media types. Subclass the simpler QStoredDrag when one type is sufficient.
+.PP
+Subclasses of QDragObject will override the format() and encodedData() members, and provide a set-method to encode the media data and static members canDecode() and decode() to decode incoming data. QImageDrag is an example of such a class in Qt. Of course, you can provide drag-only or drop-only support for a media type by omitting some of these methods.
+.PP
+Subclasses of QStoredDrag provide a set-method to encode the media data and static members canDecode() and decode() to decode incoming data. QTextDrag in Qt 1.x is an example of such a class in Qt.
+.SH "Inter-operating with existing applications"
+On X11, the public XDND protocol is used, while on Windows Qt uses the OLE standard. On X11, XDND uses MIME, so no translation is necessary. On Windows, MIME-aware applications can communicate by using clipboard format names that are MIME types. Internally, Qt has facilities for translating all proprietary clipboard formats to and from MIME. This interface will be made public at some time, but if you need to do such translations now, contact your Qt Technical Support service.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QDragObject::QDragObject ( QWidget * dragSource = 0, const char * name = 0 )"
+Creates a drag object which is a child of \fIdragSource\fR and named \fIname.\fR
+.PP
+Note that the drag object will be deleted when \fIdragSource\fR is.
+.SH "QDragObject::~QDragObject ()"
+Deletes the drag object and frees up the storage used.
+.SH "bool QDragObject::drag ()"
+Starts a drag operation using the contents of this object, using DragDefault mode.
+.PP
+See drag(DragMove) for important further information.
+.SH "bool QDragObject::drag ( DragMode mode ) \fC[virtual protected]\fR"
+Starts a drag operation using the contents of this object.
+.PP
+At this point, the object becomes owned by Qt, not the source widget. You should not delete the drag object nor anything it references (unless you make provisions in the drag object to \\link QObject::destroyed() deal with such deletion\\enlink). Many drag objects, such as QTextDrag do not reference any other objects. The actual transfer of data to the target application may be done during future event processing - after that time the drag object will be deleted.
+.PP
+Returns TRUE if the dragged data was dragged as a \fImove,\fR indicating that the caller should remove the original source of the data (the drag object must continue to have a copy).
+.PP
+The \fImode\fR is one of:
+.TP
+\fCDragDefault\fR - the mode is determined heuristically.
+.TP
+\fCDragCopy\fR - the data is copied, never moved.
+.TP
+\fCDragMove\fR - the data is moved, if dragged at all.
+.TP
+\fCDragCopyOrMove\fR - the user chooses the mode by using control key to switch from the default.
+.PP
+Normally one of simpler drag(), dragMove(), or dragCopy() functions would be used instead.
+.SH "void QDragObject::dragCopy ()"
+Starts a drag operation using the contents of this object, using DragCopy mode.
+.PP
+See drag(DragMove) for important further information.
+.SH "bool QDragObject::dragMove ()"
+Starts a drag operation using the contents of this object, using DragMove mode.
+.PP
+See drag(DragMove) for important further information.
+.SH "QByteArray QDragObject::encodedData ( const char * ) const \fC[virtual]\fR"
+Returns the encoded payload of this object. The drag manager calls this when the recipient needs to see the content of the drag; this generally doesn't happen until the actual drop.
+.PP
+Subclasses must override this function.
+.SH "const char * QDragObject::format ( int i ) const \fC[virtual]\fR"
+Returns the \fIith\fR format, or NULL.
+.SH "QPixmap QDragObject::pixmap () const"
+Returns the currently set pixmap (which isNull() if none is set).
+.SH "QPoint QDragObject::pixmapHotSpot () const"
+Returns the currently set pixmap hitspot.
+.SH "bool QDragObject::provides ( const char * mimeType ) const \fC[virtual]\fR"
+Returns TRUE if the drag object can provide the data in format \fImimeType.\fR The default implementation iterates over format().
+.SH "void QDragObject::setPixmap ( QPixmap pm, QPoint hotspot )"
+Set the pixmap \fIpm\fR to display while dragging the object. The platform-specific implementation will use this in a loose fashion - so provide a small masked pixmap, but do not require that the user ever sees it in all its splendour. In particular, cursors on Windows 95 are of limited size.
+.PP
+The \fIhotspot\fR is the point on (or off) the pixmap that should be under the cursor as it is dragged. It is relative to the top-left pixel of the pixmap.
+.SH "void QDragObject::setPixmap ( QPixmap pm )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.PP
+Uses a hotspot that positions the pixmap below and to the right of the mouse pointer. This allows the user to clearly see the point on the window which they are dragging the data onto.
+.SH "QWidget * QDragObject::source ()"
+Returns a pointer to the drag source where this object originated.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qdragobject.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

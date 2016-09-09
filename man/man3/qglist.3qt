@@ -1,0 +1,285 @@
+.TH QGList 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QGList \- Internal class for implementing Qt collection classes
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qglist.h>\fR
+.PP
+Inherits QCollection.
+.PP
+Inherited by QList, QQueue and QStack.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "virtual uint count () const"
+.br
+.ti -1c
+.BI "QDataStream& read ( QDataStream & )"
+.br
+.ti -1c
+.BI "QDataStream& write ( QDataStream & ) const"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "QGList ()"
+.br
+.ti -1c
+.BI "QGList ( const QGList & )"
+.br
+.ti -1c
+.BI "\fB~QGList\fR ()"
+.br
+.ti -1c
+.BI "QGList& operator= ( const QGList & )"
+.br
+.ti -1c
+.BI "void inSort ( GCI )"
+.br
+.ti -1c
+.BI "void append ( GCI )"
+.br
+.ti -1c
+.BI "bool insertAt ( uint " "index" ", GCI )"
+.br
+.ti -1c
+.BI "void relinkNode ( QLNode * )"
+.br
+.ti -1c
+.BI "bool removeNode ( QLNode * )"
+.br
+.ti -1c
+.BI "bool remove ( GCI = 0 )"
+.br
+.ti -1c
+.BI "bool removeRef ( GCI = 0 )"
+.br
+.ti -1c
+.BI "bool removeFirst ()"
+.br
+.ti -1c
+.BI "bool removeLast ()"
+.br
+.ti -1c
+.BI "bool removeAt ( uint index )"
+.br
+.ti -1c
+.BI "GCI takeNode ( QLNode * )"
+.br
+.ti -1c
+.BI "GCI take ()"
+.br
+.ti -1c
+.BI "GCI takeAt ( uint index )"
+.br
+.ti -1c
+.BI "GCI takeFirst ()"
+.br
+.ti -1c
+.BI "GCI takeLast ()"
+.br
+.ti -1c
+.BI "virtual void clear ()"
+.br
+.ti -1c
+.BI "int findRef ( GCI, bool = TRUE )"
+.br
+.ti -1c
+.BI "int find ( GCI, bool = TRUE )"
+.br
+.ti -1c
+.BI "uint containsRef ( GCI ) const"
+.br
+.ti -1c
+.BI "uint contains ( GCI ) const"
+.br
+.ti -1c
+.BI "GCI at ( uint index )"
+.br
+.ti -1c
+.BI "int at () const"
+.br
+.ti -1c
+.BI "QLNode* currentNode () const"
+.br
+.ti -1c
+.BI "GCI get () const"
+.br
+.ti -1c
+.BI "GCI cfirst () const"
+.br
+.ti -1c
+.BI "GCI clast () const"
+.br
+.ti -1c
+.BI "GCI first ()"
+.br
+.ti -1c
+.BI "GCI last ()"
+.br
+.ti -1c
+.BI "GCI next ()"
+.br
+.ti -1c
+.BI "GCI prev ()"
+.br
+.ti -1c
+.BI "void toVector ( QGVector * ) const"
+.br
+.ti -1c
+.BI "virtual int compareItems ( GCI, GCI )"
+.br
+.ti -1c
+.BI "virtual QDataStream& read ( QDataStream &, GCI & )"
+.br
+.ti -1c
+.BI "virtual QDataStream& write ( QDataStream &, GCI ) const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QGList class is an internal class for implementing Qt collection classes.
+.PP
+QGList is a strictly internal class that acts as a base class for several collection classes; QList, QQueue and QStack.
+.PP
+QGList has some virtual functions that can be reimplemented to customize the subclasses.
+.TP
+compareItems() compares two collection/list items.
+.TP
+read() reads a collection/list item from a QDataStream.
+.TP
+write() writes a collection/list item to a QDataStream. Normally, you do not have to reimplement any of these functions. If you still want to reimplement them, see the QStrList class (qstrlist.h), which is a good example.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QGList::QGList () \fC[protected]\fR"
+For internal use only.
+.SH "QGList::QGList ( const QGList & list ) \fC[protected]\fR"
+For internal use only.
+.SH "QGList::~QGList () \fC[protected]\fR"
+For internal use only.
+.SH "void QGList::append ( GCI d ) \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::at ( uint index ) \fC[protected]\fR"
+For internal use only.
+.SH "int QGList::at () const \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::cfirst () const \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::clast () const \fC[protected]\fR"
+For internal use only.
+.SH "void QGList::clear () \fC[virtual protected]\fR"
+For internal use only.
+.PP
+Reimplemented from QCollection.
+.SH "int QGList::compareItems ( GCI item1, GCI item2 ) \fC[virtual protected]\fR"
+This virtual function compares two list items.
+.PP
+Returns:
+.TP
+0 if \fIitem1\fR == \fIitem2\fR
+.TP
+non-zero if \fIitem1\fR != \fIitem2\fR
+.PP
+This function returns \fIint\fR rather than \fIbool\fR so that reimplementations can return three values and use it to sort by:
+.TP
+0 if \fIitem1\fR == \fIitem2\fR
+.TP
+> 0 (positive integer) if \fIitem1\fR > \fIitem2\fR
+.TP
+< 0 (negative integer) if \fIitem1\fR < \fIitem2\fR
+.PP
+The QList::inSort() function requires that compareItems() is implemented as described here.
+.PP
+This function should not modify the list because some const functions call compareItems().
+.PP
+The default implementation compares the pointers:
+.PP
+.nf
+.br
+.fi
+.SH "uint QGList::contains ( GCI d ) const \fC[protected]\fR"
+For internal use only.
+.SH "uint QGList::containsRef ( GCI d ) const \fC[protected]\fR"
+For internal use only.
+.SH "uint QGList::count () const \fC[virtual]\fR"
+For internal use only.
+.PP
+Reimplemented from QCollection.
+.SH "QLNode * QGList::currentNode () const \fC[protected]\fR"
+For internal use only.
+.SH "int QGList::find ( GCI d, bool fromStart = TRUE ) \fC[protected]\fR"
+For internal use only.
+.SH "int QGList::findRef ( GCI d, bool fromStart = TRUE ) \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::first () \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::get () const \fC[protected]\fR"
+For internal use only.
+.SH "void QGList::inSort ( GCI d ) \fC[protected]\fR"
+For internal use only.
+.SH "bool QGList::insertAt ( uint index, GCI d ) \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::last () \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::next () \fC[protected]\fR"
+For internal use only.
+.SH "QGList& QGList::operator= ( const QGList & list ) \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::prev () \fC[protected]\fR"
+For internal use only.
+.SH "QDataStream & QGList::read ( QDataStream & s )"
+For internal use only.
+.SH "QDataStream & QGList::read ( QDataStream & s, GCI & item ) \fC[virtual protected]\fR"
+Reads a collection/list item from the stream \fIs\fR and returns a reference to the stream.
+.PP
+The default implementation sets \fIitem\fR to 0.
+.PP
+See also: write().
+.SH "void QGList::relinkNode ( QLNode * n ) \fC[protected]\fR"
+For internal use only.
+.SH "bool QGList::remove ( GCI d = 0 ) \fC[protected]\fR"
+For internal use only.
+.SH "bool QGList::removeAt ( uint index ) \fC[protected]\fR"
+For internal use only.
+.SH "bool QGList::removeFirst () \fC[protected]\fR"
+For internal use only.
+.SH "bool QGList::removeLast () \fC[protected]\fR"
+For internal use only.
+.SH "bool QGList::removeNode ( QLNode * n ) \fC[protected]\fR"
+For internal use only.
+.SH "bool QGList::removeRef ( GCI d = 0 ) \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::take () \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::takeAt ( uint index ) \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::takeFirst () \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::takeLast () \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGList::takeNode ( QLNode * n ) \fC[protected]\fR"
+For internal use only.
+.SH "void QGList::toVector ( QGVector * vector ) const \fC[protected]\fR"
+For internal use only.
+.SH "QDataStream & QGList::write ( QDataStream & s ) const"
+For internal use only.
+.SH "QDataStream & QGList::write ( QDataStream & s, GCI ) const \fC[virtual protected]\fR"
+Writes a collection/list item to the stream \fIs\fR and returns a reference to the stream.
+.PP
+The default implementation does nothing.
+.PP
+See also:  read().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qglist.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

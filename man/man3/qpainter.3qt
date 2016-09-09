@@ -1,0 +1,1595 @@
+.TH QPainter 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QPainter \- Paints on paint devices
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qpainter.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QPainter ()"
+.br
+.ti -1c
+.BI "QPainter ( const QPaintDevice * )"
+.br
+.ti -1c
+.BI "QPainter ( const QPaintDevice *, const QWidget * )"
+.br
+.ti -1c
+.BI "\fB~QPainter\fR ()"
+.br
+.ti -1c
+.BI "bool begin ( const QPaintDevice * )"
+.br
+.ti -1c
+.BI "bool begin ( const QPaintDevice *, const QWidget * )"
+.br
+.ti -1c
+.BI "bool end ()"
+.br
+.ti -1c
+.BI "QPaintDevice* device () const"
+.br
+.ti -1c
+.BI "bool isActive () const"
+.br
+.ti -1c
+.BI "void flush ()"
+.br
+.ti -1c
+.BI "void save ()"
+.br
+.ti -1c
+.BI "void restore ()"
+.br
+.ti -1c
+.BI "QFontMetrics fontMetrics () const"
+.br
+.ti -1c
+.BI "QFontInfo fontInfo () const"
+.br
+.ti -1c
+.BI "const QFont& font () const"
+.br
+.ti -1c
+.BI "void setFont ( const QFont & )"
+.br
+.ti -1c
+.BI "const QPen& pen () const"
+.br
+.ti -1c
+.BI "void setPen ( const QPen & )"
+.br
+.ti -1c
+.BI "void setPen ( PenStyle )"
+.br
+.ti -1c
+.BI "void setPen ( const QColor & )"
+.br
+.ti -1c
+.BI "const QBrush& brush () const"
+.br
+.ti -1c
+.BI "void setBrush ( const QBrush & )"
+.br
+.ti -1c
+.BI "void setBrush ( BrushStyle )"
+.br
+.ti -1c
+.BI "void setBrush ( const QColor & )"
+.br
+.ti -1c
+.BI "const QColor& backgroundColor () const"
+.br
+.ti -1c
+.BI "void setBackgroundColor ( const QColor & )"
+.br
+.ti -1c
+.BI "BGMode backgroundMode () const"
+.br
+.ti -1c
+.BI "void setBackgroundMode ( BGMode )"
+.br
+.ti -1c
+.BI "RasterOp rasterOp () const"
+.br
+.ti -1c
+.BI "void setRasterOp ( RasterOp )"
+.br
+.ti -1c
+.BI "const QPoint& brushOrigin () const"
+.br
+.ti -1c
+.BI "void setBrushOrigin ( int " "x" ", int y )"
+.br
+.ti -1c
+.BI "void setBrushOrigin ( const QPoint & )"
+.br
+.ti -1c
+.BI "void setViewXForm ( bool )"
+.br
+.ti -1c
+.BI "bool hasViewXForm () const"
+.br
+.ti -1c
+.BI "QRect window () const"
+.br
+.ti -1c
+.BI "void setWindow ( const QRect & )"
+.br
+.ti -1c
+.BI "void setWindow ( int " "x" ", int " "y" ", int " "w" ", int h )"
+.br
+.ti -1c
+.BI "QRect viewport () const"
+.br
+.ti -1c
+.BI "void setViewport ( const QRect & )"
+.br
+.ti -1c
+.BI "void setViewport ( int " "x" ", int " "y" ", int " "w" ", int h )"
+.br
+.ti -1c
+.BI "void setWorldXForm ( bool )"
+.br
+.ti -1c
+.BI "bool hasWorldXForm () const"
+.br
+.ti -1c
+.BI "const QWMatrix& worldMatrix () const"
+.br
+.ti -1c
+.BI "void setWorldMatrix ( const QWMatrix &, bool " "combine" "=FALSE )"
+.br
+.ti -1c
+.BI "void translate ( float " "dx" ", float dy )"
+.br
+.ti -1c
+.BI "void scale ( float " "sx" ", float sy )"
+.br
+.ti -1c
+.BI "void shear ( float " "sh" ", float sv )"
+.br
+.ti -1c
+.BI "void rotate ( float a )"
+.br
+.ti -1c
+.BI "void resetXForm ()"
+.br
+.ti -1c
+.BI "QPoint xForm ( const QPoint & ) const"
+.br
+.ti -1c
+.BI "QRect xForm ( const QRect & ) const"
+.br
+.ti -1c
+.BI "QPointArray xForm ( const QPointArray & ) const"
+.br
+.ti -1c
+.BI "QPointArray xForm ( const QPointArray &, int " "index" ", int npoints ) const"
+.br
+.ti -1c
+.BI "QPoint xFormDev ( const QPoint & ) const"
+.br
+.ti -1c
+.BI "QRect xFormDev ( const QRect & ) const"
+.br
+.ti -1c
+.BI "QPointArray xFormDev ( const QPointArray & ) const"
+.br
+.ti -1c
+.BI "QPointArray xFormDev ( const QPointArray &, int " "index" ", int npoints ) const"
+.br
+.ti -1c
+.BI "void setClipping ( bool )"
+.br
+.ti -1c
+.BI "bool hasClipping () const"
+.br
+.ti -1c
+.BI "const QRegion& clipRegion () const"
+.br
+.ti -1c
+.BI "void setClipRect ( const QRect & )"
+.br
+.ti -1c
+.BI "void setClipRect ( int " "x" ", int " "y" ", int " "w" ", int h )"
+.br
+.ti -1c
+.BI "void setClipRegion ( const QRegion & )"
+.br
+.ti -1c
+.BI "void drawPoint ( int " "x" ", int y )"
+.br
+.ti -1c
+.BI "void drawPoint ( const QPoint & )"
+.br
+.ti -1c
+.BI "void drawPoints ( const QPointArray & " "a" ", int " "index" "=0, int " "npoints" "=-1 )"
+.br
+.ti -1c
+.BI "void moveTo ( int " "x" ", int y )"
+.br
+.ti -1c
+.BI "void moveTo ( const QPoint & )"
+.br
+.ti -1c
+.BI "void lineTo ( int " "x" ", int y )"
+.br
+.ti -1c
+.BI "void lineTo ( const QPoint & )"
+.br
+.ti -1c
+.BI "void drawLine ( int " "x1" ", int " "y1" ", int " "x2" ", int y2 )"
+.br
+.ti -1c
+.BI "void drawLine ( const QPoint &, const QPoint & )"
+.br
+.ti -1c
+.BI "void drawRect ( int " "x" ", int " "y" ", int " "w" ", int h )"
+.br
+.ti -1c
+.BI "void drawRect ( const QRect & )"
+.br
+.ti -1c
+.BI "void drawWinFocusRect ( int " "x" ", int " "y" ", int " "w" ", int h )"
+.br
+.ti -1c
+.BI "void drawWinFocusRect ( int " "x" ", int " "y" ", int " "w" ", int " "h" ", const QColor & bgColor )"
+.br
+.ti -1c
+.BI "void drawWinFocusRect ( const QRect & )"
+.br
+.ti -1c
+.BI "void drawWinFocusRect ( const QRect &, const QColor & bgColor )"
+.br
+.ti -1c
+.BI "void drawRoundRect ( int " "x" ", int " "y" ", int " "w" ", int " "h" ", int, int )"
+.br
+.ti -1c
+.BI "void drawRoundRect ( const QRect &, int, int )"
+.br
+.ti -1c
+.BI "void drawEllipse ( int " "x" ", int " "y" ", int " "w" ", int h )"
+.br
+.ti -1c
+.BI "void drawEllipse ( const QRect & )"
+.br
+.ti -1c
+.BI "void drawArc ( int " "x" ", int " "y" ", int " "w" ", int " "h" ", int " "a" ", int alen )"
+.br
+.ti -1c
+.BI "void drawArc ( const QRect &, int " "a" ", int alen )"
+.br
+.ti -1c
+.BI "void drawPie ( int " "x" ", int " "y" ", int " "w" ", int " "h" ", int " "a" ", int alen )"
+.br
+.ti -1c
+.BI "void drawPie ( const QRect &, int " "a" ", int alen )"
+.br
+.ti -1c
+.BI "void drawChord ( int " "x" ", int " "y" ", int " "w" ", int " "h" ", int " "a" ", int alen )"
+.br
+.ti -1c
+.BI "void drawChord ( const QRect &, int " "a" ", int alen )"
+.br
+.ti -1c
+.BI "void drawLineSegments ( const QPointArray &, int " "index" "=0, int " "nlines" "=-1 )"
+.br
+.ti -1c
+.BI "void drawPolyline ( const QPointArray &, int " "index" "=0, int " "npoints" "=-1 )"
+.br
+.ti -1c
+.BI "void drawPolygon ( const QPointArray &, bool " "winding" "=FALSE, int " "index" "=0, int " "npoints" "=-1 )"
+.br
+.ti -1c
+.BI "void drawQuadBezier ( const QPointArray &, int " "index" "=0 )"
+.br
+.ti -1c
+.BI "void drawPixmap ( int " "x" ", int " "y" ", const QPixmap &, int " "sx" "=0, int " "sy" "=0, int " "sw" "=-1, int " "sh" "=-1 )"
+.br
+.ti -1c
+.BI "void drawPixmap ( const QPoint &, const QPixmap &, const QRect & sr )"
+.br
+.ti -1c
+.BI "void drawPixmap ( const QPoint &, const QPixmap & )"
+.br
+.ti -1c
+.BI "void drawImage ( int " "x" ", int " "y" ", const QImage &, int " "sx" "=0, int " "sy" "=0, int " "sw" "=-1, int " "sh" "=-1 )"
+.br
+.ti -1c
+.BI "void drawImage ( const QPoint &, const QImage &, const QRect & sr )"
+.br
+.ti -1c
+.BI "void drawImage ( const QPoint &, const QImage & )"
+.br
+.ti -1c
+.BI "void drawTiledPixmap ( int " "x" ", int " "y" ", int " "w" ", int " "h" ", const QPixmap &, int " "sx" "=0, int " "sy" "=0 )"
+.br
+.ti -1c
+.BI "void drawTiledPixmap ( const QRect &, const QPixmap &, const QPoint & )"
+.br
+.ti -1c
+.BI "void drawTiledPixmap ( const QRect &, const QPixmap & )"
+.br
+.ti -1c
+.BI "void drawPicture ( const QPicture & )"
+.br
+.ti -1c
+.BI "void fillRect ( int " "x" ", int " "y" ", int " "w" ", int " "h" ", const QBrush & )"
+.br
+.ti -1c
+.BI "void fillRect ( const QRect &, const QBrush & )"
+.br
+.ti -1c
+.BI "void eraseRect ( int " "x" ", int " "y" ", int " "w" ", int h )"
+.br
+.ti -1c
+.BI "void eraseRect ( const QRect & )"
+.br
+.ti -1c
+.BI "void drawText ( int " "x" ", int " "y" ", const char * " "str" ", int " "len" " = -1 )"
+.br
+.ti -1c
+.BI "void drawText ( const QPoint &, const char * " "str" ", int " "len" " = -1 )"
+.br
+.ti -1c
+.BI "void drawText ( int " "x" ", int " "y" ", int " "w" ", int " "h" ", int " "flags" ", const char * " "str" ", int " "len" " = -1, QRect * " "br" "=0, char ** " "internal" "=0 )"
+.br
+.ti -1c
+.BI "void drawText ( const QRect &, int " "flags" ", const char * " "str" ", int " "len" " = -1, QRect * " "br" "=0, char ** " "internal" "=0 )"
+.br
+.ti -1c
+.BI "QRect boundingRect ( int " "x" ", int " "y" ", int " "w" ", int " "h" ", int " "flags" ", const char * " "str" ", int " "len" " = -1, char ** " "intern" "=0 )"
+.br
+.ti -1c
+.BI "QRect boundingRect ( const QRect &, int " "flags" ", const char * " "str" ", int " "len" " = -1, char ** " "intern" "=0 )"
+.br
+.ti -1c
+.BI "int tabStops () const"
+.br
+.ti -1c
+.BI "void setTabStops ( int )"
+.br
+.ti -1c
+.BI "int* tabArray () const"
+.br
+.ti -1c
+.BI "void setTabArray ( int * )"
+.br
+.ti -1c
+.BI "HANDLE handle () const"
+.br
+.in -1c
+.SS "Static Public Members"
+.in +1c
+.ti -1c
+.BI "void redirect ( QPaintDevice * " "pdev" ", QPaintDevice * replacement )"
+.br
+.ti -1c
+.BI "void initialize ()"
+.br
+.ti -1c
+.BI "void cleanup ()"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "void qDrawShadeLine (QPainter * " "p" ", int " "x1" ", int " "y1" ", int " "x2" ", int " "y2" ", const QColorGroup & " "g" ", bool " "sunken" ", int " "lineWidth" ", int " "midLineWidth" ")"
+.br
+.ti -1c
+.BI "void qDrawShadeRect (QPainter * " "p" ", int " "x" ", int " "y" ", int " "w" ", int " "h" ", const QColorGroup & " "g" ", bool " "sunken" ", int " "lineWidth" ", int " "midLineWidth" ", const QBrush * " "fill" ")"
+.br
+.ti -1c
+.BI "void qDrawShadePanel (QPainter * " "p" ", int " "x" ", int " "y" ", int " "w" ", int " "h" ", const QColorGroup & " "g" ", bool " "sunken" ", int " "lineWidth" ", const QBrush * " "fill" ")"
+.br
+.ti -1c
+.BI "void qDrawWinButton (QPainter * " "p" ", int " "x" ", int " "y" ", int " "w" ", int " "h" ", const QColorGroup & " "g" ", bool " "sunken" ", const QBrush * " "fill" ")"
+.br
+.ti -1c
+.BI "void qDrawWinPanel (QPainter * " "p" ", int " "x" ", int " "y" ", int " "w" ", int " "h" ", const QColorGroup & " "g" ", bool " "sunken" ", const QBrush * " "fill" ")"
+.br
+.ti -1c
+.BI "void qDrawPlainRect (QPainter * " "p" ", int " "x" ", int " "y" ", int " "w" ", int " "h" ", const QColor & " "c" ", int " "lineWidth" ", const QBrush * " "fill" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The QPainter class paints on paint devices.
+.PP
+The painter provides efficient graphics rendering on any QPaintDevice object. QPainter can draw everything from simple lines to complex shapes like pies and chords. It can also draw aligned text and pixmaps.
+.PP
+Graphics can be transformed using view transformation, world transformation or a combination of these two. View transformation is a window/viewport transformation with translation and scaling. World transformation is a full 2D transformation including rotation and shearing.
+.PP
+The typical use of a painter is:
+.IP 1
+Construct a painter.
+.IP 2
+Set a pen, a brush etc.
+.IP 3
+Draw.
+.IP 4
+Destroy the painter.
+.PP
+This example uses a convenience constructor that calls begin(), and relies on the destructor to call end():
+.PP
+.nf
+.br
+    void MyWidget::paintEvent()
+.br
+    {
+.br
+        QPainter paint( this );                 // start painting widget
+.br
+        paint.setPen( blue );                   // set blue pen
+.br
+        paint.drawText( rect(),                 // draw a text, centered
+.br
+                        AlignCenter,            //   in the widget
+.br
+                        "The Text" );
+.br
+    }
+.fi
+.PP
+You can also use the begin() and end() functions to begin and end painting explicitly:
+.PP
+.nf
+.br
+    void MyWidget::paintEvent()
+.br
+    {
+.br
+        QPainter paint;
+.br
+        paint.begin( this );                    // start painting widget
+.br
+        paint.setPen( blue );                   // set blue pen
+.br
+        paint.drawText( rect(),                 // draw a text, centered
+.br
+                        AlignCenter,            //   in the widget
+.br
+                        "The Text" );
+.br
+        paint.end();                            // painting done
+.br
+    }
+.fi
+.PP
+This is useful since it is not possible to have two painters active on the same paint device at a time.
+.PP
+QPainter is almost never used outside paintEvent(). Any widget \fImust\fR be able to repaint itself at any time via paintEvent(), therefore it's almost always best to design the widget so that it does all the painting in paintEvent() and use either QWidget::update() or QWidget::repaint() force a paint event as necessary.
+.PP
+Note that both painters and some paint devices have attributes such as current font, current foreground colors and so on.
+.PP
+QPainter::begin() copies these attributes from the paint device, and changing a paint device's attributes will have effect only the next time a painter is opened on it.
+.PP
+\fBWarning:\fR QPainter::begin() resets all attributes to their default values, from the device, thus setting fonts, brushes, etc, before begin() will have \fIno\fR effect.
+.PP
+See also: QPaintDevice, QWidget and QPixmap.
+.PP
+Examples:
+.(l
+qtimage/qtimage.cpp tictac/tictac.cpp table/table.cpp life/life.cpp grapher/grapher.cpp forever/forever.cpp desktop/desktop.cpp connect/connect.cpp trivial/trivial.cpp tooltip/tooltip.cpp drawdemo/drawdemo.cpp hello/hello.cpp movies/main.cpp picture/picture.cpp xform/xform.cpp application/application.cpp aclock/aclock.cpp progress/progress.cpp qmag/qmag.cpp showimg/showimg.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QPainter::QPainter ()"
+Constructs a painter.
+.PP
+Notice that all painter settings (setPen,setBrush etc.) are reset to default values when begin() is called.
+.PP
+See also: begin() and end().
+.SH "QPainter::QPainter ( const QPaintDevice * pd )"
+Constructs a painter that begins painting the paint device \fIpd\fR immediately.
+.PP
+This constructor is convenient for short-lived painters, e.g. in a paint event and should be used only once. The constructor calls begin() for you and the QPainter destructor automatically calls end().
+.PP
+Example using begin() and end():
+.PP
+.nf
+.br
+    void MyWidget::paintEvent( QPaintEvent * )
+.br
+    {
+.br
+        QPainter p( this );
+.br
+        p.drawLine( ... );      // drawing code
+.br
+    }
+.fi
+.PP
+Example using this constructor:
+.PP
+.nf
+.br
+    void MyWidget::paintEvent( QPaintEvent * )
+.br
+    {
+.br
+        QPainter p( this );
+.br
+        p.drawLine( ... );      // drawing code
+.br
+    }
+.fi
+.PP
+See also: begin() and end().
+.SH "QPainter::QPainter ( const QPaintDevice * pd, const QWidget * copyAttributes )"
+Constructs a painter that begins painting the paint device \fIpd\fR immediately, with the default arguments taken from \fIcopyAttributes.\fR
+.PP
+See also: begin().
+.SH "QPainter::~QPainter ()"
+Destroys the painter.
+.PP
+If you called begin() but not end(), the destructor outputs a warning message. Note that there is no need to call end() if you used one of the constructors which takes a paint device argument.
+.SH "const QColor & QPainter::backgroundColor () const"
+Returns the background color currently set.
+.PP
+See also: setBackgroundColor().
+.SH "BGMode QPainter::backgroundMode () const"
+Returns the background mode currently set.
+.PP
+See also: setBackgroundMode().
+.SH "bool QPainter::begin ( const QPaintDevice * pd )"
+Begins painting the paint device \fIpd\fR and returns TRUE if successful, or FALSE if it cannot begin painting. Call end() when you have finished painting.
+.PP
+On the X Window System, paint commands are buffered and may not appear on the screen immediately. The flush() function flushes the buffer.
+.PP
+As an alternative to calling begin() and end(), you can use the QPainter constructor that takes a paint device argument. This is for short-lived painters, for example in paint events.
+.PP
+This function initializes all painter settings:
+.TP
+The font is set to the default application font, or to the widget's font if \fIpd\fR is a widget.
+.TP
+The pen is set to QPen(black,0,SolidLine), or to QPen(widget->foreground(), 0,SolidLine) if \fIpd\fR is a widget.
+.TP
+The brush is set to QBrush(NoBrush).
+.TP
+The background color is set to white, or to the widget's background color if \fIpd\fR is a widget.
+.TP
+The background mode is set to \fCTransparentMode.\fR
+.TP
+The raster operation is set to \fCCopyROP.\fR
+.TP
+The brush origin is set to (0,0).
+.TP
+The view transformation setting is turned off.
+.TP
+The window is set to the paint device rectangle; (0,0,pd->width(),pd->height()).
+.TP
+The viewport is set to the paint device rectangle; (0,0,pd->width(),pd->height()).
+.TP
+The world transformation setting is turned off.
+.TP
+The world matrix is set to the identify matrix.
+.TP
+Clipping is disabled.
+.TP
+The clip region is set to an empty region.
+.PP
+\fBWarning:\fR A paint device can only be painted by one painter at a time.
+.PP
+See also: end(), flush(), setFont(), setPen(), setBrush(), setBackgroundColor(), setBackgroundMode(), setRasterOp(), setBrushOrigin(), setViewXForm(), setWindow(), setViewport(), setWorldXForm(), setWorldMatrix() and setClipRegion().
+.PP
+Examples:
+.(l
+desktop/desktop.cpp hello/hello.cpp picture/picture.cpp application/application.cpp
+.)l
+.SH "bool QPainter::begin ( const QPaintDevice * pd, const QWidget * copyAttributes )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.PP
+This version opens the painter on a paint device \fIpd\fR and sets the initial pen, background color and font from \fIcopyAttributes.\fR This is equivalent with:
+.PP
+.nf
+.br
+    QPainter p;
+.br
+    p.begin( pd );
+.br
+    p.setPen( copyAttributes->foregroundColor() );
+.br
+    p.setBackgroundColor( copyAttributes->backgroundColor() );
+.br
+    p.setFont( copyAttributes->font() );
+.fi
+.PP
+This begin function is convenient for double buffering. When you draw in a pixmap instead of directly in a widget (to later bitBlt the pixmap into the widget) you will need to set the widgets's font etc. This function does exactly that.
+.PP
+Example:
+.PP
+.nf
+.br
+    void MyWidget::paintEvent( QPaintEvent * )
+.br
+    {
+.br
+        QPixmap pm(rect());
+.br
+        QPainter p;
+.br
+        p.begin(&pm, this);
+.br
+        // ... potential flickering paint operation ...
+.br
+        p.end();
+.br
+        bitBlt(this, 0, 0, &pm);
+.br
+    }
+.fi
+.PP
+See also: end().
+.SH "QRect QPainter::boundingRect ( int x, int y, int w, int h, int tf, const char * str, int len = -1, char ** internal=0 )"
+Returns the bounding rectangle of the aligned text that would be printed with the corresponding drawText() function (the first \fIlen\fR characters from \fIstr).\fR The drawing, and hence the bounding rectangle, is constrained to the rectangle \fI(x,y,w,h).\fR
+.PP
+The \fItf\fR text formatting is the bitwise OR of the following flags:
+.TP
+\fCAlignLeft\fR aligns to the left border.
+.TP
+\fCAlignRight\fR aligns to the right border.
+.TP
+\fCAlignHCenter\fR aligns horizontally centered.
+.TP
+\fCAlignTop\fR aligns to the top border.
+.TP
+\fCAlignBottom\fR aligns to the bottom border.
+.TP
+\fCAlignVCenter\fR aligns vertically centered
+.TP
+\fCAlignCenter\fR (= \fCAlignHCenter\fR | \fCAlignVCenter)\fR
+.TP
+\fCSingleLine\fR ignores newline characters in the text.
+.TP
+\fCExpandTabs\fR expands tabulators.
+.TP
+\fCShowPrefix\fR displays "&x" as "x" underlined.
+.TP
+\fCWordBreak\fR breaks the text to fit the rectangle.
+.PP
+These flags are defined in qwindowdefs.h.
+.PP
+See also: drawText() and fontMetrics().
+.SH "QRect QPainter::boundingRect ( const QRect & r, int tf,const char * str, int len = -1, char ** i=0 )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "const QBrush & QPainter::brush () const"
+Returns the current painter brush.
+.PP
+See also: QPainter::setBrush().
+.SH "const QPoint & QPainter::brushOrigin () const"
+Returns the brush origin currently set.
+.PP
+See also: setBrushOrigin().
+.SH "void QPainter::cleanup () \fC[static]\fR"
+Internal function that cleans up the painter.
+.SH "const QRegion & QPainter::clipRegion () const"
+Returns the clip region currently set. Note that the clip region is given in physical device coordinates and \fInot\fR subject to any coordinate transformation.
+.PP
+See also: setClipRegion(), setClipRect() and setClipping().
+.SH "QPaintDevice * QPainter::device () const"
+Returns the paint device currently active for this painter, or null if begin() has not been called.
+.PP
+See also: QPaintDevice::paintingActive().
+.SH "void QPainter::drawArc ( int x, int y, int w, int h, int a, int alen )"
+Draws an arc defined by the rectangle \fI(x,y,w,h),\fR the start angle \fIa\fR and the arc length \fIalen.\fR
+.PP
+The angles \fIa\fR and \fIalen\fR are 1/16th of a degree, i.e. a full circle equals 5760 (16*360). Positive values of \fIa\fR and \fIalen\fR mean counter-clockwise while negative values mean clockwise direction. Zero degrees is at the 3'o clock position.
+.PP
+Example:
+.PP
+.nf
+.br
+    QPainter p;
+.br
+    p.begin( myWidget );
+.br
+    p.drawArc( 10,10, 70,100, 100*16, 160*16 ); // draws a "(" arc
+.br
+    p.end();
+.fi
+.PP
+See also: drawPie() and drawChord().
+.SH "void QPainter::drawArc ( const QRect & r, int a, int alen )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawChord ( int x, int y, int w, int h, int a, int alen )"
+Draws a chord defined by the rectangle \fI(x,y,w,h),\fR the start angle \fIa\fR and the arc length \fIalen.\fR
+.PP
+The chord is filled with the current brush.
+.PP
+The angles \fIa\fR and \fIalen\fR are 1/16th of a degree, i.e. a full circle equals 5760 (16*360). Positive values of \fIa\fR and \fIalen\fR mean counter-clockwise while negative values mean clockwise direction. Zero degrees is at the 3'o clock position.
+.PP
+See also: drawArc() and drawPie().
+.SH "void QPainter::drawChord ( const QRect & r, int a, int alen )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawEllipse ( int x, int y, int w, int h )"
+Draws an ellipse with center at \fI(x+w/2,y+h/2)\fR and size \fI(w,h).\fR
+.PP
+Examples:
+.(l
+drawdemo/drawdemo.cpp picture/picture.cpp
+.)l
+.SH "void QPainter::drawEllipse ( const QRect & r )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawImage ( int x, int y, const QImage & image, int sx=0, int sy=0, int sw=-1, int sh=-1 )"
+Draws at (\fIx, y)\fR the \fIsw\fR by \fIsh\fR area of pixels from (\fIsx, sy)\fR in \fIimage.\fR
+.PP
+This function simply converts \fIimage\fR to a QPixmap and draws it.
+.PP
+See also: drawPixmap() and QPixmap::convertFromImage().
+.SH "void QPainter::drawImage ( const QPoint &, const QImage & )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawImage ( const QPoint &, const QImage &, const QRect & sr )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawLine ( int x1, int y1, int x2, int y2 )"
+Draws a line from \fI(x1,y2)\fR to \fI(x2,y2).\fR Both endpoints are drawn.
+.PP
+See also: moveTo() and lineTo().
+.PP
+Examples:
+.(l
+table/table.cpp grapher/grapher.cpp connect/connect.cpp aclock/aclock.cpp progress/progress.cpp
+.)l
+.SH "void QPainter::drawLine ( const QPoint & p1, const QPoint & p2 )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawLineSegments ( const QPointArray & a, int index=0, int nlines=-1 )"
+Draws \fInlines\fR separate lines from points defined in \fIa,\fR starting at a[\fIindex].\fR If \fInlines\fR is -1 all points until the end of the array are used (i.e. (a.size()-index)/2 lines are drawn).
+.PP
+Draws the 1st line from \fIa[index]\fR to \fIa[index+1].\fR Draws the 2nd line from \fIa[index+2]\fR to \fIa[index+3]\fR etc.
+.PP
+See also: drawPolyline() and drawPolygon().
+.SH "void QPainter::drawPicture ( const QPicture & pic )"
+Replays the picture \fIpic.\fR
+.PP
+This function does exactly the same as QPicture::play().
+.PP
+Examples:
+.(l
+picture/picture.cpp
+.)l
+.SH "void QPainter::drawPie ( int x, int y, int w, int h, int a, int alen )"
+Draws a pie defined by the rectangle \fI(x,y,w,h),\fR the start angle \fIa\fR and the arc length \fIalen.\fR
+.PP
+The pie is filled with the current brush.
+.PP
+The angles \fIa\fR and \fIalen\fR are 1/16th of a degree, i.e. a full circle equals 5760 (16*360). Positive values of \fIa\fR and \fIalen\fR mean counter-clockwise while negative values mean clockwise direction. Zero degrees is at the 3'o clock position.
+.PP
+See also: drawArc() and drawPie().
+.PP
+Examples:
+.(l
+grapher/grapher.cpp drawdemo/drawdemo.cpp
+.)l
+.SH "void QPainter::drawPie ( const QRect & r, int a, int alen )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawPixmap ( int x, int y, const QPixmap & pixmap, int sx=0, int sy=0, int sw=-1, int sh=-1 )"
+Draws a pixmap at \fI(x,y)\fR by copying a part of the pixmap into the paint device.
+.PP
+Arguments:
+.TP
+\fI(x,y)\fR specify the point in the paint device.
+.TP
+\fI(sx,sy)\fR specify an offset in the pixmap.
+.TP
+\fI(sw,sh)\fR specify the area of the area of the pixmap to be copied. The value -1 means to the right/bottom of the pixmap. The pixmap is clipped if a mask has been set.
+.PP
+See also: bitBlt() and QPixmap::setMask().
+.PP
+Examples:
+.(l
+qtimage/qtimage.cpp grapher/grapher.cpp movies/main.cpp picture/picture.cpp qmag/qmag.cpp showimg/showimg.cpp
+.)l
+.SH "void QPainter::drawPixmap ( const QPoint & p, const QPixmap & pm )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.PP
+This version of the call draws the entire pixmap.
+.SH "void QPainter::drawPixmap ( const QPoint & p, const QPixmap & pm, const QRect & sr )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawPoint ( int x, int y )"
+Draws/plots a single point at \fI(x,y)\fR using the current pen.
+.PP
+Examples:
+.(l
+desktop/desktop.cpp connect/connect.cpp
+.)l
+.SH "void QPainter::drawPoint ( const QPoint & p )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawPoints ( const QPointArray & a, int index=0, int npoints=-1 )"
+Draws/plots an array of points using the current pen. The \fIindex\fR and \fInpoints\fR arguments allow a subsequence of the array to be drawn.
+.SH "void QPainter::drawPolygon ( const QPointArray & a, bool winding=FALSE, int index=0, int npoints=-1 )"
+Draws the polygon defined by the \fInpoints\fR points in \fIa\fR starting at \fIa[index].\fR
+.PP
+If \fInpoints\fR is -1 all points until the end of the array are used (i.e. a.size()-index line segments define the polygon).
+.PP
+The first point is always connected to the last point.
+.PP
+The polygon is filled with the current brush. If \fIwinding\fR is TRUE, the polygon is filled using the winding fill algorithm. If \fIwinding\fR is FALSE, the polygon is filled using the even-odd (alternative) fill algorithm.
+.PP
+See also: drawLineSegments() and drawPolyline().
+.PP
+Examples:
+.(l
+desktop/desktop.cpp picture/picture.cpp aclock/aclock.cpp
+.)l
+.SH "void QPainter::drawPolyline ( const QPointArray & a, int index=0, int npoints=-1 )"
+Draws the polyline defined by the \fInpoints\fR points in \fIa\fR starting at \fIa[index].\fR
+.PP
+If \fInpoints\fR is -1 all points until the end of the array are used (i.e. a.size()-index-1 line segments are drawn).
+.PP
+See also: drawLineSegments() and drawPolygon().
+.PP
+Examples:
+.(l
+drawdemo/drawdemo.cpp
+.)l
+.SH "void QPainter::drawQuadBezier ( const QPointArray & a, int index=0 )"
+Draws a cubic Bezier curve defined by the control points in \fIa,\fR starting at \fIa[index].\fR
+.PP
+\fIa\fR must have 4 points or more. The control point \fIa[index+4]\fR and beyond are ignored.
+.SH "void QPainter::drawRect ( int x, int y, int w, int h )"
+Draws a rectangle with upper left corner at \fI(x,y)\fR and with width \fIw\fR and height \fIh.\fR
+.PP
+See also: drawRoundRect().
+.PP
+Examples:
+.(l
+table/table.cpp grapher/grapher.cpp forever/forever.cpp trivial/trivial.cpp tooltip/tooltip.cpp drawdemo/drawdemo.cpp picture/picture.cpp
+.)l
+.SH "void QPainter::drawRect ( const QRect & r )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawRoundRect ( int x, int y, int w, int h, int xRnd, int yRnd )"
+Draws a rectangle with round corners at \fI(x,y),\fR with width \fIw\fR and height \fIh.\fR
+.PP
+The \fIxRnd\fR and \fIyRnd\fR arguments specify how rounded the corners should be. 0 is angled corners, 99 is maximum roundedness.
+.PP
+The width and height include both lines.
+.PP
+See also: drawRect().
+.PP
+Examples:
+.(l
+drawdemo/drawdemo.cpp
+.)l
+.SH "void QPainter::drawRoundRect ( const QRect & r, int xRnd, int yRnd )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawText ( int x, int y, const char * str, int len = -1 )"
+Draws at most \fIlen\fR characters from \fIstr\fR at position \fI(x,y).\fR
+.PP
+\fI(x,y)\fR is the base line position. Note that the meaning of \fIy\fR is not the same for the two drawText() varieties.
+.PP
+Examples:
+.(l
+table/table.cpp grapher/grapher.cpp desktop/desktop.cpp trivial/trivial.cpp drawdemo/drawdemo.cpp hello/hello.cpp movies/main.cpp picture/picture.cpp application/application.cpp progress/progress.cpp
+.)l
+.SH "void QPainter::drawText ( int x, int y, int w, int h, int tf, const char * str, int len = -1, QRect * brect=0, char ** internal=0 )"
+Draws at most \fIlen\fR characters from \fIstr\fR in the rectangle \fI(x,y,w,h).\fR
+.PP
+Note that the meaning of \fIy\fR is not the same for the two drawText() varieties.
+.PP
+This function draws formatted text. The \fItf\fR text formatting is the bitwise OR of the following flags: 
+.TP
+\fCAlignLeft\fR aligns to the left border.
+.TP
+\fCAlignRight\fR aligns to the right border.
+.TP
+\fCAlignHCenter\fR aligns horizontally centered.
+.TP
+\fCAlignTop\fR aligns to the top border.
+.TP
+\fCAlignBottom\fR aligns to the bottom border.
+.TP
+\fCAlignVCenter\fR aligns vertically centered
+.TP
+\fCAlignCenter\fR (= \fCAlignHCenter\fR | AlignVCenter)
+.TP
+\fCSingleLine\fR ignores newline characters in the text.
+.TP
+\fCDontClip\fR never clips the text to the rectangle.
+.TP
+\fCExpandTabs\fR expands tabulators.
+.TP
+\fCShowPrefix\fR displays "&x" as "x" underlined.
+.TP
+\fCWordBreak\fR breaks the text to fit the rectangle.
+.TP
+\fCGrayText\fR grays out the text.
+.PP
+Horizontal alignment defaults to AlignLeft and vertical alignment defaults to AlignTop.
+.PP
+If several of the horizontal or several of the vertical alignment flags are set, the resulting alignment is undefined.
+.PP
+If ExpandTabs is set and no tab stops or tab array have been set tabs will expand to the closest reasonable tab stop based on the current font. For fixed pitch (fixed width) fonts you are guaranteed that each tab stop will be at a multiple of eight of the width of the characters in the font.
+.PP
+\fIbrect\fR (if non-null) is set to the actual bounding rectangle of the output. \fIinternal\fR is, yes, internal.
+.PP
+These flags are defined in qwindowdefs.h.
+.PP
+See also: boundingRect().
+.SH "void QPainter::drawText ( const QPoint & p, const char * s, int len = -1 )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawText ( const QRect & r, int tf, const char * str, int len = -1, QRect * br=0, char ** i=0 )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawTiledPixmap ( int x, int y, int w, int h, const QPixmap & pixmap, int sx=0, int sy=0 )"
+Draws a tiled \fIpixmap\fR in the specified rectangle.
+.PP
+Arguments:
+.TP
+\fI(x,y,w,h)\fR is the rectangle to be filled.
+.TP
+\fI(sx,sy)\fR spefify an offset in the pixmap. The pixmap is clipped if a mask has been set.
+.PP
+Calling drawTiledPixmap() is similar to calling drawPixmap() several times to fill (tile) an area with a pixmap.
+.PP
+See also: drawPixmap().
+.SH "void QPainter::drawTiledPixmap ( const QRect & r, const QPixmap & pm )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawTiledPixmap ( const QRect & r, const QPixmap & pm, const QPoint & sp )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawWinFocusRect ( int x, int y, int w, int h )"
+Draws a Windows focus rectangle with upper left corner at \fI(x,y)\fR and with width \fIw\fR and height \fIh.\fR
+.PP
+This function draws a stippled XOR rectangle that is used to indicate keyboard focus (when the GUI style is \fCWindowStyle).
+.PP
+\fBWarning:\fR\fR This function draws nothing if the coordinate system has been rotated or sheared.
+.PP
+See also: drawRect() and QApplication::style().
+.SH "void QPainter::drawWinFocusRect ( int x, int y, int w, int h, const QColor & bgColor )"
+Draws a Windows focus rectangle with upper left corner at \fI(x,y)\fR and with width \fIw\fR and height \fIh\fR using a pen color that contrasts with \fIbgColor.\fR
+.PP
+This function draws a stippled rectangle (XOR is not used) that is used to indicate keyboard focus (when the GUI style is \fCWindowStyle).\fR
+.PP
+The pen color used to draw the rectangle is either white or black depending on the grayness of \fIbgColor\fR (see QColor::gray()).
+.PP
+\fBWarning:\fR This function draws nothing if the coordinate system has been rotated or sheared.
+.PP
+See also: drawRect() and QApplication::style().
+.SH "void QPainter::drawWinFocusRect ( const QRect & r )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::drawWinFocusRect ( const QRect & r, const QColor & bgColor )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "bool QPainter::end ()"
+Ends painting. Any resources used while painting are released.
+.PP
+See also: begin().
+.PP
+Examples:
+.(l
+desktop/desktop.cpp hello/hello.cpp picture/picture.cpp application/application.cpp
+.)l
+.SH "void QPainter::eraseRect ( int x, int y, int w, int h )"
+Erases the area inside \fI(x,y,w,h).\fR Equivalent to \fCfillRect( x, y, w, h, backgroundColor() )\fR
+.PP
+Examples:
+.(l
+life/life.cpp showimg/showimg.cpp
+.)l
+.SH "void QPainter::eraseRect ( const QRect & r )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::fillRect ( int x, int y, int w, int h, const QBrush & brush )"
+Fills the rectangle \fI(x,y,w,h)\fR with the \fIbrush.\fR
+.PP
+You can specify a QColor as \fIbrush,\fR since there is a QBrush constructor that takes a QColor argument and creates a solid pattern brush.
+.PP
+See also: drawRect().
+.PP
+Examples:
+.(l
+progress/progress.cpp
+.)l
+.SH "void QPainter::fillRect ( const QRect & r, const QBrush & brush )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::flush ()"
+Flushes any buffered drawing operations.
+.SH "const QFont & QPainter::font () const"
+Returns the current painter font.
+.PP
+See also: setFont() and QFont.
+.SH "QFontInfo QPainter::fontInfo () const"
+Returns the font info for the painter. Font info can only be obtained when the painter is active.
+.PP
+See also: fontMetrics() and isActive().
+.SH "QFontMetrics QPainter::fontMetrics () const"
+Returns the font metrics for the painter. Font metrics can only be obtained when the painter is active.
+.PP
+See also: fontInfo() and isActive().
+.PP
+Examples:
+.(l
+desktop/desktop.cpp drawdemo/drawdemo.cpp movies/main.cpp application/application.cpp
+.)l
+.SH "HANDLE QPainter::handle () const"
+Returns the platform-dependent handle used for drawing.
+.SH "bool QPainter::hasClipping () const"
+Returns TRUE if clipping has been set, otherwise FALSE.
+.PP
+See also: setClipping().
+.SH "bool QPainter::hasViewXForm () const"
+Returns TRUE if view transformation is enabled, otherwise FALSE.
+.PP
+See also: setViewXForm() and xForm().
+.SH "bool QPainter::hasWorldXForm () const"
+Returns TRUE if world transformation is enabled, otherwise FALSE.
+.PP
+See also: setWorldXForm().
+.SH "void QPainter::initialize () \fC[static]\fR"
+Internal function that initializes the painter.
+.SH "bool QPainter::isActive () const"
+Returns the TRUE if the painter is active painting, i.e. begin() has been called and end() has not yet been called.
+.PP
+See also: QPaintDevice::paintingActive().
+.PP
+Examples:
+.(l
+desktop/desktop.cpp
+.)l
+.SH "void QPainter::lineTo ( int x, int y )"
+Draws a line from the current point to \fI(x,y)\fR and sets this to the new current point. Both endpoints are are drawn.
+.PP
+See also: moveTo() and drawLine().
+.SH "void QPainter::lineTo ( const QPoint & p )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::moveTo ( int x, int y )"
+Sets the current point.
+.PP
+See also: lineTo() and drawLine().
+.SH "void QPainter::moveTo ( const QPoint & p )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "const QPen & QPainter::pen () const"
+Returns the current pen for the painter.
+.PP
+See also: setPen().
+.PP
+Examples:
+.(l
+progress/progress.cpp
+.)l
+.SH "RasterOp QPainter::rasterOp () const"
+Returns the raster operation currently set.
+.PP
+See also: setRasterOp().
+.SH "void QPainter::redirect ( QPaintDevice * pdev, QPaintDevice * replacement ) \fC[static]\fR"
+Redirects all paint command for a paint device \fIpdev\fR to another paint device \fIreplacement.\fR
+.PP
+A redirected paint device is reset if \fIreplacement\fR is 0.
+.PP
+The following example redirects painting of a widget to a pixmap:
+.PP
+.nf
+.br
+    QPixmap pm( myWidget->width(), myWidget->height() );
+.br
+    pm.fill( myWidget->backgroundColor() );
+.br
+    QPainter::redirect( myWidget, &pm );
+.br
+    myWidget->repaint( FALSE );
+.br
+    QPainter::redirect( myWidget, 0 );
+.fi
+.SH "void QPainter::resetXForm ()"
+Resets any transformations that were made using translate(), scale(), shear(), rotate(), setWorldMatrix(), setViewport() and setWindow()
+.PP
+See also: worldMatrix(), viewPort() and window().
+.SH "void QPainter::restore ()"
+Restores the current painter state (pops a saved state off the stack).
+.PP
+See also: save().
+.SH "void QPainter::rotate ( float a )"
+Rotates the coordinate system \fIa\fR degrees.
+.PP
+See also: translate(), scale(), shear(), resetXForm(), setWorldMatrix() and xForm().
+.SH "void QPainter::save ()"
+Saves the current painter state (pushes the state onto a stack).
+.PP
+A save() must have a corresponding restore().
+.PP
+See also: restore().
+.SH "void QPainter::scale ( float sx, float sy )"
+Scales the coordinate system by \fI(sx,sy).\fR
+.PP
+See also: translate(), shear(), rotate(), resetXForm(), setWorldMatrix() and xForm().
+.SH "void QPainter::setBackgroundColor ( const QColor & c )"
+Sets the background color of the painter to \fIc.\fR
+.PP
+The background color is the color that is filled in when drawing opaque text, stippled lines and bitmaps. The background color has no effect when transparent background mode is set.
+.PP
+See also: backgroundColor() and setBackgroundMode().
+.SH "void QPainter::setBackgroundMode ( BGMode m )"
+Sets the background mode of the painter to \fIm,\fR which must be one of:
+.TP
+\fCTransparentMode\fR (default)
+.TP
+\fCOpaqueMode\fR
+.PP
+Transparent mode draws stippled lines and text without setting the background pixels. Opaque mode fills these space with the current background color.
+.PP
+In order to draw a bitmap or pixmap transparently, you must use QPixmap::setMask().
+.PP
+See also: backgroundMode() and setBackgroundColor().
+.PP
+Examples:
+.(l
+picture/picture.cpp
+.)l
+.SH "void QPainter::setBrush ( BrushStyle style )"
+Sets a new painter brush with black color and the specified \fIstyle.\fR
+.PP
+See also: brush() and QBrush.
+.SH "void QPainter::setBrush ( const QBrush & brush )"
+Sets a new painter brush.
+.PP
+The brush defines how to fill shapes.
+.PP
+See also: brush().
+.PP
+Examples:
+.(l
+grapher/grapher.cpp forever/forever.cpp desktop/desktop.cpp tooltip/tooltip.cpp drawdemo/drawdemo.cpp picture/picture.cpp aclock/aclock.cpp
+.)l
+.SH "void QPainter::setBrush ( const QColor & color )"
+Sets a new painter brush with the style \fCSolidPattern\fR and the specified \fIcolor.\fR
+.PP
+See also: brush() and QBrush.
+.SH "void QPainter::setBrushOrigin ( int x, int y )"
+Sets the brush origin to \fI(x,y).\fR
+.PP
+The brush origin specifies the (0,0) coordinate of the painter's brush. This setting is only necessary for pattern brushes or pixmap brushes.
+.PP
+See also: brushOrigin().
+.SH "void QPainter::setBrushOrigin ( const QPoint & p )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::setClipRect ( int x, int y, int w, int h )"
+Sets the clip region to \fI(x,y,w,h)\fR and enables clipping.
+.PP
+Note that the clip rectangle is given in physical device coordinates and \fInot\fR subject to any coordinate transformation.
+.PP
+See also: setClipRegion(), clipRegion() and setClipping().
+.PP
+Examples:
+.(l
+qtimage/qtimage.cpp grapher/grapher.cpp trivial/trivial.cpp progress/progress.cpp showimg/showimg.cpp
+.)l
+.SH "void QPainter::setClipRect ( const QRect & r )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::setClipRegion ( const QRegion & rgn )"
+Sets the clip region to \fIrgn\fR and enables clipping.
+.PP
+Note that the clip region is given in physical device coordinates and \fInot\fR subject to any coordinate transformation.
+.PP
+See also: setClipRect(), clipRegion() and setClipping().
+.SH "void QPainter::setClipping ( bool enable )"
+Enables clipping if \fIenable\fR is TRUE, or disables clipping if \fIenable\fR is FALSE.
+.PP
+See also: hasClipping(), setClipRect() and setClipRegion().
+.SH "void QPainter::setFont ( const QFont & font )"
+Sets a new painter font.
+.PP
+This font is used by all subsequent drawText() functions. The text color is the same as the pen color.
+.PP
+See also: font() and drawText().
+.PP
+Examples:
+.(l
+grapher/grapher.cpp drawdemo/drawdemo.cpp hello/hello.cpp movies/main.cpp picture/picture.cpp application/application.cpp
+.)l
+.SH "void QPainter::setPen ( PenStyle style )"
+Sets a new painter pen with style \fCstyle,\fR width 0 and black color.
+.PP
+See also: pen() and QPen.
+.SH "void QPainter::setPen ( const QColor & color )"
+Sets a new painter pen with style \fCSolidLine,\fR width 0 and the specified \fIcolor.\fR
+.PP
+See also: pen() and QPen.
+.SH "void QPainter::setPen ( const QPen & pen )"
+Sets a new painter pen.
+.PP
+The pen defines how to draw lines and outlines, and it also defines the text color.
+.PP
+See also: pen().
+.PP
+Examples:
+.(l
+table/table.cpp grapher/grapher.cpp forever/forever.cpp desktop/desktop.cpp connect/connect.cpp drawdemo/drawdemo.cpp hello/hello.cpp movies/main.cpp progress/progress.cpp
+.)l
+.SH "void QPainter::setRasterOp ( RasterOp r )"
+Sets the raster operation to \fIr.\fR
+.PP
+The \fIr\fR parameter must be one of:
+.TP
+\fCCopyROP:\fR dst = src.
+.TP
+\fCOrROP:\fR dst = dst OR src.
+.TP
+\fCXorROP:\fR dst = dst XOR src.
+.TP
+\fCEraseROP:\fR dst = (NOT src) AND dst
+.TP
+\fCNotCopyROP:\fR dst = NOT src
+.TP
+\fCNotOrROP:\fR dst = (NOT src) OR dst
+.TP
+\fCNotXorROP:\fR dst = (NOT src) XOR dst
+.TP
+\fCNotEraseROP:\fR dst = src AND dst
+.TP
+\fCNotROP:\fR dst = NOT dst
+.PP
+See also: rasterOp().
+.SH "void QPainter::setTabArray ( int * ta )"
+Set an array containing the tab stops.
+.PP
+Tab stops are used when drawing formatted text with \fCExpandTabs\fR set.
+.PP
+The last tab stop must be 0 (terminates the array).
+.PP
+Notice that setting a tab array overrides any fixed tabulator stop that is set using setTabStops().
+.PP
+See also: tabArray(), setTabStops(), drawText() and fontMetrics().
+.SH "void QPainter::setTabStops ( int ts )"
+Set the number of pixels per tab stop to a fixed number.
+.PP
+Tab stops are used when drawing formatted text with \fCExpandTabs\fR set. This fixed tab stop value has lower precedence than tab array settings.
+.PP
+See also: tabStops(), setTabArray(), drawText() and fontMetrics().
+.SH "void QPainter::setViewXForm ( bool enable )"
+Enables view transformations if \fIenable\fR is TRUE, or disables view transformations if \fIenable\fR is FALSE.
+.PP
+See also: hasViewXForm(), setWindow(), setViewport(), setWorldMatrix(), setWorldXForm() and xForm().
+.SH "void QPainter::setViewport ( int x, int y, int w, int h )"
+Sets the viewport rectangle view transformation for the painter and enables view transformation.
+.PP
+The viewport rectangle is part of the view transformation. The viewport specifies the device coordinate system.
+.PP
+The viewport and the window are initially set to \fI(0,0,width,height),\fR where \fI(width,height)\fR is the pixel size of the paint device.
+.PP
+You can use this method to normalize the coordinate system of the painter when drawing on a part of a paint device. The following example will draw a line from the top left to the bottom right corner of a page, excluding margins:
+.PP
+.nf
+.br
+      QPrinter page;
+.br
+      int margin, pageWidth, pageHeight;
+.br
+      ...
+.br
+      QPainter p( page );
+.br
+      p.setViewPort( margin, margin, pageWidth - margin, pageHeight - margin );
+.br
+      p.drawLine( 0, 0, pageWidth - 2*margin, pageHeight - 2*margin );
+.fi
+.PP
+The setViewPort() method is often used in conjunction with setWindow(), as in this example:
+.PP
+.nf
+.br
+      QPainter p( myWidget );
+.br
+      p.setWindow( 0, 0, 1000, 2000 );
+.br
+      p.setViewport( 100,100, 200,200 );
+.br
+      p.drawPoint( 500, 500 );                  // draws pixel at (150,125)
+.fi
+.PP
+The preceding example sets up a transformation that maps the logical coordinates (0,0,1000,2000) into a (200,200) rectangle at (100,100).
+.PP
+View transformations can be combined with world transformations. World transformations are applied after the view transformations.
+.PP
+See also: viewport(), setWindow(), setViewXForm(), setWorldMatrix(), setWorldXForm() and xForm().
+.SH "void QPainter::setViewport ( const QRect & r )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::setWindow ( int x, int y, int w, int h )"
+Sets the window rectangle view transformation for the painter and enables view transformation.
+.PP
+The window rectangle is part of the view transformation. The window specifies the logical coordinate system.
+.PP
+The window and the viewport are initially set to \fI(0,0,width,height),\fR where \fI(width,height)\fR is the pixel size of the paint device.
+.PP
+You can use this method to normalize the coordinate system of the painter. The following example will draw a vertical line, from top to bottom, at the center of a pixmap, independent of the size of the pixmap:
+.PP
+.nf
+.br
+      int width, height;
+.br
+      ...
+.br
+      QPixmap icon( width, height );
+.br
+      QPainter p( icon );
+.br
+      p.setWindow( 0, 0, 100, 100 );
+.br
+      p.drawLine( 50, 0, 50, 100 );             // draw center line
+.fi
+.PP
+The setWindow() method is often used in conjunction with setViewport(), as in this example:
+.PP
+.nf
+.br
+      QPainter p( myWidget );
+.br
+      p.setWindow( 0, 0, 1000, 2000 );
+.br
+      p.setViewport( 100,100, 200,200 );
+.br
+      p.drawPoint( 500, 500 );                  // draws pixel at (150,125)
+.fi
+.PP
+The preceding example sets up a transformation that maps the logical coordinates (0,0,1000,2000) into a (200,200) rectangle at (100,100).
+.PP
+View transformations can be combined with world transformations. World transformations are applied after the view transformations.
+.PP
+See also: window(), setViewport(), setViewXForm(), setWorldMatrix() and setWorldXForm().
+.PP
+Examples:
+.(l
+forever/forever.cpp drawdemo/drawdemo.cpp
+.)l
+.SH "void QPainter::setWindow ( const QRect & r )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QPainter::setWorldMatrix ( const QWMatrix & m, bool combine=FALSE )"
+Sets the world transformation matrix to \fIm\fR and enables world transformation.
+.PP
+If \fIcombine\fR is TRUE, then \fIm\fR is combined with the current transformation matrix, otherwise \fIm\fR will replace the current transformation matrix.
+.PP
+World transformations are applied after the view transformations (i.e. window and viewport).
+.PP
+If the matrix set is the identity matrix (m11 and m22 are 1.0 and the rest are 0.0), this function calls setWorldXForm(FALSE).
+.PP
+The following functions can transform the coordinate system without using a QWMatrix:
+.TP
+translate()
+.TP
+scale()
+.TP
+shear()
+.TP
+rotate()
+.PP
+They operate on the painter's world matrix and are implemented like this:
+.PP
+.nf
+.br
+    void QPainter::rotate( float a )
+.br
+    {
+.br
+        wxmat.rotate( a );
+.br
+        setWorldMatrix( wxmat );
+.br
+    }
+.fi
+.PP
+See the QWMatrix documentation for a general discussion on coordinate system transformations.
+.PP
+See also: worldMatrix(), setWorldXForm(), setWindow(), setViewport(), setViewXForm() and xForm().
+.PP
+Examples:
+.(l
+drawdemo/drawdemo.cpp aclock/aclock.cpp
+.)l
+.SH "void QPainter::setWorldXForm ( bool enable )"
+Enables world transformations if \fIenable\fR is TRUE, or disables world transformations if \fIenable\fR is FALSE.
+.PP
+See also: setWorldMatrix(), setWindow(), setViewport(), setViewXForm() and xForm().
+.SH "void QPainter::shear ( float sh, float sv )"
+Shears the coordinate system \fI(sh,sv).\fR
+.PP
+See also: translate(), scale(), rotate(), resetXForm(), setWorldMatrix() and xForm().
+.SH "int * QPainter::tabArray () const"
+Returns the tab stop array currently set.
+.PP
+See also: setTabArray().
+.SH "int QPainter::tabStops () const"
+Returns the tab stop setting.
+.PP
+See also: setTabStops().
+.SH "void QPainter::translate ( float dx, float dy )"
+Translates the coordinate system by \fI(dx,dy).\fR
+.PP
+For example, the following code draws a single vertical line 20 pixels high.
+.PP
+.nf
+.br
+    void MyWidget::paintEvent()
+.br
+    {
+.br
+        QPainter paint( this );
+.br
+        paint.drawLine(10,0,10,20);
+.br
+        paint.translate(100.0,100.0);
+.br
+        paint.drawLine(-90,-80,-90,-70);
+.br
+    }
+.fi
+.PP
+See also: scale(), shear(), rotate(), resetXForm(), setWorldMatrix() and xForm().
+.SH "QRect QPainter::viewport () const"
+Returns the viewport rectangle.
+.PP
+See also: setViewport() and setViewXForm().
+.SH "QRect QPainter::window () const"
+Returns the window rectangle.
+.PP
+See also: setWindow() and setViewXForm().
+.SH "const QWMatrix & QPainter::worldMatrix () const"
+Returns the world transformation matrix.
+.PP
+See also: setWorldMatrix().
+.SH "QPoint QPainter::xForm ( const QPoint & pv ) const"
+Returns the point \fIpv\fR transformed from user coordinates to device coordinates.
+.PP
+See also: xFormDev() and QWMatrix::xForm().
+.SH "QPointArray QPainter::xForm ( const QPointArray & av ) const"
+Returns the point array \fIav\fR transformed from user coordinates to device coordinates.
+.PP
+See also: xFormDev() and QWMatrix::xForm().
+.SH "QPointArray QPainter::xForm ( const QPointArray & av, int index, int npoints ) const"
+Returns the point array \fIav\fR transformed from user coordinates to device coordinates. The \fIindex\fR is the first point in the array and \fInpoints\fR denotes the number of points to be transformed. If \fInpoints\fR is negative, all points from \fIav[index]\fR until the last point in the array are transformed.
+.PP
+The returned point array consists of the number of points that were transformed.
+.PP
+Example:
+.PP
+.nf
+.br
+    QPointArray a(10);
+.br
+    QPointArray b;
+.br
+    b = painter.xForm(a,2,4);   // b.size() == 4
+.br
+    b = painter.xForm(a,2,-1);  // b.size() == 8
+.fi
+.PP
+See also: xFormDev() and QWMatrix::xForm().
+.SH "QRect QPainter::xForm ( const QRect & rv ) const"
+Returns the rectangle \fIrv\fR transformed from user coordinates to device coordinates.
+.PP
+If world transformation is enabled and rotation or shearing has been specified, then the bounding rectangle is returned.
+.PP
+See also: xFormDev() and QWMatrix::xForm().
+.SH "QPoint QPainter::xFormDev ( const QPoint & pd ) const"
+Returns the point \fIpv\fR transformed from device coordinates to user coordinates.
+.PP
+See also: xForm() and QWMatrix::xForm().
+.SH "QPointArray QPainter::xFormDev ( const QPointArray & ad ) const"
+Returns the point array \fIav\fR transformed from device coordinates to user coordinates.
+.PP
+See also: xForm() and QWMatrix::xForm().
+.SH "QPointArray QPainter::xFormDev ( const QPointArray & ad, int index, int npoints ) const"
+Returns the point array \fIad\fR transformed from device coordinates to user coordinates. The \fIindex\fR is the first point in the array and \fInpoints\fR denotes the number of points to be transformed. If \fInpoints\fR is negative, all points from \fIav[index]\fR until the last point in the array are transformed.
+.PP
+The returned point array consists of the number of points that were transformed.
+.PP
+Example:
+.PP
+.nf
+.br
+    QPointArray a(10);
+.br
+    QPointArray b;
+.br
+    b = painter.xFormDev(a,1,3);        // b.size() == 3
+.br
+    b = painter.xFormDev(a,1,-1);       // b.size() == 9
+.fi
+.PP
+See also: xForm() and QWMatrix::xForm().
+.SH "QRect QPainter::xFormDev ( const QRect & rd ) const"
+Returns the rectangle \fIrv\fR transformed from device coordinates to user coordinates.
+.PP
+If world transformation is enabled and rotation or shearing is used, then the bounding rectangle is returned.
+.PP
+See also: xForm() and QWMatrix::xForm().
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "void qDrawShadeLine (QPainter * p, int x1, int y1, int x2, int y2, const QColorGroup & g, bool sunken, int lineWidth, int midLineWidth)"
+Draws a horizontal (\fIy1\fR == \fIy2)\fR or vertical (\fIx1\fR == \fIx2)\fR shaded line using the painter \fIp.\fR
+.PP
+Nothing is drawn if \fIy1\fR != y2 and \fIx1\fR != x2 (i.e. the line is neither horizontal nor vertical).
+.PP
+The color group argument \fIg\fR specifies the shading colors (light, dark and middle colors).
+.PP
+The line appears sunken if \fIsunken\fR is TRUE, or raised if \fIsunken\fR is FALSE.
+.PP
+The \fIlineWidth\fR argument specifies the line width for each of the lines. It is not the total line width.
+.PP
+The \fImidLineWidth\fR argument specifies the width of a middle line drawn in the QColorGroup::mid() color.
+.PP
+If you want to use a QFrame widget instead, you can make it display a shaded line, for example \fCQFrame::setFrameStyle( QFrame::HLine | QFrame::Sunken )\fR.
+.PP
+See also: qDrawShadeRect() and qDrawShadePanel().
+.SH "void qDrawShadeRect (QPainter * p, int x, int y, int w, int h, const QColorGroup & g, bool sunken, int lineWidth, int midLineWidth, const QBrush * fill)"
+Draws a shaded rectangle/box given by \fI(x,y,w,h)\fR using the painter \fIp.\fR
+.PP
+The color group argument \fIg\fR specifies the shading colors (light, dark and middle colors).
+.PP
+The rectangle appears sunken if \fIsunken\fR is TRUE, or raised if \fIsunken\fR is FALSE.
+.PP
+The \fIlineWidth\fR argument specifies the line width for each of the lines. It is not the total line width.
+.PP
+The \fImidLineWidth\fR argument specifies the width of a middle line drawn in the QColorGroup::mid() color.
+.PP
+The rectangle interior is filled with the \fI*fill\fR brush unless \fIfill\fR is null.
+.PP
+If you want to use a QFrame widget instead, you can make it display a shaded rectangle, for example \fCQFrame::setFrameStyle( QFrame::Box | QFrame::Raised )\fR.
+.PP
+See also: qDrawShadeLine(), qDrawShadePanel() and qDrawPlainRect().
+.SH "void qDrawShadePanel (QPainter * p, int x, int y, int w, int h, const QColorGroup & g, bool sunken, int lineWidth, const QBrush * fill)"
+Draws a shaded panel given by \fI(x,y,w,h)\fR using the painter \fIp.\fR
+.PP
+The color group argument \fIg\fR specifies the shading colors (light, dark and middle colors).
+.PP
+The panel appears sunken if \fIsunken\fR is TRUE, or raised if \fIsunken\fR is FALSE.
+.PP
+The \fIlineWidth\fR argument specifies the line width.
+.PP
+The panel interior is filled with the \fI*fill\fR brush unless \fIfill\fR is null.
+.PP
+If you want to use a QFrame widget instead, you can make it display a shaded panel, for example \fCQFrame::setFrameStyle( QFrame::Panel | QFrame::Sunken )\fR.
+.PP
+See also: qDrawWinPanel(), qDrawShadeLine() and qDrawShadeRect().
+.PP
+Examples:
+.(l
+tictac/tictac.cpp life/life.cpp
+.)l
+.SH "void qDrawWinButton (QPainter * p, int x, int y, int w, int h, const QColorGroup & g, bool sunken, const QBrush * fill)"
+Draws a Windows-style button given by \fI(x,y,w,h)\fR using the painter \fIp.\fR
+.PP
+The color group argument \fIg\fR specifies the shading colors (light, dark and middle colors).
+.PP
+The button appears sunken if \fIsunken\fR is TRUE, or raised if \fIsunken\fR is FALSE.
+.PP
+The line width is 2 pixels.
+.PP
+The button interior is filled with the \fI*fill\fR brush unless \fIfill\fR is null.
+.PP
+See also: qDrawWinPanel().
+.SH "void qDrawWinPanel (QPainter * p, int x, int y, int w, int h, const QColorGroup & g, bool sunken, const QBrush * fill)"
+Draws a Windows-style panel given by \fI(x,y,w,h)\fR using the painter \fIp.\fR
+.PP
+The color group argument \fIg\fR specifies the shading colors.
+.PP
+The panel appears sunken if \fIsunken\fR is TRUE, or raised if \fIsunken\fR is FALSE.
+.PP
+The line width is 2 pixels.
+.PP
+The button interior is filled with the \fI*fill\fR brush unless \fIfill\fR is null.
+.PP
+If you want to use a QFrame widget instead, you can make it display a shaded panel, for example \fCQFrame::setFrameStyle( QFrame::WinPanel | QFrame::Raised )\fR.
+.PP
+See also: qDrawShadePanel() and qDrawWinButton().
+.SH "void qDrawPlainRect (QPainter * p, int x, int y, int w, int h, const QColor & c, int lineWidth, const QBrush * fill)"
+Draws a plain rectangle given by \fI(x,y,w,h)\fR using the painter \fIp.\fR
+.PP
+The color argument \fIc\fR specifies the line color.
+.PP
+The \fIlineWidth\fR argument specifies the line width.
+.PP
+The rectangle interior is filled with the \fI*fill\fR brush unless \fIfill\fR is null.
+.PP
+If you want to use a QFrame widget instead, you can make it display a shaded rectangle, for example \fCQFrame::setFrameStyle( QFrame::Box | QFrame::Plain )\fR.
+.PP
+See also:  qDrawShadeRect().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qpainter.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

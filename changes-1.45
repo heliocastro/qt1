@@ -1,0 +1,2 @@
+Qt 1.45 is 1.44 with just two X-specific bug-fixes, one wrt. drag and
+drop and the other wrt. italic fonts in postscript output.

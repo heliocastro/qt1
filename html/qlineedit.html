@@ -1,0 +1,323 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QLineEdit Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QLineEdit Class Reference</h1><br clear="all">
+<p>
+The QLineEdit widget is a simple line editor for inputting text.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qlineedit-h.html">qlineedit.h</a>&gt;</code>
+<p>
+Inherits <a href="qwidget.html">QWidget</a>.
+<p><a href="qlineedit-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qlineedit.html#a0"><strong>QLineEdit</strong></a> ( QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qlineedit.html#a1"><strong>~QLineEdit</strong></a> () </span>
+<li><span class="fn">const char* <a href="qlineedit.html#a2"><strong>text</strong></a> () const</span>
+<li><span class="fn">int <a href="qlineedit.html#a3"><strong>maxLength</strong></a> () const</span>
+<li><span class="fn">void <a href="qlineedit.html#a4"><strong>setMaxLength</strong></a> ( int ) </span>
+<li><span class="fn">void <a href="qlineedit.html#a5"><strong>setFrame</strong></a> ( bool ) </span>
+<li><span class="fn">bool <a href="qlineedit.html#a6"><strong>frame</strong></a> () const</span>
+<li><span class="fn">enum <strong><a name="EchoMode"></a>EchoMode</strong> { Normal, NoEcho, Password }</span>
+<li><span class="fn">void <a href="qlineedit.html#a7"><strong>setEchoMode</strong></a> ( EchoMode ) </span>
+<li><span class="fn">EchoMode <a href="qlineedit.html#a8"><strong>echoMode</strong></a> () const</span>
+<li><span class="fn">void <a href="qlineedit.html#a9"><strong>setValidator</strong></a> ( QValidator * ) </span>
+<li><span class="fn">QValidator* <a href="qlineedit.html#b0"><strong>validator</strong></a> () const</span>
+<li><span class="fn">virtual QSize <a href="qlineedit.html#b1"><strong>sizeHint</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qlineedit.html#b2"><strong>setEnabled</strong></a> ( bool ) </span>
+<li><span class="fn">virtual void <a href="qlineedit.html#b3"><strong>setFont</strong></a> ( const QFont &amp; ) </span>
+<li><span class="fn">virtual void <a href="qlineedit.html#b4"><strong>setPalette</strong></a> ( const QPalette &amp; ) </span>
+<li><span class="fn">void <a href="qlineedit.html#b5"><strong>setSelection</strong></a> ( int, int ) </span>
+<li><span class="fn">void <a href="qlineedit.html#b6"><strong>setCursorPosition</strong></a> ( int ) </span>
+<li><span class="fn">int <a href="qlineedit.html#b7"><strong>cursorPosition</strong></a> () const</span>
+<li><span class="fn">bool <a href="qlineedit.html#b8"><strong>validateAndSet</strong></a> ( const char *, int, int, int ) </span>
+<li><span class="fn">void <a href="qlineedit.html#b9"><strong>cut</strong></a> () </span>
+<li><span class="fn">void <a href="qlineedit.html#c0"><strong>copy</strong></a> () const</span>
+<li><span class="fn">void <strong>paste</strong> () </span>
+</ul>
+<h2>Public Slots</h2>
+<ul>
+<li><span class="fn">void <a href="qlineedit.html#c2"><strong>setText</strong></a> ( const char * ) </span>
+<li><span class="fn">void <a href="qlineedit.html#c3"><strong>selectAll</strong></a> () </span>
+<li><span class="fn">void <a href="qlineedit.html#c4"><strong>deselect</strong></a> () </span>
+<li><span class="fn">void <a href="qlineedit.html#c5"><strong>clearValidator</strong></a> () </span>
+<li><span class="fn">void <a href="qlineedit.html#c6"><strong>insert</strong></a> ( const char * ) </span>
+<li><span class="fn">void <a href="qlineedit.html#c7"><strong>clear</strong></a> () </span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qlineedit.html#c8"><strong>textChanged</strong></a> ( const char * ) </span>
+<li><span class="fn">void <a href="qlineedit.html#c9"><strong>returnPressed</strong></a> () </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qlineedit.html#d0"><strong>mousePressEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qlineedit.html#d1"><strong>mouseMoveEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qlineedit.html#d2"><strong>mouseReleaseEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qlineedit.html#d3"><strong>mouseDoubleClickEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qlineedit.html#d4"><strong>keyPressEvent</strong></a> ( QKeyEvent * ) </span>
+<li><span class="fn">virtual void <a href="qlineedit.html#d5"><strong>focusInEvent</strong></a> ( QFocusEvent * ) </span>
+<li><span class="fn">virtual void <a href="qlineedit.html#d6"><strong>focusOutEvent</strong></a> ( QFocusEvent * ) </span>
+<li><span class="fn">virtual void <a href="qlineedit.html#d7"><strong>paintEvent</strong></a> ( QPaintEvent * ) </span>
+<li><span class="fn">virtual void <a href="qlineedit.html#d8"><strong>timerEvent</strong></a> ( QTimerEvent * ) </span>
+<li><span class="fn">virtual void <a href="qlineedit.html#d9"><strong>resizeEvent</strong></a> ( QResizeEvent * ) </span>
+<li><span class="fn">virtual void <a href="qlineedit.html#e0"><strong>leaveEvent</strong></a> ( QEvent * ) </span>
+<li><span class="fn">virtual bool <a href="qlineedit.html#e1"><strong>event</strong></a> ( QEvent * ) </span>
+<li><span class="fn">bool <a href="qlineedit.html#e2"><strong>hasMarkedText</strong></a> () const</span>
+<li><span class="fn">QString <a href="qlineedit.html#e3"><strong>markedText</strong></a> () const</span>
+<li><span class="fn">void <a href="qlineedit.html#e4"><strong>repaintArea</strong></a> ( int, int ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QLineEdit widget is a simple line editor for inputting text.
+<p>
+The default QLineEdit object has its own frame as specified by the
+Windows/Motif style guides, you can turn off the frame by calling
+<a href="qlineedit.html#a5">setFrame</a>( FALSE ).
+<p>It draws the text using its own <a href="qcolorgroup.html">color group:</a> <a href="qcolorgroup.html#a9">colorGroup().text()</a> on
+<a href="qcolorgroup.html#b0">colorGroup().base().</a>  The cursor
+and frame use other colors from same color group, of course.
+<p>QLineEdit can display the content of itself in three ways, depending
+on the current <a href="qlineedit.html#a7">echo mode.</a> The echo
+modes available are: <ul> <li> <code>Normal</code> - display characters as
+they are entered.  This is the default. <li> <code>NoEcho</code> - do not
+display anything. <li> <code>Password</code> - display asterisks instead of
+the characters actually entered. </ul>
+<p>The default key bindings are described in <a href="qlineedit.html#d4">keyPressEvent</a>(); they cannot
+be customized except by inheriting the class.
+<p><img src=qlined-m.gif> <img src=qlined-w.gif>
+<p>See also:  <a href="qmultilineedit.html">QMultiLineEdit</a>, <a href="qlabel.html">QLabel</a>, <a href="qcombobox.html">QComboBox</a>, <a href="guibooks.html#fowler">GUI Design Handbook: Field, Entry,</a> and <a href="guibooks.html#fowler">GUI Design Handbook: Field, Required.</a>
+<p>Examples:
+ <a href="xform-xform-cpp.html#QLineEdit">xform/xform.cpp</a>
+ <a href="layout-layout-cpp.html#QLineEdit">layout/layout.cpp</a>
+ <a href="widgets-widgets-cpp.html#QLineEdit">widgets/widgets.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QLineEdit::QLineEdit ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs a line editor with an empty edit buffer.
+<p>The cursor position is set to the start of the line, the maximum buffer
+size to 32767 characters, and the buffer contents to "".
+<p>The <em>parent</em> and <em>name</em> arguments are sent to the <a href="qwidget.html">QWidget</a> constructor.
+<h3 class="fn"><a name="a1"></a>QLineEdit::~QLineEdit ()</h3>
+<p>Destroys the line editor.
+<h3 class="fn">void <a name="c7"></a>QLineEdit::clear () <code>[slot]</code></h3>
+<p>Syntax sugar for <a href="qlineedit.html#c2">setText</a>( "" ), provided to match no-argument
+signals.
+<h3 class="fn">void <a name="c5"></a>QLineEdit::clearValidator () <code>[slot]</code></h3>
+<p>This slot is equivalent to <a href="qlineedit.html#a9">setValidator</a>( 0 ).
+<h3 class="fn">void <a name="c0"></a>QLineEdit::copy () const</h3>
+<p>Copies the marked text to the clipboard, if there is any.
+<p>See also:  <a href="qlineedit.html#b9">cut</a>() and paste().
+<h3 class="fn">int <a name="b7"></a>QLineEdit::cursorPosition () const</h3>
+<p>Returns the current cursor position for this line edit.
+<p>See also:  <a href="qlineedit.html#b6">setCursorPosition</a>().
+<h3 class="fn">void <a name="b9"></a>QLineEdit::cut ()</h3>
+<p>Copies the marked text to the clipboard and deletes it, if there is
+any.
+<p>If the current validator disallows deleting the marked text, cut()
+will copy it but not delete it.
+<p>See also:  <a href="qlineedit.html#c0">copy</a>() and paste().
+<h3 class="fn">void <a name="c4"></a>QLineEdit::deselect () <code>[slot]</code></h3>
+<p>Deselects all text (i.e. removes marking) and leaves the cursor at the
+current position.
+<h3 class="fn">QLineEdit::EchoMode <a name="a8"></a>QLineEdit::echoMode() const</h3>
+<p>Returns the current echo mode of the line edit.
+<p>See also:  <a href="qlineedit.html#a7">setEchoMode</a>().
+<h3 class="fn">bool <a name="e1"></a>QLineEdit::event ( <a href="qevent.html">QEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Don't use it if you don't mean it.
+<p>Reimplemented from <a href="qobject.html#a2">QObject.</a>
+<h3 class="fn">void <a name="d5"></a>QLineEdit::focusInEvent ( <a href="qfocusevent.html">QFocusEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles the cursor blinking.
+<p>Reimplemented from <a href="qwidget.html#o0">QWidget.</a>
+<h3 class="fn">void <a name="d6"></a>QLineEdit::focusOutEvent ( <a href="qfocusevent.html">QFocusEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles the cursor blinking and selection copying.
+<p>Reimplemented from <a href="qwidget.html#o1">QWidget.</a>
+<h3 class="fn">bool <a name="a6"></a>QLineEdit::frame () const</h3>
+<p>Returns TRUE if the line edit draws itself inside a frame, FALSE
+if it draws itself without any frame.
+<p>The default is to use a frame.
+<p>See also:  <a href="qlineedit.html#a5">setFrame</a>().
+<h3 class="fn">bool <a name="e2"></a>QLineEdit::hasMarkedText () const <code>[protected]</code></h3>
+<p>Returns TRUE if part of the text has been marked by the user (e.g. by
+clicking and dragging).
+<h3 class="fn">void <a name="c6"></a>QLineEdit::insert ( const char * newText ) <code>[slot]</code></h3>
+<p>Removes any currently selected text, inserts <em>newText,</em>
+validates the result and if it is valid, sets it as the new contents
+of the line edit.
+<h3 class="fn">void <a name="d4"></a>QLineEdit::keyPressEvent ( <a href="qkeyevent.html">QKeyEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>The key press event handler converts a key press to some line editor
+action.
+<p>If return or enter is pressed and the current text is valid (or if
+the validator can <a href="qvalidator.html#a3">make the text
+valid</a>), the signal returnPressed is emitted.
+<p>Here are the default key bindings:
+<ul>
+<li><i> Left Arrow </i> Move the cursor one character leftwards
+<li><i> Right Arrow </i> Move the cursor one character rightwards
+<li><i> Backspace </i> Delete the character to the left of the cursor
+<li><i> Home </i> Move the cursor to the beginning of the line
+<li><i> End </i>       Move the cursor to the end of the line
+<li><i> Delete </i> Delete the character to the right of the cursor
+<li><i> Shift - Left Arrow </i> Mark text one character leftwards
+<li><i> Shift - Right Arrow </i> Mark text one character rightwards
+<li><i> Control-A </i> Move the cursor to the beginning of the line
+<li><i> Control-B </i> Move the cursor one character leftwards
+<li><i> Control-C </i> Copy the marked text to the clipboard.
+<li><i> Control-D </i> Delete the character to the right of the cursor
+<li><i> Control-E </i> Move the cursor to the end of the line
+<li><i> Control-F </i> Move the cursor one character rightwards
+<li><i> Control-H </i> Delete the character to the left of the cursor
+<li><i> Control-V </i> Paste the clipboard text into line edit.
+<li><i> Control-X </i> Cut the marked text, copy to clipboard.
+</ul>
+<p>All other keys with valid ASCII codes insert themselves into the line.
+<p>Reimplemented from <a href="qwidget.html#n8">QWidget.</a>
+<h3 class="fn">void <a name="e0"></a>QLineEdit::leaveEvent ( <a href="qevent.html">QEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles selection copying.
+<p>Reimplemented from <a href="qwidget.html#o3">QWidget.</a>
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="e3"></a>QLineEdit::markedText () const <code>[protected]</code></h3>
+<p>Returns the text marked by the user (e.g. by clicking and
+dragging), or 0 if no text is marked.
+<p>See also:  <a href="qlineedit.html#e2">hasMarkedText</a>().
+<h3 class="fn">int <a name="a3"></a>QLineEdit::maxLength () const</h3>
+<p>Returns the current maximum length of the text in the editor.
+<p>See also:  <a href="qlineedit.html#a4">setMaxLength</a>().
+<h3 class="fn">void <a name="d3"></a>QLineEdit::mouseDoubleClickEvent ( <a href="qmouseevent.html">QMouseEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles mouse double click events for this widget.
+<p>Reimplemented from <a href="qwidget.html#n6">QWidget.</a>
+<h3 class="fn">void <a name="d1"></a>QLineEdit::mouseMoveEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse move events for the line editor, primarily for
+marking text.
+<p>Reimplemented from <a href="qwidget.html#n7">QWidget.</a>
+<h3 class="fn">void <a name="d0"></a>QLineEdit::mousePressEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse press events for this widget.
+<p>Reimplemented from <a href="qwidget.html#n4">QWidget.</a>
+<h3 class="fn">void <a name="d2"></a>QLineEdit::mouseReleaseEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse release events for this widget.
+<p>Reimplemented from <a href="qwidget.html#n5">QWidget.</a>
+<h3 class="fn">void <a name="d7"></a>QLineEdit::paintEvent ( <a href="qpaintevent.html">QPaintEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles paint events for the line editor.
+<p>Reimplemented from <a href="qwidget.html#o4">QWidget.</a>
+<h3 class="fn">void <a name="e4"></a>QLineEdit::repaintArea ( int from, int to ) <code>[protected]</code></h3>
+<p>Repaints all characters from <em>from</em> to <em>to.</em> If cursorPos is
+between from and to, ensures that cursorPos is visible.
+<h3 class="fn">void <a name="d9"></a>QLineEdit::resizeEvent ( <a href="qresizeevent.html">QResizeEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles resize events for this widget.
+<p>Reimplemented from <a href="qwidget.html#o6">QWidget.</a>
+<h3 class="fn">void <a name="c9"></a>QLineEdit::returnPressed () <code>[signal]</code></h3>
+<p>This signal is emitted when the return or enter key is pressed.
+<h3 class="fn">void <a name="c3"></a>QLineEdit::selectAll () <code>[slot]</code></h3>
+<p>Selects all text (i.e. marks it) and moves the cursor to the
+end. Useful when a default value has been inserted. If the user
+types before clicking on the widget the selected text will be
+erased.
+<h3 class="fn">void <a name="b6"></a>QLineEdit::setCursorPosition ( int newPos )</h3>
+<p>Set the cursor position for this line edit to <em>newPos</em> and
+repaint accordingly.
+<p>See also:  <a href="qlineedit.html#b7">cursorPosition</a>().
+<h3 class="fn">void <a name="a7"></a>QLineEdit::setEchoMode ( <a href="qlineedit.html">EchoMode</a> mode )</h3>
+<p>Sets the echo mode of the line edit widget.
+<p>The echo modes available are: <ul> <li> <code>Normal</code> - display
+characters as they are entered.  This is the default. <li> <code>NoEcho</code>
+- do not display anything. <li> <code>Password</code> - display asterisks
+instead of the characters actually entered. </ul>
+<p>It is always possible to cut and paste any marked text; only the
+widget's own display is affected.
+<p>See also:  <a href="qlineedit.html#a8">echoMode</a>().
+<h3 class="fn">void <a name="b2"></a>QLineEdit::setEnabled ( bool e ) <code>[virtual]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Reimplemented from <a href="qwidget.html#b2">QWidget.</a>
+<h3 class="fn">void <a name="b3"></a>QLineEdit::setFont ( const <a href="qfont.html">QFont</a> &amp; f ) <code>[virtual]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Reimplemented from <a href="qwidget.html#f9">QWidget.</a>
+<h3 class="fn">void <a name="a5"></a>QLineEdit::setFrame ( bool enable )</h3>
+<p>Sets the line edit to draw itself inside a two-pixel frame if <em>enable</em> is TRUE, and to draw itself without any frame if <em>enable</em> is
+FALSE.
+<p>The default is TRUE.
+<p>See also:  <a href="qlineedit.html#a6">frame</a>() and <a href="qcombobox.html">QComboBox</a>.
+<h3 class="fn">void <a name="a4"></a>QLineEdit::setMaxLength ( int m )</h3>
+<p>Set the maximum length of the text in the editor.  If the text is
+currently too long, it is chopped off at the limit. Any marked text will
+be unmarked.  The cursor position is set to 0 and the first part of the
+string is shown.
+<p>See also:  <a href="qlineedit.html#a3">maxLength</a>().
+<h3 class="fn">void <a name="b4"></a>QLineEdit::setPalette ( const <a href="qpalette.html">QPalette</a> &amp; p ) <code>[virtual]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Reimplemented from <a href="qwidget.html#f7">QWidget.</a>
+<h3 class="fn">void <a name="b5"></a>QLineEdit::setSelection ( int start, int length )</h3>
+<p>Sets the marked area of this line edit to start at <em>start</em> and
+be <em>length</em> characters long.
+<h3 class="fn">void <a name="c2"></a>QLineEdit::setText ( const char * text ) <code>[slot]</code></h3>
+<p>Sets the line editor text to <em>text,</em> clears the selection and moves
+the cursor to the end of the line.
+<p>If necessary the text is truncated to fit <a href="qlineedit.html#a3">maxLength</a>().
+<p>See also:  <a href="qlineedit.html#a2">text</a>().
+<p>Examples:
+ <a href="xform-xform-cpp.html#setText">xform/xform.cpp</a>
+<h3 class="fn">void <a name="a9"></a>QLineEdit::setValidator ( <a href="qvalidator.html">QValidator</a> * v )</h3>
+<p>Sets this line edit to accept input only as accepted by <em>v.</em>
+<p>If <em>v</em> == 0, remove the currently set input validator.  The default
+is no input validator (ie. any input is accepted up to <a href="qlineedit.html#a3">maxLength</a>()).
+<p>See also:  <a href="qlineedit.html#b0">validator</a>() and <a href="qvalidator.html">QValidator</a>.
+<h3 class="fn"><a href="qsize.html">QSize</a> <a name="b1"></a>QLineEdit::sizeHint () const <code>[virtual]</code></h3>
+<p>Returns a size which fits the contents of the line edit.
+<p>The width returned tends to be enough for about 15-20 characters.
+<p>Examples:
+ <a href="layout-layout-cpp.html#sizeHint">layout/layout.cpp</a>
+ <a href="widgets-widgets-cpp.html#sizeHint">widgets/widgets.cpp</a>
+<p>Reimplemented from <a href="qwidget.html#l7">QWidget.</a>
+<h3 class="fn">const char * <a name="a2"></a>QLineEdit::text () const</h3>
+<p>Returns a pointer to the text currently in the line.
+<p>If you need to store the text, you should make a copy of it. This can
+conveniently be done with a <a href="qstring.html">QString</a> object:
+<pre>    <a href="qstring.html">QString</a> s = lineEd-&gt;text();  // makes a copy and stores it in s
+</pre>
+<p>See also:  <a href="qlineedit.html#c2">setText</a>().
+<p>Examples:
+ <a href="xform-xform-cpp.html#text">xform/xform.cpp</a>
+<h3 class="fn">void <a name="c8"></a>QLineEdit::textChanged ( const char * ) <code>[signal]</code></h3>
+<p>This signal is emitted every time the text has changed.
+The argument is the new text.
+<h3 class="fn">void <a name="d8"></a>QLineEdit::timerEvent ( <a href="qtimerevent.html">QTimerEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Not used.
+<p>Reimplemented from <a href="qobject.html#e3">QObject.</a>
+<h3 class="fn">bool <a name="b8"></a>QLineEdit::validateAndSet ( const char * newText, int newPos, int newMarkAnchor, int newMarkDrag )</h3>
+<p>Validates and perhaps sets this line edit to contain <em>newText</em>
+with the cursor at position newPos, with marked text from <em>newMarkAnchor</em> to <em>newMarkDrag.</em>  Returns TRUE if it changes the line
+edit and FALSE if it doesn't.
+<p>If <em>newText</em> contains more than one line is longer than
+<a href="qlineedit.html#a3">maxLength</a>(), validateAndSet() truncates it before testing its
+validity.
+<p>Repaints and emits <a href="qlineedit.html#c8">textChanged</a>() if appropriate.
+<h3 class="fn"><a href="qvalidator.html">QValidator</a> * <a name="b0"></a>QLineEdit::validator () const</h3>
+<p>Returns a pointer to the current input validator, or 0 if no
+validator has been set.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qlineedit.h: 1998/10/23
+<li>qlineedit.cpp: 1998/10/23
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

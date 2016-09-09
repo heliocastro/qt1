@@ -1,0 +1,178 @@
+.TH QGArray 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QGArray \- Internal class for implementing the QArray class
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qgarray.h>\fR
+.PP
+Inherited by QArray.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QGArray ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "QGArray ( int, int )"
+.br
+.ti -1c
+.BI "QGArray ( int size )"
+.br
+.ti -1c
+.BI "QGArray ( const QGArray & a )"
+.br
+.ti -1c
+.BI "virtual \fB~QGArray\fR ()"
+.br
+.ti -1c
+.BI "QGArray& operator= ( const QGArray & a )"
+.br
+.ti -1c
+.BI "virtual void detach ()"
+.br
+.ti -1c
+.BI "char* data () const"
+.br
+.ti -1c
+.BI "uint nrefs () const"
+.br
+.ti -1c
+.BI "uint size () const"
+.br
+.ti -1c
+.BI "bool isEqual ( const QGArray & a ) const"
+.br
+.ti -1c
+.BI "bool resize ( uint newsize )"
+.br
+.ti -1c
+.BI "bool fill ( const char * " "d" ", int " "len" ", uint sz )"
+.br
+.ti -1c
+.BI "QGArray& assign ( const QGArray & a )"
+.br
+.ti -1c
+.BI "QGArray& assign ( const char * " "d" ", uint len )"
+.br
+.ti -1c
+.BI "QGArray& duplicate ( const QGArray & a )"
+.br
+.ti -1c
+.BI "QGArray& duplicate ( const char * " "d" ", uint len )"
+.br
+.ti -1c
+.BI "void store ( const char * " "d" ", uint len )"
+.br
+.ti -1c
+.BI "array_data* sharedBlock () const"
+.br
+.ti -1c
+.BI "void setSharedBlock ( array_data * p )"
+.br
+.ti -1c
+.BI "QGArray& setRawData ( const char * " "d" ", uint len )"
+.br
+.ti -1c
+.BI "void resetRawData ( const char * " "d" ", uint len )"
+.br
+.ti -1c
+.BI "int find ( const char * " "d" ", uint " "index" ", uint sz ) const"
+.br
+.ti -1c
+.BI "int contains ( const char * " "d" ", uint sz ) const"
+.br
+.ti -1c
+.BI "char* at ( uint index ) const"
+.br
+.ti -1c
+.BI "bool setExpand ( uint " "index" ", const char * " "d" ", uint sz )"
+.br
+.ti -1c
+.BI "virtual array_data* newData ()"
+.br
+.ti -1c
+.BI "virtual void deleteData ( array_data * p )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QGArray class is an internal class for implementing the QArray class.
+.PP
+QGArray is a strictly internal class that acts as base class for the QArray template array.
+.PP
+It contains an array of bytes and has no notion of an array element.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QGArray::QGArray ()"
+For internal use only.
+.SH "QGArray::QGArray ( const QGArray & a ) \fC[protected]\fR"
+For internal use only.
+.SH "QGArray::QGArray ( int size ) \fC[protected]\fR"
+For internal use only.
+.SH "QGArray::QGArray ( int, int ) \fC[protected]\fR"
+For internal use only.
+.SH "QGArray::~QGArray () \fC[virtual protected]\fR"
+For internal use only.
+.SH "QGArray & QGArray::assign ( const QGArray & a ) \fC[protected]\fR"
+For internal use only.
+.SH "QGArray & QGArray::assign ( const char * d, uint len ) \fC[protected]\fR"
+For internal use only.
+.SH "char * QGArray::at ( uint index ) const \fC[protected]\fR"
+For internal use only.
+.SH "int QGArray::contains ( const char * d, uint sz ) const \fC[protected]\fR"
+For internal use only.
+.SH "char * QGArray::data () const \fC[protected]\fR"
+For internal use only.
+.SH "void QGArray::deleteData ( array_data * p ) \fC[virtual protected]\fR"
+For internal use only.
+.SH "void QGArray::detach () \fC[virtual protected]\fR"
+For internal use only.
+.PP
+Reimplemented in QBitArray, QArray and QByteArray.
+.SH "QGArray & QGArray::duplicate ( const QGArray & a ) \fC[protected]\fR"
+For internal use only.
+.SH "QGArray & QGArray::duplicate ( const char * d, uint len ) \fC[protected]\fR"
+For internal use only.
+.SH "bool QGArray::fill ( const char * d, int len, uint sz ) \fC[protected]\fR"
+For internal use only.
+.SH "int QGArray::find ( const char * d, uint index, uint sz ) const \fC[protected]\fR"
+For internal use only.
+.SH "bool QGArray::isEqual ( const QGArray & a ) const \fC[protected]\fR"
+For internal use only.
+.SH "array_data * QGArray::newData () \fC[virtual protected]\fR"
+For internal use only.
+.SH "uint QGArray::nrefs () const \fC[protected]\fR"
+For internal use only.
+.SH "QGArray & QGArray::operator= ( const QGArray & a ) \fC[protected]\fR"
+For internal use only.
+.SH "void QGArray::resetRawData ( const char * d, uint len ) \fC[protected]\fR"
+For internal use only.
+.SH "bool QGArray::resize ( uint newsize ) \fC[protected]\fR"
+For internal use only.
+.SH "bool QGArray::setExpand ( uint index, const char * d, uint sz ) \fC[protected]\fR"
+For internal use only.
+.SH "QGArray & QGArray::setRawData ( const char * d, uint len ) \fC[protected]\fR"
+For internal use only.
+.SH "void QGArray::setSharedBlock ( array_data * p ) \fC[protected]\fR"
+For internal use only.
+.SH "array_data * QGArray::sharedBlock () const \fC[protected]\fR"
+For internal use only.
+.SH "uint QGArray::size () const \fC[protected]\fR"
+For internal use only.
+.SH "void QGArray::store ( const char * d, uint len ) \fC[protected]\fR"
+For internal use only.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qgarray.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

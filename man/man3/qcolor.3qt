@@ -1,0 +1,533 @@
+.TH QColor 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QColor \- Colors based on RGB
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qcolor.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QColor ()"
+.br
+.ti -1c
+.BI "QColor ( int " "r" ", int " "g" ", int b )"
+.br
+.ti -1c
+.BI "QColor ( int " "x" ", int " "y" ", int " "z" ", Spec )"
+.br
+.ti -1c
+.BI "QColor ( QRgb " "rgb" ", uint " "pixel" "=0xffffffff )"
+.br
+.ti -1c
+.BI "QColor ( const char * name )"
+.br
+.ti -1c
+.BI "QColor ( const QColor & )"
+.br
+.ti -1c
+.BI "QColor& operator= ( const QColor & )"
+.br
+.ti -1c
+.BI "bool isValid () const"
+.br
+.ti -1c
+.BI "bool isDirty () const"
+.br
+.ti -1c
+.BI "void setNamedColor ( const char * name )"
+.br
+.ti -1c
+.BI "void rgb ( int * " "r" ", int * " "g" ", int * b ) const"
+.br
+.ti -1c
+.BI "QRgb rgb () const"
+.br
+.ti -1c
+.BI "void setRgb ( int " "r" ", int " "g" ", int b )"
+.br
+.ti -1c
+.BI "void setRgb ( QRgb rgb )"
+.br
+.ti -1c
+.BI "int red () const"
+.br
+.ti -1c
+.BI "int green () const"
+.br
+.ti -1c
+.BI "int blue () const"
+.br
+.ti -1c
+.BI "void hsv ( int * " "h" ", int * " "s" ", int * v ) const"
+.br
+.ti -1c
+.BI "void setHsv ( int " "h" ", int " "s" ", int v )"
+.br
+.ti -1c
+.BI "QColor light ( int " "f" " = 150 ) const"
+.br
+.ti -1c
+.BI "QColor dark ( int " "f" " = 200 ) const"
+.br
+.ti -1c
+.BI "bool operator== ( const QColor & c ) const"
+.br
+.ti -1c
+.BI "bool operator!= ( const QColor & c ) const"
+.br
+.ti -1c
+.BI "uint alloc ()"
+.br
+.ti -1c
+.BI "uint pixel () const"
+.br
+.in -1c
+.SS "Static Public Members"
+.in +1c
+.ti -1c
+.BI "bool lazyAlloc ()"
+.br
+.ti -1c
+.BI "void setLazyAlloc ( bool )"
+.br
+.ti -1c
+.BI "int maxColors ()"
+.br
+.ti -1c
+.BI "int numBitPlanes ()"
+.br
+.ti -1c
+.BI "int enterAllocContext ()"
+.br
+.ti -1c
+.BI "void leaveAllocContext ()"
+.br
+.ti -1c
+.BI "int currentAllocContext ()"
+.br
+.ti -1c
+.BI "void destroyAllocContext ( int )"
+.br
+.ti -1c
+.BI "void initialize ()"
+.br
+.ti -1c
+.BI "void cleanup ()"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "QDataStream & operator<< (QDataStream & " "s" ", const QColor & " "c" ")"
+.br
+.ti -1c
+.BI "QDataStream & operator>> (QDataStream & " "s" ", QColor & " "c" ")"
+.br
+.ti -1c
+.BI "int qRed (QRgb " "rgb" ")"
+.br
+.ti -1c
+.BI "int qGreen (QRgb " "rgb" ")"
+.br
+.ti -1c
+.BI "int qBlue (QRgb " "rgb" ")"
+.br
+.ti -1c
+.BI "QRgb qRgb (int " "r" ", int " "g" ", int " "b" ")"
+.br
+.ti -1c
+.BI "int qGray (int " "r" ", int " "g" ", int " "b" ")"
+.br
+.ti -1c
+.BI "int qGray (qRgb " "rgb" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The QColor class provides colors based on RGB.
+.PP
+A color is normally specified in terms of RGB (red,green and blue) components, but it is also possible to specify HSV (hue,saturation and value) or set a color name (the names are copied from from the X11 color database).
+.PP
+In addition to the RGB value, a QColor also has a pixel value. This value is used by the underlying window system to refer to a color. It can be thought of as an index into the display hardware's color table.
+.PP
+There are 19 predefined global QColor objects: \fCblack, white, darkGray, gray, lightGray, red, green, blue, cyan, magenta, yellow, darkRed, darkGreen, darkBlue, darkCyan, darkMagenta, darkYellow, color0\fR and \fCcolor1.\fR
+.PP
+The colors \fCcolor0\fR (zero pixel value) and \fCcolor1\fR (non-zero pixel value) are special colors for drawing in bitmaps.
+.PP
+The QColor class has an efficient, dynamic color allocation strategy. A color is normally allocated the first time it is used (lazy allocation), that is, whenever the pixel() function is called:
+.IP 1
+Is the pixel value valid? If it is, just return it, otherwise, allocate a pixel value.
+.IP 2
+Check an internal hash table to see if we allocated an equal RGB value earlier. If we did, set the pixel value and return.
+.IP 3
+Try to allocate the RGB value. If we succeed, we get a pixel value which we save in the internal table with the RGB value. Return the pixel value.
+.IP 4
+The color could not be allocated. Find the closest matching color and save it in the internal table.
+.PP
+Since many people don't know the HSV color model very well, we'll cover it briefly here.
+.PP
+The RGB model is hardware-oriented. Its representation is close to what most monitors show. In contrast, HSV represents color in a way more suited to traditional human perception of color. For example, the relationships "stronger than", "darker than", "the opposite of" are easily expressed in HSV, but are much harder to express in RGB.
+.PP
+HSV, like RGB, has three components. They are: 
+.TP
+H, for hue, is either 0-360 if the color is chromatic (not gray), or meaningless if it is gray. It represents degrees on the color wheel familiar to most people. Red is 0 (degrees), green is 120 and blue is 240. 
+.TP
+S, for saturation, is 0-255 and the bigger it is, the stronger the color is. Grayish colors have saturation near 0, very strong colors have saturation near 255. 
+.TP
+V, for value, is 0-255 and represents lightness or brightness of the color. 0 is black, 255 is far from black as possible. 
+.PP
+Here are some examples: Pure red is H=0, S=255, V=255. A dark red, moving slightly towards the magenta, could be H=350 (equvalent to -10), S=255, V=180. A grayish light red could have H about 0 (say 350-359 or 0-10), S about 50-100, and S=255.
+.PP
+See also: QPalette, QColorGroup and QApplication::setColorSpec().
+.PP
+Examples:
+.(l
+grapher/grapher.cpp forever/forever.cpp desktop/desktop.cpp connect/connect.cpp drawdemo/drawdemo.cpp hello/hello.cpp picture/picture.cpp xform/xform.cpp progress/progress.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QColor::QColor ()"
+Constructs an invalid color with the RGB value (0,0,0). An invalid color is a color that is not properly set up for the underlying window system.
+.PP
+See also: isValid().
+.SH "QColor::QColor ( QRgb rgb, uint pixel=0xffffffff )"
+Constructs a color with a RGB value and a custom pixel value.
+.PP
+If the \fIpixel\fR = 0xffffffff, then the color uses the RGB value in a standard way. If \fIpixel\fR is something else, then the pixel value will be set directly to \fIpixel\fR (skips the normal allocation procedure).
+.SH "QColor::QColor ( const QColor & c )"
+Constructs a color that is a copy of \fIc.\fR
+.SH "QColor::QColor ( const char * name )"
+Constructs a named color, i.e. loads the color from the color database.
+.PP
+See also: setNamedColor().
+.SH "QColor::QColor ( int r, int g, int b )"
+Constructs a color with the RGB value \fI(r,g,b). r, g\fR and \fIb\fR must be in the range 0..255.
+.PP
+See also: setRgb().
+.SH "QColor::QColor ( int x, int y, int z, Spec colorSpec )"
+Constructs a color with the RGB \fIor\fR HSV value \fI(x,y,z).\fR
+.PP
+The \fI(x,y,z)\fR triplet defines an RGB value if \fIcolorSpec\fR == \fCQColor::Rgb.\fR \fIx\fR (red), \fIy\fR (green) and \fIz\fR (blue) must be in the range 0..255.
+.PP
+The \fI(x,y,z)\fR triplet defines a HSV value if \fIcolorSpec\fR == \fCQColor::Hsv.\fR \fIx\fR (hue) must be in the range -1..360 (-1 means achromatic), and \fIy\fR (saturation) and \fIz\fR (value) must be in the range 0..255.
+.PP
+See also: setRgb() and setHsv().
+.SH "uint QColor::alloc ()"
+Allocates the RGB color and returns the pixel value.
+.PP
+Allocating a color means to obtain a pixel value from the RGB specification. The pixel value is an index into the global color table.
+.PP
+Calling the pixel() function will allocate automatically if the color was not already allocated.
+.PP
+See also: setLazyAlloc() and enterAllocContext().
+.SH "int QColor::blue () const"
+Returns the blue component of the RGB value.
+.SH "void QColor::cleanup () \fC[static]\fR"
+Internal clean up required for QColor. This function is called from the QApplication destructor.
+.PP
+See also: initialize().
+.SH "int QColor::currentAllocContext () \fC[static]\fR"
+Returns the current color allocation context.
+.PP
+The default context is 0.
+.PP
+See also: enterAllocContext() and leaveAllocContext().
+.SH "QColor QColor::dark ( int factor = 200 ) const"
+Returns a darker (or lighter) color.
+.PP
+Returns a darker color if \fIfactor\fR is greater than 100. Setting \fIfactor\fR to 300 returns a color that has one third the brightness.
+.PP
+Returns a lighter color if \fIfactor\fR is less than 100, equal to light(10000 / \fIfactor).\fR
+.PP
+This function converts the current RGB color to HSV, divides V by \fIfactor\fR and converts back to RGB.
+.PP
+See also: light().
+.PP
+Examples:
+.(l
+desktop/desktop.cpp xform/xform.cpp
+.)l
+.SH "void QColor::destroyAllocContext ( int context ) \fC[static]\fR"
+Destroys a color allocation context, \fIcontext.\fR
+.PP
+This function deallocates all colors that were allocated in the specified \fIcontext.\fR If \fIcontext\fR == -1, it frees up all colors that the application has allocated. If \fIcontext\fR == -2, it frees up all colors that the application has allocated, except those in the default context.
+.PP
+The function does nothing for true color displays.
+.PP
+See also: enterAllocContext() and alloc().
+.PP
+Examples:
+.(l
+showimg/showimg.cpp
+.)l
+.SH "int QColor::enterAllocContext () \fC[static]\fR"
+Enters a color allocation context and returns a nonzero unique identifier.
+.PP
+Color allocation contexts are useful for programs that need to allocate many colors and throw them away later, like image viewers. The allocation context functions work for true color displays as well as colormap display, except that QColor::destroyAllocContext() does nothing for true color.
+.PP
+Example:
+.PP
+.nf
+.br
+    QPixmap loadPixmap( const char *fileName )
+.br
+    {
+.br
+        static int alloc_context = 0;
+.br
+        if ( alloc_context )
+.br
+            QColor::destroyAllocContext( alloc_context );
+.br
+        alloc_context = QColor::enterAllocContext();
+.br
+        QPixmap pm( fileName );
+.br
+        QColor::leaveAllocContext();
+.br
+        return pm;
+.br
+    }
+.fi
+.PP
+The example code loads a pixmap from file. It frees up all colors that were allocated the last time loadPixmap() was called.
+.PP
+The initial/default context is 0. Qt keeps a list of colors associated with their allocation contexts. You can call destroyAllocContext() to get rid of all colors that were allocated in a specific context.
+.PP
+Calling enterAllocContext() enters an allocation context. The allocation context lasts until you call leaveAllocContext(). QColor has an internal stack of allocation contexts. Each call to enterAllocContex() must have a corresponding leaveAllocContext().
+.PP
+.nf
+.br
+      // context 0 active
+.br
+    int c1 = QColor::enterAllocContext();       // enter context c1
+.br
+      // context c1 active
+.br
+    int c2 = QColor::enterAllocContext();       // enter context c2
+.br
+      // context c2 active
+.br
+    QColor::leaveAllocContext();                // leave context c2
+.br
+      // context c1 active
+.br
+    QColor::leaveAllocContext();                // leave context c1
+.br
+      // context 0 active
+.br
+      // Now, free all colors that were allocated in context c2
+.br
+    QColor::destroyAllocContext( c2 );
+.fi
+.PP
+You may also want to set the application's color specification. See QApplication::setColorSpec() for more information.
+.PP
+See also: leaveAllocContext(), currentAllocContext(), destroyAllocContext() and QApplication::setColorSpec().
+.SH "int QColor::green () const"
+Returns the green component of the RGB value.
+.SH "void QColor::hsv ( int * h, int * s, int * v ) const"
+Returns the current RGB value as HSV.
+.PP
+Arguments:
+.TP
+\fI*h,\fR hue.
+.TP
+\fI*s,\fR saturation.
+.TP
+\fI*v,\fR value. The hue defines the color. Its range is 0..359 if the color is chromatic and -1 if the color is achromatic. The saturation and value both vary between 0 and 255 inclusive.
+.PP
+See also: setHsv() and rgb().
+.SH "void QColor::initialize () \fC[static]\fR"
+Internal initialization required for QColor. This function is called from the QApplication constructor.
+.PP
+See also: cleanup().
+.SH "bool QColor::isDirty () const"
+Returns TRUE if the color is dirty, i.e. lazy allocation is enabled and an RGB/HSV value has been set but not allocated.
+.PP
+See also: setLazyAlloc(), alloc() and pixel().
+.SH "bool QColor::isValid () const"
+Returns TRUE if the color is invalid, i.e. it was constructed using the default constructor.
+.SH "bool QColor::lazyAlloc () \fC[static]\fR"
+Returns TRUE if lazy color allocation is enabled (on-demand allocation), or FALSE if it is disabled (immediate allocation).
+.PP
+See also: setLazyAlloc().
+.SH "void QColor::leaveAllocContext () \fC[static]\fR"
+Leaves a color allocation context.
+.PP
+See enterAllocContext() for a detailed explanation.
+.PP
+See also: enterAllocContext() and currentAllocContext().
+.PP
+Examples:
+.(l
+showimg/showimg.cpp
+.)l
+.SH "QColor QColor::light ( int factor = 150 ) const"
+Returns a lighter (or darker) color.
+.PP
+Returns a lighter color if \fIfactor\fR is greater than 100. Setting \fIfactor\fR to 150 returns a color that is 50% brighter.
+.PP
+Returns a darker color if \fIfactor\fR is less than 100, equal to dark(10000 / \fIfactor).\fR
+.PP
+This function converts the current RGB color to HSV, multiplies V with \fIfactor\fR and converts back to RGB.
+.PP
+See also: dark().
+.PP
+Examples:
+.(l
+desktop/desktop.cpp xform/xform.cpp
+.)l
+.SH "int QColor::maxColors () \fC[static]\fR"
+Returns the maximum number of colors supported by the underlying window system.
+.SH "int QColor::numBitPlanes () \fC[static]\fR"
+Returns the number of color bit planes for the underlying window system.
+.PP
+The returned values is equal to the default pixmap depth;
+.PP
+See also: QPixmap::defaultDepth().
+.SH "bool QColor::operator!= ( const QColor & c ) const"
+Returns TRUE if this color has different RGB value from \fIc,\fR or FALSE if they have equal RGB values.
+.SH "QColor & QColor::operator= ( const QColor & c )"
+Assigns a copy of the color \fCand\fR returns a reference to this color.
+.SH "bool QColor::operator== ( const QColor & c ) const"
+Returns TRUE if this color has the same RGB value as \fIc,\fR or FALSE if they have different RGB values.
+.SH "uint QColor::pixel () const"
+Returns the pixel value.
+.PP
+This value is used by the underlying window system to refer to a color. It can be thought of as an index into the display hardware's color table.
+.PP
+See also: setLazyAlloc() and alloc().
+.SH "int QColor::red () const"
+Returns the red component of the RGB value.
+.SH "QRgb QColor::rgb () const"
+Returns the RGB value.
+.PP
+Bits 0-7 = red, bits 8-15 = green, bits 16-23 = blue.
+.PP
+The return type \fIQRgb\fR is equivalent to \fCunsigned int.\fR
+.PP
+See also: setRgb() and hsv().
+.SH "void QColor::rgb ( int * r, int * g, int * b ) const"
+Returns the red, green and blue components of the RGB value in \fI*r, *g\fR and \fI*b.\fR The value range for a component is 0..255.
+.PP
+See also: setRgb() and hsv().
+.SH "void QColor::setHsv ( int h, int s, int v )"
+Sets a HSV color value.
+.PP
+Arguments:
+.TP
+\fIh,\fR hue (-1,0..360). -1 means achromatic.
+.TP
+\fIs,\fR saturation (0..255).
+.TP
+\fIv,\fR value (0..255).
+.PP
+See also: hsv() and setRgb().
+.PP
+Examples:
+.(l
+grapher/grapher.cpp drawdemo/drawdemo.cpp progress/progress.cpp
+.)l
+.SH "void QColor::setLazyAlloc ( bool enable ) \fC[static]\fR"
+Enables or disables lazy color allocation.
+.PP
+If lazy allocation is enabled, colors are allocated the first time they are used (upon calling the pixel() function). If lazy allocation is disabled, colors are allocated when they are constructed or when either setRgb() or setHsv() is called.
+.PP
+Lazy color allocation is enabled by default.
+.PP
+See also: lazyAlloc(), pixel() and alloc().
+.SH "void QColor::setNamedColor ( const char * name )"
+Sets the RGB value to that of the named color.
+.PP
+The "#RRGGBB" color format is supported on all platforms, where RR, GG, and BB and hex digits.
+.PP
+A color name may also be a color in the X color database (rgb.txt) , e.g. "steelblue" or "gainsboro". The X color names also work under Qt for Windows.
+.SH "void QColor::setRgb ( QRgb rgb )"
+Sets the RGB value to \fIrgb.\fR
+.PP
+Bits 0-7 = red, bits 8-15 = green, bits 16-23 = blue.
+.PP
+\fBWarning:\fR The bit encoding may change in a future version of Qt. Please use the qRgb() function to compose RGB triplets.
+.PP
+The type \fIQRgb\fR is equivalent to \fCunsigned int.\fR
+.PP
+See also: rgb() and setHsv().
+.SH "void QColor::setRgb ( int r, int g, int b )"
+Sets the RGB value to \fI(r,g,b). r, g\fR and \fIb\fR must be in the range 0..255.
+.PP
+See also: rgb() and setHsv().
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "QDataStream & operator<< (QDataStream & s, const QColor & c)"
+Writes a color object to the stream.
+.PP
+Serialization format: RGB value serialized as an UINT32.
+.SH "QDataStream & operator>> (QDataStream & s, QColor & c)"
+Reads a color object from the stream.
+.SH "int qRed (QRgb rgb)"
+Returns the red component of the RGB triplet \fIrgb.\fR
+.PP
+See also: qRgb() and QColor::red().
+.PP
+Examples:
+.(l
+qmag/qmag.cpp
+.)l
+.SH "int qGreen (QRgb rgb)"
+Returns the green component of the RGB triplet \fIrgb.\fR
+.PP
+See also: qRgb() and QColor::green().
+.PP
+Examples:
+.(l
+qmag/qmag.cpp
+.)l
+.SH "int qBlue (QRgb rgb)"
+Returns the blue component of the RGB triplet \fIrgb.\fR
+.PP
+See also: qRgb() and QColor::blue().
+.PP
+Examples:
+.(l
+qmag/qmag.cpp
+.)l
+.SH "QRgb qRgb (int r, int g, int b)"
+Returns the RGB triplet \fI(r,g,b).\fR
+.PP
+Bits 0-7 = \fIr\fR (red), bits 8-15 = \fIg\fR (green), bits 16-23 = \fIb\fR (blue).
+.PP
+\fBWarning:\fR The bit encoding may change in a future version of Qt.
+.PP
+The return type \fIQRgb\fR is equivalent to \fCunsigned int.\fR
+.PP
+See also: qRed(), qGreen() and qBlue().
+.PP
+Examples:
+.(l
+desktop/desktop.cpp
+.)l
+.SH "int qGray (int r, int g, int b)"
+Returns a gray value 0..255 from the \fI(r,g,b)\fR triplet.
+.PP
+The gray value is calculated using the formula: \fC(r*11 + g*16 + b*5)/32\fR
+.SH "int qGray (qRgb rgb)"
+This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qcolor.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

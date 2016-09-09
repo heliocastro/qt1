@@ -1,0 +1,167 @@
+.TH QButtonGroup 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QButtonGroup \- Organizes QButton widgets in a group
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qbuttongroup.h>\fR
+.PP
+Inherits QGroupBox.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QButtonGroup ( QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "QButtonGroup ( const char * " "title" ", QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QButtonGroup\fR ()"
+.br
+.ti -1c
+.BI "bool isExclusive () const"
+.br
+.ti -1c
+.BI "void setExclusive ( bool )"
+.br
+.ti -1c
+.BI "int insert ( QButton *, int " "id" "=-1 )"
+.br
+.ti -1c
+.BI "void remove ( QButton * )"
+.br
+.ti -1c
+.BI "QButton* find ( int id ) const"
+.br
+.ti -1c
+.BI "void setButton ( int id )"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void pressed ( int id )"
+.br
+.ti -1c
+.BI "void released ( int id )"
+.br
+.ti -1c
+.BI "void clicked ( int id )"
+.br
+.in -1c
+.SS "Protected Slots"
+.in +1c
+.ti -1c
+.BI "void buttonPressed ()"
+.br
+.ti -1c
+.BI "void buttonReleased ()"
+.br
+.ti -1c
+.BI "void buttonClicked ()"
+.br
+.ti -1c
+.BI "void buttonToggled ( bool on )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QButtonGroup widget organizes QButton widgets in a group.
+.PP
+A button group widget makes it easier to deal with groups of buttons. A button in a button group is associated with a unique identifer. The button group emits a clicked() signal with this identifier when the button is clicked. Thus, a button group is an ideal solution when you have several similar buttons and want to connect all their clicked() signals, for example, to one slot.
+.PP
+An exclusive button group switches off all toggle buttons except the one that was clicked. A button group is by default non-exclusive, however, it automatically becomes an exclusive group when a QRadioButton is inserted.
+.PP
+There are two ways of using a button group:
+.IP 1
+The button group is a parent widget of a number of buttons, i.e. the button group is the parent argument in the button contructor. The buttons are assigned identifiers 0, 1, 2 etc. in the order they are created. A QButtonGroup can display a frame and a title because it inherits QGroupBox.
+.IP 2
+The button group is an invisible widget and the contained buttons have some other parent widget. A button must then be manually inserted using the insert() function with an identifer.
+.PP
+By default, the button group's setFont() and setPalette() functions do not change the appearance of the buttons, but you can use setFontPropagation() and setPalettePropagation() to change that.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+See also: QButton, QPushButton, QCheckBox and QRadioButton.
+.PP
+Examples:
+.(l
+drawdemo/drawdemo.cpp xform/xform.cpp pref/pref.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QButtonGroup::QButtonGroup ( QWidget * parent=0, const char * name=0 )"
+Constructs a button group with no title.
+.PP
+The \fIparent\fR and \fIname\fR arguments are passed to the QWidget constructor.
+.SH "QButtonGroup::QButtonGroup ( const char * title, QWidget * parent=0, const char * name=0 )"
+Constructs a button group with a title.
+.PP
+The \fIparent\fR and \fIname\fR arguments are passed to the QWidget constructor.
+.SH "QButtonGroup::~QButtonGroup ()"
+Destroys the button group and its child widgets.
+.SH "void QButtonGroup::buttonClicked () \fC[protected slot]\fR"
+For internal use only.
+.SH "void QButtonGroup::buttonPressed () \fC[protected slot]\fR"
+For internal use only.
+.SH "void QButtonGroup::buttonReleased () \fC[protected slot]\fR"
+For internal use only.
+.SH "void QButtonGroup::buttonToggled ( bool on ) \fC[protected slot]\fR"
+For internal use only.
+.SH "void QButtonGroup::clicked ( int id ) \fC[signal]\fR"
+This signal is emitted when a button in the group is clicked. The \fIid\fR argument is the button's identifier.
+.SH "QButton * QButtonGroup::find ( int id ) const"
+Finds and returns a pointer to the button with the specified identifier \fIid.\fR
+.PP
+Returns null if the button was not found.
+.SH "int QButtonGroup::insert ( QButton * button, int id=-1 )"
+Inserts a button with the identifier \fIid\fR into the button group. Returns the button identifier.
+.PP
+It is not necessary to manually insert buttons that have this button group as their parent widget. An exception is when you want custom identifiers instead of the default 0, 1, 2 etc.
+.PP
+The button is assigned the identifier \fIid\fR or an automatically generated identifier. It works as follows: If \fIid\fR >= 0, this identifier is assigned. If \fIid\fR == -1 (default), the identifier is equal to the number of buttons in the group. If \fIid\fR is any other negative integer, for instance -2, a unique identifier (negative integer <= -2) is generated.
+.PP
+Inserting several buttons with \fIid\fR = -1 assigns the identifers 0, 1, 2, etc.
+.PP
+This function calls setExclusive(TRUE) if \fIbutton\fR is a QRadioButton.
+.PP
+See also: find(), remove() and setExclusive().
+.SH "bool QButtonGroup::isExclusive () const"
+Returns TRUE if the button group is exclusive, otherwise FALSE.
+.PP
+See also: setExclusive().
+.SH "void QButtonGroup::pressed ( int id ) \fC[signal]\fR"
+This signal is emitted when a button in the group is pressed. The \fIid\fR argument is the button's identifier.
+.SH "void QButtonGroup::released ( int id ) \fC[signal]\fR"
+This signal is emitted when a button in the group is released. The \fIid\fR argument is the button's identifier.
+.SH "void QButtonGroup::remove ( QButton * button )"
+Removes a button from the button group.
+.PP
+See also: insert().
+.SH "void QButtonGroup::setButton ( int id )"
+Sets the button with id \fIid\fR to be on, and if this is an exclusive group, all other button in the group to be off.
+.SH "void QButtonGroup::setExclusive ( bool enable )"
+Sets the button group to be exclusive if \fIenable\fR is TRUE, or to be non-exclusive if \fIenable\fR is FALSE.
+.PP
+An exclusive button group switches off all other toggle buttons when one is switched on. This is ideal for groups of radio buttons A non-exclusive group allow many buttons to be swithed on at the same time.
+.PP
+The default setting is FALSE. A button group automatically becomes an exclusive group when a QRadioButton is inserted.
+.PP
+See also:  isExclusive().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qbuttongroup.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

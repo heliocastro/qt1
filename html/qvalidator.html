@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QValidator Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QValidator Class Reference</h1><br clear="all">
+<p>
+The QValidator class provides validation of input text.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qvalidator-h.html">qvalidator.h</a>&gt;</code>
+<p>
+Inherits <a href="qobject.html">QObject</a>.
+<p>Inherited by <a href="qdoublevalidator.html">QDoubleValidator</a> and <a href="qintvalidator.html">QIntValidator</a>.
+<p><a href="qvalidator-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qvalidator.html#a0"><strong>QValidator</strong></a> ( QWidget * parent, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qvalidator.html#a1"><strong>~QValidator</strong></a> () </span>
+<li><span class="fn">virtual State <a href="qvalidator.html#a2"><strong>validate</strong></a> ( QString &amp;, int &amp; ) </span>
+<li><span class="fn">virtual void <a href="qvalidator.html#a3"><strong>fixup</strong></a> ( QString &amp; ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QValidator class provides validation of input text.
+<p>
+The class itself is abstract; two subclasses provide rudimentary
+numeric range checking.
+<p>The class includes two virtual functions, <a href="qvalidator.html#a2">validate</a>() and <a href="qvalidator.html#a3">fixup</a>().
+<p>validate() is pure virtual, so it must be implemented by every
+subclass.  It returns Invalid, Valid or Acceptable depending on
+whether its argument is valid (for the class' definition of valid).
+<p>fixup() is provided for validators that can repair some or all user
+errors.  The default does nothing.  <a href="qlineedit.html">QLineEdit</a>, for example, will
+call fixup() if the user presses Return and the content is not
+currently valid, in case fixup() can do magic.
+<p>QValidator is generally used with QLineEdit, <a href="qspinbox.html">QSpinBox</a> and <a href="qcombobox.html">QComboBox</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QValidator::QValidator ( <a href="qwidget.html">QWidget</a> * parent, const char * name = 0 )</h3>
+<p>Sets up the internal data structures used by the validator.  At
+the moment there aren't any.
+<h3 class="fn"><a name="a1"></a>QValidator::~QValidator ()</h3>
+<p>Deletes the validator and frees any storage and other resources
+used.
+<h3 class="fn">void <a name="a3"></a>QValidator::fixup ( <a href="qstring.html">QString</a> &amp; input ) <code>[virtual]</code></h3>
+<p>Attempts to change <em>to</em> be valid according to this validator's
+rules.  Need not result in a valid string - callers of this function
+must re-test afterwards.  The default does nothing.
+<p>Reimplementation notes:
+<p>Note that <em>input</em> may not be the only <a href="qstring.html">QString</a> object referencing
+this string, so it's almost always necessary to detach() the string
+at the start of the code:
+<p><pre>    input.detach();
+</pre>
+<p>You can change <em>input</em> even if you aren't able to produce a valid
+string.  For example an ISBN validator might want to delete every
+character except digits and "-", even if the result is not a valid
+ISBN, and a last-name validator might want to remove white space
+from the start and end of the string, even if the resulting string
+is not in the list of known last names.
+<h3 class="fn">QValidator::State <a name="a2"></a>QValidator::validate( QString & input, int & pos ) <code>[virtual]</code></h3>
+<p>This pure virtual function returns <code>Invalid</code> if <em>input</em> is invalid
+according to this validator's rules, <code>Valid</code> if it is likely that a
+little more editing will make the input acceptable (e.g. the user
+types '4' into a widget which accepts 10-99) and <code>Acceptable</code> if
+the input is completely acceptable.
+<p>The function can change <em>input</em> and <em>pos</em> (the cursor position) if
+it wants to.
+<p>Reimplemented in <a href="qintvalidator.html#a3">QIntValidator</a> and <a href="qdoublevalidator.html#a3">QDoubleValidator</a>.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qvalidator.h: 1998/08/19
+<li>qvalidator.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,50 @@
+.TH QFileIconProvider 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QFileIconProvider \- Icons for QFileDialog to use
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qfiledialog.h>\fR
+.PP
+Inherits QObject.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QFileIconProvider ( QObject * " "parent" " = 0, const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "virtual const QPixmap* pixmap ( const QFileInfo & )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QFileIconProvider class provides icons for QFileDialog to use.
+.PP
+By default, QFileIconProvider is not used, but any application or library can subclass it, reimplement pixmap() to return a suitable icon, and make all QFileDialog objects use it by calling the static function QFileDialog::setIconProvider().
+.PP
+It's advisable to make all the icons QFileIconProvider returns be of the same size, or at least the same width. This makes the list view look much better.
+.PP
+See also: QFileDialog.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QFileIconProvider::QFileIconProvider ( QObject * parent = 0, const char * name = 0 )"
+Constructs an empty file icon provider.
+.SH "const QPixmap * QFileIconProvider::pixmap ( const QFileInfo & ) \fC[virtual]\fR"
+Returns a pointer to a pixmap suitable for display when the file dialog next to the name of \fIfile.\fR
+.PP
+If pixmap() returns 0, QFileDialog draws nothing.
+.PP
+The default implementation returns 0 in Qt 1.40.  In future versions
+of Qt it may be extended.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qfileiconprovider.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

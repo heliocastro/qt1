@@ -1,0 +1,374 @@
+/****************************************************************************
+** $Id: moc.doc,v 2.11.2.1 1998/09/14 11:25:31 aavit Exp $
+**
+** Moc usage, expanded from the manual page
+**
+** Copyright (C) 1993-1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+/*! \page moc.html
+
+<title>
+Qt toolkit - Using the Meta Object Compiler
+</title></head><body bgcolor="#ffffff">
+
+\postheader
+
+<h1 align=center>Using the Meta Object Compiler</h1><br clear="all">
+
+The Meta Object Compiler, moc among friends, is the program which
+handles the <a href="metaobjects.html">C++ extensions in Qt.</a>
+
+The moc reads a class declaration and produces a C++ source file
+containing the names of all signals and slots for that class (and a
+little more).  This C++ source file the moc outputs must be compiled
+and linked with the implementation of the class (or it can be
+#included into the source file).
+
+Using the moc is introduced in \link t7.html chapter 7 \endlink of the
+Qt Tutorial.  Chapter 7 includes a simple \link t7-makefile.html
+Makefile that uses the moc \endlink and of course source code that
+uses signals and slots.
+
+<h2>Invoking moc</h2>
+
+Here are the command-line options supported by the moc: 
+
+<dl>
+<dt> -o <var>file</var> <dd> Write output to <var>file</var> rather
+than to stdout.
+<dt> -f <dd> Force the generation of an #include statement in the
+output.  This is the default for files whose name matches the regular
+expression \.[hH][^.]* (ie. the extension starts with H or h).  This
+option is only useful if you have header files that do not follow the
+standard naming conventions.
+<dt> -i <dd> Do not generate an #include statement in the output.
+This may be used to run the moc on on a C++ file containing one or
+more class declarations. You should then #include the meta object
+code in the .cpp
+file.  If both -i and -f are present, the last one wins.
+<dt> -nw <dd> Do not generate any warnings.  Discouraged.
+<dt> -ldbg <dd> Write a flood of lex debug information on stdout.
+<dt> -dbg <dd> Treat all non-signal members as slots, for internal
+debugging purposes.  This is not useful for programming Qt clients.
+<dt> -p <var>path</var> <dd> Makes the moc prepend <var>path</var>/ to
+the file name in the generated #include statement (if one is
+generated).
+<dt> -q <var>path</var> <dd> Makes the moc prepend <var>path</var>/ to
+the file name of qt #include files in the generated code.
+</dl>
+
+<h2>Usage</h2>
+moc is almost always invoked by make(1), not by hand.
+
+<p>
+
+moc is typically used with an input file containing class declarations
+like this skeleton:
+\code
+    class YourClass : public QObject {
+        Q_OBJECT
+    public:
+        YourClass( QObject * parent=0,
+                              const char * name=0 );
+        ~YourClass();
+
+    signals:
+
+    public slots:
+
+    };
+\endcode
+
+<p>
+
+Here is a useful makefile rule if you only use GNU make:
+
+\code
+    m%.cpp: %.h
+            moc $< -o $@
+\endcode
+
+<p>
+
+If you want to write portably, you can use individual rules of the
+following form:
+
+\code
+    mNAME.cpp: NAME.h
+            moc $< -o $@
+\endcode
+
+<p>
+
+You must also remember to add <var>mNAME.cpp</var> to your SOURCES
+(substitute your favorite name) variable and <var>mNAME.o</var> to
+your OBJECTS variable.
+
+<p>
+
+(While we prefer to name our C++ source files .cpp, the moc doesn't
+know that, so you can use .C, .cc, .CC, .cxx or even .c++ if you
+prefer.)
+
+<p>
+
+If you have class declarations in C++ files, we recommend that you use
+a makefile rule like this:
+
+\code
+    NAME.o: mNAME.cpp
+    
+    mNAME.cpp: NAME.cpp
+            moc -i $< -o $@
+\endcode
+
+<p>
+
+This guarantees that make(1) will run the moc before it compiles
+<var>NAME.cpp.</var> You can then put
+
+\code
+    #include "nNAME.cpp"
+\endcode
+
+at the end of <var>NAME.cpp,</var> where all the classes declared in
+that file are fully known.
+
+<h2>Diagnostics</h2>
+
+Sometimes you may get linkage errors, saying that
+YourClass::className() is undefined or that YourClass lacks a vtbl.
+Those errors happen most often when you forget to compile the
+moc-generated C++ code or include that object file in the link
+command.
+
+<p>
+
+The moc will warn you about a number of dangerous or illegal constructs.
+
+<h2>Bugs</h2>
+
+The moc does not expand #include or #define, it simply skips any
+preprocessor directives it encounters. This is regrettable, but is
+normally not a problem in practice.
+
+The moc does not handle all of C++.  The main problem is that class
+templates cannot have signals or slots.  This is an important bug.  Here
+is an example:
+
+\code
+    class SomeTemplate<int> : public QFrame {
+        Q_OBJECT
+    [...]
+    signals:
+        void bugInMocDetected( int );
+    };
+\endcode
+
+Less importantly, the following constructs are illegal.  All of them have
+workarounds which we think are better alternatives, so fixing these bugs
+is not a high priority for us.
+
+<h3>Multiple inheritance requires QObject to be first</h3>
+
+If you are using multiple inheritance, moc assumes that the \e first
+inherited class is a subclass of QObject.  Also, be sure that \e only
+the first inherited class is a QObject.
+
+\code
+    class SomeClass : public QObject, public OtherClass {
+    [...]
+    };
+\endcode
+
+This bug is almost impossible to fix; since the moc does not expand
+#include or #define, it cannot find out which one of the base classes is a
+QObject.
+
+<h3>Function pointers can not be arguments to signals or slots</h3>
+
+In most cases where you would consider that, we think inheritance is a
+better alternative.  Here is an example of illegal syntax:
+
+\code
+    class someClass : public QObject {
+        Q_OBJECT
+    [...]
+    public slots:
+        void apply(void (*applyFunction)(QList*, void*), char*);
+    };
+\endcode
+
+<p>
+You can work around this restriction like this:
+\code
+    typedef void (*ApplyFunctionType)(QList*, void*);
+
+    class someClass : public QObject {
+        Q_OBJECT
+    [...]
+    public slots:
+        void apply( ApplyFunctionType, char *);
+    };
+\endcode
+
+<p>
+
+(It may sometimes be even better to replace the function pointer with
+inheritance and virtual functions, signals or slots.)
+
+<h3>Friend declarations can not be placed in signals or slots sections</h3>
+
+Sometimes it will work, but in general, friend declarations can
+not be placed in signals or slots sections.  Put them in the good old
+private, protected or public sections instead.  Here is an example of
+the illegal syntax:
+
+\code
+    class someClass : public QObject {
+        Q_OBJECT
+    [...]
+    signals:
+        friend class ClassTemplate<char>;
+    };
+\endcode
+
+<h3>Signals and slots cannot be upgraded</h3>
+
+The C++ feature of upgrading an inherited member function to
+public status is not extended to cover signals and slots.  Here is an
+illegal example:
+
+\code
+    class Whatever : public QButtonGroup {
+    [...]
+    public slots:
+        void QButtonGroup::buttonPressed;
+    [...]
+    };
+\endcode
+<p>
+The QButtonGroup::buttonPressed() slot is protected.
+<p>
+C++ quiz: What happens if you try to upgrade a protected member
+function which is overloaded?
+<ol>
+<li> All the functions are overloaded.
+<li> That is not legal C++.
+<!-- C++ ARM, section r.11.3 -->
+</ol>
+
+<h3>Type macros can not be used for signal and slot arguments</h3>
+
+Since the moc does not expand #define, type macros that take an argument
+will not work in signals and slots. Here is an illegal example:
+
+\code
+    #ifdef ultrix
+    #define SIGNEDNESS(a) unsigned a
+    #else
+    #define SIGNEDNESS(a) a
+    #endif
+
+    class Whatever : public QObject {
+    [...]
+    signals:
+        void someSignal( SIGNEDNESS(a) );
+    [...]
+    };
+\endcode
+<p>
+A #define without arguments works.
+
+<h3>Nested classes cannot be in the signals or slots sections nor have
+signals or slots</h3>
+
+Here's an example:
+
+\code
+    class A {
+	Q_OBJECT
+    public:
+        class B {
+	public slots:
+	    void b();       // Nested class with slot
+	[....]
+        };
+    signals:
+        class B {
+	    void b();       // Nested class in signals:
+
+	[....]
+        }:
+    };
+\endcode
+
+<h3>Constructors can not be used in signals or slots sections</h3>
+
+It is a mystery to me why anyone would put a constructor on
+either the signals or slots sections.  You can not, anyway (except
+that it happens to work in some cases).  Put them in private,
+protected or public sections, where they belong.  Here is an example
+of the illegal syntax:
+
+\code
+    class SomeClass : public QObject {
+	Q_OBJECT
+    public slots:
+	SomeClass( QObject *parent, const char *name )
+	    : QObject( parent, name ) {}
+    [...]
+    };
+\endcode
+
+<h3>Signals and slots may not have default arguments</h3>
+
+Since signal->slot binding occurs at run-time, it is
+conceptually difficult to use default parameters, which are a
+compile-time phenomenon.  This will fail:
+
+\code
+    class SomeClass : public QObject {
+        Q_OBJECT
+    public slots:
+        void someSlot(int x=100);
+    };
+\endcode
+
+
+<h3>Signals and slots may not have template arguments</h3>
+
+Declaring signals and slots with template-type parameters will not
+work as expected, even though the moc will accept it. Connecting the
+signal to the slot in the following example, the slot will not get
+executed when the signal is emitted:
+
+\code
+   [...]
+   public slots:
+       void MyWidget::setLocation (pair<int,int> location);
+
+   [...]
+   public signals:
+       void MyObject::moved (pair<int,int> location);
+\endcode
+
+However, you can work around this limitation by explicitly typedef'ing
+the parameter types, like this:
+
+\code
+   typedef pair<int,int> IntPair;	
+   [...]
+   public slots:
+       void MyWidget::setLocation (IntPair location);
+
+   [...]
+   public signals:
+       void MyObject::moved (IntPair location);
+\endcode
+
+This will work as expected.
+
+*/

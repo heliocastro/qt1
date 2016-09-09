@@ -1,0 +1,77 @@
+.TH QPrintDialog 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QPrintDialog \- X-only dialog for specifying print-out details
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qprintdialog.h>\fR
+.PP
+Inherits QDialog.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QPrintDialog ( QPrinter *, QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QPrintDialog\fR ()"
+.br
+.ti -1c
+.BI "void setPrinter ( QPrinter *, bool = FALSE )"
+.br
+.ti -1c
+.BI "QPrinter* printer () const"
+.br
+.in -1c
+.SS "Static Public Members"
+.in +1c
+.ti -1c
+.BI "bool getPrinterSetup ( QPrinter * )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QPrintDialog class provides an X-only dialog for specifying print-out details.
+.PP
+It encompasses both the sort of details needed for doing a simple print-out and some print configuration setup.
+.PP
+\fBWarning:\fR For this release, the printer dialog is only available under X11. Use QPrinter::setup() for portability.
+.PP
+At present, the only easy way to use the class is through the static function getPrinterSetup(). You can however also call the global QPrintDialot::getPrinterConfigure(), or subclass in order to extend one of the group boxes.
+.PP
+Note that in 1.40 the printer dialog is a little too high for comfortable use on a small-screen machine. This will be improved on in 2.0.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+The printer dialog, on a large screen, in Motif style.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QPrintDialog::QPrintDialog ( QPrinter * prn, QWidget * parent=0, const char * name=0 )"
+Creates a new modal printer dialog that configures \fIprn\fR and is a child of \fIparent\fR named \fIname.\fR
+.SH "QPrintDialog::~QPrintDialog ()"
+Destroys the object and frees any allocated resources. Does not delete the associated QPrinter object.
+.SH "bool QPrintDialog::getPrinterSetup ( QPrinter * p ) \fC[static]\fR"
+Display a dialog and allow the user to configure the QPrinter \fIp.\fR Returns TRUE if the user clicks OK or presses Enter, FALSE if the user clicks Cancel or presses Escape.
+.PP
+getPrinterSetup() remembers the settings and provides the same settings the next time the dialog is shown.
+.PP
+\fBWarning:\fR For this release, the printer dialog is only available under X11. Use QPrinter::setup() for portability.
+.SH "QPrinter * QPrintDialog::printer () const"
+Returns a pointer to the printer this dialog configures, or 0 if this dialog does not operate on any printer.
+.SH "void QPrintDialog::setPrinter ( QPrinter * p, bool pickUpSettings = FALSE )"
+Sets this dialog to configure \fIp,\fR or no printer if \fIp\fR is
+FALSE.  If \fIpickUpSettings\fR is TRUE, the dialog reads most of its
+settings from \fIprinter.\fR  If \fIpickUpSettings\fR is FALSE (the
+default) the dialog keeps its old settings.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qprintdialog.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

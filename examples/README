@@ -1,0 +1,4 @@
+Look at Makefile and hange the CFLAGS and LFLAGS in Makefile if
+necessary, then just "make" and watch all the examples get made.
+
+You can also make each example individually.

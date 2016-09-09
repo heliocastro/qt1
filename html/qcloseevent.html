@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QCloseEvent Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QCloseEvent Class Reference</h1><br clear="all">
+<p>
+The QCloseEvent class contains parameters that describe a close event.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qevent-h.html">qevent.h</a>&gt;</code>
+<p>
+Inherits <a href="qevent.html">QEvent</a>.
+<p><a href="qcloseevent-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qcloseevent.html#a0"><strong>QCloseEvent</strong></a> () </span>
+<li><span class="fn">bool <a href="qcloseevent.html#a1"><strong>isAccepted</strong></a> () const</span>
+<li><span class="fn">void <a href="qcloseevent.html#a2"><strong>accept</strong></a> () </span>
+<li><span class="fn">void <a href="qcloseevent.html#a3"><strong>ignore</strong></a> () </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QCloseEvent class contains parameters that describe a close event.
+<p>
+Close events are sent to widgets that the user wants to close, usually
+by choosing "Close" from the window menu. They are also sent when you
+call <a href="qwidget.html#k5">QWidget::close</a>() to close a widget from inside the program.
+<p>Close events contain a special accept flag which tells whether the
+receiver wants the widget to be closed.  When a widget accepts the close
+event, it is <a href="qwidget.html#k3">hidden</a>. If it refuses to
+accept the close event, nothing happens.
+<p>The <a href="qapplication.html#b9">main widget</a> of the
+application is a special case. When it accepts the close event, the
+application is immediately <a href="qapplication.html#f0">terminated</a>.
+<p>The event handler <a href="qwidget.html#o7">QWidget::closeEvent</a>() receives close events.
+<p>The default implementation of this event handler accepts the close event.
+This makes Qt <a href="qwidget.html#k3">hide</a> the widget.
+<p><pre>    void QWidget::closeEvent( <a href="qcloseevent.html">QCloseEvent</a> *e )
+    {
+        e-&gt;<a href="qcloseevent.html#a2">accept</a>();                            // hides the widget
+    }
+</pre>
+<p>If you do not want your widget to be hidden, you should reimplement the
+event handler.
+<p><pre>    void MyWidget::closeEvent( <a href="qcloseevent.html">QCloseEvent</a> *e )
+    {
+        e-&gt;<a href="qcloseevent.html#a3">ignore</a>();                            // does not hide the widget
+    }
+</pre>
+<p>If you want your widget to be deleted when it is closed, simply delete
+it in the close event. In this case, calling <a href="qcloseevent.html#a2">QCloseEvent::accept</a>() or
+<a href="qcloseevent.html#a3">QCloseEvent::ignore</a>() makes no difference.<p><strong>Warning:</strong> Be careful.  The code below assumes that the widget was created
+on the heap using the <code>new</code> operator. Even when the widget has been
+created by new doing this is a tricky opreation. Be sure that you cannot
+have any other pointers to the widget hanging around.
+<p><pre>    void MyWidget::closeEvent( <a href="qcloseevent.html">QCloseEvent</a> * )
+    {
+        delete this;
+    }
+</pre>
+<p><a href="qobject.html">QObject</a> emits the <a href="qobject.html#d2">destroyed()</a> signal
+when it is deleted.  This is a useful signal if a widget needs to know
+when another widget is deleted.
+<p>See also:  <a href="qwidget.html#k5">QWidget::close</a>(), <a href="qwidget.html#k3">QWidget::hide</a>(), <a href="qobject.html#d2">QObject::destroyed</a>(), <a href="qapplication.html#b9">QApplication::setMainWidget</a>() and <a href="qapplication.html#f0">QApplication::quit</a>().
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QCloseEvent::QCloseEvent ()</h3>
+<p>Constructs a close event object with the accept parameter flag set to FALSE.
+<h3 class="fn">void <a name="a2"></a>QCloseEvent::accept ()</h3>
+<p>Sets the accep flag of the close event object.
+<p>Setting the accept flag indicates that the receiver of this event agrees
+to close the widget.
+<p>The accept flag is not set by default.
+<p>If you choose to accept in <a href="qwidget.html#o7">QWidget::closeEvent</a>(), the widget will be
+hidden.
+<p>See also:  <a href="qcloseevent.html#a3">ignore</a>() and <a href="qwidget.html#k3">QWidget::hide</a>().
+<h3 class="fn">void <a name="a3"></a>QCloseEvent::ignore ()</h3>
+<p>Clears the accept flag of the close event object.
+<p>Clearing the accept flag indicates that the receiver of this event does not
+want the widget to be hidden.
+<p>The accept flag is not set by default.
+<p>See also:  <a href="qcloseevent.html#a2">accept</a>().
+<h3 class="fn">bool <a name="a1"></a>QCloseEvent::isAccepted () const</h3>
+<p>Returns TRUE if the receiver of the event has agreed to close the widget.
+<p>See also:  <a href="qcloseevent.html#a2">accept</a>() and <a href="qcloseevent.html#a3">ignore</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qevent.h: 1998/10/05
+<li>qdnd_x11.cpp: 1998/12/17
+<li>qevent.cpp: 1999/01/13
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

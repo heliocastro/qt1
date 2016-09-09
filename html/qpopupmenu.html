@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QPopupMenu Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QPopupMenu Class Reference</h1><br clear="all">
+<p>
+The QPopupMenu class provides a popup menu widget.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qpopupmenu-h.html">qpopupmenu.h</a>&gt;</code>
+<p>
+Inherits <a href="qmenudata.html">QMenuData</a> and <a href="qtableview.html">QTableView</a>.
+<p><a href="qpopupmenu-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qpopupmenu.html#a0"><strong>QPopupMenu</strong></a> ( QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qpopupmenu.html#a1"><strong>~QPopupMenu</strong></a> () </span>
+<li><span class="fn">void <a href="qpopupmenu.html#a2"><strong>popup</strong></a> ( const QPoint &amp; pos, int indexAtPoint = 0 ) </span>
+<li><span class="fn">virtual void <a href="qmenudata.html#d0"><strong>updateItem</strong></a> ( int id ) </span>
+<li><span class="fn">void <a href="qpopupmenu.html#a4"><strong>setCheckable</strong></a> ( bool ) </span>
+<li><span class="fn">bool <a href="qpopupmenu.html#a5"><strong>isCheckable</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qpopupmenu.html#a6"><strong>setFont</strong></a> ( const QFont &amp; ) </span>
+<li><span class="fn">virtual void <a href="qpopupmenu.html#a7"><strong>show</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qpopupmenu.html#a8"><strong>hide</strong></a> () </span>
+<li><span class="fn">int <a href="qpopupmenu.html#a9"><strong>exec</strong></a> () </span>
+<li><span class="fn">int <a href="qpopupmenu.html#b0"><strong>exec</strong></a> ( const QPoint &amp; pos, int indexAtPoint = 0 ) </span>
+<li><span class="fn">void <a href="qpopupmenu.html#b1"><strong>setActiveItem</strong></a> ( int ) </span>
+<li><span class="fn">int <strong>idAt</strong> ( int index ) const</span>
+<li><span class="fn">int <a href="qpopupmenu.html#b3"><strong>idAt</strong></a> ( const QPoint &amp; pos ) const</span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qpopupmenu.html#b4"><strong>activated</strong></a> ( int itemId ) </span>
+<li><span class="fn">void <a href="qpopupmenu.html#b5"><strong>highlighted</strong></a> ( int itemId ) </span>
+<li><span class="fn">void <a href="qpopupmenu.html#b6"><strong>activatedRedirect</strong></a> ( int itemId ) </span>
+<li><span class="fn">void <a href="qpopupmenu.html#b7"><strong>highlightedRedirect</strong></a> ( int itemId ) </span>
+<li><span class="fn">void <a href="qpopupmenu.html#b8"><strong>aboutToShow</strong></a> () </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual int <a href="qpopupmenu.html#b9"><strong>cellHeight</strong></a> ( int ) </span>
+<li><span class="fn">virtual int <a href="qpopupmenu.html#c0"><strong>cellWidth</strong></a> ( int ) </span>
+<li><span class="fn">virtual void <a href="qpopupmenu.html#c1"><strong>paintCell</strong></a> ( QPainter *, int, int ) </span>
+<li><span class="fn">virtual void <a href="qpopupmenu.html#c2"><strong>paintEvent</strong></a> ( QPaintEvent * ) </span>
+<li><span class="fn">virtual void <a href="qpopupmenu.html#c3"><strong>mousePressEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qpopupmenu.html#c4"><strong>mouseReleaseEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qpopupmenu.html#c5"><strong>mouseMoveEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qpopupmenu.html#c6"><strong>keyPressEvent</strong></a> ( QKeyEvent * ) </span>
+<li><span class="fn">virtual void <a href="qpopupmenu.html#c7"><strong>timerEvent</strong></a> ( QTimerEvent * ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QPopupMenu class provides a popup menu widget.
+<p>
+The popup widget is different from other widgets in the way it
+relates to the parent widget.
+<p><a href="menu-menu-cpp.html#QPopupMenu">menu/menu.cpp</a> is a typical example of <a href="qmenubar.html">QMenuBar</a> and QPopupMenu use.
+<p><img src=qpopmenu-m.gif> <img src=qpopmenu-w.gif>
+<p>See also:  <a href="qmenubar.html">QMenuBar</a> and <a href="guibooks.html#fowler">GUI Design Handbook: Menu, Drop-Down and Pop-Up</a>
+<p>Examples:
+ <a href="qtimage-qtimage-cpp.html#QPopupMenu">qtimage/qtimage.cpp</a>
+ <a href="grapher-grapher-cpp.html#QPopupMenu">grapher/grapher.cpp</a>
+ <a href="xform-xform-cpp.html#QPopupMenu">xform/xform.cpp</a>
+ <a href="application-application-cpp.html#QPopupMenu">application/application.cpp</a>
+ <a href="menu-menu-cpp.html#QPopupMenu">menu/menu.cpp</a>
+ <a href="progress-progress-cpp.html#QPopupMenu">progress/progress.cpp</a>
+ <a href="layout-layout-cpp.html#QPopupMenu">layout/layout.cpp</a>
+ <a href="showimg-showimg-cpp.html#QPopupMenu">showimg/showimg.cpp</a>
+ <a href="widgets-widgets-cpp.html#QPopupMenu">widgets/widgets.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QPopupMenu::QPopupMenu ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs a popup menu with a null parent and a widget name.
+<p>A popup menu must be a top level widget, i.e. parent must be 0.
+This argument is present merely for API uniformity.
+<h3 class="fn"><a name="a1"></a>QPopupMenu::~QPopupMenu ()</h3>
+<p>Destroys the popup menu.
+<h3 class="fn">void <a name="b8"></a>QPopupMenu::aboutToShow () <code>[signal]</code></h3>
+<p>This signal is emited just before the popup menu is displayed.  You
+can connect it to any slot that sets up the menu contents (e.g. to
+ensure that the right items are enabled).
+<p>See also:  <a href="qmenudata.html#c7">setItemEnabled</a>(), <a href="qmenudata.html#c9">setItemChecked</a>(), <a href="qmenudata.html#a8">insertItem</a>() and <a href="qmenudata.html#b6">removeItem</a>().
+<h3 class="fn">void <a name="b4"></a>QPopupMenu::activated ( int id ) <code>[signal]</code></h3>
+<p>This signal is emitted when a menu item is selected; <em>id</em> is the id
+of the selected item.
+<p>Normally, you will connect each menu item to a single slot using
+<a href="qmenudata.html#a3">QMenuData::insertItem</a>(), but sometimes you will want to connect
+several items to a single slot (most often if the user selects from
+an array).  This signal is handy in such cases.
+<p>See also:  <a href="qpopupmenu.html#b5">highlighted</a>() and <a href="qmenudata.html#a3">QMenuData::insertItem</a>().
+<h3 class="fn">void <a name="b6"></a>QPopupMenu::activatedRedirect ( int id ) <code>[signal]</code></h3>
+<p>For internal use only.
+<h3 class="fn">int <a name="b9"></a>QPopupMenu::cellHeight ( int row ) <code>[virtual protected]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Reimplemented from <a href="qtableview.html#c3">QTableView.</a>
+<h3 class="fn">int <a name="c0"></a>QPopupMenu::cellWidth ( int col ) <code>[virtual protected]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Reimplemented from <a href="qtableview.html#c2">QTableView.</a>
+<h3 class="fn">int <a name="a9"></a>QPopupMenu::exec ()</h3>
+<p>Execute this popup synchronously.
+<p>Similar to the above function, but the position of the
+popup is not set, so you must choose an appropriate position.
+The function move the popup if it is partially off-screen.
+<p>More common usage is to position the popup at the current
+mouse position:
+<pre>      exec(<a href="qcursor.html#c2">QCursor::pos</a>());
+</pre>
+<p>or aligned to a widget:
+<pre>      exec(somewidget.mapToGlobal(<a href="qpoint.html">QPoint</a>(0,0)));
+</pre>
+<h3 class="fn">int <a name="b0"></a>QPopupMenu::exec ( const <a href="qpoint.html">QPoint</a> &amp; pos, int indexAtPoint = 0 )</h3>
+<p>Execute this popup synchronously.
+<p>Opens the popup menu so that the item number <em>indexAtPoint</em> will be
+at the specified <em>global</em> position <em>pos.</em>  To translate a widget's
+local coordinates into global coordinates, use <a href="qwidget.html#e3">QWidget::mapToGlobal</a>().
+<p>The return code is the ID of the selected item, or -1 if no item is
+selected (normally because the user presses Escape).
+<p>Note that all signals are emitted as usual.  If you connect a menu
+item to a slot and call the menu's <a href="qpopupmenu.html#a9">exec</a>(), you get the result both
+via the signal-slot connection and in the return value of exec().
+<p>Common usage is to position the popup at the current
+mouse position:
+<pre>      exec(<a href="qcursor.html#c2">QCursor::pos</a>());
+</pre>
+<p>or aligned to a widget:
+<pre>      exec(somewidget.mapToGlobal(<a href="qpoint.html">QPoint</a>(0,0)));
+</pre>
+<p>See also:  <a href="qpopupmenu.html#a2">popup</a>().
+<h3 class="fn">void <a name="a8"></a>QPopupMenu::hide () <code>[virtual]</code></h3>
+<p>Reimplements <a href="qwidget.html#k3">QWidget::hide</a>() for internal purposes.
+<p>Reimplemented from <a href="qwidget.html#k3">QWidget.</a>
+<h3 class="fn">void <a name="b5"></a>QPopupMenu::highlighted ( int id ) <code>[signal]</code></h3>
+<p>This signal is emitted when a menu item is highlighted; <em>id</em> is the
+id of the highlighted item.
+<p>Normally, you will connect each menu item to a single slot using
+<a href="qmenudata.html#a3">QMenuData::insertItem</a>(), but sometimes you will want to connect
+several items to a single slot (most often if the user selects from
+an array).  This signal is handy in such cases.
+<p>See also:  <a href="qpopupmenu.html#b4">activated</a>() and <a href="qmenudata.html#a3">QMenuData::insertItem</a>().
+<h3 class="fn">void <a name="b7"></a>QPopupMenu::highlightedRedirect ( int id ) <code>[signal]</code></h3>
+<p>For internal use only.
+<h3 class="fn">int <a name="b3"></a>QPopupMenu::idAt ( const <a href="qpoint.html">QPoint</a> &amp; pos ) const</h3>
+<p>Returns the identifier of the menu item at position <em>index</em> in the
+internal list, or -1 if <em>index</em> is out of range.
+<p>See also:  <a href="qmenudata.html#d3">QMenuData::setId</a>() and <a href="qmenudata.html#d1">QMenuData::indexOf</a>().
+<h3 class="fn">bool <a name="a5"></a>QPopupMenu::isCheckable () const</h3>
+<p>Returns whether display of check marks by the menu items is enabled.
+<p>See also:  <a href="qpopupmenu.html#a4">setCheckable</a>() and <a href="qmenudata.html#c9">QMenuData::setItemChecked</a>().
+<h3 class="fn">void <a name="c6"></a>QPopupMenu::keyPressEvent ( <a href="qkeyevent.html">QKeyEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles key press events for the popup menu.
+<p>Reimplemented from <a href="qwidget.html#n8">QWidget.</a>
+<h3 class="fn">void <a name="c5"></a>QPopupMenu::mouseMoveEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse move events for the popup menu.
+<p>Reimplemented from <a href="qwidget.html#n7">QWidget.</a>
+<h3 class="fn">void <a name="c3"></a>QPopupMenu::mousePressEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse press events for the popup menu.
+<p>Reimplemented from <a href="qwidget.html#n4">QWidget.</a>
+<h3 class="fn">void <a name="c4"></a>QPopupMenu::mouseReleaseEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse release events for the popup menu.
+<p>Reimplemented from <a href="qwidget.html#n5">QWidget.</a>
+<h3 class="fn">void <a name="c1"></a>QPopupMenu::paintCell ( <a href="qpainter.html">QPainter</a> * p, int row, int col ) <code>[virtual protected]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Reimplemented from <a href="qtableview.html#f1">QTableView.</a>
+<h3 class="fn">void <a name="c2"></a>QPopupMenu::paintEvent ( <a href="qpaintevent.html">QPaintEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles paint events for the popup menu.
+<p>Reimplemented from <a href="qwidget.html#o4">QWidget.</a>
+<h3 class="fn">void <a name="a2"></a>QPopupMenu::popup ( const <a href="qpoint.html">QPoint</a> &amp; pos, int indexAtPoint = 0 )</h3>
+<p>Opens the popup menu so that the item number <em>indexAtPoint</em> will be
+at the specified <em>global</em> position <em>pos.</em>  To translate a widget's
+local coordinates into global coordinates, use <a href="qwidget.html#e3">QWidget::mapToGlobal</a>().
+<p>Examples:
+ <a href="qtimage-qtimage-cpp.html#popup">qtimage/qtimage.cpp</a>
+<h3 class="fn">void <a name="b1"></a>QPopupMenu::setActiveItem ( int i )</h3>
+<p>Sets the currently active item to <em>i</em> and repaints as necessary.
+<h3 class="fn">void <a name="a4"></a>QPopupMenu::setCheckable ( bool enable )</h3>
+<p>Enables or disables display of check marks by the menu items.
+<p>Notice that checking is always enabled when in windows-style.
+<p>See also:  <a href="qpopupmenu.html#a5">isCheckable</a>() and <a href="qmenudata.html#c9">QMenuData::setItemChecked</a>().
+<p>Examples:
+ <a href="grapher-grapher-cpp.html#setCheckable">grapher/grapher.cpp</a>
+ <a href="progress-progress-cpp.html#setCheckable">progress/progress.cpp</a>
+<h3 class="fn">void <a name="a6"></a>QPopupMenu::setFont ( const <a href="qfont.html">QFont</a> &amp; font ) <code>[virtual]</code></h3>
+<p>Reimplements <a href="qwidget.html#f9">QWidget::setFont</a>() to be able to refresh the popup menu
+when its font changes.
+<p>Reimplemented from <a href="qwidget.html#f9">QWidget.</a>
+<h3 class="fn">void <a name="a7"></a>QPopupMenu::show () <code>[virtual]</code></h3>
+<p>Reimplements <a href="qwidget.html#k2">QWidget::show</a>() for internal purposes.
+<p>Reimplemented from <a href="qwidget.html#k2">QWidget.</a>
+<h3 class="fn">void <a name="c7"></a>QPopupMenu::timerEvent ( <a href="qtimerevent.html">QTimerEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles timer events for the popup menu.
+<p>Reimplemented from <a href="qobject.html#e3">QObject.</a>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qpopupmenu.h: 1999/01/25
+<li>qpopupmenu.cpp: 1999/01/26
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

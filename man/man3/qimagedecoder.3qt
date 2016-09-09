@@ -1,0 +1,77 @@
+.TH QImageDecoder 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QImageDecoder \- Incremental image decoder for all supported image formats
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qasyncimageio.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QImageDecoder ( QImageConsumer * c )"
+.br
+.ti -1c
+.BI "\fB~QImageDecoder\fR ()"
+.br
+.ti -1c
+.BI "const QImage& image ()"
+.br
+.ti -1c
+.BI "int decode ( const uchar * " "buffer" ", int length )"
+.br
+.in -1c
+.SS "Static Public Members"
+.in +1c
+.ti -1c
+.BI "const char* formatName ( const uchar * " "buffer" ", int length )"
+.br
+.ti -1c
+.BI "QStrList inputFormats ()"
+.br
+.ti -1c
+.BI "void registerDecoderFactory ( QImageFormatType * )"
+.br
+.ti -1c
+.BI "void unregisterDecoderFactory ( QImageFormatType * )"
+.br
+.in -1c
+.SH DESCRIPTION
+Incremental image decoder for all supported image formats.
+.PP
+New formats are installed by creating objects of class QImageFormatType, and the QMovie class can be used for using all installed incremental image formats; QImageDecoder is only useful for creating new ways of feeding data to an QImageConsumer.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QImageDecoder::QImageDecoder ( QImageConsumer * c )"
+Constructs a QImageDecoder which will send change information to a given QImageConsumer.
+.SH "QImageDecoder::~QImageDecoder ()"
+Destroys a QImageDecoder. The image it built is destroyed. The decoder built by the factory for the file format is destroyed. The consumer for which it decoded the image is \fInot\fR destroyed.
+.SH "int QImageDecoder::decode ( const uchar * buffer, int length )"
+Call this function to decode some data into image changes. The data will be decoded, sending change information to the QImageConsumer of this QImageDecoder, until one of the change functions of the consumer returns FALSE.
+.PP
+Returns the number of bytes consumed, 0 if consumption is complete, and -1 if decoding fails dur to invalid data.
+.SH "const char* QImageDecoder::formatName ( const uchar * buffer, int length ) \fC[static]\fR"
+Call this function to find the name of the format of the given header. The returned string is statically allocated.
+.PP
+Returns 0 if the format is not recognized.
+.SH "const QImage& QImageDecoder::image ()"
+Returns the image currently being decoded.
+.SH "QStrList QImageDecoder::inputFormats () \fC[static]\fR"
+Returns a sorted list of formats for which asynchronous loading is supported.
+.SH "void QImageDecoder::registerDecoderFactory ( QImageFormatType * f ) \fC[static]\fR"
+Registers a new QImageFormatType. This is not needed in application code as factories call this themselves.
+.SH "void QImageDecoder::unregisterDecoderFactory ( QImageFormatType * f ) \fC[static]\fR"
+Unregisters a new QImageFormatType.  This is not needed in
+application code as factories call this themselves.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qimagedecoder.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

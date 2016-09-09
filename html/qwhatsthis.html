@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QWhatsThis Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QWhatsThis Class Reference</h1><br clear="all">
+<p>
+The QWhatsThis class provides a simple description of any widget, e.g. answering the question "what's this?"
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qwhatsthis-h.html">qwhatsthis.h</a>&gt;</code>
+<p><a href="qwhatsthis-members.html">List of all member functions.</a>
+<h2>Static Public Members</h2>
+<ul>
+<li><span class="fn">void <a href="qwhatsthis.html#a5"><strong>add</strong></a> ( QWidget *, const char *, bool deepCopy = TRUE ) </span>
+<li><span class="fn">void <a href="qwhatsthis.html#a6"><strong>add</strong></a> ( QWidget *, const QPixmap &amp;, const char *, const char *, bool deepCopy = TRUE ) </span>
+<li><span class="fn">void <a href="qwhatsthis.html#a7"><strong>remove</strong></a> ( QWidget * ) </span>
+<li><span class="fn">const char* <a href="qwhatsthis.html#a8"><strong>textFor</strong></a> ( QWidget * ) </span>
+<li><span class="fn">QToolButton* <a href="qwhatsthis.html#a9"><strong>whatsThisButton</strong></a> ( QWidget * parent ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QWhatsThis class provides a simple description of any widget, e.g. answering the question "what's this?"
+<p>
+What's This help lies between tool tips and fully-blown online help
+systems: <ul><li> Tool Tips - flyweight help, extremely brief,
+entirely integrated in the user interface. <li> What's This? - also
+lightweight, but can encompass a three-paragraph explanation.  <li>
+Online Help - can encompass any amount of information, but is
+typically a little slower to call up, a little separated from the
+user's work, and often users feel that using online help is a
+digression from their real task. </ul>
+<p>QWhatsThis, then, offers a single window with a single explanatory
+text, which pops up quickly when the user asks "what's this?", and
+goes away as soon as the user does something else.  There are two
+ways to make QWhatsThis pop up: Click a "What's This?" button and
+then click on some other widget to get help for that other widget,
+or press Shift-F1 to get help for the widget that has keyboard
+focus.
+<p>QWhatsThis provides functions to <a href="qwhatsthis.html#a5">add</a>() and <a href="qwhatsthis.html#a7">remove</a>() What's This help
+for a widget, and it provides a function to create a What's This
+button suitable for typical tool bars.
+<p><img src="whatsthis.gif" width="376" height="239">
+<p>More functionality will be provided in the coming releases of Qt.
+<p>See also:  <a href="qtooltip.html">QToolTip</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn">void <a name="a6"></a>QWhatsThis::add ( <a href="qwidget.html">QWidget</a> * widget, const <a href="qpixmap.html">QPixmap</a> &amp; icon, const char * title, const char * text, bool deepCopy = TRUE ) <code>[static]</code></h3>
+<p>Adds <em>text</em> as What's This help for <em>widget,</em> with title line
+<em>title</em> and icon <em>icon.</em>  If <em>deepCopy</em> is TRUE, QWhatsThis makes
+a deep copy of <em>title</em> and <em>text;</em> if it is FALSE QWhatsThis just
+copies the pointers.
+<h3 class="fn">void <a name="a5"></a>QWhatsThis::add ( <a href="qwidget.html">QWidget</a> * widget, const char * text, bool deepCopy = TRUE ) <code>[static]</code></h3>
+<p>Adds <em>text</em> as What's This help for <em>widget.</em>  If <em>deepCopy</em>
+is TRUE, QWhatsThis makes a deep copy of the string; if it is FALSE
+QWhatsThis just copies the pointer <em>text.</em>
+<p>Examples:
+ <a href="application-application-cpp.html#QWhatsThis::add">application/application.cpp</a>
+<h3 class="fn">void <a name="a7"></a>QWhatsThis::remove ( <a href="qwidget.html">QWidget</a> * widget ) <code>[static]</code></h3>
+<p>Removes the What's This help for <em>widget.</em>
+<p>See also:  <a href="qwhatsthis.html#a5">add</a>().
+<h3 class="fn">const char * <a name="a8"></a>QWhatsThis::textFor ( <a href="qwidget.html">QWidget</a> * widget ) <code>[static]</code></h3>
+<p>Returns the text (not the title) for <em>widget,</em> or 0 if there
+isn't any What's This help for <em>widget.</em>
+<p>See also:  <a href="qwhatsthis.html#a5">add</a>().
+<h3 class="fn"><a href="qtoolbutton.html">QToolButton</a> * <a name="a9"></a>QWhatsThis::whatsThisButton ( <a href="qwidget.html">QWidget</a> * parent ) <code>[static]</code></h3>
+<p>Returns a pointer to a specially configured <a href="qtoolbutton.html">QToolButton</a>, suitable
+for use to enter What's This mode.
+<p>See also:  <a href="qtoolbutton.html">QToolButton</a>.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qwhatsthis.h: 1998/08/19
+<li>qwhatsthis.cpp: 1999/02/01
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

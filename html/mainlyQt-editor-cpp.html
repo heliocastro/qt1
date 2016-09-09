@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - mainlyQt/editor.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Editor Example</h1>
+  <p>
+  This example shows two simple text editors, with most of the
+  program written in Qt.  One editor is a Qt QMultiLineEdit, the
+  other is an Athena Widgets text widget.  They are bound together
+  in a Qt widget.
+<pre>#include "<a name="qxt.h"></a><a href="qxt-h.html">qxt.h</a>"
+#include &lt;<a name="qmultilinedit.h"></a><a href="qmultilinedit-h.html">qmultilinedit.h</a>&gt;
+#include &lt;<a name="qpainter.h"></a><a href="qpainter-h.html">qpainter.h</a>&gt;
+#include &lt;<a name="qmessagebox.h"></a><a href="qmessagebox-h.html">qmessagebox.h</a>&gt;
+#include &lt;X11/Shell.h&gt;
+#include &lt;X11/StringDefs.h&gt;
+#include &lt;X11/Xaw/AsciiText.h&gt;
+
+static const char* QTEDMSG =
+    "This is a Qt widget.\nIt is a QMultiLineEdit.";
+
+static const char* XTEDMSG =
+    "This is an Xt widget.\nIt is an asciiTextWidgetClass.";
+
+class EncapsulatedXtWidget : public QXtWidget {
+public:
+    EncapsulatedXtWidget(<a name="QXtWidget"></a><a href="qxtwidget.html">QXtWidget</a>* parent) :
+        <a href="qxtwidget.html">QXtWidget</a>("editor", asciiTextWidgetClass, parent)
+    {
+        Arg args[20];
+        Cardinal nargs=0;
+        XtSetArg(args[nargs], XtNeditType, XawtextEdit); nargs++;
+        XtSetArg(args[nargs], XtNstring, XTEDMSG);       nargs++;
+        XtSetValues(xtWidget(), args, nargs);
+        XtMapWidget(xtWidget());
+    }
+};
+
+class TwoEditors : public QXtWidget {
+    <a name="QMultiLineEdit"></a><a href="qmultilineedit.html">QMultiLineEdit</a>* qtchild;
+    EncapsulatedXtWidget* xtchild;
+
+public:
+    TwoEditors() :
+        <a href="qxtwidget.html">QXtWidget</a>("editors", topLevelShellWidgetClass, 0, 0, 0, FALSE)
+    {
+        qtchild = new <a href="qmultilineedit.html">QMultiLineEdit</a>(this);
+        qtchild-&gt;<a name="setText"></a><a href="qmultilineedit.html#c1">setText</a>(QTEDMSG);
+        xtchild = new EncapsulatedXtWidget(this);
+    }
+
+    void resizeEvent(<a name="QResizeEvent"></a><a href="qresizeevent.html">QResizeEvent</a>*)
+    {
+        int marg = 10;
+        int w = (width()-marg*3)/2;
+        int h = height()-marg*2;
+
+        qtchild-&gt;<a name="setGeometry"></a><a href="qwidget.html#l5">setGeometry</a>(marg,marg,w,h);
+        xtchild-&gt;<a name="setGeometry"></a><a href="qxtwidget.html#a6">setGeometry</a>(marg+w+marg,marg,w,h);
+    }
+};
+
+main(int argc, char** argv)
+{
+    <a name="QXtApplication"></a><a href="qxtapplication.html">QXtApplication</a> app(argc, argv, "TwoEditors");
+    TwoEditors m;
+    app.<a name="setMainWidget"></a><a href="qapplication.html#b9">setMainWidget</a>(&amp;m);
+    m.<a name="show"></a><a href="qwidget.html#k2">show</a>();
+    return app.<a name="exec"></a><a href="qapplication.html#c9">exec</a>();
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

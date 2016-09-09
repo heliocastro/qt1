@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>Qt tutorial - t11/lcdrange.cpp</title>
+</head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Source code for <a href="t11.html">tutorial 11</a>: lcdrange.cpp</h1><br clear="all">
+<hr>
+<pre>/****************************************************************
+**
+** Implementation of LCDRange class, Qt tutorial 11
+**
+****************************************************************/
+
+#include "lcdrange.h"
+
+#include &lt;<a href="qscrollbar-h.html">qscrollbar.h</a>&gt;
+#include &lt;<a href="qlcdnumber-h.html">qlcdnumber.h</a>&gt;
+
+LCDRange::LCDRange( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    lcd  = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "lcd"  );
+    lcd-&gt;move( 0, 0 );
+    sBar = new <a href="qscrollbar.html">QScrollBar</a>( 0, 99,                       // range
+                           1, 10,                       // line/page steps
+                           0,                           // inital value
+                           QScrollBar::Horizontal,      // orientation
+                           this, "scrollbar" );
+    <a href="qobject.html#f2">connect</a>( sBar, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)) );
+    <a href="qobject.html#f2">connect</a>( sBar, SIGNAL(valueChanged(int)), SIGNAL(valueChanged(int)) );
+
+}
+
+int <a name="208"></a>LCDRange::value() const
+{
+    return sBar-&gt;value();
+}
+
+void <a name="209"></a>LCDRange::setValue( int value )
+{
+    sBar-&gt;setValue( value );
+}
+
+void <a name="210"></a>LCDRange::setRange( int minVal, int maxVal )
+{
+    if ( minVal &lt; 0 || maxVal &gt; 99 || minVal &gt; maxVal ) {
+        <a href="qapplication.html#j5">warning</a>( "<a name="210"></a>LCDRange::setRange(%d,%d)\n"
+                 "\tRange must be 0..99\n"
+                 "\tand minVal must not be greater than maxVal",
+                 minVal, maxVal );
+        return;
+    }
+    sBar-&gt;setRange( minVal, maxVal );
+}
+
+void <a name="211"></a>LCDRange::resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * )
+{
+    lcd-&gt;resize( <a href="qwidget.html#b9">width</a>(), <a href="qwidget.html#c0">height</a>() - 16 - 5 );
+    sBar-&gt;setGeometry( 0, lcd-&gt;height() + 5, <a href="qwidget.html#b9">width</a>(), 16 );
+}
+</pre>
+<p>
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

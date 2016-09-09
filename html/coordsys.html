@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>The Coordinate System</title>
+</head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>The Coordinate System</h1><br clear="all">
+<p>
+A <a href="qpaintdevice.html">paint device</a> in Qt is a drawable 2D
+surface. <a href="qwidget.html">QWidget</a>, <a href="qpixmap.html">QPixmap</a>,
+<a href="qpicture.html">QPicture</a> and <a href="qprinter.html">QPrinter</a> are
+all paint devices.
+<p>
+The default coordinate system of a paint device has its origin located at
+the top left position. X increases to the right and Y increases downwards.
+The unit is one pixel.
+<p>
+It is possible to transform the coordinate system when drawing in a
+paint device.
+<p>
+<h2>An Example</h2>
+<p>
+The illustration below shows a magnified portion of the top left corner
+of a paint device.
+<p>
+<img src=coordsys.gif>
+<p>
+The rectangle and the line were drawn by this code:
+<p>
+<pre>    void MyWidget::paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * )
+    {
+        <a href="qpainter.html">QPainter</a> p;
+        p.<a href="qpainter.html#b0">begin</a>( this );
+        p.<a href="qpainter.html#c4">setPen</a>( blue );
+        p.<a href="qpainter.html#i0">drawRect</a>( 1,2, 5,4 );
+        p.<a href="qpainter.html#c4">setPen</a>( red );
+        p.<a href="qpainter.html#h8">drawLine</a>( 9,2, 7,7 );
+        p.<a href="qpainter.html#b2">end</a>();
+    }
+</pre>
+<p>
+<h2>Transformations</h2>
+<p>
+The <a href="qpainter.html">QPainter</a> class has the ability to transform
+graphics. It can translate, scale, shear and rotate everything from simple
+lines to text and pixmaps.
+<p>
+The following QPainter functions transform the coordinate system:
+<ol>
+<li><a href="qpainter.html#e4">setWindow()</a>
+<li><a href="qpainter.html#e7">setViewport()</a>
+<li><a href="qpainter.html#f1">setWorldMatrix()</a>; uses
+a <a href="qwmatrix.html">QWMatrix</a>
+<li><a href="qpainter.html#f2">translate()</a>
+<li><a href="qpainter.html#f3">scale()</a>
+<li><a href="qpainter.html#f4">shear()</a>
+<li><a href="qpainter.html#f5">rotate()</a>
+</ol>
+<p>
+In addition, the <a href="qpixmap.html#c7">QPixmap::xForm()</a> function
+can scale, shear and rotate a pixmap.
+<p>
+<h2>Helper Classes</h2>
+<p>
+Qt has three classes that provide coordinate system support:
+<ul>
+<li><a href="qpoint.html">QPoint</a>
+<li><a href="qsize.html">QSize</a>
+<li><a href="qrect.html">QRect</a>
+</ul>
+<p>
+All <a href="qpainter.html">QPainter</a> functions that take point, size or
+rectangle arguments are overloaded. For example, <a href="qpainter.html#h8">drawLine()</a> can take the integers (x1,y1,x2,y2) or the QPoints
+(p1,p2).
+<p>
+Qt does not force you to use QPoint, QSize or QRect.  You decide.
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

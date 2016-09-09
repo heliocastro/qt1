@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QIntValidator Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QIntValidator Class Reference</h1><br clear="all">
+<p>
+The QIntValidator class provides range checking of integers.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qvalidator-h.html">qvalidator.h</a>&gt;</code>
+<p>
+Inherits <a href="qvalidator.html">QValidator</a>.
+<p><a href="qintvalidator-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qintvalidator.html#a0"><strong>QIntValidator</strong></a> ( QWidget * parent, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qintvalidator.html#a1"><strong>QIntValidator</strong></a> ( int bottom, int top, QWidget * parent, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qintvalidator.html#a2"><strong>~QIntValidator</strong></a> () </span>
+<li><span class="fn">virtual QValidator::State <a href="qvalidator.html#a2"><strong>validate</strong></a> ( QString &amp;, int &amp; ) </span>
+<li><span class="fn">virtual void <a href="qintvalidator.html#a4"><strong>setRange</strong></a> ( int bottom, int top ) </span>
+<li><span class="fn">int <a href="qintvalidator.html#a5"><strong>bottom</strong></a> () const</span>
+<li><span class="fn">int <a href="qintvalidator.html#a6"><strong>top</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QIntValidator class provides range checking of integers.
+<p>
+QIntValidator provides a lower and an upper bound.  It does not
+provide a <a href="qvalidator.html#a3">fixup</a>() function.
+<p>See also:  <a href="qdoublevalidator.html">QDoubleValidator</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QIntValidator::QIntValidator ( <a href="qwidget.html">QWidget</a> * parent, const char * name = 0 )</h3>
+<p>Creates a validator object which accepts all integers.
+<h3 class="fn"><a name="a1"></a>QIntValidator::QIntValidator ( int bottom, int top, <a href="qwidget.html">QWidget</a> * parent, const char * name = 0 )</h3>
+<p>Creates a validator object which accepts all integers from <em>bottom</em> up to and including <em>top.</em>
+<h3 class="fn"><a name="a2"></a>QIntValidator::~QIntValidator ()</h3>
+<p>Deletes the validator and frees up any storage used.
+<h3 class="fn">int <a name="a5"></a>QIntValidator::bottom () const</h3>
+<p>Returns the lowest valid number according to this validator.
+<p>See also:  <a href="qintvalidator.html#a6">top</a>() and <a href="qintvalidator.html#a4">setRange</a>().
+<h3 class="fn">void <a name="a4"></a>QIntValidator::setRange ( int bottom, int top ) <code>[virtual]</code></h3>
+<p>Sets the validator to accept only number from <em>bottom</em> up to an
+including <em>top.</em>
+<h3 class="fn">int <a name="a6"></a>QIntValidator::top () const</h3>
+<p>Returns the highest valid number according to this validator.
+<p>See also:  <a href="qintvalidator.html#a5">bottom</a>() and <a href="qintvalidator.html#a4">setRange</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qvalidator.h: 1998/08/19
+<li>qvalidator.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

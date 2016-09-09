@@ -1,0 +1,165 @@
+.TH QLayout 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QLayout \- The base class of geometry specifiers
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qlayout.h>\fR
+.PP
+Inherits QObject.
+.PP
+Inherited by QBoxLayout and QGridLayout.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "virtual \fB~QLayout\fR ()"
+.br
+.ti -1c
+.BI "int defaultBorder () const"
+.br
+.ti -1c
+.BI "enum { unlimited = QCOORD_MAX }"
+.br
+.ti -1c
+.BI "virtual bool activate ()"
+.br
+.ti -1c
+.BI "void freeze ( int " "w" ", int h )"
+.br
+.ti -1c
+.BI "void freeze ()"
+.br
+.ti -1c
+.BI "void setMenuBar ( QMenuBar * w )"
+.br
+.ti -1c
+.BI "QWidget* mainWidget ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "QLayout ( QWidget * " "parent" ", int " "border" ", int " "autoBorder" ", const char * name )"
+.br
+.ti -1c
+.BI "QLayout ( int " "autoBorder" " = -1, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "QGManager* basicManager ()"
+.br
+.ti -1c
+.BI "virtual QChain* mainVerticalChain ()"
+.br
+.ti -1c
+.BI "virtual QChain* mainHorizontalChain ()"
+.br
+.ti -1c
+.BI "virtual void initGM ()"
+.br
+.ti -1c
+.BI "void addChildLayout ( QLayout * )"
+.br
+.in -1c
+.SS "Static Protected Members"
+.in +1c
+.ti -1c
+.BI "QChain* verChain ( QLayout * l )"
+.br
+.ti -1c
+.BI "QChain* horChain ( QLayout * l )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QLayout class is the base class of geometry specifiers.
+.PP
+This is an abstract base class. The concrete layout managers QBoxLayout and QGridLayout inherit from this one and make QLayout's functionality avaialble in friendly APIs.
+.PP
+Most users of Q*Layout are likely to use some of the basic functions provided by QLayout, such as 
+.TP
+activate(), which compiles the layout into an internal representation and activates the result,
+.TP
+setMenuBar(), which is necessary to manage a menu bar because of the special properties of menu bars, and 
+.TP
+freeze(), which allows you to freeze the widget's size and layout. 
+.PP
+Geometry management stops when the layout manager is deleted.
+.PP
+To make a new layout manager, you need to implement the functions mainVerticalChain(), mainHorizontalChain() and initGM().
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QLayout::QLayout ( QWidget * parent, int border, int autoBorder, const char * name ) \fC[protected]\fR"
+Creates a new top-level QLayout with main widget \fIparent. parent\fR may not be 0.
+.PP
+\fIborder\fR is the number of pixels between the edge of the widget and the managed children. \fIautoBorder\fR sets the value of defaultBorder(), which is interpreted by subclasses. If \fIautoBorder\fR is -1 the value of \fIborder\fR is used.
+.PP
+\fIname\fR is the internal object name
+.PP
+Having several top-level layouts for the same widget will cause considerable confusion.
+.SH "QLayout::QLayout ( int autoBorder = -1, const char * name=0 ) \fC[protected]\fR"
+Constructs a new child QLayout, If \fIautoBorder\fR is -1, this QLayout inherits \fIparent's\fR defaultBorder(), otherwise \fIautoBorder\fR is used.
+.SH "QLayout::~QLayout () \fC[virtual]\fR"
+Deletes all children layouts. Geometry management stops when a toplevel layout is deleted.
+.SH "bool QLayout::activate () \fC[virtual]\fR"
+Starts geometry management - analogous to show() for widgets. This function should only be called for top level layouts.
+.PP
+Examples:
+.(l
+pref/pref.cpp layout/layout.cpp widgets/widgets.cpp
+.)l
+.SH "void QLayout::addChildLayout ( QLayout * l ) \fC[protected]\fR"
+This function is called from addLayout functions in subclasses, to add \fIl\fR layout as a sublayout.
+.SH "QGManager * QLayout::basicManager () \fC[protected]\fR"
+Returns the QGManager for this layout. Returns 0 if this is a child layout which has not been inserted yet.
+.SH "int QLayout::defaultBorder () const"
+Returns the default border for the geometry manager.
+.SH "void QLayout::freeze ( int w, int h )"
+Fixes the size of the main widget and distributes the available space to the child widgets. For widgets which should not be resizable, but where a QLayout subclass is used to set up the initial geometry.
+.PP
+A frozen layout cannot be unfrozen, the only sensible thing to do is to delete it.
+.PP
+The size is adjusted to a valid value. Thus freeze(0,0) fixes the widget to its minimum size.
+.SH "void QLayout::freeze ()"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.PP
+This version of the method fixes the main widget at its minimum size. You can also achieve this with freeze( 0, 0 );.
+.SH "QChain * QLayout::horChain ( QLayout * ) \fC[static protected]\fR"
+This function works around a dubious feature in the C++ language definition, to provide access to mainHorizontalChain().
+.SH "void QLayout::initGM () \fC[virtual protected]\fR"
+Implement this function to do what's necessary to initialize chains, once the layout has a basicManager().
+.PP
+Reimplemented in QGridLayout and QBoxLayout.
+.SH "QChain * QLayout::mainHorizontalChain () \fC[virtual protected]\fR"
+Implement this function to return the main horizontal chain.
+.PP
+Reimplemented in QGridLayout and QBoxLayout.
+.SH "QChain * QLayout::mainVerticalChain () \fC[virtual protected]\fR"
+Implement this function to return the main vertical chain.
+.PP
+Reimplemented in QGridLayout and QBoxLayout.
+.SH "QWidget * QLayout::mainWidget ()"
+Returns the main widget of this layout, or 0 if this layout is a sub-layout which is not yet inserted.
+.SH "void QLayout::setMenuBar ( QMenuBar * w )"
+Makes the geometry manager take account of the menu bar \fIw.\fR All child widgets are placed below the bottom edge of the menu bar.
+.PP
+A menu bar does its own geometry managing, never do addWidget() on a menu bar.
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH "QChain * QLayout::verChain ( QLayout * ) \fC[static protected]\fR"
+This function works around a dubious feature in
+the C++ language definition, to provide access to mainVerticalChain().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qlayout.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,31 @@
+/****************************************************************************
+** $Id: hierarchy.doc,v 1.4 1998/03/31 09:05:36 aavit Exp $
+**
+** Documentation for class hierarchy
+**
+** Copyright (C) 1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+#if defined(DEBUG)
+static char ident[] = "$Id: hierarchy.doc,v 1.4 1998/03/31 09:05:36 aavit Exp $";
+#endif
+
+
+/*!
+\page hierarchy.html
+
+<title>Qt Documentation</title>
+</head><body bgcolor="#ffffff">
+
+\postheader
+
+<h1 align=center>Class Inheritance Hierarchy</h1><br clear="all">
+
+This list shows the C++ class inheritance relations between the
+classes in the Qt API.
+
+<p>The list is sorted roughly, but not completely, alphabetically.
+
+\classhierarchy
+*/

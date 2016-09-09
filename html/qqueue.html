@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QQueue Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QQueue Class Reference</h1><br clear="all">
+<p>
+The QQueue class is a template class that provides a queue.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qqueue-h.html">qqueue.h</a>&gt;</code>
+<p><a href="qqueue-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qqueue.html#a0"><strong>QQueue</strong></a> () </span>
+<li><span class="fn"><a href="qqueue.html#a1"><strong>QQueue</strong></a> ( const QQueue&lt;type&gt; &amp; queue ) </span>
+<li><span class="fn"><a href="qqueue.html#a2"><strong>~QQueue</strong></a> () </span>
+<li><span class="fn">QQueue&lt;type&gt;&amp; <a href="qqueue.html#a3"><strong>operator=</strong></a> ( const QQueue&lt;type&gt; &amp; queue ) </span>
+<li><span class="fn">bool <a href="qcollection.html#a0"><strong>autoDelete</strong></a> () const</span>
+<li><span class="fn">void <a href="qcollection.html#a1"><strong>setAutoDelete</strong></a> ( bool enable ) </span>
+<li><span class="fn">virtual uint <a href="qglist.html#a0"><strong>count</strong></a> () const</span>
+<li><span class="fn">bool <a href="qqueue.html#a7"><strong>isEmpty</strong></a> () const</span>
+<li><span class="fn">void <a href="qqueue.html#a8"><strong>enqueue</strong></a> ( const type * d ) </span>
+<li><span class="fn">type* <a href="qqueue.html#a9"><strong>dequeue</strong></a> () </span>
+<li><span class="fn">bool <a href="qqueue.html#b0"><strong>remove</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qglist.html#c2"><strong>clear</strong></a> () </span>
+<li><span class="fn">type* <a href="qqueue.html#b2"><strong>head</strong></a> () const</span>
+<li><span class="fn">operator <a href=qqueue.html#b5><strong>type*</strong></a> ()const</span>
+<li><span class="fn">type* <a href="qqueue.html#b3"><strong>current</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QQueue class is a template class that provides a queue.
+<p>
+QQueue is implemented as both a template and a macro class. Define a
+template instance QQueue&lt;X&gt; to create a queue that operates on
+pointers to X, or X*.
+<p>A stack is a collection that can be used to enqueue and dequeue items.
+<p>See also:  <a href="collection.html">Collection Classes</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QQueue::QQueue ()</h3>
+<p>Creates an empty queue.
+<h3 class="fn"><a name="a1"></a>QQueue::QQueue ( const QQueue&lt;type&gt; &amp; queue )</h3>
+<p>Creates a queue from another.
+<p>Only the pointers are copied.
+<h3 class="fn"><a name="a2"></a>QQueue::~QQueue ()</h3>
+<p>Destroys the list.  Items in the list are destroyed if <a href="qcollection.html#a0">autoDelete</a>() is TRUE.
+<h3 class="fn"><a name="b5"></a>QQueue::operator type* () const</h3>
+<p>Returns a reference to the first item in the queue.  The queue is
+not changed.
+<h3 class="fn">type* <a name="b3"></a>QQueue::current () const</h3>
+<p>Returns a reference to the first item in the queue.  The queue is
+not changed.
+<h3 class="fn">type* <a name="a9"></a>QQueue::dequeue ()</h3>
+<p>Removes the front item from the queue.  Last in, last out.
+<h3 class="fn">void <a name="a8"></a>QQueue::enqueue ( const type * d )</h3>
+<p>Adds an item to the queue.  Last in, last out.
+<h3 class="fn">type* <a name="b2"></a>QQueue::head () const</h3>
+<p>Returns a reference to the first item in the queue.  The queue is
+not changed.
+<h3 class="fn">bool <a name="a7"></a>QQueue::isEmpty () const</h3>
+<p>Returns TRUE if there are no items to be <a href="qqueue.html#a9">dequeued</a>
+<h3 class="fn">QQueue&lt;type&gt;&amp; <a name="a3"></a>QQueue::operator= ( const QQueue&lt;type&gt; &amp; queue )</h3>
+<p>Assigns <em>queue</em> to this queue and returns a reference to this queue.
+<p>This queue is first cleared, then each item in <em>queue</em> is
+enqueued to this queue.  Only the pointers are copied (shallow copy).
+<h3 class="fn">bool <a name="b0"></a>QQueue::remove ()</h3>
+<p>Removes the front item from the queue.  Last in, last out.
+The item is deleted if <a href="qcollection.html#a0">autoDelete</a>() is TRUE.
+Returns TRUE if there was an item to remove.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qqueue.h: 1998/08/27
+<li>qqueue.doc: 1997/08/06
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,355 @@
+.TH QLabel 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QLabel \- Displays a static text or pixmap
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qlabel.h>\fR
+.PP
+Inherits QFrame.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QLabel ( QWidget * " "parent" "=0, const char * " "name" "=0, WFlags " "f" "=0 )"
+.br
+.ti -1c
+.BI "QLabel ( const char * " "text" ", QWidget * " "parent" "=0, const char * " "name" "=0, WFlags " "f" "=0 )"
+.br
+.ti -1c
+.BI "QLabel ( QWidget * " "buddy" ", const char * " "text" ", QWidget * " "parent" ", const char * " "name" "=0, WFlags " "f" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QLabel\fR ()"
+.br
+.ti -1c
+.BI "const char* text () const"
+.br
+.ti -1c
+.BI "QPixmap* pixmap () const"
+.br
+.ti -1c
+.BI "QMovie* movie () const"
+.br
+.ti -1c
+.BI "int alignment () const"
+.br
+.ti -1c
+.BI "void setAlignment ( int )"
+.br
+.ti -1c
+.BI "int margin () const"
+.br
+.ti -1c
+.BI "void setMargin ( int )"
+.br
+.ti -1c
+.BI "bool autoResize () const"
+.br
+.ti -1c
+.BI "void setAutoResize ( bool )"
+.br
+.ti -1c
+.BI "virtual QSize sizeHint () const"
+.br
+.ti -1c
+.BI "void setBuddy ( QWidget * )"
+.br
+.ti -1c
+.BI "QWidget* buddy () const"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "void setText ( const char * )"
+.br
+.ti -1c
+.BI "void setPixmap ( const QPixmap & )"
+.br
+.ti -1c
+.BI "void setMovie ( const QMovie & )"
+.br
+.ti -1c
+.BI "void setNum ( int )"
+.br
+.ti -1c
+.BI "void setNum ( double )"
+.br
+.ti -1c
+.BI "void clear ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void drawContents ( QPainter * )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QLabel widget displays a static text or pixmap.
+.PP
+A label is a static text or pixmap field.
+.PP
+It can have a frame (since QLabel inherits QFrame) and a "buddy" and an accelerator for moving keyboard focus to the buddy.
+.PP
+The contents of a label can be specified as a normal text, as a numeric value (which is internally converted to a text) or, as a pixmap. If the label is normal text and one of the letters is prefixed with '&', you can also specify a \fIbuddy\fR for the label:
+.PP
+.nf
+.br
+     QLineEdit * phone = new QLineEdit( this, "phone number" );
+.br
+     QLabel * phoneLabel = new QLabel( phone, "&Phone", this );
+.fi
+.PP
+In this example, keyboard focus is transferred to the label's buddy (the QLineEdit) when the user presses \fIAlt-P.\fR This is handy for many dialogs. You can also use the setBuddy() function to accomplish the same means.
+.PP
+A label can be aligned in many different ways. The alignment setting specifies where to position the contents relative to the frame rectangle. See setAlignment() for a description of the alignment flags.
+.PP
+Enabling auto-resizing make the label resize itself whenever the contents change. The top left corner does not move.
+.PP
+This code sets up a sunken panel with a two-line text in the bottom right corner:
+.PP
+.nf
+.br
+    QLabel *label = new QLabel;
+.br
+    label->setFrameStyle( QFrame::Panel | QFrame::Sunken );
+.br
+    label->setText( "first line\\nsecond line" );
+.br
+    label->setAlignment( AlignBottom | AlignRight );
+.fi
+.PP
+Both lines are flush with the right side of the label.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+See also: QLineEdit, QMovie and GUI Design Handbook: Label
+.PP
+Examples:
+.(l
+tictac/tictac.cpp forever/forever.cpp movies/main.cpp xform/xform.cpp menu/menu.cpp pref/pref.cpp progress/progress.cpp cursor/cursor.cpp layout/layout.cpp qmag/qmag.cpp showimg/showimg.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QLabel::QLabel ( QWidget * buddy, const char * text, QWidget * parent, const char * name=0, WFlags f=0 )"
+Constructs a label with an accelerator key.
+.PP
+The \fIparent, name\fR and \fIf\fR arguments are passed to the QFrame constructor. Note that the \fIparent\fR argument does \fInot\fR default to 0.
+.PP
+In a dialog, you might create two data entry widgets and a label for each, and set up the geometry so each label is just to the left of its data entry widget (its "buddy"), somewhat like this:
+.PP
+.nf
+.br
+    QLineEdit *name    = new QLineEdit( this );
+.br
+    QLabel    *name_l  = new QLabel( name, "&Name:", this );
+.br
+    QLineEdit *phone   = new QLineEdit( this );
+.br
+    QLabel    *phone_l = new QLabel( phone, "&Phone:", this );
+.br
+    // geometry management setup not shown
+.fi
+.PP
+With the code above, the focus jumps to the Name field when the user presses Alt-N, and to the Phone field when the user presses Alt-P.
+.PP
+See also: setText() and setBuddy().
+.SH "QLabel::QLabel ( QWidget * parent=0, const char * name=0, WFlags f=0 )"
+Constructs an empty label which is left-aligned, vertically centered, has an automatic margin and with manual resizing.
+.PP
+The \fIparent, name\fR and \fIf\fR arguments are passed to the QFrame constructor.
+.PP
+See also: setAlignment(), setFrameStyle(), setMargin() and setAutoResize().
+.SH "QLabel::QLabel ( const char * text, QWidget * parent=0, const char * name=0, WFlags f=0 )"
+Constructs a label with a text. The label is left-aligned, vertically centered, has an automatic margin and with manual resizing.
+.PP
+The \fIparent, name\fR and \fIf\fR arguments are passed to the QFrame constructor.
+.PP
+See also: setAlignment(), setFrameStyle(), setMargin() and setAutoResize().
+.SH "QLabel::~QLabel ()"
+Destroys the label.
+.SH "int QLabel::alignment () const"
+Returns the alignment setting.
+.PP
+The default alignment is \fCAlignLeft | AlignVCenter | ExpandTabs\fR if the label doesn't have a buddy and \fCAlignLeft | AlignVCenter | ExpandTabs | ShowPrefix \fR if the label has a buddy.
+.PP
+See also: setAlignment().
+.SH "bool QLabel::autoResize () const"
+Returns TRUE if auto-resizing is enabled, or FALSE if auto-resizing is disabled.
+.PP
+Auto-resizing is disabled by default.
+.PP
+See also: setAutoResize().
+.SH "QWidget * QLabel::buddy () const"
+Returns the buddy of this label.
+.SH "void QLabel::clear () \fC[slot]\fR"
+Clears the label. Equivalent with setText( "" ).
+.SH "void QLabel::drawContents ( QPainter * p ) \fC[virtual protected]\fR"
+Draws the label contents using the painter \fIp.\fR
+.PP
+Reimplemented from QFrame.
+.SH "int QLabel::margin () const"
+Returns the margin of the label.
+.PP
+See also: setMargin().
+.SH "QMovie* QLabel::movie () const"
+Returns the QMovie currently displaying in the label, or 0 if none has been set.
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH "QPixmap * QLabel::pixmap () const"
+Returns the label pixmap.
+.PP
+See also: setPixmap().
+.SH "void QLabel::setAlignment ( int alignment )"
+Sets the alignment of the label contents and redraws itself.
+.PP
+The \fIalignment\fR is the bitwise OR of the following flags:
+.TP
+\fCAlignLeft\fR aligns to the left border.
+.TP
+\fCAlignRight\fR aligns to the right border.
+.TP
+\fCAlignHCenter\fR aligns horizontally centered.
+.TP
+\fCAlignTop\fR aligns to the top border.
+.TP
+\fCAlignBottom\fR aligns to the bottom border.
+.TP
+\fCAlignVCenter\fR aligns vertically centered
+.TP
+\fCAlignCenter\fR (= \fCAlignHCenter\fR | AlignVCenter)
+.TP
+\fCExpandTabs\fR expands tabulators.
+.TP
+\fCWordBreak\fR enables automatic word breaking.
+.PP
+If the label has a buddy, \fCShowPrefix\fR is forced to TRUE.
+.PP
+See also: alignment(), setBuddy() and setText().
+.PP
+Examples:
+.(l
+cursor/cursor.cpp layout/layout.cpp qmag/qmag.cpp widgets/widgets.cpp
+.)l
+.SH "void QLabel::setAutoResize ( bool enable )"
+Enables auto-resizing if \fIenable\fR is TRUE, or disables it if \fIenable\fR is FALSE.
+.PP
+When auto-resizing is enabled, the label will resize itself whenever the contents change. The top left corner is not moved.
+.PP
+See also: autoResize() and adjustSize().
+.PP
+Examples:
+.(l
+forever/forever.cpp
+.)l
+.SH "void QLabel::setBuddy ( QWidget * buddy )"
+Sets the buddy of this label to \fIbuddy.\fR
+.PP
+When the user presses the accelerator key indicated by this label, the keyboard focus is transferred to the label's buddy.
+.PP
+See also: label() and setText().
+.PP
+Examples:
+.(l
+pref/pref.cpp layout/layout.cpp
+.)l
+.SH "void QLabel::setMargin ( int margin )"
+Sets the margin of the label to \fImargin\fR pixels.
+.PP
+The margin applies to the left edge if alignment() is \fCAlignLeft,\fR to the right edge if alignment() is \fCAlignRight,\fR to the top edge if alignment() is \fCAlignTop,\fR and to to the bottom edge if alignment() is \fCAlignBottom.\fR
+.PP
+If \fImargin\fR is negative (as it is by default), the label computes the margin as follows: If the frame width is zero, the effective margin becomes 0. If the frame style is greater than zero, the effective margin becomes half the width of the "x" character (of the widget's current font.
+.PP
+Setting a non-negative margin gives the specified margin in pixels.
+.PP
+See also: margin(), frameWidth() and font().
+.PP
+Examples:
+.(l
+movies/main.cpp widgets/widgets.cpp
+.)l
+.SH "void QLabel::setMovie ( const QMovie & movie ) \fC[slot]\fR"
+Sets a QMovie to display in the label, or removes any existing movie if the given movie QMovie::isNull().
+.PP
+Any current pixmap or text label is cleared.
+.PP
+If the label has a buddy, the accelerator is disabled since the movie doesn't contain any suitable character.
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH "void QLabel::setNum ( double num ) \fC[slot]\fR"
+Sets the label contents to \fInum\fR (converts it to text) and redraws the contents.
+.PP
+If the label has a buddy, the accelerator is disabled since the number doesn't contain any suitable character.
+.PP
+The label resizes itself if auto-resizing is enabled.
+.PP
+See also: setAutoResize().
+.SH "void QLabel::setNum ( int num ) \fC[slot]\fR"
+Sets the label contents to \fInum\fR (converts it to text) and redraws the contents.
+.PP
+If the label has a buddy, the accelerator is disabled since the number doesn't contain any suitable character.
+.PP
+The label resizes itself if auto-resizing is enabled. Nothing happens if \fInum\fR reads the same as the current label.
+.PP
+See also: setAutoResize().
+.SH "void QLabel::setPixmap ( const QPixmap & pixmap ) \fC[slot]\fR"
+Sets the label contents to \fIpixmap\fR and redraws the contents.
+.PP
+If the label has a buddy, the accelerator is disabled since the pixmap doesn't contain any suitable character.
+.PP
+The label resizes itself if auto-resizing is enabled. Nothing happens if \fIpixmap\fR is the same as the current label.
+.PP
+See also: pixmap(), setText() and setAutoResize().
+.SH "void QLabel::setText ( const char * text ) \fC[slot]\fR"
+Sets the label contents to \fItext,\fR updates the optional accelerator and redraws the contents.
+.PP
+The label resizes itself if auto-resizing is enabled. Nothing happens if \fItext\fR is the same as the current label.
+.PP
+See also: text(), setPixmap() and setAutoResize().
+.PP
+Examples:
+.(l
+forever/forever.cpp xform/xform.cpp pref/pref.cpp cursor/cursor.cpp layout/layout.cpp qmag/qmag.cpp widgets/widgets.cpp
+.)l
+.SH "QSize QLabel::sizeHint () const \fC[virtual]\fR"
+Returns a size which fits the contents of the label.
+.PP
+Bugs and limitations:
+.TP
+Does not work well with the WordBreak flag
+.PP
+Examples:
+.(l
+pref/pref.cpp layout/layout.cpp widgets/widgets.cpp
+.)l
+.PP
+Reimplemented from QWidget.
+.SH "const char * QLabel::text () const"
+Returns the label text.
+.PP
+See also:  setText().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qlabel.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

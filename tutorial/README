@@ -1,0 +1,10 @@
+Here are the programs in the Qt tutorial.  The tutorial itself is in
+../html/tutorial.html (or http://www.troll.no/qt/tutorial.html).
+
+You can also get it on paper, see http://www.troll.no/postscript.html.
+
+Saying just 'make' in this directory builds all the programs (t1/t1,
+t2/t2, t3/t3 and so on).  Saying 'make' in each subdirectory builds
+just that tutorial program.
+
+Feel free to send comments about the tutorial to qt-bugs@troll.no.

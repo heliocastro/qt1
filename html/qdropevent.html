@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QDropEvent Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QDropEvent Class Reference</h1><br clear="all">
+<p>
+Event sent when a drag-and-drop is completed.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qevent-h.html">qevent.h</a>&gt;</code>
+<p>
+Inherits <a href="qevent.html">QEvent</a>.
+<p><a href="qdropevent-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qdropevent.html#a0"><strong>QDropEvent</strong></a> ( const QPoint &amp; pos ) </span>
+<li><span class="fn">const QPoint&amp; <strong>pos</strong> () const</span>
+<li><span class="fn">bool <strong>isAccepted</strong> () const</span>
+<li><span class="fn">void <a href="qdropevent.html#a3"><strong>accept</strong></a> () </span>
+<li><span class="fn">void <a href="qdropevent.html#a4"><strong>ignore</strong></a> () </span>
+<li><span class="fn">QByteArray <a href="qdropevent.html#a5"><strong>data</strong></a> ( const char * ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+Event sent when a drag-and-drop is completed.
+<p>
+When a widgets <a href="qwidget.html#m7">accepts drop events</a>,
+it will receive this event if it has accepted the most recent
+QDragEnterEvent or <a href="qdragmoveevent.html">QDragMoveEvent</a> sent to it.
+<p>The widget should use <a href="qdropevent.html#a5">data</a>() to extract data in an
+appropriate format.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QDropEvent::QDropEvent ( const <a href="qpoint.html">QPoint</a> &amp; pos )</h3>
+<p>Creates a QDropEvent for which the mouse is at point <em>pos.</em>
+<p>Note that internal state is also involved with QDropEvent,
+so it is not useful to create these yourself.
+<h3 class="fn">void <a name="a3"></a>QDropEvent::accept ()</h3>
+<p>Call this to indicate that the event provided data which your widget
+processed.  Use <a href="qdropevent.html#a5">data</a>(), or preferrably, the decode() methods
+of existing <a href="qdragobject.html">QDragObject</a> subclasses, such as
+<a href="qtextdrag.html#a7">QTextDrag::decode</a>(), or your own subclasses.
+<h3 class="fn"><a href="qbytearray.html">QByteArray</a> <a name="a5"></a>QDropEvent::data ( const char * format )</h3>
+<p>Returns a byte array containing the payload data of this drag, in
+<em>format.</em>
+<p>data() normally needs to get the data from the drag source, which is
+potentially very slow, so it's advisable to call this function only
+if you're sure that you will need the data in <em>format.</em>
+<p>The resulting data will have a <a href="qbytearray.html#b2">size</a>
+of 0 if the format was not available.
+<p>See also:  <a href="qdragmoveevent.html#b0">QDragMoveEvent::data</a>() and <a href="qdragmoveevent.html#a8">QDragMoveEvent::format</a>().
+<h3 class="fn">void <a name="a4"></a>QDropEvent::ignore ()</h3>
+<p>The opposite of <a href="qdropevent.html#a3">accept</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qevent.h: 1998/10/05
+<li>qdnd_x11.cpp: 1998/12/17
+<li>qevent.cpp: 1999/01/13
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

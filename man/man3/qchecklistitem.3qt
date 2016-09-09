@@ -1,0 +1,124 @@
+.TH QCheckListItem 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QCheckListItem \- Implements checkable list view items
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qlistview.h>\fR
+.PP
+Inherits QListViewItem.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QCheckListItem ( QCheckListItem * " "parent" ", const char * " "text" ", Type = Controller )"
+.br
+.ti -1c
+.BI "QCheckListItem ( QListView * " "parent" ", const char * " "text" ", Type = Controller )"
+.br
+.ti -1c
+.BI "QCheckListItem ( QListViewItem * " "parent" ", const char * " "text" ", const QPixmap & )"
+.br
+.ti -1c
+.BI "QCheckListItem ( QListView * " "parent" ", const char * " "text" ", const QPixmap & )"
+.br
+.ti -1c
+.BI "virtual void paintCell ( QPainter *, const QColorGroup & " "cg" ", int " "column" ", int " "width" ", int alignment )"
+.br
+.ti -1c
+.BI "virtual int width ( const QFontMetrics &, const QListView *, int column ) const"
+.br
+.ti -1c
+.BI "virtual void setup ()"
+.br
+.ti -1c
+.BI "void setOn ( bool )"
+.br
+.ti -1c
+.BI "bool isOn () const"
+.br
+.ti -1c
+.BI "Type type () const"
+.br
+.ti -1c
+.BI "const char* text () const"
+.br
+.ti -1c
+.BI "virtual const char* text ( int n ) const"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void paintBranches ( QPainter * " "p" ", const QColorGroup & " "cg" ", int " "w" ", int " "y" ", int " "h" ", GUIStyle s )"
+.br
+.ti -1c
+.BI "virtual void activate ()"
+.br
+.ti -1c
+.BI "void turnOffChild ()"
+.br
+.ti -1c
+.BI "virtual void stateChange ( bool )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QCheckListItem class implements checkable list view items.
+.PP
+There are three types of check list items: CheckBox, RadioButton and Controller.
+.PP
+Checkboxes may be inserted at top level in the list view. A radio button must be child of a controller.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QCheckListItem::QCheckListItem ( QListView * parent, const char * text, Type tt = Controller )"
+Constructs a checkable item with parent \fIparent,\fR text \fItext\fR and type \fItt.\fR Note that \fItt\fR must not be RadioButton, if so it will not toggle.
+.SH "QCheckListItem::QCheckListItem ( QListView * parent, const char * text, const QPixmap & p )"
+Constructs a Controller item with parent \fIparent,\fR text \fItext\fR and pixmap \fIp.\fR
+.SH "QCheckListItem::QCheckListItem ( QListViewItem * parent, const char * text, const QPixmap & p )"
+Constructs a Controller item with parent \fIparent,\fR text \fItext\fR and pixmap \fIp.\fR
+.SH "QCheckListItem::QCheckListItem ( QCheckListItem * parent, const char * text, Type tt = Controller )"
+Constructs a checkable item with parent \fIparent,\fR text \fItext\fR and type \fItt.\fR Note that a RadioButton must be child of a Controller, otherwise it will not toggle.
+.SH "void QCheckListItem::activate () \fC[virtual protected]\fR"
+Toggle checkbox, or set radiobutton on.
+.PP
+Reimplemented from QListViewItem.
+.SH "bool QCheckListItem::isOn () const"
+Returns TRUE if this item is toggled on, FALSE otherwise.
+.SH "void QCheckListItem::paintBranches ( QPainter * p, const QColorGroup & cg, int w, int, int h, GUIStyle ) \fC[virtual protected]\fR"
+Fills the rectangle. No decoration is drawn.
+.PP
+Reimplemented from QListViewItem.
+.SH "void QCheckListItem::paintCell ( QPainter * p, const QColorGroup & cg, int column, int width, int align ) \fC[virtual]\fR"
+Paints this item.
+.PP
+Reimplemented from QListViewItem.
+.SH "void QCheckListItem::setOn ( bool b )"
+Sets this button on of \fIb\fR is TRUE, off otherwise. Maintains radiobutton exclusivity.
+.SH "void QCheckListItem::setup () \fC[virtual]\fR"
+Performs setup.
+.PP
+Reimplemented from QListViewItem.
+.SH "void QCheckListItem::stateChange ( bool ) \fC[virtual protected]\fR"
+This virtual function is called when the item changes its on/off state.
+.SH "const char * QCheckListItem::text () const"
+Returns the text of this item.
+.SH "const char * QCheckListItem::text ( int n ) const \fC[virtual]\fR"
+Reimplemented for internal reasons; the API is not affected.
+.PP
+Reimplemented from QListViewItem.
+.SH "void QCheckListItem::turnOffChild () \fC[protected]\fR"
+If this is a Controller that has RadioButton children, turn off the child that is on.
+.SH "QCheckListItem::Type QCheckListItem::type() const"
+Returns the type of this item.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qchecklistitem.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

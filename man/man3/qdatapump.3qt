@@ -1,0 +1,39 @@
+.TH QDataPump 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QDataPump \- Moves data from a QDataSource to a QDataSink during event processing
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qasyncio.h>\fR
+.PP
+Inherits QObject.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QDataPump ( QDataSource *, QDataSink * )"
+.br
+.in -1c
+.SH DESCRIPTION
+Moves data from a QDataSource to a QDataSink during event processing.
+.PP
+For a QDataSource to provide data to a QDataSink, a controller must exist to examine the QDataSource::readyToSend() and QDataSink::readyToReceive() methods and respond to the QASyncIO::activate() signal of the source and sink. One very useful way to do this is interleaved with other event processing. QDataPump provides this - create a pipe between a source and a sink, and data will be moved during subsequent event processing.
+.PP
+Note that each source can only provide data to one sink and each sink can only receive data from one source (although it is quite possible to write a multiplexing sink that is multiple sources).
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QDataPump::QDataPump ( QDataSource * data_source, QDataSink * data_sink )"
+Creates a QDataPump to move data from a given \fIdata_source\fR
+to a given \fIdata_sink.\fR
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qdatapump.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

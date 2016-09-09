@@ -1,0 +1,85 @@
+.TH QGListIterator 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QGListIterator \- The QGListIterator is an internal class for implementing QListIterator
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qglist.h>\fR
+.PP
+Inherited by QListIterator.
+.PP
+.SS "Protected Members"
+.TP
+\fBQGListIterator\fR ( const QGList & ) 
+.TP
+\fBQGListIterator\fR ( const QGListIterator & ) 
+.TP
+QGListIterator& \fBoperator=\fR ( const QGListIterator & ) 
+.TP
+\fB~QGListIterator\fR () 
+.TP
+bool \fBatFirst\fR () const
+.TP
+bool \fBatLast\fR () const
+.TP
+GCI \fBtoFirst\fR () 
+.TP
+GCI \fBtoLast\fR () 
+.TP
+GCI \fBget\fR () const
+.TP
+GCI \fBoperator\fR ()() 
+.TP
+GCI \fBoperator++\fR () 
+.TP
+GCI \fBoperator+=\fR ( uint ) 
+.TP
+GCI \fBoperator--\fR () 
+.TP
+GCI \fBoperator-=\fR ( uint ) 
+.SH DESCRIPTION
+The QGListIterator is an internal class for implementing QListIterator.
+.PP
+QGListIterator is a strictly internal class that does the heavy work for QListIterator.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QGListIterator::QGListIterator ( const QGList & l ) \fC[protected]\fR"
+For internal use only.
+.SH "QGListIterator::QGListIterator ( const QGListIterator & it ) \fC[protected]\fR"
+For internal use only.
+.SH "QGListIterator::~QGListIterator () \fC[protected]\fR"
+For internal use only.
+.SH "bool QGListIterator::atFirst () const \fC[protected]\fR"
+For internal use only.
+.SH "bool QGListIterator::atLast () const \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGListIterator::get () const \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGListIterator::operator() () \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGListIterator::operator++ () \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGListIterator::operator+= ( uint jumps ) \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGListIterator::operator-- () \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGListIterator::operator-= ( uint jumps ) \fC[protected]\fR"
+For internal use only.
+.SH "QGListIterator & QGListIterator::operator= ( const QGListIterator & it ) \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGListIterator::toFirst () \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGListIterator::toLast () \fC[protected]\fR"
+For internal use only.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qglistiterator.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

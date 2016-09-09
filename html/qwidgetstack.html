@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QWidgetStack Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QWidgetStack Class Reference</h1><br clear="all">
+<p>
+The QWidgetStack class provides a stack of widgets, where the user can see only the top widget.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qwidgetstack-h.html">qwidgetstack.h</a>&gt;</code>
+<p>
+Inherits <a href="qframe.html">QFrame</a>.
+<p><a href="qwidgetstack-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qwidgetstack.html#a0"><strong>QWidgetStack</strong></a> ( QWidget * parent = 0, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qwidgetstack.html#a1"><strong>~QWidgetStack</strong></a> () </span>
+<li><span class="fn">void <a href="qwidgetstack.html#a2"><strong>addWidget</strong></a> ( QWidget *, int ) </span>
+<li><span class="fn">void <a href="qwidgetstack.html#a3"><strong>removeWidget</strong></a> ( QWidget * ) </span>
+<li><span class="fn">virtual void <a href="qwidgetstack.html#a4"><strong>show</strong></a> () </span>
+<li><span class="fn">QWidget* <a href="qwidgetstack.html#a5"><strong>widget</strong></a> ( int ) const</span>
+<li><span class="fn">int <a href="qwidgetstack.html#a6"><strong>id</strong></a> ( QWidget * ) const</span>
+<li><span class="fn">QWidget* <a href="qwidgetstack.html#a7"><strong>visibleWidget</strong></a> () const</span>
+<li><span class="fn">virtual bool <a href="qwidgetstack.html#a8"><strong>event</strong></a> ( QEvent * ) </span>
+</ul>
+<h2>Public Slots</h2>
+<ul>
+<li><span class="fn">void <a href="qwidgetstack.html#b1"><strong>raiseWidget</strong></a> ( int ) </span>
+<li><span class="fn">void <a href="qwidgetstack.html#b2"><strong>raiseWidget</strong></a> ( QWidget * ) </span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qwidgetstack.html#a9"><strong>aboutToShow</strong></a> ( int ) </span>
+<li><span class="fn">void <a href="qwidgetstack.html#b0"><strong>aboutToShow</strong></a> ( QWidget * ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qwidgetstack.html#b3"><strong>frameChanged</strong></a> () </span>
+<li><span class="fn">void <a href="qwidgetstack.html#b4"><strong>setChildGeometries</strong></a> () </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QWidgetStack class provides a stack of widgets, where the user can see only the top widget.
+<p>
+This is often used e.g. in tab and wizard dialogs.
+<p>The application programmer can move any widget to the top of the
+stack at any time using the slot <a href="qwidgetstack.html#b1">raiseWidget</a>(), and add or remove
+widgets using <a href="qwidgetstack.html#a2">addWidget</a>() and <a href="qwidgetstack.html#a3">removeWidget</a>().
+<p><a href="qwidgetstack.html#a7">visibleWidget</a>() is the <em>get</em> equivalent of raiseWidget(); it
+returns a pointer ot the widget that is currently on the top of the
+stack.
+<p>QWidgetStack also provides the ability to manipulate widgets through
+application-specfied integer IDs, and to translate from widget
+pointers to IDs using <a href="qwidgetstack.html#a6">id</a>() and from IDs to widget pointers using
+<a href="qwidgetstack.html#a5">widget</a>().  These numeric IDs have and unique (per QWidgetStack, not
+globally) and cannot be -1, but apart from that QWidgetStack does
+not attach any meaning to them.
+<p>The default widget stack is frame-less and propagates its font and
+palette to all its children, but you can use the usual <a href="qframe.html">QFrame</a>
+functions (like <a href="qframe.html#a4">setFrameStyle</a>()) to add a frame, and use
+<a href="qwidget.html#g3">setFontPropagation</a>() and <a href="qwidget.html#g5">setPalettePropagation</a>() to change the
+propagation style.
+<p>Finally, QWidgetStack provides a signal, <a href="qwidgetstack.html#a9">aboutToShow</a>(), which is
+emitted just before a managed widget is shown.
+<p>See also:  <a href="qtabdialog.html">QTabDialog</a>, <a href="qtabbar.html">QTabBar</a> and <a href="qframe.html">QFrame</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QWidgetStack::QWidgetStack ( <a href="qwidget.html">QWidget</a> * parent = 0, const char * name = 0 )</h3>
+<p>Constructs an empty widget stack.
+<h3 class="fn"><a name="a1"></a>QWidgetStack::~QWidgetStack ()</h3>
+<p>Destroys the object and frees any allocated resources.
+<h3 class="fn">void <a name="b0"></a>QWidgetStack::aboutToShow ( <a href="qwidget.html">QWidget</a> * ) <code>[signal]</code></h3>
+<p>This signal is emitted just before a managed widget is shown.  The
+argument is a pointer to the widget.
+<h3 class="fn">void <a name="a9"></a>QWidgetStack::aboutToShow ( int ) <code>[signal]</code></h3>
+<p>This signal is emitted just before a managed widget is shown, if
+that managed widget has a non-zero ID.  The argument is the numeric
+ID of the widget.
+<h3 class="fn">void <a name="a2"></a>QWidgetStack::addWidget ( <a href="qwidget.html">QWidget</a> * w, int id )</h3>
+<p>Adds <em>w</em> to this stack of widgets, with id <em>id.</em>
+<p>If <em>w</em> is not a child of <code>this,</code> QWidgetStack moves it using
+<a href="qwidget.html#l9">recreate</a>().
+<h3 class="fn">bool <a name="a8"></a>QWidgetStack::event ( <a href="qevent.html">QEvent</a> * e ) <code>[virtual]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Reimplemented from <a href="qobject.html#a2">QObject.</a>
+<h3 class="fn">void <a name="b3"></a>QWidgetStack::frameChanged () <code>[virtual protected]</code></h3>
+<p>Reimpelemented in order to set the children's geometries
+appropriately.
+<p>Reimplemented from <a href="qframe.html#c1">QFrame.</a>
+<h3 class="fn">int <a name="a6"></a>QWidgetStack::id ( <a href="qwidget.html">QWidget</a> * widget ) const</h3>
+<p>Returns the ID of the <em>widget.</em>  If <em>widget</em> is 0 or is not
+being managed by this widget stack, this function returns -1.
+<p>See also:  <a href="qwidgetstack.html#a5">widget</a>() and <a href="qwidgetstack.html#a2">addWidget</a>().
+<h3 class="fn">void <a name="b2"></a>QWidgetStack::raiseWidget ( <a href="qwidget.html">QWidget</a> * w ) <code>[slot]</code></h3>
+<p>Raises <em>w</em> to the top of the widget stack.
+<h3 class="fn">void <a name="b1"></a>QWidgetStack::raiseWidget ( int id ) <code>[slot]</code></h3>
+<p>Raises <em>id</em> to the top of the widget stack.
+<p>See also:  <a href="qwidgetstack.html#a7">visibleWidget</a>().
+<h3 class="fn">void <a name="a3"></a>QWidgetStack::removeWidget ( <a href="qwidget.html">QWidget</a> * w )</h3>
+<p>Removes <em>w</em> from this stack of widgets.  Does not delete <em>w.</em> If <em>w</em> is the currently visible widget, no other widget is
+substituted.
+<p>See also:  <a href="qwidgetstack.html#a7">visibleWidget</a>() and <a href="qwidgetstack.html#b1">raiseWidget</a>().
+<h3 class="fn">void <a name="b4"></a>QWidgetStack::setChildGeometries () <code>[protected]</code></h3>
+<p>Fix up the children's geometries.
+<h3 class="fn">void <a name="a4"></a>QWidgetStack::show () <code>[virtual]</code></h3>
+<p>Reimplemented in order to set the children's geometries
+appropriately.
+<p>Reimplemented from <a href="qwidget.html#k2">QWidget.</a>
+<h3 class="fn"><a href="qwidget.html">QWidget</a> * <a name="a7"></a>QWidgetStack::visibleWidget () const</h3>
+<p>Returns a pointer to the currently visible widget (the one on the
+top of the stack), of 0 if nothing is currently being shown.
+<p>See also:  <a href="qwidgetstack.html#a9">aboutToShow</a>(), <a href="qwidgetstack.html#a6">id</a>() and <a href="qwidgetstack.html#b1">raiseWidget</a>().
+<h3 class="fn"><a href="qwidget.html">QWidget</a> * <a name="a5"></a>QWidgetStack::widget ( int id ) const</h3>
+<p>Returns a pointer to the widget with ID <em>id.</em>  If this widget
+stack does not manage a widget with ID <em>id,</em> this function return
+0.
+<p>See also:  <a href="qwidgetstack.html#a6">id</a>() and <a href="qwidgetstack.html#a2">addWidget</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qwidgetstack.h: 1998/08/19
+<li>qwidgetstack.cpp: 1998/09/28
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

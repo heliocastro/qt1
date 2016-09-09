@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QIntDictIterator Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QIntDictIterator Class Reference</h1><br clear="all">
+<p>
+The QIntDictIterator class provides an iterator for <a href="qintdict.html">QIntDict</a> collections.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qintdict-h.html">qintdict.h</a>&gt;</code>
+<p>
+Inherits <a href="qgdictiterator.html">QGDictIterator</a>.
+<p><a href="qintdictiterator-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qintdictiterator.html#a0"><strong>QIntDictIterator</strong></a> ( const QIntDict&lt;type&gt; &amp; dict ) </span>
+<li><span class="fn"><a href="qintdictiterator.html#a1"><strong>~QIntDictIterator</strong></a> () </span>
+<li><span class="fn">uint <a href="qintdictiterator.html#a2"><strong>count</strong></a> () const</span>
+<li><span class="fn">bool <a href="qintdictiterator.html#a3"><strong>isEmpty</strong></a> () const</span>
+<li><span class="fn">type* <a href="qintdictiterator.html#a4"><strong>toFirst</strong></a> () </span>
+<li><span class="fn">operator <a href=qintdictiterator.html#b0><strong>type*</strong></a> ()const</span>
+<li><span class="fn">type* <a href="qintdictiterator.html#a5"><strong>current</strong></a> () const</span>
+<li><span class="fn">long <a href="qintdictiterator.html#a6"><strong>currentKey</strong></a> () const</span>
+<li><span class="fn">type* <a href="qintdictiterator.html#a7"><strong>operator</strong></a> () </span>
+<li><span class="fn">type* <a href="qintdictiterator.html#a8"><strong>operator++</strong></a> () </span>
+<li><span class="fn">type* <a href="qintdictiterator.html#a9"><strong>operator+=</strong></a> ( uint jump ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QIntDictIterator class provides an iterator for <a href="qintdict.html">QIntDict</a> collections.
+<p>
+QIntDictIterator is implemented as both a template and a macro class.
+Define a template instance QIntDictIterator&lt;X&gt; to create a
+dictionary iterator that operates on QIntDict&lt;X&gt; (dictionary of X*).
+<p>Example:
+<pre>    #include &lt;qintdict.h&gt;
+    #include &lt;stdio.h&gt;
+
+    void main()
+    {
+        <a href="qintdict.html">QIntDict</a>&lt;char&gt; dict;            // maps long ==&gt; char*
+
+        dict.<a href="qintdict.html#a7">insert</a>( 33, "France" );
+        dict.<a href="qintdict.html#a7">insert</a>(  7, "Russia" );
+        dict.<a href="qintdict.html#a7">insert</a>( 49, "Norway" );
+
+        <a href="qintdictiterator.html">QIntDictIterator</a>&lt;char&gt; it( dict ); // iterator for dict
+
+        while ( it.<a href="qintdictiterator.html#a5">current</a>() ) {
+            printf( "%d -&gt; %s\n", it.<a href="qintdictiterator.html#a6">currentKey</a>(), it.<a href="qintdictiterator.html#a5">current</a>() );
+            ++it;
+        }
+    }
+</pre>
+<p>Program output:
+<pre>        7 -&gt; Russia
+        49 -&gt; Norway
+        33 -&gt; France
+</pre>
+<p>Note that the traversal order is arbitrary, you are not guaranteed the
+order above.
+<p>A QIntDictIterator can also be instantiated through a macro expansion,
+but this is necessary only for compilers that do not support templates.
+See the <a href="collection.html">collection classes documentation</a>
+for a general discussion on template-based versus macro-based collections.
+<p>Multiple iterators may independently traverse the same dictionary.
+A QIntDict knows about all iterators that are operating on the dictionary.
+When an item is removed from the dictionary, QIntDict update all
+iterators that are referring the removed item to point to the next item
+in the traversing order.
+<p>See also:  <a href="qintdict.html">QIntDict</a> and <a href="collection.html">Collection Classes</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QIntDictIterator::QIntDictIterator ( const <a href="qintdict.html">QIntDict</a>&lt;type&gt; &amp; dict )</h3>
+<p>Constructs an iterator for <em>dict.</em>  The current iterator item is
+set to point on the first item in the <em>dict.</em>
+<h3 class="fn"><a name="a1"></a>QIntDictIterator::~QIntDictIterator ()</h3>
+<p>Destroys the iterator.
+<h3 class="fn"><a name="b0"></a>QIntDictIterator::operator type * () const</h3>
+<p>Cast operator. Returns a pointer to the current iterator item.
+Same as <a href="qintdictiterator.html#a5">current</a>().
+<h3 class="fn">uint <a name="a2"></a>QIntDictIterator::count () const</h3>
+<p>Returns the number of items in the dictionary this iterator operates on.
+<p>See also:  <a href="qintdictiterator.html#a3">isEmpty</a>().
+<h3 class="fn">type * <a name="a5"></a>QIntDictIterator::current () const</h3>
+<p>Returns a pointer to the current iterator item.
+<h3 class="fn">long <a name="a6"></a>QIntDictIterator::currentKey () const</h3>
+<p>Returns the key for the current iterator item.
+<h3 class="fn">bool <a name="a3"></a>QIntDictIterator::isEmpty () const</h3>
+<p>Returns TRUE if the dictionary is empty, i.e. <a href="qintdictiterator.html#a2">count</a>() == 0. Returns FALSE
+otherwise.
+<p>See also:  <a href="qintdictiterator.html#a2">count</a>().
+<h3 class="fn">type * <a name="a7"></a>QIntDictIterator::operator() ()</h3>
+<p>Makes the succeeding item current and returns the original current item.
+<p>If the current iterator item was the last item in the dictionary or if it
+was null, null is returned.
+<h3 class="fn">type * <a name="a8"></a>QIntDictIterator::operator++ ()</h3>
+<p>Prefix ++ makes the succeeding item current and returns the new current
+item.
+<p>If the current iterator item was the last item in the dictionary or if it
+was null, null is returned.
+<h3 class="fn">type * <a name="a9"></a>QIntDictIterator::operator+= ( uint jump )</h3>
+<p>Sets the current item to the item <em>jump</em> positions after the current item,
+and returns a pointer to that item.
+<p>If that item is beyond the last item or if the dictionary is  empty,
+it sets the current item to null and returns null.
+<h3 class="fn">type * <a name="a4"></a>QIntDictIterator::toFirst ()</h3>
+<p>Sets the current iterator item to point to the first item in the
+dictionary and returns a pointer to the item.
+If the dictionary is  empty it sets the current item to null and 
+returns null.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qintdict.h: 1998/08/27
+<li>qintdict.doc: 1998/03/17
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

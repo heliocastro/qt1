@@ -1,0 +1,208 @@
+.TH QPaintDevice 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QPaintDevice \- Of objects that can be painted
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qpaintdevice.h>\fR
+.PP
+Inherited by QPicture, QPixmap, QPrinter and QWidget.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "virtual \fB~QPaintDevice\fR ()"
+.br
+.ti -1c
+.BI "int devType () const"
+.br
+.ti -1c
+.BI "bool isExtDev () const"
+.br
+.ti -1c
+.BI "bool paintingActive () const"
+.br
+.ti -1c
+.BI "HANDLE handle () const"
+.br
+.ti -1c
+.BI "Display* x11Display () const"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "QPaintDevice ( uint devflags )"
+.br
+.ti -1c
+.BI "virtual bool cmd ( int, QPainter *, QPDevCmdParam * )"
+.br
+.ti -1c
+.BI "virtual int metric ( int ) const"
+.br
+.ti -1c
+.BI "virtual int fontMet ( QFont *, int, const char * = 0, int = 0 ) const"
+.br
+.ti -1c
+.BI "virtual int fontInf ( QFont *, int ) const"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "void bitBlt (QPaintDevice * " "dst" ", int " "dx" ", int " "dy" ", const QPaintDevice * " "src" ", int " "sx" ", int " "sy" ", int " "sw" ", int " "sh" ", RasterOp " "rop" ", bool " "ignoreMask" ")"
+.br
+.ti -1c
+.BI "void bitBlt (QPaintDevice * " "dst" ", const QPoint & " "dp" ", const QPaintDevice * " "src" ", const QRect & " "sr" ", RasterOp " "rop" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The base class of objects that can be painted.
+.PP
+A paint device is an abstraction of a two-dimensional space that can be drawn using a QPainter. The drawing capabilities are implemented by the subclasses: QWidget, QPixmap, QPicture and QPrinter.
+.PP
+The default coordinate system of a paint device has its origin located at the top left position. X increases to the right and Y increases downwards. The unit is one pixel. There are several ways to set up a user-defined coordinate system using the painter, for example by QPainter::setWorldMatrix().
+.PP
+Example (draw on a paint device):
+.PP
+.nf
+.br
+    void MyWidget::paintEvent( QPaintEvent * )
+.br
+    {
+.br
+        QPainter p;                             // our painter
+.br
+        p.begin( this );                        // start painting widget
+.br
+        p.setPen( red );                        // blue outline
+.br
+        p.setBrush( yellow );                   // yellow fill
+.br
+        p.drawEllipse( 10,20, 100,100 );        // 100x100 ellipse at 10,20
+.br
+        p.end();                                // painting done
+.br
+    }
+.fi
+.PP
+The bit block transfer is an extremely useful operation for copying pixels from one paint device to another (or to itself). It is implemented as the global function bitBlt().
+.PP
+Example (scroll widget contents 10 pixels to the right):
+.PP
+.nf
+.br
+    bitBlt( myWidget, 10,0, myWidget );
+.fi
+.PP
+\fBWarning:\fR Qt requires that a QApplication object must exist before any paint devices can be created. Paint devices access window system resources, and these resources are not initialized before an application object is created.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QPaintDevice::QPaintDevice ( uint devflags ) \fC[protected]\fR"
+Constructs a paint device with internal flags \fIdevflags.\fR This constructor can only be invoked from subclasses of QPaintDevice.
+.SH "QPaintDevice::~QPaintDevice () \fC[virtual]\fR"
+Destroys the paint device and frees window system resources.
+.SH "bool QPaintDevice::cmd ( int, QPainter *, QPDevCmdParam * ) \fC[virtual protected]\fR"
+Internal virtual function that interprets drawing commands from the painter.
+.PP
+Implemented by subclasses that have no direct support for drawing graphics (external paint devices, for example QPicture).
+.PP
+Reimplemented in QPicture and QPrinter.
+.SH "int QPaintDevice::devType () const"
+Returns the device type identifier: \fCPDT_WIDGET, PDT_PIXMAP, PDT_PRINTER, PDT_PICTURE\fR or \fCPDT_UNDEF.\fR
+.SH "int QPaintDevice::fontInf ( QFont *, int ) const \fC[virtual protected]\fR"
+Internal virtual function. Reserved for future use.
+.SH "int QPaintDevice::fontMet ( QFont *, int, const char * = 0, int = 0 ) const \fC[virtual protected]\fR"
+Internal virtual function. Reserved for future use.
+.SH "HANDLE QPaintDevice::handle () const"
+Returns the window system handle of the paint device, for low-level access. \fIUsing this function is not portable.\fR
+.PP
+The HANDLE type varies with platform; see qpaintdevice.h and qwindowdefs.h for details.
+.PP
+See also: x11Display().
+.SH "bool QPaintDevice::isExtDev () const"
+Returns TRUE if the device is a so-called external paint device.
+.PP
+External paint devices cannot be bitBlt()'ed from. QPicture and QPrinter are external paint devices.
+.SH "int QPaintDevice::metric ( int ) const \fC[virtual protected]\fR"
+Internal virtual function that returns paint device metrics.
+.PP
+Please use the QPaintDeviceMetrics class instead.
+.PP
+Reimplemented in QPixmap, QWidget, QPicture and QPrinter.
+.SH "bool QPaintDevice::paintingActive () const"
+Returns TRUE if the device is being painted, i.e. someone has called QPainter::begin() and not yet QPainter::end() for this device.
+.PP
+See also: QPainter::isActive().
+.SH "Display * QPaintDevice::x11Display () const"
+Returns a pointer to the X display (X11 only). \fIUsing this function is not portable.\fR
+.PP
+See also: handle().
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "void bitBlt (QPaintDevice * dst, int dx, int dy, const QPaintDevice * src, int sx, int sy, int sw, int sh, RasterOp rop, bool ignoreMask)"
+This function copies a block of pixels from one paint device to another (bitBlt means bit block transfer).
+.PP
+Arguments:
+.TP
+\fIdst\fR is the paint device to copy to.
+.TP
+\fIdx\fR and \fIdy\fR is the position to copy to.
+.TP
+\fIsrc\fR is the paint device to copy from.
+.TP
+\fIsx\fR and \fIsy\fR is the position to copy from.
+.TP
+\fIsw\fR and \fIsh\fR is the width and height of the block to be copied.
+.TP
+\fIrop\fR defines the raster operation to be used when copying. If \fIsw\fR is 0 or \fIsh\fR is 0, then bitBlt will do nothing.
+.PP
+If \fIsw\fR is negative, then bitBlt calculates \fCsw = src->width - sx.\fR If \fIsh\fR is negative, then bitBlt calculates \fCsh = src->height - sy.\fR
+.PP
+The \fIrop\fR argument can be one of:
+.TP
+\fCCopyROP:\fR dst = src.
+.TP
+\fCOrROP:\fR dst = dst OR src.
+.TP
+\fCXorROP:\fR dst = dst XOR src.
+.TP
+\fCEraseROP:\fR dst = (NOT src) AND dst
+.TP
+\fCNotCopyROP:\fR dst = NOT src
+.TP
+\fCNotOrROP:\fR dst = (NOT src) OR dst
+.TP
+\fCNotXorROP:\fR dst = (NOT src) XOR dst
+.TP
+\fCNotEraseROP:\fR dst = src AND dst
+.TP
+\fCNotROP:\fR dst = NOT dst
+.PP
+The \fIignoreMask\fR argument (default FALSE) applies where \fIsrc\fR is a QPixmap with a mask. If \fIignoreMask\fR is TRUE, bitBlt ignores the pixmap's mask.
+.PP
+BitBlt has two restrictions:
+.IP 1
+The \fIsrc\fR device must be QWidget or QPixmap. You cannot copy pixels from a picture or a printer (external device).
+.IP 2
+The \fIsrc\fR device may not have pixel depth greater than \fIdst.\fR You cannot copy from an 8 bit pixmap to a 1 bit pixmap.
+.PP
+Examples:
+.(l
+desktop/desktop.cpp hello/hello.cpp xform/xform.cpp showimg/showimg.cpp biff/biff.cpp
+.)l
+.SH "void bitBlt (QPaintDevice * dst, const QPoint & dp, const QPaintDevice * src, const QRect & sr, RasterOp rop)"
+Overloaded bitBlt() with the destination point \fIdp\fR and source rectangle
+\fIsr.\fR
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qpaintdevice.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

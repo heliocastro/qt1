@@ -1,0 +1,305 @@
+.TH QImageIO 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QImageIO \- Parameters for loading and saving images
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qimage.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QImageIO ()"
+.br
+.ti -1c
+.BI "QImageIO ( QIODevice * " "ioDevice" ", const char * format )"
+.br
+.ti -1c
+.BI "QImageIO ( const char * " "fileName" ", const char * format )"
+.br
+.ti -1c
+.BI "\fB~QImageIO\fR ()"
+.br
+.ti -1c
+.BI "const QImage& image () const"
+.br
+.ti -1c
+.BI "int status () const"
+.br
+.ti -1c
+.BI "const char* format () const"
+.br
+.ti -1c
+.BI "QIODevice* ioDevice () const"
+.br
+.ti -1c
+.BI "const char* fileName () const"
+.br
+.ti -1c
+.BI "const char* parameters () const"
+.br
+.ti -1c
+.BI "const char* description () const"
+.br
+.ti -1c
+.BI "void setImage ( const QImage & )"
+.br
+.ti -1c
+.BI "void setStatus ( int )"
+.br
+.ti -1c
+.BI "void setFormat ( const char * )"
+.br
+.ti -1c
+.BI "void setIODevice ( QIODevice * )"
+.br
+.ti -1c
+.BI "void setFileName ( const char * )"
+.br
+.ti -1c
+.BI "void setParameters ( const char * )"
+.br
+.ti -1c
+.BI "void setDescription ( const char * )"
+.br
+.ti -1c
+.BI "bool read ()"
+.br
+.ti -1c
+.BI "bool write ()"
+.br
+.in -1c
+.SS "Static Public Members"
+.in +1c
+.ti -1c
+.BI "const char* imageFormat ( const char * fileName )"
+.br
+.ti -1c
+.BI "const char* imageFormat ( QIODevice * )"
+.br
+.ti -1c
+.BI "QStrList inputFormats ()"
+.br
+.ti -1c
+.BI "QStrList outputFormats ()"
+.br
+.ti -1c
+.BI "void defineIOHandler ( const char * " "format" ", const char * " "header" ", const char * " "flags" ", image_io_handler " "read_image" ", image_io_handler write_image )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QImageIO class contains parameters for loading and saving images.
+.PP
+QImageIO contains a QIODevice object that is used for image data I/O. The programmer can install new image file formats in addition to those that Qt implements.
+.PP
+Qt currently supports the following image file formats: GIF (reading only), BMP, XBM, XPM and PNM. The different PNM formats are: PBM (P1), PGM (P2), PPM (P3), PBMRAW (P4), PGMRAW (P5) and PPMRAW (P6).
+.PP
+Additional formats are available with the Qt Image IO Extension package.
+.PP
+You will normally not need to use this class, QPixmap::load(), QPixmap::save() and QImage contain most of the needed functionality.
+.PP
+For image files which contain sequences of images, only the first is read. See the QMovie for loading multiple images.
+.PP
+PBM, PGM, and PPM format output is only supported in PPMRAW format.
+.PP
+\fBWarning:\fR Unisys has changed its position regarding GIF. If you are in a country where Unisys holds a patent on LZW compression and/or decompression, Unisys may require you to license that technology. These countries include Canada, Japan, the USA, France, Germany, Italy and the UK. There is more information on Unisys web site: Overview of Unisys' position. GIF support may be removed in a future version of Qt. We recommend using the PNG format, which is available in the Qt Image IO Extension package.
+.PP
+See also: QImage, QPixmap, QFile and QMovie.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QImageIO::QImageIO ()"
+Constructs a QImageIO object with all parameters set to zero.
+.SH "QImageIO::QImageIO ( QIODevice * ioDevice, const char * format )"
+Constructs a QImageIO object with an I/O device and a format tag.
+.SH "QImageIO::QImageIO ( const char * fileName, const char * format )"
+Constructs a QImageIO object with a file name and a format tag.
+.SH "QImageIO::~QImageIO ()"
+Destroys the object an all related data.
+.SH "void QImageIO::defineIOHandler ( const char * format, const char * header, const char * flags, image_io_handler read_image, image_io_handler write_image ) \fC[static]\fR"
+Defines a image IO handler for a specified image format. An image IO handler is responsible for reading and writing images.
+.PP
+Arguments:
+.TP
+\fIformat\fR is the name of the format.
+.TP
+\fIheader\fR is a regular expression that recognizes the image header.
+.TP
+\fIflags\fR is "T" for text formats like PBM; generally you will want to use 0.
+.TP
+\fIread_image\fR is a function to read an image of this format.
+.TP
+\fIwrite_image\fR is a function to write an image of this format. Both read_image and write_image are of type image_io_handler, which is a function pointer.
+.PP
+Example:
+.PP
+.nf
+.br
+    void readGIF( QImageIO *image )
+.br
+    {
+.br
+      // read the image, using the image->ioDevice()
+.br
+    }
+.br
+.br
+    void writeGIF( QImageIO *image )
+.br
+    {
+.br
+      // write the image, using the image->ioDevice()
+.br
+    }
+.br
+.br
+    // add the GIF image handler
+.br
+.br
+    QImageIO::defineIOHandler( "GIF",
+.br
+                               "^GIF[0-9][0-9][a-z]",
+.br
+                               0,
+.br
+                               readGIF,
+.br
+                               writeGIF );
+.fi
+.PP
+Prior to comparison with the regular expression, the file header is converted to change all 0 bytes into 1 bytes. This is done because 0 is such a common header byte yet regular expressions cannot match it.
+.PP
+For image formats supporting incremental display, such as sequences of animated frames, see the QImageFormatType class.
+.SH "const char * QImageIO::description () const"
+Returns the image description string.
+.PP
+See also: setDescription().
+.SH "const char * QImageIO::fileName () const"
+Returns the file name currently set.
+.PP
+See also: setFileName().
+.SH "const char * QImageIO::format () const"
+Returns the image format string, or 0 if no format has been explicitly set.
+.SH "const QImage & QImageIO::image () const"
+Returns the image currently set.
+.PP
+See also: setImage().
+.SH "const char * QImageIO::imageFormat ( QIODevice * d ) \fC[static]\fR"
+Returns a string that specifies the image format of the image read from \fId,\fR or null if the file cannot be read or if the format is not recognized.
+.SH "const char * QImageIO::imageFormat ( const char * fileName ) \fC[static]\fR"
+Returns a string that specifies the image format of the file \fIfileName,\fR or null if the file cannot not be read or if the format is not recognized.
+.SH "QStrList QImageIO::inputFormats () \fC[static]\fR"
+Returns a sorted list of image formats which are supported for image input.
+.SH "QIODevice * QImageIO::ioDevice () const"
+Returns the IO device currently set.
+.PP
+See also: setIODevice().
+.SH "QStrList QImageIO::outputFormats () \fC[static]\fR"
+Returns a sorted list of image formats which are supported for image output.
+.SH "const char * QImageIO::parameters () const"
+Returns image parameters string.
+.PP
+See also: setParameters().
+.SH "bool QImageIO::read ()"
+Reads an image into memory and returns TRUE if the image was successfully read.
+.PP
+Before reading an image, you must set an IO device or a file name. If both an IO device and a file name has been set, then the IO device will be used.
+.PP
+Setting the image file format string is optional.
+.PP
+Note that this function does \fInot\fR set the format used to read the image. If you need that information, use the imageFormat() static functions.
+.PP
+Example:
+.PP
+.nf
+.br
+    QImageIO iio;
+.br
+    QPixmap  pixmap;
+.br
+    iio.setFileName( "burger.bmp" );
+.br
+    if ( image.read() )                 // ok
+.br
+        pixmap = iio.image();           // convert to pixmap
+.fi
+.PP
+See also: setIODevice(), setFileName(), setFormat(), write() and QPixmap::load().
+.SH "void QImageIO::setDescription ( const char * description )"
+Sets the image description string for image handlers that support image descriptions.
+.PP
+Currently, no image format supported by Qt use the description string.
+.SH "void QImageIO::setFileName ( const char * fileName )"
+Sets the name of the file to read or write an image.
+.PP
+See also: setIODevice().
+.SH "void QImageIO::setFormat ( const char * format )"
+Sets the image format name of the image about to be read or written.
+.PP
+It is necessary to specify a format before writing an image.
+.PP
+It is not necessary to specify a format before reading an image. If not format has been set, Qt guesses the image format before reading it. If a format is set, but the image has another (valid) format, the image will not be read.
+.PP
+See also: read(), write() and format().
+.SH "void QImageIO::setIODevice ( QIODevice * ioDevice )"
+Sets the IO device to be used for reading or writing an image.
+.PP
+Setting the IO device allows images to be read/written to any block-oriented QIODevice.
+.PP
+If \fIioDevice\fR is not null, this IO device will override file name settings.
+.PP
+See also: setFileName().
+.SH "void QImageIO::setImage ( const QImage & image )"
+Sets the image.
+.PP
+See also: image().
+.SH "void QImageIO::setParameters ( const char * parameters )"
+Sets the image parameters string for image handlers that require special parameters.
+.PP
+Although all image formats supported by Qt ignore the parameters string, it will be useful for future extentions or contributions (like JPEG).
+.SH "void QImageIO::setStatus ( int status )"
+Sets the image IO status. A non-zero value indicates an error, while 0 means that the IO operation was successful.
+.PP
+See also: status().
+.SH "int QImageIO::status () const"
+Returns the image IO status. A non-zero value indicates an error, while 0 means that the IO operation was successful.
+.PP
+See also: setStatus().
+.SH "bool QImageIO::write ()"
+Writes an image to an IO device and returns TRUE if the image was successfully written.
+.PP
+Before writing an image, you must set an IO device or a file name. If both an IO device and a file name has been set, then the IO device will be used.
+.PP
+The image will be written using the specified image format.
+.PP
+Example:
+.PP
+.nf
+.br
+    QImageIO iio;
+.br
+    QImage   im;
+.br
+    im = pixmap;                                // convert to image
+.br
+    iio.setImage( im );
+.br
+    iio.setFileName( "burger.bmp" );
+.br
+    iio.setFormat( "BMP" );
+.br
+    iio.write();                                // TRUE if ok
+.fi
+.PP
+See also:  setIODevice(), setFileName(), setFormat(), read() and QPixmap::save().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qimageio.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,208 @@
+.TH QPen 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QPen \- Defines how a QPainter should draw lines and outlines of shapes
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qpen.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QPen ()"
+.br
+.ti -1c
+.BI "QPen ( PenStyle )"
+.br
+.ti -1c
+.BI "QPen ( const QColor & " "color" ", uint " "width" "=0, PenStyle " "style" "=SolidLine )"
+.br
+.ti -1c
+.BI "QPen ( const QPen & )"
+.br
+.ti -1c
+.BI "\fB~QPen\fR ()"
+.br
+.ti -1c
+.BI "QPen& operator= ( const QPen & )"
+.br
+.ti -1c
+.BI "PenStyle style () const"
+.br
+.ti -1c
+.BI "void setStyle ( PenStyle )"
+.br
+.ti -1c
+.BI "uint width () const"
+.br
+.ti -1c
+.BI "void setWidth ( uint )"
+.br
+.ti -1c
+.BI "const QColor& color () const"
+.br
+.ti -1c
+.BI "void setColor ( const QColor & )"
+.br
+.ti -1c
+.BI "bool operator== ( const QPen & p ) const"
+.br
+.ti -1c
+.BI "bool operator!= ( const QPen & p ) const"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "QDataStream & operator<< (QDataStream & " "s" ", const QPen & " "p" ")"
+.br
+.ti -1c
+.BI "QDataStream & operator>> (QDataStream & " "s" ", QPen & " "p" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The QPen class defines how a QPainter should draw lines and outlines of shapes.
+.PP
+A pen has a style, a width and a color.
+.PP
+The pen style defines the line type. The default pen style is \fCSolidPen.\fR Setting the style to \fCNoPen\fR tells the painter to not draw lines or outlines.
+.PP
+The pen width defines the line width. The default line width is 0, which draws a 1-pixel line very fast, but with lower presicion than with a line width of 1. Setting the line width to 1 or more draws lines that are precise, but drawing is slower.
+.PP
+The pen color defines the color of lines and text. The default line color is black. The QColor documentation lists predefined colors.
+.PP
+Use the QBrush class for specifying fill styles.
+.PP
+Example:
+.PP
+.nf
+.br
+    QPainter painter;
+.br
+    QPen     pen( red, 2 );             // red solid line, 2 pixel width
+.br
+    painter.begin( &anyPaintDevice );   // paint something
+.br
+    painter.setPen( pen );              // set the red, fat pen
+.br
+    painter.drawRect( 40,30, 200,100 ); // draw rectangle
+.br
+    painter.setPen( blue );             // set blue pen, 0 pixel width
+.br
+    painter.drawLine( 40,30, 240,130 ); // draw diagonal in rectangle
+.br
+    painter.end();                      // painting done
+.fi
+.PP
+See the setStyle() function for a complete list of pen styles.
+.PP
+See also: QPainter and QPainter::setPen().
+.PP
+Examples:
+.(l
+tictac/tictac.cpp desktop/desktop.cpp progress/progress.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QPen::QPen ()"
+Constructs a default black solid line pen with 0 width.
+.SH "QPen::QPen ( PenStyle style )"
+Constructs a pen black with 0 width and a specified style.
+.PP
+See also: setStyle().
+.SH "QPen::QPen ( const QColor & color, uint width=0, PenStyle style=SolidLine )"
+Constructs a pen with a specified color, width and style.
+.PP
+See also: setWidth(), setStyle() and setColor().
+.SH "QPen::QPen ( const QPen & p )"
+Constructs a pen which is a copy of \fIp.\fR
+.SH "QPen::~QPen ()"
+Destroys the pen.
+.SH "const QColor & QPen::color () const"
+Returns the pen color.
+.PP
+See also: setColor().
+.SH "bool QPen::operator!= ( const QPen & p ) const"
+Returns TRUE if the pen is different from \fIp,\fR or FALSE if the pens are equal.
+.PP
+Two pens are different if they have different styles, widths or colors.
+.PP
+See also: operator==().
+.SH "QPen & QPen::operator= ( const QPen & p )"
+Assigns \fIc\fR to this pen and returns a reference to this pen.
+.SH "bool QPen::operator== ( const QPen & p ) const"
+Returns TRUE if the pen is equal to \fIp,\fR or FALSE if the pens are different.
+.PP
+Two pens are equal if they have equal styles, widths and colors.
+.PP
+See also: operator!=().
+.SH "void QPen::setColor ( const QColor & c )"
+Sets the pen color to \fIc.\fR
+.PP
+See also: color().
+.PP
+Examples:
+.(l
+progress/progress.cpp
+.)l
+.SH "void QPen::setStyle ( PenStyle s )"
+Sets the pen style to \fIs.\fR
+.PP
+The pen styles are:
+.TP
+\fCNoPen\fR no outline is drawn.
+.TP
+\fCSolidLine\fR solid line (default).
+.TP
+\fCDashLine\fR - - - (dashes) line.
+.TP
+\fCDotLine\fR * * * (dots) line.
+.TP
+\fCDashDotLine\fR - * - * line.
+.TP
+\fCDashDotDotLine\fR - ** - ** line.
+.PP
+See also: style().
+.SH "void QPen::setWidth ( uint w )"
+Sets the pen width to \fIw.\fR
+.PP
+See also: width().
+.PP
+Examples:
+.(l
+progress/progress.cpp
+.)l
+.SH "PenStyle QPen::style () const"
+Returns the pen style.
+.PP
+See also: setStyle().
+.SH "uint QPen::width () const"
+Returns the pen width.
+.PP
+See also: setWidth().
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "QDataStream & operator<< (QDataStream & s, const QPen & p)"
+Writes a pen to the stream and returns a reference to the stream.
+.PP
+The serialization format is:
+.IP 1
+The pen style (UINT8)
+.IP 2
+The pen width (UINT8)
+.IP 3
+The pen color (QColor)
+.SH "QDataStream & operator>> (QDataStream & s, QPen & p)"
+Reads a pen from the stream and returns a reference to the stream.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qpen.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

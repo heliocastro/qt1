@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>Qt tutorial - t14/cannon.h</title>
+</head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Source code for <a href="t14.html">tutorial 14</a>: cannon.h</h1><br clear="all">
+<hr>
+<pre>/****************************************************************
+**
+** Definition of CannonField class, Qt tutorial 14
+**
+****************************************************************/
+
+#ifndef CANNON_H
+#define CANNON_H
+
+#include &lt;<a href="qwidget-h.html">qwidget.h</a>&gt;
+
+class CannonField : public QWidget
+{
+    Q_OBJECT
+public:
+    CannonField( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+
+    int   angle()      const { return ang; }
+    int   force()      const { return f; }
+    bool  gameOver()   const { return gameEnded; }
+    bool  isShooting() const { return shooting; }
+public slots:
+    void  setAngle( int degrees );
+    void  setForce( int newton );
+    void  shoot();
+    void  newTarget();
+    void  setGameOver();
+    void  restartGame();
+signals:
+    void  hit();
+    void  missed();
+    void  angleChanged( int );
+    void  forceChanged( int );
+protected:
+    void  timerEvent( <a href="qtimerevent.html">QTimerEvent</a> * );
+    void  paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * );
+    void  mousePressEvent( <a href="qmouseevent.html">QMouseEvent</a> * );
+    void  mouseMoveEvent( <a href="qmouseevent.html">QMouseEvent</a> * );
+    void  mouseReleaseEvent( <a href="qmouseevent.html">QMouseEvent</a> * );
+private:
+    void  stopShooting();
+    void  paintShot( <a href="qpainter.html">QPainter</a> * );
+    void  paintTarget( <a href="qpainter.html">QPainter</a> * );
+    void  paintBarrier( <a href="qpainter.html">QPainter</a> * );
+    void  paintCannon( <a href="qpainter.html">QPainter</a> * );
+    <a href="qrect.html">QRect</a> cannonRect() const;
+    <a href="qrect.html">QRect</a> shotRect() const;
+    <a href="qrect.html">QRect</a> targetRect() const;
+    <a href="qrect.html">QRect</a> barrierRect() const;
+    bool  barrelHit( const QPoint &amp; ) const;
+
+    int   ang;
+    int   f;
+    bool  shooting;
+
+    int   timerCount;
+    float shoot_ang;
+    float shoot_f;
+
+    <a href="qpoint.html">QPoint</a> target;
+
+    bool gameEnded;
+    bool barrelPressed;
+};
+
+#endif // CANNON_H
+</pre>
+<p>
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

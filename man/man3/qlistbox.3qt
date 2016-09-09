@@ -1,0 +1,659 @@
+.TH QListBox 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QListBox \- Single-column list of items that can be scrolled
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qlistbox.h>\fR
+.PP
+Inherits QTableView.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QListBox ( QWidget * " "parent" "=0, const char * " "name" "=0, WFlags " "f" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QListBox\fR ()"
+.br
+.ti -1c
+.BI "virtual void setFont ( const QFont & )"
+.br
+.ti -1c
+.BI "uint count () const"
+.br
+.ti -1c
+.BI "void insertStrList ( const QStrList *, int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "void insertStrList ( const char **, int " "numStrings" "=-1, int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "void insertItem ( const QListBoxItem *, int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "void insertItem ( const char * " "text" ", int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "void insertItem ( const QPixmap & " "pixmap" ", int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "void inSort ( const QListBoxItem * )"
+.br
+.ti -1c
+.BI "void inSort ( const char * text )"
+.br
+.ti -1c
+.BI "void removeItem ( int index )"
+.br
+.ti -1c
+.BI "void clear ()"
+.br
+.ti -1c
+.BI "const char* text ( int index ) const"
+.br
+.ti -1c
+.BI "const QPixmap* pixmap ( int index ) const"
+.br
+.ti -1c
+.BI "void changeItem ( const QListBoxItem *, int index )"
+.br
+.ti -1c
+.BI "void changeItem ( const char * " "text" ", int index )"
+.br
+.ti -1c
+.BI "void changeItem ( const QPixmap & " "pixmap" ", int index )"
+.br
+.ti -1c
+.BI "bool autoUpdate () const"
+.br
+.ti -1c
+.BI "void setAutoUpdate ( bool )"
+.br
+.ti -1c
+.BI "int numItemsVisible () const"
+.br
+.ti -1c
+.BI "void setFixedVisibleLines ( int lines )"
+.br
+.ti -1c
+.BI "int currentItem () const"
+.br
+.ti -1c
+.BI "void setCurrentItem ( int index )"
+.br
+.ti -1c
+.BI "void centerCurrentItem ()"
+.br
+.ti -1c
+.BI "int topItem () const"
+.br
+.ti -1c
+.BI "void setTopItem ( int index )"
+.br
+.ti -1c
+.BI "void setBottomItem ( int index )"
+.br
+.ti -1c
+.BI "bool dragSelect () const"
+.br
+.ti -1c
+.BI "void setDragSelect ( bool )"
+.br
+.ti -1c
+.BI "bool autoScroll () const"
+.br
+.ti -1c
+.BI "void setAutoScroll ( bool )"
+.br
+.ti -1c
+.BI "bool autoScrollBar () const"
+.br
+.ti -1c
+.BI "void setAutoScrollBar ( bool )"
+.br
+.ti -1c
+.BI "bool scrollBar () const"
+.br
+.ti -1c
+.BI "void setScrollBar ( bool )"
+.br
+.ti -1c
+.BI "bool autoBottomScrollBar () const"
+.br
+.ti -1c
+.BI "void setAutoBottomScrollBar ( bool )"
+.br
+.ti -1c
+.BI "bool bottomScrollBar () const"
+.br
+.ti -1c
+.BI "void setBottomScrollBar ( bool )"
+.br
+.ti -1c
+.BI "bool smoothScrolling () const"
+.br
+.ti -1c
+.BI "void setSmoothScrolling ( bool )"
+.br
+.ti -1c
+.BI "int itemHeight () const"
+.br
+.ti -1c
+.BI "int itemHeight ( int index ) const"
+.br
+.ti -1c
+.BI "long maxItemWidth () const"
+.br
+.ti -1c
+.BI "long maxItemWidth ()"
+.br
+.ti -1c
+.BI "bool isMultiSelection () const"
+.br
+.ti -1c
+.BI "void setMultiSelection ( bool )"
+.br
+.ti -1c
+.BI "void setSelected ( int, bool )"
+.br
+.ti -1c
+.BI "bool isSelected ( int ) const"
+.br
+.ti -1c
+.BI "virtual QSize sizeHint () const"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "void clearSelection ()"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void highlighted ( int index )"
+.br
+.ti -1c
+.BI "void selected ( int index )"
+.br
+.ti -1c
+.BI "void highlighted ( const char * )"
+.br
+.ti -1c
+.BI "void selected ( const char * )"
+.br
+.ti -1c
+.BI "void selectionChanged ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "QListBoxItem* item ( int index ) const"
+.br
+.ti -1c
+.BI "bool itemVisible ( int index )"
+.br
+.ti -1c
+.BI "virtual int cellHeight ( int " "index" " = 0 )"
+.br
+.ti -1c
+.BI "virtual void paintCell ( QPainter *, int " "row" ", int col )"
+.br
+.ti -1c
+.BI "virtual void mousePressEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseReleaseEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseDoubleClickEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseMoveEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void keyPressEvent ( QKeyEvent * e )"
+.br
+.ti -1c
+.BI "virtual void focusInEvent ( QFocusEvent * e )"
+.br
+.ti -1c
+.BI "virtual void focusOutEvent ( QFocusEvent * e )"
+.br
+.ti -1c
+.BI "virtual void resizeEvent ( QResizeEvent * )"
+.br
+.ti -1c
+.BI "virtual void timerEvent ( QTimerEvent * )"
+.br
+.ti -1c
+.BI "int findItem ( int yPos ) const"
+.br
+.ti -1c
+.BI "bool itemYPos ( int " "index" ", int * yPos ) const"
+.br
+.ti -1c
+.BI "void updateItem ( int " "index" ", bool " "clear" " = TRUE )"
+.br
+.ti -1c
+.BI "void clearList ()"
+.br
+.ti -1c
+.BI "void updateCellWidth ()"
+.br
+.ti -1c
+.BI "void toggleCurrentItem ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QListBox widget provides a single-column list of items that can be scrolled.
+.PP
+Each item in a QListBox contains a QListBoxItem. One of the items can be the current item. The highlighted() signal is emitted when the user highlights a new current item; selected() is emitted when the user double-clicks on an item or presses return when an item is highlighted.
+.PP
+If the user does not select anything, no signals are emitted and currentItem() returns -1.
+.PP
+A list box has \fCStrongFocus\fR as a default focusPolicy(), i.e. it can get keyboard focus both by tabbing and clicking.
+.PP
+New items may be inserted using either insertItem(), insertStrList() and inSort(). The list box is automatically updated to reflect the change; if you are going to insert a lot of data it may be worthwhile to wrap the insertion in calls to setAutoUpdate():
+.PP
+.nf
+.br
+      listBix->setAutoUpdate( FALSE );
+.br
+      for( i=1; i< hugeArray->count(); i++ )
+.br
+          listBox->insertItem( hugeArray[i] );
+.br
+      listBox->setAutoUpdate( TRUE );
+.br
+      listBox->repaint();
+.fi
+.PP
+Each change to insertItem() normally causes a screen update, and for a large change only a few of those updates are really necessary. Be careful to call repaint() when you re-enable updates, so the widget is completely repainted.
+.PP
+By default, vertical and horizontal scroll bars are added and removed as necessary. setAutoScrollBar() can be used to force a specific policy.
+.PP
+If you need to insert other types than texts and pixmaps, you must define new classes which inherit QListBoxItem.
+.PP
+\fBWarning:\fR The list box assumes ownership of all list box items and will delete them when they are not needed.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+See also: QListView, QComboBox, QButtonGroup and GUI Design Handbook: List Box (two sections)
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QListBox::QListBox ( QWidget * parent=0, const char * name=0, WFlags f=0 )"
+Constructs a list box. The arguments are passed directly to the QTableView constructor.
+.PP
+Note that the \fIf\fR argument is \fInot\fR table flags but rather widget flags.
+.SH "QListBox::~QListBox ()"
+Destroys the list box. Deletes all list box items.
+.SH "bool QListBox::autoBottomScrollBar () const"
+Returns TRUE if the list box has an automatic bottom scroll bar.
+.PP
+See also: setAutoBottomScrollBar() and autoScrollBar().
+.SH "bool QListBox::autoScroll () const"
+Returns TRUE if auto-scrolling is enabled, otherwise FALSE.
+.PP
+See also: setAutoScroll and dragSelect().
+.SH "bool QListBox::autoScrollBar () const"
+Returns TRUE if the list box has an automatic (vertical) scroll bar.
+.PP
+See also: setAutoScrollBar() and autoBottomScrollBar().
+.SH "bool QListBox::autoUpdate () const"
+Returns TRUE if the list box updates itself automatically when items are inserted or removed.
+.PP
+The default setting is TRUE.
+.PP
+See also: setAutoUpdate().
+.SH "bool QListBox::bottomScrollBar () const"
+Returns TRUE if the list box has a bottom scroll bar.
+.PP
+See also: setBottomScrollBar(), autoBottomScrollBar() and scrollBar().
+.SH "int QListBox::cellHeight ( int index = 0 ) \fC[virtual protected]\fR"
+Returns the height of the item at position \fIindex\fR in pixels.
+.PP
+Reimplemented from QTableView.
+.SH "void QListBox::centerCurrentItem ()"
+Scrolls the list box so the current (highlighted) item is centered in the list box.
+.PP
+See also: currentItem() and setTopItem().
+.SH "void QListBox::changeItem ( const QListBoxItem * lbi, int index )"
+Replaces the item at posistion \fIindex\fR with \fIlbi.\fR If \fIindex\fR is negative or too large, changeItem() does nothing.
+.PP
+See also: insertItem() and removeItem().
+.SH "void QListBox::changeItem ( const QPixmap & pixmap, int index )"
+Replaces the item at position \fIindex\fR with \fIpixmap.\fR
+.PP
+The operation is ignored if \fIindex\fR is out of range.
+.PP
+See also: insertItem() and removeItem().
+.SH "void QListBox::changeItem ( const char * text, int index )"
+Replaces the item at position \fIindex\fR with \fItext.\fR
+.PP
+The operation is ignored if \fIindex\fR is out of range.
+.PP
+See also: insertItem() and removeItem().
+.SH "void QListBox::clear ()"
+Deletes all items in the list.
+.PP
+See also: removeItem() and setStrList().
+.SH "void QListBox::clearList () \fC[protected]\fR"
+Deletes all items in the list. Protected function that does NOT update the list box.
+.SH "void QListBox::clearSelection () \fC[slot]\fR"
+Deselects all items. Note that a single-selection listbox will automatically select its first item if it has keyboard focus.
+.SH "uint QListBox::count () const"
+Returns the number of items in the list box.
+.SH "int QListBox::currentItem () const"
+Returns the index of the current (highlighted) item of the list box, or -1 if no item has been selected.
+.PP
+See also: topItem().
+.SH "bool QListBox::dragSelect () const"
+Returns TRUE if drag-selection is enabled, otherwise FALSE.
+.PP
+See also: setDragSelect() and autoScroll().
+.SH "int QListBox::findItem ( int yPos ) const \fC[protected]\fR"
+Returns the index of the list box item at the vertical pixel-coordinate \fIyPos.\fR
+.PP
+See also: itemYPos().
+.SH "void QListBox::focusInEvent ( QFocusEvent * ) \fC[virtual protected]\fR"
+Handles focus events. Repaints the current item (if not set, topItem() is made current).
+.PP
+See also: keyPressEvent() and focusOutEvent().
+.PP
+Reimplemented from QWidget.
+.SH "void QListBox::focusOutEvent ( QFocusEvent * ) \fC[virtual protected]\fR"
+Handles focus out events. Repaints the current item, if set.
+.PP
+See also: keyPressEvent() and focusOutEvent().
+.PP
+Reimplemented from QWidget.
+.SH "void QListBox::highlighted ( const char * ) \fC[signal]\fR"
+This signal is emitted when the user highlights a new current item and the new item is a string. The argument is the text of the new current item.
+.PP
+See also: selected(), currentItem() and selectionChanged().
+.SH "void QListBox::highlighted ( int index ) \fC[signal]\fR"
+This signal is emitted when the user highlights a new current item. The argument is the index of the new item, which is already current.
+.PP
+See also: selected(), currentItem() and selectionChanged().
+.SH "void QListBox::inSort ( const QListBoxItem * lbi )"
+Inserts \fIlbi\fR at its sorted position in the list box.
+.PP
+All items must be inserted with inSort() to maintain the sorting order. inSort() treats any pixmap (or user-defined type) as lexicographically less than any string.
+.PP
+See also: insertItem().
+.SH "void QListBox::inSort ( const char * text )"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "void QListBox::insertItem ( const QListBoxItem * lbi, int index=-1 )"
+Inserts the item \fIlbi\fR into the list at \fIindex.\fR
+.PP
+If \fIindex\fR is negative or larger than the number of items in the list box, \fIlbi\fR is inserted at the end of the list.
+.PP
+See also: insertStrList().
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH "void QListBox::insertItem ( const QPixmap & pixmap, int index=-1 )"
+Inserts \fIpixmap\fR into the list at \fIindex.\fR
+.PP
+If \fIindex\fR is negative, \fIpixmap\fR is inserted at the end of the list.
+.PP
+See also: insertStrList().
+.SH "void QListBox::insertItem ( const char * text, int index=-1 )"
+Inserts \fItext\fR into the list at \fIindex.\fR
+.PP
+If \fIindex\fR is negative, \fItext\fR is inserted at the end of the list.
+.PP
+See also: insertStrList().
+.SH "void QListBox::insertStrList ( const QStrList * list, int index=-1 )"
+Inserts the string list \fIlist\fR into the list at item \fIindex.\fR
+.PP
+If \fIindex\fR is negative, \fIlist\fR is inserted at the end of the list. If \fIindex\fR is too large, the operation is ignored.
+.PP
+See also: insertItem() and inSort().
+.SH "void QListBox::insertStrList ( const char ** strings, int numStrings=-1, int index=-1 )"
+Inserts the \fInumStrings\fR strings of the array \fIstrings\fR into the list at item\fIindex.\fR
+.PP
+If \fIindex\fR is negative, insertStrList() inserts \fIstrings\fR at the end of the list. If \fIindex\fR is too large, the operation is ignored.
+.PP
+See also: insertItem() and inSort().
+.SH "bool QListBox::isMultiSelection () const"
+Returns TRUE if the listbox is in multi-selection mode, and FALSE if it is in single-selection mode.
+.PP
+See also: setMultiSelection().
+.SH "bool QListBox::isSelected ( int i ) const"
+Returns TRUE if item \fIi\fR is selected. Returns FALSE if it is not selected or if there is an error.
+.SH "QListBoxItem * QListBox::item ( int index ) const \fC[protected]\fR"
+Returns a pointer to the item at position \fIindex.\fR
+.SH "int QListBox::itemHeight () const"
+Returns the standard item height (in pixels), or -1 if the list box has variable item height.
+.SH "int QListBox::itemHeight ( int index ) const"
+Returns the height (in pixels) of item at \fIindex.\fR
+.SH "bool QListBox::itemVisible ( int index ) \fC[protected]\fR"
+Returns TRUE if the item at position \fIindex\fR is at least partly visible.
+.SH "bool QListBox::itemYPos ( int index, int * yPos ) const \fC[protected]\fR"
+Returns the vertical pixel-coordinate in \fI*yPos,\fR of the list box item at position \fIindex\fR in the list. Returns FALSE if the item is outside the visible area.
+.PP
+See also: findItem.
+.SH "void QListBox::keyPressEvent ( QKeyEvent * e ) \fC[virtual protected]\fR"
+Handles key press events.
+.PP
+\fCUp\fR and \fCdown\fR arrow keys make the highlighted item move and if necessary scroll the list box.
+.PP
+\fCEnter\fR makes the list box emit the selected() signal.
+.PP
+See also: selected() and setCurrentItem().
+.PP
+Reimplemented from QWidget.
+.SH "long QListBox::maxItemWidth ()"
+For binary compatibility.
+.SH "long QListBox::maxItemWidth () const"
+Returns the width in pixels of the widest item.
+.SH "void QListBox::mouseDoubleClickEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse double click events. Emits the selected() signal for the item that was double-clicked.
+.PP
+Reimplemented from QWidget.
+.SH "void QListBox::mouseMoveEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse move events. Scrolls the list box if auto-scroll is enabled.
+.PP
+See also: autoScroll().
+.PP
+Reimplemented from QWidget.
+.SH "void QListBox::mousePressEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse press events. Makes the clicked item the current item.
+.PP
+See also: currentItem().
+.PP
+Reimplemented from QWidget.
+.SH "void QListBox::mouseReleaseEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse release events.
+.PP
+Reimplemented from QWidget.
+.SH "int QListBox::numItemsVisible () const"
+Returns the number of visible items. This may change at any time since the user may resize the widget.
+.PP
+See also: setFixedVisibleLines().
+.SH "void QListBox::paintCell ( QPainter * p, int row, int col ) \fC[virtual protected]\fR"
+Repaints the cell at position \fIrow\fR using \fIp.\fR The \fIcol\fR argument is ignored, it is present because QTableView is more general. This function has the responsibility of showing focus and highlighting.
+.PP
+See also: QTableView::paintCell().
+.PP
+Reimplemented from QTableView.
+.SH "const QPixmap * QListBox::pixmap ( int index ) const"
+Returns a pointer to the pixmap at position \fIindex,\fR or 0 if there is no pixmap there.
+.PP
+See also: text().
+.SH "void QListBox::removeItem ( int index )"
+Removes the item at position \fIindex.\fR If \fIindex\fR is equal to currentItem(), a new item gets selected and the highlighted() signal is emitted.
+.PP
+See also: insertItem() and clear().
+.SH "void QListBox::resizeEvent ( QResizeEvent * e ) \fC[virtual protected]\fR"
+Handles resize events. Updates internal parameters for the new list box size.
+.PP
+Reimplemented from QWidget.
+.SH "bool QListBox::scrollBar () const"
+Returns TRUE if the list box has a (vertical) scroll bar.
+.PP
+See also: setScrollBar(), autoScrollBar() and bottomScrollBar().
+.SH "void QListBox::selected ( const char * ) \fC[signal]\fR"
+This signal is emitted when the user double-clicks on an item or presses return while an item is highlighted, and the selected item is (or has) a string. The argument is the text of the selected item.
+.PP
+See also: highlighted() and selectionChanged().
+.SH "void QListBox::selected ( int index ) \fC[signal]\fR"
+This signal is emitted when the user double-clicks on an item or presses return when an item is highlighted. The argument is the index of the selected item.
+.PP
+See also: highlighted() and selectionChanged().
+.SH "void QListBox::selectionChanged () \fC[signal]\fR"
+This signal is emitted when the selection set of a multiple-choice listbox changes. If the user selects five items by drag-selecting, QListBox tries to emit just one selectionChanged() signal, so the signal can be connected to computationally expensive slots.
+.PP
+See also: selected() and currentItem().
+.SH "void QListBox::setAutoBottomScrollBar ( bool enable )"
+Enables an automatic bottom scroll bar if \fIenable\fR is TRUE, or disables it if \fIenable\fR is FALSE.
+.PP
+If it is enabled, then the list box will get a bottom scroll bar if the maximum list box item width exceeds the list box width.
+.PP
+The default setting is TRUE.
+.PP
+See also: autoBottomScrollBar(), setBottomScrollBar() and setAutoScrollBar().
+.SH "void QListBox::setAutoScroll ( bool enable )"
+Sets auto-scrolling if \fIenable\fR is TRUE, or disables it if \fIenable\fR is FALSE.
+.PP
+If auto-scrolling is enabled, the list box will scroll its contents when the user drags the mouse outside (below or above) the list box. Auto-scrolling only works if drag-selection is enabled.
+.PP
+The default setting is TRUE.
+.PP
+See also: autoScroll() and setDragSelect().
+.SH "void QListBox::setAutoScrollBar ( bool enable )"
+Enables an automatic (vertical) scroll bar if \fIenable\fR is TRUE, or disables it if \fIenable\fR is FALSE.
+.PP
+If it is enabled, then the list box will get a (vertical) scroll bar if the list box items exceed the list box height.
+.PP
+The default setting is TRUE.
+.PP
+See also: autoScrollBar(), setScrollBar() and setAutoBottomScrollBar().
+.SH "void QListBox::setAutoUpdate ( bool enable )"
+Specifies whether the list box should update itself automatically when items are inserted or removed.
+.PP
+Auto-update is enabled by default.
+.PP
+If \fIenable\fR is TRUE, the list box will update itself. If \fIenable\fR is FALSE, the list box will not update itself.
+.PP
+\fBWarning:\fR Do not leave the view in this state for a long time (i.e. between events ). If the user interacts with the view when auto-update is off, strange things can happen.
+.PP
+See also: autoUpdate().
+.SH "void QListBox::setBottomItem ( int index )"
+Scrolls the list box so the item at position \fIindex\fR in the list becomes the bottom row of the list box.
+.PP
+See also: setTopItem().
+.SH "void QListBox::setBottomScrollBar ( bool enable )"
+Enables a bottom scroll bar if \fIenable\fR is TRUE, or disables it if \fIenable\fR is FALSE.
+.PP
+The default setting is FALSE.
+.PP
+See also: bottomScrollBar(), setAutoBottomScrollBar() and setScrollBar().
+.SH "void QListBox::setCurrentItem ( int index )"
+Sets the highlighted item to the item at position \fIindex\fR in the list. The highlighting is moved and the list box scrolled as necessary.
+.PP
+See also: currentItem().
+.SH "void QListBox::setDragSelect ( bool enable )"
+Sets drag-selection if \fIenable\fR is TRUE, or disables it if \fIenable\fR is FALSE.
+.PP
+If drag-selection is enabled, the list box will highlight new items when the user drags the mouse inside the list box.
+.PP
+The default setting is TRUE.
+.PP
+See also: drawSelect() and setAutoScroll().
+.SH "void QListBox::setFixedVisibleLines ( int lines )"
+Sets a fixed height for the widget, so that it shows the given number of lines of text for the current font size.
+.SH "void QListBox::setFont ( const QFont & font ) \fC[virtual]\fR"
+Reimplements QWidget::setFont() to update the list box line height and maxItemWidth().
+.PP
+Reimplemented from QWidget.
+.SH "void QListBox::setMultiSelection ( bool enable )"
+Sets the list box to multi-selection mode if \fIenable\fR is TRUE, and to single-selection mode if \fIenable\fR is FALSE.
+.PP
+Single- and multi-selections modes work the same, except that the highlighted() and selected() signals are emitted at different times.
+.PP
+See also: isMultiSelection().
+.SH "void QListBox::setScrollBar ( bool enable )"
+Enables a (vertical) scroll bar if \fIenable\fR is TRUE, or disables it if \fIenable\fR is FALSE.
+.PP
+The default setting is FALSE.
+.PP
+See also: scrollBar(), setAutoScrollBar() and setBottomScrollBar().
+.SH "void QListBox::setSelected ( int index, bool select )"
+Selects the item at position \fIindex\fR if \fIselect\fR is TRUE, or unselects it if \fIselect\fR is FALSE. May also repaint the item.
+.PP
+If the listbox is a single-selection listbox and and \fIselect\fR is TRUE, setCurrentItem will be called.
+.PP
+If the listbox is a single-selection listbox and and \fIselect\fR is FALSE, clearSelection() will be called if \fIindex\fR is the currently selected item.
+.PP
+See also: setMultiSelection(), setCurrentItem(), clearSelection() and currentItem().
+.SH "void QListBox::setSmoothScrolling ( bool enable )"
+Enables smooth list box scrolling if \fIenable\fR is TRUE, or disables it if \fIenable\fR is FALSE.
+.PP
+The default setting is TRUE.
+.PP
+See also: smoothScrolling().
+.SH "void QListBox::setTopItem ( int index )"
+Scrolls the list box so the item at position \fIindex\fR in the list becomes the top row of the list box.
+.PP
+See also: topItem() and centerCurrentItem().
+.SH "QSize QListBox::sizeHint () const \fC[virtual]\fR"
+Returns a size mased on maxItemWidth() and any value set by setFixedVisibleLines().
+.PP
+Reimplemented from QWidget.
+.SH "bool QListBox::smoothScrolling () const"
+Returns TRUE if smooth list box scrolling is enabled, otherwise FALSE.
+.PP
+See also: setSmoothScrolling().
+.SH "const char * QListBox::text ( int index ) const"
+Returns a pointer to the text at position \fIindex,\fR or 0 if there is no text there.
+.PP
+See also: pixmap().
+.SH "void QListBox::timerEvent ( QTimerEvent * ) \fC[virtual protected]\fR"
+Handles timer events. Does auto-scrolling.
+.PP
+Reimplemented from QObject.
+.SH "void QListBox::toggleCurrentItem () \fC[protected]\fR"
+Toggles the selection status of currentItem() and repaints, if the listbox is a multi-selection listbox.
+.PP
+Does nothing if the listbox is a single-selection listbox.
+.PP
+See also: setMultiSelection().
+.SH "int QListBox::topItem () const"
+Returns index of the item that is on the top line of the list box.
+.PP
+See also: setTopItem() and currentItem().
+.SH "void QListBox::updateCellWidth () \fC[protected]\fR"
+Traverses the list and finds an item with the maximum width, and updates the internal list box structures accordingly.
+.SH "void QListBox::updateItem ( int index, bool erase = TRUE ) \fC[protected]\fR"
+Repaints the item at position \fIindex\fR in the list.  Erases the line
+first if \fIerase\fR is TRUE.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qlistbox.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

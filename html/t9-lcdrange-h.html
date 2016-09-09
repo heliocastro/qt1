@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>Qt tutorial - t9/lcdrange.h</title>
+</head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Source code for <a href="t9.html">tutorial 9</a>: lcdrange.h</h1><br clear="all">
+<hr>
+<pre>/****************************************************************
+**
+** Definition of LCDRange class, Qt tutorial 9
+**
+****************************************************************/
+
+#ifndef LCDRANGE_H
+#define LCDRANGE_H
+
+#include &lt;<a href="qwidget-h.html">qwidget.h</a>&gt;
+
+class QScrollBar;
+class QLCDNumber;
+
+class LCDRange : public QWidget
+{
+    Q_OBJECT
+public:
+    LCDRange( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+
+    int value() const;
+public slots:
+    void setValue( int );
+    void setRange( int minVal, int maxVal );
+signals:
+    void valueChanged( int );
+protected:
+    void resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * );
+private:
+    <a href="qscrollbar.html">QScrollBar</a>  *sBar;
+    <a href="qlcdnumber.html">QLCDNumber</a>  *lcd;
+};
+
+#endif // LCDRANGE_H
+</pre>
+<p>
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

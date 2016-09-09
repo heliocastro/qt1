@@ -1,0 +1,341 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QButton Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QButton Class Reference</h1><br clear="all">
+<p>
+The QButton class is the abstract base class of button widgets, providing functionality common to buttons.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qbutton-h.html">qbutton.h</a>&gt;</code>
+<p>
+Inherits <a href="qwidget.html">QWidget</a>.
+<p>Inherited by <a href="qcheckbox.html">QCheckBox</a>, <a href="qpushbutton.html">QPushButton</a>, <a href="qradiobutton.html">QRadioButton</a> and <a href="qtoolbutton.html">QToolButton</a>.
+<p><a href="qbutton-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qbutton.html#a0"><strong>QButton</strong></a> ( QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qbutton.html#a1"><strong>~QButton</strong></a> () </span>
+<li><span class="fn">const char* <a href="qbutton.html#a2"><strong>text</strong></a> () const</span>
+<li><span class="fn">void <a href="qbutton.html#a3"><strong>setText</strong></a> ( const char * ) </span>
+<li><span class="fn">const QPixmap* <a href="qbutton.html#a4"><strong>pixmap</strong></a> () const</span>
+<li><span class="fn">void <a href="qbutton.html#a5"><strong>setPixmap</strong></a> ( const QPixmap &amp; ) </span>
+<li><span class="fn">int <a href="qbutton.html#a6"><strong>accel</strong></a> () const</span>
+<li><span class="fn">void <a href="qbutton.html#a7"><strong>setAccel</strong></a> ( int ) </span>
+<li><span class="fn">bool <a href="qbutton.html#a8"><strong>isToggleButton</strong></a> () const</span>
+<li><span class="fn">void <a href="qbutton.html#a9"><strong>setDown</strong></a> ( bool ) </span>
+<li><span class="fn">bool <a href="qbutton.html#b0"><strong>isDown</strong></a> () const</span>
+<li><span class="fn">bool <a href="qbutton.html#b1"><strong>isOn</strong></a> () const</span>
+<li><span class="fn">bool <a href="qbutton.html#b2"><strong>autoResize</strong></a> () const</span>
+<li><span class="fn">void <a href="qbutton.html#b3"><strong>setAutoResize</strong></a> ( bool ) </span>
+<li><span class="fn">bool <a href="qbutton.html#b4"><strong>autoRepeat</strong></a> () const</span>
+<li><span class="fn">void <a href="qbutton.html#b5"><strong>setAutoRepeat</strong></a> ( bool ) </span>
+</ul>
+<h2>Public Slots</h2>
+<ul>
+<li><span class="fn">void <a href="qbutton.html#b6"><strong>animateClick</strong></a> () </span>
+<li><span class="fn">void <a href="qbutton.html#b7"><strong>toggle</strong></a> () </span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qbutton.html#b8"><strong>pressed</strong></a> () </span>
+<li><span class="fn">void <a href="qbutton.html#b9"><strong>released</strong></a> () </span>
+<li><span class="fn">void <a href="qbutton.html#c0"><strong>clicked</strong></a> () </span>
+<li><span class="fn">void <a href="qbutton.html#c1"><strong>toggled</strong></a> ( bool ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">void <a href="qbutton.html#c2"><strong>setToggleButton</strong></a> ( bool ) </span>
+<li><span class="fn">void <a href="qbutton.html#c3"><strong>setOn</strong></a> ( bool ) </span>
+<li><span class="fn">virtual bool <a href="qbutton.html#c4"><strong>hitButton</strong></a> ( const QPoint &amp; pos ) const</span>
+<li><span class="fn">virtual void <a href="qbutton.html#c5"><strong>drawButton</strong></a> ( QPainter * ) </span>
+<li><span class="fn">virtual void <a href="qbutton.html#c6"><strong>drawButtonLabel</strong></a> ( QPainter * ) </span>
+<li><span class="fn">virtual void <a href="qbutton.html#c7"><strong>keyPressEvent</strong></a> ( QKeyEvent * ) </span>
+<li><span class="fn">virtual void <a href="qbutton.html#c8"><strong>mousePressEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qbutton.html#c9"><strong>mouseReleaseEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qbutton.html#d0"><strong>mouseMoveEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qbutton.html#d1"><strong>paintEvent</strong></a> ( QPaintEvent * ) </span>
+<li><span class="fn">virtual void <a href="qbutton.html#d2"><strong>focusInEvent</strong></a> ( QFocusEvent * ) </span>
+<li><span class="fn">virtual void <a href="qbutton.html#d3"><strong>focusOutEvent</strong></a> ( QFocusEvent * ) </span>
+<li><span class="fn">virtual void <a href="qbutton.html#d4"><strong>enabledChange</strong></a> ( bool ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QButton class is the abstract base class of button widgets, providing functionality common to buttons.
+<p>
+The QButton class implements an abstract button, and lets subclasses
+specify how to reply to user actions and how to draw the button.
+<p>QButton provides both push and toggle buttons.  The <a href="qradiobutton.html">QRadioButton</a> and
+<a href="qcheckbox.html">QCheckBox</a> classes provide only toggle buttons, <a href="qpushbutton.html">QPushButton</a> and
+<a href="qtoolbutton.html">QToolButton</a> provide both toggle and push buttons.
+<p>Any button can have either a text or pixmap label.  <a href="qbutton.html#a3">setText</a>() sets
+the button to be a text button and <a href="qbutton.html#a5">setPixmap</a>() sets it to be a
+pixmap button.  The text/pixmap is manipulated as necessary to
+create "disabled" appearance when the button is <a href="qwidget.html#b2">disabled</a>.
+<p>QButton provides most of the states used for buttons:
+<ul>
+<li><a href="qbutton.html#b0">isDown</a>() determines whether the button is <em>pressed</em> down.
+<li><a href="qbutton.html#b1">isOn</a>() determines whether the button is <em>on.</em>
+Only toggle buttons can be switched on and off  (see below).
+<li><a href="qwidget.html#a9">isEnabled</a>() determines whether the button can be pressed by the
+user.
+<li><a href="qbutton.html#b5">setAutoRepeat</a>() determines whether the button will auto-repeat
+if the user holds it down.
+<li><a href="qbutton.html#c2">setToggleButton</a>() determines whether the button is a toggle
+button or not.
+</ul>
+<p>The difference between isDown() and isOn() is as follows:
+When the user clicks a toggle button to toggle it on, the button is
+first <em>pressed,</em> then released into <em>on</em> state.  When the user
+clicks it again (to toggle it off) the button moves first to the <em>pressed</em> state, then to the <em>off</em> state (isOn() and isDown() are
+both FALSE).
+<p>Default buttons (as used in many dialogs) are provided by
+<a href="qpushbutton.html#a6">QPushButton::setDefault</a>() and <a href="qpushbutton.html#a4">QPushButton::setAutoDefault</a>().
+<p>QButton provides four signals:
+<ul>
+<li><a href="qbutton.html#b8">pressed</a>() is emitted when the left mouse button is pressed while
+the mouse cursor is inside the button.
+<li><a href="qbutton.html#b9">released</a>() is emitted when the left mouse button is released.
+<li><a href="qbutton.html#c0">clicked</a>() is emitted when the button is first pressed then
+released, or when the accelerator key is typed, or when <a href="qbutton.html#b6">animateClick</a>()
+is called.
+<li><a href="qbutton.html#c1">toggled</a>() is emitted when the state of a toggle button changes.
+</ul>
+<p>If the button is a text button with "&" in its text, QButton creates an
+automatic accelerator key.  This code creates a push button labelled "Rock
+& Roll" (where the c is underscored).  The button gets an automatic
+accelerator key, Alt-C:
+<p><pre>    <a href="qpushbutton.html">QPushButton</a> *p = new <a href="qpushbutton.html">QPushButton</a>( "Ro&amp;ck &amp;&amp; Roll", this );
+</pre>
+<p>In this example, when the user presses Alt-C the button will
+<a href="qbutton.html#b6">animate a click</a>.
+<p>You can also set a custom accelerator using the <a href="qbutton.html#a7">setAccel</a>() function.
+This is useful mostly for pixmap buttons since they have no
+automatic accelerator.
+<p><pre>    <a href="qpushbutton.html">QPushButton</a> *p;
+    p-&gt;<a href="qbutton.html#a5">setPixmap</a>( <a href="qpixmap.html">QPixmap</a>("print.gif") );
+    p-&gt;<a href="qbutton.html#a7">setAccel</a>( ALT+Key_F7 );
+</pre>
+<p>All of the buttons provided by Qt (<a href="qpushbutton.html">QPushButton</a>, <a href="qtoolbutton.html">QToolButton</a>,
+<a href="qcheckbox.html">QCheckBox</a> and <a href="qradiobutton.html">QRadioButton)</a> can display both text and pixmaps.
+<p>To subclass QButton, you have to reimplement at least <a href="qbutton.html#c5">drawButton</a>()
+(to draw the button's outskirts) and <a href="qbutton.html#c6">drawButtonLabel</a>() (to draw its
+text or pixmap).  It is generally advisable to reimplement
+<a href="qwidget.html#l7">sizeHint</a>() as well, and sometimes <a href="qbutton.html#c4">hitButton</a>() (to determine whether
+a button press is within the button).
+<p>To reduce flickering the <a href="qbutton.html#d1">QButton::paintEvent</a>() sets up a pixmap that the
+drawButton() function draws in. You should not reimplement <a href="qbutton.html#d1">paintEvent</a>()
+for a subclass of QButton unless you want to take over all drawing.
+<p>See also:  <a href="qbuttongroup.html">QButtonGroup</a> and <a href="http://www.microsoft.com/win32dev/uiguide/uigui161.htm">Microsoft Style Guide</a>
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#QButton">tictac/tictac.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QButton::QButton ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs a standard button with a parent widget and a name.
+<p>If <em>parent</em> is a <a href="qbuttongroup.html">QButtonGroup</a>, this constructor calls
+<a href="qbuttongroup.html#a5">QButtonGroup::insert</a>().
+<h3 class="fn"><a name="a1"></a>QButton::~QButton ()</h3>
+<p>Destroys the button and all its child widgets.
+<h3 class="fn">int <a name="a6"></a>QButton::accel () const</h3>
+<p>Returns the accelerator key currently set for the button, or 0
+if no accelerator key has been set.
+<p>See also:  <a href="qbutton.html#a7">setAccel</a>().
+<h3 class="fn">void <a name="b6"></a>QButton::animateClick () <code>[slot]</code></h3>
+<p>Performs an animated click: The button is pressed and a short while
+later released.
+<p><a href="qbutton.html#b8">pressed</a>(), <a href="qbutton.html#b9">released</a>(), <a href="qbutton.html#c0">clicked</a>() and <a href="qbutton.html#c1">toggled</a>() signals are emitted as
+appropriate.
+<p>This function does nothing if the button is <a href="qwidget.html#b2">disabled.</a>
+<p>See also:  <a href="qbutton.html#a7">setAccel</a>().
+<h3 class="fn">bool <a name="b4"></a>QButton::autoRepeat () const</h3>
+<p>Returns TRUE if the button is auto-repeating, else FALSE.
+<p>The default is FALSE.
+<p>See also:  <a href="qbutton.html#b5">setAutoRepeat</a>().
+<h3 class="fn">bool <a name="b2"></a>QButton::autoResize () const</h3>
+<p>Returns TRUE if auto-resizing is enabled, or FALSE if auto-resizing is
+disabled.
+<p>Auto-resizing is disabled by default.
+<p>See also:  <a href="qbutton.html#b3">setAutoResize</a>().
+<h3 class="fn">void <a name="c0"></a>QButton::clicked () <code>[signal]</code></h3>
+<p>This signal is emitted when the button is activated (i.e. first
+pressed down and then released when the mouse cursor is inside the
+button).
+<p>See also:  <a href="qbutton.html#b8">pressed</a>(), <a href="qbutton.html#b9">released</a>() and <a href="qbutton.html#c1">toggled</a>().
+<h3 class="fn">void <a name="c5"></a>QButton::drawButton ( <a href="qpainter.html">QPainter</a> * ) <code>[virtual protected]</code></h3>
+<p>Draws the button.  The default implementation does nothing.
+<p>This virtual function is reimplemented by subclasses to draw real buttons.
+<p>Reimplemented in <a href="qtoolbutton.html#b6">QToolButton</a>, <a href="qpushbutton.html#b8">QPushButton</a>, <a href="qcheckbox.html#a5">QCheckBox</a> and <a href="qradiobutton.html#a6">QRadioButton</a>.
+<h3 class="fn">void <a name="c6"></a>QButton::drawButtonLabel ( <a href="qpainter.html">QPainter</a> * ) <code>[virtual protected]</code></h3>
+<p>Draws the button text or pixmap.  The default implementation does nothing.
+<p>This virtual function is reimplemented by subclasses to draw real buttons.
+<p>Reimplemented in <a href="qtoolbutton.html#b7">QToolButton</a>, <a href="qpushbutton.html#b9">QPushButton</a>, <a href="qcheckbox.html#a6">QCheckBox</a> and <a href="qradiobutton.html#a7">QRadioButton</a>.
+<h3 class="fn">void <a name="d4"></a>QButton::enabledChange ( bool e ) <code>[virtual protected]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Reimplemented from <a href="qwidget.html#o9">QWidget.</a>
+<h3 class="fn">void <a name="d2"></a>QButton::focusInEvent ( <a href="qfocusevent.html">QFocusEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles focus in events for the button.
+<p>See also:  <a href="qbutton.html#d3">focusOutEvent</a>().
+<p>Reimplemented from <a href="qwidget.html#o0">QWidget.</a>
+<h3 class="fn">void <a name="d3"></a>QButton::focusOutEvent ( <a href="qfocusevent.html">QFocusEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles focus out events for the button.
+<p>See also:  <a href="qbutton.html#d2">focusInEvent</a>().
+<p>Reimplemented from <a href="qwidget.html#o1">QWidget.</a>
+<h3 class="fn">bool <a name="c4"></a>QButton::hitButton ( const <a href="qpoint.html">QPoint</a> &amp; pos ) const <code>[virtual protected]</code></h3>
+<p>Returns TRUE if <em>pos</em> is inside the widget rectangle, or FALSE if it
+is outside.
+<p>This virtual function is reimplemented by subclasses.
+<p>Reimplemented in <a href="qradiobutton.html#a5">QRadioButton</a>.
+<h3 class="fn">bool <a name="b0"></a>QButton::isDown () const</h3>
+<p>Returns TRUE if the button pressed down, or FALSE if it is standing up.
+<p>See also:  <a href="qbutton.html#a9">setDown</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#isDown">tictac/tictac.cpp</a>
+<h3 class="fn">bool <a name="b1"></a>QButton::isOn () const</h3>
+<p>Returns TRUE if this toggle button is switched on, or FALSE if it is
+switched off.
+<p>See also:  <a href="qbutton.html#c3">setOn</a>() and toggleButton().
+<p>Examples:
+ <a href="qmag-qmag-cpp.html#isOn">qmag/qmag.cpp</a>
+<h3 class="fn">bool <a name="a8"></a>QButton::isToggleButton () const</h3>
+<p>Returns TRUE if the button is a toggle button.
+<p>See also:  <a href="qbutton.html#c2">setToggleButton</a>().
+<h3 class="fn">void <a name="c7"></a>QButton::keyPressEvent ( <a href="qkeyevent.html">QKeyEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles keyboard events for the button.
+<p>Space calls <a href="qbutton.html#b6">animateClick</a>(), the arrow keys cause focus changes.
+<p>Reimplemented from <a href="qwidget.html#n8">QWidget.</a>
+<h3 class="fn">void <a name="d0"></a>QButton::mouseMoveEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse move events for the button.
+<p>See also:  <a href="qbutton.html#c8">mousePressEvent</a>() and <a href="qbutton.html#c9">mouseReleaseEvent</a>().
+<p>Reimplemented from <a href="qwidget.html#n7">QWidget.</a>
+<h3 class="fn">void <a name="c8"></a>QButton::mousePressEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse press events for the button.
+<p>See also:  <a href="qbutton.html#c9">mouseReleaseEvent</a>().
+<p>Reimplemented from <a href="qwidget.html#n4">QWidget.</a>
+<h3 class="fn">void <a name="c9"></a>QButton::mouseReleaseEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse release events for the button.
+<p>See also:  <a href="qbutton.html#c8">mousePressEvent</a>().
+<p>Reimplemented from <a href="qwidget.html#n5">QWidget.</a>
+<h3 class="fn">void <a name="d1"></a>QButton::paintEvent ( <a href="qpaintevent.html">QPaintEvent</a> * event ) <code>[virtual protected]</code></h3>
+<p>Handles paint events for the button.
+<p>Opens the painter on the button and calls <a href="qbutton.html#c5">drawButton</a>().
+<p>Reimplemented from <a href="qwidget.html#o4">QWidget.</a>
+<h3 class="fn">const <a href="qpixmap.html">QPixmap</a> * <a name="a4"></a>QButton::pixmap () const</h3>
+<p>Returns the button pixmap, or 0 if the button has no pixmap.
+<h3 class="fn">void <a name="b8"></a>QButton::pressed () <code>[signal]</code></h3>
+<p>This signal is emitted when the button is pressed down.
+<p>See also:  <a href="qbutton.html#b9">released</a>() and <a href="qbutton.html#c0">clicked</a>().
+<h3 class="fn">void <a name="b9"></a>QButton::released () <code>[signal]</code></h3>
+<p>This signal is emitted when the button is released.
+<p>See also:  <a href="qbutton.html#b8">pressed</a>(), <a href="qbutton.html#c0">clicked</a>() and <a href="qbutton.html#c1">toggled</a>().
+<h3 class="fn">void <a name="a7"></a>QButton::setAccel ( int key )</h3>
+<p>Specifies an accelerator <em>key</em> for the button, or removes the
+accelerator if <em>key</em> is 0.
+<p>Setting a button text containing a shortcut character (for
+example the 'x' in E&xit) automatically defines an ALT+letter
+accelerator for the button.
+You only need to call this function in order to specify a custom
+accelerator.
+<p>Example:
+<pre>    <a href="qpushbutton.html">QPushButton</a> *b1 = new <a href="qpushbutton.html">QPushButton</a>;
+    b1-&gt;<a href="qbutton.html#a3">setText</a>( "&amp;OK" );               // sets accel ALT+'O'
+
+    <a href="qpushbutton.html">QPushButton</a> *b2 = new <a href="qpushbutton.html">QPushButton</a>;
+    b2-&gt;<a href="qbutton.html#a5">setPixmap</a>( printIcon );         // pixmap instead of text
+    b2-&gt;<a href="qbutton.html#a7">setAccel</a>( CTRL+'P' );           // custom accel
+</pre>
+<p>See also:  <a href="qbutton.html#a6">accel</a>(), <a href="qbutton.html#a3">setText</a>() and <a href="qaccel.html">QAccel</a>.
+<h3 class="fn">void <a name="b5"></a>QButton::setAutoRepeat ( bool enable )</h3>
+<p>Turns on auto-repeat for the button if <em>enable</em> is TRUE, or
+turns it off if <em>enable</em> is FALSE.
+<p>When auto-repeat is enabled, the <a href="qbutton.html#c0">clicked</a>() signal is emitted at
+regular intervals while the buttons <a href="qbutton.html#b0">is down.</a>
+<p>setAutoRepeat() has no effect for <a href="qbutton.html#c2">toggle
+buttons.</a>
+<p>See also:  <a href="qbutton.html#b0">isDown</a>(), <a href="qbutton.html#b4">autoRepeat</a>() and <a href="qbutton.html#c0">clicked</a>().
+<h3 class="fn">void <a name="b3"></a>QButton::setAutoResize ( bool enable )</h3>
+<p>Enables auto-resizing if <em>enable</em> is TRUE, or disables it if <em>enable</em> is
+FALSE.
+<p>When auto-resizing is enabled, the button will resize itself whenever
+the contents change.
+<p>See also:  <a href="qbutton.html#b2">autoResize</a>() and <a href="qwidget.html#l8">adjustSize</a>().
+<h3 class="fn">void <a name="a9"></a>QButton::setDown ( bool enable )</h3>
+<p>Sets the state of the button to pressed down if <em>enable</em> is TRUE
+or to standing up if <em>enable</em> is FALSE.
+<p>If the button is a toggle button, it is <em>not</em> toggled.  Call
+<a href="qbutton.html#b7">toggle</a>() as well if you need to do that.  The <a href="qbutton.html#b8">pressed</a>() and
+<a href="qbutton.html#b9">released</a>() signals are not emitted by this function.
+<p>This method is provided in case you need to override the mouse event
+handlers.
+<p>See also:  <a href="qbutton.html#b0">isDown</a>(), <a href="qbutton.html#c3">setOn</a>(), <a href="qbutton.html#b7">toggle</a>() and <a href="qbutton.html#c1">toggled</a>().
+<h3 class="fn">void <a name="c3"></a>QButton::setOn ( bool enable ) <code>[protected]</code></h3>
+<p>Switches a toggle button on if <em>enable</em> is TRUE or off if <em>enable</em> is
+FALSE.  This function should be called only for toggle buttons.
+<p>See also:  <a href="qbutton.html#b1">isOn</a>() and toggleButton().
+<h3 class="fn">void <a name="a5"></a>QButton::setPixmap ( const <a href="qpixmap.html">QPixmap</a> &amp; pixmap )</h3>
+<p>Sets the button to display <em>pixmap</em> and repaints at once.
+<p>If <em>pixmap</em> is monochrome (i.e. it is a <a href="qbitmap.html">QBitmap</a> or its <a href="qpixmap.html#b5">depth</a> is 1) and it does not have a mask,
+this function sets the pixmap to be its own mask. The purpose of
+this is to draw transparent bitmaps, which is important for
+e.g. toggle buttons.
+<p>The button resizes itself if auto-resizing is enabled, changes its
+minimum size if autoMinimumSize() is enabled, and always disables
+any accelerator.
+<p>See also:  <a href="qbutton.html#a4">pixmap</a>(), <a href="qbutton.html#a3">setText</a>(), setAutoMinimumSize(), <a href="qbutton.html#b3">setAutoResize</a>(), <a href="qbutton.html#a7">setAccel</a>() and <a href="qpixmap.html#c2">QPixmap::mask</a>().
+<h3 class="fn">void <a name="a3"></a>QButton::setText ( const char * text )</h3>
+<p>Sets the button to display <em>text</em> and repaints
+<p>The button resizes itself if auto-resizing is enabled, changes its
+minimum size if autoMinimumSize() is enabled, and sets the
+appropriate accelerator.
+<p>See also:  <a href="qbutton.html#a2">text</a>(), <a href="qbutton.html#a5">setPixmap</a>(), setAutoMinimumSize(), <a href="qbutton.html#b3">setAutoResize</a>(), <a href="qbutton.html#a7">setAccel</a>() and <a href="qpixmap.html#c2">QPixmap::mask</a>().
+<p>Examples:
+ <a href="xform-xform-cpp.html#setText">xform/xform.cpp</a>
+ <a href="layout-layout-cpp.html#setText">layout/layout.cpp</a>
+ <a href="qmag-qmag-cpp.html#setText">qmag/qmag.cpp</a>
+ <a href="widgets-widgets-cpp.html#setText">widgets/widgets.cpp</a>
+<h3 class="fn">void <a name="c2"></a>QButton::setToggleButton ( bool enable ) <code>[protected]</code></h3>
+<p>Makes the button a toggle button if <em>enable</em> is TRUE, or a normal button
+if <em>enable</em> is FALSE.
+<p>Note that this function is protected. It is called from subclasses
+to enable the toggle functionality. <a href="qcheckbox.html">QCheckBox</a> and <a href="qradiobutton.html">QRadioButton</a> are
+toggle buttons. <a href="qpushbutton.html">QPushButton</a> is initially not a toggle button, but
+<a href="qpushbutton.html#a2">QPushButton::setToggleButton</a>() can be called to create toggle buttons.
+<p>See also:  <a href="qbutton.html#a8">isToggleButton</a>().
+<h3 class="fn">const char * <a name="a2"></a>QButton::text () const</h3>
+<p>Returns the button text, or 0 if the button has no text.
+<p>See also:  <a href="qbutton.html#a3">setText</a>().
+<h3 class="fn">void <a name="b7"></a>QButton::toggle () <code>[slot]</code></h3>
+<p>if this is a toggle button, toggles it.
+<h3 class="fn">void <a name="c1"></a>QButton::toggled ( bool on ) <code>[signal]</code></h3>
+<p>This signal is emitted whenever a toggle button changes status.
+<em>on</em> is TRUE if the button is on, or FALSE if the button is off.
+<p>This may be the result of a user action, <a href="qbutton.html#b7">toggle</a>() slot activation,
+or because <a href="qbutton.html#c3">setOn</a>() was called.
+<p>See also:  <a href="qbutton.html#c0">clicked</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qbutton.h: 1998/08/21
+<li>qbutton.cpp: 1998/11/01
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

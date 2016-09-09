@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QFileInfo Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QFileInfo Class Reference</h1><br clear="all">
+<p>
+The QFileInfo class provides system-independent file information.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qfileinfo-h.html">qfileinfo.h</a>&gt;</code>
+<p><a href="qfileinfo-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qfileinfo.html#a0"><strong>QFileInfo</strong></a> () </span>
+<li><span class="fn"><a href="qfileinfo.html#a1"><strong>QFileInfo</strong></a> ( const char * file ) </span>
+<li><span class="fn"><a href="qfileinfo.html#a2"><strong>QFileInfo</strong></a> ( const QFile &amp; ) </span>
+<li><span class="fn"><a href="qfileinfo.html#a3"><strong>QFileInfo</strong></a> ( const QDir &amp;, const char * fileName ) </span>
+<li><span class="fn"><a href="qfileinfo.html#a4"><strong>QFileInfo</strong></a> ( const QFileInfo &amp; ) </span>
+<li><span class="fn"><a href="qfileinfo.html#a5"><strong>~QFileInfo</strong></a> () </span>
+<li><span class="fn">QFileInfo&amp; <a href="qfileinfo.html#a6"><strong>operator=</strong></a> ( const QFileInfo &amp; ) </span>
+<li><span class="fn">void <a href="qfileinfo.html#a7"><strong>setFile</strong></a> ( const char * file ) </span>
+<li><span class="fn">void <a href="qfileinfo.html#a8"><strong>setFile</strong></a> ( const QFile &amp; ) </span>
+<li><span class="fn">void <a href="qfileinfo.html#a9"><strong>setFile</strong></a> ( const QDir &amp;, const char * fileName ) </span>
+<li><span class="fn">bool <a href="qfileinfo.html#b0"><strong>exists</strong></a> () const</span>
+<li><span class="fn">void <a href="qfileinfo.html#b1"><strong>refresh</strong></a> () const</span>
+<li><span class="fn">bool <a href="qfileinfo.html#b2"><strong>caching</strong></a> () const</span>
+<li><span class="fn">void <a href="qfileinfo.html#b3"><strong>setCaching</strong></a> ( bool ) </span>
+<li><span class="fn">const char* <a href="qfileinfo.html#b4"><strong>filePath</strong></a> () const</span>
+<li><span class="fn">QString <a href="qfileinfo.html#b5"><strong>fileName</strong></a> () const</span>
+<li><span class="fn">QString <a href="qfileinfo.html#b6"><strong>absFilePath</strong></a> () const</span>
+<li><span class="fn">QString <a href="qfileinfo.html#b7"><strong>baseName</strong></a> () const</span>
+<li><span class="fn">QString <a href="qfileinfo.html#b8"><strong>extension</strong></a> () const</span>
+<li><span class="fn">QString <a href="qfileinfo.html#b9"><strong>dirPath</strong></a> ( bool absPath = FALSE ) const</span>
+<li><span class="fn">QDir <a href="qfileinfo.html#c0"><strong>dir</strong></a> ( bool absPath = FALSE ) const</span>
+<li><span class="fn">bool <a href="qfileinfo.html#c1"><strong>isReadable</strong></a> () const</span>
+<li><span class="fn">bool <a href="qfileinfo.html#c2"><strong>isWritable</strong></a> () const</span>
+<li><span class="fn">bool <a href="qfileinfo.html#c3"><strong>isExecutable</strong></a> () const</span>
+<li><span class="fn">bool <a href="qfileinfo.html#c4"><strong>isRelative</strong></a> () const</span>
+<li><span class="fn">bool <a href="qfileinfo.html#c5"><strong>convertToAbs</strong></a> () </span>
+<li><span class="fn">bool <a href="qfileinfo.html#c6"><strong>isFile</strong></a> () const</span>
+<li><span class="fn">bool <a href="qfileinfo.html#c7"><strong>isDir</strong></a> () const</span>
+<li><span class="fn">bool <a href="qfileinfo.html#c8"><strong>isSymLink</strong></a> () const</span>
+<li><span class="fn">QString <a href="qfileinfo.html#c9"><strong>readLink</strong></a> () const</span>
+<li><span class="fn">const char* <a href="qfileinfo.html#d0"><strong>owner</strong></a> () const</span>
+<li><span class="fn">uint <a href="qfileinfo.html#d1"><strong>ownerId</strong></a> () const</span>
+<li><span class="fn">const char* <a href="qfileinfo.html#d2"><strong>group</strong></a> () const</span>
+<li><span class="fn">uint <a href="qfileinfo.html#d3"><strong>groupId</strong></a> () const</span>
+<li><span class="fn">bool <a href="qfileinfo.html#d4"><strong>permission</strong></a> ( int permissionSpec ) const</span>
+<li><span class="fn">uint <a href="qfileinfo.html#d5"><strong>size</strong></a> () const</span>
+<li><span class="fn">QDateTime <a href="qfileinfo.html#d6"><strong>lastModified</strong></a> () const</span>
+<li><span class="fn">QDateTime <a href="qfileinfo.html#d7"><strong>lastRead</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QFileInfo class provides system-independent file information.
+<p>
+QFileInfo provides information about a file's name and position (path) in
+the file system, its access rights and whether it is a directory or a
+symbolic link.  Its size and last modified/read times are also available.
+<p>To speed up performance QFileInfo caches information about the file. Since
+files can be changed by other users or programs, or even by other parts of
+the same program there is a function that refreshes the file information;
+<a href="qfileinfo.html#b1">refresh</a>(). If you would rather like a QFileInfo to access the file system
+every time you request information from it, you can call the function
+<a href="qfileinfo.html#b3">setCaching</a>( FALSE ).
+<p>A QFileInfo can point to a file using either a relative or an absolute
+file path. Absolute file paths begin with the directory separator
+('/') or a drive specification (not applicable to UNIX).
+Relative file names begin with a directory name or a file name and specify
+a path relative to the current directory. An example of
+an absolute path is the string "/tmp/quartz". A relative path might look like
+"src/fatlib". You can use the function <a href="qfileinfo.html#c4">isRelative</a>() to check if a QFileInfo
+is using a relative or an absolute file path. You can call the function
+<a href="qfileinfo.html#c5">convertToAbs</a>() to convert a relative QFileInfo to an absolute one.
+<p>If you need to read and traverse directories, see the <a href="qdir.html">QDir</a> class.
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#QFileInfo">dirview/dirview.cpp</a>
+ <a href="biff-biff-cpp.html#QFileInfo">biff/biff.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QFileInfo::QFileInfo ()</h3>
+<p>Constructs a new empty QFileInfo.
+<h3 class="fn"><a name="a3"></a>QFileInfo::QFileInfo ( const <a href="qdir.html">QDir</a> &amp; d, const char * fileName )</h3>
+<p>Constructs a new QFileInfo that gives information about the file
+named <em>fileName</em> in the directory <em>d.</em>
+<p>If the directory has a relative path, the QFileInfo will also have one.
+<p>See also:  <a href="qfileinfo.html#c4">isRelative</a>().
+<h3 class="fn"><a name="a2"></a>QFileInfo::QFileInfo ( const <a href="qfile.html">QFile</a> &amp; file )</h3>
+<p>Constructs a new QFileInfo that gives information about <em>file.</em>
+<p>If the file has a relative path, the QFileInfo will also have one.
+<p>See also:  <a href="qfileinfo.html#c4">isRelative</a>().
+<h3 class="fn"><a name="a4"></a>QFileInfo::QFileInfo ( const QFileInfo &amp; fi )</h3>
+<p>Constructs a new QFileInfo that is a copy of <em>fi.</em>
+<h3 class="fn"><a name="a1"></a>QFileInfo::QFileInfo ( const char * file )</h3>
+<p>Constructs a new QFileInfo that gives information about the given file.
+The string given can be an absolute or a relative file path.
+<p>See also:  bool, <a href="qfileinfo.html#a7">setFile</a>(const, char*), <a href="qfileinfo.html#c4">isRelative</a>(), <a href="qdir.html#f8">QDir::setCurrent</a>() and <a href="qdir.html#g7">QDir::isRelativePath</a>().
+<h3 class="fn"><a name="a5"></a>QFileInfo::~QFileInfo ()</h3>
+<p>Destroys the QFileInfo.
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="b6"></a>QFileInfo::absFilePath () const</h3>
+<p>Returns the absolute path name.
+<p>The absolute path name is the file name including the absolute path. If
+the QFileInfo is absolute (i.e. not relative) this function will return
+the same string as <a href="qfileinfo.html#b4">filePath</a>().
+<p>Note that this function can be time-consuming under UNIX. (in the order
+of milliseconds on a 486 DX2/66 running Linux).
+<p>See also:  <a href="qfileinfo.html#c4">isRelative</a>() and <a href="qfileinfo.html#b4">filePath</a>().
+<p>Examples:
+ <a href="biff-biff-cpp.html#absFilePath">biff/biff.cpp</a>
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="b7"></a>QFileInfo::baseName () const</h3>
+<p>Returns the base name of the file.
+<p>The base name consists of all characters in the file name up to (but not
+including) the first '.' character.  The path is not included.
+<p>Example:
+<pre>     <a href="qfileinfo.html">QFileInfo</a> fi( "/tmp/abdomen.lower" );
+     <a href="qstring.html">QString</a> base = fi.<a href="qfileinfo.html#b7">baseName</a>();              // base = "abdomen"
+</pre>
+<p>See also:  <a href="qfileinfo.html#b5">fileName</a>() and <a href="qfileinfo.html#b8">extension</a>().
+<h3 class="fn">bool <a name="b2"></a>QFileInfo::caching () const</h3>
+<p>Returns TRUE if caching is enabled.
+<p>See also:  <a href="qfileinfo.html#b3">setCaching</a>() and <a href="qfileinfo.html#b1">refresh</a>().
+<h3 class="fn">bool <a name="c5"></a>QFileInfo::convertToAbs ()</h3>
+<p>Converts the file path name to an absolute path.
+<p>If it is already absolute nothing is done.
+<p>See also:  <a href="qfileinfo.html#b4">filePath</a>() and <a href="qfileinfo.html#c4">isRelative</a>().
+<h3 class="fn"><a href="qdir.html">QDir</a> <a name="c0"></a>QFileInfo::dir ( bool absPath = FALSE ) const</h3>
+<p>Returns the directory path of the file.
+<p>If the QFileInfo is relative and <em>absPath</em> is FALSE, the <a href="qdir.html">QDir</a> will be
+relative, otherwise it will be absolute.
+<p>See also:  <a href="qfileinfo.html#b9">dirPath</a>(), <a href="qfileinfo.html#b4">filePath</a>(), <a href="qfileinfo.html#b5">fileName</a>() and <a href="qfileinfo.html#c4">isRelative</a>().
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="b9"></a>QFileInfo::dirPath ( bool absPath = FALSE ) const</h3>
+<p>Returns the directory path of the file.
+<p>If <em>absPath</em> is TRUE an absolute path is always returned.
+<p>See also:  <a href="qfileinfo.html#c0">dir</a>(), <a href="qfileinfo.html#b4">filePath</a>(), <a href="qfileinfo.html#b5">fileName</a>() and <a href="qfileinfo.html#c4">isRelative</a>().
+<h3 class="fn">bool <a name="b0"></a>QFileInfo::exists () const</h3>
+<p>Returns TRUE if the file pointed to exists, otherwise FALSE.
+<p>Examples:
+ <a href="biff-biff-cpp.html#exists">biff/biff.cpp</a>
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="b8"></a>QFileInfo::extension () const</h3>
+<p>Returns the extension name of the file.
+<p>The file name extension consists of all characters in the file name
+after (but not including) the first '.' character.
+<p>For a file named "archive.tar.gz" this function will return "tar.gz".
+<p>Example:
+<pre>     <a href="qfileinfo.html">QFileInfo</a> fi( "/tmp/abdomen.lower" );
+     <a href="qstring.html">QString</a> ext = fi.<a href="qfileinfo.html#b8">extension</a>();              // ext = "lower"
+</pre>
+<p>See also:  <a href="qfileinfo.html#b5">fileName</a>() and <a href="qfileinfo.html#b7">baseName</a>().
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="b5"></a>QFileInfo::fileName () const</h3>
+<p>Returns the name of the file, the file path is not included.
+<p>Example:
+<pre>     <a href="qfileinfo.html">QFileInfo</a> fi( "/tmp/abdomen.lower" );
+     <a href="qstring.html">QString</a> name = fi.<a href="qfileinfo.html#b5">fileName</a>();              // name = "abdomen.lower"
+</pre>
+<p>See also:  <a href="qfileinfo.html#c4">isRelative</a>(), <a href="qfileinfo.html#b4">filePath</a>(), <a href="qfileinfo.html#b7">baseName</a>() and <a href="qfileinfo.html#b8">extension</a>().
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#fileName">dirview/dirview.cpp</a>
+<h3 class="fn">const char * <a name="b4"></a>QFileInfo::filePath () const</h3>
+<p>Returns the name, i.e. the file name including the path (which can be
+absolute or relative).
+<p>See also:  <a href="qfileinfo.html#c4">isRelative</a>() and <a href="qfileinfo.html#b6">absFilePath</a>().
+<h3 class="fn">const char * <a name="d2"></a>QFileInfo::group () const</h3>
+<p>Returns the group the file belongs to.
+<p>On systems where files do not have groups this function always
+returns 0.
+<p>Note that this function can be time-consuming under UNIX (in the order of
+milliseconds on a 486 DX2/66 running Linux).
+<p>See also:  <a href="qfileinfo.html#d3">groupId</a>(), <a href="qfileinfo.html#d0">owner</a>() and <a href="qfileinfo.html#d1">ownerId</a>().
+<h3 class="fn">uint <a name="d3"></a>QFileInfo::groupId () const</h3>
+<p>Returns the id of the group the file belongs to.
+<p>On systems where files do not have groups this function always
+returns ((uind) -2).
+<p>See also:  <a href="qfileinfo.html#d2">group</a>(), <a href="qfileinfo.html#d0">owner</a>() and <a href="qfileinfo.html#d1">ownerId</a>().
+<h3 class="fn">bool <a name="c7"></a>QFileInfo::isDir () const</h3>
+<p>Returns TRUE if we are pointing to a directory or a symbolic link to
+a directory.
+<p>See also:  <a href="qfileinfo.html#c6">isFile</a>() and <a href="qfileinfo.html#c8">isSymLink</a>().
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#isDir">dirview/dirview.cpp</a>
+<h3 class="fn">bool <a name="c3"></a>QFileInfo::isExecutable () const</h3>
+<p>Returns TRUE if the file is executable.
+<p>See also:  <a href="qfileinfo.html#c1">isReadable</a>(), <a href="qfileinfo.html#c2">isWritable</a>() and <a href="qfileinfo.html#d4">permission</a>().
+<h3 class="fn">bool <a name="c6"></a>QFileInfo::isFile () const</h3>
+<p>Returns TRUE if we are pointing to a file or a symbolic link to a file.
+<p>See also:  <a href="qfileinfo.html#c7">isDir</a>() and <a href="qfileinfo.html#c8">isSymLink</a>().
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#isFile">dirview/dirview.cpp</a>
+<h3 class="fn">bool <a name="c1"></a>QFileInfo::isReadable () const</h3>
+<p>Returns TRUE if the file is readable.
+<p>See also:  <a href="qfileinfo.html#c2">isWritable</a>(), <a href="qfileinfo.html#c3">isExecutable</a>() and <a href="qfileinfo.html#d4">permission</a>().
+<h3 class="fn">bool <a name="c4"></a>QFileInfo::isRelative () const</h3>
+<p>Returns TRUE if the file path name is relative to the current directory,
+FALSE if the path is absolute (e.g. under UNIX a path is relative if it
+does not start with a '/').
+<p>According to Einstein this function should always return TRUE.
+<h3 class="fn">bool <a name="c8"></a>QFileInfo::isSymLink () const</h3>
+<p>Returns TRUE if we are pointing to a symbolic link.
+<p>See also:  <a href="qfileinfo.html#c6">isFile</a>(), <a href="qfileinfo.html#c7">isDir</a>() and <a href="qfileinfo.html#c9">readLink</a>().
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#isSymLink">dirview/dirview.cpp</a>
+<h3 class="fn">bool <a name="c2"></a>QFileInfo::isWritable () const</h3>
+<p>Returns TRUE if the file is writable.
+<p>See also:  <a href="qfileinfo.html#c1">isReadable</a>(), <a href="qfileinfo.html#c3">isExecutable</a>() and <a href="qfileinfo.html#d4">permission</a>().
+<h3 class="fn"><a href="qdatetime.html">QDateTime</a> <a name="d6"></a>QFileInfo::lastModified () const</h3>
+<p>Returns the date and time when the file was last modified.
+<p>See also:  <a href="qfileinfo.html#d7">lastRead</a>().
+<p>Examples:
+ <a href="biff-biff-cpp.html#lastModified">biff/biff.cpp</a>
+<h3 class="fn"><a href="qdatetime.html">QDateTime</a> <a name="d7"></a>QFileInfo::lastRead () const</h3>
+<p>Returns the date and time when the file was last read (accessed).
+<p>On systems that do not support last read times, the modification time is
+returned.
+<p>See also:  <a href="qfileinfo.html#d6">lastModified</a>().
+<p>Examples:
+ <a href="biff-biff-cpp.html#lastRead">biff/biff.cpp</a>
+<h3 class="fn">QFileInfo &amp; <a name="a6"></a>QFileInfo::operator= ( const QFileInfo &amp; fi )</h3>
+<p>Makes a copy of <em>fi</em> and assigns it to this QFileInfo.
+<h3 class="fn">const char * <a name="d0"></a>QFileInfo::owner () const</h3>
+<p>Returns the owner of the file.
+<p>On systems where files do not have owners this function returns 0.
+<p>Note that this function can be time-consuming under UNIX. (in the order
+of milliseconds on a 486 DX2/66 running Linux).
+<p>See also:  <a href="qfileinfo.html#d1">ownerId</a>(), <a href="qfileinfo.html#d2">group</a>() and <a href="qfileinfo.html#d3">groupId</a>().
+<h3 class="fn">uint <a name="d1"></a>QFileInfo::ownerId () const</h3>
+<p>Returns the id of the owner of the file.
+<p>On systems where files do not have owners this function returns ((uint) -2).
+<p>See also:  <a href="qfileinfo.html#d0">owner</a>(), <a href="qfileinfo.html#d2">group</a>() and <a href="qfileinfo.html#d3">groupId</a>().
+<h3 class="fn">bool <a name="d4"></a>QFileInfo::permission ( int permissionSpec ) const</h3>
+<p>Tests for file permissions.  The <em>permissionSpec</em> argument can be several
+flags of type PermissionSpec or'ed together to check for permission
+combinations.
+<p>On systems where files do not have permissions this function always
+returns TRUE.
+<p>Example:
+<pre>    <a href="qfileinfo.html">QFileInfo</a> fi( "/tmp/tonsils" );
+    if ( fi.<a href="qfileinfo.html#d4">permission</a>( QFileInfo::WriteUser | QFileInfo::ReadGroup ) )
+        <a href="qapplication.html#j5">warning</a>( "Tonsils can be changed by me, and the group can read them.");
+    if ( fi.<a href="qfileinfo.html#d4">permission</a>( QFileInfo::WriteGroup | QFileInfo::WriteOther ) )
+        <a href="qapplication.html#j5">warning</a>( "Danger! Tonsils can be changed by the group or others!" );
+</pre>
+<p>See also:  <a href="qfileinfo.html#c1">isReadable</a>(), <a href="qfileinfo.html#c2">isWritable</a>() and <a href="qfileinfo.html#c3">isExecutable</a>().
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="c9"></a>QFileInfo::readLink () const</h3>
+<p>Returns the name a symlink points to, or a null <a href="qstring.html">QString</a> if the
+object does not refer to a symbolic link.
+<p>This name may not represent an existing file; it is only a string.
+<a href="qfileinfo.html#b0">QFileInfo::exists</a>() returns TRUE if the symlink points to an
+existing file.
+<p>See also:  <a href="qfileinfo.html#b0">exists</a>(), <a href="qfileinfo.html#c8">isSymLink</a>(), <a href="qfileinfo.html#c7">isDir</a>() and <a href="qfileinfo.html#c6">isFile</a>().
+<h3 class="fn">void <a name="b1"></a>QFileInfo::refresh () const</h3>
+<p>Refresh the information about the file, i.e. read in information from the
+file system the next time a cached property is fetched.
+<p>See also:  <a href="qfileinfo.html#b3">setCaching</a>().
+<h3 class="fn">void <a name="b3"></a>QFileInfo::setCaching ( bool enable )</h3>
+<p>Enables caching of file information if <em>enable</em> is TRUE, or disables it
+if <em>enable</em> is FALSE.
+<p>When caching is enabled, QFileInfo reads the file information the first
+time
+<p>Caching is enabled by default.
+<p>See also:  <a href="qfileinfo.html#b1">refresh</a>() and <a href="qfileinfo.html#b2">caching</a>().
+<h3 class="fn">void <a name="a9"></a>QFileInfo::setFile ( const <a href="qdir.html">QDir</a> &amp; d, const char * fileName )</h3>
+<p>Sets the file to obains information about to <em>fileName</em> in the
+directory <em>d.</em>
+<p>If the directory has a relative path, the QFileInfo will also have one.
+<p>See also:  <a href="qfileinfo.html#c4">isRelative</a>().
+<h3 class="fn">void <a name="a8"></a>QFileInfo::setFile ( const <a href="qfile.html">QFile</a> &amp; file )</h3>
+<p>Sets the file to obtain information about.
+<p>If the file has a relative path, the QFileInfo will also have one.
+<p>See also:  <a href="qfileinfo.html#c4">isRelative</a>().
+<h3 class="fn">void <a name="a7"></a>QFileInfo::setFile ( const char * file )</h3>
+<p>Sets the file to obtain information about.
+<p>The string given can be an absolute or a relative file path. Absolute file
+paths begin with the directory separator (e.g. '/' under UNIX) or a drive
+specification (not applicable to UNIX). Relative file names begin with a
+directory name or a file name and specify a path relative to the current
+directory.
+<p>Example:
+<pre>    #include &lt;qfileinfo.h&gt;
+    #include &lt;qdir.h&gt;
+
+    void test()
+    {
+        const char *absolute = "/liver/aorta";
+        const char *relative = "liver/aorta";
+        <a href="qfileinfo.html">QFileInfo</a> fi1( absolute );
+        <a href="qfileinfo.html">QFileInfo</a> fi2( relative );
+
+        <a href="qdir.html#f8">QDir::setCurrent</a>( <a href="qdir.html#g4">QDir::rootDirPath</a>() );
+                                // fi1 and fi2 now point to the same file
+
+        <a href="qdir.html#f8">QDir::setCurrent</a>( "/tmp" );
+                                // fi1 now points to "/liver/aorta",
+                                // while fi2 points to "/tmp/liver/aorta"
+    }
+</pre>
+<p>See also:  <a href="qfileinfo.html#c4">isRelative</a>(), <a href="qdir.html#f8">QDir::setCurrent</a>() and <a href="qdir.html#g7">QDir::isRelativePath</a>().
+<p>Examples:
+ <a href="biff-biff-cpp.html#setFile">biff/biff.cpp</a>
+<h3 class="fn">uint <a name="d5"></a>QFileInfo::size () const</h3>
+<p>Returns the file size in bytes, or 0 if the file does not exist if the size
+cannot be fetched.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qfileinfo.h: 1998/08/19
+<li>qfileinfo.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

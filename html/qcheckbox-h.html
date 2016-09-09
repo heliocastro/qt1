@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qcheckbox.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qcheckbox.h</h1><br clear="all">
+This is the verbatim text of the qcheckbox.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qcheckbox.h,v 2.7.2.2 1998/08/21 19:13:24 hanord Exp $
+**
+** Definition of QCheckBox class
+**
+** Created : 940222
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QCHECKBOX_H
+#define QCHECKBOX_H
+
+#ifndef QT_H
+#include "qbutton.h"
+#endif // QT_H
+
+
+class Q_EXPORT QCheckBox : public QButton
+{
+    Q_OBJECT
+public:
+    QCheckBox( QWidget *parent=0, const char *name=0 );
+    QCheckBox( const char *text, QWidget *parent, const char *name=0 );
+
+    bool    isChecked() const;
+    void    setChecked( bool check );
+
+    QSize sizeHint() const;
+
+protected:
+    void    drawButton( QPainter * );
+    void    drawButtonLabel( QPainter * );
+
+private:        // Disabled copy constructor and operator=
+#if defined(Q_DISABLE_COPY)
+    QCheckBox( const QCheckBox &amp; );
+    QCheckBox &amp;operator=( const QCheckBox &amp; );
+#endif
+};
+
+
+inline bool QCheckBox::isChecked() const
+{ return isOn(); }
+
+inline void QCheckBox::setChecked( bool check )
+{ setOn( check ); }
+
+
+#endif // QCHECKBOX_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

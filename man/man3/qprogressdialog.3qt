@@ -1,0 +1,258 @@
+.TH QProgressDialog 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QProgressDialog \- Provides feedback on the progress of a slow operation
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qprogressdialog.h>\fR
+.PP
+Inherits QSemiModal.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QProgressDialog ( QWidget * " "parent" "=0, const char * " "name" "=0, bool " "modal" "=FALSE, WFlags " "f" "=0 )"
+.br
+.ti -1c
+.BI "QProgressDialog ( const char * " "labelText" ", const char * " "cancelButtonText" ", int " "totalSteps" ", QWidget * " "parent" "=0, const char * " "name" "=0, bool " "modal" "=FALSE, WFlags " "f" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QProgressDialog\fR ()"
+.br
+.ti -1c
+.BI "void setLabel ( QLabel * )"
+.br
+.ti -1c
+.BI "void setCancelButton ( QPushButton * )"
+.br
+.ti -1c
+.BI "void setBar ( QProgressBar * )"
+.br
+.ti -1c
+.BI "bool wasCancelled () const"
+.br
+.ti -1c
+.BI "int totalSteps () const"
+.br
+.ti -1c
+.BI "int progress () const"
+.br
+.ti -1c
+.BI "virtual QSize sizeHint () const"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "void cancel ()"
+.br
+.ti -1c
+.BI "void reset ()"
+.br
+.ti -1c
+.BI "void setTotalSteps ( int totalSteps )"
+.br
+.ti -1c
+.BI "void setProgress ( int progress )"
+.br
+.ti -1c
+.BI "void setLabelText ( const char * )"
+.br
+.ti -1c
+.BI "void setCancelButtonText ( const char * )"
+.br
+.ti -1c
+.BI "void setMinimumDuration ( int ms )"
+.br
+.ti -1c
+.BI "int minimumDuration () const"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void cancelled ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void resizeEvent ( QResizeEvent * )"
+.br
+.ti -1c
+.BI "virtual void styleChange ( GUIStyle )"
+.br
+.in -1c
+.SH DESCRIPTION
+Provides feedback on the progress of a slow operation.
+.PP
+A progress dialog is used to give the user an indication of how long an operation is going to take to perform, and to reassure them that the application has not frozen.
+.PP
+A potential problem with progress dialogs is that it is difficult to know when to use them, as operations take different amounts of time on different computer hardware. QProgressDialog offers a solution to this problem: it estimates the time the operation will take (based on time for steps), and only shows itself if that estimate is beyond 3 seconds.
+.PP
+Example:
+.PP
+.nf
+.br
+    QProgressDialog progress( "Copying files...", "Abort Copy", numFiles, this );
+.br
+    for (int i=0; i<numFiles; i++) {
+.br
+        progress.setProgress( i );
+.br
+        if ( progress.wasCancelled() )
+.br
+            break;
+.br
+        ... // copy one file
+.br
+    }
+.br
+    progress.setProgress( numFiles );
+.fi
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+See also: QDialog, QProgressBar and GUI Design Handbook: Progress Indicator
+.PP
+Examples:
+.(l
+progress/progress.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QProgressDialog::QProgressDialog ( QWidget * creator=0, const char * name=0, bool modal=FALSE, WFlags f=0 )"
+Constructs a progress dialog.
+.PP
+Default settings:
+.TP
+The label text is empty.
+.TP
+The cancel button text is "Cancel".
+.TP
+The total number of steps is 100.
+.PP
+\fIparent, name, modal,\fR and \fIf\fR are sent to the QSemiModal::QSemiModal() constructor. Note that if \fImodal\fR is FALSE (the default), you will need to have an event loop proceeding for any redrawing of the dialog to occur. If it is TRUE, the dialog ensures events are processed when needed.
+.PP
+See also: setLabelText(), setLabel(), setCancelButtonText(), setCancelButton() and setTotalSteps().
+.SH "QProgressDialog::QProgressDialog ( const char * labelText, const char * cancelButtonText, int totalSteps, QWidget * creator=0, const char * name=0, bool modal=FALSE, WFlags f=0 )"
+Constructs a progress dialog.
+.PP
+Arguments:
+.TP
+\fIlabelText\fR is text telling the user what is progressing.
+.TP
+\fIcancelButtonText\fR is the text on the cancel button, or 0 if no cancel button is to be shown.
+.TP
+\fItotalSteps\fR is the total number of steps in the operation of which this progress dialog shows the progress. For example, if the operation is to examine 50 files, this value would be 50, then before examining the first file, call setProgress(0), and after examining the last file call setProgress(50).
+.TP
+\fIname, modal,\fR and \fIf\fR are sent to the QSemiModal::QSemiModal() constructor. Note that if \fImodal\fR is FALSE (the default), you will need to have an event loop proceeding for any redrawing of the dialog to occur. If it is TRUE, the dialog ensures events are processed when needed.
+.PP
+See also: setLabelText(), setLabel(), setCancelButtonText(), setCancelButton() and setTotalSteps().
+.SH "QProgressDialog::~QProgressDialog ()"
+Destroys the progress dialog.
+.SH "void QProgressDialog::cancel () \fC[slot]\fR"
+Reset the progress dialog. wasCancelled() becomes TRUE until the progress dialog is reset. The progress dialog becomes hidden.
+.SH "void QProgressDialog::cancelled () \fC[signal]\fR"
+This signal is emitted when the cancel button is clicked. It is connected to the cancel() slot by default.
+.PP
+See also: wasCancelled().
+.SH "int QProgressDialog::minimumDuration () const \fC[slot]\fR"
+Returns the currently set minimum duration for the QProgressDialog
+.PP
+See also: setMinimumDuration().
+.SH "int QProgressDialog::progress () const"
+Returns the current amount of progress, or -1 if the progress counting has not started.
+.PP
+See also: setProgress().
+.SH "void QProgressDialog::reset () \fC[slot]\fR"
+Reset the progress dialog. The progress dialog becomes hidden.
+.SH "void QProgressDialog::resizeEvent ( QResizeEvent * ) \fC[virtual protected]\fR"
+Handles resize events for the progress dialog, sizing the label, dialog, and cancellation button.
+.PP
+Reimplemented from QWidget.
+.SH "void QProgressDialog::setBar ( QProgressBar * bar )"
+Sets the progress bar widget. The progress dialog resizes to fit. The progress bar becomes owned by the progress dialog and will be deleted when necessary.
+.SH "void QProgressDialog::setCancelButton ( QPushButton * cancelButton )"
+Sets the cancellation button. The button becomes owned by the progress dialog and will be deleted when necessary, so do not pass the address of an object on the stack.
+.PP
+See also: setCancelButtonText().
+.SH "void QProgressDialog::setCancelButtonText ( const char * cancelButtonText ) \fC[slot]\fR"
+Sets the cancellation button text.
+.PP
+See also: setCancelButton().
+.SH "void QProgressDialog::setLabel ( QLabel * label )"
+Sets the label. The progress dialog resizes to fit. The label becomes owned by the progress dialog and will be deleted when necessary, so do not pass the address of an object on the stack.
+.PP
+See also: setLabelText().
+.PP
+Examples:
+.(l
+progress/progress.cpp
+.)l
+.SH "void QProgressDialog::setLabelText ( const char * text ) \fC[slot]\fR"
+Sets the label text. The progress dialog resizes to fit.
+.PP
+See also: setLabel().
+.SH "void QProgressDialog::setMinimumDuration ( int ms ) \fC[slot]\fR"
+The dialog will not appear if the anticipated duration of the progressing task is less than \fIms\fR milliseconds.
+.PP
+If set to 0 the dialog is always shown as soon as any progress is set.
+.SH "void QProgressDialog::setProgress ( int progress ) \fC[slot]\fR"
+Sets the current amount of progress made to \fIprog\fR units of the total number of steps. For the progress dialog to work correctly, you must at least call this with the parameter 0 initially, then later with QProgressDialog::totalSteps(), and you may call it any number of times in between.
+.PP
+\fBWarning:\fR If the progress dialog is modal (see QProgressDialog::QProgressDialog()), this function calls QApplication::processEvents(), so take care that this does not cause undesirable re-entrancy to your code. For example, don't use a QProgressDialog inside a paintEvent()!
+.PP
+See also: progress().
+.PP
+Examples:
+.(l
+progress/progress.cpp
+.)l
+.SH "void QProgressDialog::setTotalSteps ( int totalSteps ) \fC[slot]\fR"
+Sets the total number of steps.
+.PP
+See also: totalSteps() and QProgressBar::setTotalSteps().
+.SH "QSize QProgressDialog::sizeHint () const \fC[virtual]\fR"
+Returns a size which fits the contents of the progress dialog. The progress dialog resizes itself as required, so this should not be needed in user code.
+.PP
+Reimplemented from QWidget.
+.SH "void QProgressDialog::styleChange ( GUIStyle s ) \fC[virtual protected]\fR"
+Ensures layout conforms to style of GUI.
+.PP
+Reimplemented from QWidget.
+.SH "int QProgressDialog::totalSteps () const"
+Returns the total number of steps.
+.PP
+See also: setTotalSteps() and QProgressBar::totalSteps().
+.PP
+Examples:
+.(l
+progress/progress.cpp
+.)l
+.SH "bool QProgressDialog::wasCancelled () const"
+Returns the TRUE if the dialog was cancelled, otherwise FALSE.
+.PP
+See also: setProgress(), cancel() and cancelled().
+.PP
+Examples:
+.(l
+progress/progress.cpp
+.)l
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qprogressdialog.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

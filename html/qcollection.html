@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QCollection Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QCollection Class Reference</h1><br clear="all">
+<p>
+The QCollection class is the base class of all Qt collections.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qcollection-h.html">qcollection.h</a>&gt;</code>
+<p>Inherited by <a href="qgcache.html">QGCache</a>, <a href="qgdict.html">QGDict</a> and <a href="qglist.html">QGList</a>.
+<p><a href="qcollection-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn">bool <a href="qcollection.html#a0"><strong>autoDelete</strong></a> () const</span>
+<li><span class="fn">void <a href="qcollection.html#a1"><strong>setAutoDelete</strong></a> ( bool enable ) </span>
+<li><span class="fn">virtual uint <a href="qcollection.html#a2"><strong>count</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qcollection.html#a3"><strong>clear</strong></a> () </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn"><a href="qcollection.html#a4"><strong>QCollection</strong></a> () </span>
+<li><span class="fn"><a href="qcollection.html#a5"><strong>QCollection</strong></a> ( const QCollection &amp; ) </span>
+<li><span class="fn">virtual <a href="qcollection.html#a6"><strong>~QCollection</strong></a> () </span>
+<li><span class="fn">virtual GCI <a href="qcollection.html#a7"><strong>newItem</strong></a> ( GCI ) </span>
+<li><span class="fn">virtual void <a href="qcollection.html#a8"><strong>deleteItem</strong></a> ( GCI ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QCollection class is the base class of all Qt collections.
+<p>
+The QCollection class is an abstract base class for the Qt <a href="collection.html">collection classes</a> <a href="qdict.html">QDict</a>, <a href="qlist.html">QList</a> etc. via <a href="qgdict.html">QGDict</a>,
+<a href="qglist.html">QGList</a> etc.
+<p>A QCollection knows only about the number of objects in the collection and
+the <a href="qcollection.html#a1">deletion strategy</a>.
+<p>A collection is implemented using the <code>GCI</code> (generic collection item)
+type, which is a <code>void*.</code>  The template (or macro) classes that
+create the real collections cast the <code>GCI</code> to the required type.
+<p>See also:  <a href="collection.html">Collection Classes</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a4"></a>QCollection::QCollection () <code>[protected]</code></h3>
+<p>Constructs a collection. The constructor is protected because
+QCollection is an abstract class.
+<h3 class="fn"><a name="a5"></a>QCollection::QCollection ( const QCollection &amp; source ) <code>[protected]</code></h3>
+<p>Constructs a copy of <em>source</em> with <a href="qcollection.html#a0">autoDelete</a>() set to FALSE. The
+constructor is protected because QCollection is an abstract class.
+<p>Note that if <em>source</em> has autoDelete turned on, copying it is a
+good way to get memory leaks, reading freed memory, or both.
+<h3 class="fn"><a name="a6"></a>QCollection::~QCollection () <code>[virtual protected]</code></h3>
+<p>Destroys the collection. The destructor is protected because QCollection
+is an abstract class.
+<h3 class="fn">bool <a name="a0"></a>QCollection::autoDelete () const</h3>
+<p>Returns the setting of the auto-delete option (default is FALSE).
+<p>See also:  <a href="qcollection.html#a1">setAutoDelete</a>().
+<h3 class="fn">virtual void <a name="a3"></a>QCollection::clear () <code>[virtual]</code></h3>
+<p>Removes all objects from the collection.  The objects will be deleted
+if auto-delete has been enabled.
+<p>See also:  <a href="qcollection.html#a1">setAutoDelete</a>().
+<p>Reimplemented in <a href="qptrdict.html#b1">QPtrDict</a>, <a href="qintcache.html#b3">QIntCache</a>, <a href="qgcache.html#b2">QGCache</a>, <a href="qdict.html#b1">QDict</a>, <a href="qintdict.html#b1">QIntDict</a>, <a href="qgdict.html#b2">QGDict</a>, <a href="qlist.html#b9">QList</a>, <a href="qcache.html#b3">QCache</a> and <a href="qglist.html#c2">QGList</a>.
+<h3 class="fn">virtual uint <a name="a2"></a>QCollection::count () const <code>[virtual]</code></h3>
+<p>Returns the number of objects in the collection.
+<p>Reimplemented in <a href="qptrdict.html#a4">QPtrDict</a>, <a href="qintcache.html#a7">QIntCache</a>, <a href="qgcache.html#a4">QGCache</a>, <a href="qdict.html#a4">QDict</a>, <a href="qintdict.html#a4">QIntDict</a>, <a href="qgdict.html#a0">QGDict</a>, <a href="qlist.html#a4">QList</a>, <a href="qcache.html#a7">QCache</a> and <a href="qglist.html#a0">QGList</a>.
+<h3 class="fn">void <a name="a8"></a>QCollection::deleteItem ( GCI d ) <code>[virtual protected]</code></h3>
+<p>Virtual function that deletes an item that is about to be removed from
+the collection.
+<p>The default implementation deletes <em>d</em> pointer if and only if
+auto-delete has been enabled.
+<p>This function is always reimplemented in the collection template
+classes.
+<p>See also:  <a href="qcollection.html#a7">newItem</a>() and <a href="qcollection.html#a1">setAutoDelete</a>().
+<h3 class="fn">GCI <a name="a7"></a>QCollection::newItem ( GCI d ) <code>[virtual protected]</code></h3>
+<p>Virtual function that creates a copy of an object that is about to
+be inserted into the collection.
+<p>The default implementation returns the <em>d</em> pointer, i.e. no copy
+is made.
+<p>This function is seldom reimplemented in the collection template
+classes. It is not common practice to make a copy of something
+that is being inserted.
+<p>See also:  <a href="qcollection.html#a8">deleteItem</a>().
+<h3 class="fn">void <a name="a1"></a>QCollection::setAutoDelete ( bool enable )</h3>
+<p>Sets the auto-delete option of the collection.
+<p>Enabling auto-delete (<em>enable</em> is TRUE) will delete objects that
+are removed from the collection.  This can be useful if the
+collection has the only reference to the objects.  (Note that the
+object can still be copied using the copy constructor - copying such
+objects is a good way to get memory leaks, reading freed memory or
+both.)
+<p>Disabling auto-delete (<em>enable</em> is FALSE) will <em>not</em> delete objects
+that are removed from the collection.  This is useful if the objects
+are part of many collections.
+<p>The default setting is FALSE.
+<p>See also:  <a href="qcollection.html#a0">autoDelete</a>().
+<p>Examples:
+ <a href="grapher-grapher-cpp.html#setAutoDelete">grapher/grapher.cpp</a>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qcollection.h: 1998/08/25
+<li>qcollection.cpp: 1998/08/12
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

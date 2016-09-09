@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qfocusdata.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qfocusdata.h</h1><br clear="all">
+This is the verbatim text of the qfocusdata.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qfocusdata.h,v 2.5.2.3 1998/08/25 09:20:52 hanord Exp $
+**
+** Definition of internal QFocusData class
+**
+** Created : 980405
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QFOCUSDATA_H
+#define QFOCUSDATA_H
+
+#ifndef QT_H
+#include "qglobal.h"
+#if defined(Q_TEMPLATEDLL)
+#include "qwidgetlist.h"
+#else
+#include "qlist.h"
+#include "qwidget.h"
+#endif
+#endif // QT_H
+
+
+class Q_EXPORT QFocusData {
+public:
+    QWidget* focusWidget() const { return it.current(); }
+
+    // List-iteration
+    QWidget* home();
+    QWidget* next();
+    QWidget* prev();
+    int count() const { return focusWidgets.count(); }
+
+private:
+    friend class QWidget;
+    QFocusData()
+        : it(focusWidgets) {}
+#if defined(Q_TEMPLATEDLL)
+    QWidgetList   focusWidgets;
+    QWidgetListIt it;
+#else
+    QList&lt;QWidget&gt; focusWidgets;
+    QListIterator&lt;QWidget&gt; it;
+#endif
+};
+
+
+#endif // QFOCUSDATA_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,174 @@
+.TH QSplitter 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QSplitter \- QSplitter implements a splitter widget
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qsplitter.h>\fR
+.PP
+Inherits QFrame.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "enum ResizeMode { Stretch, KeepSize }"
+.br
+.ti -1c
+.BI "QSplitter ( QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "QSplitter ( Orientation, QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "void setOrientation ( Orientation )"
+.br
+.ti -1c
+.BI "Orientation orientation () const"
+.br
+.ti -1c
+.BI "void setResizeMode ( QWidget * " "w" ", ResizeMode )"
+.br
+.ti -1c
+.BI "virtual bool event ( QEvent * )"
+.br
+.ti -1c
+.BI "void setOpaqueResize ( bool = TRUE )"
+.br
+.ti -1c
+.BI "bool opaqueResize () const"
+.br
+.ti -1c
+.BI "void moveToFirst ( QWidget * )"
+.br
+.ti -1c
+.BI "void moveToLast ( QWidget * )"
+.br
+.ti -1c
+.BI "void refresh ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "void childInsertEvent ( QChildEvent * )"
+.br
+.ti -1c
+.BI "void childRemoveEvent ( QChildEvent * )"
+.br
+.ti -1c
+.BI "void layoutHintEvent ( QEvent * )"
+.br
+.ti -1c
+.BI "virtual void resizeEvent ( QResizeEvent * )"
+.br
+.ti -1c
+.BI "void moveSplitter ( QCOORD pos )"
+.br
+.ti -1c
+.BI "virtual void drawSplitter ( QPainter *, QCOORD " "x" ", QCOORD " "y" ", QCOORD " "w" ", QCOORD h )"
+.br
+.ti -1c
+.BI "int adjustPos ( int )"
+.br
+.ti -1c
+.BI "void setRubberband ( int )"
+.br
+.in -1c
+.SH DESCRIPTION
+QSplitter implements a splitter widget.
+.PP
+A splitter lets the user control the size of child widgets by dragging the boundary between the children.
+.PP
+The current implementation is limited to two children. The two widgets to be managed are the first two children added. If you need to split more than two widgets, you can nest splitters (although it may be difficult to control the relative sizing to your requirements).
+.PP
+To show a QListBox and a QMultiLineEdit side by side:
+.PP
+.nf
+.br
+    QSplitter *split = new QSplitter( parent );
+.br
+    QListBox *lb = new QListBox( split );
+.br
+    QMultiLineEdit *lb = new QMultiLineEdit( split );
+.fi
+.PP
+In QSplitter the boundary can be either horizontal or vertical. The default is horizontal (the children are side by side) and you can use setOrientation( QSplitter::Vertical ) to set it to vertical.
+.PP
+By default, both widgets can be as large or as small as the user wishes. You can naturally use setMinimumSize() and/or setMaximumSize() on the children. Use setResizeMode() to specify that a widget should keep its size when the splitter is resized.
+.PP
+QSplitter normally resizes the children only at the end of a resize operation, but if you call setOpaqueResize( TRUE ), the widgets are resized as often as possible.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+See also: QTabBar.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QSplitter::QSplitter ( QWidget * parent=0, const char * name=0 )"
+Creates a horizontal splitter.
+.SH "QSplitter::QSplitter ( Orientation o, QWidget * parent=0, const char * name=0 )"
+Creates splitter with orientation \fIo.\fR
+.SH "int QSplitter::adjustPos ( int p ) \fC[protected]\fR"
+Returns the legal position of the splitter closest to \fIp.\fR
+.SH "void QSplitter::childInsertEvent ( QChildEvent * c ) \fC[protected]\fR"
+Tells the splitter that a child widget has been inserted.
+.SH "void QSplitter::childRemoveEvent ( QChildEvent * c ) \fC[protected]\fR"
+Tells the splitter that a child widget has been removed.
+.SH "void QSplitter::drawSplitter ( QPainter * p, QCOORD x, QCOORD y, QCOORD w, QCOORD h ) \fC[virtual protected]\fR"
+Draws the splitter handle in the rectangle described by \fIx, y, w, h\fR using painter \fIp.\fR
+.SH "bool QSplitter::event ( QEvent * e ) \fC[virtual]\fR"
+Reimplemented to provide childRemoveEvent(), childInsertEvent() and layoutHintEvent() without breaking binary compatibility.
+.PP
+Reimplemented from QObject.
+.SH "void QSplitter::layoutHintEvent ( QEvent * ) \fC[protected]\fR"
+Tells the splitter that a child widget has changed layout parameters.
+.SH "void QSplitter::moveSplitter ( QCOORD p ) \fC[protected]\fR"
+Moves the left/top edge of the splitter handle as close as possible to \fIp\fR which is the distance from the left (or top) edge of the widget.
+.PP
+Only has effect if both widgets are set.
+.SH "void QSplitter::moveToFirst ( QWidget * w )"
+Moves \fIw\fR to the leftmost/top position.
+.SH "void QSplitter::moveToLast ( QWidget * w )"
+Moves \fIw\fR to the rightmost/bottom position.
+.SH "bool QSplitter::opaqueResize () const"
+Returns TRUE if opaque resize is on, FALSE otherwise.
+.PP
+See also: setOpaqueResize().
+.SH "QSplitter::Orientation QSplitter::orientation() const"
+Returns the orientation (\fCHorizontal\fR or \fCVertical)\fR of the splitter.
+.PP
+See also: setOrientation().
+.SH "void QSplitter::refresh ()"
+Updates the splitter state. You should not need to call this function during normal operations.
+.SH "void QSplitter::setOpaqueResize ( bool on = TRUE )"
+Sets opaque resize to \fIon.\fR Opaque resize is initially turned off.
+.PP
+See also: opaqueResize().
+.SH "void QSplitter::setOrientation ( Orientation o )"
+Sets the orientation to \fIo.\fR By default the orientation is horizontal (the two widgets are side by side).
+.PP
+See also: orientation().
+.SH "void QSplitter::setResizeMode ( QWidget * w, ResizeMode mode )"
+Sets resize mode of \fIw\fR to \fImode. mode\fR can be one of:
+.TP
+\fCStretch\fR (the default) - \fIw\fR will resize when the splitter resizes
+.TP
+\fCKeepSize\fR - \fIw\fR will keep its size.
+.SH "void QSplitter::setRubberband ( int p ) \fC[protected]\fR"
+Shows a rubber band at position \fIp.\fR If \fIp\fR is negative, the rubber band is removed.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qsplitter.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

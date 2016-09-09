@@ -1,0 +1,44 @@
+/****************************************************************************
+** $Id: design.doc,v 2.4 1998/03/31 09:05:35 aavit Exp $
+**
+** The design of Qt
+**
+** Copyright (C) 1995-1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+/*! \page design.html
+
+<title>Qt Design Principles</title>
+</head><body bgcolor="#ffffff">
+
+\postheader
+
+<h1 align=center>Design Principles</h1><br clear="all">
+
+Here are the design principles behind Qt.  These are guiding principles,
+not rules, but they're <em>good</em> principles, and we've stuck to
+them almost everywhere in the toolkit.
+
+<h2>GUI Toolkit</h2>
+
+<h2>Portability Toolkit</h2>
+
+<h2>Efficient Implementation</h2>
+
+<h2>Truly Object-Oriented Design</h2>
+
+<h2>Never Dump Core</h2>
+
+<h2>"What you don't know won't hurt you"</h2>
+
+<h2>Uniform Naming in the API</h2>
+
+<h2>Type Safety</h2>
+
+<h2>On-line Documentation</h2>
+
+<h2>Don't Push</h2>
+
+*/
+

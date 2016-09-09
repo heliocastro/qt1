@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qsplitter.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qsplitter.h</h1><br clear="all">
+This is the verbatim text of the qsplitter.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qsplitter.h,v 1.11.2.1 1998/08/19 16:02:43 agulbra Exp $
+**
+** Defintion of  QSplitter class
+**
+**  Created:  980105
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+#ifndef QSPLITTER_H
+#define QSPLITTER_H
+
+#ifndef QT_H
+#include "qframe.h"
+#endif // QT_H
+
+class QInternalSplitter;
+
+class Q_EXPORT QSplitter : public QFrame
+{
+        Q_OBJECT
+public:
+    enum Orientation { Horizontal, Vertical };
+    enum ResizeMode { Stretch, KeepSize };
+    
+    QSplitter( QWidget *parent=0, const char *name=0 );
+    QSplitter( Orientation, QWidget *parent=0, const char *name=0 );
+
+    void setOrientation( Orientation );
+    Orientation orientation() const { return orient; }
+
+    void setResizeMode( QWidget *w, ResizeMode );
+
+    bool event( QEvent * );
+
+    void setOpaqueResize( bool = TRUE );
+    bool opaqueResize() const { return opaque; }
+
+    void moveToFirst( QWidget * );
+    void moveToLast( QWidget * );
+    
+    //void setHidden( QWidget *, bool );
+    //bool isHidden( QWidget *) const;
+
+    void refresh() { recalc( TRUE ); }
+    
+protected:
+    void childInsertEvent( QChildEvent * );
+    void childRemoveEvent( QChildEvent * );
+    void layoutHintEvent( QEvent * );
+    void resizeEvent( QResizeEvent * );
+
+    void moveSplitter( QCOORD pos );
+    virtual void drawSplitter( QPainter*, QCOORD x, QCOORD y,
+                               QCOORD w, QCOORD h );
+
+    int adjustPos( int );
+    void setRubberband( int );
+    // virtual int border2()
+
+private:
+    void init();
+    void recalc( bool update = FALSE );
+    int hit( QPoint p );
+    void doResize();
+    QWidget *splitterWidget();
+
+    void startMoving();
+    void moveTo( QPoint );
+    void stopMoving( );
+
+
+
+    QCOORD pick( const QPoint &amp;p ) const
+    { return orient == Horizontal ? p.x() : p.y(); }
+    QCOORD pick( const QSize &amp;s ) const
+    { return orient == Horizontal ? s.width() : s.height(); }
+
+    QCOORD trans( const QPoint &amp;p ) const
+    { return orient == Vertical ? p.x() : p.y(); }
+    QCOORD trans( const QSize &amp;s ) const
+    { return orient == Vertical ? s.width() : s.height(); }
+
+    QCOORD newpos() const;
+
+    QWidget *w1;
+    QWidget *w2;
+    int moving;
+    //    bool w1show;
+    //    bool w2show;
+    QWidget *fixedWidget;
+    QInternalSplitter *d;
+    bool opaque;
+
+    Orientation orient;
+    QCOORD bord; //half border
+    friend class QInternalSplitter;
+};
+
+
+#endif //QSPLITTER_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QEvent Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QEvent Class Reference</h1><br clear="all">
+<p>
+The QEvent class is base class of all event classes. Event objects contain event parameters.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qevent-h.html">qevent.h</a>&gt;</code>
+<p>Inherited by <a href="qchildevent.html">QChildEvent</a>, <a href="qcloseevent.html">QCloseEvent</a>, <a href="qcustomevent.html">QCustomEvent</a>, QDragLeaveEvent, <a href="qdragmoveevent.html">QDragMoveEvent</a>, QDragResponseEvent, <a href="qdropevent.html">QDropEvent</a>, <a href="qfocusevent.html">QFocusEvent</a>, QHideEvent, <a href="qkeyevent.html">QKeyEvent</a>, <a href="qmouseevent.html">QMouseEvent</a>, <a href="qmoveevent.html">QMoveEvent</a>, <a href="qpaintevent.html">QPaintEvent</a>, <a href="qresizeevent.html">QResizeEvent</a>, QShowEvent and <a href="qtimerevent.html">QTimerEvent</a>.
+<p><a href="qevent-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qevent.html#a0"><strong>QEvent</strong></a> ( int type ) </span>
+<li><span class="fn"><a href="qevent.html#a1"><strong>~QEvent</strong></a> () </span>
+<li><span class="fn">int <a href="qevent.html#a2"><strong>type</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QEvent class is base class of all event classes. Event objects contain event parameters.
+<p>
+The <a href="qapplication.html#c9">main event loop</a> of Qt fetches
+native window system events from the event queue, translates them
+into QEvent and sends the translated events to QObjects.
+<p>Generally, events come from the underlying window system, but it is
+also possible to manually send events through the <a href="qapplication.html">QApplication</a> class
+using <a href="qapplication.html#g5">QApplication::sendEvent</a>() and <a href="qapplication.html#i5">QApplication::postEvent</a>().
+<p><a href="qobject.html">QObject</a> received events by having its <a href="qobject.html#a2">QObject::event</a>() function
+called.  The default implementation simply calls
+<a href="qobject.html#e3">QObject::timerEvent</a>() for timer events and ignores all other events.
+<a href="qwidget.html">QWidget</a> reimplements <a href="qwidget.html#n3">event()</a> and
+dispatches incoming events to various event handles such as
+<a href="qwidget.html#n8">QWidget::keyPressEvent</a>() and <a href="qwidget.html#n7">QWidget::mouseMoveEvent</a>().
+<p>The basic QEvent only contains an event type parameter.  Subclasses
+of QEvent contain additional parameters that descripe the particular
+event.
+<p>See also:  <a href="qobject.html#a2">QObject::event</a>(), <a href="qobject.html#c3">QObject::installEventFilter</a>(), <a href="qwidget.html#n3">QWidget::event</a>(), <a href="qapplication.html#g5">QApplication::sendEvent</a>(), QApplcation::postEvent() and <a href="qapplication.html#d0">QApplication::processEvents</a>().
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QEvent::QEvent ( int type )</h3>
+<p>Contructs an event object with a <em>type.</em> The file <a href="qevent-h.html">qevent.h</a> lists
+all event types.
+<h3 class="fn"><a name="a1"></a>QEvent::~QEvent ()</h3>
+<p>Destroys the event.  Reports an error if the event has been
+<a href="qapplication.html#i5">posted.</a>
+<h3 class="fn">int <a name="a2"></a>QEvent::type () const</h3>
+<p>Returns the event type.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qevent.h: 1998/10/05
+<li>qdnd_x11.cpp: 1998/12/17
+<li>qevent.cpp: 1999/01/13
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

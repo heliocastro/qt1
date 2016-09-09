@@ -1,0 +1,335 @@
+.TH QGLWidget 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QGLWidget \- Widget for rendering OpenGL graphics [Qt OpenGL Extension]
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qgl.h>\fR
+.PP
+Inherits QWidget and QGL.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QGLWidget ( QWidget * " "parent" "=0, const char * " "name" "=0, const QGLWidget * " "shareWidget" " = 0, WFlags " "f" "=0 )"
+.br
+.ti -1c
+.BI "QGLWidget ( const QGLFormat & " "format" ", QWidget * " "parent" "=0, const char * " "name" "=0, const QGLWidget * " "shareWidget" " = 0, WFlags " "f" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QGLWidget\fR ()"
+.br
+.ti -1c
+.BI "bool isValid () const"
+.br
+.ti -1c
+.BI "bool isSharing () const"
+.br
+.ti -1c
+.BI "virtual void makeCurrent ()"
+.br
+.ti -1c
+.BI "bool doubleBuffer () const"
+.br
+.ti -1c
+.BI "virtual void swapBuffers ()"
+.br
+.ti -1c
+.BI "QGLFormat format () const"
+.br
+.ti -1c
+.BI "virtual void setFormat ( const QGLFormat & format )"
+.br
+.ti -1c
+.BI "const QGLContext* context () const"
+.br
+.ti -1c
+.BI "virtual void setContext ( QGLContext * " "context" ", const QGLContext * " "shareContext" " = 0, bool " "deleteOldContext" " = TRUE )"
+.br
+.ti -1c
+.BI "virtual QPixmap renderPixmap ( int " "w" " = 0, int " "h" " = 0, bool " "useContext" " = FALSE )"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "virtual void updateGL ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void initializeGL ()"
+.br
+.ti -1c
+.BI "virtual void paintGL ()"
+.br
+.ti -1c
+.BI "virtual void resizeGL ( int " "w" ", int h )"
+.br
+.ti -1c
+.BI "void setAutoBufferSwap ( bool on )"
+.br
+.ti -1c
+.BI "bool autoBufferSwap () const"
+.br
+.ti -1c
+.BI "virtual void paintEvent ( QPaintEvent * )"
+.br
+.ti -1c
+.BI "virtual void resizeEvent ( QResizeEvent * )"
+.br
+.ti -1c
+.BI "virtual void glInit ()"
+.br
+.ti -1c
+.BI "virtual void glDraw ()"
+.br
+.in -1c
+.SH DESCRIPTION
+This class is defined in the \fBQt OpenGL Extension\fR, which can be found in the \fCqt/extensions\fR directory. It is not included in the main Qt API.
+.PP
+The QGLWidget class is a widget for rendering OpenGL graphics.
+.PP
+QGLWidget provides functionality for displaying OpenGL graphics integrated in a Qt application. It is very simple to use: you inherit from it and use the subclass like any other QWidget, only that instead of drawing the widget's contents using QPainter & al., you use the standard OpenGL rendering commands.
+.PP
+QGLWidget provides three convenient virtual functions that you can reimplement in your subclass to perform the typical OpenGL tasks:
+.TP
+paintGL() - Render the OpenGL scene. Gets called whenever the widget needs to be updated.
+.TP
+resizeGL() - Set up OpenGL viewport, projection etc. Gets called whenever the the widget has been resized (and also when it shown for the first time, since all newly created widgets get a resize event automatically).
+.TP
+initializeGL() - Set up the OpenGL rendering context, define display lists etc. Gets called once before the first time resizeGL() or paintGL() is called.
+.PP
+Here is a rough outline of how your QGLWidget subclass may look:
+.PP
+.nf
+.br
+    class MyGLDrawer : public QGLWidget
+.br
+    {
+.br
+        Q_OBJECT        // must include this if you use Qt signals/slots
+.br
+.br
+    public:
+.br
+        MyGLDrawer( QWidget *parent, const char *name )
+.br
+            : QGLWidget(parent,name) {}
+.br
+.br
+    protected:
+.br
+.br
+        void initializeGL()
+.br
+        {
+.br
+          // Set up the rendering context, define display lists etc.:
+.br
+          ...
+.br
+          glClearColor( 0.0, 0.0, 0.0, 0.0 );
+.br
+          glEnable(GL_DEPTH_TEST);
+.br
+          ...
+.br
+        }
+.br
+.br
+        void resizeGL( int w, int h )
+.br
+        {
+.br
+          // setup viewport, projection etc.:
+.br
+          glViewport( 0, 0, (GLint)w, (GLint)h );
+.br
+          ...
+.br
+          glFrustum( ... );
+.br
+          ...
+.br
+        }
+.br
+.br
+        void paintGL()
+.br
+        {
+.br
+          // draw the scene:
+.br
+          ...
+.br
+          glRotatef( ... );
+.br
+          glMaterialfv( ... );
+.br
+          glBegin( GL_QUADS );
+.br
+          glVertex3f( ... );
+.br
+          glVertex3f( ... );
+.br
+          ...
+.br
+          glEnd();
+.br
+          ...
+.br
+        }
+.br
+.br
+    };
+.fi
+.PP
+If you need to trigger a repaint from other places than paintGL() (a typical example is when using timers to animate scenes), you should call the widget's updateGL() function.
+.PP
+When paintGL(), resizeGL() or initializeGL() is called, your widget's OpenGL rendering context has been made current. If you need to call the standard OpenGL API functions from other places (e.g. in your widget's constructor), you must call makeCurrent() first.
+.PP
+QGLWidget provides advanced functions for requesting a new display format, and you can even set a new rendering context.
+.PP
+You can achieve sharing of OpenGL display lists between QGLWidgets, see the documentation of the QGLWidget constructors for details.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QGLWidget::QGLWidget ( QWidget * parent=0, const char * name=0, const QGLWidget * shareWidget = 0, WFlags f=0 )"
+Constructs an OpenGL widget with a \fIparent\fR widget and a \fIname.\fR
+.PP
+The default format is used. The widget will be invalid if the system has no OpenGL support.
+.PP
+The \fIparent, name\fR and \fIf\fR arguments are passed to the QWidget constructor.
+.PP
+If the \fIshareWidget\fR parameter points to a valid QGLWidget, this widget will share OpenGL display lists with \fIshareWidget.\fR Note: If this widget and \fIshareWidget\fR has different formats, display list sharing may fail. You can check whether display list sharing succeeded by using the isSharing() method.
+.PP
+Note: Initialization of OpenGL rendering state etc. should be done by overriding the initializeGL() function, not in the constructor of your QGLWidget subclass.
+.PP
+See also: QGLFormat::defaultFormat().
+.SH "QGLWidget::QGLWidget ( const QGLFormat & format, QWidget * parent=0, const char * name=0, const QGLWidget * shareWidget = 0, WFlags f=0 )"
+Constructs an OpenGL widget with a \fIparent\fR widget and a \fIname.\fR
+.PP
+The \fIformat\fR argument specifies the desired rendering options. If the underlying OpenGL/Window system cannot satisfy all the features requested in \fIformat,\fR the nearest subset of features will be used. After creation, the format() method will return the actual format obtained.
+.PP
+The widget will be invalid if the system has no OpenGL support.
+.PP
+The \fIparent, name\fR and \fIf\fR arguments are passed to the QWidget constructor.
+.PP
+If the \fIshareWidget\fR parameter points to a valid QGLWidget, this widget will share OpenGL display lists with \fIshareWidget.\fR Note: If this widget and \fIshareWidget\fR has different formats, display list sharing may fail. You can check whether display list sharing succeeded by using the isSharing() method.
+.PP
+Note: Initialization of OpenGL rendering state etc. should be done by overriding the initializeGL() function, not in the constructor of your QGLWidget subclass.
+.PP
+See also: QGLFormat::defaultFormat() and isValid().
+.SH "QGLWidget::~QGLWidget ()"
+Destroys the widget.
+.SH "bool QGLWidget::autoBufferSwap () const \fC[protected]\fR"
+Returns TRUE if the widget is doing automatic GL buffer swapping.
+.PP
+See also: setAutoBufferSwap().
+.SH "const QGLContext * QGLWidget::context () const"
+Returns the current context.
+.PP
+See also: setContext().
+.SH "bool QGLWidget::doubleBuffer () const"
+Returns TRUE if the contained GL rendering context has double buffering.
+.PP
+See also: QGLFormat::doubleBuffer().
+.SH "QGLFormat QGLWidget::format () const"
+Returns the format of the contained GL rendering context.
+.PP
+See also: setFormat().
+.SH "void QGLWidget::glDraw () \fC[virtual protected]\fR"
+Executes the virtual function paintGL(), initializing first as necessary.
+.SH "void QGLWidget::glInit () \fC[virtual protected]\fR"
+Initializes OpenGL for this widget's context. Calls the virtual function initializeGL().
+.SH "void QGLWidget::initializeGL () \fC[virtual protected]\fR"
+This virtual function is called one time before the first call to paintGL() or resizeGL(), and then one time whenever the widget has been assigned a new QGLContext. Reimplement it in a subclass.
+.PP
+This function should take care of setting any required OpenGL context rendering flags, defining display lists, etc.
+.PP
+There is no need to call makeCurrent() because this has already been done when this function is called.
+.SH "bool QGLWidget::isSharing () const"
+Returns TRUE if display list sharing with another QGLWidget was requested in the constructor, and the GL system was able to provide it. The GL system may fail to provide display list sharing if the two QGLWidgets use different formats.
+.PP
+See also: format().
+.SH "bool QGLWidget::isValid () const"
+Returns TRUE if the widget has a valid GL rendering context. A widget will be invalid if the system has no OpenGL support
+.SH "void QGLWidget::makeCurrent () \fC[virtual]\fR"
+Makes this widget the current widget for OpenGL operations. I.e. makes this widget's rendering context the current OpenGL rendering context.
+.SH "void QGLWidget::paintEvent ( QPaintEvent * ) \fC[virtual protected]\fR"
+Handles paint events. Will cause the virtual paintGL() fucntion to be called, initializing first as necessary.
+.PP
+Reimplemented from QWidget.
+.SH "void QGLWidget::paintGL () \fC[virtual protected]\fR"
+This virtual function is called whenever the widget needs to be painted. Reimplement it in a subclass.
+.PP
+There is no need to call makeCurrent() because this has already been done when this function is called.
+.SH "QPixmap QGLWidget::renderPixmap ( int w = 0, int h = 0, bool useContext = FALSE ) \fC[virtual]\fR"
+Renders the current scene on a pixmap and returns it.
+.PP
+You may use this method on both visible and invisible QGLWidgets.
+.PP
+This method will create a pixmap and a temporary QGLContext to render on it. Then, initializeGL(), resizeGL(), and paintGL() are called on this context. Finally, the widget's original GL context is restored.
+.PP
+The size of the pixmap will be width \fIw\fR and height \fIh.\fR If any of those are 0 (the default), the pixmap will have the same size as the widget.
+.PP
+If \fIuseContext\fR is TRUE, this method will try to be more efficient by using the existing GL context to render the pixmap. The default is FALSE. Use only if you know what you are doing.
+.PP
+Bugs and limitations:
+.TP
+May give unexpected results if the depth of the GL rendering context is different from the depth of the desktop.
+.SH "void QGLWidget::resizeEvent ( QResizeEvent * ) \fC[virtual protected]\fR"
+Handles resize events. Calls the virtual function resizeGL().
+.PP
+Reimplemented from QWidget.
+.SH "void QGLWidget::resizeGL ( int width, int height ) \fC[virtual protected]\fR"
+This virtual function is called whenever the widget has been resized. Reimplement it in a subclass.
+.PP
+There is no need to call makeCurrent() because this has already been done when this function is called.
+.SH "void QGLWidget::setAutoBufferSwap ( bool on ) \fC[protected]\fR"
+Turns on or off the automatic GL buffer swapping. If on, and the widget is using a double-buffered format, the background and foreground GL buffers will automatically be swapped after each time the paintGL() function has been called.
+.PP
+The buffer auto-swapping is on by default.
+.PP
+See also: autoBufferSwap(), doubleBuffer() and swapBuffers().
+.SH "void QGLWidget::setContext ( QGLContext * context, const QGLContext * shareContext = 0, bool deleteOldContext = TRUE ) \fC[virtual]\fR"
+Sets a new context for this widget. The QGLContext \fIcontext\fR must be created using \fInew.\fR QGLWidget will delete \fIcontext\fR when another context is set or when the widget is destroyed.
+.PP
+If \fIcontext\fR is invalid, QGLContext::create() is performed on it. The initializeGL() function will then be executed for the new context before the first resizeGL() or paintGL().
+.PP
+If \fIcontext\fR is invalid, this method will try to keep any existing display list sharing with other QGLWidgets this widget currently has, or (if \fIshareContext\fR points to a valid context) start display list sharing with that context, but it may fail. Use isSharing() to test.
+.PP
+If \fIdeleteOldContext\fR is TRUE (the default), the existing context will be deleted. You may use FALSE here if you have kept a pointer to the old context (as returned by context()), and want to restore that context later.
+.PP
+See also: context(), setFormat() and isSharing().
+.SH "void QGLWidget::setFormat ( const QGLFormat & format ) \fC[virtual]\fR"
+Sets a new format for this widget.
+.PP
+If the underlying OpenGL/Window system cannot satisfy all the features requested in \fIformat,\fR the nearest subset of features will be used. After creation, the format() method will return the actual rendering context format obtained.
+.PP
+The widget will be assigned a new QGLContext, and the initializeGL() function will be executed for this new context before the first resizeGL() or paintGL().
+.PP
+This method will try to keep any existing display list sharing with other QGLWidgets, but it may fail. Use isSharing() to test.
+.PP
+See also: format(), setContext(), isSharing() and isValid().
+.SH "void QGLWidget::swapBuffers () \fC[virtual]\fR"
+Swaps the screen contents with an off-screen buffer. Works only if the widget's format specifies double buffer mode.
+.PP
+Normally, there is no need to explicitly call this function, because it is done automatically after each widget repaint, i.e. after each time paintGL() has been executed.
+.PP
+See also: doubleBuffer(), setAutoBufferSwap() and QGLFormat::setDoubleBuffer().
+.SH "void QGLWidget::updateGL () \fC[virtual slot]\fR"
+Updates the widget by calling glDraw().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qglwidget.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

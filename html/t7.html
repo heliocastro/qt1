@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>
+Qt Tutorial - Chapter 7
+</title></head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Chapter 7: One Thing Leads to Another</h1><br clear="all">
+<p>
+<center><img src="t7.gif" alt="Screenshot of tutorial seven"></center>
+<p>
+This example shows how to create custom widgets with signals and
+slots, and how to connect them together in more complex ways.  For the
+first time, the source is split among several files.
+<p>
+<ul>
+<li><a href="t7-lcdrange-h.html">lcdrange.h</a> contains the LCDRange
+class definition
+<li><a href="t7-lcdrange-cpp.html">lcdrange.cpp</a> contains the LCDRange
+implementation
+<li><a href="t7-main-cpp.html">main.cpp</a> contains MyWidget and main.
+<li><a href="t7-makefile.html">Makefile</a> contains some rules for
+generating the meta object information necessary for <a
+href="metaobjects.html">signal/slot creation.</a>
+</ul>
+<p>
+<h2>Line by Line Walk-Through</h2>
+<p>
+<h3><a href="t7-lcdrange-h.html">lcdrange.h</a></h3>
+<p>
+This file is mainly lifted from <a href="t6.html#main">main.cpp</a> in
+chapter 6 and only the changes are noted here.
+<p>
+<pre>
+    #ifndef LCDRANGE_H
+    #define LCDRANGE_H
+</pre>
+<p>
+This is the classical C construction to avoid errors if a header file
+happens to be included more than once.  If you don't use it already:
+It is a very good habit.  The #ifndef should enclose <em>all</em> of the
+header file.
+<p>
+<pre>
+    #include &lt;<a href="qwidget-h.html">qwidget.h</a>&gt;
+    class QScrollBar;
+    class QLCDNumber;
+</pre>
+<p>
+<code>qwidget.h</code> is included.  LCDRange inherits QWidget, and the header
+file of a parent class must always be included.  Until now, <code>qwidget.h</code> has been included indirectly via other header files like <code>qpushbutton.h.</code>
+<p>
+Since the class declaration only uses pointers to QScrollBar and
+QLCDNumber it does not need their definitions, so we merely declare
+their names in the header files.  This makes the job a little easier
+for the compiler.
+<p>
+<pre>
+    class LCDRange : public QWidget
+    {
+        Q_OBJECT
+    public:
+        LCDRange( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+</pre>
+<p>
+Note the Q_OBJECT.  This macro must be included in <em>all</em> classes that
+contain signals and/or slots.  For the curious, it defines the
+functions that are implemented in the <a
+href="metaobjects.html">meta object file</a>.
+<p>
+<pre>
+        int value() const;
+    public slots:
+        void setValue( int );
+    signals:
+        void valueChanged( int );
+</pre>
+<p>
+These three members make up an interface between this widget and other
+components in a program.  Until now, LCDRange didn't really have an
+interface at all.
+<p>
+value() is a public function for accessing the value of the LCDRange.
+setValue() is our first custom slot and valueChanged() is our first
+custom signal.
+<p>
+Slots must be implemented in the normal way (remember, a slot is also
+a C++ member function).  Signals are automatically implemented in the
+<a href="metaobjects.html">meta object</a> file. Signals follow the
+access rules of protected C++ functions, i.e. they can only be emitted
+by the class they are defined in or by classes inheriting from it.
+<p>
+<h3><a href="t7-lcdrange-cpp.html">lcdrange.cpp</a></h3>
+<p>
+This file is mainly lifted from <a href="t6.html#main">t6/main.cpp</a> and
+only the changes are noted here.
+<p>
+<pre>
+        <a href="qobject.html#f2">connect</a>( sBar, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)) );
+        <a href="qobject.html#f2">connect</a>( sBar, SIGNAL(valueChanged(int)), SIGNAL(valueChanged(int)) );
+</pre>
+<p>
+This code is from the LCDRange constructor.
+<p>
+The first connect is the same you've seen in the previous
+chapter.  The second is new: It connects sBar's valueChanged() signal
+to this object's valueChanged <em>signal.</em> connect() with 3 arguments
+always connect to signals or slots in <code>this</code> object.
+<p>
+Yes, that's right.  Signals can be connected to other signals.  When
+the first is emitted, the second signal is also emitted.
+<p>
+Let's look at what happens when the user operates the scroll bar: The
+scroll bar sees that its value has changed, and emits the valueChanged()
+signal.  That signal is connected both to the display() slot of the
+QLCDNumber and to the valueChanged() signal of the LCDRange.
+<p>
+Thus, when the signal is emitted, LCDRange emits its own
+valueChanged() signal.  In addition, QLCDNumber::display() is called
+and shows the new number.
+<p>
+Note that you're not guaranteed any particular order of execution.
+<p>
+<pre>
+    int LCDRange::value() const
+    {
+        return sBar-&gt;value();
+    }
+</pre>
+<p>
+The implementation of value() is straight forward, it simply returns
+the scroll bar's value.
+<p>
+<pre>
+    void LCDRange::setValue( int value )
+    {
+        sBar-&gt;setValue( value );
+    }
+</pre>
+<p>
+The implementation of setValue() is equally straight forward.  Note that
+since the scroll bar and LCD number is connected, setting the
+scroll bar's value automatically updates the LCD number as well.
+In addition, the scroll bar will automatically adjust the value if it is
+outside the scroll bar's legal range.
+<p>
+<h3><a href="t7-main-cpp.html">main.cpp</a></h3>
+<p>
+<pre>
+        for( int i = 0 ; i &lt; 16 ; i++ ) {
+            value[i] = new LCDRange( this );
+            if ( i &gt; 0 )
+                <a href="qobject.html#f2">connect</a>( value[i], SIGNAL(valueChanged(int)), 
+                         value[i - 1], SLOT(setValue(int)) );
+        }
+</pre>
+<p>
+Apart from moving LCDRange into two separate files, these lines are the
+only changes to the main.cpp file. As in the previous chapter, we create
+16 LCDRange objects. In addition, we now connect them together using
+the <a href="metaobjects.html">signal/slot</a> mechanism.
+Each one has its valueChanged() signal connected to the setValue()
+slot in the previous one.  Since LCDRange emits the signal valueChanged()
+when its value changes (surprise!), we are here creating a "chain" of
+signals and slots.
+<p>
+<h2>Behavior</h2>
+<p>
+On startup, the program's appearance is identical to the previous one.
+Try operating the scroll bar to the bottom right...
+<p>
+<h2>Excercises</h2>
+<p>
+Use the bottom right scroll bar to set all LCDs to 30. Then set the
+top half to 29 by using the rightmost scroll bar on the 2nd row.
+Now, use the one to the left of the last one operated to set the first seven
+LCDs back to 30. Click on the left arrow on the bottom right scroll bar.
+What happens? Why is this the correct behavior?
+<p>
+You may now go on to <a href="t8.html">chapter eight.</a>
+<p>
+[<a href="t6.html">Previous tutorial</a>]
+[<a href="t8.html">Next tutorial</a>]
+[<a href="tutorial.html">Main tutorial page</a>]
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

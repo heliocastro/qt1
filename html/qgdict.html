@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QGDict Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QGDict Class Reference</h1><br clear="all">
+<p>
+The QGDict class is an internal class for implementing <a href="qdict.html">QDict</a> and <a href="qintdict.html">QIntDict</a>.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qgdict-h.html">qgdict.h</a>&gt;</code>
+<p>
+Inherits <a href="qcollection.html">QCollection</a>.
+<p>Inherited by <a href="qdict.html">QDict</a>, <a href="qintdict.html">QIntDict</a> and <a href="qptrdict.html">QPtrDict</a>.
+<p><a href="qgdict-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn">virtual uint <a href="qgdict.html#a0"><strong>count</strong></a> () const</span>
+<li><span class="fn">uint <a href="qgdict.html#a1"><strong>size</strong></a> () const</span>
+<li><span class="fn">GCI <a href="qgdict.html#a2"><strong>look</strong></a> ( const char * key, GCI, int ) </span>
+<li><span class="fn">QDataStream&amp; <a href="qgdict.html#a3"><strong>read</strong></a> ( QDataStream &amp; ) </span>
+<li><span class="fn">QDataStream&amp; <a href="qgdict.html#a4"><strong>write</strong></a> ( QDataStream &amp; ) const</span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn"><a href="qgdict.html#a5"><strong>QGDict</strong></a> ( uint len, bool cs, bool ck, bool th ) </span>
+<li><span class="fn"><a href="qgdict.html#a6"><strong>QGDict</strong></a> ( const QGDict &amp; ) </span>
+<li><span class="fn"><a href="qgdict.html#a7"><strong>~QGDict</strong></a> () </span>
+<li><span class="fn">QGDict&amp; <a href="qgdict.html#a8"><strong>operator=</strong></a> ( const QGDict &amp; ) </span>
+<li><span class="fn">bool <a href="qgdict.html#a9"><strong>remove</strong></a> ( const char * key ) </span>
+<li><span class="fn">bool <a href="qgdict.html#b0"><strong>removeItem</strong></a> ( const char * key, GCI item ) </span>
+<li><span class="fn">GCI <a href="qgdict.html#b1"><strong>take</strong></a> ( const char * key ) </span>
+<li><span class="fn">virtual void <a href="qgdict.html#b2"><strong>clear</strong></a> () </span>
+<li><span class="fn">void <a href="qgdict.html#b3"><strong>resize</strong></a> ( uint ) </span>
+<li><span class="fn">virtual int <a href="qgdict.html#b4"><strong>hashKey</strong></a> ( const char * ) </span>
+<li><span class="fn">void <a href="qgdict.html#b5"><strong>statistics</strong></a> () const</span>
+<li><span class="fn">virtual QDataStream&amp; <a href="qgdict.html#b6"><strong>read</strong></a> ( QDataStream &amp;, GCI &amp; ) </span>
+<li><span class="fn">virtual QDataStream&amp; <a href="qgdict.html#b7"><strong>write</strong></a> ( QDataStream &amp;, GCI ) const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QGDict class is an internal class for implementing <a href="qdict.html">QDict</a> and <a href="qintdict.html">QIntDict</a>.
+<p>
+QGDict is a strictly internal class that acts as a base class for the
+<a href="collection.html">collection classes</a> QDict and QIntDict.
+<p>QGDict has some virtual functions that can be reimplemented to customize
+the subclasses.
+<ul>
+<li> <a href="qgdict.html#b4">hashKey</a>() implements the hashing function for the dictionary.
+<li> <a href="qgdict.html#a3">read</a>() reads a collection/dictionary item from a <a href="qdatastream.html">QDataStream</a>.
+<li> <a href="qgdict.html#a4">write</a>() writes a collection/dictionary item to a QDataStream.
+</ul>
+Normally, you do not have to reimplement any of these functions.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a6"></a>QGDict::QGDict ( const QGDict &amp; dict ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn"><a name="a5"></a>QGDict::QGDict ( uint len, bool cs, bool ck, bool th ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn"><a name="a7"></a>QGDict::~QGDict () <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">void <a name="b2"></a>QGDict::clear () <code>[virtual protected]</code></h3>
+<p>For internal use only.
+<p>Reimplemented from <a href="qcollection.html#a3">QCollection.</a>
+<h3 class="fn">uint <a name="a0"></a>QGDict::count () const <code>[virtual]</code></h3>
+<p>For internal use only.
+<p>Reimplemented from <a href="qcollection.html#a2">QCollection.</a>
+<h3 class="fn">int <a name="b4"></a>QGDict::hashKey ( const char * key ) <code>[virtual protected]</code></h3>
+<p>Returns the hash key for <em>key,</em> when key is a string.
+<h3 class="fn">GCI <a name="a2"></a>QGDict::look ( const char * key, GCI d, int op )</h3>
+<p>For internal use only.
+<h3 class="fn">QGDict &amp; <a name="a8"></a>QGDict::operator= ( const QGDict &amp; dict ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn"><a href="qdatastream.html">QDataStream</a> &amp; <a name="a3"></a>QGDict::read ( <a href="qdatastream.html">QDataStream</a> &amp; s )</h3>
+<p>For internal use only.
+<h3 class="fn"><a href="qdatastream.html">QDataStream</a>&amp; <a name="b6"></a>QGDict::read ( <a href="qdatastream.html">QDataStream</a> &amp; s, GCI &amp; item ) <code>[virtual protected]</code></h3>
+<p>Reads a collection/dictionary item from the stream <em>s</em> and returns a
+reference to the stream.
+<p>The default implementation sets <em>item</em> to 0.
+<p>See also:  <a href="qgdict.html#a4">write</a>().
+<h3 class="fn">bool <a name="a9"></a>QGDict::remove ( const char * key ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">bool <a name="b0"></a>QGDict::removeItem ( const char * key, GCI item ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">void <a name="b3"></a>QGDict::resize ( uint newsize ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">uint <a name="a1"></a>QGDict::size () const</h3>
+<p>For internal use only.
+<h3 class="fn">void <a name="b5"></a>QGDict::statistics () const <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">GCI <a name="b1"></a>QGDict::take ( const char * key ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn"><a href="qdatastream.html">QDataStream</a>&amp; <a name="a4"></a>QGDict::write ( <a href="qdatastream.html">QDataStream</a> &amp; s ) const</h3>
+<p>For internal use only.
+<h3 class="fn"><a href="qdatastream.html">QDataStream</a>&amp; <a name="b7"></a>QGDict::write ( <a href="qdatastream.html">QDataStream</a> &amp; s, GCI ) const <code>[virtual protected]</code></h3>
+<p>Writes a collection/dictionary item to the stream <em>s</em> and returns a
+reference to the stream.
+<p>The default implementation does nothing.
+<p>See also:  <a href="qgdict.html#a3">read</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qgdict.h: 1998/11/26
+<li>qgdict.cpp: 1998/11/26
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

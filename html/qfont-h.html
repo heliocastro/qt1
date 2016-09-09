@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qfont.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qfont.h</h1><br clear="all">
+This is the verbatim text of the qfont.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qfont.h,v 2.11.2.5 1999/01/26 07:49:01 aavit Exp $
+**
+** Definition of QFont class
+**
+** Created : 940514
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QFONT_H
+#define QFONT_H
+
+#ifndef QT_H
+#include "qwindowdefs.h"
+#include "qstring.h"
+#endif // QT_H
+
+
+class  QStrList;
+struct QFontDef;
+struct QFontData;
+class  QFontInternal;
+
+
+class Q_EXPORT QFont                                    // font class
+{
+public:
+    enum StyleHint { Helvetica, Times, Courier, OldEnglish,  System, AnyStyle,
+                     SansSerif  = Helvetica,
+                     Serif      = Times,
+                     TypeWriter = Courier,
+                     Decorative = OldEnglish};
+    enum Weight    { Light = 25, Normal = 50, DemiBold = 63,
+                     Bold  = 75, Black  = 87 };
+    enum CharSet   { Latin1, ISO_8859_1 = Latin1, AnyCharSet,
+                     Latin2, ISO_8859_2 = Latin2,
+                     Latin3, ISO_8859_3 = Latin3,
+                     Latin4, ISO_8859_4 = Latin4,
+                     Latin5, ISO_8859_5 = Latin5,
+                     Latin6, ISO_8859_6 = Latin6,
+                     Latin7, ISO_8859_7 = Latin7,
+                     Latin8, ISO_8859_8 = Latin8,
+                     Latin9, ISO_8859_9 = Latin9,
+                     KOI8R };
+
+    QFont();                                    // default font
+    QFont( const char *family, int pointSize = 12,
+           int weight = Normal, bool italic = FALSE );
+    QFont( const char *family, int pointSize,
+           int weight, bool italic, CharSet charSet );
+    QFont( const QFont &amp; );
+    virtual ~QFont();
+    QFont      &amp;operator=( const QFont &amp; );
+
+    const char *family()        const;
+    void        setFamily( const char * );
+    int         pointSize()     const;
+    void        setPointSize( int );
+    int         weight()        const;
+    void        setWeight( int );
+    bool        bold()          const;
+    void        setBold( bool );
+    bool        italic()        const;
+    void        setItalic( bool );
+    bool        underline()     const;
+    void        setUnderline( bool );
+    bool        strikeOut()     const;
+    void        setStrikeOut( bool );
+    bool        fixedPitch()    const;
+    void        setFixedPitch( bool );
+    StyleHint   styleHint()     const;
+    void        setStyleHint( StyleHint );
+    CharSet     charSet()       const;
+    void        setCharSet( CharSet );
+    bool        rawMode()       const;
+    void        setRawMode( bool );
+
+    bool        exactMatch()    const;
+
+    bool        operator==( const QFont &amp; ) const;
+    bool        operator!=( const QFont &amp; ) const;
+    bool        isCopyOf( const QFont &amp; ) const;
+
+    HANDLE      handle( HANDLE=0 ) const;
+
+    const char* rawName() const;
+
+    QString     key() const;
+
+    static const QFont &amp;defaultFont();
+    static void setDefaultFont( const QFont &amp; );
+
+    static const char  *substitute( const char *familyName );
+    static void insertSubstitution( const char *, const char * );
+    static void removeSubstitution( const char * );
+    static void listSubstitutions( QStrList * );
+
+    static void initialize();
+    static void cleanup();
+    static void cacheStatistics();
+
+protected:
+    bool        dirty()                 const;
+
+    QString     defaultFamily()         const;
+    QString     lastResortFamily()      const;
+    QString     lastResortFont()        const;
+    int         deciPointSize()         const;
+
+private:
+    QFont( QFontData * );
+    QFont( bool );
+    void        init();
+    void        detach();
+    void        initFontInfo()      const;
+    void        load( HANDLE=0 )    const;
+#if defined(_WS_WIN_)
+    HANDLE      create( bool *, HANDLE=0, bool=FALSE ) const;
+    void       *textMetric()        const;
+#endif
+
+    friend class QFontMetrics;
+    friend class QFontInfo;
+    friend class QPainter;
+    friend Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QFont &amp; );
+    friend Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QFont &amp; );
+
+    QFontData    *d;                            // internal font data
+    static QFont *defFont;
+};
+
+
+inline bool QFont::bold() const
+{ return weight() &gt; Normal; }
+
+inline void QFont::setBold( bool enable )
+{ setWeight( enable ? Bold : Normal ); }
+
+
+/*****************************************************************************
+  QFont stream functions
+ *****************************************************************************/
+
+Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QFont &amp; );
+Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QFont &amp; );
+
+
+#endif // QFONT_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

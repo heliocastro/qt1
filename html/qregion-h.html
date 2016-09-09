@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qregion.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qregion.h</h1><br clear="all">
+This is the verbatim text of the qregion.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qregion.h,v 2.14.2.4 1999/01/22 15:45:28 warwick Exp $
+**
+** Definition of QRegion class
+**
+** Created : 940514
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QREGION_H
+#define QREGION_H
+
+#ifndef QT_H
+#include "qshared.h"
+#include "qrect.h"
+#include "qstring.h"
+#endif // QT_H
+
+
+class Q_EXPORT QRegion
+{
+public:
+    enum RegionType { Rectangle, Ellipse };
+
+    QRegion();
+    QRegion( int x, int y, int w, int h, RegionType = Rectangle );
+    QRegion( const QRect &amp;, RegionType = Rectangle );
+    QRegion( const QPointArray &amp;, bool winding=FALSE );
+    QRegion( const QRegion &amp; );
+    QRegion( const QBitmap &amp; );
+   ~QRegion();
+    QRegion &amp;operator=( const QRegion &amp; );
+
+    bool    isNull()   const;
+    bool    isEmpty()  const;
+
+    bool    contains( const QPoint &amp;p ) const;
+    bool    contains( const QRect &amp;r )  const;
+
+    void    translate( int dx, int dy );
+
+    QRegion unite( const QRegion &amp; )    const;
+    QRegion intersect( const QRegion &amp;) const;
+    QRegion subtract( const QRegion &amp; ) const;
+
+// Work around clash with the ANSI C++ keyword "xor".
+//
+// Use of QRegion::xor() is deprecated - you should use QRegion::eor().
+// Calls to QRegion::xor() will work for now, but give a warning.
+//
+// If possible, compile the Qt library without this ANSI C++ feature enabled,
+// thus including both the old xor() and new eor() in the library, so old
+// binaries will continue to work (with the warning).
+//
+// We also hide the xor() function if there is a #define for xor, in
+// case someone is using #define xor ^ to work around deficiencies in
+// their compiler that cause problems with some other header files.
+//
+#if !(defined(__STRICT_ANSI__) &amp;&amp; defined(_CC_GNU_)) &amp;&amp; !defined(_CC_EDG_) &amp;&amp; !defined(_CC_HP_) &amp;&amp; !defined(_CC_HP_ACC_) &amp;&amp; !defined(_CC_USLC_) &amp;&amp; !defined(_CC_MWERKS_) &amp;&amp; !defined(xor)
+    QRegion xor( const QRegion &amp; )      const;
+#endif
+    QRegion eor( const QRegion &amp; )      const;
+
+    QRect   boundingRect() const;
+    QArray&lt;QRect&gt; rects() const;
+
+    bool    operator==( const QRegion &amp; )  const;
+    bool    operator!=( const QRegion &amp;r ) const
+                        { return !(operator==(r)); }
+
+#if defined(_WS_WIN_)
+    HANDLE  handle() const { return data-&gt;rgn; }
+#elif defined(_WS_PM_)
+    HANDLE  handle() const { return data-&gt;rgn; }
+#elif defined(_WS_X11_)
+    Region  handle() const { return data-&gt;rgn; }
+#endif
+
+    friend Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QRegion &amp; );
+    friend Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QRegion &amp; );
+
+private:
+    QRegion( bool );
+    QRegion copy() const;
+    void    detach();
+#if defined(_WS_WIN_)
+    QRegion winCombine( const QRegion &amp;, int ) const;
+#endif
+    void    cmd( int id, void *, const QRegion * = 0, const QRegion * = 0 );
+    void    exec( const QByteArray &amp; );
+    struct QRegionData : public QShared {
+#if defined(_WS_WIN_)
+        HANDLE rgn;
+#elif defined(_WS_PM_)
+        HANDLE rgn;
+#elif defined(_WS_X11_)
+        Region rgn;
+#endif
+        bool   is_null;
+    } *data;
+#if defined(_WS_PM_)
+    static HPS hps;
+#endif
+};
+
+
+#define QRGN_SETRECT            1               // region stream commands
+#define QRGN_SETELLIPSE         2               //  (these are internal)
+#define QRGN_SETPTARRAY_ALT     3
+#define QRGN_SETPTARRAY_WIND    4
+#define QRGN_TRANSLATE          5
+#define QRGN_OR                 6
+#define QRGN_AND                7
+#define QRGN_SUB                8
+#define QRGN_XOR                9
+#define QRGN_RECTS             10
+
+
+/*****************************************************************************
+  QRegion stream functions
+ *****************************************************************************/
+
+Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QRegion &amp; );
+Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QRegion &amp; );
+
+
+#endif // QREGION_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

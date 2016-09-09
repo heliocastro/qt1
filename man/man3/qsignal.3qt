@@ -1,0 +1,161 @@
+.TH QSignal 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QSignal \- Can be used to send signals without parameters
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qsignal.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QSignal ( QObject * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "const char* name () const"
+.br
+.ti -1c
+.BI "void setName ( const char * name )"
+.br
+.ti -1c
+.BI "bool connect ( const QObject * " "receiver" ", const char * member )"
+.br
+.ti -1c
+.BI "bool disconnect ( const QObject * " "receiver" ", const char * " "member" "=0 )"
+.br
+.ti -1c
+.BI "bool isBlocked () const"
+.br
+.ti -1c
+.BI "void block ( bool b )"
+.br
+.ti -1c
+.BI "void activate ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QSignal class can be used to send signals without parameters.
+.PP
+QSignal is a simple extension of QObject that can send plain signals without parameters. If you want to send signals from a class that does not inherit QObject, you can create an internal QSignal object to emit the signal. You must also provide a function that connects the signal to an outside object slot. This is how we have implemented signals in the QMenuData class, which is not a QObject.
+.PP
+In general, we recommend inheriting QObject instead. QObject provides much more functionality.
+.PP
+Note that QObject is a \fIprivate\fR base class of QSignal, i.e. you cannot call any QObject member functions from a QSignal object.
+.PP
+Example:
+.PP
+.nf
+.br
+    #include <qsignal.h>
+.br
+.br
+    class MyClass
+.br
+    {
+.br
+    public:
+.br
+        MyClass();
+.br
+       ~MyClass();
+.br
+.br
+        void doSomething();
+.br
+.br
+        void connect( QObject *receiver, const char *member );
+.br
+.br
+    private:
+.br
+        QSignal *sig;
+.br
+    };
+.br
+.br
+    MyClass::MyClass()
+.br
+    {
+.br
+        sig = new QSignal;
+.br
+    }
+.br
+.br
+    MyClass::~MyClass()
+.br
+    {
+.br
+        delete sig;
+.br
+    }
+.br
+.br
+    void MyClass::doSomething()
+.br
+    {
+.br
+        // ... does something
+.br
+        sig->activate();        // activates the signal
+.br
+    }
+.br
+.br
+    void MyClass::connect( QObject *receiver, const char *member )
+.br
+    {
+.br
+        sig->connect( receiver, member );
+.br
+    }
+.fi
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QSignal::QSignal ( QObject * parent=0, const char * name=0 )"
+Constructs a signal object with the parent object \fIparent\fR and a \fIname.\fR These arguments are passed directly to QObject.
+.SH "void QSignal::activate ()"
+Emits the signal.
+.PP
+See also: isBlock().
+.SH "void QSignal::block ( bool b )"
+Blocks the signal if \fIb\fR is TRUE, or unblocks the signal if \fIb\fR is FALSE.
+.PP
+An activated signal disappears into hyperspace if it is blocked.
+.PP
+See also: isBlocked(), activate() and QObject::blockSignals().
+.SH "bool QSignal::connect ( const QObject * receiver, const char * member )"
+Connects the signal to \fImember\fR in object \fIreceiver.\fR
+.PP
+See also: disconnect() and QObject::connect().
+.SH "bool QSignal::disconnect ( const QObject * receiver, const char * member=0 )"
+Disonnects the signal from \fImember\fR in object \fIreceiver.\fR
+.PP
+See also: connect() and QObject::disconnect().
+.SH "bool QSignal::isBlocked () const"
+Returns TRUE if the signal is blocked, or FALSE if it is not blocked.
+.PP
+The signal is not blocked by default.
+.PP
+See also: block() and QObject::signalsBlocked().
+.SH "const char * QSignal::name () const"
+Returns the name of this signal object.
+.PP
+Since QObject is a private base class, we have added this function, which calls QObject::name().
+.SH "void QSignal::setName ( const char * name )"
+Sets the name of this signal object to \fIname.\fR
+.PP
+Since QObject is a private base class, we have added this function, which
+calls QObject::setName().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qsignal.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

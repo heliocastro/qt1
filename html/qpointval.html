@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QPointVal Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QPointVal Class Reference</h1><br clear="all">
+<p>
+The QPointVal class is an internal class, used with <a href="qpointarray.html">QPointArray</a>.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qpointarray-h.html">qpointarray.h</a>&gt;</code>
+<p><a href="qpointval-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qpointval.html#a0"><strong>QPointVal</strong></a> ( QPointData * ptr ) </span>
+<li><span class="fn">bool <strong>operator==</strong> ( const QPointVal &amp; point ) const</span>
+<li><span class="fn">bool <strong>operator!=</strong> ( const QPointVal &amp; point ) const</span>
+<li><span class="fn">QPointVal&amp; <strong>operator=</strong> ( const QPointVal &amp; point ) </span>
+<li><span class="fn">QPointVal&amp; <a href="qpointval.html#a4"><strong>operator=</strong></a> ( const QPoint &amp; point ) </span>
+<li><span class="fn">QPointVal&amp; <a href="qpointval.html#a5"><strong>operator+=</strong></a> ( const QPoint &amp; point ) </span>
+<li><span class="fn">QPointVal&amp; <a href="qpointval.html#a6"><strong>operator-=</strong></a> ( const QPoint &amp; point ) </span>
+<li><span class="fn">operator <a href=qpointval.html#b0><strong>QPoint</strong></a> ()const</span>
+<li><span class="fn">int <a href="qpointval.html#a8"><strong>x</strong></a> () const</span>
+<li><span class="fn">int <a href="qpointval.html#a9"><strong>y</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QPointVal class is an internal class, used with <a href="qpointarray.html">QPointArray</a>.
+<p>
+The QPointVal is required by the indexing [] operator on point arrays.
+It is probably a bad idea to use it in any other context.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QPointVal::QPointVal ( QPointData * ptr )</h3>
+<p>Constructs a reference to an element in a <a href="qpointarray.html">QPointArray</a>.  This is
+what QPointArray::operator[] contructs its return value with.
+<h3 class="fn"><a name="b0"></a>QPointVal::operator QPoint () const</h3>
+<p>Returns the value of the point referenced by this QPointVal.
+<h3 class="fn">QPointVal&amp; <a name="a5"></a>QPointVal::operator+= ( const <a href="qpoint.html">QPoint</a> &amp; point )</h3>
+<p>Vector-adds a given point to the value referenced by this QPointVal.
+<h3 class="fn">QPointVal&amp; <a name="a6"></a>QPointVal::operator-= ( const <a href="qpoint.html">QPoint</a> &amp; point )</h3>
+<p>Vector-subtracts a given point to the value referenced by this QPointVal.
+<h3 class="fn">QPointVal&amp; <a name="a4"></a>QPointVal::operator= ( const <a href="qpoint.html">QPoint</a> &amp; point )</h3>
+<p>Assigns a given point to the value referenced by this QPointVal.
+<h3 class="fn">int <a name="a8"></a>QPointVal::x () const</h3>
+<p>Returns the X coordinate of the point referenced by this QPointVal.
+<h3 class="fn">int <a name="a9"></a>QPointVal::y () const</h3>
+<p>Returns the Y coordinate of the point referenced by this QPointVal.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qpointarray.h: 1998/12/08
+<li>qpointarray.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

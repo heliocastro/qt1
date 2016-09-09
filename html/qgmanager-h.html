@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qgmanager.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qgmanager.h</h1><br clear="all">
+This is the verbatim text of the qgmanager.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qgmanager.h,v 2.14.2.2 1998/08/21 19:13:22 hanord Exp $
+**
+** Definition of QGManager class (workhorse for QLayout classes)
+**
+** Created : 960406
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QGMANAGER_H
+#define QGMANAGER_H
+
+#ifndef QT_H
+#include "qintdict.h"
+#include "qwidget.h"
+#endif // QT_H
+
+
+class QChain;
+struct QGManagerData;
+
+class Q_EXPORT QGManager : public QObject
+{
+    Q_OBJECT
+public:
+    QGManager( QWidget *parent, const char *name=0 );
+    ~QGManager();
+
+    void setBorder( int b ) { border = b; }
+
+    enum Direction { LeftToRight, RightToLeft, Down, Up };
+    enum { unlimited = QCOORD_MAX };
+
+    QChain *newSerChain( Direction );
+    //    QChain *newSerChain( Direction, int );
+    QChain *newParChain( Direction );
+
+    bool add( QChain *destination, QChain *source, int stretch = 0 );
+    bool addWidget( QChain *, QWidget *, int stretch = 0 );
+    bool addSpacing( QChain *, int minSize, int stretch = 0, int maxSize = unlimited );
+
+    bool addBranch( QChain *destination, QChain *branch, int fromIndex,
+                    int toIndex );
+    void setStretch( QChain*, int );
+    bool activate();
+
+    void freeze( int w = 0, int h = 0 );
+    void unFreeze();
+
+    QChain *xChain() {  return xC; }
+    QChain *yChain() {  return yC; }
+
+    void  setMenuBar( QWidget *w ) { menuBar = w; }
+
+    QWidget *mainWidget() { return main; }
+
+    void remove( QWidget *w );
+
+    void setName( QChain *, const char * );
+        
+protected:
+    bool  eventFilter( QObject *, QEvent * );
+
+private:
+    int border;
+
+    void      resizeHandle( QWidget *, const QSize &amp; );
+    void      resizeAll();
+
+    QChain *xC;
+    QChain *yC;
+    QWidget *main;
+    QWidget *menuBar;
+    int     menuBarHeight;
+    QGManagerData *extraData;
+    bool frozen;
+
+private:        // Disabled copy constructor and operator=
+#if defined(Q_DISABLE_COPY)
+    QGManager( const QGManager &amp; );
+    QGManager &amp;operator=( const QGManager &amp; );
+#endif
+};
+
+
+#endif // QGMANAGER_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

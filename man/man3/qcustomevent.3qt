@@ -1,0 +1,48 @@
+.TH QCustomEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QCustomEvent \- Support for custom events
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherits QEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QCustomEvent ( int " "type" ", void * data )"
+.br
+.ti -1c
+.BI "void* data () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QCustomEvent class provides support for custom events.
+.PP
+QCustomEvent is a user-defined event type which contains a \fCvoid*.
+.PP
+\fBWarning:\fR\fR This event class is internally used to implement Qt enhancements. It is not advisable to use QCustomEvent in normal applications, where other event types and the signal/slot mechanism can do the job.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QCustomEvent::QCustomEvent ( int type, void * data )"
+Constructs a custom event object with the event type \fItype\fR and a pointer to \fIdata.\fR
+.SH "void * QCustomEvent::data () const"
+Returns a pointer to the event data (specified in the constructor).
+.PP
+The event data can be anything and must be casted to something useful
+based on the event type. Again, it is not
+recommended to use custom events unless you are implementing Qt kernel
+enhancements.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qcustomevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,44 @@
+/****************************************************************************
+** $Id: examples.doc,v 1.1 1998/01/07 22:04:46 warwick Exp $
+**
+** Documentation for the examples
+**
+** Copyright (C) 1995-1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+#if defined(DEBUG)
+static char ident[] = "$Id: examples.doc,v 1.1 1998/01/07 22:04:46 warwick Exp $";
+#endif
+
+
+/*! \example mainlyQt/editor.cpp
+
+  <h1 align=center>Editor Example</h1>
+  <p>
+  This example shows two simple text editors, with most of the
+  program written in Qt.  One editor is a Qt QMultiLineEdit, the
+  other is an Athena Widgets text widget.  They are bound together
+  in a Qt widget.
+*/
+
+/*! \example mainlyXt/editor.cpp
+
+  <h1 align=center>Editor Example</h1>
+  <p>
+  This example shows two simple text editors, with most of the
+  program written in Xt.  One editor is a Qt QMultiLineEdit, the
+  other is an Athena Widgets text widget.  They are bound together
+  in an Xt form widget.
+*/
+
+/*! \example mainlyMotif/editor.cpp
+
+  <h1 align=center>Editor Example</h1>
+  <p>
+  This example shows two simple text editors, with most of the
+  program written in Motif.  One editor is a Qt QMultiLineEdit, the
+  other is a Motif text widget.  They are bound together
+  in a Motif form widget.
+*/
+

@@ -1,0 +1,260 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QIntDict Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QIntDict Class Reference</h1><br clear="all">
+<p>
+The QIntDict class is a template class that provides a dictionary based on <code>long</code> keys.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qintdict-h.html">qintdict.h</a>&gt;</code>
+<p>
+Inherits <a href="qgdict.html">QGDict</a>.
+<p><a href="qintdict-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qintdict.html#a0"><strong>QIntDict</strong></a> ( int size=17 ) </span>
+<li><span class="fn"><a href="qintdict.html#a1"><strong>QIntDict</strong></a> ( const QIntDict&lt;type&gt; &amp; dict ) </span>
+<li><span class="fn"><a href="qintdict.html#a2"><strong>~QIntDict</strong></a> () </span>
+<li><span class="fn">QIntDict&lt;type&gt;&amp; <a href="qintdict.html#a3"><strong>operator=</strong></a> ( const QIntDict&lt;type&gt; &amp; dict ) </span>
+<li><span class="fn">virtual uint <a href="qintdict.html#a4"><strong>count</strong></a> () const</span>
+<li><span class="fn">uint <a href="qintdict.html#a5"><strong>size</strong></a> () const</span>
+<li><span class="fn">bool <a href="qintdict.html#a6"><strong>isEmpty</strong></a> () const</span>
+<li><span class="fn">void <a href="qintdict.html#a7"><strong>insert</strong></a> ( long key, const type * item ) </span>
+<li><span class="fn">void <a href="qintdict.html#a8"><strong>replace</strong></a> ( long key, const type * item ) </span>
+<li><span class="fn">bool <a href="qintdict.html#a9"><strong>remove</strong></a> ( long key ) </span>
+<li><span class="fn">type* <a href="qintdict.html#b0"><strong>take</strong></a> ( long key ) </span>
+<li><span class="fn">virtual void <a href="qintdict.html#b1"><strong>clear</strong></a> () </span>
+<li><span class="fn">void <a href="qintdict.html#b2"><strong>resize</strong></a> ( uint newsize ) </span>
+<li><span class="fn">type* <a href="qintdict.html#b3"><strong>find</strong></a> ( long key ) const</span>
+<li><span class="fn">type* <a href="qintdict.html#b4"><strong>operator[]</strong></a> ( long key ) const</span>
+<li><span class="fn">void <a href="qintdict.html#b5"><strong>statistics</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QIntDict class is a template class that provides a dictionary based on <code>long</code> keys.
+<p>
+QIntDict is implemented as both a template and a macro class. Define a
+template instance QIntDict&lt;X&gt; to create a dictionary that operates on
+pointers to X, or X*.
+<p>A dictionary is a collection that associates an item with a key.
+The key is used for inserting and looking up an item.  QIntDict has
+<code>long</code> keys.
+<p>The dictionary has very fast insertion and lookup.
+<p>Example:
+<pre>    #include &lt;qintdict.h&gt;
+    #include &lt;stdio.h&gt;
+
+    void main()
+    {
+        <a href="qintdict.html">QIntDict</a>&lt;char&gt; dict;            // maps long ==&gt; char*
+
+        dict.<a href="qintdict.html#a7">insert</a>( 33, "France" );
+        dict.<a href="qintdict.html#a7">insert</a>(  7, "Russia" );
+        dict.<a href="qintdict.html#a7">insert</a>( 49, "Norway" );
+
+        printf( "%s\n", dict[49] );
+        printf( "%s\n", dict[33] );
+        printf( "%s\n", dict[7] );
+
+        if ( !dict[39] )
+            printf( "39 not defined\n" );
+    }
+</pre>
+<p>Program output:
+<pre>        Norway
+        France
+        Russia
+        39 not defined
+</pre>
+<p>The dictionary in our example maps <code>long</code> keys to <code>char*</code> items.
+QIntDict implements the <a href="qintdict.html#b4">[] operator</a> to lookup
+an item.
+<p>A QIntDict can also be instantiated through a macro expansion, but this
+is necessary only for compilers that do not support templates. See the
+<a href="collection.html">collection classes documentation</a>
+for a general discussion on template-based versus macro-based collections.
+<p>QIntDict is implemented by <a href="qgdict.html">QGDict</a> as a hash array with a fixed number of
+entries. Each array entry points to a singly linked list of buckets, in
+which the dictionary items are stored.
+<p>When an item is inserted with a key, the key is converted (hashed) to
+an integer index into the hash array using the <code>mod</code> operation. The
+item is inserted before the first bucket in the list of buckets.
+<p>Looking up an item is normally very fast. The key is again hashed to an
+array index. Then QIntDict scans the list of buckets and returns the item
+found or null if the item was not found.  You cannot insert null pointers
+into a dictionary.
+<p>The size of the hash array is very important. In order to get good
+performance, you should use a suitably large <a href="primes.html">prime
+number</a>.  Suitable means equal to or larger than the maximum
+expected number of dictionary items.
+<p>Items with equal keys are allowed.  When inserting two items with the
+same key, only the last inserted item will be visible (last in, first out)
+until it is removed.
+<p>Example:
+<pre>    #include &lt;qintdict.h&gt;
+    #include &lt;stdio.h&gt;
+
+    void main()
+    {
+        <a href="qintdict.html">QIntDict</a>&lt;char&gt; dict;            // maps long ==&gt; char*
+
+        dict.<a href="qintdict.html#a7">insert</a>( 7, "Russia" );
+        dict.<a href="qintdict.html#a7">insert</a>( 7, "USSR" );
+
+        printf( "%s\n", dict[7] );
+        dict.<a href="qintdict.html#a9">remove</a>( 7 );               // Gorbie was here
+        printf( "%s\n", dict[7] );
+    }
+</pre>
+<p>Program output:
+<pre>        USSR
+        Russia
+</pre>
+<p>The <a href="qintdictiterator.html">QIntDictIterator</a> class can traverse the dictionary contents, but only
+in an arbitrary order.  Multiple iterators may independently traverse the
+same dictionary.
+<p>Calling <a href="qcollection.html#a1">setAutoDelete</a>(TRUE) for a dictionary tells it to delete items
+that are removed .  The default is to not delete items when they are
+removed.
+<p>When inserting an item into a dictionary, only the pointer is copied, not
+the item itself. This is called a shallow copy. It is possible to make the
+dictionary copy all of the item's data (known as a deep copy) when an
+item is inserted.  <a href="qintdict.html#a7">insert</a>() calls the virtual function
+<a href="qcollection.html#a7">QCollection::newItem</a>() for the item to be inserted.
+Inherit a dictionary and reimplement it if you want deep copies.
+<p>When removing a dictionary item, the virtual function
+<a href="qcollection.html#a8">QCollection::deleteItem</a>() is called.  QIntDict's default implementation
+is to delete the item if auto-deletion is enabled.
+<p>See also:  <a href="qintdictiterator.html">QIntDictIterator</a>, <a href="qdict.html">QDict</a> and <a href="collection.html">Collection Classes</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a1"></a>QIntDict::QIntDict ( const QIntDict&lt;type&gt; &amp; dict )</h3>
+<p>Constructs a copy of <em>dict.</em>
+<p>Each item in <em>dict</em> are inserted into this dictionary.
+Only the pointers are copied (shallow copy).
+<h3 class="fn"><a name="a0"></a>QIntDict::QIntDict ( int size=17 )</h3>
+<p>Constructs a dictionary using an internal hash array with the size
+<em>size.</em>
+<p>Setting <em>size</em> to a suitably large <a href="primes.html">prime number</a>
+(equal to or greater than the expected number of entries) makes the hash
+distribution better and hence the loopup faster.
+<h3 class="fn"><a name="a2"></a>QIntDict::~QIntDict ()</h3>
+<p>Removes all items from the dictionary and destroys it.
+<p>All iterators that access this dictionary will be reset.
+<p>See also:  <a href="qcollection.html#a1">setAutoDelete</a>().
+<h3 class="fn">void <a name="b1"></a>QIntDict::clear () <code>[virtual]</code></h3>
+<p>Removes all items from the dictionary.
+<p>The removed items are deleted if <a href="qcollection.html#a1">auto-deletion</a> is enabled.
+<p>All dictionary iterators that access this dictionary will be reset.
+<p>See also:  <a href="qintdict.html#a9">remove</a>(), <a href="qintdict.html#b0">take</a>() and <a href="qcollection.html#a1">setAutoDelete</a>().
+<p>Reimplemented from <a href="qcollection.html#a3">QCollection.</a>
+<h3 class="fn">uint <a name="a4"></a>QIntDict::count () const <code>[virtual]</code></h3>
+<p>Returns the number of items in the dictionary.
+<p>See also:  <a href="qintdict.html#a6">isEmpty</a>().
+<p>Reimplemented from <a href="qcollection.html#a2">QCollection.</a>
+<h3 class="fn">type * <a name="b3"></a>QIntDict::find ( long key ) const</h3>
+<p>Returns the item associated with <em>key,</em> or null if the key does not
+exist in the dictionary.
+<p>This function uses an internal hashing algorithm to optimize lookup.
+<p>If there are two or more items with equal keys, then the last inserted
+of these will be found.
+<p>Equivalent to the [] operator.
+<p>See also:  operator[].
+<h3 class="fn">void <a name="a7"></a>QIntDict::insert ( long key, const type * item )</h3>
+<p>Inserts the <em>key</em> with the <em>item</em> into the dictionary.
+<p>The key does not have to be a unique dictionary key.  If multiple items
+are inserted with the same key, only the last item will be visible.
+<p>Null items are not allowed.
+<p>See also:  <a href="qintdict.html#a8">replace</a>().
+<h3 class="fn">bool <a name="a6"></a>QIntDict::isEmpty () const</h3>
+<p>Returns TRUE if the dictionary is empty, i.e. <a href="qintdict.html#a4">count</a>() == 0. Returns FALSE
+otherwise.
+<p>See also:  <a href="qintdict.html#a4">count</a>().
+<h3 class="fn">QIntDict&lt;type&gt; &amp; <a name="a3"></a>QIntDict::operator= ( const QIntDict&lt;type&gt; &amp; dict )</h3>
+<p>Assigns <em>dict</em> to this dictionary and returns a reference to this
+dictionary.
+<p>This dictionary is first cleared, then each item in <em>dict</em> is inserted
+into this dictionary.
+Only the pointers are copied (shallow copy), unless <a href="qcollection.html#a7">newItem</a>() has been
+reimplemented().
+<h3 class="fn">type * <a name="b4"></a>QIntDict::operator[] ( long key ) const</h3>
+<p>Returns the item associated with <em>key,</em> or null if the key does not
+exist in the dictionary.
+<p>This function uses an internal hashing algorithm to optimize lookup.
+<p>If there are two or more items with equal keys, then the last inserted
+of these will be found.
+<p>Equivalent to the <a href="qintdict.html#b3">find</a>() function.
+<p>See also:  <a href="qintdict.html#b3">find</a>().
+<h3 class="fn">bool <a name="a9"></a>QIntDict::remove ( long key )</h3>
+<p>Removes the item associated with <em>key</em> from the dictionary.
+Returns TRUE if successful, or FALSE if the key does not exist in the
+dictionary.
+<p>If there are two or more items with equal keys, then the last inserted
+of these will be removed.
+<p>The removed item is deleted if <a href="qcollection.html#a1">auto-deletion</a> is enabled.
+<p>All dictionary iterators that refer to the removed item will be set to
+point to the next item in the dictionary traversing order.
+<p>See also:  <a href="qintdict.html#b0">take</a>(), <a href="qintdict.html#b1">clear</a>() and <a href="qcollection.html#a1">setAutoDelete</a>().
+<h3 class="fn">void <a name="a8"></a>QIntDict::replace ( long key, const type * item )</h3>
+<p>Replaces an item which has a key equal to <em>key</em> with <em>item.</em>
+<p>If the item does not already exist, it will be inserted.
+<p>Null items are not allowed.
+<p>Equivalent to:
+<pre>    <a href="qintdict.html">QIntDict</a>&lt;char&gt; dict;
+        ...
+    if ( dict.<a href="qintdict.html#b3">find</a>(key) )
+        dict.<a href="qintdict.html#a9">remove</a>( key );
+    dict.<a href="qintdict.html#a7">insert</a>( key, item );
+</pre>
+<p>If there are two or more items with equal keys, then the last inserted
+of these will be replaced.
+<p>See also:  <a href="qintdict.html#a7">insert</a>().
+<h3 class="fn">void <a name="b2"></a>QIntDict::resize ( uint newsize )</h3>
+<p>Changes the size of the hashtable the <em>newsize.</em>
+The contents of the dictionary are preserved,
+but all iterators on the dictionary become invalid.
+<h3 class="fn">uint <a name="a5"></a>QIntDict::size () const</h3>
+<p>Returns the size of the internal hash array (as specified in the
+constructor).
+<p>See also:  <a href="qintdict.html#a4">count</a>().
+<h3 class="fn">void <a name="b5"></a>QIntDict::statistics () const</h3>
+<p>Debugging-only function that prints out the dictionary distribution
+using <a href="qapplication.html#j4">debug</a>().
+<h3 class="fn">type * <a name="b0"></a>QIntDict::take ( long key )</h3>
+<p>Takes the item associated with <em>key</em> out of the dictionary without
+deleting it (even if <a href="qcollection.html#a1">auto-deletion</a> is enabled).
+<p>If there are two or more items with equal keys, then the last inserted
+of these will be taken.
+<p>Returns a pointer to the item taken out, or null if the key does not
+exist in the dictionary.
+<p>All dictionary iterators that refer to the taken item will be set to
+point to the next item in the dictionary travering order.
+<p>See also:  <a href="qintdict.html#a9">remove</a>(), <a href="qintdict.html#b1">clear</a>() and <a href="qcollection.html#a1">setAutoDelete</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qintdict.h: 1998/08/27
+<li>qintdict.doc: 1998/03/17
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

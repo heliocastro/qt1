@@ -1,0 +1,56 @@
+.TH QResizeEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QResizeEvent \- Event parameters for resize events
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherits QEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QResizeEvent ( const QSize & " "size" ", const QSize & oldSize )"
+.br
+.ti -1c
+.BI "const QSize& size () const"
+.br
+.ti -1c
+.BI "const QSize& oldSize () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QResizeEvent class contains event parameters for resize events.
+.PP
+Resize events are sent to widgets that have been resized.
+.PP
+The event handler QWidget::resizeEvent() receives resize events.
+.PP
+See also: QWidget::resize() and QWidget::setGeometry().
+.PP
+Examples:
+.(l
+mainlyMotif/editor.cpp tictac/tictac.cpp life/life.cpp mainlyQt/editor.cpp tooltip/tooltip.cpp drawdemo/drawdemo.cpp xform/xform.cpp menu/menu.cpp qmag/qmag.cpp showimg/showimg.cpp mainlyXt/editor.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QResizeEvent::QResizeEvent ( const QSize & size, const QSize & oldSize )"
+Constructs a resize event with the new and old widget sizes.
+.SH "const QSize & QResizeEvent::oldSize () const"
+Returns the old size of the widget.
+.SH "const QSize & QResizeEvent::size () const"
+Returns the new size of the widget, which is the same as
+QWidget::size().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qresizeevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

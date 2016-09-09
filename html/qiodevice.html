@@ -1,0 +1,326 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QIODevice Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QIODevice Class Reference</h1><br clear="all">
+<p>
+The QIODevice class is the base class of I/O devices.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qiodevice-h.html">qiodevice.h</a>&gt;</code>
+<p>Inherited by <a href="qbuffer.html">QBuffer</a> and <a href="qfile.html">QFile</a>.
+<p><a href="qiodevice-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qiodevice.html#a0"><strong>QIODevice</strong></a> () </span>
+<li><span class="fn">virtual <a href="qiodevice.html#a1"><strong>~QIODevice</strong></a> () </span>
+<li><span class="fn">int <a href="qiodevice.html#a2"><strong>flags</strong></a> () const</span>
+<li><span class="fn">int <a href="qiodevice.html#a3"><strong>mode</strong></a> () const</span>
+<li><span class="fn">int <a href="qiodevice.html#a4"><strong>state</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#a5"><strong>isDirectAccess</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#a6"><strong>isSequentialAccess</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#a7"><strong>isCombinedAccess</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#a8"><strong>isBuffered</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#a9"><strong>isRaw</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#b0"><strong>isSynchronous</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#b1"><strong>isAsynchronous</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#b2"><strong>isTranslated</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#b3"><strong>isReadable</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#b4"><strong>isWritable</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#b5"><strong>isReadWrite</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#b6"><strong>isInactive</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#b7"><strong>isOpen</strong></a> () const</span>
+<li><span class="fn">int <a href="qiodevice.html#b8"><strong>status</strong></a> () const</span>
+<li><span class="fn">void <a href="qiodevice.html#b9"><strong>resetStatus</strong></a> () </span>
+<li><span class="fn">virtual bool <a href="qiodevice.html#c0"><strong>open</strong></a> ( int mode ) </span>
+<li><span class="fn">virtual void <a href="qiodevice.html#c1"><strong>close</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qiodevice.html#c2"><strong>flush</strong></a> () </span>
+<li><span class="fn">virtual uint <a href="qiodevice.html#c3"><strong>size</strong></a> () const</span>
+<li><span class="fn">virtual int <a href="qiodevice.html#c4"><strong>at</strong></a> () const</span>
+<li><span class="fn">virtual bool <a href="qiodevice.html#c5"><strong>at</strong></a> ( int ) </span>
+<li><span class="fn">virtual bool <a href="qiodevice.html#c6"><strong>atEnd</strong></a> () const</span>
+<li><span class="fn">bool <a href="qiodevice.html#c7"><strong>reset</strong></a> () </span>
+<li><span class="fn">virtual int <a href="qiodevice.html#c8"><strong>readBlock</strong></a> ( char * data, uint len ) </span>
+<li><span class="fn">virtual int <a href="qiodevice.html#c9"><strong>writeBlock</strong></a> ( const char * data, uint len ) </span>
+<li><span class="fn">virtual int <a href="qiodevice.html#d0"><strong>readLine</strong></a> ( char * data, uint maxlen ) </span>
+<li><span class="fn">virtual int <a href="qiodevice.html#d1"><strong>getch</strong></a> () </span>
+<li><span class="fn">virtual int <a href="qiodevice.html#d2"><strong>putch</strong></a> ( int ) </span>
+<li><span class="fn">virtual int <a href="qiodevice.html#d3"><strong>ungetch</strong></a> ( int ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">void <a href="qiodevice.html#d4"><strong>setFlags</strong></a> ( int f ) </span>
+<li><span class="fn">void <a href="qiodevice.html#d5"><strong>setType</strong></a> ( int ) </span>
+<li><span class="fn">void <a href="qiodevice.html#d6"><strong>setMode</strong></a> ( int ) </span>
+<li><span class="fn">void <a href="qiodevice.html#d7"><strong>setState</strong></a> ( int ) </span>
+<li><span class="fn">void <a href="qiodevice.html#d8"><strong>setStatus</strong></a> ( int ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QIODevice class is the base class of I/O devices.
+<p>
+An I/O device represents a medium that one can read bytes from and write
+bytes to.  The QIODevice class itself is not capable of reading or
+writing any data; it has virtual functions for doing so. These functions
+are implemented by the subclasses <a href="qfile.html">QFile</a> and <a href="qbuffer.html">QBuffer</a>.
+<p>There are two types of I/O devices;
+<a href="qiodevice.html#a5">&lt;em&gt;direct access&lt;/em&gt;</a> and
+<a href="qiodevice.html#a6">&lt;em&gt;sequential access &lt;/em&gt;</a> devices.
+Files can normally be accessed
+directly, except <code>stdin</code> etc., which must be processed sequentially.
+Buffers are always direct access devices.
+<p>The access mode of an I/O device can be either <em>raw</em> or <em>buffered.</em>
+QFile objects can be created using one of these.  Raw access mode is more
+low level, while buffered access use smart buffering techniques.
+The raw access mode is best when I/O is block-operated using 4kB block size
+or greater.  Buffered access works better when reading small portions of
+data at a time.
+<p>An I/O device operation can be executed in either <em>synchronous</em> or
+<em>asynchronous</em> mode.  The I/O devices currently supported by Qt only
+execute synchronously.
+<p>The <a href="qdatastream.html">QDataStream</a> and <a href="qtextstream.html">QTextStream</a> provide binary and text operations
+on QIODevice objects.
+<p>QIODevice provides numerous pure virtual functions you need to implement
+when subclassing it. Here is a skeleton subclass:
+<p><pre>    class YourDevice : public QIODevice
+    {
+    public:
+        YourDevice();
+       ~YourDevice();
+
+        bool open( int mode );
+        void close();
+        void flush();
+
+        uint size() const;
+        int  at() const;        // not a pure virtual function
+        bool at( int );         // not a pure virtual function
+        bool atEnd() const;     // not a pure virtual function
+
+        int readBlock( char *data, uint len );
+        int writeBlock( const char *data, uint len );
+        int readLine( char *data, uint maxlen );
+
+        int getch();
+        int putch( int );
+        int ungetch( int );
+    };
+</pre>
+<p>The three non-pure virtual functions can be ignored if your device
+is sequential (e.g. a tape device).
+<p>See also:  <a href="qdatastream.html">QDataStream</a> and <a href="qtextstream.html">QTextStream</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QIODevice::QIODevice ()</h3>
+<p>Constructs an I/O device.
+<h3 class="fn"><a name="a1"></a>QIODevice::~QIODevice () <code>[virtual]</code></h3>
+<p>Destroys the I/O device.
+<h3 class="fn">bool <a name="c5"></a>QIODevice::at ( int pos ) <code>[virtual]</code></h3>
+<p>Virtual function that sets the I/O device index to <em>pos.</em>
+<p>See also:  <a href="qiodevice.html#c3">size</a>().
+<p>Reimplemented in <a href="qbuffer.html#b0">QBuffer</a> and <a href="qfile.html#b6">QFile</a>.
+<h3 class="fn">int <a name="c4"></a>QIODevice::at () const <code>[virtual]</code></h3>
+<p>Virtual function that returns the current I/O device index.
+<p>This index is the data read/write head of the I/O device.
+<p>See also:  <a href="qiodevice.html#c3">size</a>().
+<p>Reimplemented in <a href="qbuffer.html#a9">QBuffer</a> and <a href="qfile.html#b5">QFile</a>.
+<h3 class="fn">bool <a name="c6"></a>QIODevice::atEnd () const <code>[virtual]</code></h3>
+<p>Virtual function that returns TRUE if the I/O device index is at the
+end of the input.
+<p>Reimplemented in <a href="qfile.html#b7">QFile</a>.
+<h3 class="fn">void <a name="c1"></a>QIODevice::close () <code>[virtual]</code></h3>
+<p>Closes the I/O device.
+<p>This virtual function must be reimplemented by all subclasses.
+<p>See also:  <a href="qiodevice.html#c0">open</a>().
+<p>Reimplemented in <a href="qbuffer.html#a6">QBuffer</a> and <a href="qfile.html#b2">QFile</a>.
+<h3 class="fn">int <a name="a2"></a>QIODevice::flags () const</h3>
+<p>Returns the current I/O device flags setting.
+<p>Flags consists of mode flags and state flags.
+<p>See also:  <a href="qiodevice.html#a3">mode</a>() and <a href="qiodevice.html#a4">state</a>().
+<h3 class="fn">void <a name="c2"></a>QIODevice::flush () <code>[virtual]</code></h3>
+<p>Flushes an open I/O device.
+<p>This virtual function must be reimplemented by all subclasses.
+<p>Reimplemented in <a href="qbuffer.html#a7">QBuffer</a> and <a href="qfile.html#b3">QFile</a>.
+<h3 class="fn">int <a name="d1"></a>QIODevice::getch () <code>[virtual]</code></h3>
+<p>Reads a single byte/character from the I/O device.
+<p>Returns the byte/character read, or -1 if the end of the I/O device has been
+reached.
+<p>This virtual function must be reimplemented by all subclasses.
+<p>See also:  <a href="qiodevice.html#d2">putch</a>() and <a href="qiodevice.html#d3">ungetch</a>().
+<p>Reimplemented in <a href="qbuffer.html#b4">QBuffer</a> and <a href="qfile.html#c1">QFile</a>.
+<h3 class="fn">bool <a name="b1"></a>QIODevice::isAsynchronous () const</h3>
+<p>Returns TRUE if the I/O device is a asynchronous device, otherwise
+FALSE.
+<p>This mode is currently not in use.
+<p>See also:  <a href="qiodevice.html#b0">isSynchronous</a>().
+<h3 class="fn">bool <a name="a8"></a>QIODevice::isBuffered () const</h3>
+<p>Returns TRUE if the I/O device is a buffered (not raw) device, otherwise
+FALSE.
+<p>See also:  <a href="qiodevice.html#a9">isRaw</a>().
+<h3 class="fn">bool <a name="a7"></a>QIODevice::isCombinedAccess () const</h3>
+<p>Returns TRUE if the I/O device is a combined access (both direct and
+sequential) device,  otherwise FALSE.
+<p>This access method is currently not in use.
+<h3 class="fn">bool <a name="a5"></a>QIODevice::isDirectAccess () const</h3>
+<p>Returns TRUE if the I/O device is a direct access (not sequential) device,
+otherwise FALSE.
+<p>See also:  <a href="qiodevice.html#a6">isSequentialAccess</a>().
+<h3 class="fn">bool <a name="b6"></a>QIODevice::isInactive () const</h3>
+<p>Returns TRUE if the I/O device state is 0, i.e. the device is not open.
+<p>See also:  <a href="qiodevice.html#b7">isOpen</a>().
+<h3 class="fn">bool <a name="b7"></a>QIODevice::isOpen () const</h3>
+<p>Returns TRUE if the I/O device state has been opened, otherwise FALSE.
+<p>See also:  <a href="qiodevice.html#b6">isInactive</a>().
+<h3 class="fn">bool <a name="a9"></a>QIODevice::isRaw () const</h3>
+<p>Returns TRUE if the I/O device is a raw (not buffered) device, otherwise
+FALSE.
+<p>See also:  <a href="qiodevice.html#a8">isBuffered</a>().
+<h3 class="fn">bool <a name="b5"></a>QIODevice::isReadWrite () const</h3>
+<p>Returns TRUE if the I/O device was opened using <code>IO_ReadWrite</code> mode.
+<p>See also:  <a href="qiodevice.html#b3">isReadable</a>() and <a href="qiodevice.html#b4">isWritable</a>().
+<h3 class="fn">bool <a name="b3"></a>QIODevice::isReadable () const</h3>
+<p>Returns TRUE if the I/O device was opened using <code>IO_ReadOnly</code> or
+<code>IO_ReadWrite</code> mode.
+<p>See also:  <a href="qiodevice.html#b4">isWritable</a>() and <a href="qiodevice.html#b5">isReadWrite</a>().
+<h3 class="fn">bool <a name="a6"></a>QIODevice::isSequentialAccess () const</h3>
+<p>Returns TRUE if the I/O device is a sequential access (not direct) device,
+otherwise FALSE.  Operations involving <a href="qiodevice.html#c3">size</a>() and <a href="qiodevice.html#c4">at</a>(int) are not valid
+on sequential devices.
+<p>See also:  <a href="qiodevice.html#a5">isDirectAccess</a>().
+<h3 class="fn">bool <a name="b0"></a>QIODevice::isSynchronous () const</h3>
+<p>Returns TRUE if the I/O device is a synchronous device, otherwise
+FALSE.
+<p>See also:  <a href="qiodevice.html#b1">isAsynchronous</a>().
+<h3 class="fn">bool <a name="b2"></a>QIODevice::isTranslated () const</h3>
+<p>Returns TRUE if the I/O device translates carriage-return and linefeed
+characters.
+<p>A <a href="qfile.html">QFile</a> is translated if it is opened with the <code>IO_Translate</code> mode
+flag.
+<h3 class="fn">bool <a name="b4"></a>QIODevice::isWritable () const</h3>
+<p>Returns TRUE if the I/O device was opened using <code>IO_WriteOnly</code> or
+<code>IO_ReadWrite</code> mode.
+<p>See also:  <a href="qiodevice.html#b3">isReadable</a>() and <a href="qiodevice.html#b5">isReadWrite</a>().
+<h3 class="fn">int <a name="a3"></a>QIODevice::mode () const</h3>
+<p>Returns bits OR'ed together that specify the current operation mode.
+<p>These are the flags that were given to the <a href="qiodevice.html#c0">open</a>() function.
+<p>The flags are: <code>IO_ReadOnly, IO_WriteOnly, IO_ReadWrite, IO_Append, IO_Truncate</code> and <code>IO_Translate.</code>
+<h3 class="fn">bool <a name="c0"></a>QIODevice::open ( int mode ) <code>[virtual]</code></h3>
+<p>Opens the I/O device using the specified <em>mode.</em>
+Returns TRUE if successful, or FALSE if the device could not be opened.
+<p>The mode parameter <em>m</em> must be a combination of the following flags.
+<ul>
+<li><code>IO_Raw</code> specified raw (unbuffered) file access.
+<li><code>IO_ReadOnly</code> opens a file in read-only mode.
+<li><code>IO_WriteOnly</code> opens a file in write-only mode.
+<li><code>IO_ReadWrite</code> opens a file in read/write mode.
+<li><code>IO_Append</code> sets the file index to the end of the file.
+<li><code>IO_Truncate</code> truncates the file.
+<li><code>IO_Translate</code> enables carriage returns and linefeed translation
+for text files under MS-DOS, Window, OS/2 and Macintosh.  Cannot be
+combined with <code>IO_Raw.</code>
+</ul>
+<p>This virtual function must be reimplemented by all subclasses.
+<p>See also:  <a href="qiodevice.html#c1">close</a>().
+<p>Reimplemented in <a href="qbuffer.html#a5">QBuffer</a> and <a href="qfile.html#a9">QFile</a>.
+<h3 class="fn">int <a name="d2"></a>QIODevice::putch ( int ch ) <code>[virtual]</code></h3>
+<p>Writes the character <em>ch</em> to the I/O device.
+<p>Returns <em>ch,</em> or -1 if some error occurred.
+<p>This virtual function must be reimplemented by all subclasses.
+<p>See also:  <a href="qiodevice.html#d1">getch</a>() and <a href="qiodevice.html#d3">ungetch</a>().
+<p>Reimplemented in <a href="qbuffer.html#b5">QBuffer</a> and <a href="qfile.html#c2">QFile</a>.
+<h3 class="fn">int <a name="c8"></a>QIODevice::readBlock ( char * data, uint len ) <code>[virtual]</code></h3>
+<p>Reads at most <em>len</em> bytes from the I/O device into <em>data</em> and
+returns the number of bytes actually read.
+<p>This virtual function must be reimplemented by all subclasses.
+<p>See also:  <a href="qiodevice.html#c9">writeBlock</a>().
+<p>Reimplemented in <a href="qbuffer.html#b1">QBuffer</a> and <a href="qfile.html#b8">QFile</a>.
+<h3 class="fn">int <a name="d0"></a>QIODevice::readLine ( char * data, uint maxlen ) <code>[virtual]</code></h3>
+<p>Reads a line of text, up to <em>maxlen</em> bytes including a terminating
+\0.  If there is a newline at the end if the line, it is not stripped.
+<p>Returns the number of bytes read, or -1 in case of error.
+<p>This virtual function can be reimplemented much more efficiently by
+the most subclasses.
+<p>See also:  <a href="qiodevice.html#c8">readBlock</a>() and <a href="qtextstream.html#d3">QTextStream::readLine</a>().
+<p>Reimplemented in <a href="qbuffer.html#b3">QBuffer</a> and <a href="qfile.html#c0">QFile</a>.
+<h3 class="fn">bool <a name="c7"></a>QIODevice::reset ()</h3>
+<p>Sets the device index to 0.
+<p>See also:  <a href="qiodevice.html#c4">at</a>().
+<h3 class="fn">void <a name="b9"></a>QIODevice::resetStatus ()</h3>
+<p>Sets the I/O device status to <code>IO_Ok.</code>
+<p>See also:  <a href="qiodevice.html#b8">status</a>().
+<h3 class="fn">void <a name="d4"></a>QIODevice::setFlags ( int f ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">void <a name="d6"></a>QIODevice::setMode ( int m ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">void <a name="d7"></a>QIODevice::setState ( int s ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">void <a name="d8"></a>QIODevice::setStatus ( int s ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">void <a name="d5"></a>QIODevice::setType ( int t ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">uint <a name="c3"></a>QIODevice::size () const <code>[virtual]</code></h3>
+<p>Virtual function that returns the size of the I/O device.
+<p>See also:  <a href="qiodevice.html#c4">at</a>().
+<p>Reimplemented in <a href="qbuffer.html#a8">QBuffer</a> and <a href="qfile.html#b4">QFile</a>.
+<h3 class="fn">int <a name="a4"></a>QIODevice::state () const</h3>
+<p>Returns bits OR'ed together that specify the current state.
+<p>The flags are: <code>IO_Open.</code>
+<p>Subclasses may define more flags.
+<h3 class="fn">int <a name="b8"></a>QIODevice::status () const</h3>
+<p>Returns the I/O device status.
+<p>The I/O device status returns an error code.  If <a href="qiodevice.html#c0">open</a>() returns FALSE
+or <a href="qiodevice.html#c8">readBlock</a>() or <a href="qiodevice.html#c9">writeBlock</a>() return -1, this function can be called to
+get the reason why the operation did not succeed.
+<p>The status codes are:
+<ul>
+<li><code>IO_Ok</code> The operation was successful.
+<li><code>IO_ReadError</code> Could not read from the device.
+<li><code>IO_WriteError</code> Could not write to the device.
+<li><code>IO_FatalError</code> A fatal unrecoverable error occurred.
+<li><code>IO_OpenError</code> Could not open the device.
+<li><code>IO_ConnectError</code> Could not connect to the device.
+<li><code>IO_AbortError</code> The operation was unexpectedly aborted.
+<li><code>IO_TimeOutError</code> The operation timed out.
+</ul>
+<p>See also:  <a href="qiodevice.html#b9">resetStatus</a>().
+<h3 class="fn">int <a name="d3"></a>QIODevice::ungetch ( int ch ) <code>[virtual]</code></h3>
+<p>Puts the character <em>ch</em> back into the I/O device and decrements the
+index if it is not zero.
+<p>This function is normally called to "undo" a <a href="qiodevice.html#d1">getch</a>() operation.
+<p>Returns <em>ch,</em> or -1 if some error occurred.
+<p>This virtual function must be reimplemented by all subclasses.
+<p>See also:  <a href="qiodevice.html#d1">getch</a>() and <a href="qiodevice.html#d2">putch</a>().
+<p>Reimplemented in <a href="qbuffer.html#b6">QBuffer</a> and <a href="qfile.html#c3">QFile</a>.
+<h3 class="fn">int <a name="c9"></a>QIODevice::writeBlock ( const char * data, uint len ) <code>[virtual]</code></h3>
+<p>Writes <em>len</em> bytes from <em>p</em> to the I/O device and returns the number of
+bytes actually written.
+<p>This virtual function must be reimplemented by all subclasses.
+<p>See also:  <a href="qiodevice.html#c8">readBlock</a>().
+<p>Reimplemented in <a href="qbuffer.html#b2">QBuffer</a> and <a href="qfile.html#b9">QFile</a>.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qiodevice.h: 1998/08/21
+<li>qiodevice.cpp: 1998/09/28
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

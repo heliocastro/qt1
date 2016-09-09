@@ -1,0 +1,67 @@
+.TH QDropEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QDropEvent \- Event sent when a drag-and-drop is completed
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherits QEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QDropEvent ( const QPoint & pos )"
+.br
+.ti -1c
+.BI "const QPoint& pos () const"
+.br
+.ti -1c
+.BI "bool isAccepted () const"
+.br
+.ti -1c
+.BI "void accept ()"
+.br
+.ti -1c
+.BI "void ignore ()"
+.br
+.ti -1c
+.BI "QByteArray data ( const char * )"
+.br
+.in -1c
+.SH DESCRIPTION
+Event sent when a drag-and-drop is completed.
+.PP
+When a widgets accepts drop events, it will receive this event if it has accepted the most recent QDragEnterEvent or QDragMoveEvent sent to it.
+.PP
+The widget should use data() to extract data in an appropriate format.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QDropEvent::QDropEvent ( const QPoint & pos )"
+Creates a QDropEvent for which the mouse is at point \fIpos.\fR
+.PP
+Note that internal state is also involved with QDropEvent, so it is not useful to create these yourself.
+.SH "void QDropEvent::accept ()"
+Call this to indicate that the event provided data which your widget processed. Use data(), or preferrably, the decode() methods of existing QDragObject subclasses, such as QTextDrag::decode(), or your own subclasses.
+.SH "QByteArray QDropEvent::data ( const char * format )"
+Returns a byte array containing the payload data of this drag, in \fIformat.\fR
+.PP
+data() normally needs to get the data from the drag source, which is potentially very slow, so it's advisable to call this function only if you're sure that you will need the data in \fIformat.\fR
+.PP
+The resulting data will have a size of 0 if the format was not available.
+.PP
+See also: QDragMoveEvent::data() and QDragMoveEvent::format().
+.SH "void QDropEvent::ignore ()"
+The opposite of accept().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qdropevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

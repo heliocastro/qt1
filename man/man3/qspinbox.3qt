@@ -1,0 +1,352 @@
+.TH QSpinBox 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QSpinBox \- Spin box widget, sometimes called up-down widget, little arrows widget or spin button
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qspinbox.h>\fR
+.PP
+Inherits QFrame and QRangeControl.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QSpinBox ( QWidget * " "parent" " = 0, const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "QSpinBox ( int " "minValue" ", int " "maxValue" ", int " "step" " = 1, QWidget * " "parent" " = 0, const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "\fB~QSpinBox\fR ()"
+.br
+.ti -1c
+.BI "const char* text () const"
+.br
+.ti -1c
+.BI "virtual const char* prefix () const"
+.br
+.ti -1c
+.BI "virtual const char* suffix () const"
+.br
+.ti -1c
+.BI "virtual QString cleanText () const"
+.br
+.ti -1c
+.BI "void setSpecialValueText ( const char * text )"
+.br
+.ti -1c
+.BI "const char* specialValueText () const"
+.br
+.ti -1c
+.BI "void setWrapping ( bool on )"
+.br
+.ti -1c
+.BI "bool wrapping () const"
+.br
+.ti -1c
+.BI "void setValidator ( QValidator * v )"
+.br
+.ti -1c
+.BI "virtual QSize sizeHint () const"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "virtual void setValue ( int value )"
+.br
+.ti -1c
+.BI "virtual void setPrefix ( const char * text )"
+.br
+.ti -1c
+.BI "virtual void setSuffix ( const char * text )"
+.br
+.ti -1c
+.BI "virtual void stepUp ()"
+.br
+.ti -1c
+.BI "virtual void stepDown ()"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void valueChanged ( int value )"
+.br
+.ti -1c
+.BI "void valueChanged ( const char * valueText )"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual QString mapValueToText ( int value )"
+.br
+.ti -1c
+.BI "virtual int mapTextToValue ( bool * ok )"
+.br
+.ti -1c
+.BI "QString currentValueText ()"
+.br
+.ti -1c
+.BI "virtual void updateDisplay ()"
+.br
+.ti -1c
+.BI "virtual void interpretText ()"
+.br
+.ti -1c
+.BI "QPushButton* upButton () const"
+.br
+.ti -1c
+.BI "QPushButton* downButton () const"
+.br
+.ti -1c
+.BI "QLineEdit* editor () const"
+.br
+.ti -1c
+.BI "virtual void valueChange ()"
+.br
+.ti -1c
+.BI "virtual void rangeChange ()"
+.br
+.ti -1c
+.BI "virtual bool eventFilter ( QObject * " "obj" ", QEvent * ev )"
+.br
+.ti -1c
+.BI "virtual void resizeEvent ( QResizeEvent * ev )"
+.br
+.ti -1c
+.BI "virtual void paletteChange ( const QPalette & )"
+.br
+.ti -1c
+.BI "virtual void enabledChange ( bool )"
+.br
+.ti -1c
+.BI "virtual void fontChange ( const QFont & )"
+.br
+.ti -1c
+.BI "virtual void styleChange ( GUIStyle )"
+.br
+.in -1c
+.SS "Protected Slots"
+.in +1c
+.ti -1c
+.BI "void textChanged ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QSpinBox class provides a spin box widget, sometimes called up-down widget, little arrows widget or spin button.
+.PP
+QSpinBox allows the user to choose a numeric value, either by clicking the up/down buttons to increase/decrease the value currently displayed, or by typing the value directly into the spin box.
+.PP
+Every time the value changes, QSpinBox emits the valueChanged() signal. The current value can be fetched with value() and set with setValue().
+.PP
+The spin box clamps the value within a numeric range, see QRangeControl for details. Clicking the up/down down buttons (or using the keyboard accelerators: Up-arrow and Down-arrow) will increase or decrease the current value in steps of size lineStep().
+.PP
+Most spin boxes are directional, but QSpinBox can also operate as a circular spin box, i.e. if the range is 0-99 and the current value is 99, clicking Up will give 0. Use setWrapping() to if you want circular behavior.
+.PP
+The displayed value can be appended and/or prepended with an arbitray string indicating for example the unit of measurement. See setPrefix() and setSuffix().
+.PP
+It is often desirable to give the user a special, often default, choice in addition to the range of numeric values. See setSpecialValueText() for how to do this with QSpinBox.
+.PP
+The default focus policy is StrongFocus.
+.PP
+QSpinBox can easily be subclassed to allow the user to input other things than a numeric value, as long as the allowed input can be mapped down to a range of integers. This can be done by overriding the virtual functions mapValueToText() and mapTextToValue() and setting another, suitable validator using setValidator().
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+See also: QScrollBar, QSlider and GUI Design Handbook: Spin Box
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QSpinBox::QSpinBox ( QWidget * parent = 0, const char * name = 0 )"
+Creates a spin box with the default QRangeControl range and step value.
+.PP
+See also: minValue(), maxValue(), setRange(), lineStep() and setSteps().
+.SH "QSpinBox::QSpinBox ( int minValue, int maxValue, int step = 1, QWidget * parent = 0, const char * name = 0 )"
+Creates a spin box with range from \fIminValue\fR to \fImaxValue\fR inclusive, with step value \fIstep.\fR The value is set to \fIminValue.\fR
+.PP
+See also: minValue(), maxValue(), setRange(), lineStep() and setSteps().
+.SH "QSpinBox::~QSpinBox ()"
+Deletes the spin box, freeing all memory and other resoures.
+.SH "QString QSpinBox::cleanText () const \fC[virtual]\fR"
+Returns a copy of the current text of the spin box with any prefix and/or suffix and white space at the start and end removed.
+.PP
+See also: text(), setPrefix() and setSuffix().
+.SH "QString QSpinBox::currentValueText () \fC[protected]\fR"
+Returns the full text of the current value, i.e. including any prefix, suffix or special-value text.
+.SH "QPushButton* QSpinBox::downButton () const \fC[protected]\fR"
+Returns a pointer to the embedded 'down' button.
+.SH "QLineEdit* QSpinBox::editor () const \fC[protected]\fR"
+Returns a pointer to the embedded QLineEdit.
+.SH "void QSpinBox::enabledChange ( bool ) \fC[virtual protected]\fR"
+Reimplemented for internal purposes.
+.PP
+Reimplemented from QWidget.
+.SH "bool QSpinBox::eventFilter ( QObject * obj, QEvent * ev ) \fC[virtual protected]\fR"
+Intercepts and handles those events coming to the embedded QLineEdit which have special meaning for the QSpinBox.
+.PP
+Reimplemented from QObject.
+.SH "void QSpinBox::fontChange ( const QFont & ) \fC[virtual protected]\fR"
+Reimplemented for internal purposes.
+.PP
+Reimplemented from QWidget.
+.SH "void QSpinBox::interpretText () \fC[virtual protected]\fR"
+Called after the user has manually edited the contents of the spin box. Interprets the text using mapTextToValue(), and calls setValue() if successful.
+.SH "int QSpinBox::mapTextToValue ( bool * ok ) \fC[virtual protected]\fR"
+This virtual function is used by the spin box whenever it needs to interpret the text entered by the user as a value. The default implementation tries to interpret it as an integer in the standard way, and returns the integer value.
+.PP
+Override this function in in a subclass if you want a specialized spin box, handling something else than integers. It should call text() (or cleanText() ) and return the value corresponding to that text. If the text does not represent a legal value (uninterpretable), the bool pointed to by \fIok\fR should be set to FALSE.
+.PP
+This function need not be concerned with special-value text, the QSpinBox handles that automatically.
+.PP
+See also: interpretText() and mapValueToText().
+.SH "QString QSpinBox::mapValueToText ( int v ) \fC[virtual protected]\fR"
+This virtual function is used by the spin box whenever it needs to display value \fIv.\fR The default implementation returns a string containing \fIv\fR printed in the standard way.
+.PP
+Override this function in in a subclass if you want a specialized spin box, handling something else than integers. This function need not be concerned with prefix or suffix or special-value text, the QSpinBox handles that automatically.
+.PP
+See also: updateDisplay() and mapTextToValue().
+.SH "void QSpinBox::paletteChange ( const QPalette & ) \fC[virtual protected]\fR"
+Reimplemented for internal purposes.
+.PP
+Reimplemented from QWidget.
+.SH "const char* QSpinBox::prefix () const \fC[virtual]\fR"
+Returns the currently set prefix, or 0 if no prefix is currently set.
+.PP
+See also: setPrefix(), setSuffix() and suffix().
+.SH "void QSpinBox::rangeChange () \fC[virtual protected]\fR"
+This method gets called by QRangeControl whenever the range has changed. It adjusts the default validator and updates the display.
+.SH "void QSpinBox::resizeEvent ( QResizeEvent * ) \fC[virtual protected]\fR"
+Handles resize events for the spin box.
+.PP
+Reimplemented from QWidget.
+.SH "void QSpinBox::setPrefix ( const char * text ) \fC[virtual slot]\fR"
+Sets the prefix to \fItext.\fR The prefix is prepended to the start of the displayed value. Typical use is to indicate the unit of measurement to the user.
+.PP
+To turn off the prefix display, call this function with 0 or an empty string as parameter. The default is no prefix.
+.PP
+See also: prefix(), setSuffix() and suffix().
+.SH "void QSpinBox::setSpecialValueText ( const char * text )"
+Sets the special-value text to \fItext.\fR If set, the spin box will display this text instead of a numeric value whenever the current value is equal to minVal(). Typically used for indicating that this choice has a special (default) meaning.
+.PP
+For example, if you use a spin box for letting the user choose margin width in a print dialog, and your application is able to automatically choose a good margin width, you can set up the spin box like this:
+.PP
+.nf
+.br
+    QSpinBox marginBox( -1, 20, 1, parent, "marginBox" );
+.br
+    marginBox->setSuffix( " mm" );
+.br
+    marginBox->setSpecialValueText( "Auto" );
+.fi
+.PP
+The user will then be able to choose a margin width from 0-20 millimeters, or select "Auto" to leave it to the application to choose. Your code must then interpret the spin box value of -1 as the user requesting automatic margin width.
+.PP
+Neither prefix nor suffix, if set, are added to the special-value text when displayed.
+.PP
+To turn off the special-value text display, call this function with 0 or an empty string as parameter. The default is no special-value text, i.e. the numeric value is shown as usual.
+.PP
+See also: specialValueText().
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH "void QSpinBox::setSuffix ( const char * text ) \fC[virtual slot]\fR"
+Sets the suffix to \fItext.\fR The suffix is appended to the end of the displayed value. Typical use is to indicate the unit of measurement to the user.
+.PP
+To turn off the suffix display, call this function with 0 or an empty string as parameter. The default is no suffix.
+.PP
+See also: suffix(), setPrefix() and prefix().
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH "void QSpinBox::setValidator ( QValidator * v )"
+Sets the validator to \fIv.\fR The default is to use a suitable QIntValidator.
+.SH "void QSpinBox::setValue ( int value ) \fC[virtual slot]\fR"
+Sets the current value of the spin box to \fIvalue.\fR This is QRangeControl::setValue() made available as a slot.
+.SH "void QSpinBox::setWrapping ( bool on )"
+Setting wrapping to TRUE will allow the value to be stepped from the highest value to the lowest, and vice versa. By default, wrapping is turned off.
+.PP
+See also: wrapping(), minValue(), maxValue() and setRange().
+.SH "QSize QSpinBox::sizeHint () const \fC[virtual]\fR"
+Returns a good-looking size for the spin box.
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.PP
+Reimplemented from QWidget.
+.SH "const char* QSpinBox::specialValueText () const"
+Returns the currently special-value text, or 0 if no special-value text is currently set.
+.PP
+See also: setSpecialValueText().
+.SH "void QSpinBox::stepDown () \fC[virtual slot]\fR"
+Decreases the current value one step, wrapping as necessary. This is the same as clicking on the pointing-down button, and can be used for e.g. keyboard accelerators.
+.PP
+See also: stepUp(), subtractLine(), lineStep(), setSteps(), setValue() and value().
+.SH "void QSpinBox::stepUp () \fC[virtual slot]\fR"
+Increases the current value one step, wrapping as necessary. This is the same as clicking on the pointing-up button, and can be used for e.g. keyboard accelerators.
+.PP
+See also: stepDown(), addLine(), lineStep(), setSteps(), setValue() and value().
+.SH "void QSpinBox::styleChange ( GUIStyle ) \fC[virtual protected]\fR"
+Reimplemented for internal purposes.
+.PP
+Reimplemented from QWidget.
+.SH "const char* QSpinBox::suffix () const \fC[virtual]\fR"
+Returns the currently set suffix, or 0 if no suffix is currently set.
+.PP
+See also: setSuffix(), setPrefix() and suffix().
+.SH "const char * QSpinBox::text () const"
+Returns the current text of the spin box.
+.PP
+See also: value().
+.SH "void QSpinBox::textChanged () \fC[protected slot]\fR"
+This slot gets called whenever the user edits the text of the spin box.
+.SH "QPushButton* QSpinBox::upButton () const \fC[protected]\fR"
+Returns a pointer to the embedded 'up' button.
+.SH "void QSpinBox::updateDisplay () \fC[virtual protected]\fR"
+Updates the contents of the embedded QLineEdit to reflect current value, using mapValueToText(). Also enables/disables the push buttons accordingly.
+.PP
+See also: mapValueToText().
+.SH "void QSpinBox::valueChange () \fC[virtual protected]\fR"
+This method gets called by QRangeControl whenever the value has changed. Updates the display and emits the valueChanged() signals.
+.SH "void QSpinBox::valueChanged ( const char * valueText ) \fC[signal]\fR"
+This signal is emitted whenever the valueChanged( int ) signal is emitted, i.e. every time the value of the spin box changes (whatever the cause - by setValue(), by a keyboard accelerator, by mouse clicks etc.).
+.PP
+The string pointed to by \fIvalueText\fR is the same string that is displayed in the edit field of the spin box.
+.PP
+See also: value().
+.SH "void QSpinBox::valueChanged ( int value ) \fC[signal]\fR"
+This signal is emitted every time the value of the spin box changes (whatever the cause - by setValue(), by a keyboard accelerator, by mouse clicks etc.).
+.PP
+Note that it is emitted \fIevery\fR time, not just for the "final" step - if the user clicks 'up' three times, this signal is emitted three times.
+.PP
+See also: value().
+.SH "bool QSpinBox::wrapping () const"
+Returns the current setWrapping() value.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qspinbox.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

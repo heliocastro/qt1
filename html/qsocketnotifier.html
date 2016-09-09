@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QSocketNotifier Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QSocketNotifier Class Reference</h1><br clear="all">
+<p>
+The QSocketNotifer class provides support for socket callbacks.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qsocketnotifier-h.html">qsocketnotifier.h</a>&gt;</code>
+<p>
+Inherits <a href="qobject.html">QObject</a>.
+<p><a href="qsocketnotifier-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qsocketnotifier.html#a0"><strong>QSocketNotifier</strong></a> ( int socket, Type, QObject * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qsocketnotifier.html#a1"><strong>~QSocketNotifier</strong></a> () </span>
+<li><span class="fn">int <a href="qsocketnotifier.html#a2"><strong>socket</strong></a> () const</span>
+<li><span class="fn">Type <a href="qsocketnotifier.html#a3"><strong>type</strong></a> () const</span>
+<li><span class="fn">bool <a href="qsocketnotifier.html#a4"><strong>isEnabled</strong></a> () const</span>
+<li><span class="fn">void <a href="qsocketnotifier.html#a5"><strong>setEnabled</strong></a> ( bool ) </span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qsocketnotifier.html#a6"><strong>activated</strong></a> ( int socket ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual bool <a href="qsocketnotifier.html#a7"><strong>event</strong></a> ( QEvent * ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QSocketNotifer class provides support for socket callbacks.
+<p>
+This class makes it possible to write e.g. asynchronous TCP/IP
+socket-based code in Qt.  Using synchronous socket operations blocks
+the program, which is clearly not acceptable for an event-based GUI
+program.
+<p>Once you have opened a non-blocking socket (either for TCP, UDP, a
+unix-domain socket, or any other protocol family your operating
+system supports), you can create a socket notifier to monitor the
+socket.  Then connect the <a href="qsocketnotifier.html#a6">activated</a>() signal to the slot you want to
+be called when a socket event occurs.
+<p>There are three types of socket notifiers (read, write and exception)
+and you must specify one of these in the constructor.
+<p>The type specifies when the activated() signal is to be emitted:
+<ol>
+<li> <code>QSocketNotifier::Read:</code> There is data to be read (socket read event).
+<li> <code>QSocketNotifier::Write:</code> Data can be written (socket write event).
+<li> <code>QSocketNofifier::Exception:</code> An exception has ocurred (socket
+exception event).  We recommend against using this.
+</ol>
+<p>For example, if you need to monitor both reads and writes for the same
+socket, you must create two socket notifiers.
+<p>Example:
+<pre>    int sockfd;                                 // socket identifier
+    struct sockaddr_in sa;                      // should contain host address
+    sockfd = socket( AF_INET, SOCK_STREAM, 0 ); // create TCP socket
+    // make the socket non-blocking here, usually using fcntl( O_NONBLOCK )
+    ::connect( sockfd, (struct sockaddr*)&amp;sa,   // connect to host
+               sizeof(sa) );                    //   NOT QObject::connect()!
+    <a href="qsocketnotifier.html">QSocketNotifier</a> *sn;
+    sn = new <a href="qsocketnotifier.html">QSocketNotifier</a>( sockfd, QSocketNotifier::Read, parent );
+    <a href="qobject.html#f2">QObject::connect</a>( sn, SIGNAL(activated(int)),
+                      myObject, SLOT(dataReceived()) );
+</pre>
+<p>The optional <em>parent</em> argument can be set to make the socket notifier a
+child of some widget and therefore be automatically destroyed when the
+widget is destroyed.
+<p>For read notifiers, it makes little sense to connect the activated()
+signal to more than one slot, because the data can be read from the
+socket only once.
+<p>Make sure to disable the socket notifier for write operations when
+there is nothing to be written, otherwise the notifier fires on
+every pass of the main event loop.  The socket notifier is enabled
+when it is created.
+<p>Also observe that if you do not read all the available data when the
+read notifier fires, it fires again and again.
+<p>If you disable the read notifier, your program may deadlock.  Avoid
+it if you do not know what you are doing.  (The same applies to
+exception notifiers if you have to use that, for instance if you <em>have</em> to use TCP urgent data.)
+<p>If you need a time-out for your sockets, you can use either
+<a href="qobject.html#b6">timer events</a> or the <a href="qtimer.html">QTimer</a> class.
+<p>Socket action is detected in the <a href="qapplication.html#c9">main event
+loop</a> of Qt.  The X11 version of Qt has has a single UNIX
+select() call which incorporates all socket notifiers and the X socket.
+<p>Note that on XFree86 for OS/2, select() only works in the thread in
+which main() is running, therefore you should use that thread for GUI
+operations.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QSocketNotifier::QSocketNotifier ( int socket, Type type, <a href="qobject.html">QObject</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs a socket notifier with a <em>parent</em> and a <em>name.</em>
+<p>Arguments:
+<ul>
+<li><em>socket</em> is the socket to be monitored.
+<li><em>type</em> specifies the socket operation to be detected;
+<code>QSocketNotifier::Read, QSocketNotifier::Write</code> or
+<code>QSocketNotifier::Exception.</code>
+</ul>
+The <em>parent</em> and <em>name</em> arguments are sent to the <a href="qobject.html">QObject</a> constructor.
+<p>The socket notifier is initially enabled.  It is generally advisable to
+explicitly enable or disable it, especially for write notifiers.
+<p>See also:  <a href="qsocketnotifier.html#a5">setEnabled</a>() and <a href="qsocketnotifier.html#a4">isEnabled</a>().
+<h3 class="fn"><a name="a1"></a>QSocketNotifier::~QSocketNotifier ()</h3>
+<p>Destroys the socket notifier.
+<h3 class="fn">void <a name="a6"></a>QSocketNotifier::activated ( int socket ) <code>[signal]</code></h3>
+<p>This signal is emitted under certain conditions, specified by the
+notifier <a href="qsocketnotifier.html#a3">type</a>:
+<ol>
+<li> <code>QSocketNotifier::Read:</code> There is data to be read (socket read event).
+<li> <code>QSocketNotifier::Write:</code> Data can be written (socket write event).
+<li> <code>QSocketNofifier::Exception:</code> An exception has ocurred (socket
+exception event).
+</ol>
+<p>The <em>socket</em> argument is the <a href="qsocketnotifier.html#a2">socket</a> identifier.
+<p>See also:  <a href="qsocketnotifier.html#a3">type</a>() and <a href="qsocketnotifier.html#a2">socket</a>().
+<h3 class="fn">bool <a name="a7"></a>QSocketNotifier::event ( <a href="qevent.html">QEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles events for the socket notifier object.
+<p>Emits the <a href="qsocketnotifier.html#a6">activated</a>() signal when a <code>Event_SockAct</code> is received.
+<p>Reimplemented from <a href="qobject.html#a2">QObject.</a>
+<h3 class="fn">bool <a name="a4"></a>QSocketNotifier::isEnabled () const</h3>
+<p>Returns TRUE if the notifier is enabled, or FALSE if it is disabled.
+<p>See also:  <a href="qsocketnotifier.html#a5">setEnabled</a>().
+<h3 class="fn">void <a name="a5"></a>QSocketNotifier::setEnabled ( bool enable )</h3>
+<p>Enables the notifier if <em>enable</em> is TRUE, or disables it if <em>enable</em> is
+FALSE.
+<p>The notifier is by default enabled.
+<p>If the notifier is enabled, it emits the <a href="qsocketnotifier.html#a6">activated</a>() signal whenever a
+socket event corresponding to its <a href="qsocketnotifier.html#a3">type</a> occurs.  If
+it is disabled, it ignores socket events (the same effect as not creating
+the socket notifier).
+<p>Disable the socket notifier for writes if there is nothing to be
+written, otherwise your program hogs the CPU.
+<p>See also:  <a href="qsocketnotifier.html#a4">isEnabled</a>() and <a href="qsocketnotifier.html#a6">activated</a>().
+<h3 class="fn">int <a name="a2"></a>QSocketNotifier::socket () const</h3>
+<p>Returns the socket identifier specified to the constructor.
+<p>See also:  <a href="qsocketnotifier.html#a3">type</a>().
+<h3 class="fn">Type <a name="a3"></a>QSocketNotifier::type () const</h3>
+<p>Returns the socket event type specified to the constructor;
+<code>QSocketNotifier::Read, QSocketNotifier::Write</code> or
+<code>QSocketNotifier::Exception.</code>
+<p>See also:  <a href="qsocketnotifier.html#a2">socket</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qsocketnotifier.h: 1998/08/21
+<li>qsocketnotifier.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,755 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QString Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QString Class Reference</h1><br clear="all">
+<p>
+The QString class provides an abstraction of the classic C zero-terminated char array (<var>char*</var>).
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qstring-h.html">qstring.h</a>&gt;</code>
+<p>
+Inherits <a href="qbytearray.html">QByteArray</a>.
+<p><a href="qstring-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qstring.html#b3"><strong>QString</strong></a> () </span>
+<li><span class="fn"><a href="qstring.html#b4"><strong>QString</strong></a> ( int size ) </span>
+<li><span class="fn"><a href="qstring.html#b5"><strong>QString</strong></a> ( const QString &amp; s ) </span>
+<li><span class="fn"><a href="qstring.html#b6"><strong>QString</strong></a> ( const char * str ) </span>
+<li><span class="fn"><a href="qstring.html#b7"><strong>QString</strong></a> ( const char * str, uint maxlen ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#b8"><strong>operator=</strong></a> ( const QString &amp; s ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#b9"><strong>operator=</strong></a> ( const char * str ) </span>
+<li><span class="fn">bool <a href="qstring.html#c0"><strong>isNull</strong></a> () const</span>
+<li><span class="fn">bool <a href="qstring.html#c1"><strong>isEmpty</strong></a> () const</span>
+<li><span class="fn">uint <a href="qstring.html#c2"><strong>length</strong></a> () const</span>
+<li><span class="fn">bool <a href="qstring.html#c3"><strong>resize</strong></a> ( uint newlen ) </span>
+<li><span class="fn">bool <a href="qstring.html#c4"><strong>truncate</strong></a> ( uint pos ) </span>
+<li><span class="fn">bool <a href="qstring.html#c5"><strong>fill</strong></a> ( char c, int len = -1 ) </span>
+<li><span class="fn">QString <a href="qstring.html#c6"><strong>copy</strong></a> () const</span>
+<li><span class="fn">QString&amp; <a href="qstring.html#c7"><strong>sprintf</strong></a> ( const char * format, ... ) </span>
+<li><span class="fn">int <a href="qstring.html#c8"><strong>find</strong></a> ( char c, int index=0, bool cs=TRUE ) const</span>
+<li><span class="fn">int <a href="qstring.html#c9"><strong>find</strong></a> ( const char * str, int index=0, bool cs=TRUE ) const</span>
+<li><span class="fn">int <a href="qstring.html#a0"><strong>find</strong></a> ( const QRegExp &amp;, int index=0 ) const</span>
+<li><span class="fn">int <a href="qstring.html#d0"><strong>findRev</strong></a> ( char c, int index=-1, bool cs=TRUE ) const</span>
+<li><span class="fn">int <a href="qstring.html#d1"><strong>findRev</strong></a> ( const char * str, int index=-1, bool cs=TRUE ) const</span>
+<li><span class="fn">int <a href="qstring.html#a1"><strong>findRev</strong></a> ( const QRegExp &amp;, int index=-1 ) const</span>
+<li><span class="fn">int <a href="qstring.html#d2"><strong>contains</strong></a> ( char c, bool cs=TRUE ) const</span>
+<li><span class="fn">int <a href="qstring.html#d3"><strong>contains</strong></a> ( const char * str, bool cs=TRUE ) const</span>
+<li><span class="fn">int <a href="qstring.html#a2"><strong>contains</strong></a> ( const QRegExp &amp; ) const</span>
+<li><span class="fn">QString <a href="qstring.html#d4"><strong>left</strong></a> ( uint len ) const</span>
+<li><span class="fn">QString <a href="qstring.html#d5"><strong>right</strong></a> ( uint len ) const</span>
+<li><span class="fn">QString <a href="qstring.html#d6"><strong>mid</strong></a> ( uint index, uint len ) const</span>
+<li><span class="fn">QString <a href="qstring.html#d7"><strong>leftJustify</strong></a> ( uint width, char fill=' ', bool trunc=FALSE ) const</span>
+<li><span class="fn">QString <a href="qstring.html#d8"><strong>rightJustify</strong></a> ( uint width, char fill=' ', bool trunc=FALSE ) const</span>
+<li><span class="fn">QString <a href="qstring.html#d9"><strong>lower</strong></a> () const</span>
+<li><span class="fn">QString <a href="qstring.html#e0"><strong>upper</strong></a> () const</span>
+<li><span class="fn">QString <a href="qstring.html#e1"><strong>stripWhiteSpace</strong></a> () const</span>
+<li><span class="fn">QString <a href="qstring.html#e2"><strong>simplifyWhiteSpace</strong></a> () const</span>
+<li><span class="fn">QString&amp; <a href="qstring.html#e3"><strong>insert</strong></a> ( uint index, const char * ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#e4"><strong>insert</strong></a> ( uint index, char ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#e5"><strong>append</strong></a> ( const char * ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#e6"><strong>prepend</strong></a> ( const char * ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#e7"><strong>remove</strong></a> ( uint index, uint len ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#e8"><strong>replace</strong></a> ( uint index, uint len, const char * ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#a3"><strong>replace</strong></a> ( const QRegExp &amp;, const char * ) </span>
+<li><span class="fn">short <a href="qstring.html#e9"><strong>toShort</strong></a> ( bool * ok=0 ) const</span>
+<li><span class="fn">ushort <a href="qstring.html#f0"><strong>toUShort</strong></a> ( bool * ok=0 ) const</span>
+<li><span class="fn">int <a href="qstring.html#f1"><strong>toInt</strong></a> ( bool * ok=0 ) const</span>
+<li><span class="fn">uint <a href="qstring.html#f2"><strong>toUInt</strong></a> ( bool * ok=0 ) const</span>
+<li><span class="fn">long <a href="qstring.html#f3"><strong>toLong</strong></a> ( bool * ok=0 ) const</span>
+<li><span class="fn">ulong <a href="qstring.html#f4"><strong>toULong</strong></a> ( bool * ok=0 ) const</span>
+<li><span class="fn">float <a href="qstring.html#f5"><strong>toFloat</strong></a> ( bool * ok=0 ) const</span>
+<li><span class="fn">double <a href="qstring.html#f6"><strong>toDouble</strong></a> ( bool * ok=0 ) const</span>
+<li><span class="fn">QString&amp; <a href="qstring.html#f7"><strong>setStr</strong></a> ( const char * s ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#f8"><strong>setNum</strong></a> ( short ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#f9"><strong>setNum</strong></a> ( ushort ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#g0"><strong>setNum</strong></a> ( int ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#g1"><strong>setNum</strong></a> ( uint ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#g2"><strong>setNum</strong></a> ( long ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#g3"><strong>setNum</strong></a> ( ulong ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#g4"><strong>setNum</strong></a> ( float, char f='g', int prec=6 ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#g5"><strong>setNum</strong></a> ( double, char f='g', int prec=6 ) </span>
+<li><span class="fn">bool <a href="qstring.html#g6"><strong>setExpand</strong></a> ( uint index, char c ) </span>
+<li><span class="fn">operator <a href=qstring.html#g9><strong>const char*</strong></a> ()const</span>
+<li><span class="fn">QString&amp; <a href="qstring.html#g7"><strong>operator+=</strong></a> ( const char * str ) </span>
+<li><span class="fn">QString&amp; <a href="qstring.html#g8"><strong>operator+=</strong></a> ( char c ) </span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>void * <a href="qstring.html#a4"><strong>memmove</strong></a> (void * dst, const void * src, uint len)
+<li>char * <a href="qstring.html#a5"><strong>qstrdup</strong></a> (const char * str)
+<li>uint <a href="qstring.html#a6"><strong>strlen</strong></a> (const char * str)
+<li>char * <a href="qstring.html#a7"><strong>strcpy</strong></a> (char * dst, const char * str)
+<li>char * <a href="qstring.html#a8"><strong>qstrncpy</strong></a> (char * dst, const char * src, uint len)
+<li>int <a href="qstring.html#a9"><strong>strcmp</strong></a> (const char * str1, const char * str2)
+<li>int <a href="qstring.html#b0"><strong>strncmp</strong></a> (const char * str1, const char * str2, uint len)
+<li>int <a href="qstring.html#b1"><strong>stricmp</strong></a> (const char * str1, const char * str2)
+<li>int <a href="qstring.html#b2"><strong>strnicmp</strong></a> (const char * str1, const char * str2, uint len)
+<li>QDataStream &amp; <a href="qstring.html#h1"><strong>operator&lt;&lt;</strong></a> (QDataStream &amp; s, const QString &amp; str)
+<li>QDataStream &amp; <a href="qstring.html#h2"><strong>operator&gt;&gt;</strong></a> (QDataStream &amp; s, QString &amp; str)
+<li>bool <a href="qstring.html#h3"><strong>operator==</strong></a> (const QString &amp; s1, const QString &amp; s2)
+<li>bool <a href="qstring.html#h4"><strong>operator==</strong></a> (const QString &amp; s1, const char * s2)
+<li>bool <a href="qstring.html#h5"><strong>operator==</strong></a> (const char * s1, const QString &amp; s2)
+<li>bool <a href="qstring.html#h6"><strong>operator!=</strong></a> (const QString &amp; s1, const QString &amp; s2)
+<li>bool <a href="qstring.html#h7"><strong>operator!=</strong></a> (const QString &amp; s1, const char * s2)
+<li>bool <a href="qstring.html#h8"><strong>operator!=</strong></a> (const char * s1, const QString &amp; s2)
+<li>bool <a href="qstring.html#h9"><strong>operator&lt;</strong></a> (const QString &amp; s1, const char * s2)
+<li>bool <a href="qstring.html#i0"><strong>operator&lt;</strong></a> (const char * s1, const QString &amp; s2)
+<li>bool <a href="qstring.html#i1"><strong>operator&lt;=</strong></a> (const QString &amp; s1, const char * s2)
+<li>bool <a href="qstring.html#i2"><strong>operator&lt;=</strong></a> (const char * s1, const QString &amp; s2)
+<li>bool <a href="qstring.html#i3"><strong>operator&gt;</strong></a> (const QString &amp; s1, const char * s2)
+<li>bool <a href="qstring.html#i4"><strong>operator&gt;</strong></a> (const char * s1, const QString &amp; s2)
+<li>bool <a href="qstring.html#i5"><strong>operator&gt;=</strong></a> (const QString &amp; s1, const char * s2)
+<li>bool <a href="qstring.html#i6"><strong>operator&gt;=</strong></a> (const char * s1, const QString &amp; s2)
+<li>QString <a href="qstring.html#i7"><strong>operator+</strong></a> (const QString &amp; s1, const QString &amp; s2)
+<li>QString <a href="qstring.html#i8"><strong>operator+</strong></a> (const QString &amp; s1, const char * s2)
+<li>QString <a href="qstring.html#i9"><strong>operator+</strong></a> (const char * s1, const QString &amp; s2)
+<li>QString <a href="qstring.html#j0"><strong>operator+</strong></a> (const QString &amp; s, char c)
+<li>QString <a href="qstring.html#j1"><strong>operator+</strong></a> (char c, const QString &amp; s)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QString class provides an abstraction of the classic C zero-terminated char array (<var>char*</var>).
+<p>
+QString inherits <a href="qbytearray.html">QByteArray</a>, which is defined as <a href="qarray.html">QArray</a>&lt;char&gt;.
+<p>Since QString is a QArray, it uses explicit
+<a href="shclass.html">sharing</a> with a reference count.
+<p>Note that for the QString methods that take a <var>const char *</var>
+parameter the results are undefined if the QString is not
+zero-terminated.  It is legal for the <var>const char *</var> parameter
+to be 0.
+<p>A QString that has not been assigned to anything is <em>null,</em> i.e. both
+the length and data pointer is 0. A QString that references the empty
+string ("", a single '\0' char) is <em>empty.</em>  Both null and empty
+QStrings are legal parameters to the methods. Assigning <var>const char
+* 0</var> to QString gives a null QString.
+<p>See also:  <a href="shclass.html">Shared classes</a>
+<p>Examples:
+ <a href="table-table-cpp.html#QString">table/table.cpp</a>
+ <a href="dclock-dclock-cpp.html#QString">dclock/dclock.cpp</a>
+ <a href="grapher-grapher-cpp.html#QString">grapher/grapher.cpp</a>
+ <a href="forever-forever-cpp.html#QString">forever/forever.cpp</a>
+ <a href="dirview-dirview-cpp.html#QString">dirview/dirview.cpp</a>
+ <a href="desktop-desktop-cpp.html#QString">desktop/desktop.cpp</a>
+ <a href="tooltip-tooltip-cpp.html#QString">tooltip/tooltip.cpp</a>
+ <a href="drawdemo-drawdemo-cpp.html#QString">drawdemo/drawdemo.cpp</a>
+ <a href="movies-main-cpp.html#QString">movies/main.cpp</a>
+ <a href="picture-picture-cpp.html#QString">picture/picture.cpp</a>
+ <a href="xform-xform-cpp.html#QString">xform/xform.cpp</a>
+ <a href="application-application-cpp.html#QString">application/application.cpp</a>
+ <a href="pref-pref-cpp.html#QString">pref/pref.cpp</a>
+ <a href="progress-progress-cpp.html#QString">progress/progress.cpp</a>
+ <a href="layout-layout-cpp.html#QString">layout/layout.cpp</a>
+ <a href="qmag-qmag-cpp.html#QString">qmag/qmag.cpp</a>
+ <a href="showimg-showimg-cpp.html#QString">showimg/showimg.cpp</a>
+ <a href="biff-biff-cpp.html#QString">biff/biff.cpp</a>
+ <a href="widgets-widgets-cpp.html#QString">widgets/widgets.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="b3"></a>QString::QString ()</h3>
+<p>Constructs a null string.
+<p>See also:  <a href="qstring.html#c0">isNull</a>().
+<h3 class="fn"><a name="b5"></a>QString::QString ( const QString &amp; s )</h3>
+<p>Constructs a shallow copy <em>s.</em>
+<p>See also:  <a href="qbytearray.html#c0">assign</a>().
+<h3 class="fn"><a name="b6"></a>QString::QString ( const char * str )</h3>
+<p>Constructs a string that is a deep copy of <em>str.</em>
+<p>If <em>str</em> is 0 a null string is created.
+<p>See also:  <a href="qstring.html#c0">isNull</a>().
+<h3 class="fn"><a name="b7"></a>QString::QString ( const char * str, uint maxlen )</h3>
+<p>Constructs a string that is a deep copy of <em>str,</em> that is no more
+than <em>maxlen</em> bytes long including the '\0'-terminator.
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> str("helloworld",6); // Assigns "hello" to str.
+</pre>
+<p>If <em>str</em> contains a 0 byte within the first <em>maxlen</em> bytes, the
+resulting QString will be terminated by the 0.  If <em>str</em> is 0 a
+null string is created.
+<p>See also:  <a href="qstring.html#c0">isNull</a>().
+<h3 class="fn"><a name="b4"></a>QString::QString ( int size )</h3>
+<p>Constructs a string with room for <em>size</em> characters, including the
+'\0'-terminator.  Makes a null string if <em>size</em> == 0.
+<p>If <em>size</em> &gt; 0, then the first and last characters in the string are
+initialized to '\0'.  All other characters are uninitialized.
+<p>See also:  <a href="qstring.html#c3">resize</a>() and <a href="qstring.html#c0">isNull</a>().
+<h3 class="fn"><a name="g9"></a>QString::operator const char * () const</h3>
+<p>Returns the string data.
+<h3 class="fn">QString&amp; <a name="e5"></a>QString::append ( const char * str )</h3>
+<p>Appends <em>str</em> to the string and returns a reference to the string.
+Equivalent to <a href="qstring.html#g7">operator+=</a>().
+<p>Examples:
+ <a href="dirview-dirview-cpp.html#append">dirview/dirview.cpp</a>
+<h3 class="fn">int <a name="d2"></a>QString::contains ( char c, bool cs=TRUE ) const</h3>
+<p>Returns the number of times the character <em>c</em> occurs in the string.
+<p>The match is case sensitive if <em>cs</em> is TRUE, or case insensitive if <em>cs</em>
+if FALSE.
+<h3 class="fn">int <a name="a2"></a>QString::contains ( const <a href="qregexp.html">QRegExp</a> &amp; rx ) const</h3>
+<p>Counts the number of overlapping occurrences of <em>rx</em> in the string.
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s = "banana and panama";
+    <a href="qregexp.html">QRegExp</a> r = QRegExp("a[nm]a", TRUE, FALSE);
+    s.<a href="qstring.html#a2">contains</a>( r );                            // 4 matches
+</pre>
+<p>See also:  <a href="qstring.html#a0">find</a>() and <a href="qstring.html#a1">findRev</a>().
+<h3 class="fn">int <a name="d3"></a>QString::contains ( const char * str, bool cs=TRUE ) const</h3>
+<p>Returns the number of times <em>str</em> occurs in the string.
+<p>The match is case sensitive if <em>cs</em> is TRUE, or case insensitive if <em>cs</em> if FALSE.
+<p>This function counts overlapping substrings, for example, "banana"
+contains two occurrences of "ana".
+<p>See also:  <a href="qstring.html#a1">findRev</a>().
+<h3 class="fn">QString <a name="c6"></a>QString::copy () const</h3>
+<p>Returns a deep copy of this string.
+<p>See also:  <a href="qbytearray.html#b8">detach</a>().
+<h3 class="fn">bool <a name="c5"></a>QString::fill ( char c, int len = -1 )</h3>
+<p>Fills the string with <em>len</em> bytes of value <em>c,</em> followed by a
+'\0'-terminator.
+<p>If <em>len</em> is negative, then the current string length is used.
+<p>Returns FALSE is <em>len</em> is nonnegative and there is no memory to
+resize the string, otherwise TRUE is returned.
+<h3 class="fn">int <a name="c8"></a>QString::find ( char c, int index=0, bool cs=TRUE ) const</h3>
+<p>Finds the first occurrence of the character <em>c,</em> starting at
+position <em>index.</em>
+<p>The search is case sensitive if <em>cs</em> is TRUE, or case insensitive if <em>cs</em> is FALSE.
+<p>Returns the position of <em>c,</em> or -1 if <em>c</em> could not be found.
+<h3 class="fn">int <a name="a0"></a>QString::find ( const <a href="qregexp.html">QRegExp</a> &amp; rx, int index=0 ) const</h3>
+<p>Finds the first occurrence of the regular expression <em>rx,</em> starting at
+position <em>index.</em>
+<p>Returns the position of the next match, or -1 if <em>rx</em> was not found.
+<h3 class="fn">int <a name="c9"></a>QString::find ( const char * str, int index=0, bool cs=TRUE ) const</h3>
+<p>Finds the first occurrence of the string <em>str,</em> starting at position
+<em>index.</em>
+<p>The search is case sensitive if <em>cs</em> is TRUE, or case insensitive if <em>cs</em> is FALSE.
+<p>Returns the position of <em>str,</em> or -1 if <em>str</em> could not be found.
+<h3 class="fn">int <a name="d0"></a>QString::findRev ( char c, int index=-1, bool cs=TRUE ) const</h3>
+<p>Finds the first occurrence of the character <em>c,</em> starting at
+position <em>index</em> and searching backwards.
+<p>The search is case sensitive if <em>cs</em> is TRUE, or case insensitive if <em>cs</em> is FALSE.
+<p>Returns the position of <em>c,</em> or -1 if <em>c</em> could not be found.
+<h3 class="fn">int <a name="a1"></a>QString::findRev ( const <a href="qregexp.html">QRegExp</a> &amp; rx, int index=-1 ) const</h3>
+<p>Finds the first occurrence of the regular expression <em>rx,</em> starting at
+position <em>index</em> and searching backwards.
+<p>The search will start from the end of the string if <em>index</em> is negative.
+<p>Returns the position of the next match (backwards), or -1 if <em>rx</em> was not
+found.
+<h3 class="fn">int <a name="d1"></a>QString::findRev ( const char * str, int index=-1, bool cs=TRUE ) const</h3>
+<p>Finds the first occurrence of the string <em>str,</em> starting at
+position <em>index</em> and searching backwards.
+<p>The search is case sensitive if <em>cs</em> is TRUE, or case insensitive if <em>cs</em> is FALSE.
+<p>Returns the position of <em>str,</em> or -1 if <em>str</em> could not be found.
+<h3 class="fn">QString &amp; <a name="e4"></a>QString::insert ( uint index, char c )</h3>
+<p>Insert <em>c</em> into the string at (before) position <em>index</em> and returns
+a reference to the string.
+<p>If <em>index</em> is beyond the end of the string, the string is extended with
+spaces (ASCII 32) to length <em>index</em> and <em>c</em> is then appended.
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s = "Yes";
+    s.<a href="qstring.html#e3">insert</a>( 3, '!');                          // s == "Yes!"
+</pre>
+<p>See also:  <a href="qstring.html#e7">remove</a>() and <a href="qstring.html#a3">replace</a>().
+<h3 class="fn">QString &amp; <a name="e3"></a>QString::insert ( uint index, const char * s )</h3>
+<p>Insert <em>s</em> into the string before position <em>index.</em>
+<p>If <em>index</em> is beyond the end of the string, the string is extended with
+spaces (ASCII 32) to length <em>index</em> and <em>s</em> is then appended.
+<p><pre>    <a href="qstring.html">QString</a> s = "I like fish";
+    s.<a href="qstring.html#e3">insert</a>( 2, "don't ");                     // s == "I don't like fish"
+    s = "x";
+    s.<a href="qstring.html#e3">insert</a>( 3, "yz" );                        // s == "x  yz"
+</pre>
+<p>Examples:
+ <a href="xform-xform-cpp.html#insert">xform/xform.cpp</a>
+<h3 class="fn">bool <a name="c1"></a>QString::isEmpty () const</h3>
+<p>Returns TRUE if the string is empty, i.e. if <a href="qstring.html#c2">length</a>() == 0.
+An empty string is not always a null string.
+<p>See example in <a href="qstring.html#c0">isNull</a>().
+<p>See also:  <a href="qstring.html#c0">isNull</a>(), <a href="qstring.html#c2">length</a>() and <a href="qbytearray.html#b2">size</a>().
+<p>Examples:
+ <a href="application-application-cpp.html#isEmpty">application/application.cpp</a>
+ <a href="qmag-qmag-cpp.html#isEmpty">qmag/qmag.cpp</a>
+ <a href="showimg-showimg-cpp.html#isEmpty">showimg/showimg.cpp</a>
+<h3 class="fn">bool <a name="c0"></a>QString::isNull () const</h3>
+<p>Returns TRUE if the string is null, i.e. if <a href="qbytearray.html#b0">data</a>() == 0.
+A null string is also an empty string.
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> a;          // a.<a href="qbytearray.html#b0">data</a>() == 0,  a.<a href="qbytearray.html#b2">size</a>() == 0, a.<a href="qstring.html#c2">length</a>() == 0
+    <a href="qstring.html">QString</a> b == "";    // b.<a href="qbytearray.html#b0">data</a>() == "", b.<a href="qbytearray.html#b2">size</a>() == 1, b.<a href="qstring.html#c2">length</a>() == 0
+    a.<a href="qstring.html#c0">isNull</a>();         // TRUE, because a.<a href="qbytearray.html#b0">data</a>() == 0
+    a.<a href="qstring.html#c1">isEmpty</a>();        // TRUE, because a.<a href="qstring.html#c2">length</a>() == 0
+    b.<a href="qstring.html#c0">isNull</a>();         // FALSE, because b.<a href="qbytearray.html#b0">data</a>() == ""
+    b.<a href="qstring.html#c1">isEmpty</a>();        // TRUE, because b.<a href="qstring.html#c2">length</a>() == 0
+</pre>
+<p>See also:  <a href="qstring.html#c1">isEmpty</a>(), <a href="qstring.html#c2">length</a>() and <a href="qbytearray.html#b2">size</a>().
+<h3 class="fn">QString <a name="d4"></a>QString::left ( uint len ) const</h3>
+<p>Returns a substring that contains the <em>len</em> leftmost characters
+of the string.
+<p>The whole string is returned if <em>len</em> exceeds the length of the string.
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s = "Pineapple";
+    <a href="qstring.html">QString</a> t = s.<a href="qstring.html#d4">left</a>( 4 );                    // t == "Pine"
+</pre>
+<p>See also:  <a href="qstring.html#d5">right</a>() and <a href="qstring.html#d6">mid</a>().
+<h3 class="fn">QString <a name="d7"></a>QString::leftJustify ( uint width, char fill=' ', bool truncate=FALSE ) const</h3>
+<p>Returns a string of length <em>width</em> (plus '\0') that contains this
+string and padded by the <em>fill</em> character.
+<p>If the length of the string exceeds <em>width</em> and <em>truncate</em> is FALSE,
+then the returned string is a copy of the string.
+If the length of the string exceeds <em>width</em> and <em>truncate</em> is TRUE,
+then the returned string is a <a href="qstring.html#d4">left</a>(<em>width).</em>
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s("apple");
+    <a href="qstring.html">QString</a> t = s.<a href="qstring.html#d7">leftJustify</a>(8, '.');          // t == "apple..."
+</pre>
+<p>See also:  <a href="qstring.html#d8">rightJustify</a>().
+<h3 class="fn">uint <a name="c2"></a>QString::length () const</h3>
+<p>Returns the length of the string, excluding the '\0'-terminator.
+Equivalent to calling <code><a href="qstring.html#a6">strlen</a>(<a href="qbytearray.html#b0">data</a>()).</code>
+<p>Null strings and empty strings have zero length.
+<p>See also:  <a href="qbytearray.html#b2">size</a>(), <a href="qstring.html#c0">isNull</a>() and <a href="qstring.html#c1">isEmpty</a>().
+<p>Examples:
+ <a href="showimg-showimg-cpp.html#length">showimg/showimg.cpp</a>
+<h3 class="fn">QString <a name="d9"></a>QString::lower () const</h3>
+<p>Returns a new string that is the string converted to lower case.
+<p>Presently it only handles 7-bit ASCII, or whatever tolower()
+handles (if $LC_CTYPE is set, most UNIX systems do the Right Thing).
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s("TeX");
+    <a href="qstring.html">QString</a> t = s.<a href="qstring.html#d9">lower</a>();                      // t == "tex"
+</pre>
+<p>See also:  <a href="qstring.html#e0">upper</a>().
+<h3 class="fn">QString <a name="d6"></a>QString::mid ( uint index, uint len ) const</h3>
+<p>Returns a substring that contains the <em>len</em> characters of this
+string, starting at position <em>index.</em>
+<p>Returns a null string if the string is empty or <em>index</em> is out
+of range.  Returns the whole string from <em>index</em> if <em>index+len</em> exceeds
+the length of the string.
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s = "Two pineapples";
+    <a href="qstring.html">QString</a> t = s.<a href="qstring.html#d6">mid</a>( 4, 4 );                  // t == "pine"
+</pre>
+<p>See also:  <a href="qstring.html#d4">left</a>() and <a href="qstring.html#d5">right</a>().
+<p>Examples:
+ <a href="qmag-qmag-cpp.html#mid">qmag/qmag.cpp</a>
+<h3 class="fn">QString &amp; <a name="g8"></a>QString::operator+= ( char c )</h3>
+<p>Appends <em>c</em> to the string and returns a reference to the string.
+<h3 class="fn">QString&amp; <a name="g7"></a>QString::operator+= ( const char * str )</h3>
+<p>Appends <em>str</em> to the string and returns a reference to the string.
+<h3 class="fn">QString &amp; <a name="b8"></a>QString::operator= ( const QString &amp; s )</h3>
+<p>Assigns a shallow copy of <em>s</em> to this string and returns a reference to
+this string.
+<h3 class="fn">QString &amp; <a name="b9"></a>QString::operator= ( const char * str )</h3>
+<p>Assigns a deep copy of <em>str</em> to this string and returns a reference to
+this string.
+<p>If <em>str</em> is 0 a null string is created.
+<p>See also:  <a href="qstring.html#c0">isNull</a>().
+<h3 class="fn">QString &amp; <a name="e6"></a>QString::prepend ( const char * s )</h3>
+<p>Prepend \s to the string. Equivalent to <a href="qstring.html#e3">insert</a>(0,s).
+<p>See also:  <a href="qstring.html#e3">insert</a>().
+<h3 class="fn">QString &amp; <a name="e7"></a>QString::remove ( uint index, uint len )</h3>
+<p>Removes <em>len</em> characters starting at position <em>index</em> from the
+string and returns a reference to the string.
+<p>If <em>index</em> is too big, nothing happens.  If <em>index</em> is valid, but
+<em>len</em> is too large, the rest of the string is removed.
+<p><pre>    <a href="qstring.html">QString</a> s = "Montreal";
+    s.<a href="qstring.html#e7">remove</a>( 1, 4 );
+    // s == "Meal"
+</pre>
+<p>See also:  <a href="qstring.html#e3">insert</a>() and <a href="qstring.html#a3">replace</a>().
+<h3 class="fn">QString &amp; <a name="a3"></a>QString::replace ( const <a href="qregexp.html">QRegExp</a> &amp; rx, const char * str )</h3>
+<p>Replaces every occurrence of <em>rx</em> in the string with <em>str.</em>
+Returns a reference to the string.
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s = "banana";
+    s.<a href="qstring.html#a3">replace</a>( <a href="qregexp.html">QRegExp</a>("a.*a"), "" );           // becomes "b"
+
+    <a href="qstring.html">QString</a> s = "banana";
+    s.<a href="qstring.html#a3">replace</a>( <a href="qregexp.html">QRegExp</a>("^[bn]a"), " " );        // becomes " nana"
+
+    <a href="qstring.html">QString</a> s = "banana";
+    s.<a href="qstring.html#a3">replace</a>( <a href="qregexp.html">QRegExp</a>("^[bn]a"), "" );         // NOTE! becomes ""
+</pre>
+<p>Examples:
+ <a href="qmag-qmag-cpp.html#replace">qmag/qmag.cpp</a>
+<h3 class="fn">QString &amp; <a name="e8"></a>QString::replace ( uint index, uint len, const char * s )</h3>
+<p>Replaces <em>len</em> characters starting at position <em>index</em> from the
+string with <em>s,</em> and returns a reference to the string.
+<p>If <em>index</em> is too big, nothing is deleted and <em>s</em> is inserted at the
+end of the string.  If <em>index</em> is valid, but <em>len</em> is too large, <em>str</em> replaces the rest of the string.
+<p><pre>    <a href="qstring.html">QString</a> s = "Say yes!";
+    s.<a href="qstring.html#a3">replace</a>( 4, 3, "NO" );                    // s == "Say NO!"
+</pre>
+<p>See also:  <a href="qstring.html#e3">insert</a>() and <a href="qstring.html#e7">remove</a>().
+<h3 class="fn">bool <a name="c3"></a>QString::resize ( uint len )</h3>
+<p>Extends or shrinks the string to <em>len</em> bytes, including the
+'\0'-terminator.
+<p>A \0-terminator is set at position <code>len - 1</code> unless
+<code>len == 0</code>.
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s = "resize this string";
+    s.<a href="qstring.html#c3">resize</a>( 7 );                              // s == "resize"
+</pre>
+<p>See also:  <a href="qstring.html#c4">truncate</a>().
+<h3 class="fn">QString <a name="d5"></a>QString::right ( uint len ) const</h3>
+<p>Returns a substring that contains the <em>len</em> rightmost characters
+of the string.
+<p>The whole string is returned if <em>len</em> exceeds the length of the string.
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s = "Pineapple";
+    <a href="qstring.html">QString</a> t = s.<a href="qstring.html#d5">right</a>( 5 );                   // t == "apple"
+</pre>
+<p>See also:  <a href="qstring.html#d4">left</a>() and <a href="qstring.html#d6">mid</a>().
+<h3 class="fn">QString <a name="d8"></a>QString::rightJustify ( uint width, char fill=' ', bool truncate=FALSE ) const</h3>
+<p>Returns a string of length <em>width</em> (plus '\0') that contains pad
+characters followed by the string.
+<p>If the length of the string exceeds <em>width</em> and <em>truncate</em> is FALSE,
+then the returned string is a copy of the string.
+If the length of the string exceeds <em>width</em> and <em>truncate</em> is TRUE,
+then the returned string is a <a href="qstring.html#d5">right</a>(<em>width).</em>
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s("pie");
+    <a href="qstring.html">QString</a> t = s.<a href="qstring.html#d8">rightJustify</a>(8, '.');         // t == ".....pie"
+</pre>
+<p>See also:  <a href="qstring.html#d7">leftJustify</a>().
+<h3 class="fn">bool <a name="g6"></a>QString::setExpand ( uint index, char c )</h3>
+<p>Sets the character at position <em>index</em> to <em>c</em> and expands the
+string if necessary, filling with spaces.
+<p>Returns FALSE if this <em>index</em> was out of range and the string could
+not be expanded, otherwise TRUE.
+<h3 class="fn">QString &amp; <a name="g5"></a>QString::setNum ( double n, char f='g', int prec=6 )</h3>
+<p>Sets the string to the printed value of <em>n.</em>
+<p>Arguments:
+<ul>
+<li><em>f</em> is the format specifier: 'f', 'F', 'e', 'E', 'g', 'G' (same
+as <a href="qstring.html#c7">sprintf</a>()).
+<li><em>prec</em> is the precision.
+</ul>
+Returns a reference to the string.
+<h3 class="fn">QString &amp; <a name="g4"></a>QString::setNum ( float n, char f='g', int prec=6 )</h3>
+<p>Sets the string to the printed value of <em>n.</em>
+<p>Arguments:
+<ul>
+<li><em>f</em> is the format specifier: 'f', 'F', 'e', 'E', 'g', 'G' (same
+as <a href="qstring.html#c7">sprintf</a>()).
+<li><em>prec</em> is the precision.
+</ul>
+Returns a reference to the string.
+<h3 class="fn">QString &amp; <a name="g0"></a>QString::setNum ( int n )</h3>
+<p>Sets the string to the printed value of <em>n</em> and returns a reference
+to the string.
+<h3 class="fn">QString &amp; <a name="g2"></a>QString::setNum ( long n )</h3>
+<p>Sets the string to the printed value of <em>n</em> and returns a
+reference to the string.
+<h3 class="fn">QString &amp; <a name="f8"></a>QString::setNum ( short n )</h3>
+<p>Sets the string to the printed value of <em>n</em> and returns a reference
+to the string.
+<h3 class="fn">QString &amp; <a name="g1"></a>QString::setNum ( uint n )</h3>
+<p>Sets the string to the printed unsigned value of <em>n</em> and returns a
+reference to the string.
+<h3 class="fn">QString &amp; <a name="g3"></a>QString::setNum ( ulong n )</h3>
+<p>Sets the string to the printed unsigned value of <em>n</em> and
+returns a reference to the string.
+<h3 class="fn">QString &amp; <a name="f9"></a>QString::setNum ( ushort n )</h3>
+<p>Sets the string to the printed unsigned value of <em>n</em> and returns a
+reference to the string.
+<h3 class="fn">QString &amp; <a name="f7"></a>QString::setStr ( const char * str )</h3>
+<p>Makes a deep copy of <em>str.</em>
+Returns a reference to the string.
+<h3 class="fn">QString <a name="e2"></a>QString::simplifyWhiteSpace () const</h3>
+<p>Returns a new string that has white space removed from the start and the end,
+plus any sequence of internal white space replaced with a single space
+(ASCII 32).
+<p>White space means any ASCII code 9, 10, 11, 12, 13 or 32.
+<p><pre>    <a href="qstring.html">QString</a> s = "  lots\t of\nwhite    space ";
+    <a href="qstring.html">QString</a> t = s.<a href="qstring.html#e2">simplifyWhiteSpace</a>();         // t == "lots of white space"
+</pre>
+<p>See also:  <a href="qstring.html#e1">stripWhiteSpace</a>().
+<h3 class="fn">QString &amp; <a name="c7"></a>QString::sprintf ( const char * format, ... )</h3>
+<p>Implemented as a call to the native vsprintf() (see your C-library
+manual).
+<p>If your string is shorter than 256 characters, this sprintf() calls
+<a href="qstring.html#c3">resize</a>(256) to decrease the chance of memory corruption.  The string is
+resized back to its natural length before sprintf() returns.
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s;
+    s.<a href="qstring.html#c7">sprintf</a>( "%d - %s", 1, "first" );         // result &lt; 256 chars
+
+    <a href="qstring.html">QString</a> big( 25000 );                       // very long string
+    big.<a href="qstring.html#c7">sprintf</a>( "%d - %s", 2, longString );    // result &lt; 25000 chars
+</pre>
+<p><strong>Warning:</strong> All vsprintf() implementations will write past the end of
+the target string (*this) if the format specification and arguments
+happen to be longer than the target string, and some will also fail
+if the target string is longer than some arbitrary implementation
+limit.
+<p>Giving user-supplied arguments to sprintf() is begging for trouble.
+Sooner or later someone <em>will</em> paste a 3000-character line into
+your application.
+<p>Examples:
+ <a href="dclock-dclock-cpp.html#sprintf">dclock/dclock.cpp</a>
+ <a href="forever-forever-cpp.html#sprintf">forever/forever.cpp</a>
+ <a href="tooltip-tooltip-cpp.html#sprintf">tooltip/tooltip.cpp</a>
+ <a href="drawdemo-drawdemo-cpp.html#sprintf">drawdemo/drawdemo.cpp</a>
+ <a href="movies-main-cpp.html#sprintf">movies/main.cpp</a>
+ <a href="picture-picture-cpp.html#sprintf">picture/picture.cpp</a>
+ <a href="xform-xform-cpp.html#sprintf">xform/xform.cpp</a>
+ <a href="application-application-cpp.html#sprintf">application/application.cpp</a>
+ <a href="pref-pref-cpp.html#sprintf">pref/pref.cpp</a>
+ <a href="progress-progress-cpp.html#sprintf">progress/progress.cpp</a>
+ <a href="layout-layout-cpp.html#sprintf">layout/layout.cpp</a>
+ <a href="qmag-qmag-cpp.html#sprintf">qmag/qmag.cpp</a>
+ <a href="showimg-showimg-cpp.html#sprintf">showimg/showimg.cpp</a>
+ <a href="widgets-widgets-cpp.html#sprintf">widgets/widgets.cpp</a>
+<h3 class="fn">QString <a name="e1"></a>QString::stripWhiteSpace () const</h3>
+<p>Returns a new string that has white space removed from the start and the end.
+<p>White space means any ASCII code 9, 10, 11, 12, 13 or 32.
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s = " space ";
+    <a href="qstring.html">QString</a> t = s.<a href="qstring.html#e1">stripWhiteSpace</a>();            // t == "space"
+</pre>
+<p>See also:  <a href="qstring.html#e2">simplifyWhiteSpace</a>().
+<h3 class="fn">double <a name="f6"></a>QString::toDouble ( bool * ok=0 ) const</h3>
+<p>Returns the string converted to a <code>double</code> value.
+<p>If <em>ok</em> is non-null, <em>*ok</em> is set to TRUE if there are no conceivable
+errors, and FALSE if the string is not a number at all, or if it has
+trailing garbage.
+<h3 class="fn">float <a name="f5"></a>QString::toFloat ( bool * ok=0 ) const</h3>
+<p>Returns the string converted to a <code>float</code> value.
+<p>If <em>ok</em> is non-null, <em>*ok</em> is set to TRUE if there are no
+conceivable errors, and FALSE if the string is not a number at all,
+or if it has trailing garbage.
+<h3 class="fn">int <a name="f1"></a>QString::toInt ( bool * ok=0 ) const</h3>
+<p>Returns the string converted to a <code>int</code> value.
+<p>If <em>ok</em> is non-null, <em>*ok</em> is set to TRUE if there are no
+conceivable errors, and FALSE if the string is not a number at all,
+or if it has trailing garbage.
+<h3 class="fn">long <a name="f3"></a>QString::toLong ( bool * ok=0 ) const</h3>
+<p>Returns the string converted to a <code>long</code> value.
+<p>If <em>ok</em> is non-null, <em>*ok</em> is set to TRUE if there are no
+conceivable errors, and FALSE if the string is not a number at all, or if
+it has trailing garbage.
+<h3 class="fn">short <a name="e9"></a>QString::toShort ( bool * ok=0 ) const</h3>
+<p>Returns the string converted to a <code>short</code> value.
+<p>If <em>ok</em> is non-null, <em>*ok</em> is set to TRUE if there are no
+conceivable errors, and FALSE if the string is not a number at all, or if
+it has trailing garbage.
+<h3 class="fn">uint <a name="f2"></a>QString::toUInt ( bool * ok=0 ) const</h3>
+<p>Returns the string converted to an <code>unsigned int</code> value.
+<p>If <em>ok</em> is non-null, <em>*ok</em> is set to TRUE if there are no
+conceivable errors, and FALSE if the string is not a number at all,
+or if it has trailing garbage.
+<h3 class="fn">ulong <a name="f4"></a>QString::toULong ( bool * ok=0 ) const</h3>
+<p>Returns the string converted to an <code>unsigned long</code>
+value.
+<p>If <em>ok</em> is non-null, <em>*ok</em> is set to TRUE if there are no
+conceivable errors, and FALSE if the string is not a number at all,
+or if it has trailing garbage.
+<h3 class="fn">ushort <a name="f0"></a>QString::toUShort ( bool * ok=0 ) const</h3>
+<p>Returns the string converted to an <code>unsigned short</code> value.
+<p>If <em>ok</em> is non-null, <em>*ok</em> is set to TRUE if there are no
+conceivable errors, and FALSE if the string is not a number at all, or if
+it has trailing garbage.
+<h3 class="fn">bool <a name="c4"></a>QString::truncate ( uint pos )</h3>
+<p>Truncates the string at position <em>pos.</em>
+<p>Equivalent to calling <code><a href="qstring.html#c3">resize</a>(pos+1).</code>
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s = "truncate this string";
+    s.<a href="qstring.html#c4">truncate</a>( 5 );                            // s == "trunc"
+</pre>
+<p>See also:  <a href="qstring.html#c3">resize</a>().
+<h3 class="fn">QString <a name="e0"></a>QString::upper () const</h3>
+<p>Returns a new string that is the string converted to upper case.
+<p>Presently it only handles 7-bit ASCII, or whatever toupper()
+handles (if $LC_CTYPE is set, most UNIX systems do the Right Thing).
+<p>Example:
+<pre>    <a href="qstring.html">QString</a> s("TeX");
+    <a href="qstring.html">QString</a> t = s.<a href="qstring.html#e0">upper</a>();                      // t == "TEX"
+</pre>
+<p>See also:  <a href="qstring.html#d9">lower</a>().
+<hr><h2>Related Functions</h2>
+<h3>void * <a name="a4"></a>memmove (void * dst, const void * src, uint len)</h3>
+<p>This function is normally part of the C library. Qt implements
+memmove() for platforms that do not have it.
+<p>memmove() copies <em>len</em> bytes from <em>src</em> into <em>dst.</em>  The data is
+copied correctly even if <em>src</em> and <em>dst</em> overlap.
+
+<h3>char * <a name="a5"></a>qstrdup (const char * str)</h3>
+<p>Returns a duplicate string.
+<p>Allocates space for a copy of <em>str</em> (using <code>new),</code> copies it, and returns
+a pointer to the copy.
+If <em>src</em> is null, it immediately returns 0.
+
+<h3>uint <a name="a6"></a>strlen (const char * str)</h3>
+<p>A safe strlen() function that overrides the one defined by the C library.
+The original strlen() function has been renamed cstrlen().
+<p>Returns the number of characters in <em>str,</em> or 0 if <em>str</em> is null.
+
+<h3>char * <a name="a7"></a>strcpy (char * dst, const char * str)</h3>
+<p>A safe strcpy() function that overrides the one defined by the C library.
+The original strcpy() function has been renamed cstrcpy().
+<p>Copies all characters (including \0) from <em>str</em> into <em>dst</em> and returns
+a pointer to <em>dst.</em>
+If <em>src</em> is null, it immediately returns 0.
+<p>See also:  <a href="qstring.html#a8">qstrncpy</a>().
+
+<h3>char * <a name="a8"></a>qstrncpy (char * dst, const char * src, uint len)</h3>
+<p>A safe strncpy() function.
+<p>Copies all characters up to <em>len</em> bytes from <em>str</em> into <em>dst</em> and returns
+a pointer to <em>dst.</em>  Guarantees that <em>dst</em> is \0-terminated.
+If <em>src</em> is null, it immediately returns 0.
+<p>See also:  <a href="qstring.html#a7">strcpy</a>().
+
+<h3>int <a name="a9"></a>strcmp (const char * str1, const char * str2)</h3>
+<p>A safe strcmp() function that overrides the one defined by the C library.
+The original strcmp() function has been renamed cstrcmp().
+<p>Compares <em>str1</em> and <em>str2.</em>  Returns a negative value if <em>str1</em>
+is less than <em>str2,</em> 0 if <em>str1</em> is equal to <em>str2</em> or a positive
+value if <em>str1</em> is greater than <em>str2.</em>
+<p>Special case I: Returns 0 if <em>str1</em> and <em>str2</em> are both null.
+<p>Special case II: Returns a random nonzero value if <em>str1</em> is null
+or <em>str2</em> is null (but not both).
+<p>See also:  <a href="qstring.html#b0">strncmp</a>(), <a href="qstring.html#b1">stricmp</a>() and <a href="qstring.html#b2">strnicmp</a>().
+<p>Examples:
+ <a href="desktop-desktop-cpp.html#strcmp">desktop/desktop.cpp</a>
+
+<h3>int <a name="b0"></a>strncmp (const char * str1, const char * str2, uint len)</h3>
+<p>A safe strncmp() function that overrides the one defined by the C library.
+The original strncmp() function has been renamed cstrncmp().
+<p>Compares <em>str1</em> and <em>str2</em> up to <em>len</em> bytes.
+<p>Returns a negative value if <em>str1</em> is less than <em>str2,</em> 0 if <em>str1</em>
+is equal to <em>str2</em> or a positive value if <em>str1</em> is greater than <em>str2.</em>
+<p>Special case I: Returns 0 if <em>str1</em> and <em>str2</em> are both null.
+<p>Special case II: Returns a random nonzero value if <em>str1</em> is null
+or <em>str2</em> is null (but not both).
+<p>See also:  <a href="qstring.html#a9">strcmp</a>(), <a href="qstring.html#b1">stricmp</a>() and <a href="qstring.html#b2">strnicmp</a>().
+
+<h3>int <a name="b1"></a>stricmp (const char * str1, const char * str2)</h3>
+<p>A safe stricmp() function that overrides the one defined by the C library,
+if the C library has one.
+<p>Compares <em>str1</em> and <em>str2</em> ignoring the case.
+<p>Returns a negative value if <em>str1</em> is less than <em>str2,</em> 0 if <em>str1</em>
+is equal to <em>str2</em> or a positive value if <em>str1</em> is greater than <em>str2.</em>
+<p>Special case I: Returns 0 if <em>str1</em> and <em>str2</em> are both null.
+<p>Special case II: Returns a random nonzero value if <em>str1</em> is null
+or <em>str2</em> is null (but not both).
+<p>See also:  <a href="qstring.html#a9">strcmp</a>(), <a href="qstring.html#b0">strncmp</a>() and <a href="qstring.html#b2">strnicmp</a>().
+
+<h3>int <a name="b2"></a>strnicmp (const char * str1, const char * str2, uint len)</h3>
+<p>A safe strnicmp() function that overrides the one defined by the C library,
+if the C library has one.
+<p>Compares <em>str1</em> and <em>str2</em> up to <em>len</em> bytes ignoring the case.
+<p>Returns a negative value if <em>str1</em> is less than <em>str2,</em> 0 if <em>str1</em>
+is equal to <em>str2</em> or a positive value if <em>str1</em> is greater than <em>str2.</em>
+<p>Special case I: Returns 0 if <em>str1</em> and <em>str2</em> are both null.
+<p>Special case II: Returns a random nonzero value if <em>str1</em> is null
+or <em>str2</em> is null (but not both).
+<p>See also:  <a href="qstring.html#a9">strcmp</a>(), <a href="qstring.html#b0">strncmp</a>() and <a href="qstring.html#b1">stricmp</a>().
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="h1"></a>operator&lt;&lt; (<a href="qdatastream.html">QDataStream</a> &amp; s, const QString &amp; str)</h3>
+<p>Writes a string to the stream.
+<p>Output format: [length (Q_UINT32) data...].
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="h2"></a>operator&gt;&gt; (<a href="qdatastream.html">QDataStream</a> &amp; s, QString &amp; str)</h3>
+<p>Reads a string from the stream.
+
+<h3>bool <a name="h3"></a>operator== (const QString &amp; s1, const QString &amp; s2)</h3>
+<p>Returns TRUE if the two strings are equal, or FALSE if they are different.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) == 0</code>
+
+<h3>bool <a name="h4"></a>operator== (const QString &amp; s1, const char * s2)</h3>
+<p>Returns TRUE if the two strings are equal, or FALSE if they are different.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) == 0</code>
+
+<h3>bool <a name="h5"></a>operator== (const char * s1, const QString &amp; s2)</h3>
+<p>Returns TRUE if the two strings are equal, or FALSE if they are different.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) == 0</code>
+
+<h3>bool <a name="h6"></a>operator!= (const QString &amp; s1, const QString &amp; s2)</h3>
+<p>Returns TRUE if the two strings are different, or FALSE if they are equal.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) != 0</code>
+
+<h3>bool <a name="h7"></a>operator!= (const QString &amp; s1, const char * s2)</h3>
+<p>Returns TRUE if the two strings are different, or FALSE if they are equal.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) != 0</code>
+
+<h3>bool <a name="h8"></a>operator!= (const char * s1, const QString &amp; s2)</h3>
+<p>Returns TRUE if the two strings are different, or FALSE if they are equal.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) != 0</code>
+
+<h3>bool <a name="h9"></a>operator&lt; (const QString &amp; s1, const char * s2)</h3>
+<p>Returns TRUE if <em>s1</em> is alphabetically less than <em>s2,</em> otherwise FALSE.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) &lt; 0</code>
+
+<h3>bool <a name="i0"></a>operator&lt; (const char * s1, const QString &amp; s2)</h3>
+<p>Returns TRUE if <em>s1</em> is alphabetically less than <em>s2,</em> otherwise FALSE.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) &lt; 0</code>
+
+<h3>bool <a name="i1"></a>operator&lt;= (const QString &amp; s1, const char * s2)</h3>
+<p>Returns TRUE if <em>s1</em> is alphabetically less than or equal to <em>s2,</em>
+otherwise FALSE.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) &lt;= 0</code>
+
+<h3>bool <a name="i2"></a>operator&lt;= (const char * s1, const QString &amp; s2)</h3>
+<p>Returns TRUE if <em>s1</em> is alphabetically less than or equal to <em>s2,</em>
+otherwise FALSE.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) &lt;= 0</code>
+
+<h3>bool <a name="i3"></a>operator&gt; (const QString &amp; s1, const char * s2)</h3>
+<p>Returns TRUE if <em>s1</em> is alphabetically greater than <em>s2,</em> otherwise FALSE.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) &gt; 0</code>
+
+<h3>bool <a name="i4"></a>operator&gt; (const char * s1, const QString &amp; s2)</h3>
+<p>Returns TRUE if <em>s1</em> is alphabetically greater than <em>s2,</em> otherwise FALSE.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) &gt; 0</code>
+
+<h3>bool <a name="i5"></a>operator&gt;= (const QString &amp; s1, const char * s2)</h3>
+<p>Returns TRUE if <em>s1</em> is alphabetically greater than or equal to <em>s2,</em>
+otherwise FALSE.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) &gt;= 0</code>
+
+<h3>bool <a name="i6"></a>operator&gt;= (const char * s1, const QString &amp; s2)</h3>
+<p>Returns TRUE if <em>s1</em> is alphabetically greater than or equal to <em>s2,</em>
+otherwise FALSE.
+<p>Equivalent to <code><a href="qstring.html#a9">strcmp</a>(s1,s2) &gt;= 0</code>
+
+<h3>QString <a name="i7"></a>operator+ (const QString &amp; s1, const QString &amp; s2)</h3>
+<p>Returns the concatenated string of s1 and s2.
+
+<h3>QString <a name="i8"></a>operator+ (const QString &amp; s1, const char * s2)</h3>
+<p>Returns the concatenated string of s1 and s2.
+
+<h3>QString <a name="i9"></a>operator+ (const char * s1, const QString &amp; s2)</h3>
+<p>Returns the concatenated string of s1 and s2.
+
+<h3>QString <a name="j0"></a>operator+ (const QString &amp; s, char c)</h3>
+<p>Returns the concatenated string of s and c.
+
+<h3>QString <a name="j1"></a>operator+ (char c, const QString &amp; s)</h3>
+<p>Returns the concatenated string of c and s.
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qstring.h: 1999/02/17
+<li>qstring.cpp: 1998/09/15
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

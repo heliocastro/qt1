@@ -1,0 +1,5 @@
+The xform program demonstrates rotation/shearing of text and pixmaps.
+
+It was hacked together along the way to test the font and transform
+functionality: it is emphatically not an excercise in good design and
+programming.

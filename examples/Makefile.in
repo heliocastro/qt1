@@ -1,0 +1,66 @@
+# $Source: /local/lib/cvs/qt/examples/examples.t,v $
+#
+
+####### Tools
+
+TMAKE	=	tmake
+
+####### Directories
+
+SUBDIRS =	aclock \
+		application \
+		biff \
+		connect \
+		cursor \
+		dclock \
+		desktop \
+		dirview \
+		dragdrop \
+		drawdemo \
+		forever \
+		hello \
+		layout \
+		life \
+		menu \
+		movies \
+		picture \
+		pref \
+		progress \
+		qdir \
+		qmag \
+		qwerty \
+		scrollview \
+		showimg \
+		splitter \
+		table \
+		tetrix \
+		tictac \
+		timestmp \
+		tooltip \
+		validator \
+		widgets \
+		xform
+
+####### Targets
+
+all: $(SUBDIRS)
+
+showdirs:
+	@echo $(SUBDIRS)
+
+$(SUBDIRS): FORCE
+	cd $@; $(MAKE)
+
+galore:
+	for a in */* ; do [ -f $$a -a -x $$a ] && ( cd `dirname $$a` ; ../$$a & ) ; done
+
+tmake:
+	for i in $(SUBDIRS); do ( cd $$i ; $(TMAKE) $$i.pro -o Makefile ) ; done
+
+clean:
+	for i in $(SUBDIRS); do ( cd $$i ; $(MAKE) clean ) ; done
+
+Makefile: examples.t examples.pro
+	$(TMAKE) examples.pro -o Makefile
+
+FORCE:

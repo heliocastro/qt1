@@ -1,0 +1,72 @@
+.TH QImageConsumer 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QImageConsumer \- An abstraction used by QImageDecoder
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qasyncimageio.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "virtual void changed ( const QRect & )"
+.br
+.ti -1c
+.BI "virtual void end ()"
+.br
+.ti -1c
+.BI "virtual void frameDone ()"
+.br
+.ti -1c
+.BI "virtual void setLooping ( int )"
+.br
+.ti -1c
+.BI "virtual void setFramePeriod ( int )"
+.br
+.ti -1c
+.BI "virtual void setSize ( int, int )"
+.br
+.in -1c
+.SH DESCRIPTION
+An abstraction used by QImageDecoder.
+.PP
+A QImageConsumer consumes information about changes to the QImage maintained by a QImageDecoder. It represents the a view of the image which the decoder produces.
+.PP
+See also: QImageDecoder.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "void QImageConsumer::changed ( const QRect & ) \fC[virtual]\fR"
+Called when the given area of the image has changed.
+.SH "void QImageConsumer::end () \fC[virtual]\fR"
+Called when all data of all frames has been decoded and revealed as changed().
+.SH "void QImageConsumer::frameDone () \fC[virtual]\fR"
+Called when a frame of an animated image has ended and been revealed as changed(). The decoder will not make any further changes to the image until the next call to QImageFormat::decode().
+.SH "void QImageConsumer::setFramePeriod ( int milliseconds ) \fC[virtual]\fR"
+Notes that the frame about to be decoded should not be displayed until the given number of \fImilliseconds\fR after the time that this function is called. Of course, the image may not have been decoded by then, in which case the frame should not be displayed until it is complete. A value of -1 (the assumed default) indicates that the image should be diplayed even while it is only partially loaded.
+.SH "void QImageConsumer::setLooping ( int n ) \fC[virtual]\fR"
+Called to indicate that the sequence of frames in the image should be repeated \fIn\fR times, including the sequence during decoding.
+.TP
+0 = Forever
+.TP
+1 = Only display frames the first time through
+.TP
+2 = Repeat once after first pass through images
+.TP
+etc.
+.PP
+To make the QImageDecoder do this just delete it and pass the information to it again for decoding (setLooping() will be called again of course, but that can be ignored), or keep copies of the changed areas at the ends of frames.
+.SH "void QImageConsumer::setSize ( int, int ) \fC[virtual]\fR"
+This function is called as soon as the size of the image has
+been determined.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qimageconsumer.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

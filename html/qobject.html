@@ -1,0 +1,687 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QObject Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QObject Class Reference</h1><br clear="all">
+<p>
+The QObject class is the base class of all Qt objects that can deal with signals, slots and events.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qobject-h.html">qobject.h</a>&gt;</code>
+<p>Inherited by <a href="qaccel.html">QAccel</a>, <a href="qapplication.html">QApplication</a>, <a href="qclipboard.html">QClipboard</a>, <a href="qdatapump.html">QDataPump</a>, QDragManager, <a href="qdragobject.html">QDragObject</a>, <a href="qfileiconprovider.html">QFileIconProvider</a>, <a href="qgmanager.html">QGManager</a>, <a href="qlayout.html">QLayout</a>, <a href="qnpinstance.html">QNPInstance</a>, <a href="qsenderobject.html">QSenderObject</a>, <a href="qsignal.html">QSignal</a>, <a href="qsignalmapper.html">QSignalMapper</a>, <a href="qsocketnotifier.html">QSocketNotifier</a>, <a href="qtimer.html">QTimer</a>, <a href="qtooltipgroup.html">QToolTipGroup</a>, <a href="qvalidator.html">QValidator</a> and <a href="qwidget.html">QWidget</a>.
+<p><a href="qobject-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qobject.html#a0"><strong>QObject</strong></a> ( QObject * parent=0, const char * name=0 ) </span>
+<li><span class="fn">virtual <a href="qobject.html#a1"><strong>~QObject</strong></a> () </span>
+<li><span class="fn">virtual bool <a href="qobject.html#a2"><strong>event</strong></a> ( QEvent * ) </span>
+<li><span class="fn">virtual bool <a href="qobject.html#a3"><strong>eventFilter</strong></a> ( QObject *, QEvent * ) </span>
+<li><span class="fn">const char* <a href="qobject.html#a4"><strong>tr</strong></a> ( const char * ) const</span>
+<li><span class="fn">virtual QMetaObject* <a href="qobject.html#a5"><strong>metaObject</strong></a> () const</span>
+<li><span class="fn">virtual const char* <a href="qobject.html#a6"><strong>className</strong></a> () const</span>
+<li><span class="fn">bool <a href="qobject.html#a7"><strong>isA</strong></a> ( const char * ) const</span>
+<li><span class="fn">bool <a href="qobject.html#a8"><strong>inherits</strong></a> ( const char * ) const</span>
+<li><span class="fn">const char* <a href="qobject.html#a9"><strong>name</strong></a> () const</span>
+<li><span class="fn">const char* <a href="qobject.html#b0"><strong>name</strong></a> ( const char * defaultName ) const</span>
+<li><span class="fn">void <a href="qobject.html#b1"><strong>setName</strong></a> ( const char * name ) </span>
+<li><span class="fn">bool <a href="qobject.html#b2"><strong>isWidgetType</strong></a> () const</span>
+<li><span class="fn">bool <a href="qobject.html#b3"><strong>highPriority</strong></a> () const</span>
+<li><span class="fn">bool <a href="qobject.html#b4"><strong>signalsBlocked</strong></a> () const</span>
+<li><span class="fn">void <a href="qobject.html#b5"><strong>blockSignals</strong></a> ( bool b ) </span>
+<li><span class="fn">int <a href="qobject.html#b6"><strong>startTimer</strong></a> ( int interval ) </span>
+<li><span class="fn">void <a href="qobject.html#b7"><strong>killTimer</strong></a> ( int id ) </span>
+<li><span class="fn">void <a href="qobject.html#b8"><strong>killTimers</strong></a> () </span>
+<li><span class="fn">const QObjectList* <a href="qobject.html#b9"><strong>children</strong></a> () const</span>
+<li><span class="fn">QObjectList* <a href="qobject.html#c0"><strong>queryList</strong></a> ( const char * inheritsClass = 0, const char * objName = 0, bool regexpMatch = TRUE, bool recursiveSearch = TRUE ) </span>
+<li><span class="fn">void <a href="qobject.html#c1"><strong>insertChild</strong></a> ( QObject * ) </span>
+<li><span class="fn">void <a href="qobject.html#c2"><strong>removeChild</strong></a> ( QObject * ) </span>
+<li><span class="fn">void <a href="qobject.html#c3"><strong>installEventFilter</strong></a> ( const QObject * ) </span>
+<li><span class="fn">void <a href="qobject.html#c4"><strong>removeEventFilter</strong></a> ( const QObject * ) </span>
+<li><span class="fn">bool <a href="qobject.html#c6"><strong>connect</strong></a> ( const QObject * sender, const char * signal, const char * member ) const</span>
+<li><span class="fn">bool <a href="qobject.html#c8"><strong>disconnect</strong></a> ( const char * signal=0, const QObject * receiver=0, const char * member=0 ) </span>
+<li><span class="fn">bool <a href="qobject.html#c9"><strong>disconnect</strong></a> ( const QObject * receiver, const char * member=0 ) </span>
+<li><span class="fn">void <a href="qobject.html#d0"><strong>dumpObjectTree</strong></a> () </span>
+<li><span class="fn">void <a href="qobject.html#d1"><strong>dumpObjectInfo</strong></a> () </span>
+<li><span class="fn">QObject* <a href="qobject.html#d3"><strong>parent</strong></a> () const</span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qobject.html#d2"><strong>destroyed</strong></a> () </span>
+</ul>
+<h2>Static Public Members</h2>
+<ul>
+<li><span class="fn">bool <a href="qobject.html#f2"><strong>connect</strong></a> ( const QObject * sender, const char * signal, const QObject * receiver, const char * member ) </span>
+<li><span class="fn">bool <a href="qobject.html#f3"><strong>disconnect</strong></a> ( const QObject * sender, const char * signal, const QObject * receiver, const char * member ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">bool <a href="qobject.html#d4"><strong>activate_filters</strong></a> ( QEvent * ) </span>
+<li><span class="fn">QConnectionList* <a href="qobject.html#d5"><strong>receivers</strong></a> ( const char * signal ) const</span>
+<li><span class="fn">void <a href="qobject.html#d6"><strong>activate_signal</strong></a> ( const char * signal ) </span>
+<li><span class="fn">void <a href="qobject.html#d7"><strong>activate_signal</strong></a> ( const char * signal, short ) </span>
+<li><span class="fn">void <a href="qobject.html#d8"><strong>activate_signal</strong></a> ( const char * signal, int ) </span>
+<li><span class="fn">void <a href="qobject.html#d9"><strong>activate_signal</strong></a> ( const char * signal, long ) </span>
+<li><span class="fn">void <a href="qobject.html#e0"><strong>activate_signal</strong></a> ( const char * signal, const char * ) </span>
+<li><span class="fn">const QObject* <a href="qobject.html#e1"><strong>sender</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qobject.html#e2"><strong>initMetaObject</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qobject.html#e3"><strong>timerEvent</strong></a> ( QTimerEvent * ) </span>
+<li><span class="fn">virtual void <a href="qobject.html#e4"><strong>connectNotify</strong></a> ( const char * signal ) </span>
+<li><span class="fn">virtual void <a href="qobject.html#e5"><strong>disconnectNotify</strong></a> ( const char * signal ) </span>
+<li><span class="fn">virtual bool <a href="qobject.html#e6"><strong>checkConnectArgs</strong></a> ( const char * signal, const QObject * receiver, const char * member ) </span>
+</ul>
+<h2>Static Protected Members</h2>
+<ul>
+<li><span class="fn">void <a href="qobject.html#f1"><strong>badSuperclassWarning</strong></a> ( const char * className, const char * superclassName ) </span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>void * <a href="qobject.html#f0"><strong>qt_find_obj_child</strong></a> (QObject * parent, const char * type, const char * name)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QObject class is the base class of all Qt objects that can deal with signals, slots and events.
+<p>
+Qt provides a very powerful mechanism for seamless object
+communication; <a href="metaobjects.html">signal/slot
+connections</a>. The signal/slot mechanism is an advanced way
+of making traditional callback routines.
+<p>Example:
+<pre>    //
+    // The Mandelbrot class uses a QTimer to calculate the mandelbrot
+    // set one scanline at a time without blocking the CPU.
+    // It inherits QObject to use signals and slots.
+    // Calling start() starts the calculation. The done() signal is
+    // emitted when it has finished.
+    // Note that this example is not complete. Feel free to complete it.
+    //
+
+    class Mandelbrot : public QObject
+    {
+        Q_OBJECT                                // required for signals/slots
+    public:
+        Mandelbrot( <a href="qobject.html">QObject</a> *parent=0, const char *name );
+        ...
+    public slots:
+        void    start();
+    signals:
+        void    done();
+    private slots:
+        void    calculate();
+    private:
+        <a href="qtimer.html">QTimer</a>  timer;
+        ...
+    };
+
+    //
+    // Constructs and initializes a Mandelbrot object.
+    //
+
+    Mandelbrot::Mandelbrot( <a href="qobject.html">QObject</a> *parent=0, const char *name )
+        : <a href="qobject.html">QObject</a>( parent, name )
+    {
+        <a href="qobject.html#f2">connect</a>( &amp;timer, SIGNAL(timeout()), SLOT(calculate()) );
+        ...
+    }
+
+    //
+    // Starts the calculation task. The internal calculate() slot
+    // will be activated every 10 milliseconds.
+    //
+
+    void Mandelbrot::start()
+    {
+        if ( !timer.<a href="qtimer.html#a2">isActive</a>() )                // not already running
+            timer.<a href="qtimer.html#a3">start</a>( 10 );                  // timeout every 10 ms
+    }
+
+    //
+    // Calculates one scanline at a time.
+    // Emits the done() signal when finished.
+    //
+
+    void Mandelbrot::calculate()
+    {
+        ...                     // perform the calculation for a scanline
+        if ( finished ) {       // no more scanlines
+           timer.<a href="qtimer.html#a5">stop</a>();
+           emit done();
+        }
+    }
+</pre>
+<p>When an object has changed in some way that might be interesting for
+the outside world, it emits a signal to tell whoever is listening.
+All slots that are connected to this signal will be activated
+(called).  It is even possible to connect a signal directly to
+another signal.  (This will emit the second signal immediately
+whenever the first is emitted.)
+<p>There is no limitation on how many slots that can be connected to
+a signal.  The slots will be activated in the order they were connected
+to the signal.
+<p>Notice that the <code>Q_OBJECT</code> macro is mandatory for any object that
+implement signals or slots.  You also need to run the <a href="metaobjects.html">moc program (Meta Object Compiler)</a> on the
+source file.
+<p>The signal/slot mechanism allows objects to easily reused, because
+the object that emits a signal does not need to know what the
+signals are connected to.
+<p>All Qt widgets inherit QObject and use signals and slots.  A
+<a href="qscrollbar.html">QScrollBar</a>, for example, emits <a href="qscrollbar.html#b0">valueChanged()</a> whenever the scroll bar value changes.
+<p>Meta objects are useful for doing more than connecting signals to slots.
+They also allow the programmer to obtain information about the class to
+which an object is instantiated from (see <a href="qobject.html#a7">isA</a>() and <a href="qobject.html#a8">inherits</a>()) or to
+produce a list of child objects that inherit a particular class
+(see <a href="qobject.html#c0">queryList</a>()).
+<p>Examples:
+ <a href="widgets-widgets-cpp.html#QObject">widgets/widgets.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QObject::QObject ( QObject * parent=0, const char * name=0 )</h3>
+<p>Constructs an object with the parent object <em>parent</em> and a <em>name.</em>
+<p>The parent of an object may be viewed as the object's owner. For
+instance, a <a href="qdialog.html">dialog box</a> is the parent of the
+"ok" and "cancel" buttons inside it.
+<p>The destructor of a parent object destroys all child objects.
+<p>Setting <em>parent</em> to 0 constructs an object with no parent.
+If the object is a widget, it will become a top-level window.
+<p>The object name is a text that can be used to identify this QObject.
+It is not very useful in the current version of Qt, but it will become
+increasingly important in the future.
+<p>The <a href="qobject.html#c0">queryList</a>() function searches the object tree for objects that
+matches a particular object name.
+<p>See also:  <a href="qobject.html#d3">parent</a>(), <a href="qobject.html#a9">name</a>() and <a href="qobject.html#c0">queryList</a>().
+<h3 class="fn"><a name="a1"></a>QObject::~QObject () <code>[virtual]</code></h3>
+<p>Destroys the object and all its children objects.
+<p>All signals to and from the object are automatically disconnected.<p><strong>Warning:</strong> <em>All</em> child objects are deleted.  If any of these objects are
+on the stack or global, your program will sooner or later crash.  We do
+not recommend holding pointers to child objects from outside the parent.
+If you still do, the <a href="qobject.html#d2">QObject::destroyed</a>() signal gives you an
+opportunity to detect when an object is destroyed.
+<h3 class="fn">bool <a name="d4"></a>QObject::activate_filters ( <a href="qevent.html">QEvent</a> * e ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">void <a name="d6"></a>QObject::activate_signal ( const char * signal ) <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">void <a name="e0"></a>QObject::activate_signal ( const char * signal, const char * ) <code>[protected]</code></h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<h3 class="fn">void <a name="d8"></a>QObject::activate_signal ( const char * signal, int ) <code>[protected]</code></h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<h3 class="fn">void <a name="d9"></a>QObject::activate_signal ( const char * signal, long ) <code>[protected]</code></h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<h3 class="fn">void <a name="d7"></a>QObject::activate_signal ( const char * signal, short ) <code>[protected]</code></h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<h3 class="fn">void <a name="f1"></a>QObject::badSuperclassWarning ( const char * className, const char * superclassName ) <code>[static protected]</code></h3>
+<p>Internal function, called from <a href="qobject.html#e2">initMetaObject</a>(). Used to emit a warning
+when a class containing the macro Q_OBJECT inherits from a class that
+does not contain it.
+<h3 class="fn">void <a name="b5"></a>QObject::blockSignals ( bool block )</h3>
+<p>Blocks signals if <em>block</em> is TRUE, or unblocks signals if <em>block</em> is FALSE.
+<p>Emitted signals disappear into hyperspace if signals are blocked.
+<p>Examples:
+ <a href="xform-xform-cpp.html#blockSignals">xform/xform.cpp</a>
+<h3 class="fn">bool <a name="e6"></a>QObject::checkConnectArgs ( const char * signal, const QObject * receiver, const char * member ) <code>[virtual protected]</code></h3>
+<p>Returns TRUE if the <em>signal</em> and the <em>member</em> arguments are compatible,
+otherwise FALSE.<p><strong>Warning:</strong> We recommend that you do not reimplement this function but use the default
+implementation.
+<h3 class="fn">const QObjectList * <a name="b9"></a>QObject::children () const</h3>
+<p>Returns a list of child objects, or 0 if this object has no children.
+<p>The QObjectList class is defined in the qobjcoll.h header file.
+<p>The latest child added is the <a href="qlist.html#d2">first</a> object
+in the list and the first child is added is the <a href="qlist.html#d3">last</a> object in the list.
+<p>Note that the list order might change when <a href="qwidget.html">widget</a>
+children are <a href="qwidget.html#k9">raised</a> or <a href="qwidget.html#l0">lowered</a>. A widget that is raised becomes the
+last object in the list.  A widget that is lowered becomes the first
+object in the list.
+<p>See also:  <a href="qobject.html#c0">queryList</a>(), <a href="qobject.html#d3">parent</a>(), <a href="qobject.html#c1">insertChild</a>() and <a href="qobject.html#c2">removeChild</a>().
+<h3 class="fn">const char * <a name="a6"></a>QObject::className () const <code>[virtual]</code></h3>
+<p>Returns the class name of this object.
+<p>This function is generated by the <a href="metaobjects.html">Meta Object
+Compiler.</a><p><strong>Warning:</strong> This function will return an invalid name if the class
+definition lacks the <code>Q_OBJECT</code> macro.
+<p>See also:  <a href="qobject.html#a9">name</a>(), <a href="qobject.html#a8">inherits</a>(), <a href="qobject.html#a7">isA</a>() and <a href="qobject.html#b2">isWidgetType</a>().
+<p>Examples:
+ <a href="widgets-widgets-cpp.html#className">widgets/widgets.cpp</a>
+<h3 class="fn">bool <a name="f2"></a>QObject::connect ( const QObject * sender, const char * signal, const QObject * receiver, const char * member ) <code>[static]</code></h3>
+<p>Connects <em>signal</em> from the <em>sender</em> object to <em>member</em> in object <em>receiver.</em>
+<p>You must use the SIGNAL() and SLOT() macros when specifying the <em>signal</em>
+and the <em>member.</em>
+<p>Example:
+<pre>    <a href="qlabel.html">QLabel</a>     *label  = new <a href="qlabel.html">QLabel</a>;
+    <a href="qscrollbar.html">QScrollBar</a> *scroll = new <a href="qscrollbar.html">QScrollBar</a>;
+    <a href="qobject.html#f2">QObject::connect</a>( scroll, SIGNAL(valueChanged(int)),
+                      label,  SLOT(setNum(int)) );
+</pre>
+<p>This example connects the scroll bar's <a href="qscrollbar.html#b0">valueChanged()</a> signal to the label's <a href="qlabel.html#b9">setNum()</a> slot. It makes the label always display the current
+scroll bar value.
+<p>A signal can even be connected to another signal, i.e. <em>member</em> is
+a SIGNAL().
+<p><pre>    class MyWidget : public QWidget
+    {
+    public:
+        MyWidget();
+    ...
+    signals:
+        void aSignal(int);
+    ...
+    private:
+    ...
+        <a href="qpushbutton.html">QPushButton</a> *aButton;
+    };
+
+    MyWidget::MyWidget()
+    {
+        aButton = new <a href="qpushbutton.html">QPushButton</a>( this );
+        <a href="qobject.html#f2">connect</a>( aButton, SIGNAL(clicked()), SIGNAL(aSignal()) );
+    }
+</pre>
+<p>In its constructor, MyWidget creates a private button and connects the
+<a href="qbutton.html#c0">clicked()</a> signal to relay clicked() to
+the outside world. You can achieve the same effect by connecting the
+clicked() signal to a private slot and emitting aSignal() in this slot,
+but that takes a few lines of extra code and is not quite as clear, of
+course.
+<p>A signal can be connected to many slots/signals. Many signals can be
+connected to one slot.
+<p>If a signal is connected to several slots, the slots are activated
+in arbitrary order when the signal is emitted.
+<p>See also:  <a href="qobject.html#f3">disconnect</a>().
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#connect">tictac/tictac.cpp</a>
+ <a href="grapher-grapher-cpp.html#connect">grapher/grapher.cpp</a>
+ <a href="drawdemo-drawdemo-cpp.html#connect">drawdemo/drawdemo.cpp</a>
+ <a href="hello-hello-cpp.html#connect">hello/hello.cpp</a>
+ <a href="movies-main-cpp.html#QObject::connect">movies/main.cpp</a>
+ <a href="xform-xform-cpp.html#connect">xform/xform.cpp</a>
+ <a href="aclock-aclock-cpp.html#connect">aclock/aclock.cpp</a>
+ <a href="menu-menu-cpp.html#connect">menu/menu.cpp</a>
+ <a href="pref-pref-cpp.html#connect">pref/pref.cpp</a>
+ <a href="qmag-qmag-cpp.html#connect">qmag/qmag.cpp</a>
+ <a href="showimg-showimg-cpp.html#connect">showimg/showimg.cpp</a>
+ <a href="widgets-widgets-cpp.html#connect">widgets/widgets.cpp</a>
+<h3 class="fn">bool <a name="c6"></a>QObject::connect ( const QObject * sender, const char * signal, const char * member ) const</h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<p>Connects <em>signal</em> from the <em>sender</em> object to <em>member</em> in this object.
+<p>Equivalent to: <code><a href="qobject.html#f2">QObject::connect</a>(sender, signal, this, member)</code>.
+<p>See also:  <a href="qobject.html#f3">disconnect</a>().
+<h3 class="fn">void <a name="e4"></a>QObject::connectNotify ( const char * signal ) <code>[virtual protected]</code></h3>
+<p>This virtual function is called when something has been connected to
+<em>signal</em> in this object.<p><strong>Warning:</strong> This function violates the object-oriented principle of modularity.
+However, it might be useful when you need to perform expensive
+initialization only if something is connected to a signal.
+<p>See also:  <a href="qobject.html#f2">connect</a>() and <a href="qobject.html#e5">disconnectNotify</a>().
+<p>Reimplemented in <a href="qclipboard.html#b1">QClipboard</a>.
+<h3 class="fn">void <a name="d2"></a>QObject::destroyed () <code>[signal]</code></h3>
+<p>This signal is emitted immediately before the object is destroyed.
+<p>All the objects's children are destroyed immediately after this signal
+is emitted.
+<p>Examples:
+ <a href="xform-xform-cpp.html#destroyed">xform/xform.cpp</a>
+<h3 class="fn">bool <a name="f3"></a>QObject::disconnect ( const QObject * sender, const char * signal, const QObject * receiver, const char * member ) <code>[static]</code></h3>
+<p>Disconnects <em>signal</em> in object <em>sender</em> from <em>member</em> in object <em>receiver.</em>
+<p>A signal-slot connection is removed when either of the objects
+involved are destroyed.
+<p>disconnect() is typically used in three ways, as the following examples
+show.
+<p><ol>
+<li> Disconnect everything connected to an object's signals:
+<pre>    disconnect( myObject );
+</pre>
+<p><li> Disconnect everything connected to a signal:
+<pre>    disconnect( myObject, SIGNAL(mySignal()) );
+</pre>
+<p><li> Disconnect a specific receiver.
+<pre>    disconnect( myObject, 0, myReceiver, 0 );
+</pre>
+<p></ol>
+<p>0 may be used as a wildcard in three of the four arguments, meaning
+"any signal", "any receiving object" or "any slot in the receiving
+object" respectively.
+<p>The <em>sender</em> has no default and may never be 0.  (You cannot
+disconnect signals from more than one object.)
+<p>If <em>signal</em> is 0, it disconnects <em>receiver</em> and <em>member</em> from any
+signal.  If not, only the specified signal is disconnected.
+<p>If <em>receiver</em> is 0, it disconnects anything connected to <em>signal.</em>
+If not, slots in objects other than <em>receiver</em> are not disconnected.
+<p>If <em>member</em> is 0, it disconnects anything that is connected to <em>receiver.</em>  If not, only slots named <em>member</em> will be disconnected,
+and all other slots are left alone.  The <em>member</em> must be 0 if <em>receiver</em> is left out, so you cannot disconnect a specifically-named
+slot on all objects.
+<p>See also:  <a href="qobject.html#f2">connect</a>().
+<h3 class="fn">bool <a name="c9"></a>QObject::disconnect ( const QObject * receiver, const char * member=0 )</h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<p>Disconnects all signals in this object from <em>member</em> of <em>receiver.</em>
+<p>A signal-slot connection is removed when either of the objects
+involved are destroyed.
+<h3 class="fn">bool <a name="c8"></a>QObject::disconnect ( const char * signal=0, const QObject * receiver=0, const char * member=0 )</h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<p>Disconnects <em>signal</em> from <em>member</em> of <em>receiver.</em>
+<p>A signal-slot connection is removed when either of the objects
+involved are destroyed.
+<h3 class="fn">void <a name="e5"></a>QObject::disconnectNotify ( const char * signal ) <code>[virtual protected]</code></h3>
+<p>This virtual function is called when something has been disconnected from
+<em>signal</em> in this object.<p><strong>Warning:</strong> This function violates the object-oriented principle of modularity.
+However, it might be useful for optimizing access to expensive resources.
+<p>See also:  <a href="qobject.html#f3">disconnect</a>() and <a href="qobject.html#e4">connectNotify</a>().
+<h3 class="fn">void <a name="d1"></a>QObject::dumpObjectInfo ()</h3>
+<p>Dumps information about signal connections etc. for this object to the
+debug output.
+<p>This function is useful for debugging.
+<h3 class="fn">void <a name="d0"></a>QObject::dumpObjectTree ()</h3>
+<p>Dumps a tree of children to the debug output.
+<p>This function is useful for debugging.
+<h3 class="fn">bool <a name="a2"></a>QObject::event ( <a href="qevent.html">QEvent</a> * e ) <code>[virtual]</code></h3>
+<p>This virtual function receives events to an object and should return
+TRUE if the event was recognized and processed.
+<p>The event() function can be reimplemented to customize the behavior of
+an object.
+<p>See also:  <a href="qobject.html#c3">installEventFilter</a>(), <a href="qobject.html#e3">timerEvent</a>(), <a href="qapplication.html#g5">QApplication::sendEvent</a>(), <a href="qapplication.html#i5">QApplication::postEvent</a>() and <a href="qwidget.html#n3">QWidget::event</a>().
+<p>Reimplemented in <a href="qtoolbar.html#b0">QToolBar</a>, <a href="qclipboard.html#b2">QClipboard</a>, <a href="qtimer.html#a8">QTimer</a>, <a href="qsocketnotifier.html#a7">QSocketNotifier</a>, <a href="qlineedit.html#e1">QLineEdit</a>, <a href="qwidget.html#n3">QWidget</a>, <a href="qmainwindow.html#c0">QMainWindow</a>, <a href="qwidgetstack.html#a8">QWidgetStack</a> and <a href="qsplitter.html#a5">QSplitter</a>.
+<h3 class="fn">bool <a name="a3"></a>QObject::eventFilter ( QObject *, <a href="qevent.html">QEvent</a> * ) <code>[virtual]</code></h3>
+<p>Filters events if this object has been installed as an event filter for
+another object.
+<p>The reimplementation of this virtual function must return TRUE if the
+event should be stopped, or FALSE if the event should be dispatched normally.
+<p>See also:  <a href="qobject.html#c3">installEventFilter</a>().
+<p>Reimplemented in <a href="qspinbox.html#d0">QSpinBox</a>, <a href="qlistview.html#e2">QListView</a>, <a href="qmainwindow.html#b4">QMainWindow</a>, <a href="qfiledialog.html#b7">QFileDialog</a>, <a href="qaccel.html#b6">QAccel</a>, <a href="qscrollview.html#d8">QScrollView</a>, <a href="qmenubar.html#a5">QMenuBar</a>, <a href="qgmanager.html#b9">QGManager</a> and <a href="qcombobox.html#d7">QComboBox</a>.
+<h3 class="fn">bool <a name="b3"></a>QObject::highPriority () const</h3>
+<p>Returns TRUE if the object is a high priority object, or FALSE if it is a
+standard priority object.
+<p>High priority objects are placed first in list of children,
+on the assumption that they will be referenced very often.
+<h3 class="fn">bool <a name="a8"></a>QObject::inherits ( const char * clname ) const</h3>
+<p>Returns TRUE if this object is an instance of a class that inherits
+<em>clname,</em> and <em>clname</em> inherits QObject.
+<p>(A class is considered to inherit itself.)
+<p>Example:
+<pre>    <a href="qtimer.html">QTimer</a> *t = new <a href="qtimer.html">QTimer</a>;             // QTimer inherits QObject
+    t-&gt;<a href="qobject.html#a8">inherits</a>("QTimer");              // returns TRUE
+    t-&gt;<a href="qobject.html#a8">inherits</a>("QObject");             // returns TRUE
+    t-&gt;<a href="qobject.html#a8">inherits</a>("QButton");             // returns FALSE
+
+    <a href="qscrollbar.html">QScrollBar</a> * s = new <a href="qscrollbar.html">QScrollBar</a>;    // inherits QWidget and QRangeControl
+    s-&gt;<a href="qobject.html#a8">inherits</a>( "QWidget" );           // returns TRUE
+    s-&gt;<a href="qobject.html#a8">inherits</a>( "QRangeControl" );     // returns FALSE
+</pre>
+<p>See also:  <a href="qobject.html#a7">isA</a>() and <a href="qobject.html#a5">metaObject</a>().
+<h3 class="fn">void <a name="e2"></a>QObject::initMetaObject () <code>[virtual protected]</code></h3>
+<p>Initializes the <a href="qobject.html#a5">meta object</a> of this
+object. This method is automatically executed on demand from the
+QObject constructor.
+<p>See also:  <a href="qobject.html#a5">metaObject</a>().
+<h3 class="fn">void <a name="c1"></a>QObject::insertChild ( QObject * obj )</h3>
+<p>Inserts an object <em>obj</em> into the list of child objects.<p><strong>Warning:</strong> This function cannot be used to make a widget a child
+widget of another.  Child widgets can be created only by setting the
+parent widget in the constructor or by calling <a href="qwidget.html#l9">QWidget::recreate</a>().
+<p>See also:  <a href="qobject.html#c2">removeChild</a>() and <a href="qwidget.html#l9">QWidget::recreate</a>().
+<h3 class="fn">void <a name="c3"></a>QObject::installEventFilter ( const QObject * obj )</h3>
+<p>Installs an event filter object for this object.
+<p>An event filter is an object that receives all events that are sent to
+this object.  The filter can either stop the event or forward it to this
+object.  The event filter object receives events via the <a href="qobject.html#a3">eventFilter</a>()
+function.  The eventFilter() function must return TRUE if the event
+should be stopped, or FALSE if the event should be dispatched normally.
+<p>If multiple event filters are installed for a single object, the
+filter that was installed last will be activated first.
+<p>Example:
+<pre>    #include &lt;qwidget.h&gt;
+
+    class MyWidget : public QWidget
+    {
+    public:
+        MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+    protected:
+        bool  eventFilter( <a href="qobject.html">QObject</a> *, QEvent * );
+    };
+
+    MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qwidget.html">QWidget</a>( parent, name )
+    {
+        if ( parent )                           // has a child widget
+            parent-&gt;<a href="qobject.html#c3">installEventFilter</a>( this ); // then install filter
+    }
+
+    bool MyWidget::eventFilter( <a href="qobject.html">QObject</a> *, QEvent *e )
+    {
+        if ( e-&gt;type() == Event_KeyPress ) {    // key press
+            <a href="qkeyevent.html">QKeyEvent</a> *k = (<a href="qkeyevent.html">QKeyEvent</a>*)e;
+            <a href="qapplication.html#j4">debug</a>( "Ate key press %d", k-&gt;<a href="qkeyevent.html#a1">key</a>() );
+            return TRUE;                        // eat event
+        }
+        return FALSE;                           // standard event processing
+    }
+</pre>
+<p>The <a href="qaccel.html">QAccel</a> class was implemented using this technique.<p><strong>Warning:</strong> If you delete the receiver object in your eventFilter() function, be
+sure to return TRUE. If you return FALSE, Qt sends the event to the
+deleted object and the program will crash.
+<p>See also:  <a href="qobject.html#c4">removeEventFilter</a>(), <a href="qobject.html#a3">eventFilter</a>() and <a href="qobject.html#a2">event</a>().
+<h3 class="fn">bool <a name="a7"></a>QObject::isA ( const char * clname ) const</h3>
+<p>Returns TRUE if this object is an instance of a specified class,
+otherwise FALSE.
+<p>Example:
+<pre>    <a href="qtimer.html">QTimer</a> *t = new <a href="qtimer.html">QTimer</a>;             // QTimer inherits QObject
+    t-&gt;<a href="qobject.html#a7">isA</a>("QTimer");                   // returns TRUE
+    t-&gt;<a href="qobject.html#a7">isA</a>("QObject");                  // returns FALSE
+</pre>
+<p>See also:  <a href="qobject.html#a8">inherits</a>() and <a href="qobject.html#a5">metaObject</a>().
+<h3 class="fn">bool <a name="b2"></a>QObject::isWidgetType () const</h3>
+<p>Returns TRUE if the object is a widget, or FALSE if not.
+<p>Calling this function is equivalent to calling <a href="qobject.html#a8">inherits</a>("<a href="qwidget.html">QWidget</a>"),
+except that it is much faster.
+<h3 class="fn">void <a name="b7"></a>QObject::killTimer ( int id )</h3>
+<p>Kills the timer with the identifier <em>id.</em>
+<p>The timer identifier is returned by <a href="qobject.html#b6">startTimer</a>() when a timer event is
+started.
+<p>See also:  <a href="qobject.html#e3">timerEvent</a>(), <a href="qobject.html#b6">startTimer</a>() and <a href="qobject.html#b8">killTimers</a>().
+<p>Examples:
+ <a href="dclock-dclock-cpp.html#killTimer">dclock/dclock.cpp</a>
+ <a href="grapher-grapher-cpp.html#killTimer">grapher/grapher.cpp</a>
+<h3 class="fn">void <a name="b8"></a>QObject::killTimers ()</h3>
+<p>Kills all timers that this object has started.
+<p>Using this function makes it harder to subclass your class (it kills
+timers started by subclasses as well as those started by you), so it
+is generally better to use <a href="qobject.html#b7">killTimer</a>().
+<p>See also:  <a href="qobject.html#e3">timerEvent</a>(), <a href="qobject.html#b6">startTimer</a>() and <a href="qobject.html#b7">killTimer</a>().
+<p>Examples:
+ <a href="qmag-qmag-cpp.html#killTimers">qmag/qmag.cpp</a>
+<h3 class="fn">QMetaObject * <a name="a5"></a>QObject::metaObject () const <code>[virtual]</code></h3>
+<p>Returns a pointer to the meta object of this object.
+<p>A meta object contains information about a class that inherits QObject:
+class name, super class name, signals and slots. Every class that contains
+the <code>Q_OBJECT</code> macro will also have a meta object.
+<p>The meta object information is required by the signal/slot connection
+mechanism.  The functions <a href="qobject.html#a7">isA</a>() and <a href="qobject.html#a8">inherits</a>() also make use of the
+meta object.
+<p>The meta object is created by the <a href="qobject.html#e2">initMetaObject</a>() function, which
+is generated by the meta object compiler and called from the QObject
+constructor.
+<h3 class="fn">const char * <a name="a9"></a>QObject::name () const</h3>
+<p>Returns the name of this object, or 0 if the object does not have a
+name.
+<p>The object name is set by the constructor or by the <a href="qobject.html#b1">setName</a>() function.
+The object name is not very useful in the current version of Qt, but
+will become increasingly important in the future.
+<p>The <a href="qobject.html#c0">queryList</a>() function searches the object tree for objects that
+matches a particular object name.
+<p>See also:  <a href="qobject.html#b1">setName</a>(), <a href="qobject.html#a6">className</a>() and <a href="qobject.html#c0">queryList</a>().
+<p>Examples:
+ <a href="widgets-widgets-cpp.html#name">widgets/widgets.cpp</a>
+<h3 class="fn">const char * <a name="b0"></a>QObject::name ( const char * defaultName ) const</h3>
+<p>This is an overloaded member function, provided for convenience.  It differs from the above function only in what argument(s) it accepts.
+<p>Returns the name of this object, or <em>defaultName</em> if the object
+does not have a name.
+<p>This version of <a href="qobject.html#a9">name</a>() is particularly useful for <a href="qapplication.html#j4">debug</a>() calls such as:
+<p><pre>    <a href="qapplication.html#j4">debug</a>( "MyClass::setPrecision(): (%s) unable to set precision to %f",
+            name( "unnamed" ), newPrecision );
+</pre>
+<p>name( "unnamed" ) is used here so that printf() (used in debug())
+will not be asked to output a null pointer.
+<h3 class="fn">QObject * <a name="d3"></a>QObject::parent () const</h3>
+<p>Returns a pointer to the parent object.
+<p>See also:  <a href="qobject.html#b9">children</a>().
+<h3 class="fn">QObjectList * <a name="c0"></a>QObject::queryList ( const char * inheritsClass = 0, const char * objName = 0, bool regexpMatch = TRUE, bool recursiveSearch = TRUE )</h3>
+<p>Returns a list of child objects found by a query.
+<p>The query is specified by:
+<p>Arguments:
+<ul>
+<li><em>inheritsClass</em> is the name of the base class that an object should
+inherit. Any class will be matched if <em>inheritsClass</em> is 0.
+<li><em>objName</em> is the object name to search for. Any object name will be
+matched if <em>objName</em> is 0.
+<li><em>regexpMatch</em> specifies whether <em>objName</em> is a regular expression
+(default) or not.
+<li><em>recursiveSearch</em> must be <code>TRUE</code> (default) if you want to search
+the entire object tree, or <code>FALSE</code> if you want the search to traverse
+just the 1st level child objects of this object.
+</ul>
+Example:
+<pre>    //
+    // Sets a Courier 24 point fonts for all children in myWidget that
+    // inherit QButton (i.e. QPushButton, QCheckBox, QRadioButton).
+    //
+    QObjectList *list = myWidget-&gt;queryList( "QButton" );
+    QObjectListIt it( *list );          // iterate over the buttons
+    <a href="qfont.html">QFont</a> newFont( "Courier", 24 );
+    <a href="qobject.html">QObject</a> * obj;
+    while ( (obj=it.current()) != 0 ) { // for each found object...
+        ++it;
+        ((<a href="qbutton.html">QButton</a>*)obj)-&gt;setFont( newFont );
+    }
+    delete list;                        // delete the list, not the objects
+</pre>
+<p>The QObjectList class is defined in the qobjcoll.h header file.<p><strong>Warning:</strong> Delete the list away as soon you have finished using it.
+You can get in serious trouble if you for instance try to access
+an object that has been deleted.
+<p>See also:  <a href="qobject.html#b9">children</a>(), <a href="qobject.html#d3">parent</a>(), <a href="qobject.html#a8">inherits</a>(), <a href="qobject.html#a9">name</a>() and <a href="qregexp.html">QRegExp</a>.
+<h3 class="fn">QConnectionList * <a name="d5"></a>QObject::receivers ( const char * signal ) const <code>[protected]</code></h3>
+<p>Returns a list of objects/slot pairs that are connected to the
+signal, or 0 if nothing is connected to it.
+<p>This function is for internal use.
+<h3 class="fn">void <a name="c2"></a>QObject::removeChild ( QObject * obj )</h3>
+<p>Removes the child object <em>obj</em> from the list of children.<p><strong>Warning:</strong> This function will not remove a child widget from the screen.
+It will only remove it from the parent widget's list of children.
+<p>See also:  <a href="qobject.html#c1">insertChild</a>() and <a href="qwidget.html#l9">QWidget::recreate</a>().
+<h3 class="fn">void <a name="c4"></a>QObject::removeEventFilter ( const QObject * obj )</h3>
+<p>Removes an event filter object <em>obj</em> from this object.
+The request is ignored if such an event filter has not been installed.
+<p>All event filters for this object are automatically removed when this
+object is destroyed.
+<p>It is always safe to remove an event filter, even during event filter
+activation (i.e. from the <a href="qobject.html#a3">eventFilter</a>() function).
+<p>See also:  <a href="qobject.html#c3">installEventFilter</a>(), <a href="qobject.html#a3">eventFilter</a>() and <a href="qobject.html#a2">event</a>().
+<h3 class="fn">const QObject * <a name="e1"></a>QObject::sender () <code>[protected]</code></h3>
+<p>Returns a pointer to the object that sent the last signal received by
+this object.<p><strong>Warning:</strong> This function violates the object-oriented principle of modularity,
+However, getting access to the sender might be practical when many
+signals are connected to a single slot. The sender is undefined if
+the slot is called as a normal C++ function.
+<h3 class="fn">void <a name="b1"></a>QObject::setName ( const char * name )</h3>
+<p>Sets the name of this object to <em>name.</em>  The default name is the
+one assigned by the constructor.
+<p>The object name is not very useful in the current version of Qt, but
+it will become increasingly important in the future.
+<p>The <a href="qobject.html#c0">queryList</a>() function searches the object tree for objects that
+matches a particular object name.
+<p>See also:  <a href="qobject.html#a9">name</a>(), <a href="qobject.html#a6">className</a>() and <a href="qobject.html#c0">queryList</a>().
+<h3 class="fn">bool <a name="b4"></a>QObject::signalsBlocked () const</h3>
+<p>Returns TRUE if signals are blocked, or FALSE if signals are not blocked.
+<p>Signals are not blocked by default.
+<p>See also:  <a href="qobject.html#b5">blockSignals</a>().
+<h3 class="fn">int <a name="b6"></a>QObject::startTimer ( int interval )</h3>
+<p>Starts a timer and returns a timer identifier, or returns zero if
+it could not start a timer.
+<p>A timer event will occur every <em>interval</em> milliseconds until
+<a href="qobject.html#b7">killTimer</a>() or <a href="qobject.html#b8">killTimers</a>() is called.  If <em>interval</em> is 0, then
+the timer event occurs once every time there are no more window system
+events to process.
+<p>The virtual <a href="qobject.html#e3">timerEvent</a>() function is called with the <a href="qtimerevent.html">QTimerEvent</a> event
+parameter class when a timer event occurs.  Reimplement this function to
+get timer events.
+<p>If multiple timers are running, the <a href="qtimerevent.html#a1">QTimerEvent::timerId</a>() can be
+used to find out which timer was activated.
+<p>Example:
+<pre>    class MyObject : public QObject
+    {
+    public:
+        MyObject( <a href="qobject.html">QObject</a> *parent=0, const char *name=0 );
+    protected:
+        void  timerEvent( <a href="qtimerevent.html">QTimerEvent</a> * );
+    };
+
+    MyObject::MyObject( <a href="qobject.html">QObject</a> *parent, const char *name )
+        : <a href="qobject.html">QObject</a>( parent, name )
+    {
+        <a href="qobject.html#b6">startTimer</a>( 50 );                       // 50 millisec timer
+        <a href="qobject.html#b6">startTimer</a>( 1000 );                     // 1 second timer
+        <a href="qobject.html#b6">startTimer</a>( 60000 );                    // 1 minute timer
+    }
+
+    void MyObject::timerEvent( <a href="qtimerevent.html">QTimerEvent</a> *e )
+    {
+        <a href="qapplication.html#j4">debug</a>( "timer event, id=%d", e-&gt;<a href="qtimerevent.html#a1">timerId</a>() );
+    }
+</pre>
+<p>There is practically no upper limit for the interval value (more than
+one year).  The accuracy depends on the underlying operating system.
+Windows 95 has 55 millisecond (18.2 times per second) accuracy; other
+systems that we have tested (UNIX X11, Windows NT and OS/2) can
+handle 1 millisecond intervals.
+<p>The <a href="qtimer.html">QTimer</a> class provides a high-level programming interface with
+one-shot timers and timer signals instead of events.
+<p>See also:  <a href="qobject.html#e3">timerEvent</a>(), <a href="qobject.html#b7">killTimer</a>() and <a href="qobject.html#b8">killTimers</a>().
+<p>Examples:
+ <a href="forever-forever-cpp.html#startTimer">forever/forever.cpp</a>
+ <a href="qmag-qmag-cpp.html#startTimer">qmag/qmag.cpp</a>
+ <a href="biff-biff-cpp.html#startTimer">biff/biff.cpp</a>
+<h3 class="fn">void <a name="e3"></a>QObject::timerEvent ( <a href="qtimerevent.html">QTimerEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>This event handler can be reimplemented in a subclass to receive
+timer events for the object.
+<p>The default implementation does nothing.
+<p><a href="qtimer.html">QTimer</a> provides a higher-level interface to the timer functionality,
+and also more general information about timers.
+<p>See also:  <a href="qobject.html#b6">startTimer</a>(), <a href="qobject.html#b7">killTimer</a>(), <a href="qobject.html#b8">killTimers</a>() and <a href="qobject.html#a2">event</a>().
+<p>Reimplemented in <a href="qlistbox.html#g9">QListBox</a>, <a href="qmultilineedit.html#e0">QMultiLineEdit</a>, <a href="qpopupmenu.html#c7">QPopupMenu</a>, <a href="qscrollbar.html#b8">QScrollBar</a> and <a href="qlineedit.html#d8">QLineEdit</a>.
+<h3 class="fn">const char * <a name="a4"></a>QObject::tr ( const char * text ) const</h3>
+<p>Returns a translated version of <em>text,</em> or <em>text</em> if there is
+no appropriate translated version.
+<hr><h2>Related Functions</h2>
+<h3>void * <a name="f0"></a>qt_find_obj_child (QObject * parent, const char * type, const char * name)</h3>
+<p>Returns a pointer to the child named <em>name</em> of QObject <em>parent</em>
+which inherits type <em>type.</em>
+<p>Returns 0 if there is no such child.
+<p>The CHILD macro (defined in <a href="qwindowdefs-h.html">qwindowdefs.h</a>) does all this, and also
+casts the returt type to <em>type</em> *.
+<p>Examples:
+<pre>    <a href="qlistbox.html">QListBox</a> * c = CHILD(myWidget,QListBox,"listboxname");
+    if ( c )
+        c-&gt;<a href="qlistbox.html#a6">insertItem</a>( "another string" );
+</pre>
+<p><pre>    <a href="qlistbox.html">QListBox</a> * c = (<a href="qlistbox.html">QListBox</a> *)::qt_find_obj_child(myWidget,QListBox,
+                                                   "listboxname");
+    if ( c )
+        c-&gt;<a href="qlistbox.html#a6">insertItem</a>( "another string" );
+</pre>
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qobject.h: 1998/10/19
+<li>qobject.cpp: 1998/11/20
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QPrintDialog Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QPrintDialog Class Reference</h1><br clear="all">
+<p>
+The QPrintDialog class provides an X-only dialog for specifying print-out details.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qprintdialog-h.html">qprintdialog.h</a>&gt;</code>
+<p>
+Inherits <a href="qdialog.html">QDialog</a>.
+<p><a href="qprintdialog-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qprintdialog.html#a0"><strong>QPrintDialog</strong></a> ( QPrinter *, QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qprintdialog.html#a1"><strong>~QPrintDialog</strong></a> () </span>
+<li><span class="fn">void <a href="qprintdialog.html#a3"><strong>setPrinter</strong></a> ( QPrinter *, bool = FALSE ) </span>
+<li><span class="fn">QPrinter* <a href="qprintdialog.html#a4"><strong>printer</strong></a> () const</span>
+</ul>
+<h2>Static Public Members</h2>
+<ul>
+<li><span class="fn">bool <a href="qprintdialog.html#c0"><strong>getPrinterSetup</strong></a> ( QPrinter * ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QPrintDialog class provides an X-only dialog for specifying print-out details.
+<p>
+It encompasses both the sort of details needed for doing a simple
+print-out and some print configuration setup.<p><strong>Warning:</strong> For this release, the printer dialog is only available
+under X11. Use <a href="qprinter.html#d3">QPrinter::setup</a>() for portability.
+<p>At present, the only easy way to use the class is through the static
+function <a href="qprintdialog.html#c0">getPrinterSetup</a>().  You can however also call the global
+QPrintDialot::getPrinterConfigure(), or subclass in order to extend
+one of the group boxes.
+<p>Note that in 1.40 the printer dialog is a little too high for
+comfortable use on a small-screen machine.  This will be improved on
+in 2.0.
+<p><img src="printerdialog.gif" width="479" height="540"><br clear=all>
+The printer dialog, on a large screen, in Motif style.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QPrintDialog::QPrintDialog ( <a href="qprinter.html">QPrinter</a> * prn, <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Creates a new modal printer dialog that configures <em>prn</em> and is a
+child of <em>parent</em> named <em>name.</em>
+<h3 class="fn"><a name="a1"></a>QPrintDialog::~QPrintDialog ()</h3>
+<p>Destroys the object and frees any allocated resources.  Does not
+delete the associated <a href="qprinter.html">QPrinter</a> object.
+<h3 class="fn">bool <a name="c0"></a>QPrintDialog::getPrinterSetup ( <a href="qprinter.html">QPrinter</a> * p ) <code>[static]</code></h3>
+<p>Display a dialog and allow the user to configure the <a href="qprinter.html">QPrinter</a> <em>p.</em>  Returns TRUE if the user clicks OK or presses Enter, FALSE if
+the user clicks Cancel or presses Escape.
+<p>getPrinterSetup() remembers the settings and provides the same
+settings the next time the dialog is shown.<p><strong>Warning:</strong> For this release, the printer dialog is only available
+under X11. Use <a href="qprinter.html#d3">QPrinter::setup</a>() for portability.
+<h3 class="fn"><a href="qprinter.html">QPrinter</a> * <a name="a4"></a>QPrintDialog::printer () const</h3>
+<p>Returns a pointer to the printer this dialog configures, or 0 if
+this dialog does not operate on any printer.
+<h3 class="fn">void <a name="a3"></a>QPrintDialog::setPrinter ( <a href="qprinter.html">QPrinter</a> * p, bool pickUpSettings = FALSE )</h3>
+<p>Sets this dialog to configure <em>p,</em> or no printer if <em>p</em> is
+FALSE.  If <em>pickUpSettings</em> is TRUE, the dialog reads most of its
+settings from <em>printer.</em>  If <em>pickUpSettings</em> is FALSE (the
+default) the dialog keeps its old settings.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qprintdialog.h: 1998/08/21
+<li>qprintdialog.cpp: 1998/11/02
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

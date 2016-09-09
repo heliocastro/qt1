@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QToolTipGroup Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QToolTipGroup Class Reference</h1><br clear="all">
+<p>
+The QToolTipGroup class collects tool tips into natural groups.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qtooltip-h.html">qtooltip.h</a>&gt;</code>
+<p>
+Inherits <a href="qobject.html">QObject</a>.
+<p><a href="qtooltipgroup-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qtooltipgroup.html#a0"><strong>QToolTipGroup</strong></a> ( QObject * parent, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qtooltipgroup.html#a1"><strong>~QToolTipGroup</strong></a> () </span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qtooltipgroup.html#a2"><strong>showTip</strong></a> ( const char * ) </span>
+<li><span class="fn">void <a href="qtooltipgroup.html#a3"><strong>removeTip</strong></a> () </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QToolTipGroup class collects tool tips into natural groups.
+<p>
+Tool tips can display <em>two</em> texts, the one in the tip and
+optionally another one, typically in a status bar.  QToolTipGroup
+provides a way to link tool tips to this status bar.
+<p>QToolTipGroup has practically no API, it is only used as an argument
+to <a href="qtooltip.html">QToolTip</a>'s member functions, for example like this:
+<p><pre>    <a href="qtooltipgroup.html">QToolTipGroup</a> * g = new <a href="qtooltipgroup.html">QToolTipGroup</a>( this, "tool tip relay" );
+    connect( g, SIGNAL(showTip(const char *)),
+             myLabel, SLOT(setText(const char *)) );
+    connect( g, SIGNAL(removeTip()),
+             myLabel, SLOT(clear()) );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( giraffeButton, "feed giraffe",
+                   g, "Give the giraffe a meal" );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( gorillaButton, "feed gorilla",
+                   g, "Give the gorilla a meal" );
+</pre>
+<p>This example makes the object myLabel (which you have to supply)
+display (one assumes, though you can make myLabel do anything, of
+course) the strings "Give the giraffe a meal" and "Give the gorilla
+a meal" while the relevant tool tips are being displayed.
+<p>Deleting a tool tip group removes the tool tips in it.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QToolTipGroup::QToolTipGroup ( <a href="qobject.html">QObject</a> * parent, const char * name = 0 )</h3>
+<p>Constructs a tool tip group.
+<h3 class="fn"><a name="a1"></a>QToolTipGroup::~QToolTipGroup ()</h3>
+<p>Destroy this tool tip groups and all tool tips in it.
+<h3 class="fn">void <a name="a3"></a>QToolTipGroup::removeTip () <code>[signal]</code></h3>
+<p>This signal is emitted when a tool tip in this group is hidden.  See
+the QToolTipGroup documentation for an example of use.
+<p>See also:  <a href="qtooltipgroup.html#a2">showTip</a>().
+<h3 class="fn">void <a name="a2"></a>QToolTipGroup::showTip ( const char * longText ) <code>[signal]</code></h3>
+<p>This signal is emitted when one of the tool tips in the group is
+displayed.  <em>longText</em> is the supplementary text for the displayed
+tool tip.
+<p>See also:  <a href="qtooltipgroup.html#a3">removeTip</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qtooltip.h: 1998/08/19
+<li>qtooltip.cpp: 1998/08/31
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

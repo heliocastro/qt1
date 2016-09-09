@@ -1,0 +1,112 @@
+.TH QDragMoveEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QDragMoveEvent \- Event sent as a drag-and-drop is in progress
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherits QEvent.
+.PP
+Inherited by QDragEnterEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QDragMoveEvent ( const QPoint & pos )"
+.br
+.ti -1c
+.BI "const QPoint& pos () const"
+.br
+.ti -1c
+.BI "bool isAccepted () const"
+.br
+.ti -1c
+.BI "void accept ()"
+.br
+.ti -1c
+.BI "void ignore ()"
+.br
+.ti -1c
+.BI "void accept ( const QRect & r )"
+.br
+.ti -1c
+.BI "void ignore ( const QRect & r )"
+.br
+.ti -1c
+.BI "QRect answerRect () const"
+.br
+.ti -1c
+.BI "const char* format ( int " "n" " = 0 )"
+.br
+.ti -1c
+.BI "bool provides ( const char * )"
+.br
+.ti -1c
+.BI "QByteArray data ( const char * )"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "QDragMoveEvent ( const QPoint & " "pos" ", int type )"
+.br
+.in -1c
+.SH DESCRIPTION
+Event sent as a drag-and-drop is in progress.
+.PP
+When a widgets accepts drop events, it will receive this event repeatedly while the the drag is inside that widget. The widget should examine the event, especially seeing what data it provides, and accept() the drop if appropriate.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QDragMoveEvent::QDragMoveEvent ( const QPoint & pos )"
+Creates a QDragMoveEvent for which the mouse is at point \fIpos.\fR
+.PP
+Note that internal state is also involved with QDragMoveEvent, so it is not useful to create these yourself.
+.SH "QDragMoveEvent::QDragMoveEvent ( const QPoint & pos, int type ) \fC[protected]\fR"
+Creates a QDragMoveEvent for which the mouse is at point \fIpos,\fR and the given event \fItype.\fR
+.PP
+Note that internal state is also involved with QDragMoveEvent, so it is not useful to create these yourself.
+.SH "void QDragMoveEvent::accept ()"
+Call this to indicate that the event provides data which your widget can process. Use provides(), or preferrably, the canDecode() methods of existing QDragObject subclasses, such as QTextDrag::canDecode(), or your own subclasses.
+.SH "void QDragMoveEvent::accept ( const QRect & r )"
+The same as accept() above, but also notifies that future moves will also be acceptable if they remain withing the rectangle \fIr\fR on the widget - this can improve performance, but may also be ignored by the underlying system.
+.SH "QRect QDragMoveEvent::answerRect () const"
+{ return rect; }
+.PP
+Returns the rectangle for which the acceptance of the move event applies.
+.SH "QByteArray QDragMoveEvent::data ( const char * format )"
+Returns a byte array containing the payload data of this drag, in \fIformat.\fR
+.PP
+data() normally needs to get the data from the drag source, which is potentially very slow, so it's advisable to call this function only if you're sure that you will need the data in \fIformat.\fR
+.PP
+See also: format().
+.SH "const char * QDragMoveEvent::format ( int n = 0 )"
+Returns a string describing one of the available data types for this drag. Common examples are "text/plain" and "image/gif". If \fIn\fR is less than zero or greater than the number of available data types, format() returns 0.
+.PP
+This function is provided mainly for debugging. Most drop targets will use provides().
+.PP
+See also: data() and provides().
+.SH "void QDragMoveEvent::ignore ()"
+The opposite of accept().
+.SH "void QDragMoveEvent::ignore ( const QRect & r )"
+The opposite of accept(const QRect&).
+.SH "bool QDragMoveEvent::isAccepted () const"
+Returns TRUE if accept() has been called.
+.SH "const QPoint& QDragMoveEvent::pos () const"
+Returns the position of the mouse when the event occurred.
+.SH "bool QDragMoveEvent::provides ( const char * mimeType )"
+Returns TRUE if this drag object provides format \fImimeType\fR or FALSE if it does not.
+.PP
+See also:  data().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qdragmoveevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

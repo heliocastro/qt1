@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QHeader Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QHeader Class Reference</h1><br clear="all">
+<p>
+The QHeader class provides a table header.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qheader-h.html">qheader.h</a>&gt;</code>
+<p>
+Inherits <a href="qtableview.html">QTableView</a>.
+<p><a href="qheader-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qheader.html#a0"><strong>QHeader</strong></a> ( QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qheader.html#a1"><strong>QHeader</strong></a> ( int, QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qheader.html#a2"><strong>~QHeader</strong></a> () </span>
+<li><span class="fn">int <a href="qheader.html#a3"><strong>addLabel</strong></a> ( const char *, int size = -1 ) </span>
+<li><span class="fn">void <a href="qheader.html#a4"><strong>setLabel</strong></a> ( int, const char *, int size = -1 ) </span>
+<li><span class="fn">const char* <a href="qheader.html#a5"><strong>label</strong></a> ( int ) </span>
+<li><span class="fn">void <a href="qheader.html#a6"><strong>setOrientation</strong></a> ( Orientation ) </span>
+<li><span class="fn">Orientation <a href="qheader.html#a7"><strong>orientation</strong></a> () const</span>
+<li><span class="fn">void <a href="qheader.html#a8"><strong>setTracking</strong></a> ( bool enable ) </span>
+<li><span class="fn">bool <a href="qheader.html#a9"><strong>tracking</strong></a> () const</span>
+<li><span class="fn">void <a href="qheader.html#b0"><strong>setClickEnabled</strong></a> ( bool, int logIdx = -1 ) </span>
+<li><span class="fn">void <a href="qheader.html#b1"><strong>setResizeEnabled</strong></a> ( bool, int logIdx = -1 ) </span>
+<li><span class="fn">void <a href="qheader.html#b2"><strong>setMovingEnabled</strong></a> ( bool ) </span>
+<li><span class="fn">void <a href="qheader.html#b3"><strong>setCellSize</strong></a> ( int i, int s ) </span>
+<li><span class="fn">int <a href="qheader.html#b4"><strong>cellSize</strong></a> ( int i ) const</span>
+<li><span class="fn">int <a href="qheader.html#b5"><strong>cellPos</strong></a> ( int i ) const</span>
+<li><span class="fn">int <a href="qheader.html#b6"><strong>cellAt</strong></a> ( int i ) const</span>
+<li><span class="fn">int <a href="qheader.html#b7"><strong>count</strong></a> () const</span>
+<li><span class="fn">int <a href="qheader.html#b8"><strong>offset</strong></a> () const</span>
+<li><span class="fn">virtual QSize <a href="qheader.html#b9"><strong>sizeHint</strong></a> () const</span>
+<li><span class="fn">int <a href="qheader.html#c0"><strong>mapToLogical</strong></a> ( int ) const</span>
+<li><span class="fn">int <a href="qheader.html#c1"><strong>mapToActual</strong></a> ( int ) const</span>
+</ul>
+<h2>Public Slots</h2>
+<ul>
+<li><span class="fn">void <a href="qheader.html#c2"><strong>setOffset</strong></a> ( int ) </span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qheader.html#c3"><strong>sectionClicked</strong></a> ( int ) </span>
+<li><span class="fn">void <a href="qheader.html#c4"><strong>sizeChange</strong></a> ( int section, int oldSize, int newSize ) </span>
+<li><span class="fn">void <a href="qheader.html#c5"><strong>moved</strong></a> ( int from, int to ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qheader.html#c6"><strong>resizeEvent</strong></a> ( QResizeEvent * ) </span>
+<li><span class="fn">QRect <a href="qheader.html#c7"><strong>sRect</strong></a> ( int i ) </span>
+<li><span class="fn">virtual void <a href="qheader.html#c8"><strong>paintCell</strong></a> ( QPainter *, int, int ) </span>
+<li><span class="fn">virtual void <a href="qheader.html#c9"><strong>setupPainter</strong></a> ( QPainter * ) </span>
+<li><span class="fn">virtual int <a href="qheader.html#d0"><strong>cellHeight</strong></a> ( int ) </span>
+<li><span class="fn">virtual int <a href="qheader.html#d1"><strong>cellWidth</strong></a> ( int ) </span>
+<li><span class="fn">virtual void <a href="qwidget.html#n4"><strong>mousePressEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qwidget.html#n5"><strong>mouseReleaseEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qwidget.html#n7"><strong>mouseMoveEvent</strong></a> ( QMouseEvent * ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QHeader class provides a table header.
+<p>
+This is a table heading of the type used in a list view. It gives
+the user the opportunity to resize and move the columns (or rows for
+vertical headings).
+<p>This class can be used without a table view, if you need to control
+table-like structures.
+<p><img src=qheader-m.gif> <img src=qheader-w.gif>
+<p>See also:  <a href="qlistview.html">QListView</a>, <a href="qtableview.html">QTableView</a> and <a href="http://www.microsoft.com/win32dev/uiguide/uigui181.htm">Microsoft Style Guide</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QHeader::QHeader ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs a horizontal header.
+<p>The <em>parent</em> and <em>name</em> arguments are sent to the <a href="qwidget.html">QWidget</a> constructor.
+<h3 class="fn"><a name="a1"></a>QHeader::QHeader ( int n, <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs a horizontal header with <em>n</em> sections.
+<p>The <em>parent</em> and <em>name</em> arguments are sent to the <a href="qwidget.html">QWidget</a> constructor.
+<h3 class="fn"><a name="a2"></a>QHeader::~QHeader ()</h3>
+<p>Destroys the header.
+<h3 class="fn">int <a name="a3"></a>QHeader::addLabel ( const char * s, int size = -1 )</h3>
+<p>Adds a new section, with label text <em>s.</em> Returns the index.
+If <em>size</em> is non-negative, the section width is set to <em>size,</em>
+otherwise a size currently sufficient for the label text is used.
+<h3 class="fn">int <a name="b6"></a>QHeader::cellAt ( int c ) const</h3>
+<p>Returns the actual index of the section at position <em>c,</em> or -1 if outside.
+<h3 class="fn">int <a name="d0"></a>QHeader::cellHeight ( int row ) <code>[virtual protected]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Reimplemented from <a href="qtableview.html#c3">QTableView.</a>
+<h3 class="fn">int <a name="b5"></a>QHeader::cellPos ( int i ) const</h3>
+<p>Returns the position in pixels of section <em>i</em> of the header.  <em>i</em> is the
+actual index.
+<h3 class="fn">int <a name="b4"></a>QHeader::cellSize ( int i ) const</h3>
+<p>Returns the size in pixels of section <em>i</em> of the header. <em>i</em> is the
+actual index.
+<h3 class="fn">int <a name="d1"></a>QHeader::cellWidth ( int col ) <code>[virtual protected]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Reimplemented from <a href="qtableview.html#c2">QTableView.</a>
+<h3 class="fn">int <a name="b7"></a>QHeader::count () const</h3>
+<p>Returns the number of sections in the header.
+<h3 class="fn">const char* <a name="a5"></a>QHeader::label ( int i )</h3>
+<p>Returns the text set on logical section <em>i.</em>
+<h3 class="fn">int <a name="c1"></a>QHeader::mapToActual ( int l ) const</h3>
+<p>Translates from logical index <em>l</em> to actual index.  Returns -1 if
+<em>l</em> is outside the legal range.
+<h3 class="fn">int <a name="c0"></a>QHeader::mapToLogical ( int a ) const</h3>
+<p>Translates from actual index <em>a</em> to logical index.  Returns -1 if
+<em>a</em> is outside the legal range.
+<h3 class="fn">void <a name="c5"></a>QHeader::moved ( int from, int to ) <code>[signal]</code></h3>
+<p>This signal is emitted when the user has moved column <em>from</em> to
+position <em>to.</em>
+<h3 class="fn">int <a name="b8"></a>QHeader::offset () const</h3>
+<p>int QHeader::offset() const
+Returns the leftmost (or uppermost for vertical headers) visible pixel.
+<h3 class="fn">QHeader::Orientation <a name="a7"></a>QHeader::orientation() const</h3>
+<p>Returns <code>Horizontal</code> if the header is horizontal, <code>Vertical</code> if
+the header is vertical.
+<h3 class="fn">void <a name="c8"></a>QHeader::paintCell ( <a href="qpainter.html">QPainter</a> * p, int row, int col ) <code>[virtual protected]</code></h3>
+<p>paints a section of the header.
+<p>Reimplemented from <a href="qtableview.html#f1">QTableView.</a>
+<h3 class="fn">void <a name="c6"></a>QHeader::resizeEvent ( <a href="qresizeevent.html">QResizeEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles resize events.
+<p>Reimplemented from <a href="qwidget.html#o6">QWidget.</a>
+<h3 class="fn"><a href="qrect.html">QRect</a> <a name="c7"></a>QHeader::sRect ( int i ) <code>[protected]</code></h3>
+<p>Returns the rectangle covered by actual section <em>i.</em>
+<h3 class="fn">void <a name="c3"></a>QHeader::sectionClicked ( int logical ) <code>[signal]</code></h3>
+<p>This signal is emitted when a part of the header is clicked. In a
+list view, this signal would typically be connected to a slot which sorts
+the specified column.
+<h3 class="fn">void <a name="b3"></a>QHeader::setCellSize ( int i, int s )</h3>
+<p>Sets the size of logical cell <em>i</em> to <em>s</em> pixels.<p><strong>Warning:</strong> does not repaint or send out signals at present.
+<h3 class="fn">void <a name="b0"></a>QHeader::setClickEnabled ( bool enable, int i = -1 )</h3>
+<p>Enable clicking in column <em>i</em> if <em>enable</em> is TRUE, disable otherwise.
+If <em>i</em> is negative, clicking is enabled/disabled for all columns.
+<p>If enabled, the <a href="qheader.html#c3">sectionClicked</a>() signal is emitted when the user clicks.
+<p>See also:  <a href="qheader.html#b2">setMovingEnabled</a>() and <a href="qheader.html#b1">setResizeEnabled</a>().
+<h3 class="fn">void <a name="a4"></a>QHeader::setLabel ( int i, const char * s, int size = -1 )</h3>
+<p>Sets the text on logical section <em>i</em> to <em>s.</em> If the section does not exist,
+nothing happens.
+If <em>size</em> is non-negative, the section width is set to <em>size.</em>
+<h3 class="fn">void <a name="b2"></a>QHeader::setMovingEnabled ( bool enable )</h3>
+<p>Enable the user to exchange  columns if <em>enable</em> is TRUE,
+disable otherwise.
+<p>See also:  <a href="qheader.html#b0">setClickEnabled</a>() and <a href="qheader.html#b1">setResizeEnabled</a>().
+<h3 class="fn">void <a name="c2"></a>QHeader::setOffset ( int x ) <code>[slot]</code></h3>
+<p>Scrolls the header such that <em>x</em> becomes the leftmost (or uppermost
+for vertical headers) visible pixel.
+<h3 class="fn">void <a name="a6"></a>QHeader::setOrientation ( Orientation orientation )</h3>
+<p>Sets the header orientation.  The <em>orientation</em> must be
+QHeader::Vertical or QHeader::Horizontal.
+<p>When adding labels without the size parameter, setOrientation
+should be called first, otherwise labels will be sized incorrectly.
+<p>See also:  <a href="qheader.html#a7">orientation</a>().
+<h3 class="fn">void <a name="b1"></a>QHeader::setResizeEnabled ( bool enable, int i = -1 )</h3>
+<p>Enable user resizing of column <em>i</em> if <em>enable</em> is TRUE, disable otherwise.
+If <em>i</em> is negative, resizing is enabled/disabled for all columns.
+<p>See also:  <a href="qheader.html#b2">setMovingEnabled</a>() and <a href="qheader.html#b0">setClickEnabled</a>().
+<h3 class="fn">void <a name="a8"></a>QHeader::setTracking ( bool enable )</h3>
+<p>Sets tracking if <em>enable</em> is TRUE, otherwise turns off tracking.
+If tracking is on, the <a href="qheader.html#c4">sizeChange</a>() signal is emitted continuously
+while the mouse is moved, otherwise it is only emitted when the
+mouse button is released.
+<p>See also:  <a href="qheader.html#a9">tracking</a>().
+<h3 class="fn">void <a name="c9"></a>QHeader::setupPainter ( <a href="qpainter.html">QPainter</a> * p ) <code>[virtual protected]</code></h3>
+<p>sets up the painter.
+<p>Reimplemented from <a href="qtableview.html#f2">QTableView.</a>
+<h3 class="fn">void <a name="c4"></a>QHeader::sizeChange ( int section, int oldSize, int newSize ) <code>[signal]</code></h3>
+<p>This signal is emitted when the user has changed the size of some
+of the parts of the header. This signal is typically connected to a slot
+that repaints the table. <em>section</em> is the logical section resized.
+<h3 class="fn"><a href="qsize.html">QSize</a> <a name="b9"></a>QHeader::sizeHint () const <code>[virtual]</code></h3>
+<p>Returns the recommended size of the QHeader.
+<p>Reimplemented from <a href="qwidget.html#l7">QWidget.</a>
+<h3 class="fn">bool <a name="a9"></a>QHeader::tracking () const</h3>
+<p>Returns TRUE if tracking is on, FALSE otherwise.
+<p>See also:  <a href="qheader.html#a8">setTracking</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qheader.h: 1998/08/21
+<li>qheader.cpp: 1998/10/30
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

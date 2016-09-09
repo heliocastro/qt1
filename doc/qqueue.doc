@@ -1,0 +1,89 @@
+/****************************************************************************
+** $Id: qqueue.doc,v 2.3 1997/08/06 15:03:13 hanord Exp $
+**
+** QQueue class documentation
+**
+** Copyright (C) 1995-1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+
+/*****************************************************************************
+  QQueue documentation
+ *****************************************************************************/
+
+/*!
+  \class QQueue qqueue.h
+  \brief The QQueue class is a template class that provides a queue.
+
+  \ingroup collection
+  \ingroup tools
+
+  QQueue is implemented as both a template and a macro class. Define a
+  template instance QQueue\<X\> to create a queue that operates on
+  pointers to X, or X*.
+
+  A stack is a collection that can be used to enqueue and dequeue items.
+
+  \sa \link collection.html Collection Classes\endlink
+*/
+
+/*! \fn QQueue::QQueue () 
+  Creates an empty queue.
+*/
+
+/*! \fn QQueue::QQueue (const QQueue<type>& queue) 
+  Creates a queue from another.
+
+  Only the pointers are copied.
+*/
+
+/*! \fn QQueue::~QQueue () 
+  Destroys the list.  Items in the list are destroyed if autoDelete() is TRUE.
+*/
+
+/*! \fn QQueue<type>& QQueue::operator= (const QQueue<type>& queue) 
+  Assigns \e queue to this queue and returns a reference to this queue.
+
+  This queue is first cleared, then each item in \e queue is
+  enqueued to this queue.  Only the pointers are copied (shallow copy).
+*/
+
+/*! \fn bool QQueue::isEmpty () const 
+
+  Returns TRUE if there are no items to be \link dequeue() dequeued \endlink.
+*/
+
+/*! \fn void QQueue::enqueue (const type* d) 
+
+  Adds an item to the queue.  Last in, last out.
+*/
+
+/*! \fn type* QQueue::dequeue () 
+
+  Removes the front item from the queue.  Last in, last out.
+*/
+
+/*! \fn bool QQueue::remove () 
+
+  Removes the front item from the queue.  Last in, last out.
+  The item is deleted if autoDelete() is TRUE.
+  Returns TRUE if there was an item to remove.
+*/
+
+/*! \fn type* QQueue::head () const 
+  Returns a reference to the first item in the queue.  The queue is
+  not changed.
+*/
+
+/*! \fn QQueue::operator type* ()const 
+
+  Returns a reference to the first item in the queue.  The queue is
+  not changed.
+*/
+
+/*! \fn type* QQueue::current () const 
+
+  Returns a reference to the first item in the queue.  The queue is
+  not changed.
+*/

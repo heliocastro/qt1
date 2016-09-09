@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QStrIList Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QStrIList Class Reference</h1><br clear="all">
+<p>
+The QStrIList class provides a doubly linked list of <code>char*</code> with case insensitive compare.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qstrlist-h.html">qstrlist.h</a>&gt;</code>
+<p>
+Inherits <a href="qstrlist.html">QStrList</a>.
+<p><a href="qstrilist-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qstrilist.html#a0"><strong>QStrIList</strong></a> ( bool deepCopies=TRUE ) </span>
+<li><span class="fn"><a href="qstrilist.html#a1"><strong>~QStrIList</strong></a> () </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QStrIList class provides a doubly linked list of <code>char*</code> with case insensitive compare.
+<p>
+This class is a <a href="qlist.html">QList</a>&lt;char&gt; instance (a list of char*).
+<p>QStrIList is similar to <a href="qstrlist.html">QStrList</a> except that it is case insensitive.
+The virtual <a href="qglist.html#d8">compareItems</a>() function is reimplemented and does a
+case insensitive string comparision.
+The <a href="qlist.html#a7">inSort</a>() function will insert strings in a sorted order.
+<p>The QStrListIterator class is an iterator for QStrList.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QStrIList::QStrIList ( bool deepCopies=TRUE )</h3>
+<p>Constructs a list of strings.  Will make deep copies of all inserted
+strings if <em>deepCopies</em> is TRUE, or uses shallow copies if <em>deepCopies</em>
+is FALSE.
+<h3 class="fn"><a name="a1"></a>QStrIList::~QStrIList ()</h3>
+<p>Destroys the list.  All strings are removed.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qstrlist.h: 1998/08/25
+<li>qlist.doc: 1998/08/25
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>Qt tutorial - t8/cannon.h</title>
+</head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Source code for <a href="t8.html">tutorial 8</a>: cannon.h</h1><br clear="all">
+<hr>
+<pre>/****************************************************************
+**
+** Definition of CannonField class, Qt tutorial 8
+**
+****************************************************************/
+
+#ifndef CANNON_H
+#define CANNON_H
+
+#include &lt;<a href="qwidget-h.html">qwidget.h</a>&gt;
+
+class CannonField : public QWidget
+{
+    Q_OBJECT
+public:
+    CannonField( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+
+    int angle() const { return ang; }
+public slots:
+    void setAngle( int degrees );
+signals:
+    void angleChanged( int );
+protected:
+    void paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * );
+private:
+    int ang;
+};
+
+#endif // CANNON_H
+</pre>
+<p>
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

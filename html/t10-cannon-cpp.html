@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>Qt tutorial - t10/cannon.cpp</title>
+</head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Source code for <a href="t10.html">tutorial 10</a>: cannon.cpp</h1><br clear="all">
+<hr>
+<pre>/****************************************************************
+**
+** Implementation CannonField class, Qt tutorial 10
+**
+****************************************************************/
+
+#include "cannon.h"
+#include &lt;<a href="qpainter-h.html">qpainter.h</a>&gt;
+#include &lt;<a href="qpixmap-h.html">qpixmap.h</a>&gt;
+
+CannonField::CannonField( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    ang = 45;
+    f   = 0;
+}
+
+void <a name="260"></a>CannonField::setAngle( int degrees )
+{
+    if ( degrees &lt; 5 )
+        degrees = 5;
+    if ( degrees &gt; 70 )
+        degrees = 70;
+    if ( ang == degrees )
+        return;
+    ang = degrees;
+    <a href="qwidget.html#k0">repaint</a>( cannonRect(), FALSE );
+    emit angleChanged( ang );
+}
+
+void <a name="261"></a>CannonField::setForce( int newton )
+{
+    if ( newton &lt; 0 )
+        newton = 0;
+    if ( f == newton )
+        return;
+    f = newton;
+    emit forceChanged( f );
+}
+
+void <a name="262"></a>CannonField::paintEvent( <a href="qpaintevent.html">QPaintEvent</a> *e )
+{
+    <a href="qrect.html">QRect</a> updateR = e-&gt;<a href="qpaintevent.html#a1">rect</a>();
+    <a href="qpainter.html">QPainter</a> p;
+
+    p.<a href="qpainter.html#b0">begin</a>( this );
+    if ( updateR.<a href="qrect.html#e5">intersects</a>( <a href=#264>cannonRect</a>() ) )
+        <a href=#263>paintCannon</a>( &amp;p );
+    p.<a href="qpainter.html#b2">end</a>();
+}
+
+const QRect barrel_rect(33, -4, 15, 8);
+
+void <a name="263"></a>CannonField::paintCannon( <a href="qpainter.html">QPainter</a> *p )
+{
+    <a href="qrect.html">QRect</a>    cr = cannonRect();
+    <a href="qpixmap.html">QPixmap</a>  pix( cr.<a href="qrect.html#d5">size</a>() );
+    <a href="qpainter.html">QPainter</a> tmp;
+
+    pix.<a href="qpixmap.html#b7">fill</a>( this, cr.<a href="qrect.html#c0">topLeft</a>() );
+
+    tmp.<a href="qpainter.html#b0">begin</a>( &amp;pix );
+    tmp.<a href="qpainter.html#c8">setBrush</a>( blue );
+    tmp.<a href="qpainter.html#c4">setPen</a>( NoPen );
+
+    tmp.<a href="qpainter.html#f2">translate</a>( 0, pix.<a href="qpixmap.html#b2">height</a>() - 1 );
+    tmp.<a href="qpainter.html#j2">drawPie</a>( <a href="qrect.html">QRect</a>( -35,-35, 70, 70 ), 0, 90*16 );
+    tmp.<a href="qpainter.html#f5">rotate</a>( -ang );
+    tmp.<a href="qpainter.html#i0">drawRect</a>( barrel_rect );
+    tmp.<a href="qpainter.html#b2">end</a>();
+
+    p-&gt;<a href="qpainter.html#k0">drawPixmap</a>( cr.<a href="qrect.html#c0">topLeft</a>(), pix );
+}
+
+<a href="qrect.html">QRect</a> <a name="264"></a>CannonField::cannonRect() const
+{
+    <a href="qrect.html">QRect</a> r( 0, 0, 50, 50 );
+    r.<a href="qrect.html#d0">moveBottomLeft</a>( <a href="qwidget.html#c1">rect</a>().bottomLeft() );
+    return r;
+}
+</pre>
+<p>
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QGroupBox Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QGroupBox Class Reference</h1><br clear="all">
+<p>
+The QGroupBox widget provides a group box frame with a title.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qgroupbox-h.html">qgroupbox.h</a>&gt;</code>
+<p>
+Inherits <a href="qframe.html">QFrame</a>.
+<p>Inherited by <a href="qbuttongroup.html">QButtonGroup</a>.
+<p><a href="qgroupbox-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qgroupbox.html#a0"><strong>QGroupBox</strong></a> ( QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qgroupbox.html#a1"><strong>QGroupBox</strong></a> ( const char * title, QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn">const char* <a href="qgroupbox.html#a2"><strong>title</strong></a> () const</span>
+<li><span class="fn">void <a href="qgroupbox.html#a3"><strong>setTitle</strong></a> ( const char * ) </span>
+<li><span class="fn">int <a href="qgroupbox.html#a4"><strong>alignment</strong></a> () const</span>
+<li><span class="fn">void <a href="qgroupbox.html#a5"><strong>setAlignment</strong></a> ( int ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qgroupbox.html#a6"><strong>paintEvent</strong></a> ( QPaintEvent * ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QGroupBox widget provides a group box frame with a title.
+<p>
+The intended use of a group box is to show that a number of widgets
+(i.e. child widgets) are logically related.  <a href="qprintdialog.html">QPrintDialog</a> is a good
+example; each of its three panes is one group box.
+<p>By default, the group's <a href="qwidget.html#f9">setFont</a>() and <a href="qwidget.html#f7">setPalette</a>() functions do not
+change the appearance of the widgets it contaisn, but you can use
+<a href="qwidget.html#g3">setFontPropagation</a>() and <a href="qwidget.html#g5">setPalettePropagation</a>() to change that.
+<p>Qt also provides a more specialized group box, <a href="qbuttongroup.html">QButtonGroup</a>, that is
+very useful for organizing buttons in a group.
+<p><img src=qgrpbox-m.gif> <img src=qgrpbox-w.gif>
+<p>Examples:
+ <a href="xform-xform-cpp.html#QGroupBox">xform/xform.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QGroupBox::QGroupBox ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs a group box widget with no title.
+<p>The <em>parent</em> and <em>name</em> arguments are passed to the <a href="qwidget.html">QWidget</a> constructor.
+<h3 class="fn"><a name="a1"></a>QGroupBox::QGroupBox ( const char * title, <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs a group box with a title.
+<p>The <em>parent</em> and <em>name</em> arguments are passed to the <a href="qwidget.html">QWidget</a> constructor.
+<h3 class="fn">int <a name="a4"></a>QGroupBox::alignment () const</h3>
+<p>Returns the alignment of the group box title.
+<p>The default alignment is <code>AlignHCenter.</code>
+<p>See also:  <a href="qgroupbox.html#a5">setAlignment</a>().
+<h3 class="fn">void <a name="a6"></a>QGroupBox::paintEvent ( <a href="qpaintevent.html">QPaintEvent</a> * event ) <code>[virtual protected]</code></h3>
+<p>Handles paint events for the group box.
+<p>Reimplemented from <a href="qwidget.html#o4">QWidget.</a>
+<h3 class="fn">void <a name="a5"></a>QGroupBox::setAlignment ( int alignment )</h3>
+<p>Sets the alignment of the group box title.
+<p>The title is always placed on the upper frame line, however,
+the horizontal alignment can be specified by the <em>alignment</em> parameter.
+<p>The <em>alignment</em> is the bitwise OR of the following flags:
+<ul>
+<li> <code>AlignLeft</code> aligns the title text to the left.
+<li> <code>AlignRight</code> aligns the title text to the right.
+<li> <code>AlignHCenter</code> aligns the title text centered.
+</ul>
+<p>See also:  <a href="qgroupbox.html#a4">alignment</a>().
+<h3 class="fn">void <a name="a3"></a>QGroupBox::setTitle ( const char * title )</h3>
+<p>Sets the group box title text to <em>title.</em>
+<p>Examples:
+ <a href="xform-xform-cpp.html#setTitle">xform/xform.cpp</a>
+ <a href="widgets-widgets-cpp.html#setTitle">widgets/widgets.cpp</a>
+<h3 class="fn">const char* <a name="a2"></a>QGroupBox::title () const</h3>
+<p>Returns the group box title text.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qgroupbox.h: 1998/08/21
+<li>qgroupbox.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

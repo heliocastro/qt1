@@ -1,0 +1,49 @@
+.TH QBitVal 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QBitVal \- Internal class, used with QBitArray
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qbitarray.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QBitVal ( QBitArray * " "a" ", uint i )"
+.br
+.ti -1c
+.BI "operator int ()"
+.br
+.ti -1c
+.BI "QBitVal& operator= ( const QBitVal & v )"
+.br
+.ti -1c
+.BI "QBitVal& operator= ( int v )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QBitVal class is an internal class, used with QBitArray.
+.PP
+The QBitVal is required by the indexing [] operator on bit arrays. It is probably a bad idea to use it in any other context.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QBitVal::QBitVal ( QBitArray * a, uint i )"
+Constructs a reference to an element in a QBitArray. This is what QBitArray::operator[] contructs its return value with.
+.SH "QBitVal::operator int ()"
+Returns the value referenced by the QBitVal.
+.SH "QBitVal& QBitVal::operator= ( const QBitVal & v )"
+Sets the value referenced by the QBitVal to that referenced by another QBitVal.
+.SH "QBitVal& QBitVal::operator= ( int v )"
+Sets the value referenced by the QBitVal.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qbitval.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

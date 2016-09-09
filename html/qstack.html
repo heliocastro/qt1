@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QStack Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QStack Class Reference</h1><br clear="all">
+<p>
+The QStack class is a template class that provides a stack.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qstack-h.html">qstack.h</a>&gt;</code>
+<p><a href="qstack-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qstack.html#a0"><strong>QStack</strong></a> () </span>
+<li><span class="fn"><a href="qstack.html#a1"><strong>QStack</strong></a> ( const QStack&lt;type&gt; &amp; s ) </span>
+<li><span class="fn"><a href="qstack.html#a2"><strong>~QStack</strong></a> () </span>
+<li><span class="fn">QStack&lt;type&gt;&amp; <a href="qstack.html#a3"><strong>operator=</strong></a> ( const QStack&lt;type&gt; &amp; s ) </span>
+<li><span class="fn">bool <a href="qcollection.html#a0"><strong>autoDelete</strong></a> () const</span>
+<li><span class="fn">void <a href="qcollection.html#a1"><strong>setAutoDelete</strong></a> ( bool enable ) </span>
+<li><span class="fn">virtual uint <a href="qglist.html#a0"><strong>count</strong></a> () const</span>
+<li><span class="fn">bool <a href="qstack.html#a7"><strong>isEmpty</strong></a> () const</span>
+<li><span class="fn">void <a href="qstack.html#a8"><strong>push</strong></a> ( const type * d ) </span>
+<li><span class="fn">type* <a href="qstack.html#a9"><strong>pop</strong></a> () </span>
+<li><span class="fn">bool <a href="qstack.html#b0"><strong>remove</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qglist.html#c2"><strong>clear</strong></a> () </span>
+<li><span class="fn">type* <a href="qstack.html#b2"><strong>top</strong></a> () const</span>
+<li><span class="fn">operator <a href=qstack.html#b5><strong>type*</strong></a> ()const</span>
+<li><span class="fn">type* <a href="qstack.html#b3"><strong>current</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QStack class is a template class that provides a stack.
+<p>
+QStack is implemented as both a template and a macro class. Define a
+template instance QStack&lt;X&gt; to create a stack that operates on
+pointers to X, or X*.
+<p>A stack is a collection that can be used to push and pop items.
+<p>See also:  <a href="collection.html">Collection Classes</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QStack::QStack ()</h3>
+<p>Creates and empty stack.
+<h3 class="fn"><a name="a1"></a>QStack::QStack ( const QStack&lt;type&gt; &amp; s )</h3>
+<p>Creates a stack by making a shallow copy of another stack.
+<h3 class="fn"><a name="a2"></a>QStack::~QStack ()</h3>
+<p>Destroys the stack.  All items will be deleted if <a href="qcollection.html#a0">autoDelete</a>() is TRUE.
+<h3 class="fn"><a name="b5"></a>QStack::operator type* () const</h3>
+<p>Returns a reference to the top item on the stack (most recently pushed).
+The stack is not changed.
+<h3 class="fn">type* <a name="b3"></a>QStack::current () const</h3>
+<p>Returns a reference to the top item on the stack (most recently pushed).
+The stack is not changed.
+<h3 class="fn">bool <a name="a7"></a>QStack::isEmpty () const</h3>
+<p>Returns TRUE is the stack contains no elements to be <a href="qstack.html#a9">popped</a>
+<h3 class="fn">QStack&lt;type&gt;&amp; <a name="a3"></a>QStack::operator= ( const QStack&lt;type&gt; &amp; s )</h3>
+<p>Sets the contents of this stack by making a shallow copy of another stack.
+Elements currently in this stack will be deleted if <a href="qcollection.html#a0">autoDelete</a>() is TRUE.
+<h3 class="fn">type* <a name="a9"></a>QStack::pop ()</h3>
+<p>Removes the top item from the stack and returns it.
+<h3 class="fn">void <a name="a8"></a>QStack::push ( const type * d )</h3>
+<p>Adds an element to the top of the stack.  Last in, first out.
+<h3 class="fn">bool <a name="b0"></a>QStack::remove ()</h3>
+<p>Removes the top item from the stack and deletes it if
+if <a href="qcollection.html#a0">autoDelete</a>() is TRUE.  Returns TRUE if there was an item to pop.
+<h3 class="fn">type* <a name="b2"></a>QStack::top () const</h3>
+<p>Returns a reference to the top item on the stack (most recently pushed).
+The stack is not changed.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qstack.h: 1998/08/27
+<li>qstack.doc: 1997/08/06
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

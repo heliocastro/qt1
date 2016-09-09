@@ -1,0 +1,81 @@
+/****************************************************************************
+** $Id: fontmatch.doc,v 2.4 1998/03/31 09:05:35 aavit Exp $
+**
+** Explanation of font matching
+**
+** Copyright (C) 1995-1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+/*! \page fontmatch.html
+
+<title>Qt Font Matching</title></head><body bgcolor="#ffffff">
+
+\postheader
+
+<h1 align=center> Font Matching </h1><br clear="all">
+
+<p>
+
+The QFont class is an abstract specification of an ideal font. This
+font must be matched to fit an actual window system font when drawing
+is to be done. This is not a trivial operation since there are no
+fonts that we can be sure will be available on all window systems at all
+times, or even on a single window system at all times. Qt queries the
+window system for available fonts and uses a font matching algorithm to
+decide which one of the available fonts closely matches the QFont settings.
+
+<p>
+
+The font matching algorithm works as follows:
+
+<p>
+
+First an available font family is found. If the requested is not
+available the \link QFont::setStyleHint() style hint \endlink is
+used to select a replacement family. If the style hint has not been
+set, "helvetica" will be used.
+
+<p>
+
+If even the replacement family is not found, "helvetica" is searched
+for, if that too is not found Qt will search for a last resort font,
+i.e.  a specific font to match to, ignoring the attribute settings.
+Qt searches through a built-in list of very common fonts. If none of
+these are available, Qt chickens out, gives you an error message and
+aborts (of course this only happens if you are using fonts and Qt \e
+has to load a font). We have not been able to find a case where this
+happens. Please <a href="mailto:qt-bugs@troll.no">mail us</a> if you
+do, preferably with a list of the fonts you have installed (under X
+windows, type "xlsfonts").
+
+<p>
+
+The following attributes are then matched, in order of priority:
+
+<ol>
+<li> \link QFont::setCharSet() character set \endlink
+<li> \link QFont::setFixedPitch() pitch \endlink
+<li> \link QFont::setPointSize() point size \endlink
+<li> \link QFont::setWeight() weight \endlink
+<li> \link QFont::setItalic() italic \endlink
+</ol>
+
+<p>
+
+If, for example, a font with the correct character set is found, but
+with all other attributes in the list unmatched, it will be chosen before
+a font with the wrong character set but with all other attributes correct.
+
+<p>
+
+The point size is defined to match if it is within 20% of the requested
+point size. Of course, when several fonts match and only point size
+differs the closest point size to the one requested will be chosen.
+
+<p>
+
+Using the correct font family has higher priority than using the correct
+character set.
+
+*/

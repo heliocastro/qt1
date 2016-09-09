@@ -1,0 +1,343 @@
+.TH QBitArray 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QBitArray \- Array of bits
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qbitarray.h>\fR
+.PP
+Inherits QByteArray.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QBitArray ()"
+.br
+.ti -1c
+.BI "QBitArray ( uint size )"
+.br
+.ti -1c
+.BI "QBitArray ( const QBitArray & a )"
+.br
+.ti -1c
+.BI "QBitArray& operator= ( const QBitArray & )"
+.br
+.ti -1c
+.BI "uint size () const"
+.br
+.ti -1c
+.BI "bool resize ( uint size )"
+.br
+.ti -1c
+.BI "bool fill ( bool " "v" ", int " "size" " = -1 )"
+.br
+.ti -1c
+.BI "virtual void detach ()"
+.br
+.ti -1c
+.BI "QBitArray copy () const"
+.br
+.ti -1c
+.BI "bool testBit ( uint index ) const"
+.br
+.ti -1c
+.BI "void setBit ( uint index )"
+.br
+.ti -1c
+.BI "void setBit ( uint " "index" ", bool value )"
+.br
+.ti -1c
+.BI "void clearBit ( uint index )"
+.br
+.ti -1c
+.BI "bool toggleBit ( uint index )"
+.br
+.ti -1c
+.BI "bool at ( uint index ) const"
+.br
+.ti -1c
+.BI "QBitVal operator[] ( int index )"
+.br
+.ti -1c
+.BI "QBitArray& operator&= ( const QBitArray & )"
+.br
+.ti -1c
+.BI "QBitArray& operator|= ( const QBitArray & )"
+.br
+.ti -1c
+.BI "QBitArray& operator^= ( const QBitArray & )"
+.br
+.ti -1c
+.BI "QBitArray operator~ () const"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual array_data* newData ()"
+.br
+.ti -1c
+.BI "virtual void deleteData ( array_data * d )"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "QBitArray operator& (const QBitArray & " "a1" ", const QBitArray & " "a2" ")"
+.br
+.ti -1c
+.BI "QBitArray operator| (const QBitArray & " "a1" ", const QBitArray & " "a2" ")"
+.br
+.ti -1c
+.BI "QBitArray operator^ (const QBitArray & " "a1" ", const QBitArray & " "a2" ")"
+.br
+.ti -1c
+.BI "QDataStream & operator<< (QDataStream & " "s" ", const QBitArray & " "a" ")"
+.br
+.ti -1c
+.BI "QDataStream & operator>> (QDataStream & " "s" ", QBitArray & " "a" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The QBitArray class provides an array of bits.
+.PP
+QString inherits QByteArray, which is defined as QArray<char>.
+.PP
+Since QBitArray is a QArray, it uses explicit sharing with a reference count.
+.PP
+A QBitArray is a special byte array that can access individual bits and perform bit-operations (AND, OR, XOR and NOT) on entire arrays or bits.
+.PP
+Bits can be manipulated by the setBit() and clearBit() functions, but it is also possible to use the indexing [] operator to test and set individual bits. The [] operator is a little slower than the others, because some tricks are required to implement single-bit assignments.
+.PP
+Example:
+.PP
+.nf
+.br
+    QBitArray a(3);
+.br
+    a.setBit( 0 );
+.br
+    a.clearBit( 1 );
+.br
+    a.setBit( 2 );                      // a = [1 0 1]
+.br
+.br
+    QBitArray b(3);
+.br
+    b[0] = 1;
+.br
+    b[1] = 1;
+.br
+    b[2] = 0;                           // b = [1 1 0]
+.br
+.br
+    QBitArray c;
+.br
+    c = ~a & b;                         // c = [0 1 0]
+.fi
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QBitArray::QBitArray ()"
+Constructs an empty bit array.
+.SH "QBitArray::QBitArray ( const QBitArray & a )"
+Constructs a shallow copy of \fIa.\fR
+.SH "QBitArray::QBitArray ( uint size )"
+Constructs a bit array of \fIsize\fR bits. The bits are uninitialized.
+.SH "bool QBitArray::at ( uint index ) const"
+Returns the value (0 or 1) of the bit at position \fIindex.\fR
+.PP
+See also: operator[].
+.SH "void QBitArray::clearBit ( uint index )"
+Clears the bit at position \fIindex\fR (sets it to 0).
+.PP
+See also: setBit() and toggleBit().
+.SH "QBitArray QBitArray::copy () const"
+Returns a deep copy of the bit array.
+.PP
+See also: detach().
+.SH "void QBitArray::detach () \fC[virtual]\fR"
+Detaches from shared bit array data and makes sure that this bit array is the only one referring the data.
+.PP
+If multiple bit arrays share common data, this bit array dereferences the data and gets a copy of the data. Nothing will be done if there is just a single reference.
+.PP
+See also: copy().
+.PP
+Reimplemented from QGArray.
+.SH "bool QBitArray::fill ( bool v, int size = -1 )"
+Fills the bit array with \fIv\fR (1's if \fIv\fR is TRUE, or 0's if \fIv\fR is FALSE).
+.PP
+Will resize the bit array to \fIsize\fR bits if \fIsize\fR is nonnegative.
+.PP
+Returns FALSE if a nonnegative \fIsize\fR was specified and if the bit array could not be resized, otherwise returns TRUE.
+.PP
+See also: resize().
+.SH "QBitArray & QBitArray::operator&= ( const QBitArray & a )"
+Performs the AND operation between all bits in this bit array and \fIa.\fR Returns a reference to this bit array.
+.PP
+The two bit arrays must have the same size. The debug library will warn you if they aren't, the production library blithely ignores the problem.
+.PP
+Example:
+.PP
+.nf
+.br
+    QBitArray a(3), b(3);
+.br
+    a[0] = 1;  a[1] = 0;        a[2] = 1;       // a = [1 0 1]
+.br
+    b[0] = 0;  b[1] = 0;        b[2] = 1;       // b = [0 0 1]
+.br
+    a &= b;                                     // a = [0 0 1]
+.fi
+.PP
+See also: operator|=(), operator^=() and operator~().
+.SH "QBitArray & QBitArray::operator= ( const QBitArray & a )"
+Assigns a shallow copy of \fIa\fR to this bit array and returns a reference to this array.
+.SH "QBitVal QBitArray::operator[] ( int index )"
+Implements the [] operator for bit arrays.
+.PP
+The returned QBitVal is a context object. It makes it possible to get and set a single bit value.
+.PP
+Example:
+.PP
+.nf
+.br
+    QBitArray a( 3 );
+.br
+    a[0] = 0;
+.br
+    a[1] = 1;
+.br
+    a[2] = a[0] ^ a[1];
+.fi
+.PP
+The functions testBit(), setBit() and clearBit() are faster.
+.PP
+See also: at().
+.SH "QBitArray & QBitArray::operator^= ( const QBitArray & a )"
+Performs the XOR operation between all bits in this bit array and \fIa.\fR Returns a reference to this bit array.
+.PP
+The two bit arrays must have the same size. The debug library will warn you if they aren't, the production library blithely ignores the problem.
+.PP
+Example:
+.PP
+.nf
+.br
+    QBitArray a(3), b(3);
+.br
+    a[0] = 1;  a[1] = 0;        a[2] = 1;       // a = [1 0 1]
+.br
+    b[0] = 0;  b[1] = 0;        b[2] = 1;       // b = [0 0 1]
+.br
+    a ^= b;                                     // a = [1 0 0]
+.fi
+.PP
+See also: operator&=(), operator|=() and operator~().
+.SH "QBitArray & QBitArray::operator|= ( const QBitArray & a )"
+Performs the OR operation between all bits in this bit array and \fIa.\fR Returns a reference to this bit array.
+.PP
+The two bit arrays must have the same size. The debug library will warn you if they aren't, the production library blithely ignores the problem.
+.PP
+Example:
+.PP
+.nf
+.br
+    QBitArray a(3), b(3);
+.br
+    a[0] = 1;  a[1] = 0;        a[2] = 1;       // a = [1 0 1]
+.br
+    b[0] = 0;  b[1] = 0;        b[2] = 1;       // b = [0 0 1]
+.br
+    a |= b;                                     // a = [1 0 1]
+.fi
+.PP
+See also: operator&=(), operator^=() and operator~().
+.SH "QBitArray QBitArray::operator~ () const"
+Returns a bit array which contains the inverted bits of this bit array.
+.PP
+Example:
+.PP
+.nf
+.br
+    QBitArray a(3);
+.br
+    a[0] = 1;  a[1] = 0; a[2] = 1;      // a = [1 0 1]
+.br
+    QBitArray b = ~a;                   // b = [0 1 0]
+.fi
+.SH "bool QBitArray::resize ( uint size )"
+Resizes the bit array to \fIsize\fR bits. Returns TRUE if the bit array could be resized.
+.PP
+When expanding the bit array, the new bits will be uninitialized.
+.PP
+See also: size().
+.SH "void QBitArray::setBit ( uint index )"
+Sets the bit at position \fIindex\fR (sets it to 1).
+.PP
+See also: clearBit() and toggleBit().
+.SH "void QBitArray::setBit ( uint index, bool value )"
+Sets the bit at position \fIindex\fR to \fIvalue.\fR
+.PP
+Equivalent to:
+.PP
+.nf
+.br
+    if ( value )
+.br
+        setBit( index );
+.br
+    else
+.br
+        clearBit( index );
+.fi
+.PP
+See also: clearBit() and toggleBit().
+.SH "uint QBitArray::size () const"
+Returns the size (number of bits) of the bit array.
+.PP
+See also: resize().
+.SH "bool QBitArray::testBit ( uint index ) const"
+Returns TRUE if the bit at position \fIindex\fR is set.
+.PP
+See also: setBit() and clearBit().
+.SH "bool QBitArray::toggleBit ( uint index )"
+Toggles the bit at position \fIindex.\fR
+.PP
+If the previous value was 0, the new value will be 1. If the previous value was 1, the new value will be 0.
+.PP
+See also: setBit() and clearBit().
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "QBitArray operator& (const QBitArray & a1, const QBitArray & a2)"
+Returns the AND result between the bit arrays \fIa1\fR and \fIa2.\fR
+.PP
+See also: QBitArray::operator&=().
+.SH "QBitArray operator| (const QBitArray & a1, const QBitArray & a2)"
+Returns the OR result between the bit arrays \fIa1\fR and \fIa2.\fR
+.PP
+See also: QBitArray::operator|=().
+.SH "QBitArray operator^ (const QBitArray & a1, const QBitArray & a2)"
+Returns the XOR result between the bit arrays \fIa1\fR and \fIa2.\fR
+.PP
+See also: QBitArray::operator^().
+.SH "QDataStream & operator<< (QDataStream & s, const QBitArray & a)"
+Writes a bit array to a stream.
+.PP
+Serialization format:
+.IP 1
+The array size (UINT32)
+.IP 2
+The array bits, (size+7)/8 bytes
+.SH "QDataStream & operator>> (QDataStream & s, QBitArray & a)"
+Reads a bit array from a stream.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qbitarray.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

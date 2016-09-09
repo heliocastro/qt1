@@ -1,0 +1,153 @@
+.TH QGManager 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QGManager \- One-dimensional geometry management
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qgmanager.h>\fR
+.PP
+Inherits QObject.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QGManager ( QWidget * " "parent" ", const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QGManager\fR ()"
+.br
+.ti -1c
+.BI "void setBorder ( int b )"
+.br
+.ti -1c
+.BI "enum { unlimited = QCOORD_MAX }"
+.br
+.ti -1c
+.BI "QChain* newSerChain ( Direction )"
+.br
+.ti -1c
+.BI "QChain* newParChain ( Direction )"
+.br
+.ti -1c
+.BI "bool add ( QChain * " "destination" ", QChain * " "source" ", int " "stretch" " = 0 )"
+.br
+.ti -1c
+.BI "bool addWidget ( QChain *, QWidget *, int " "stretch" " = 0 )"
+.br
+.ti -1c
+.BI "bool addSpacing ( QChain *, int " "minSize" ", int " "stretch" " = 0, int " "maxSize" " = unlimited )"
+.br
+.ti -1c
+.BI "bool addBranch ( QChain * " "destination" ", QChain * " "branch" ", int " "fromIndex" ", int toIndex )"
+.br
+.ti -1c
+.BI "void setStretch ( QChain *, int )"
+.br
+.ti -1c
+.BI "bool activate ()"
+.br
+.ti -1c
+.BI "void freeze ( int " "w" " = 0, int " "h" " = 0 )"
+.br
+.ti -1c
+.BI "void unFreeze ()"
+.br
+.ti -1c
+.BI "QChain* xChain ()"
+.br
+.ti -1c
+.BI "QChain* yChain ()"
+.br
+.ti -1c
+.BI "void setMenuBar ( QWidget * w )"
+.br
+.ti -1c
+.BI "QWidget* mainWidget ()"
+.br
+.ti -1c
+.BI "void remove ( QWidget * w )"
+.br
+.ti -1c
+.BI "void setName ( QChain *, const char * )"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual bool eventFilter ( QObject *, QEvent * )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QGManager class provides one-dimensional geometry management.
+.PP
+This class is intended for those who write geometry managers and graphical designers. \fBIt is not for the faint of heart. \fR The QHBoxLayout, QVBoxLayout and QGridLayout classes are available for normal application programming.
+.PP
+Each dimension (horizontal and vertical) is handled independently. Widgets are organized in chains, which can be parallel or serial.
+.PP
+In a serial chain, elements are added one after another. Available space is divided among the elements according to stretch and max-/minsize.
+.PP
+In parallel chains, elements are added on top of each other. All elements are given the full length of the chain, and are placed at the same position.
+.PP
+See also: QHBoxLayout, QVBoxLayout and QGridLayout.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QGManager::QGManager ( QWidget * parent, const char * name=0 )"
+Creates a new QGManager which manages \fIparent's\fR children.
+.SH "QGManager::~QGManager ()"
+Destroys the QGManager, deleting all add()ed chains.
+.SH "bool QGManager::activate ()"
+Starts geometry management.
+.SH "bool QGManager::add ( QChain * destination, QChain * source, int stretch = 0 )"
+Adds the chain \fIsource\fR to the chain \fIdestination.\fR
+.SH "bool QGManager::addBranch ( QChain * destination, QChain * branch, int fromIndex, int toIndex )"
+Adds \fIbranch\fR to \fIdestination\fR as a branch going from \fIfromIndex\fR to \fItoIndex.\fR A branch is a chain that is anchored at two locations in a serial chain. The branch does not influence the main chain; if the branch's minimum size is greater than the minimum distance between the anchors, things will look ugly.
+.PP
+The branch goes from the beginning of the item at \fIfromIndex\fR to the end of the item at \fItoIndex.\fR Note: remember to count spacing when calculating indices.
+.SH "bool QGManager::addSpacing ( QChain * d, int minSize, int stretch = 0, int maxSize = unlimited )"
+Adds the spacing \fIw\fR to the chain \fId.\fR If \fId\fR is a serial chain, this means screen space between widgets. If \fId\fR is parallel, this influences the maximum and minimum size.
+.SH "bool QGManager::addWidget ( QChain * d, QWidget * w, int stretch = 0 )"
+Adds the widget \fIw\fR to the chain \fId.\fR
+.SH "bool QGManager::eventFilter ( QObject * o, QEvent * e ) \fC[virtual protected]\fR"
+Grabs all resize events for my parent, and does child widget resizing.
+.PP
+Reimplemented from QObject.
+.SH "void QGManager::freeze ( int w = 0, int h = 0 )"
+Fixes the size of the main widget and distributes the available space to the child widgets. The size is adjusted to a valid value. Thus freeze(0,0) (the default) will fix the widget to its minimum size.
+.SH "QWidget * QGManager::mainWidget ()"
+Returns the main widget of the manager.
+.SH "QChain * QGManager::newParChain ( Direction d )"
+Creates a new QChain which is \fIparallel.\fR
+.SH "QChain * QGManager::newSerChain ( Direction d )"
+Creates a new QChain which is \fIserial.\fR
+.SH "void QGManager::remove ( QWidget * w )"
+Removes the widget \fIw\fR from geometry management. Will not remove spacing around the widget. This function is called automatically if the widget is deleted.
+.SH "void QGManager::setBorder ( int b )"
+Sets the border around the edge of the widget. \fIb\fR is the number of pixels between the edge of the widget and the area controlled by the manager.
+.SH "void QGManager::setMenuBar ( QWidget * w )"
+Makes the geometry manager take account of the menu bar \fIw.\fR All child widgets are placed below the bottom edge of the menu bar.
+.SH "void QGManager::setName ( QChain * chain, const char * name )"
+Sets the name of \fIchain\fR to \fIname.\fR The name is used for debugging purposes.
+.SH "void QGManager::setStretch ( QChain * c, int s )"
+Sets the stretch factor on \fIc\fR to \fIs.\fR This stretch factor is overridden by add(), so there's no point in calling this function before you add() the chain.
+.PP
+See also: add().
+.SH "void QGManager::unFreeze ()"
+Undoes the effect of a previous freeze(). The main widget will now again be resizable.
+.SH "QChain * QGManager::xChain ()"
+Returns the main horizontal chain of the manager. All horizontal chains should be inserted into this chain or one of its descendants, otherwise they will be ignored.
+.SH "QChain * QGManager::yChain ()"
+Returns the main vertical chain of the manager. All vertical chains
+should be inserted into this chain or one of its descendants, otherwise
+they will be ignored.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qgmanager.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

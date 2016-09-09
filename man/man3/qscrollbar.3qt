@@ -1,0 +1,306 @@
+.TH QScrollBar 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QScrollBar \- Vertical or horizontal scroll bar
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qscrollbar.h>\fR
+.PP
+Inherits QRangeControl and QWidget.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QScrollBar ( QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "QScrollBar ( Orientation, QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "QScrollBar ( int " "minValue" ", int " "maxValue" ", int " "LineStep" ", int " "PageStep" ", int " "value" ", Orientation, QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "void setOrientation ( Orientation )"
+.br
+.ti -1c
+.BI "Orientation orientation () const"
+.br
+.ti -1c
+.BI "void setTracking ( bool enable )"
+.br
+.ti -1c
+.BI "bool tracking () const"
+.br
+.ti -1c
+.BI "bool draggingSlider () const"
+.br
+.ti -1c
+.BI "virtual void setPalette ( const QPalette & )"
+.br
+.ti -1c
+.BI "virtual QSize sizeHint () const"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void valueChanged ( int value )"
+.br
+.ti -1c
+.BI "void sliderPressed ()"
+.br
+.ti -1c
+.BI "void sliderMoved ( int value )"
+.br
+.ti -1c
+.BI "void sliderReleased ()"
+.br
+.ti -1c
+.BI "void nextLine ()"
+.br
+.ti -1c
+.BI "void prevLine ()"
+.br
+.ti -1c
+.BI "void nextPage ()"
+.br
+.ti -1c
+.BI "void prevPage ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void timerEvent ( QTimerEvent * )"
+.br
+.ti -1c
+.BI "virtual void keyPressEvent ( QKeyEvent * )"
+.br
+.ti -1c
+.BI "virtual void resizeEvent ( QResizeEvent * )"
+.br
+.ti -1c
+.BI "virtual void paintEvent ( QPaintEvent * )"
+.br
+.ti -1c
+.BI "virtual void mousePressEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseReleaseEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseMoveEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void valueChange ()"
+.br
+.ti -1c
+.BI "virtual void stepChange ()"
+.br
+.ti -1c
+.BI "virtual void rangeChange ()"
+.br
+.ti -1c
+.BI "int sliderStart () const"
+.br
+.ti -1c
+.BI "QRect sliderRect () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QScrollBar widget provides a vertical or horizontal scroll bar.
+.PP
+A scroll bar is used to let the user control a value within a program-definable range, and to give the user visible indication of the current value of a range control.
+.PP
+Scroll bars include four separate controls, in order: 
+.TP
+The \fIline-up\fR control is a little triangle with which the user can move one line up. The meaning of line is configurable. In e.g. editors and list boxes means one line of text. 
+.TP
+The \fIslider\fR is the handle that indicates the current value of the scroll bar, and which the user can drag to change the value. 
+.TP
+The \fIpage-up/down\fR control is the area on which the slider slides (the scroll bar's background). Clicking here moves the scroll bar up or down one page. The meaning of page too is configurable - in editors and list boxes it means as many lines as there is space for in the widget.
+.TP
+Finally, the line-down control is the arrow on the other end of the scroll bar. Clicking there moves the scroll bar down/rightwards one line.
+.PP
+QScrollBar has not much of an API of its own; it mostly relies on QRangeControl. The most useful functions are setValue() to set the scrollbar directly to some value; addPage(), addLine(), subPage() and subLine() to simulate the effects of clicking (neat for accelerator keys; setSteps() to define the values of pageStep() and lineStep(); and last but NOT least setRange() to set the minValue() and maxValue() of the scrollbar. (QScrollBar has a convenience constructor with which you can set most of that.)
+.PP
+In addition to the access functions from QRangeControl, QScrollBar has a comprehensive set of signals: 
+.IP
+.TP
+valueChanged() - emitted when the scroll bar's value has changed.
+.IP
+.TP
+sliderPressed() - emitted when the user starts to drag the slider
+.IP
+.TP
+sliderMoved() - emitted when the user drags the slider
+.IP
+.TP
+sliderReleased() - emitted when the user releases the slider
+.IP
+.TP
+nextLine() - emitted when the scroll bar has moved one line down/rightwards. Line is defined in QRangeControl.
+.IP
+.TP
+prevLine() - emitted when the scroll bar has moved one line up/leftwards.
+.IP
+.TP
+nextPage() - emitted when the scroll bar has moved one page down/rightwards.
+.IP
+.TP
+prevPage() - emitted when the scroll bar has moved one page up/leftwards.
+.IP
+.PP
+QScrollBar only offers integer ranges, and the current implementation has problems when the range is greater than a million or so. (A million is more than sufficient for today's display sizes, however.)
+.PP
+A scroll bar can be controlled by the keyboard, but it has a default focusPolicy() of \fCNoFocus.\fR Use setFocusPolicy() to enable keyboard focus.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+See also: QSlider, QSpinBox and GUI Design Handbook: Scroll Bar
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QScrollBar::QScrollBar ( QWidget * parent=0, const char * name=0 )"
+Constructs a vertical scroll bar.
+.PP
+The \fIparent\fR and \fIname\fR arguments are sent to the QWidget constructor.
+.SH "QScrollBar::QScrollBar ( Orientation orientation, QWidget * parent=0, const char * name=0 )"
+Constructs a scroll bar.
+.PP
+The \fIorientation\fR must be QScrollBar::Vertical or QScrollBar::Horizontal.
+.PP
+The \fIparent\fR and \fIname\fR arguments are sent to the QWidget constructor.
+.SH "QScrollBar::QScrollBar ( int minValue, int maxValue, int lineStep, int pageStep, int value, Orientation orientation, QWidget * parent=0, const char * name=0 )"
+Constructs a scroll bar.
+.PP
+Arguments:
+.TP
+\fIminValue\fR is the minimum scroll bar value.
+.TP
+\fImaxValue\fR is the maximum scroll bar value.
+.TP
+\fIlineStep\fR is the line step value.
+.TP
+\fIpageStep\fR is the page step value.
+.TP
+\fIvalue\fR is the initial value.
+.TP
+\fIorientation\fR must be QScrollBar::Vertical or QScrollBar::Horizontal. The \fIparent\fR and \fIname\fR arguments are sent to the QWidget constructor.
+.SH "bool QScrollBar::draggingSlider () const"
+Returns TRUE if the user has clicked the mouse on the slider and is currenly dragging it, or FALSE if not.
+.SH "void QScrollBar::keyPressEvent ( QKeyEvent * e ) \fC[virtual protected]\fR"
+Handles key press events for the scroll bar.
+.PP
+Reimplemented from QWidget.
+.SH "void QScrollBar::mouseMoveEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse move events for the scroll bar.
+.PP
+Reimplemented from QWidget.
+.SH "void QScrollBar::mousePressEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse press events for the scroll bar.
+.PP
+Reimplemented from QWidget.
+.SH "void QScrollBar::mouseReleaseEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse release events for the scroll bar.
+.PP
+Reimplemented from QWidget.
+.SH "void QScrollBar::nextLine () \fC[signal]\fR"
+This signal is emitted when the scroll bar scrolls one line down/right.
+.SH "void QScrollBar::nextPage () \fC[signal]\fR"
+This signal is emitted when the scroll bar scrolls one page down/right.
+.SH "Orientation QScrollBar::orientation () const"
+Returns the scroll bar orientation; QScrollBar::Vertical or QScrollBar::Horizontal.
+.PP
+See also: setOrientation().
+.SH "void QScrollBar::paintEvent ( QPaintEvent * event ) \fC[virtual protected]\fR"
+Handles paint events for the scroll bar.
+.PP
+Reimplemented from QWidget.
+.SH "void QScrollBar::prevLine () \fC[signal]\fR"
+This signal is emitted when the scroll bar scrolls one line up/left.
+.SH "void QScrollBar::prevPage () \fC[signal]\fR"
+This signal is emitted when the scroll bar scrolls one page up/left.
+.SH "void QScrollBar::rangeChange () \fC[virtual protected]\fR"
+For internal use only.
+.PP
+Reimplemented from QRangeControl.
+.SH "void QScrollBar::resizeEvent ( QResizeEvent * ) \fC[virtual protected]\fR"
+Handles resize events for the scroll bar.
+.PP
+Reimplemented from QWidget.
+.SH "void QScrollBar::setOrientation ( Orientation orientation )"
+Sets the scroll bar orientation. The \fIorientation\fR must be QScrollBar::Vertical or QScrollBar::Horizontal.
+.PP
+See also: orientation().
+.SH "void QScrollBar::setPalette ( const QPalette & p ) \fC[virtual]\fR"
+Reimplements the virtual function QWidget::setPalette().
+.PP
+Sets the background color to the mid color for Motif style scroll bars.
+.PP
+Reimplemented from QWidget.
+.SH "void QScrollBar::setTracking ( bool enable )"
+Enables scroll bar tracking if \fIenable\fR is TRUE, or disables tracking if \fIenable\fR is FALSE.
+.PP
+If tracking is enabled (default), the scroll bar emits the valueChanged() signal whenever the slider is being dragged. If tracking is disabled, the scroll bar emits the valueChanged() signal when the user relases the mouse button (unless the value happens to be the same as before).
+.PP
+See also: tracking().
+.SH "QSize QScrollBar::sizeHint () const \fC[virtual]\fR"
+Returns a size hint for this scroll bar.
+.PP
+Reimplemented from QWidget.
+.SH "void QScrollBar::sliderMoved ( int value ) \fC[signal]\fR"
+This signal is emitted when the slider is moved by the user, with the new scroll bar value as an argument.
+.PP
+This signal is emitted even when tracking is turned off.
+.PP
+See also: tracking(), valueChanged(), nextLine(), prevLine(), nextPage() and prevPage().
+.SH "void QScrollBar::sliderPressed () \fC[signal]\fR"
+This signal is emitted when the user presses the slider with the mouse.
+.SH "QRect QScrollBar::sliderRect () const \fC[protected]\fR"
+Returns the scroll bar slider rectangle.
+.PP
+See also: sliderStart().
+.SH "void QScrollBar::sliderReleased () \fC[signal]\fR"
+This signal is emitted when the user releases the slider with the mouse.
+.SH "int QScrollBar::sliderStart () const \fC[protected]\fR"
+Returns the pixel position where the scroll bar slider starts.
+.PP
+It is equivalent to sliderRect().y() for vertical scroll bars or sliderRect().x() for horizontal scroll bars.
+.SH "void QScrollBar::stepChange () \fC[virtual protected]\fR"
+For internal use only.
+.PP
+Reimplemented from QRangeControl.
+.SH "void QScrollBar::timerEvent ( QTimerEvent * ) \fC[virtual protected]\fR"
+Handles timer events for the scroll bar.
+.PP
+Reimplemented from QObject.
+.SH "bool QScrollBar::tracking () const"
+Returns TRUE if tracking is enabled, or FALSE if tracking is disabled.
+.PP
+Tracking is initially enabled.
+.PP
+See also: setTracking().
+.SH "void QScrollBar::valueChange () \fC[virtual protected]\fR"
+For internal use only.
+.PP
+Reimplemented from QRangeControl.
+.SH "void QScrollBar::valueChanged ( int value ) \fC[signal]\fR"
+This signal is emitted when the scroll bar value is changed, with the
+new scroll bar value as an argument.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qscrollbar.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

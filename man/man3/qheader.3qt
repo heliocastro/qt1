@@ -1,0 +1,254 @@
+.TH QHeader 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QHeader \- Table header
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qheader.h>\fR
+.PP
+Inherits QTableView.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QHeader ( QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "QHeader ( int, QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QHeader\fR ()"
+.br
+.ti -1c
+.BI "int addLabel ( const char *, int " "size" " = -1 )"
+.br
+.ti -1c
+.BI "void setLabel ( int, const char *, int " "size" " = -1 )"
+.br
+.ti -1c
+.BI "const char* label ( int )"
+.br
+.ti -1c
+.BI "void setOrientation ( Orientation )"
+.br
+.ti -1c
+.BI "Orientation orientation () const"
+.br
+.ti -1c
+.BI "void setTracking ( bool enable )"
+.br
+.ti -1c
+.BI "bool tracking () const"
+.br
+.ti -1c
+.BI "void setClickEnabled ( bool, int " "logIdx" " = -1 )"
+.br
+.ti -1c
+.BI "void setResizeEnabled ( bool, int " "logIdx" " = -1 )"
+.br
+.ti -1c
+.BI "void setMovingEnabled ( bool )"
+.br
+.ti -1c
+.BI "void setCellSize ( int " "i" ", int s )"
+.br
+.ti -1c
+.BI "int cellSize ( int i ) const"
+.br
+.ti -1c
+.BI "int cellPos ( int i ) const"
+.br
+.ti -1c
+.BI "int cellAt ( int i ) const"
+.br
+.ti -1c
+.BI "int count () const"
+.br
+.ti -1c
+.BI "int offset () const"
+.br
+.ti -1c
+.BI "virtual QSize sizeHint () const"
+.br
+.ti -1c
+.BI "int mapToLogical ( int ) const"
+.br
+.ti -1c
+.BI "int mapToActual ( int ) const"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "void setOffset ( int )"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void sectionClicked ( int )"
+.br
+.ti -1c
+.BI "void sizeChange ( int " "section" ", int " "oldSize" ", int newSize )"
+.br
+.ti -1c
+.BI "void moved ( int " "from" ", int to )"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void resizeEvent ( QResizeEvent * )"
+.br
+.ti -1c
+.BI "QRect sRect ( int i )"
+.br
+.ti -1c
+.BI "virtual void paintCell ( QPainter *, int, int )"
+.br
+.ti -1c
+.BI "virtual void setupPainter ( QPainter * )"
+.br
+.ti -1c
+.BI "virtual int cellHeight ( int )"
+.br
+.ti -1c
+.BI "virtual int cellWidth ( int )"
+.br
+.ti -1c
+.BI "virtual void mousePressEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseReleaseEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseMoveEvent ( QMouseEvent * )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QHeader class provides a table header.
+.PP
+This is a table heading of the type used in a list view. It gives the user the opportunity to resize and move the columns (or rows for vertical headings).
+.PP
+This class can be used without a table view, if you need to control table-like structures.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+See also: QListView, QTableView and Microsoft Style Guide
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QHeader::QHeader ( QWidget * parent=0, const char * name=0 )"
+Constructs a horizontal header.
+.PP
+The \fIparent\fR and \fIname\fR arguments are sent to the QWidget constructor.
+.SH "QHeader::QHeader ( int n, QWidget * parent=0, const char * name=0 )"
+Constructs a horizontal header with \fIn\fR sections.
+.PP
+The \fIparent\fR and \fIname\fR arguments are sent to the QWidget constructor.
+.SH "QHeader::~QHeader ()"
+Destroys the header.
+.SH "int QHeader::addLabel ( const char * s, int size = -1 )"
+Adds a new section, with label text \fIs.\fR Returns the index. If \fIsize\fR is non-negative, the section width is set to \fIsize,\fR otherwise a size currently sufficient for the label text is used.
+.SH "int QHeader::cellAt ( int c ) const"
+Returns the actual index of the section at position \fIc,\fR or -1 if outside.
+.SH "int QHeader::cellHeight ( int row ) \fC[virtual protected]\fR"
+Reimplemented for internal reasons; the API is not affected.
+.PP
+Reimplemented from QTableView.
+.SH "int QHeader::cellPos ( int i ) const"
+Returns the position in pixels of section \fIi\fR of the header. \fIi\fR is the actual index.
+.SH "int QHeader::cellSize ( int i ) const"
+Returns the size in pixels of section \fIi\fR of the header. \fIi\fR is the actual index.
+.SH "int QHeader::cellWidth ( int col ) \fC[virtual protected]\fR"
+Reimplemented for internal reasons; the API is not affected.
+.PP
+Reimplemented from QTableView.
+.SH "int QHeader::count () const"
+Returns the number of sections in the header.
+.SH "const char* QHeader::label ( int i )"
+Returns the text set on logical section \fIi.\fR
+.SH "int QHeader::mapToActual ( int l ) const"
+Translates from logical index \fIl\fR to actual index. Returns -1 if \fIl\fR is outside the legal range.
+.SH "int QHeader::mapToLogical ( int a ) const"
+Translates from actual index \fIa\fR to logical index. Returns -1 if \fIa\fR is outside the legal range.
+.SH "void QHeader::moved ( int from, int to ) \fC[signal]\fR"
+This signal is emitted when the user has moved column \fIfrom\fR to position \fIto.\fR
+.SH "int QHeader::offset () const"
+int QHeader::offset() const Returns the leftmost (or uppermost for vertical headers) visible pixel.
+.SH "QHeader::Orientation QHeader::orientation() const"
+Returns \fCHorizontal\fR if the header is horizontal, \fCVertical\fR if the header is vertical.
+.SH "void QHeader::paintCell ( QPainter * p, int row, int col ) \fC[virtual protected]\fR"
+paints a section of the header.
+.PP
+Reimplemented from QTableView.
+.SH "void QHeader::resizeEvent ( QResizeEvent * ) \fC[virtual protected]\fR"
+Handles resize events.
+.PP
+Reimplemented from QWidget.
+.SH "QRect QHeader::sRect ( int i ) \fC[protected]\fR"
+Returns the rectangle covered by actual section \fIi.\fR
+.SH "void QHeader::sectionClicked ( int logical ) \fC[signal]\fR"
+This signal is emitted when a part of the header is clicked. In a list view, this signal would typically be connected to a slot which sorts the specified column.
+.SH "void QHeader::setCellSize ( int i, int s )"
+Sets the size of logical cell \fIi\fR to \fIs\fR pixels.
+.PP
+\fBWarning:\fR does not repaint or send out signals at present.
+.SH "void QHeader::setClickEnabled ( bool enable, int i = -1 )"
+Enable clicking in column \fIi\fR if \fIenable\fR is TRUE, disable otherwise. If \fIi\fR is negative, clicking is enabled/disabled for all columns.
+.PP
+If enabled, the sectionClicked() signal is emitted when the user clicks.
+.PP
+See also: setMovingEnabled() and setResizeEnabled().
+.SH "void QHeader::setLabel ( int i, const char * s, int size = -1 )"
+Sets the text on logical section \fIi\fR to \fIs.\fR If the section does not exist, nothing happens. If \fIsize\fR is non-negative, the section width is set to \fIsize.\fR
+.SH "void QHeader::setMovingEnabled ( bool enable )"
+Enable the user to exchange columns if \fIenable\fR is TRUE, disable otherwise.
+.PP
+See also: setClickEnabled() and setResizeEnabled().
+.SH "void QHeader::setOffset ( int x ) \fC[slot]\fR"
+Scrolls the header such that \fIx\fR becomes the leftmost (or uppermost for vertical headers) visible pixel.
+.SH "void QHeader::setOrientation ( Orientation orientation )"
+Sets the header orientation. The \fIorientation\fR must be QHeader::Vertical or QHeader::Horizontal.
+.PP
+When adding labels without the size parameter, setOrientation should be called first, otherwise labels will be sized incorrectly.
+.PP
+See also: orientation().
+.SH "void QHeader::setResizeEnabled ( bool enable, int i = -1 )"
+Enable user resizing of column \fIi\fR if \fIenable\fR is TRUE, disable otherwise. If \fIi\fR is negative, resizing is enabled/disabled for all columns.
+.PP
+See also: setMovingEnabled() and setClickEnabled().
+.SH "void QHeader::setTracking ( bool enable )"
+Sets tracking if \fIenable\fR is TRUE, otherwise turns off tracking. If tracking is on, the sizeChange() signal is emitted continuously while the mouse is moved, otherwise it is only emitted when the mouse button is released.
+.PP
+See also: tracking().
+.SH "void QHeader::setupPainter ( QPainter * p ) \fC[virtual protected]\fR"
+sets up the painter.
+.PP
+Reimplemented from QTableView.
+.SH "void QHeader::sizeChange ( int section, int oldSize, int newSize ) \fC[signal]\fR"
+This signal is emitted when the user has changed the size of some of the parts of the header. This signal is typically connected to a slot that repaints the table. \fIsection\fR is the logical section resized.
+.SH "QSize QHeader::sizeHint () const \fC[virtual]\fR"
+Returns the recommended size of the QHeader.
+.PP
+Reimplemented from QWidget.
+.SH "bool QHeader::tracking () const"
+Returns TRUE if tracking is on, FALSE otherwise.
+.PP
+See also:  setTracking().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qheader.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,28 @@
+/****************************************************************************
+** $Id: classes.doc,v 1.5 1998/05/05 13:48:50 warwick Exp $
+**
+** Documentation for class overview
+**
+** Copyright (C) 1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+#if defined(DEBUG)
+static char ident[] = "$Id: classes.doc,v 1.5 1998/05/05 13:48:50 warwick Exp $";
+#endif
+
+
+/*!
+\page classes.html
+
+<title>Qt Documentation</title>
+</head><body bgcolor="#ffffff">
+
+\postheader
+
+<h1 align=center>Class Index</h1><br clear="all">
+
+<multicol cols=4>
+  \classlist
+</multicol>
+*/

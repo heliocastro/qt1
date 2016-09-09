@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qregexp.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qregexp.h</h1><br clear="all">
+This is the verbatim text of the qregexp.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qregexp.h,v 2.3.2.1 1998/08/19 16:02:37 agulbra Exp $
+**
+** Definition of QRegExp class
+**
+** Created : 950126
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QREGEXP_H
+#define QREGEXP_H
+
+#ifndef QT_H
+#include "qstring.h"
+#endif // QT_H
+
+
+class Q_EXPORT QRegExp
+{
+public:
+    QRegExp();
+    QRegExp( const char *, bool caseSensitive=TRUE, bool wildcard=FALSE );
+    QRegExp( const QRegExp &amp; );
+   ~QRegExp();
+    QRegExp    &amp;operator=( const QRegExp &amp; );
+    QRegExp    &amp;operator=( const char *pattern );
+
+    bool        operator==( const QRegExp &amp; )  const;
+    bool        operator!=( const QRegExp &amp;r ) const
+                                        { return !(this-&gt;operator==(r)); }
+
+    bool        isEmpty()       const   { return rxdata == 0; }
+    bool        isValid()       const   { return error == 0; }
+
+    bool        caseSensitive() const   { return cs; }
+    void        setCaseSensitive( bool );
+
+    bool        wildcard()      const   { return wc; }
+    void        setWildcard( bool );
+
+    const char *pattern()       const   { return (const char *)rxstring; }
+
+    int         match( const char *str, int index=0, int *len=0 ) const;
+
+protected:
+    void        compile();
+    char       *matchstr( ushort *, char *, char * ) const;
+
+private:
+    QString     rxstring;                       // regular expression pattern
+    ushort     *rxdata;                         // compiled regexp pattern
+    int         error;                          // error status
+    bool        cs;                             // case sensitive
+    bool        wc;                             // wildcard
+};
+
+
+#endif // QREGEXP_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

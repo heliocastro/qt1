@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qdatastream.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qdatastream.h</h1><br clear="all">
+This is the verbatim text of the qdatastream.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qdatastream.h,v 2.7.2.2 1998/08/21 19:13:24 hanord Exp $
+**
+** Definition of QDataStream class
+**
+** Created : 930831
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QDATASTREAM_H
+#define QDATASTREAM_H
+
+#ifndef QT_H
+#include "qiodevice.h"
+#include "qstring.h"
+#endif // QT_H
+
+
+class Q_EXPORT QDataStream                              // data stream class
+{
+public:
+    QDataStream();
+    QDataStream( QIODevice * );
+    QDataStream( QByteArray, int mode );
+    virtual ~QDataStream();
+
+    QIODevice   *device() const;
+    void         setDevice( QIODevice * );
+    void         unsetDevice();
+
+    bool         eof() const;
+
+    enum ByteOrder { BigEndian, LittleEndian };
+    int          byteOrder()    const;
+    void         setByteOrder( int );
+
+    bool         isPrintableData() const;
+    void         setPrintableData( bool );
+
+    QDataStream &amp;operator&gt;&gt;( Q_INT8 &amp;i );
+    QDataStream &amp;operator&gt;&gt;( Q_UINT8 &amp;i );
+    QDataStream &amp;operator&gt;&gt;( Q_INT16 &amp;i );
+    QDataStream &amp;operator&gt;&gt;( Q_UINT16 &amp;i );
+    QDataStream &amp;operator&gt;&gt;( Q_INT32 &amp;i );
+    QDataStream &amp;operator&gt;&gt;( Q_UINT32 &amp;i );
+    QDataStream &amp;operator&gt;&gt;( float &amp;f );
+    QDataStream &amp;operator&gt;&gt;( double &amp;f );
+    QDataStream &amp;operator&gt;&gt;( char *&amp;str );
+
+    QDataStream &amp;operator&lt;&lt;( Q_INT8 i );
+    QDataStream &amp;operator&lt;&lt;( Q_UINT8 i );
+    QDataStream &amp;operator&lt;&lt;( Q_INT16 i );
+    QDataStream &amp;operator&lt;&lt;( Q_UINT16 i );
+    QDataStream &amp;operator&lt;&lt;( Q_INT32 i );
+    QDataStream &amp;operator&lt;&lt;( Q_UINT32 i );
+    QDataStream &amp;operator&lt;&lt;( float f );
+    QDataStream &amp;operator&lt;&lt;( double f );
+    QDataStream &amp;operator&lt;&lt;( const char *str );
+
+    QDataStream &amp;readBytes( char *&amp;, uint &amp;len );
+    QDataStream &amp;readRawBytes( char *, uint len );
+
+    QDataStream &amp;writeBytes( const char *, uint len );
+    QDataStream &amp;writeRawBytes( const char *, uint len );
+
+private:
+    QIODevice   *dev;
+    bool         owndev;
+    int          byteorder;
+    bool         printable;
+    bool         noswap;
+
+private:        // Disabled copy constructor and operator=
+#if defined(Q_DISABLE_COPY)
+    QDataStream( const QDataStream &amp; );
+    QDataStream &amp;operator=( const QDataStream &amp; );
+#endif
+};
+
+
+/*****************************************************************************
+  QDataStream inline functions
+ *****************************************************************************/
+
+inline QIODevice *QDataStream::device() const
+{ return dev; }
+
+inline bool QDataStream::eof() const
+{ return dev ? dev-&gt;atEnd() : TRUE; }
+
+inline int QDataStream::byteOrder() const
+{ return byteorder; }
+
+inline bool QDataStream::isPrintableData() const
+{ return printable; }
+
+inline void QDataStream::setPrintableData( bool p )
+{ printable = p; }
+
+inline QDataStream &amp;QDataStream::operator&gt;&gt;( Q_UINT8 &amp;i )
+{ return *this &gt;&gt; (Q_INT8&amp;)i; }
+
+inline QDataStream &amp;QDataStream::operator&gt;&gt;( Q_UINT16 &amp;i )
+{ return *this &gt;&gt; (Q_INT16&amp;)i; }
+
+inline QDataStream &amp;QDataStream::operator&gt;&gt;( Q_UINT32 &amp;i )
+{ return *this &gt;&gt; (Q_INT32&amp;)i; }
+
+inline QDataStream &amp;QDataStream::operator&lt;&lt;( Q_UINT8 i )
+{ return *this &lt;&lt; (Q_INT8)i; }
+
+inline QDataStream &amp;QDataStream::operator&lt;&lt;( Q_UINT16 i )
+{ return *this &lt;&lt; (Q_INT16)i; }
+
+inline QDataStream &amp;QDataStream::operator&lt;&lt;( Q_UINT32 i )
+{ return *this &lt;&lt; (Q_INT32)i; }
+
+
+#endif // QDATASTREAM_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

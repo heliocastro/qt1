@@ -1,0 +1,76 @@
+.TH QValidator 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QValidator \- Validation of input text
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qvalidator.h>\fR
+.PP
+Inherits QObject.
+.PP
+Inherited by QDoubleValidator and QIntValidator.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QValidator ( QWidget * " "parent" ", const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "\fB~QValidator\fR ()"
+.br
+.ti -1c
+.BI "virtual State validate ( QString &, int & )"
+.br
+.ti -1c
+.BI "virtual void fixup ( QString & )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QValidator class provides validation of input text.
+.PP
+The class itself is abstract; two subclasses provide rudimentary numeric range checking.
+.PP
+The class includes two virtual functions, validate() and fixup().
+.PP
+validate() is pure virtual, so it must be implemented by every subclass. It returns Invalid, Valid or Acceptable depending on whether its argument is valid (for the class' definition of valid).
+.PP
+fixup() is provided for validators that can repair some or all user errors. The default does nothing. QLineEdit, for example, will call fixup() if the user presses Return and the content is not currently valid, in case fixup() can do magic.
+.PP
+QValidator is generally used with QLineEdit, QSpinBox and QComboBox.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QValidator::QValidator ( QWidget * parent, const char * name = 0 )"
+Sets up the internal data structures used by the validator. At the moment there aren't any.
+.SH "QValidator::~QValidator ()"
+Deletes the validator and frees any storage and other resources used.
+.SH "void QValidator::fixup ( QString & input ) \fC[virtual]\fR"
+Attempts to change \fIto\fR be valid according to this validator's rules. Need not result in a valid string - callers of this function must re-test afterwards. The default does nothing.
+.PP
+Reimplementation notes:
+.PP
+Note that \fIinput\fR may not be the only QString object referencing this string, so it's almost always necessary to detach() the string at the start of the code:
+.PP
+.nf
+.br
+    input.detach();
+.fi
+.PP
+You can change \fIinput\fR even if you aren't able to produce a valid string. For example an ISBN validator might want to delete every character except digits and "-", even if the result is not a valid ISBN, and a last-name validator might want to remove white space from the start and end of the string, even if the resulting string is not in the list of known last names.
+.SH "QValidator::State QValidator::validate( QString & input, int & pos ) \fC[virtual]\fR"
+This pure virtual function returns \fCInvalid\fR if \fIinput\fR is invalid according to this validator's rules, \fCValid\fR if it is likely that a little more editing will make the input acceptable (e.g. the user types '4' into a widget which accepts 10-99) and \fCAcceptable\fR if the input is completely acceptable.
+.PP
+The function can change \fIinput\fR and \fIpos\fR (the cursor position) if it wants to.
+.PP
+Reimplemented in QIntValidator and QDoubleValidator.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qvalidator.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

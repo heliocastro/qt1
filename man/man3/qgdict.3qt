@@ -1,0 +1,146 @@
+.TH QGDict 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QGDict \- Internal class for implementing QDict and QIntDict
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qgdict.h>\fR
+.PP
+Inherits QCollection.
+.PP
+Inherited by QDict, QIntDict and QPtrDict.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "virtual uint count () const"
+.br
+.ti -1c
+.BI "uint size () const"
+.br
+.ti -1c
+.BI "GCI look ( const char * " "key" ", GCI, int )"
+.br
+.ti -1c
+.BI "QDataStream& read ( QDataStream & )"
+.br
+.ti -1c
+.BI "QDataStream& write ( QDataStream & ) const"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "QGDict ( uint " "len" ", bool " "cs" ", bool " "ck" ", bool th )"
+.br
+.ti -1c
+.BI "QGDict ( const QGDict & )"
+.br
+.ti -1c
+.BI "\fB~QGDict\fR ()"
+.br
+.ti -1c
+.BI "QGDict& operator= ( const QGDict & )"
+.br
+.ti -1c
+.BI "bool remove ( const char * key )"
+.br
+.ti -1c
+.BI "bool removeItem ( const char * " "key" ", GCI item )"
+.br
+.ti -1c
+.BI "GCI take ( const char * key )"
+.br
+.ti -1c
+.BI "virtual void clear ()"
+.br
+.ti -1c
+.BI "void resize ( uint )"
+.br
+.ti -1c
+.BI "virtual int hashKey ( const char * )"
+.br
+.ti -1c
+.BI "void statistics () const"
+.br
+.ti -1c
+.BI "virtual QDataStream& read ( QDataStream &, GCI & )"
+.br
+.ti -1c
+.BI "virtual QDataStream& write ( QDataStream &, GCI ) const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QGDict class is an internal class for implementing QDict and QIntDict.
+.PP
+QGDict is a strictly internal class that acts as a base class for the collection classes QDict and QIntDict.
+.PP
+QGDict has some virtual functions that can be reimplemented to customize the subclasses.
+.TP
+hashKey() implements the hashing function for the dictionary.
+.TP
+read() reads a collection/dictionary item from a QDataStream.
+.TP
+write() writes a collection/dictionary item to a QDataStream. Normally, you do not have to reimplement any of these functions.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QGDict::QGDict ( const QGDict & dict ) \fC[protected]\fR"
+For internal use only.
+.SH "QGDict::QGDict ( uint len, bool cs, bool ck, bool th ) \fC[protected]\fR"
+For internal use only.
+.SH "QGDict::~QGDict () \fC[protected]\fR"
+For internal use only.
+.SH "void QGDict::clear () \fC[virtual protected]\fR"
+For internal use only.
+.PP
+Reimplemented from QCollection.
+.SH "uint QGDict::count () const \fC[virtual]\fR"
+For internal use only.
+.PP
+Reimplemented from QCollection.
+.SH "int QGDict::hashKey ( const char * key ) \fC[virtual protected]\fR"
+Returns the hash key for \fIkey,\fR when key is a string.
+.SH "GCI QGDict::look ( const char * key, GCI d, int op )"
+For internal use only.
+.SH "QGDict & QGDict::operator= ( const QGDict & dict ) \fC[protected]\fR"
+For internal use only.
+.SH "QDataStream & QGDict::read ( QDataStream & s )"
+For internal use only.
+.SH "QDataStream& QGDict::read ( QDataStream & s, GCI & item ) \fC[virtual protected]\fR"
+Reads a collection/dictionary item from the stream \fIs\fR and returns a reference to the stream.
+.PP
+The default implementation sets \fIitem\fR to 0.
+.PP
+See also: write().
+.SH "bool QGDict::remove ( const char * key ) \fC[protected]\fR"
+For internal use only.
+.SH "bool QGDict::removeItem ( const char * key, GCI item ) \fC[protected]\fR"
+For internal use only.
+.SH "void QGDict::resize ( uint newsize ) \fC[protected]\fR"
+For internal use only.
+.SH "uint QGDict::size () const"
+For internal use only.
+.SH "void QGDict::statistics () const \fC[protected]\fR"
+For internal use only.
+.SH "GCI QGDict::take ( const char * key ) \fC[protected]\fR"
+For internal use only.
+.SH "QDataStream& QGDict::write ( QDataStream & s ) const"
+For internal use only.
+.SH "QDataStream& QGDict::write ( QDataStream & s, GCI ) const \fC[virtual protected]\fR"
+Writes a collection/dictionary item to the stream \fIs\fR and returns a reference to the stream.
+.PP
+The default implementation does nothing.
+.PP
+See also:  read().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qgdict.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

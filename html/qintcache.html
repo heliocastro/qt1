@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QIntCache Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QIntCache Class Reference</h1><br clear="all">
+<p>
+The QIntCache class is a template class that provides a cache based on <code>long</code> keys.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qintcache-h.html">qintcache.h</a>&gt;</code>
+<p>
+Inherits <a href="qgcache.html">QGCache</a>.
+<p><a href="qintcache-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qintcache.html#a0"><strong>QIntCache</strong></a> ( const QIntCache&lt;type&gt; &amp; c ) </span>
+<li><span class="fn"><a href="qintcache.html#a1"><strong>QIntCache</strong></a> ( int maxCost=100, int size=17 ) </span>
+<li><span class="fn"><a href="qintcache.html#a2"><strong>~QIntCache</strong></a> () </span>
+<li><span class="fn">QIntCache&lt;type&gt;&amp; <a href="qintcache.html#a3"><strong>operator=</strong></a> ( const QIntCache&lt;type&gt; &amp; c ) </span>
+<li><span class="fn">int <a href="qintcache.html#a4"><strong>maxCost</strong></a> () const</span>
+<li><span class="fn">int <a href="qintcache.html#a5"><strong>totalCost</strong></a> () const</span>
+<li><span class="fn">void <a href="qintcache.html#a6"><strong>setMaxCost</strong></a> ( int m ) </span>
+<li><span class="fn">virtual uint <a href="qintcache.html#a7"><strong>count</strong></a> () const</span>
+<li><span class="fn">uint <a href="qintcache.html#a8"><strong>size</strong></a> () const</span>
+<li><span class="fn">bool <a href="qintcache.html#a9"><strong>isEmpty</strong></a> () const</span>
+<li><span class="fn">bool <a href="qintcache.html#b0"><strong>insert</strong></a> ( long k, const type * d, long c=1, int p=0 ) </span>
+<li><span class="fn">bool <a href="qintcache.html#b1"><strong>remove</strong></a> ( long k ) </span>
+<li><span class="fn">type* <a href="qintcache.html#b2"><strong>take</strong></a> ( long k ) </span>
+<li><span class="fn">virtual void <a href="qintcache.html#b3"><strong>clear</strong></a> () </span>
+<li><span class="fn">type* <a href="qintcache.html#b4"><strong>find</strong></a> ( long k, bool ref=TRUE ) const</span>
+<li><span class="fn">type* <a href="qintcache.html#b5"><strong>operator[]</strong></a> ( long k ) const</span>
+<li><span class="fn">void <a href="qgcache.html#b4"><strong>statistics</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QIntCache class is a template class that provides a cache based on <code>long</code> keys.
+<p>
+QIntCache is implemented as both a template and a macro class. Define a
+template instance QIntCache&lt;X&gt; to create a cache that operates on
+pointers to X, or X*.
+<p>A cache is a least recently used (LRU) list of cache items.  Each
+cache item has a cost.  The sum of item costs, <a href="qintcache.html#a5">totalCost</a>(), will not
+exceed the maximum cache cost, <a href="qintcache.html#a4">maxCost</a>().  If inserting a new item
+would cause the total cost to exceed the maximum cost, the least
+recently used items in the cache are deleted.
+<p>Apart from insert, by far the most important function is <a href="qintcache.html#b4">find</a>()
+(which also exists as operatior[]).  This function looks up an item,
+returns it, and by default marks it as being the least recently used
+item.
+<p>There are also methods to <a href="qintcache.html#b1">remove</a>() an object from the cache and
+delete it, and to <a href="qintcache.html#b2">take</a>() an object out of the cache without deleting
+it.
+<p>QIntCache, as it must, takes over ownership of the items you insert.
+That implies that it will delete the items at its discretion, and
+that you must <em>not</em> delete them.  There is one exception, however:
+If the cost of an object you try to <a href="qintcache.html#b0">insert</a>() is higher than the
+allowed total cost of the cache, insert() returns FALSE and in this
+case you must delete the object yourself.
+<p>In addition to totalCost() and maxCost()/<a href="qintcache.html#a6">setMaxCost</a>(), there are
+access functions to obtain the number of items in the cache
+(<a href="qintcache.html#a7">count</a>()), the size of the hash array (<a href="qintcache.html#a8">size</a>(), set using the
+constructor) and whether the cache is empty (you guessed it:
+<a href="qintcache.html#a9">isEmpty</a>()).  Finally, there is a <a href="qgcache.html#b4">statistics</a>(), which prints various
+cache statistics on <code>stdout.</code>
+<p>There is also a <a href="qintcacheiterator.html">QIntCacheIterator</a> which may be used to traverse the
+items in the cache in arbritrary order.
+<p>See also:  <a href="qintcacheiterator.html">QIntCacheIterator</a>, <a href="qcache.html">QCache</a> and <a href="collection.html">Collection Classes</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QIntCache::QIntCache ( const QIntCache&lt;type&gt; &amp; c )</h3>
+<p>For internal use only.
+<h3 class="fn"><a name="a1"></a>QIntCache::QIntCache ( int maxCost=100, int size=17 )</h3>
+<p>Constructs an empty cache with maximum allowed total cost <em>maxCost</em>
+and optimized to contain a bit less than <em>size</em> items.
+<h3 class="fn"><a name="a2"></a>QIntCache::~QIntCache ()</h3>
+<p>Destroys the object and all objects in it.
+<h3 class="fn">void <a name="b3"></a>QIntCache::clear () <code>[virtual]</code></h3>
+<p>Removes all items from the cache, and deletes them.
+<p>All cache iterators that operate this on cache are reset.
+<p>See also:  <a href="qintcache.html#b1">remove</a>() and <a href="qintcache.html#b2">take</a>().
+<p>Reimplemented from <a href="qcollection.html#a3">QCollection.</a>
+<h3 class="fn">uint <a name="a7"></a>QIntCache::count () const <code>[virtual]</code></h3>
+<p>Returns the number of items in the cache.
+<p>See also:  <a href="qintcache.html#a5">totalCost</a>().
+<p>Reimplemented from <a href="qcollection.html#a2">QCollection.</a>
+<h3 class="fn">type * <a name="b4"></a>QIntCache::find ( long k, bool ref=TRUE ) const</h3>
+<p>Returns the item associated with \ k, or null if the key does not
+exist in the cache.  If <em>ref</em> is TRUE (the default), the item is
+moved to the front of the LRU list.
+<p>If there are two or more items with equal keys, then the one that
+was inserted last is returned.
+<h3 class="fn">bool <a name="b0"></a>QIntCache::insert ( long k, const type * d, long c=1, int p=0 )</h3>
+<p>Inserts the item <em>d</em> into the cache with key <em>k,</em> cost <code>(default</code>
+1) and priority <em>p</em> (default 0).  Returns TRUE if it succeeds and
+FALSE if it fails.
+<p>The cache's size is limited, and if the total cost is too high,
+QIntCache will delete some of the least-used objects.<p><strong>Warning:</strong> If this function returns FALSE, you must delete <em>d</em>
+yourself.  Additionally, be very careful about using <em>d</em> after
+calling this function, as any other insertions into the cache, from
+anywhere in the application, or within Qt itself, could cause the
+object to be discarded from the cache, and the pointer to become
+invalid.
+<h3 class="fn">bool <a name="a9"></a>QIntCache::isEmpty () const</h3>
+<p>Returns TRUE if the cache is empty, or TRUE if there is at least one
+object in it.
+<h3 class="fn">int <a name="a4"></a>QIntCache::maxCost () const</h3>
+<p>Returns the maximum allowed total cost of the cache.
+<p>See also:  <a href="qintcache.html#a6">setMaxCost</a>() and <a href="qintcache.html#a5">totalCost</a>().
+<h3 class="fn">QIntCache&lt;type&gt;&amp; <a name="a3"></a>QIntCache::operator= ( const QIntCache&lt;type&gt; &amp; c )</h3>
+<p>For internal use only.
+<h3 class="fn">type * <a name="b5"></a>QIntCache::operator[] ( long k ) const</h3>
+<p>Returns the item associated with <em>k,</em> or null if <em>k</em> does not
+exist in the cache, and moves the item to the front of the LRU list.
+<p>If there are two or more items with equal keys, then the one that
+was inserted last is returned.
+<p>This is the same as <a href="qintcache.html#b4">find</a>( k, TRUE ).
+<p>See also:  <a href="qintcache.html#b4">find</a>().
+<h3 class="fn">bool <a name="b1"></a>QIntCache::remove ( long k )</h3>
+<p>Deletes the item associated with <em>k,</em> and returns TRUE if the item
+was present in the cache or FALSE if it was not.
+<p>If there are two or more items with equal keys, then the one that
+was inserted last is is deleted.
+<p>All iterators that refer to the removed item are set to point to the
+next item in the cache's traversal order.
+<p>See also:  <a href="qintcache.html#b2">take</a>() and <a href="qintcache.html#b3">clear</a>().
+<h3 class="fn">void <a name="a6"></a>QIntCache::setMaxCost ( int m )</h3>
+<p>Sets the maximum allowed total cost of the cache to <em>m.</em>  If the
+current total cost is above <em>m,</em> some items are deleted
+immediately.
+<p>See also:  <a href="qintcache.html#a4">maxCost</a>() and <a href="qintcache.html#a5">totalCost</a>().
+<h3 class="fn">uint <a name="a8"></a>QIntCache::size () const</h3>
+<p>Returns the size of the hash array used to implement the cache.
+This should be a bit bigger than <a href="qintcache.html#a7">count</a>() is likely to be.
+<h3 class="fn">type * <a name="b2"></a>QIntCache::take ( long k )</h3>
+<p>Takes the item associated with <em>k</em> out of the cache without
+deleting it, and returns a pointer to the item taken out, or null if
+the key does not exist in the cache.
+<p>If there are two or more items with equal keys, then the one that
+was inserted last is taken.
+<p>All iterators that refer to the taken item are set to point to the
+next item in the cache's traversal order.
+<p>See also:  <a href="qintcache.html#b1">remove</a>() and <a href="qintcache.html#b3">clear</a>().
+<h3 class="fn">int <a name="a5"></a>QIntCache::totalCost () const</h3>
+<p>Returns the total cost of the items in the cache.  This is an
+integer in the range 0 to <a href="qintcache.html#a4">maxCost</a>().
+<p>See also:  <a href="qintcache.html#a6">setMaxCost</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qintcache.h: 1998/08/27
+<li>qcache.doc: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

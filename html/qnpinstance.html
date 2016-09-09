@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QNPInstance Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QNPInstance Class Reference</h1><br clear="all">
+<p>
+a <a href="qobject.html">QObject</a> that is a Web-browser plugin
+This class is part of the <b>Qt NSPlugin Extension.</b>
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qnp-h.html">qnp.h</a>&gt;</code>
+<p>
+Inherits <a href="qobject.html">QObject</a>.
+<p><a href="qnpinstance-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qnpinstance.html#a0"><strong>~QNPInstance</strong></a> () </span>
+<li><span class="fn">int <a href="qnpinstance.html#a1"><strong>argc</strong></a> () const</span>
+<li><span class="fn">const char* <a href="qnpinstance.html#a2"><strong>argn</strong></a> ( int ) const</span>
+<li><span class="fn">const char* <a href="qnpinstance.html#a3"><strong>argv</strong></a> ( int ) const</span>
+<li><span class="fn">const char* <a href="qnpinstance.html#a4"><strong>arg</strong></a> ( const char * name ) const</span>
+<li><span class="fn">InstanceMode <a href="qnpinstance.html#a5"><strong>mode</strong></a> () const</span>
+<li><span class="fn">const char* <a href="qnpinstance.html#a6"><strong>userAgent</strong></a> () const</span>
+<li><span class="fn">virtual QNPWidget* <a href="qnpinstance.html#a7"><strong>newWindow</strong></a> () </span>
+<li><span class="fn">QNPWidget* <a href="qnpinstance.html#a8"><strong>widget</strong></a> () </span>
+<li><span class="fn">virtual bool <a href="qnpinstance.html#a9"><strong>newStreamCreated</strong></a> ( QNPStream *, StreamMode &amp; smode ) </span>
+<li><span class="fn">virtual int <a href="qnpinstance.html#b0"><strong>writeReady</strong></a> ( QNPStream * ) </span>
+<li><span class="fn">virtual int <a href="qnpinstance.html#b1"><strong>write</strong></a> ( QNPStream *, int offset, int len, void * buffer ) </span>
+<li><span class="fn">virtual void <a href="qnpinstance.html#b2"><strong>streamDestroyed</strong></a> ( QNPStream * ) </span>
+<li><span class="fn">void <a href="qnpinstance.html#b3"><strong>status</strong></a> ( const char * msg ) </span>
+<li><span class="fn">void <a href="qnpinstance.html#b4"><strong>getURL</strong></a> ( const char * url, const char * window=0 ) </span>
+<li><span class="fn">void <a href="qnpinstance.html#b5"><strong>postURL</strong></a> ( const char * url, const char * window, uint len, const char * buf, bool file ) </span>
+<li><span class="fn">QNPStream* <a href="qnpinstance.html#b6"><strong>newStream</strong></a> ( const char * mimetype, const char * window, bool as_file=FALSE ) </span>
+<li><span class="fn">virtual void <a href="qnpinstance.html#b7"><strong>streamAsFile</strong></a> ( QNPStream *, const char * fname ) </span>
+<li><span class="fn">void* <a href="qnpinstance.html#b8"><strong>getJavaPeer</strong></a> () const</span>
+<li><span class="fn">virtual bool <a href="qnpinstance.html#b9"><strong>printFullPage</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qnpinstance.html#c0"><strong>print</strong></a> ( QPainter * ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn"><a href="qnpinstance.html#c1"><strong>QNPInstance</strong></a> () </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+This class is defined in the <b>Qt NSPlugin Extension</b>, which can be found in the <tt>qt/extensions</tt> directory.
+It is not included in the main Qt API.
+<p>
+a <a href="qobject.html">QObject</a> that is a Web-browser plugin
+<p>
+Deriving from QNPInstance creates an object that represents a single
+&lt;EMBED&gt; tag in an HTML document.
+<p>The QNPInstance is responsible for creating an appropriate window if
+required (not all plugins have windows), and for interacting with the
+input/output facilities intrinsic to plugins.
+<p>Note that there is <em>absolutely no garrantee</em> as to the order in
+which functions are called.  Sometimes the browser will call setWindow()
+first, at other times, <a href="qnpinstance.html#a9">newStreamCreated</a>() will be called first (assuming the
+&lt;EMBED&gt; tag has a SRC parameter).
+<p><em>No GUI functionality</em> of Qt may be used until the first call
+to setWindow().  This includes any use of <a href="qpaintdevice.html">QPaintDevice</a> (ie. <a href="qpixmap.html">QPixmap</a>,
+<a href="qwidget.html">QWidget</a>, and all subclasses), <a href="qapplication.html">QApplication</a>, anything related to
+<a href="qpainter.html">QPainter</a> (<a href="qbrush.html">QBrush</a>, etc.), fonts, <a href="qmovie.html">QMovie</a>, <a href="qtooltip.html">QToolTip</a>, etc.  Useful
+classes which specifically <em>can</em> be used are <a href="qimage.html">QImage</a>, <a href="qfile.html">QFile</a>,
+and <a href="qbuffer.html">QBuffer</a>.
+<p>By structuring your plugin so that
+the task of the QNPInstance is to gather data, while
+the task of the <a href="qnpwidget.html">QNPWidget</a> is to provide a graphical interface to that data,
+this restriction can be easily accommodated.
+<p>Examples:
+ <a href="qtimage-qtimage-cpp.html#QNPInstance">qtimage/qtimage.cpp</a>
+ <a href="grapher-grapher-cpp.html#QNPInstance">grapher/grapher.cpp</a>
+ <a href="trivial-trivial-cpp.html#QNPInstance">trivial/trivial.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="c1"></a>QNPInstance::QNPInstance () <code>[protected]</code></h3>
+<p>Creates a QNPInstance.
+Can only be called from within a derived class created
+within <a href="qnplugin.html#a4">QNPlugin::newInstance</a>().
+<h3 class="fn"><a name="a0"></a>QNPInstance::~QNPInstance ()</h3>
+<p>Called when the plugin instance is about to disappear.
+<h3 class="fn">const char* <a name="a4"></a>QNPInstance::arg ( const char * name ) const</h3>
+<p>Returns the value of the named arguments, or 0 if no argument
+with that name appears in the &lt;EMBED&gt; tag of this instance.
+If the argument appears, but has no value assigned, the empty
+string is returned.  In summary:
+<p><ul>
+<li> <b>&lt;EMBED ...&gt;</b> - arg("FOO") == 0
+<li> <b>&lt;EMBED FOO ...&gt;</b> - arg("FOO") == ""
+<li> <b>&lt;EMBED FOO=BAR ...&gt;</b> - arg("FOO") == "BAR"
+</ul>
+<h3 class="fn">int <a name="a1"></a>QNPInstance::argc () const</h3>
+<p>Returns the number of arguments to the instance.  Note that you should
+not normally rely on the ordering of arguments, and also note that
+the SGML specification does not permit multiple arguments with the same
+name.
+<p>See also:  <a href="qnpinstance.html#a4">arg</a>().
+<h3 class="fn">const char* <a name="a2"></a>QNPInstance::argn ( int i ) const</h3>
+<p>Returns the name of the <em>i</em>th argument.  See notes of <a href="qnpinstance.html#a1">argc</a>().
+<h3 class="fn">const char* <a name="a3"></a>QNPInstance::argv ( int i ) const</h3>
+<p>Returns the value of the <em>i</em>th argument.  See notes of <a href="qnpinstance.html#a1">argc</a>().
+<h3 class="fn">void* <a name="b8"></a>QNPInstance::getJavaPeer () const</h3>
+<p>Returns the Java object associated with the plug-in instance, an
+object of the
+<a href="qnplugin.html#a8">plug-in's Java class</a>,
+or 0 if the plug-in does not have a Java class, Java is disabled, or
+an error occurred .
+<p>The return value is actually a <tt>jref</tt> we use <tt>void*</tt> so
+as to avoid burdening plugins which do not require Java.
+<p>See also:  <a href="qnplugin.html#a8">QNPlugin::getJavaClass</a>(), <a href="qnplugin.html#b0">QNPlugin::getJavaEnv</a>(), getJavaPeer() and <a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgja.htm#npngetjavapeer> Netscape: NPN_GetJavaPeer</a>
+<h3 class="fn">void <a name="b4"></a>QNPInstance::getURL ( const char * url, const char * window=0 )</h3>
+<p>Requests that the given URL be retrieved and sent to the named
+window.  See Netscape's JavaScript documentation for an explanation
+of window names.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgur.htm#npngeturl>
+Netscape: NPN_GetURL method</a>
+<p>Examples:
+ <a href="grapher-grapher-cpp.html#getURL">grapher/grapher.cpp</a>
+<h3 class="fn">QNPInstance::InstanceMode <a name="a5"></a>QNPInstance::mode() const</h3>
+<p>Returns the mode of the plugin.
+<h3 class="fn"><a href="qnpstream.html">QNPStream</a>* <a name="b6"></a>QNPInstance::newStream ( const char * mimetype, const char * window, bool as_file=FALSE )</h3>
+<p>Requests the creation of a new data stream <em>from</em> the plug-in.
+This function is not tested.
+It is an interface to the NPN_NewStream
+function of the Netscape Plugin API.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgst.htm#npnnewstream>
+Netscape: NPN_NewStream method</a>
+<h3 class="fn">bool <a name="a9"></a>QNPInstance::newStreamCreated ( <a href="qnpstream.html">QNPStream</a> *, StreamMode &amp; smode ) <code>[virtual]</code></h3>
+<p>This function is called when a new stream has been created.
+The instance should return TRUE if it accepts the processing
+of the stream.  If the instance requires the stream as a file,
+it should set <em>smode</em> to AsFileOnly, in which case the data
+will be delivered some time later to the <a href="qnpinstance.html#b7">streamAsFile</a>() function.
+Otherwise, the data will be delivered in chunks to the <a href="qnpinstance.html#b1">write</a>()
+function which must consume at least as much data as was returned
+by the most recent call to <a href="qnpinstance.html#b0">writeReady</a>().
+<p>Note that the AsFileOnly method is not supported by Netscape 2.0
+and MS-Explorer 3.0.  A future version of Qt will hide this problem.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgst.htm#nppnewstream>
+Netscape: NPP_NewStream method</a>
+<h3 class="fn"><a href="qnpwidget.html">QNPWidget</a>* <a name="a7"></a>QNPInstance::newWindow () <code>[virtual]</code></h3>
+<p>Called at most once, at some time after the QNPInstance is created.
+If the plugin requires a window, this function should return a derived
+class of <a href="qnpwidget.html">QNPWidget</a> that provides the required interface.
+<h3 class="fn">void <a name="b5"></a>QNPInstance::postURL ( const char * url, const char * window, uint len, const char * buf, bool file )</h3>
+<p>This function is not tested.  It is an interface to the NPN_PostURL
+function of the Netscape Plugin API.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgur.htm#npnposturl>
+Netscape: NPN_PostURL method</a>
+<h3 class="fn">void <a name="c0"></a>QNPInstance::print ( <a href="qpainter.html">QPainter</a> * ) <code>[virtual]</code></h3>
+<p>Print the instance embedded in a page.
+<p>This function is not tested.
+It is an encapsulation of the NPP_Print
+function of the Netscape Plugin API.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgdr.htm#nppprint>
+Netscape: NPP_Print method</a>
+<h3 class="fn">bool <a name="b9"></a>QNPInstance::printFullPage () <code>[virtual]</code></h3>
+<p>Print the instance full-page.  By default, this returns FALSE, causing the
+browser to call the (embedded) <a href="qnpinstance.html#c0">print</a>() function instead.
+<p>This function is not tested.
+It is an encapsulation of the NPP_Print
+function of the Netscape Plugin API.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgdr.htm#nppprint>
+Netscape: NPP_Print method</a>
+<h3 class="fn">void <a name="b3"></a>QNPInstance::status ( const char * msg )</h3>
+<p>Sets the status message in the browser containing this instance.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgve.htm#npnstatus>
+Netscape: NPN_Status method</a>
+<h3 class="fn">void <a name="b7"></a>QNPInstance::streamAsFile ( <a href="qnpstream.html">QNPStream</a> *, const char * ) <code>[virtual]</code></h3>
+<p>Called when a stream is delivered as a single file rather than
+as chunks.  This may be simpler for a plugin to deal with, but
+precludes any incremental behaviour.
+<p>See also:  <a href="qnpinstance.html#a9">newStreamCreated</a>(), <a href="qnpinstance.html#b6">newStream</a>(), Note, that, the, AsFileOnly, method, is, not, supported, by, Netscape, 2.0, MS-Explorer, 3.0., See, also: and <a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgst.htm#nppstreamasfile> Netscape: NPP_StreamAsFile method</a>
+<h3 class="fn">void <a name="b2"></a>QNPInstance::streamDestroyed ( <a href="qnpstream.html">QNPStream</a> * ) <code>[virtual]</code></h3>
+<p>Called when a stream is destroyed.  At this this, the stream may
+be complete() and okay().  If it is not okay(), then an error has
+occurred.  If it is okay(), but not complete(), then the user has
+cancelled the transmission - do not give an error message in this case.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgst.htm#nppdestroystream>
+Netscape: NPP_DestroyStream method</a>
+<h3 class="fn">const char* <a name="a6"></a>QNPInstance::userAgent () const</h3>
+<p>Returns the user agent (browser name) containing this instance.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgve.htm#npnuseragent>
+Netscape: NPN_UserAgent method</a>
+<h3 class="fn"><a href="qnpwidget.html">QNPWidget</a>* <a name="a8"></a>QNPInstance::widget ()</h3>
+<p>Returns the plugin window created at <a href="qnpinstance.html#a7">newWindow</a>(), if any.
+<p>Examples:
+ <a href="grapher-grapher-cpp.html#widget">grapher/grapher.cpp</a>
+<h3 class="fn">int <a name="b1"></a>QNPInstance::write ( <a href="qnpstream.html">QNPStream</a> *, int offset, int len, void * buffer ) <code>[virtual]</code></h3>
+<p>Called when incoming data is available for processing by the instance.
+The instance <em>must</em> consume at least the amount that it returned in
+the most recent call to <a href="qnpinstance.html#b0">writeReady</a>(), but it may consume up to the
+amount given by <em>len. buffer</em> is the data available for consumption.
+The <em>offset</em> argument is merely an informational
+value indicating the total amount of data that has been consumed
+in prior calls.
+<p>This function should return the amount of data actually consumed.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgst.htm#nppwrite>
+Netscape: NPP_NewStream method</a>
+<h3 class="fn">int <a name="b0"></a>QNPInstance::writeReady ( <a href="qnpstream.html">QNPStream</a> * ) <code>[virtual]</code></h3>
+<p>Called to inquire the minimum amount of data the instance is
+willing to receive from the given stream.
+<p>The default returns a very large value.
+<p>See also:
+<a href=http://developer.netscape.com/library/documentation/communicator/plugin/refpgst.htm#nppwriteready>
+Netscape: NPP_WriteReady method</a>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qnp.h: 1998/07/03
+<li>qnp.cpp: 1998/09/22
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

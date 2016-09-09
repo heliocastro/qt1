@@ -1,0 +1,217 @@
+.TH QMenuBar 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QMenuBar \- Horizontal menu bar
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qmenubar.h>\fR
+.PP
+Inherits QFrame and QMenuData.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QMenuBar ( QWidget * " "parent" "=0, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QMenuBar\fR ()"
+.br
+.ti -1c
+.BI "virtual void updateItem ( int id )"
+.br
+.ti -1c
+.BI "virtual void show ()"
+.br
+.ti -1c
+.BI "virtual void hide ()"
+.br
+.ti -1c
+.BI "virtual bool eventFilter ( QObject *, QEvent * )"
+.br
+.ti -1c
+.BI "int heightForWidth ( int ) const"
+.br
+.ti -1c
+.BI "Separator separator () const"
+.br
+.ti -1c
+.BI "void setSeparator ( Separator when )"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void activated ( int itemId )"
+.br
+.ti -1c
+.BI "void highlighted ( int itemId )"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void drawContents ( QPainter * )"
+.br
+.ti -1c
+.BI "virtual void fontChange ( const QFont & )"
+.br
+.ti -1c
+.BI "virtual void mousePressEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseReleaseEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void mouseMoveEvent ( QMouseEvent * )"
+.br
+.ti -1c
+.BI "virtual void keyPressEvent ( QKeyEvent * )"
+.br
+.ti -1c
+.BI "virtual void resizeEvent ( QResizeEvent * )"
+.br
+.ti -1c
+.BI "virtual void leaveEvent ( QEvent * )"
+.br
+.ti -1c
+.BI "virtual void menuContentsChanged ()"
+.br
+.ti -1c
+.BI "virtual void menuStateChanged ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QMenuBar class provides a horizontal menu bar.
+.PP
+It automatically sets its own geometry to the top of the parent widget and changes appropriately it when the parent widget is resized.
+.PP
+menu/menu.cpp is a typical example of QMenuBar and QPopupMenu use.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+See also: QPopupMenu and GUI Design Handbook: Menu Bar
+.PP
+Examples:
+.(l
+grapher/grapher.cpp xform/xform.cpp menu/menu.cpp progress/progress.cpp layout/layout.cpp showimg/showimg.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QMenuBar::QMenuBar ( QWidget * parent=0, const char * name=0 )"
+Creates a menu bar with a \fIparent\fR and a \fIname.\fR
+.SH "QMenuBar::~QMenuBar ()"
+Destroys the menu bar.
+.SH "void QMenuBar::activated ( int id ) \fC[signal]\fR"
+This signal is emitted when a menu item is selected; \fIid\fR is the id of the selected item.
+.PP
+Normally, you will connect each menu item to a single slot using QMenuData::insertItem(), but sometimes you will want to connect several items to a single slot (most often if the user selects from an array). This signal is handy in such cases.
+.PP
+See also: highlighted() and QMenuData::insertItem().
+.SH "void QMenuBar::drawContents ( QPainter * p ) \fC[virtual protected]\fR"
+Called from QFrame::paintEvent().
+.PP
+Reimplemented from QFrame.
+.SH "bool QMenuBar::eventFilter ( QObject * object, QEvent * event ) \fC[virtual]\fR"
+This function is used to adjust the menu bar's geometry to the parent widget's. Note that this is \fInot\fR part of the public interface - the function is \fCpublic\fR only because QObject::eventFilter() is.
+.PP
+Reimplemented from QObject.
+.SH "void QMenuBar::fontChange ( const QFont & ) \fC[virtual protected]\fR"
+For internal use only.
+.PP
+Reimplemented from QWidget.
+.SH "int QMenuBar::heightForWidth ( int max_width ) const"
+Returns the height that the menu would resize itself to if its parent (and hence itself) resized to the given width. This can be useful for simple layout tasks where the height of the menubar is needed after items have been inserted. See examples/showimg/showimg.cpp for an example of the usage.
+.SH "void QMenuBar::hide () \fC[virtual]\fR"
+Reimplements QWidget::hide() in order to deselect any selected item.
+.PP
+Examples:
+.(l
+grapher/grapher.cpp
+.)l
+.PP
+Reimplemented from QWidget.
+.SH "void QMenuBar::highlighted ( int id ) \fC[signal]\fR"
+This signal is emitted when a menu item is highlighted; \fIid\fR is the id of the highlighted item.
+.PP
+Normally, you will connect each menu item to a single slot using QMenuData::insertItem(), but sometimes you will want to connect several items to a single slot (most often if the user selects from an array). This signal is handy in such cases.
+.PP
+See also: activated() and QMenuData::insertItem().
+.SH "void QMenuBar::keyPressEvent ( QKeyEvent * e ) \fC[virtual protected]\fR"
+Handles key press events for the menu bar.
+.PP
+Reimplemented from QWidget.
+.SH "void QMenuBar::leaveEvent ( QEvent * e ) \fC[virtual protected]\fR"
+Handles leave events for the menu bar.
+.PP
+Reimplemented from QWidget.
+.SH "void QMenuBar::menuContentsChanged () \fC[virtual protected]\fR"
+Recomputes the menu bar's display data according to the new contents.
+.PP
+You should never need to call this, it is called automatically by QMenuData whenever it needs to be called.
+.PP
+Reimplemented from QMenuData.
+.SH "void QMenuBar::menuStateChanged () \fC[virtual protected]\fR"
+Recomputes the menu bar's display data according to the new state.
+.PP
+You should never need to call this, it is called automatically by QMenuData whenever it needs to be called.
+.PP
+Reimplemented from QMenuData.
+.SH "void QMenuBar::mouseMoveEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse move events for the menu bar.
+.PP
+Reimplemented from QWidget.
+.SH "void QMenuBar::mousePressEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse press events for the menu bar.
+.PP
+Reimplemented from QWidget.
+.SH "void QMenuBar::mouseReleaseEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Handles mouse release events for the menu bar.
+.PP
+Reimplemented from QWidget.
+.SH "void QMenuBar::resizeEvent ( QResizeEvent * ) \fC[virtual protected]\fR"
+Handles resize events for the menu bar.
+.PP
+Reimplemented from QWidget.
+.SH "QMenuBar::Separator QMenuBar::separator() const"
+Returns the currently set separator usage
+.SH "void QMenuBar::setSeparator ( Separator when )"
+When a menubar is used above an unframed widget, it may look better with a separating line when displayed with WindowsStyle.
+.PP
+This function sets the usage of such a separator to appear either QMenuBar::Never, or QMenuBar::InWindowsStyle.
+.PP
+The default is QMenuBar::Never.
+.PP
+Examples:
+.(l
+layout/layout.cpp widgets/widgets.cpp
+.)l
+.SH "void QMenuBar::show () \fC[virtual]\fR"
+Reimplements QWidget::show() in order to set up the correct keyboard accelerators and raise itself to the top of the widget stack.
+.PP
+Examples:
+.(l
+grapher/grapher.cpp
+.)l
+.PP
+Reimplemented from QWidget.
+.SH "void QMenuBar::updateItem ( int ) \fC[virtual]\fR"
+For internal use only.
+.PP
+Reimplemented from QMenuData.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qmenubar.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

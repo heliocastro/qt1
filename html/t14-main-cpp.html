@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>Qt tutorial - t14/main.cpp</title>
+</head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Source code for <a href="t14.html">tutorial 14</a>: main.cpp</h1><br clear="all">
+<hr>
+<pre>/****************************************************************
+**
+** Qt tutorial 14
+**
+****************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+
+#include "gamebrd.h"
+
+int main( int argc, char **argv )
+{
+    <a href="qapplication.html#f6">QApplication::setColorSpec</a>( QApplication::CustomColor );
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+    GameBoard gb;
+    gb.<a href="qwidget.html#l5">setGeometry</a>( 100, 100, 500, 355 );
+    a.<a href="qapplication.html#b9">setMainWidget</a>( &amp;gb );
+    gb.<a href="qwidget.html#k2">show</a>();
+    return a.<a href="qapplication.html#c9">exec</a>();
+}
+</pre>
+<p>
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

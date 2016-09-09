@@ -1,0 +1,250 @@
+.TH QBuffer 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QBuffer \- I/O device that operates on a QByteArray
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qbuffer.h>\fR
+.PP
+Inherits QIODevice.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QBuffer ()"
+.br
+.ti -1c
+.BI "QBuffer ( QByteArray )"
+.br
+.ti -1c
+.BI "\fB~QBuffer\fR ()"
+.br
+.ti -1c
+.BI "QByteArray buffer () const"
+.br
+.ti -1c
+.BI "bool setBuffer ( QByteArray )"
+.br
+.ti -1c
+.BI "virtual bool open ( int )"
+.br
+.ti -1c
+.BI "virtual void close ()"
+.br
+.ti -1c
+.BI "virtual void flush ()"
+.br
+.ti -1c
+.BI "virtual uint size () const"
+.br
+.ti -1c
+.BI "virtual int at () const"
+.br
+.ti -1c
+.BI "virtual bool at ( int )"
+.br
+.ti -1c
+.BI "virtual int readBlock ( char * " "p" ", uint )"
+.br
+.ti -1c
+.BI "virtual int writeBlock ( const char * " "p" ", uint )"
+.br
+.ti -1c
+.BI "virtual int readLine ( char * " "p" ", uint )"
+.br
+.ti -1c
+.BI "virtual int getch ()"
+.br
+.ti -1c
+.BI "virtual int putch ( int )"
+.br
+.ti -1c
+.BI "virtual int ungetch ( int )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QBuffer class is an I/O device that operates on a QByteArray
+.PP
+QBuffer is an I/O device for reading and writing a memory buffer. A QBuffer may be used directly (readBlock() and writeBlock()) or more conveniently via QDataStream or QTextStream. Most of its behavior is inherited from QIODevice.
+.PP
+A QBuffer has an associated QByteArray which holds the buffer data. Writing data at the end (i.e. size()) of the buffer expands the byte array.
+.PP
+For convenience, the byte stream classes QDataStream and QTextStream can operate on a QByteArray (or a QString) via an internal QBuffer:
+.PP
+.nf
+.br
+    QString str;
+.br
+    QTextStream ts( str, IO_WriteOnly );
+.br
+    ts << "pi = " << 3.14;                      // str == "pi = 3.14"
+.fi
+.PP
+See also: QFile, QDataStream and QTextStream.
+.PP
+Examples:
+.(l
+grapher/grapher.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QBuffer::QBuffer ()"
+Constructs an empty buffer.
+.SH "QBuffer::QBuffer ( QByteArray buf )"
+Constructs a buffer and sets the buffer contents to \fIbuf.\fR
+.PP
+See also: setBuffer().
+.SH "QBuffer::~QBuffer ()"
+Destroys the buffer.
+.SH "bool QBuffer::at ( int pos ) \fC[virtual]\fR"
+Sets the buffer index to \fIpos.\fR Returns TRUE if successful, otherwise FALSE.
+.PP
+See also: size().
+.PP
+Reimplemented from QIODevice.
+.SH "int QBuffer::at () const \fC[virtual]\fR"
+Returns the buffer index.
+.PP
+See also: size().
+.PP
+Reimplemented from QIODevice.
+.SH "QByteArray QBuffer::buffer () const"
+Returns the buffer most recently set by setBuffer(), or at construction.
+.SH "void QBuffer::close () \fC[virtual]\fR"
+Closes an open buffer.
+.PP
+See also: open().
+.PP
+Examples:
+.(l
+grapher/grapher.cpp
+.)l
+.PP
+Reimplemented from QIODevice.
+.SH "void QBuffer::flush () \fC[virtual]\fR"
+The flush function does nothing.
+.PP
+Reimplemented from QIODevice.
+.SH "int QBuffer::getch () \fC[virtual]\fR"
+Reads a single byte/character from the buffer.
+.PP
+Returns the byte/character read, or -1 if the end of the buffer has been reached.
+.PP
+See also: putch() and ungetch().
+.PP
+Reimplemented from QIODevice.
+.SH "bool QBuffer::open ( int m ) \fC[virtual]\fR"
+Opens the file specified by the file name currently set, using the mode \fIm.\fR Returns TRUE if successful, otherwise FALSE.
+.PP
+The mode parameter \fIm\fR must be a combination of the following flags.
+.TP
+\fCIO_ReadOnly\fR opens a buffer in read-only mode.
+.TP
+\fCIO_WriteOnly\fR opens a buffer in write-only mode.
+.TP
+\fCIO_ReadWrite\fR opens a buffer in read/write mode.
+.TP
+\fCIO_Append\fR sets the buffer index to the end of the buffer.
+.TP
+\fCIO_Truncate\fR truncates the buffer.
+.PP
+See also: close() and isOpen().
+.PP
+Examples:
+.(l
+grapher/grapher.cpp
+.)l
+.PP
+Reimplemented from QIODevice.
+.SH "int QBuffer::putch ( int ch ) \fC[virtual]\fR"
+Writes the character \fIch\fR into the buffer, overwriting the character at the current index, extending the buffer if necessary.
+.PP
+Returns \fIch,\fR or -1 if some error occurred.
+.PP
+See also: getch() and ungetch().
+.PP
+Examples:
+.(l
+grapher/grapher.cpp
+.)l
+.PP
+Reimplemented from QIODevice.
+.SH "int QBuffer::readBlock ( char * p, uint len ) \fC[virtual]\fR"
+Reads at most \fIlen\fR bytes from the buffer into \fIp\fR and returns the number of bytes actually read.
+.PP
+Returns -1 if a serious error occurred.
+.PP
+See also: writeBlock().
+.PP
+Reimplemented from QIODevice.
+.SH "int QBuffer::readLine ( char * p, uint maxlen ) \fC[virtual]\fR"
+Reads a line of text.
+.PP
+Reads bytes from the buffer until end-of-line is reached, or up to \fImaxlen\fR bytes.
+.PP
+See also: readBlock().
+.PP
+Reimplemented from QIODevice.
+.SH "bool QBuffer::setBuffer ( QByteArray buf )"
+Replaces the buffer's contents with \fIbuf.\fR
+.PP
+This may not be done while the buffer is open.
+.PP
+Note that if you open the buffer in write mode (\fCIO_WriteOnly\fR or IO_ReadWrite) and write something into the buffer, \fIbuf\fR is also modified because QByteArray is an explicitly shared class.
+.PP
+Example:
+.PP
+.nf
+.br
+    QString str = "abc";
+.br
+    QBuffer b( str );
+.br
+    b.open( IO_WriteOnly );
+.br
+    b.at( 3 );                                  // position at \\0
+.br
+    b.writeBlock( "def", 4 );                   // write including \\0
+.br
+    b.close();
+.br
+      // Now, str == "abcdef"
+.fi
+.PP
+See also: open and Shared Classes
+.SH "uint QBuffer::size () const \fC[virtual]\fR"
+Returns the number of bytes in the buffer.
+.PP
+See also: at().
+.PP
+Reimplemented from QIODevice.
+.SH "int QBuffer::ungetch ( int ch ) \fC[virtual]\fR"
+Puts the character \fIch\fR back into the buffer and decrements the index if it is not zero.
+.PP
+This function is normally called to "undo" a getch() operation.
+.PP
+Returns \fIch,\fR or -1 if some error occurred.
+.PP
+See also: getch() and putch().
+.PP
+Reimplemented from QIODevice.
+.SH "int QBuffer::writeBlock ( const char * p, uint len ) \fC[virtual]\fR"
+Writes \fIlen\fR bytes from \fIp\fR into the buffer at the current index, overwriting any characters there and extending the buffer if necessary. Returns the number of bytes actually written.
+.PP
+Returns -1 if a serious error occurred.
+.PP
+See also: readBlock().
+.PP
+Reimplemented from QIODevice.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qbuffer.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

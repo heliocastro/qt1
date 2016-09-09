@@ -1,0 +1,68 @@
+.TH QListBoxText 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QListBoxText \- List box items with text
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qlistbox.h>\fR
+.PP
+Inherits QListBoxItem.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QListBoxText ( const char * = 0 )"
+.br
+.ti -1c
+.BI "\fB~QListBoxText\fR ()"
+.br
+.ti -1c
+.BI "virtual void paint ( QPainter * )"
+.br
+.ti -1c
+.BI "virtual int height ( const QListBox * ) const"
+.br
+.ti -1c
+.BI "virtual int width ( const QListBox * ) const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QListBoxText class provides list box items with text.
+.PP
+The text is drawn in the widget's current font. If you need several different fonts, you have to make your own subclass of QListBoxItem.
+.PP
+See also: QListBox and QListBoxItem.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QListBoxText::QListBoxText ( const char * text = 0 )"
+Constructs a list box item showing the text \fItext.\fR
+.SH "QListBoxText::~QListBoxText ()"
+Destroys the item.
+.SH "int QListBoxText::height ( const QListBox * lb ) const \fC[virtual]\fR"
+Returns the height of a line of text.
+.PP
+See also: paint() and width().
+.PP
+Reimplemented from QListBoxItem.
+.SH "void QListBoxText::paint ( QPainter * p ) \fC[virtual]\fR"
+Draws the text using painter \fIp.\fR
+.PP
+Reimplemented from QListBoxItem.
+.SH "int QListBoxText::width ( const QListBox * lb ) const \fC[virtual]\fR"
+Returns the width of this line.
+.PP
+See also: paint() and height().
+.PP
+Reimplemented from QListBoxItem.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qlistboxtext.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

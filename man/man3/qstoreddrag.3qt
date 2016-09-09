@@ -1,0 +1,65 @@
+.TH QStoredDrag 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QStoredDrag \- Simple stored-value drag object for arbitrary MIME data
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qdragobject.h>\fR
+.PP
+Inherits QDragObject.
+.PP
+Inherited by QTextDrag and QUrlDrag.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QStoredDrag ( const char * " "mimeType" ", QWidget * " "dragSource" " = 0, const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "\fB~QStoredDrag\fR ()"
+.br
+.ti -1c
+.BI "void setEncodedData ( const QByteArray & )"
+.br
+.ti -1c
+.BI "virtual const char* format ( int i ) const"
+.br
+.ti -1c
+.BI "virtual QByteArray encodedData ( const char * ) const"
+.br
+.in -1c
+.SH DESCRIPTION
+Simple stored-value drag object for arbitrary MIME data.
+.PP
+When a block of data only has one representation, you can use a QStoredDrag to hold it.
+.PP
+For detailed information about drag-and-drop, see the QDragObject class.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QStoredDrag::QStoredDrag ( const char * mimeType, QWidget * dragSource = 0, const char * name = 0 )"
+Constructs a QStoredDrag. The parameters are passed to the QDragObject constructor, and the format is set to \fImimeType.\fR
+.PP
+The data will be unset. Use setEncodedData() to set it.
+.SH "QStoredDrag::~QStoredDrag ()"
+Destroys the drag object and frees all allocated resources.
+.SH "QByteArray QStoredDrag::encodedData ( const char * m ) const \fC[virtual]\fR"
+Returns the stored data.
+.PP
+See also: setEncodedData().
+.SH "void QStoredDrag::setEncodedData ( const QByteArray & encodedData )"
+Sets the encoded data of this drag object to \fIencodedData.\fR The encoded data is what's delivered to the drop sites, and must be in a strictly defined and portable format.
+.PP
+The drag object can't be dropped (by the user) until this function
+has been called.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qstoreddrag.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

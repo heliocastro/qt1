@@ -1,0 +1,1075 @@
+.TH QApplication 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QApplication \- Manages the application event queue
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qapplication.h>\fR
+.PP
+Inherits QObject.
+.PP
+Inherited by QXtApplication.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QApplication ( int & " "argc" ", char ** argv )"
+.br
+.ti -1c
+.BI "virtual \fB~QApplication\fR ()"
+.br
+.ti -1c
+.BI "int argc () const"
+.br
+.ti -1c
+.BI "char** argv () const"
+.br
+.ti -1c
+.BI "QWidget* mainWidget () const"
+.br
+.ti -1c
+.BI "void setMainWidget ( QWidget * )"
+.br
+.ti -1c
+.BI "QWidget* focusWidget () const"
+.br
+.ti -1c
+.BI "int exec ()"
+.br
+.ti -1c
+.BI "void processEvents ()"
+.br
+.ti -1c
+.BI "void processEvents ( int maxtime )"
+.br
+.ti -1c
+.BI "void processOneEvent ()"
+.br
+.ti -1c
+.BI "int enter_loop ()"
+.br
+.ti -1c
+.BI "void exit_loop ()"
+.br
+.ti -1c
+.BI "virtual bool notify ( QObject *, QEvent * )"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "void quit ()"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void lastWindowClosed ()"
+.br
+.in -1c
+.SS "Static Public Members"
+.in +1c
+.ti -1c
+.BI "GUIStyle style ()"
+.br
+.ti -1c
+.BI "void setStyle ( GUIStyle )"
+.br
+.ti -1c
+.BI "int colorSpec ()"
+.br
+.ti -1c
+.BI "void setColorSpec ( int )"
+.br
+.ti -1c
+.BI "QCursor* overrideCursor ()"
+.br
+.ti -1c
+.BI "void setOverrideCursor ( const QCursor &, bool " "replace" "=FALSE )"
+.br
+.ti -1c
+.BI "void restoreOverrideCursor ()"
+.br
+.ti -1c
+.BI "bool hasGlobalMouseTracking ()"
+.br
+.ti -1c
+.BI "void setGlobalMouseTracking ( bool enable )"
+.br
+.ti -1c
+.BI "QPalette* palette ()"
+.br
+.ti -1c
+.BI "void setPalette ( const QPalette &, bool " "updateAllWidgets" "=FALSE )"
+.br
+.ti -1c
+.BI "QFont* font ()"
+.br
+.ti -1c
+.BI "void setFont ( const QFont &, bool " "updateAllWidgets" "=FALSE )"
+.br
+.ti -1c
+.BI "QFontMetrics fontMetrics ()"
+.br
+.ti -1c
+.BI "QWidgetList* allWidgets ()"
+.br
+.ti -1c
+.BI "QWidgetList* topLevelWidgets ()"
+.br
+.ti -1c
+.BI "QWidget* desktop ()"
+.br
+.ti -1c
+.BI "QWidget* activePopupWidget ()"
+.br
+.ti -1c
+.BI "QWidget* activeModalWidget ()"
+.br
+.ti -1c
+.BI "QClipboard* clipboard ()"
+.br
+.ti -1c
+.BI "QWidget* widgetAt ( int " "x" ", int " "y" ", bool " "child" "=FALSE )"
+.br
+.ti -1c
+.BI "QWidget* widgetAt ( const QPoint &, bool " "child" "=FALSE )"
+.br
+.ti -1c
+.BI "void exit ( int " "retcode" "=0 )"
+.br
+.ti -1c
+.BI "bool sendEvent ( QObject * " "receiver" ", QEvent * event )"
+.br
+.ti -1c
+.BI "void postEvent ( QObject * " "receiver" ", QEvent * event )"
+.br
+.ti -1c
+.BI "void sendPostedEvents ( QObject * " "receiver" ", int event_type )"
+.br
+.ti -1c
+.BI "bool startingUp ()"
+.br
+.ti -1c
+.BI "bool closingDown ()"
+.br
+.ti -1c
+.BI "void flushX ()"
+.br
+.ti -1c
+.BI "void syncX ()"
+.br
+.ti -1c
+.BI "void beep ()"
+.br
+.ti -1c
+.BI "void setWinStyleHighlightColor ( const QColor & )"
+.br
+.ti -1c
+.BI "const QColor& winStyleHighlightColor ()"
+.br
+.ti -1c
+.BI "void setDoubleClickInterval ( int )"
+.br
+.ti -1c
+.BI "int doubleClickInterval ()"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "void qAddPostRoutine (CleanUpFunction " "p" ")"
+.br
+.ti -1c
+.BI "Q_EXPORT const char * qVersion ()"
+.br
+.ti -1c
+.BI "Q_EXPORT bool qSysInfo (int * " "wordSize" ", bool * " "bigEndian" ")"
+.br
+.ti -1c
+.BI "Q_EXPORT void debug (const char * " "msg" ", ...)"
+.br
+.ti -1c
+.BI "Q_EXPORT void warning (const char * " "msg" ", ...)"
+.br
+.ti -1c
+.BI "Q_EXPORT void fatal (const char * " "msg" ", ...)"
+.br
+.ti -1c
+.BI "void ASSERT (bool " "test" ")"
+.br
+.ti -1c
+.BI "void CHECK_PTR (void * " "p" ")"
+.br
+.ti -1c
+.BI "Q_EXPORT msg_handler qInstallMsgHandler (msg_handler " "h" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The QApplication class manages the application event queue.
+.PP
+The QApplication class is central to Qt. It receives events from the underlying window system and sends them to the destination widgets. An application object must be created before any widgets can be created!
+.PP
+Only one single QApplication object should be created. In fact Qt complains if you create more than one, and this is normally done in the main() function. Once a QApplication object has been created, \fCqApp\fR (defined as \fCextern QApplication *qApp\fR) refers to this object.
+.PP
+Example (a complete Qt application):
+.PP
+.nf
+.br
+    #include <qapplication.h>                           // defines QApplication
+.br
+    #include <qpushbutton.h>                    // defines QPushButton
+.br
+.br
+    int main( int argc, char **argv )
+.br
+    {
+.br
+        QApplication app( argc, argv );         // create application object
+.br
+        QPushButton  hello( "Hello, world!" );  // create a push button
+.br
+        app.setMainWidget( &hello );            // define as main widget
+.br
+        connect( &hello, SIGNAL(clicked()),     // clicking the button
+.br
+                 &app, SLOT(quit()) );          //   quits the application
+.br
+        hello.show();                           // show button
+.br
+        return app.exec();                      // run main event loop
+.br
+    }
+.fi
+.PP
+\fBImportant\fR
+.br
+Notice that the QApplication object must be created before any window-system functionality of Qt is used, this includes widgets, colors, fonts etc.
+.PP
+Note also that for X11, setMainWidget() may change the main widget according to the \fI-geometry\fR option. To preserve this functionality, you must set your defaults before setMainWidget() and any overrides after.
+.PP
+While Qt is not optimized or designed for writing non-GUI programs, it's possible to use some of its classes without creating a QApplication. This can be very useful if you wish to share code between a non-GUI server and a GUI client.
+.PP
+Examples:
+.(l
+forever/forever.cpp desktop/desktop.cpp connect/connect.cpp drawdemo/drawdemo.cpp movies/main.cpp picture/picture.cpp xform/xform.cpp menu/menu.cpp progress/progress.cpp cursor/cursor.cpp layout/layout.cpp qmag/qmag.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QApplication::QApplication ( int & argc, char ** argv )"
+Initializes the window system and onstructs an application object with the command line arguments \fIargc\fR and \fIargv.\fR
+.PP
+The global \fCqApp\fR pointer refers to this application object. Only one application object should be created.
+.PP
+This application object must be constructed before any paint devices (includes widgets, pixmaps, bitmaps etc.)
+.PP
+Notice that \fIargc\fR and \fIargv\fR might be changed. Qt removes command line arguments that it recognizes. \fIargc\fR and \fIargv\fR are can be accessed later by \fCqApp->argc()\fR and \fCqApp->argv().\fR The documentation for argv() contains a detailed description of how to process command line arguments.
+.PP
+Qt debugging options:
+.TP
+\fC-nograb,\fR tells Qt to never grab the mouse or the keyboard.
+.TP
+\fC-sync\fR (only under X11), switches to synchronous mode for debugging.
+.PP
+See Debugging Techniques for a more detailed explanation.
+.PP
+The X11 version of Qt supports a few more command line options:
+.TP
+\fC-display\fR \fIdisplay,\fR sets the X display (default is $DISPLAY).
+.TP
+\fC-geometry\fR \fIgeometry,\fR sets the client geometry of the main widget.
+.TP
+\fC-fn\fR or \fC-font\fR \fIfont,\fR defines the application font.
+.TP
+\fC-bg\fR or \fC-background\fR \fIcolor,\fR sets the default background color and an application palette (light and dark shades are calculated).
+.TP
+\fC-fg\fR or \fC-foreground\fR \fIcolor,\fR sets the default foreground color.
+.TP
+\fC-name\fR \fIname,\fR sets the application name.
+.TP
+\fC-title\fR \fItitle,\fR sets the application title (caption).
+.TP
+\fC-style=\fR \fIstyle,\fR sets the application GUI style. Possible values are \fCmotif\fR and \fCwindows\fR
+.TP
+\fC-visual TrueColor,\fR forces the application to use a TrueColor visual on an 8-bit display.
+.TP
+\fC-ncols\fR \fIcount,\fR limits the number of colors allocated in the color cube on a 8-bit display, if the application is using the \fCQApplication::ManyColor\fR color specification. If \fIcount\fR is 216 then a 6x6x6 color cube is used (ie. 6 levels of red, 6 of green, and 6 of blue); for other values, a cube approximately proportional to a 2x3x1 cube is used.
+.TP
+\fC-cmap,\fR causes the application to install a private color map on an 8-bit display.
+.PP
+See also: argc() and argv().
+.SH "QApplication::~QApplication () \fC[virtual]\fR"
+Deletes all remaining widgets and cleans up any window system resources that were allocated by this application. Sets the global variable \fCqApp\fR to null.
+.SH "QWidget * QApplication::activeModalWidget () \fC[static]\fR"
+Returns the active modal widget.
+.PP
+A modal widget is a special top level widget which is a subclass of QDialog that specifies the modal parameter of the constructor to TRUE. A modal widget must be finished before the user can continue with other parts of the program.
+.PP
+The modal widgets are organized in a stack. This function returns the active modal widget on top of the stack.
+.PP
+See also: currentPopupWidget() and topLevelWidgets().
+.SH "QWidget * QApplication::activePopupWidget () \fC[static]\fR"
+Returns the active popup widget.
+.PP
+A popup widget is a special top level widget that sets the WType_Popup widget flag, e.g. the QPopupMenu widget. When the application opens a popup widget, all events are sent to the popup and normal widgets and modal widgets cannot be accessed before the popup widget is closed.
+.PP
+Only other popup widgets may be opened when a popup widget is shown. The popup widgets are organized in a stack. This function returns the active popup widget on top of the stack.
+.PP
+See also: currentModalWidget() and topLevelWidgets().
+.SH "QWidgetList * QApplication::allWidgets () \fC[static]\fR"
+Returns a list of all the widgets in the application.
+.PP
+The list is created using new and must be deleted by the caller.
+.PP
+The list is empty if there are no widgets.
+.PP
+Note that some of the widgets may be hidden.
+.PP
+Example:
+.PP
+.nf
+.br
+    //
+.br
+    // Updates all widgets.
+.br
+    //
+.br
+    QWidgetList  *list = QApplication::allWidgets();
+.br
+    QWidgetListIt it( *list );          // iterate over the widgets
+.br
+    while ( it.current() ) {            // for each top level widget...
+.br
+        it.current()->update();
+.br
+        ++it;
+.br
+    }
+.br
+    delete list;                        // delete the list, not the widgets
+.fi
+.PP
+The QWidgetList class is defined in the qwidcoll.h header file.
+.PP
+\fBWarning:\fR Delete the list away as soon you have finished using it. You can get in serious trouble if you for instance try to access a widget that has been deleted.
+.PP
+See also: topLevelWidgets(), QWidget::isVisible() and QList::isEmpty(),.
+.SH "int QApplication::argc () const"
+Returns the number of command line arguments.
+.PP
+The documentation for argv() contains a detailed description of how to process command line arguments.
+.PP
+See also: argv() and QApplication::QApplication().
+.SH "char ** QApplication::argv () const"
+Returns the command line argument vector.
+.PP
+\fCargv()[0]\fR is the program name, \fCargv()[1]\fR is the first argument and \fCargv()[argc()-1]\fR is the last argument.
+.PP
+A QApplication object is constructed by passing \fIargc\fR and \fIargv\fR from the \fCmain()\fR function. Some of the arguments may be recognized as Qt options removed from the argument vector. For example, the X11 version of Qt knows about \fC-display, -font\fR and a few more options.
+.PP
+Example:
+.PP
+.nf
+.br
+    // showargs.cpp - displays program arguments in a list box
+.br
+.br
+    #include <qapplication.h>
+.br
+    #include <qlistbox.h>
+.br
+.br
+    int main( int argc, char **argv )
+.br
+    {
+.br
+        QApplication a( argc, argv );
+.br
+        QListBox b;
+.br
+        a.setMainWidget( &b );
+.br
+        for ( int i=0; i<a.argc(); i++ )        // a.argc() == argc
+.br
+            b.insertItem( a.argv()[i] );        // a.argv()[i] == argv[i]
+.br
+        b.show();
+.br
+        return a.exec();
+.br
+    }
+.fi
+.PP
+If you run \fCshowargs -display unix:0 -font 9x15bold hello world\fR under X11, the list box contains the three strings "showargs", "hello" and "world".
+.PP
+See also: argc() and QApplication::QApplication().
+.SH "void QApplication::beep () \fC[static]\fR"
+Sounds the bell, using the default volume and sound.
+.SH "QClipboard * QApplication::clipboard () \fC[static]\fR"
+Returns a pointer to the application global clipboard.
+.SH "bool QApplication::closingDown () \fC[static]\fR"
+Returns TRUE if the application objects are being destroyed.
+.PP
+See also: startingUp().
+.SH "int QApplication::colorSpec () \fC[static]\fR"
+Returns the color specification.
+.PP
+See also: QApplication::setColorSpec().
+.PP
+Examples:
+.(l
+showimg/showimg.cpp
+.)l
+.SH "QWidget * QApplication::desktop () \fC[static]\fR"
+Returns the desktop widget (also called the root window).
+.PP
+The desktop widget is useful for obtaining the size of the screen. It can also be used to draw on the desktop.
+.PP
+.nf
+.br
+    QWidget *d = QApplication::desktop();
+.br
+    int w=d->width();                   // returns screen width
+.br
+    int h=d->height();                  // returns screen height
+.br
+    d->setBackgroundColor( red );       // makes desktop red
+.fi
+.PP
+Examples:
+.(l
+qmag/qmag.cpp
+.)l
+.SH "int QApplication::doubleClickInterval () \fC[static]\fR"
+Returns the maximum duration for a double click.
+.PP
+See also: setDoubleClickInterval().
+.SH "int QApplication::enter_loop ()"
+This function enters the main event loop (recursively). Do not call it unless you are an expert.
+.PP
+See also: exit_loop().
+.SH "int QApplication::exec ()"
+Enters the main event loop and waits until exit() is called or the main widget is destroyed. Returns the value that was specified to exit(), which is 0 if exit() is called via quit().
+.PP
+It is necessary to call this function to start event handling. The main event loop receives events from the window system and dispatches these to the application widgets.
+.PP
+Generally, no user interaction can take place before calling exec(). As a special case, modal widgets like QMessageBox can be used before calling exec(), because modal widget have a local event loop.
+.PP
+To make your application perform idle processing, i.e. executing a special function whenever there are no pending events, use a QTimer with 0 timeout. More advanced idle processing schemes can be achieved by using processEvents() and processOneEvent().
+.PP
+See also: quit(), exit(), processEvents(), setMainWidget() and QTimer.
+.PP
+Examples:
+.(l
+forever/forever.cpp connect/connect.cpp mainlyQt/editor.cpp drawdemo/drawdemo.cpp movies/main.cpp picture/picture.cpp xform/xform.cpp menu/menu.cpp progress/progress.cpp cursor/cursor.cpp layout/layout.cpp qmag/qmag.cpp widgets/widgets.cpp
+.)l
+.SH "void QApplication::exit ( int retcode=0 ) \fC[static]\fR"
+Tells the application to exit with a return code.
+.PP
+After this function has been called, the application leaves the main event loop and returns from the call to exec(). The exec() function returns \fIretcode.\fR
+.PP
+By convention, \fIretcode\fR 0 means success, any non-zero value indicates an error.
+.PP
+Note that unlike the C library exit function, this function \fIdoes\fR returns to the caller - it is event processing that stops.
+.PP
+See also: quit() and exec().
+.PP
+Examples:
+.(l
+picture/picture.cpp
+.)l
+.SH "void QApplication::exit_loop ()"
+This function leaves from a recursive call to the main event loop. Do not call it unless you are an expert.
+.PP
+See also: enter_loop().
+.SH "void QApplication::flushX () \fC[static]\fR"
+Flushes the X event queue in the X11 implementation. Does nothing on other platforms.
+.PP
+See also: syncX().
+.SH "QWidget * QApplication::focusWidget () const"
+Returns the application widget that has the keyboard input focus, or null if no application widget has the focus.
+.PP
+See also: QWidget::setFocus() and QWidget::hasFocus().
+.SH "QFont * QApplication::font () \fC[static]\fR"
+Returns the default application font. There is always an application font, i.e. the returned pointer is guaranteed to be non-null.
+.PP
+See also: setFont(), fontMetrics() and QWidget::font().
+.SH "QFontMetrics QApplication::fontMetrics () \fC[static]\fR"
+Returns display (screen) font metrics for the application font.
+.PP
+See also: font(), setFont(), QWidget::fontMetrics() and QPainter::fontMetrics().
+.SH "bool QApplication::hasGlobalMouseTracking () \fC[static]\fR"
+Returns TRUE if global mouse tracking is enabled, otherwise FALSE.
+.PP
+See also: setGlobalMouseTracking().
+.SH "void QApplication::lastWindowClosed () \fC[signal]\fR"
+This signal is emitted when the user has closed a top level widget and there are no more visible top level widgets left.
+.PP
+The signal is very useful when your application has many top level widgets but no main widget. You can then connect it to the quit() slot.
+.PP
+See also: mainWidget(), topLevelWidgets() and QWidget::isTopLevel().
+.SH "QWidget * QApplication::mainWidget () const"
+Returns the main application widget, or 0 if there is not a defined main widget.
+.PP
+See also: setMainWidget().
+.SH "bool QApplication::notify ( QObject * receiver, QEvent * event ) \fC[virtual]\fR"
+Sends \fIevent\fR to \fIreceiver:\fR \fCreceiver->event( event )\fR Returns the value that is returned from the receiver's event handler.
+.PP
+Reimplementing this virtual function is one of five ways to process an event: 
+.IP 1
+Reimplementing this function. Very powerful, you get \fIcomplete\fR control, but of course only one subclass can be qApp.
+.IP 2
+Installing an event filter on qApp. Such an event filter gets to process all events for all widgets, so it's just as powerful as reimplementing notify(), and in this way it's possible to have more than one application-global event filter. Global event filter get to see even mouse events for disabled widgets, and if global mouse tracking is enabled, mouse move events for all widgets.
+.IP 3
+Reimplementing QObject::event() (as QWidget does). If you do this you get tab key-presses, and you get to see the events before any widget-specific event filters.
+.IP 4
+Installing an event filter on the object. Such an even filter gets all the events except Tab and Shift-Tab key presses.
+.IP 5
+Finally, reimplementing paintEvent(), mousePressEvent() and so on. This is the normal, easist and least powerful way. 
+.PP
+See also: QObject::event() and installEventFilter().
+.SH "QCursor * QApplication::overrideCursor () \fC[static]\fR"
+Returns the active application override cursor.
+.PP
+This function returns 0 if no application cursor has been defined (i.e. the internal cursor stack is empty).
+.PP
+See also: setOverrideCursor() and restoreOverrideCursor().
+.SH "QPalette * QApplication::palette () \fC[static]\fR"
+Returns a pointer to the default application palette. There is always an application palette, i.e. the returned pointer is guaranteed to be non-null.
+.PP
+See also: setPalette() and QWidget::palette().
+.SH "void QApplication::postEvent ( QObject * receiver, QEvent * event ) \fC[static]\fR"
+Stores the event in a queue and returns immediatly.
+.PP
+The event must be allocated on the heap, as it is deleted when the event has been posted.
+.PP
+When control returns to the main event loop, all events that are stored in the queue will be sent using the notify() function.
+.PP
+See also: sendEvent().
+.SH "void QApplication::processEvents ()"
+Processes pending events, for 3 seconds or until there are no more events to process, then return.
+.PP
+You can call this function occasionally when your program is busy doing a long operation (e.g. copying a file).
+.PP
+See also: processEvents(), exec() and QTimer.
+.SH "void QApplication::processEvents ( int maxtime )"
+Processes pending events, for \fImaxtime\fR milliseconds or until there are no more events to process, then return.
+.PP
+You can call this function occasionally when you program is busy doing a long operation (e.g. copying a file).
+.PP
+See also: processOneEvent(), exec() and QTimer.
+.SH "void QApplication::processOneEvent ()"
+Waits for an event to occur, processes it, then returns.
+.PP
+This function is useful for adapting Qt to situations where the event processing must be grafted into existing program loops. Beware that using this function in new applications may be an indication of design problems.
+.PP
+See also: processEvents(), exec() and QTimer.
+.SH "void QApplication::quit () \fC[slot]\fR"
+Tells the application to exit with return code 0 (success). Equivalent to calling QApplication::exit( 0 ).
+.PP
+This function is a slot, i.e. you may connect any signal to activate quit().
+.PP
+Example:
+.PP
+.nf
+.br
+    QPushButton *quitButton = new QPushButton( "Quit" );
+.br
+    connect( quitButton, SIGNAL(clicked()), qApp, SLOT(quit()) );
+.fi
+.PP
+See also: exit().
+.SH "void QApplication::restoreOverrideCursor () \fC[static]\fR"
+Restores the effect of setOverrideCursor().
+.PP
+If setOverrideCursor() has been called twice, calling restoreOverrideCursor() will activate the first cursor set. Calling this function a second time restores the original widgets cursors.
+.PP
+Application cursors are stored on an internal stack. setOverrideCursor() pushes the cursor onto the stack, and restoreOverrideCursor() pops the active cursor off the stack. Every setOverrideCursor() must have an corresponding restoreOverrideCursor(), otherwise the stack will get out of sync. overrideCursor() returns 0 if the cursor stack is empty.
+.PP
+See also: setOverrideCursor() and overrideCursor().
+.PP
+Examples:
+.(l
+showimg/showimg.cpp
+.)l
+.SH "bool QApplication::sendEvent ( QObject * receiver, QEvent * event ) \fC[static]\fR"
+Sends an event directly to a receiver, using the notify() function. Returns the value that was returned from the event handler.
+.PP
+See also: postEvent() and notify().
+.SH "void QApplication::sendPostedEvents ( QObject * receiver, int event_type ) \fC[static]\fR"
+Immediately dispatches all events which have been previously enqueued with QApplication::postEvent() and which are for the object \fIreceiver\fR and have the \fIevent_type.\fR
+.PP
+Some event compression may occur. Note that events from the window system are \fInot\fR dispatched by this function.
+.SH "void QApplication::setColorSpec ( int spec ) \fC[static]\fR"
+Sets the color specification for the application to \fIspec.\fR
+.PP
+The color specification controls how your application allocates colors. You must set the color specification before you create the QApplication object.
+.PP
+The choices are:
+.TP
+\fCQApplication::NormalColor.\fR This is the default color allocation strategy. Use this choice if your application uses buttons, menus, texts and pixmaps with few colors. With this choice, the application allocates system global colors. This work fine for most applications under X11, but Windows dithers to the 20 standard colors unless the display has true color support (more than 256 colors).
+.IP
+.TP
+\fCQApplication::CustomColor.\fR Use this choice if your application needs a small number of custom colors. This choice only makes a difference on Windows - the application gets more colors when it is active, but the background windows look less good. Under X11 this is the same as \fCNormalColor.\fR Under Windows, Qt creates a Windows palette if the display supports 256 colors.
+.IP
+.TP
+\fCQApplication::ManyColor.\fR Use this choice if your application is very color hungry (e.g. it wants thousands of colors). Under Windows, this is equal to \fCCustomColor.\fR Under X11 the effect is:
+.TP
+For 256-color displays which have at best a 256 color true color visual, the default visual is used, and a colors are allocated from a color cube. The color cube is the 6x6x6 (216 color) "Web palette", but the number of colors can be changed by the \fI-ncols\fR option. The user can force the application to use the true color visual by the -visual option.
+.TP
+For 256-color displays which have a true color visual with more than 256 colors, use that visual. Silicon Graphics X servers have this feature. They provide an 8 bit visual as default but can deliver true color when asked.
+.PP
+Example:
+.PP
+.nf
+.br
+  int main( int argc, char **argv )
+.br
+  {
+.br
+      QApplication::setColorSpec( QApplication::ManyColor );
+.br
+      QApplication a( argc, argv );
+.br
+      ...
+.br
+  }
+.fi
+.PP
+QColor provides more functionality for controlling color allocation and freeing up certains colors. See QColor::enterAllocContext() for more information.
+.PP
+To see what mode you end up with, you can call QColor::numBitPlanes() once the QApplication object exists. A value greater than 8 (typically 16, 24 or 32) means true color.
+.PP
+The color cube used by Qt are all those colors with red, green, and blue components of either 0x00, 0x33, 0x66, 0x99, 0xCC, or 0xFF.
+.PP
+See also: colorSpec(), QColor::numBitPlanes() and QColor::enterAllocContext().
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH "void QApplication::setDoubleClickInterval ( int ms ) \fC[static]\fR"
+Sets the time limit that distinguishes a double click from two consecutive mouse clicks to \fIms\fR milliseconds. This value is ignored under Windows (the control panel value is used.)
+.PP
+The default value is 400 milliseconds.
+.PP
+See also: doubleClickInterval().
+.SH "void QApplication::setFont ( const QFont & font, bool updateAllWidgets=FALSE ) \fC[static]\fR"
+Changes the default application font to \fIfont.\fR
+.PP
+The default font depends on the X server in use.
+.PP
+If \fIupdateAllWidgets\fR is TRUE, then the font of all existing widgets is set to \fIfont.\fR
+.PP
+Widgets created after this call get \fIfont\fR as their font.
+.PP
+See also: font(), fontMetrics() and QWidget::setFont().
+.PP
+Examples:
+.(l
+desktop/desktop.cpp movies/main.cpp
+.)l
+.SH "void QApplication::setGlobalMouseTracking ( bool enable ) \fC[static]\fR"
+Enables global mouse tracking if \fIenable\fR is TRUE or disables it if \fIenable\fR is FALSE.
+.PP
+Enabling global mouse tracking makes it possible for widget event filters or application event filters to get all mouse move events, even when no button is depressed. This is useful for special GUI elements, e.g. tool tips.
+.PP
+Global mouse tracking does not affect widgets and their mouseMoveEvent(). For a widget to get mouse move events when no button is depressed, it must do QWidget::setMouseTracking(TRUE).
+.PP
+This function has an internal counter. Each setGlobalMouseTracking(TRUE) must have a corresponding setGlobalMouseTracking(FALSE).
+.PP
+See also: hasGlobalMouseTracking() and QWidget::hasMouseTracking().
+.SH "void QApplication::setMainWidget ( QWidget * mainWidget )"
+Sets the main widget of the application.
+.PP
+The special thing about the main widget is that destroying the main widget (i.e. the program calls QWidget::close() or the user double-clicks the window close box) will leave the main event loop and exit the application.
+.PP
+For X11, this function also resizes and moves the main widget according to the \fI-geometry\fR command-line option, so you should set the default geometry before calling setMainWidget().
+.PP
+See also: mainWidget(), exec() and quit().
+.PP
+Examples:
+.(l
+forever/forever.cpp connect/connect.cpp mainlyQt/editor.cpp drawdemo/drawdemo.cpp picture/picture.cpp xform/xform.cpp menu/menu.cpp progress/progress.cpp cursor/cursor.cpp layout/layout.cpp qmag/qmag.cpp widgets/widgets.cpp
+.)l
+.SH "void QApplication::setOverrideCursor ( const QCursor & cursor, bool replace=FALSE ) \fC[static]\fR"
+Sets the application override cursor to \fIcursor.\fR
+.PP
+Application override cursor are intended for showing the user that the application is in a special state, for example during an operation that might take some time.
+.PP
+This cursor will be displayed in all application widgets until restoreOverrideCursor() or another setOverrideCursor() is called.
+.PP
+Application cursors are stored on an internal stack. setOverrideCursor() pushes the cursor onto the stack, and restoreOverrideCursor() pops the active cursor off the stack. Every setOverrideCursor() must have an corresponding restoreOverrideCursor(), otherwise the stack will get out of sync. overrideCursor() returns 0 if the cursor stack is empty.
+.PP
+If \fIreplace\fR is TRUE, the new cursor will replace the last override cursor.
+.PP
+Example:
+.PP
+.nf
+.br
+    QApplication::setOverrideCursor( waitCursor );
+.br
+    calculateHugeMandelbrot();                  // lunch time...
+.br
+    QApplication::restoreOverrideCursor();
+.fi
+.PP
+See also: overrideCursor(), restoreOverrideCursor() and QWidget::setCursor().
+.PP
+Examples:
+.(l
+showimg/showimg.cpp
+.)l
+.SH "void QApplication::setPalette ( const QPalette & palette, bool updateAllWidgets=FALSE ) \fC[static]\fR"
+Changes the default application palette to \fIpalette.\fR
+.PP
+If \fIupdateAllWidgets\fR is TRUE, then the palette of all existing widgets is set to \fIpalette.\fR
+.PP
+Widgets created after this call get \fIpalette\fR as their palette.
+.PP
+See also: QWidget::setPalette() and palette().
+.PP
+Examples:
+.(l
+xform/xform.cpp
+.)l
+.SH "void QApplication::setStyle ( GUIStyle style ) \fC[static]\fR"
+Sets the application GUI style to \fIstyle.\fR
+.PP
+The style parameter can be \fCWindowsStyle\fR or \fCMotifStyle.\fR
+.PP
+See also: style() and QWidget::setStyle().
+.SH "void QApplication::setWinStyleHighlightColor ( const QColor & c ) \fC[static]\fR"
+Sets the color used to mark selections in windows style for all widgets in the application. Will repaint all widgets if the color is changed.
+.PP
+The default color is \fCdarkBlue.\fR
+.PP
+See also: winStyleHighlightColor().
+.PP
+Examples:
+.(l
+widgets/widgets.cpp
+.)l
+.SH "bool QApplication::startingUp () \fC[static]\fR"
+Returns TRUE if an application object has not been created yet.
+.PP
+See also: closingDown().
+.SH "GUIStyle QApplication::style () \fC[static]\fR"
+Returns the GUI style of the application.
+.PP
+See also: setStyle().
+.SH "void QApplication::syncX () \fC[static]\fR"
+Synchronizes with the X server in the X11 implementation. Does nothing on other platforms.
+.PP
+See also: flushX().
+.SH "QWidgetList * QApplication::topLevelWidgets () \fC[static]\fR"
+Returns a list of the top level widgets in the application.
+.PP
+The list is created using new and must be deleted by the caller.
+.PP
+The list is empty if there are no top level widgets.
+.PP
+Note that some of the top level widgets may be hidden.
+.PP
+Example:
+.PP
+.nf
+.br
+    //
+.br
+    // Shows all hidden top level widgets.
+.br
+    //
+.br
+    QWidgetList  *list = QApplication::topLevelWidgets();
+.br
+    QWidgetListIt it( *list );          // iterate over the widgets
+.br
+    while ( it.current() ) {            // for each top level widget...
+.br
+        if ( !it.current()->isVisible() )
+.br
+            it.current()->show();
+.br
+        ++it;
+.br
+    }
+.br
+    delete list;                        // delete the list, not the widgets
+.fi
+.PP
+The QWidgetList class is defined in the qwidcoll.h header file.
+.PP
+\fBWarning:\fR Delete the list away as soon you have finished using it. You can get in serious trouble if you for instance try to access a widget that has been deleted.
+.PP
+See also: allWidgets(), QWidget::isTopLevel(), QWidget::isVisible() and QList::isEmpty().
+.SH "QWidget * QApplication::widgetAt ( int x, int y, bool child=FALSE ) \fC[static]\fR"
+Returns a pointer to the widget at global screen position \fI(x,y),\fR or a null pointer if there is no Qt widget there.
+.PP
+If \fIchild\fR is FALSE and there is a child widget at position \fI(x,y),\fR the top-level widget containing it is returned. If \fIchild\fR is TRUE the child widget at position \fI(x,y)\fR is returned.
+.PP
+See also: QCursor::pos(), QWidget::grabMouse() and QWidget::grabKeyboard().
+.SH "QWidget * QApplication::widgetAt ( const QPoint & pos, bool child=FALSE ) \fC[static]\fR"
+This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts.
+.SH "const QColor& QApplication::winStyleHighlightColor () \fC[static]\fR"
+Returns the color used to mark selections in windows style.
+.PP
+See also: setWinStyleHighlightColor().
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "void qAddPostRoutine (CleanUpFunction p)"
+Adds a global routine that will be called from the QApplication destructor. This function is normally used to add cleanup routines.
+.PP
+CleanUpFunctions is defined as \fC typedef void (*CleanUpFunction)(); \fR, i.e. a pointer to a function that takes no arguments and returns nothing.
+.PP
+Example of use:
+.PP
+.nf
+.br
+    static int *global_ptr = 0;
+.br
+.br
+    void cleanup_ptr()
+.br
+    {
+.br
+        delete [] global_ptr;
+.br
+    }
+.br
+.br
+    void init_ptr()
+.br
+    {
+.br
+        global_ptr = new int[100];              // allocate data
+.br
+        qAddPostRoutine( cleanup_ptr );         // delete later
+.br
+    }
+.fi
+.SH "Q_EXPORT const char * qVersion ()"
+Returns the Qt version number for the library, typically "1.30" or "1.31".
+.SH "Q_EXPORT bool qSysInfo (int * wordSize, bool * bigEndian)"
+Obtains information about the system.
+.PP
+The system's word size in bits (typically 32) is returned in \fI*wordSize.\fR The \fI*bigEndian\fR is set to TRUE if this is a big-endian machine, or to FALSE if this is a little-endian machine.
+.PP
+This function calls fatal() with a message if the computer is truely weird (i.e. different endianness for 16 bit and 32 bit integers).
+.SH "Q_EXPORT void debug (const char * msg, ...)"
+Prints a debug message, or calls the message handler (if it has been installed).
+.PP
+This function takes a format string and a stack arguments, similar to the C printf() function.
+.PP
+Example:
+.PP
+.nf
+.br
+    debug( "my window handle = %x", myWidget->id() );
+.fi
+.PP
+Under X11, the text is printed to stderr. Under Windows, the text is sent to the debugger.
+.PP
+\fBWarning:\fR The internal buffer is limited to 512 bytes (including the 0-terminator.
+.PP
+See also: warning(), fatal(), qInstallMsgHandler() and Debugging
+.SH "Q_EXPORT void warning (const char * msg, ...)"
+Prints a warning message, or calls the message handler (if it has been installed).
+.PP
+This function takes a format string and a stack arguments, similar to the C printf() function.
+.PP
+Example:
+.PP
+.nf
+.br
+    void f( int c )
+.br
+    {
+.br
+        if ( c > 200 )
+.br
+            warning( "f: bad argument, c == %d", c );
+.br
+    }
+.fi
+.PP
+Under X11, the text is printed to stderr. Under Windows, the text is sent to the debugger.
+.PP
+\fBWarning:\fR The internal buffer is limited to 512 bytes (including the 0-terminator.
+.PP
+See also: debug(), fatal(), qInstallMsgHandler() and Debugging
+.PP
+Examples:
+.(l
+progress/progress.cpp
+.)l
+.SH "Q_EXPORT void fatal (const char * msg, ...)"
+Prints a fatal error message and exits, or calls the message handler (if it has been installed).
+.PP
+This function takes a format string and a stack arguments, similar to the C printf() function.
+.PP
+Example:
+.PP
+.nf
+.br
+    int divide( int a, int b )
+.br
+    {
+.br
+        if ( b == 0 )                           // program error
+.br
+            fatal( "divide: cannot divide by zero" );
+.br
+        return a/b;
+.br
+    }
+.fi
+.PP
+Under X11, the text is printed to stderr. Under Windows, the text is sent to the debugger.
+.PP
+\fBWarning:\fR The internal buffer is limited to 512 bytes (including the 0-terminator.
+.PP
+See also: debug(), warning(), qInstallMsgHandler() and Debugging
+.SH "void ASSERT (bool test)"
+Prints a warning message containing the source code file name and line number if \fItest\fR is FALSE.
+.PP
+This is really a macro defined in qglobal.h.
+.PP
+ASSERT is useful for testing required conditions in your program.
+.PP
+Example:
+.PP
+.nf
+.br
+    //
+.br
+    // File: div.cpp
+.br
+    //
+.br
+.br
+    #include <qglobal.h>
+.br
+.br
+    int divide( int a, int b )
+.br
+    {
+.br
+        ASSERT( b != 0 );                       // this is line 9
+.br
+        return a/b;
+.br
+    }
+.fi
+.PP
+If \fCb\fR is zero, the ASSERT statement will output the following message using the warning() function:
+.PP
+.nf
+.br
+    ASSERT: "b == 0" in div.cpp (9)
+.fi
+.PP
+See also: warning() and Debugging
+.SH "void CHECK_PTR (void * p)"
+If \fIp\fR is null, a fatal messages says that the program ran out of memory and exits. If \fIp\fR is not null, nothing happens.
+.PP
+This is really a macro defined in qglobal.h.
+.PP
+\fBWarning:\fR CHECK_PTR only works for the development release of the Qt library. In the release library, CHECK_PTR will be substituted with nothing.
+.PP
+Example:
+.PP
+.nf
+.br
+    int *a;
+.br
+    CHECK_PTR( a = new int[80] );       // never do this!
+.br
+      // do this instead:
+.br
+    a = new int[80];
+.br
+    CHECK_PTR( a );                     // this is fine
+.fi
+.PP
+See also: fatal() and Debugging
+.SH "Q_EXPORT msg_handler qInstallMsgHandler (msg_handler h)"
+Installs a Qt message handler. Returns a pointer to the message handler previously defined.
+.PP
+The message handler is a function that prints out debug messages, warnings and fatal error messages. The Qt library (debug version) contains hundreds of warning messages that are printed when internal errors (usually invalid function arguments) occur. If you implement your own message handler, you get total control of these messages.
+.PP
+The default message handler prints the message to the standard output under X11 or to the debugger under Windows. If it is a fatal message, the application aborts immediately.
+.PP
+Only one message handler can be defined, since this is usually done on an application-wide basis to control debug output.
+.PP
+To restore the message handler, call \fCqInstallMsgHandler(0).\fR
+.PP
+Example:
+.PP
+.nf
+.br
+    #include <qapplication.h>
+.br
+    #include <stdio.h>
+.br
+    #include <stdlib.h>
+.br
+.br
+    void myMessageOutput( QtMsgType type, const char *msg )
+.br
+    {
+.br
+        switch ( type ) {
+.br
+            case QtDebugMsg:
+.br
+                fprintf( stderr, "Debug: %s\\n", msg );
+.br
+                break;
+.br
+            case QtWarningMsg:
+.br
+                fprintf( stderr, "Warning: %s\\n", msg );
+.br
+                break;
+.br
+            case QtFatalMsg:
+.br
+                fprintf( stderr, "Fatal: %s\\n", msg );
+.br
+                abort();                        // dump core on purpose
+.br
+        }
+.br
+    }
+.br
+.br
+    int main( int argc, char **argv )
+.br
+    {
+.br
+        qInstallMsgHandler( myMessageOutput );
+.br
+        QApplication a( argc, argv );
+.br
+        ...
+.br
+        return a.exec();
+.br
+    }
+.fi
+.PP
+See also:  debug(), warning(), fatal() and Debugging
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qapplication.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

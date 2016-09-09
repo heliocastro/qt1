@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QPoint Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QPoint Class Reference</h1><br clear="all">
+<p>
+The QPoint class defines a point in the plane.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qpoint-h.html">qpoint.h</a>&gt;</code>
+<p><a href="qpoint-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qpoint.html#a0"><strong>QPoint</strong></a> () </span>
+<li><span class="fn"><a href="qpoint.html#a1"><strong>QPoint</strong></a> ( int xpos, int ypos ) </span>
+<li><span class="fn">bool <a href="qpoint.html#a2"><strong>isNull</strong></a> () const</span>
+<li><span class="fn">int <a href="qpoint.html#a3"><strong>x</strong></a> () const</span>
+<li><span class="fn">int <a href="qpoint.html#a4"><strong>y</strong></a> () const</span>
+<li><span class="fn">void <a href="qpoint.html#a5"><strong>setX</strong></a> ( int x ) </span>
+<li><span class="fn">void <a href="qpoint.html#a6"><strong>setY</strong></a> ( int y ) </span>
+<li><span class="fn">QCOORD&amp; <a href="qpoint.html#a7"><strong>rx</strong></a> () </span>
+<li><span class="fn">QCOORD&amp; <a href="qpoint.html#a8"><strong>ry</strong></a> () </span>
+<li><span class="fn">QPoint&amp; <a href="qpoint.html#a9"><strong>operator+=</strong></a> ( const QPoint &amp; p ) </span>
+<li><span class="fn">QPoint&amp; <a href="qpoint.html#b0"><strong>operator-=</strong></a> ( const QPoint &amp; p ) </span>
+<li><span class="fn">QPoint&amp; <a href="qpoint.html#b1"><strong>operator*=</strong></a> ( int c ) </span>
+<li><span class="fn">QPoint&amp; <a href="qpoint.html#b2"><strong>operator*=</strong></a> ( double c ) </span>
+<li><span class="fn">QPoint&amp; <a href="qpoint.html#b3"><strong>operator/=</strong></a> ( int c ) </span>
+<li><span class="fn">QPoint&amp; <a href="qpoint.html#b4"><strong>operator/=</strong></a> ( double c ) </span>
+</ul>
+<h2>Static Public Members</h2>
+<ul>
+<li><span class="fn">void <strong>warningDivByZero</strong> () </span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>bool <a href="qpoint.html#c5"><strong>operator==</strong></a> (const QPoint &amp; p1, const QPoint &amp; p2)
+<li>bool <a href="qpoint.html#c6"><strong>operator!=</strong></a> (const QPoint &amp; p1, const QPoint &amp; p2)
+<li>QPoint <a href="qpoint.html#c7"><strong>operator+</strong></a> (const QPoint &amp; p1, const QPoint &amp; p2)
+<li>QPoint <a href="qpoint.html#c8"><strong>operator-</strong></a> (const QPoint &amp; p1, const QPoint &amp; p2)
+<li>QPoint <a href="qpoint.html#c9"><strong>operator*</strong></a> (const QPoint &amp; p, int c)
+<li>QPoint <a href="qpoint.html#d0"><strong>operator*</strong></a> (int c, const QPoint &amp; p)
+<li>QPoint <a href="qpoint.html#d1"><strong>operator*</strong></a> (const QPoint &amp; p, double c)
+<li>QPoint <a href="qpoint.html#d2"><strong>operator*</strong></a> (double c, const QPoint &amp; p)
+<li>QPoint <a href="qpoint.html#d3"><strong>operator-</strong></a> (const QPoint &amp; p)
+<li>QPoint <a href="qpoint.html#d4"><strong>operator/</strong></a> (const QPoint &amp; p, int c)
+<li>QPoint <a href="qpoint.html#d5"><strong>operator/</strong></a> (const QPoint &amp; p, double c)
+<li>QDataStream &amp; <a href="qpoint.html#d6"><strong>operator&lt;&lt;</strong></a> (QDataStream &amp; s, const QPoint &amp; p)
+<li>QDataStream &amp; <a href="qpoint.html#d7"><strong>operator&gt;&gt;</strong></a> (QDataStream &amp; s, QPoint &amp; p)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QPoint class defines a point in the plane.
+<p>
+A point is specified by an x coordinate and a y coordinate.
+<p>The coordinate type is QCOORD (defined in <a href="qwindowdefs-h.html">qwindowdefs.h</a> as <code>short).</code>
+The minimum value of QCOORD is QCOORD_MIN (-32768) and the maximum
+value is  QCOORD_MAX (32767).
+<p>We have defined many operator functions that make arithmetic on points
+simple and intuitive.
+<p>Example:
+<pre>    <a href="qpoint.html">QPoint</a> p(  1, 2 );
+    <a href="qpoint.html">QPoint</a> q( -8, 5 );
+    <a href="qpoint.html">QPoint</a> r(  9, 7 );
+    <a href="qpoint.html">QPoint</a> x = 2*p + (q-r)*5.5 - (r+p/1.5);
+</pre>
+<p>See also:  <a href="qsize.html">QSize</a> and <a href="qrect.html">QRect</a>.
+<p>Examples:
+ <a href="tictac-tictac-cpp.html#QPoint">tictac/tictac.cpp</a>
+ <a href="table-table-cpp.html#QPoint">table/table.cpp</a>
+ <a href="forever-forever-cpp.html#QPoint">forever/forever.cpp</a>
+ <a href="connect-connect-cpp.html#QPoint">connect/connect.cpp</a>
+ <a href="drawdemo-drawdemo-cpp.html#QPoint">drawdemo/drawdemo.cpp</a>
+ <a href="xform-xform-cpp.html#QPoint">xform/xform.cpp</a>
+ <a href="aclock-aclock-cpp.html#QPoint">aclock/aclock.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QPoint::QPoint ()</h3>
+<p>Constructs a point with undefined x and y values.
+<h3 class="fn"><a name="a1"></a>QPoint::QPoint ( int xpos, int ypos )</h3>
+<p>Constructs a point with the x value  <em>xpos</em> and y value <em>ypos.</em>
+<h3 class="fn">bool <a name="a2"></a>QPoint::isNull () const</h3>
+<p>Returns TRUE if both the x value and the y value are 0.
+<h3 class="fn">QPoint &amp; <a name="b2"></a>QPoint::operator*= ( double c )</h3>
+<p>Multiplies both x and y with <em>c,</em> and return a reference to this point.
+<p>Example:
+<pre>    <a href="qpoint.html">QPoint</a> p( -1, 4 );
+    p *= 2.5;                   // p becomes (-3,10)
+</pre>
+<p>Note that the result is truncated.
+<h3 class="fn">QPoint &amp; <a name="b1"></a>QPoint::operator*= ( int c )</h3>
+<p>Multiplies both x and y with <em>c,</em> and return a reference to this point.
+<p>Example:
+<pre>    <a href="qpoint.html">QPoint</a> p( -1, 4 );
+    p *= 2;                     // p becomes (-2,8)
+</pre>
+<h3 class="fn">QPoint &amp; <a name="a9"></a>QPoint::operator+= ( const QPoint &amp; p )</h3>
+<p>Adds <em>p</em> to the point and returns a reference to this point.
+<p>Example:
+<pre>    <a href="qpoint.html">QPoint</a> p(  3, 7 );
+    <a href="qpoint.html">QPoint</a> q( -1, 4 );
+    p += q;                     // p becomes (2,11)
+</pre>
+<h3 class="fn">QPoint &amp; <a name="b0"></a>QPoint::operator-= ( const QPoint &amp; p )</h3>
+<p>Subtracts <em>p</em> from the point and returns a reference to this point.
+<p>Example:
+<pre>    <a href="qpoint.html">QPoint</a> p(  3, 7 );
+    <a href="qpoint.html">QPoint</a> q( -1, 4 );
+    p -= q;                     // p becomes (4,3)
+</pre>
+<h3 class="fn">QPoint &amp; <a name="b4"></a>QPoint::operator/= ( double c )</h3>
+<p>Divides both x and y by <em>c,</em> and return a reference to this point.
+<p>Example:
+<pre>    <a href="qpoint.html">QPoint</a> p( -3, 10 );
+    p /= 2.5;                   // p becomes (-1,4)
+</pre>
+<p>Note that the result is truncated.
+<h3 class="fn">QPoint &amp; <a name="b3"></a>QPoint::operator/= ( int c )</h3>
+<p>Divides both x and y by <em>c,</em> and return a reference to this point.
+<p>Example:
+<pre>    <a href="qpoint.html">QPoint</a> p( -2, 8 );
+    p /= 2;                     // p becomes (-1,4)
+</pre>
+<h3 class="fn">QCOORD &amp; <a name="a7"></a>QPoint::rx ()</h3>
+<p>Returns a reference to the x coordinate of the point.
+<p>Using a reference makes it possible to directly manipulate x.
+<p>Example:
+<pre>    <a href="qpoint.html">QPoint</a> p( 1, 2 );
+    p.<a href="qpoint.html#a7">rx</a>()--;                   // p becomes (0,2)
+</pre>
+<p>See also:  <a href="qpoint.html#a8">ry</a>().
+<h3 class="fn">QCOORD &amp; <a name="a8"></a>QPoint::ry ()</h3>
+<p>Returns a reference to the y coordinate of the point.
+<p>Using a reference makes it possible to directly manipulate y.
+<p>Example:
+<pre>    <a href="qpoint.html">QPoint</a> p( 1, 2 );
+    p.<a href="qpoint.html#a8">ry</a>()++;                   // p becomes (1,3)
+</pre>
+<p>See also:  <a href="qpoint.html#a7">rx</a>().
+<h3 class="fn">void <a name="a5"></a>QPoint::setX ( int x )</h3>
+<p>Sets the x coordinate of the point to <em>x.</em>
+<p>See also:  <a href="qpoint.html#a6">setY</a>().
+<h3 class="fn">void <a name="a6"></a>QPoint::setY ( int y )</h3>
+<p>Sets the y coordinate of the point to <em>y.</em>
+<p>See also:  <a href="qpoint.html#a5">setX</a>().
+<h3 class="fn">int <a name="a3"></a>QPoint::x () const</h3>
+<p>Returns the x coordinate of the point.
+<p>See also:  <a href="qpoint.html#a4">y</a>().
+<p>Examples:
+ <a href="table-table-cpp.html#x">table/table.cpp</a>
+ <a href="drawdemo-drawdemo-cpp.html#x">drawdemo/drawdemo.cpp</a>
+ <a href="aclock-aclock-cpp.html#x">aclock/aclock.cpp</a>
+<h3 class="fn">int <a name="a4"></a>QPoint::y () const</h3>
+<p>Returns the y coordinate of the point.
+<p>See also:  <a href="qpoint.html#a3">x</a>().
+<p>Examples:
+ <a href="table-table-cpp.html#y">table/table.cpp</a>
+ <a href="drawdemo-drawdemo-cpp.html#y">drawdemo/drawdemo.cpp</a>
+ <a href="aclock-aclock-cpp.html#y">aclock/aclock.cpp</a>
+<hr><h2>Related Functions</h2>
+<h3>bool <a name="c5"></a>operator== (const QPoint &amp; p1, const QPoint &amp; p2)</h3>
+<p>Returns TRUE if <em>p1</em> and <em>p2</em> are equal, or FALSE if they are different.
+
+<h3>bool <a name="c6"></a>operator!= (const QPoint &amp; p1, const QPoint &amp; p2)</h3>
+<p>Returns TRUE if <em>p1</em> and <em>p2</em> are different, or FALSE if they are equal.
+
+<h3>QPoint <a name="c7"></a>operator+ (const QPoint &amp; p1, const QPoint &amp; p2)</h3>
+<p>Returns the sum of <em>p1</em> and <em>p2;</em> each component is added separately.
+
+<h3>QPoint <a name="c8"></a>operator- (const QPoint &amp; p1, const QPoint &amp; p2)</h3>
+<p>Returns <em>p2</em> subtracted from <em>p1;</em> each component is
+subtracted separately.
+
+<h3>QPoint <a name="c9"></a>operator* (const QPoint &amp; p, int c)</h3>
+<p>Multiplies both of <em>p's</em> components by <em>c</em> and returns the result.
+
+<h3>QPoint <a name="d0"></a>operator* (int c, const QPoint &amp; p)</h3>
+<p>Multiplies both of <em>p's</em> components by <em>c</em> and returns the result.
+
+<h3>QPoint <a name="d1"></a>operator* (const QPoint &amp; p, double c)</h3>
+<p>Multiplies both of <em>p's</em> components by <em>c</em> and returns the
+result.
+
+<h3>QPoint <a name="d2"></a>operator* (double c, const QPoint &amp; p)</h3>
+<p>Multiplies both of <em>p's</em> components by <em>c</em> and returns the
+result.
+
+<h3>QPoint <a name="d3"></a>operator- (const QPoint &amp; p)</h3>
+<p>Returns <em>p</em> where x and y have opposite signs.
+
+<h3>QPoint <a name="d4"></a>operator/ (const QPoint &amp; p, int c)</h3>
+<p>Divides both of <em>p's</em> components by <em>c</em> and returns the result.
+
+<h3>QPoint <a name="d5"></a>operator/ (const QPoint &amp; p, double c)</h3>
+<p>Divides both of <em>p's</em> components by <em>c</em> and returns the result.
+<p>Note that the result is truncated.
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="d6"></a>operator&lt;&lt; (<a href="qdatastream.html">QDataStream</a> &amp; s, const QPoint &amp; p)</h3>
+<p>Writes a QPoint to the stream and returns a reference to the stream.
+<p>Serialization format: [x (INT16), y (INT16)].
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="d7"></a>operator&gt;&gt; (<a href="qdatastream.html">QDataStream</a> &amp; s, QPoint &amp; p)</h3>
+<p>Reads a QPoint from the stream and returns a reference to the stream.
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qpoint.h: 1998/11/02
+<li>qpoint.cpp: 1998/11/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

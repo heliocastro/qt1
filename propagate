@@ -1,0 +1,44 @@
+#!/bin/sh
+
+MAKEFILES=`find . -name Makefile.in -print | sort`;
+
+if cmp "$QTDIR/LICENSE" "$PWD/LICENSE" || cmp "$QTDIR/LICENSE" `pwd`/LICENSE || cmp "$QTDIR/LICENSE" "$CWD/LICENSE" 2>/dev/null
+then
+    true
+else
+    echo >&2
+    echo >&2
+    echo '   $QTDIR must be set to $PWD ('$PWD')' >&2
+    echo '   Please read INSTALL' >&2
+    echo >&2
+    echo >&2
+    exit 1
+fi
+
+
+QTDIR='$(QTDIR)'
+
+for a in $MAKEFILES ; do
+    N=`dirname $a`/Makefile
+    M=${N}.in
+    sed -ne '1,/##* BEGIN/ p' < $M > $N
+    cat >> $N <<EOF
+#
+#   This section was automatically generated from
+#      `pwd`/Makefile for building on
+#      ${PLATFORM} on `date`
+#
+
+`cat $1`
+
+####### End of automatically generated section
+EOF
+    sed -ne '/##* END/,$ p' < $M >> $N
+    echo '  created' $N
+done
+
+touch variables
+echo
+echo Qt is now configured for building. Just run make.
+echo To reconfigure, run make config.
+echo

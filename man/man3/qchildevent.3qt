@@ -1,0 +1,55 @@
+.TH QChildEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QChildEvent \- Event parameters for child widget events
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherits QEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QChildEvent ( int " "type" ", QWidget * child )"
+.br
+.ti -1c
+.BI "QWidget* child () const"
+.br
+.ti -1c
+.BI "bool inserted () const"
+.br
+.ti -1c
+.BI "bool removed () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QChildEvent class contains event parameters for child widget events.
+.PP
+Child events are sent to widgets when children are inserted or removed.
+.PP
+In this release of Qt, no event handlers are defined to receive child events. Reimplement QObject::event() or install an QObject::eventFilter() to handle these events.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QChildEvent::QChildEvent ( int type, QWidget * child )"
+Constructs a child event object.
+.PP
+The \fItype\fR parameter must be either \fIEvent_ChildInserted\fR or \fIEvent_ChildRemoved.\fR
+.SH "QWidget * QChildEvent::child () const"
+Returns the child widget inserted or removed.
+.SH "bool QChildEvent::inserted () const"
+Returns TRUE if the widget received a new child.
+.SH "bool QChildEvent::removed () const"
+Returns TRUE if the widget lost a child.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qchildevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

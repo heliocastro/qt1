@@ -1,0 +1,94 @@
+/****************************************************************************
+** $Id: coordsys.doc,v 2.5 1998/03/31 09:05:35 aavit Exp $
+**
+** Qt Coordinate System Documentation
+**
+** Copyright (C) 1995-1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+/*!
+\page coordsys.html
+
+<title>The Coordinate System</title>
+</head><body bgcolor="#ffffff">
+
+\postheader
+
+<h1 align=center>The Coordinate System</h1><br clear="all">
+
+A \link QPaintDevice paint device\endlink in Qt is a drawable 2D
+surface. \link QWidget QWidget\endlink, \link QPixmap QPixmap\endlink,
+\link QPicture QPicture\endlink and \link QPrinter QPrinter\endlink are
+all paint devices.
+
+The default coordinate system of a paint device has its origin located at
+the top left position. X increases to the right and Y increases downwards.
+The unit is one pixel.
+
+It is possible to transform the coordinate system when drawing in a
+paint device.
+
+
+<h2>An Example</h2>
+
+The illustration below shows a magnified portion of the top left corner
+of a paint device.
+
+<img src=coordsys.gif>
+
+The rectangle and the line were drawn by this code:
+
+\code
+    void MyWidget::paintEvent( QPaintEvent * )
+    {
+	QPainter p;
+	p.begin( this );
+	p.setPen( blue );
+	p.drawRect( 1,2, 5,4 );
+	p.setPen( red );
+	p.drawLine( 9,2, 7,7 );
+	p.end();
+    }
+\endcode
+
+
+<h2>Transformations</h2>
+
+The \link QPainter QPainter\endlink class has the ability to transform
+graphics. It can translate, scale, shear and rotate everything from simple
+lines to text and pixmaps.
+
+The following QPainter functions transform the coordinate system:
+<ol>
+<li>\link QPainter::setWindow() setWindow()\endlink
+<li>\link QPainter::setViewport() setViewport()\endlink
+<li>\link QPainter::setWorldMatrix() setWorldMatrix()\endlink; uses
+a \link QWMatrix QWMatrix\endlink
+<li>\link QPainter::translate() translate()\endlink
+<li>\link QPainter::scale() scale()\endlink
+<li>\link QPainter::shear() shear()\endlink
+<li>\link QPainter::rotate() rotate()\endlink
+</ol>
+
+In addition, the \link QPixmap::xForm() QPixmap::xForm()\endlink function
+can scale, shear and rotate a pixmap.
+
+
+<h2>Helper Classes</h2>
+
+Qt has three classes that provide coordinate system support:
+<ul>
+<li>\link QPoint QPoint\endlink
+<li>\link QSize QSize\endlink
+<li>\link QRect QRect\endlink
+</ul>
+
+All \link QPainter QPainter\endlink functions that take point, size or
+rectangle arguments are overloaded. For example, \link QPainter::drawLine()
+drawLine()\endlink can take the integers (x1,y1,x2,y2) or the QPoints
+(p1,p2).
+
+Qt does not force you to use QPoint, QSize or QRect.  You decide.
+
+*/

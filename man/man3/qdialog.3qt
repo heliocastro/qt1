@@ -1,0 +1,247 @@
+.TH QDialog 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QDialog \- The base class of dialog windows
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qdialog.h>\fR
+.PP
+Inherits QWidget.
+.PP
+Inherited by QFileDialog, QMessageBox, QPrintDialog and QTabDialog.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QDialog ( QWidget * " "parent" "=0, const char * " "name" "=0, bool " "modal" "=FALSE, WFlags " "f" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QDialog\fR ()"
+.br
+.ti -1c
+.BI "int exec ()"
+.br
+.ti -1c
+.BI "int result () const"
+.br
+.ti -1c
+.BI "virtual void show ()"
+.br
+.ti -1c
+.BI "virtual void move ( int " "x" ", int y )"
+.br
+.ti -1c
+.BI "void move ( const QPoint & p )"
+.br
+.ti -1c
+.BI "virtual void resize ( int " "w" ", int h )"
+.br
+.ti -1c
+.BI "void resize ( const QSize & )"
+.br
+.ti -1c
+.BI "virtual void setGeometry ( int " "x" ", int " "y" ", int " "w" ", int h )"
+.br
+.ti -1c
+.BI "void setGeometry ( const QRect & )"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "void setResult ( int r )"
+.br
+.ti -1c
+.BI "virtual void keyPressEvent ( QKeyEvent * )"
+.br
+.ti -1c
+.BI "virtual void closeEvent ( QCloseEvent * )"
+.br
+.in -1c
+.SS "Protected Slots"
+.in +1c
+.ti -1c
+.BI "virtual void done ( int )"
+.br
+.ti -1c
+.BI "void accept ()"
+.br
+.ti -1c
+.BI "void reject ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QDialog class is the base class of dialog windows.
+.PP
+A dialog window is a widget used to communicate with the user. It offers mechanisms such as default buttons.
+.PP
+The dialog window can either be modeless or modal. A modeless dialog is a normal window, while a modal window must be finished before the user can continue with other parts of the program. The third constructor argument must be set to TRUE to create a modal dialog, otherwise it will create a modeless dialog.
+.PP
+Example (your own modal dialog):
+.PP
+.nf
+.br
+    class Modal : public QDialog {
+.br
+        Q_OBJECT
+.br
+    public:
+.br
+        Modal( QWidget *parent, const char *name );
+.br
+    };
+.br
+.br
+    Modal::Modal( QWidget *parent, const char *name )
+.br
+        : QDialog( parent, name, TRUE )
+.br
+    {
+.br
+        QPushButton *ok, *cancel;
+.br
+        ok = new QPushButton( "Ok", this );
+.br
+        ok->setGeometry( 10,10, 100,30 );
+.br
+        connect( ok, SIGNAL(clicked()), SLOT(accept()) );
+.br
+        cancel = new QPushButton( "Cancel", this );
+.br
+        cancel->setGeometry( 10,60, 100,30 );
+.br
+        connect( cancel, SIGNAL(clicked()), SLOT(reject()) );
+.br
+    }
+.fi
+.PP
+Note that the parent widget has a different meaning for modal dialogs than for other types of widgets. A dialog is placed on top of the parent widget. The dialog is centered on the screen if the parent widget is zero.
+.PP
+You would normally call exec() to start a modal dialog. This enters a local event loop, which is terminated when the modal dialog calls done() (or accept() or reject()).
+.PP
+Example (using a modal dialog):
+.PP
+.nf
+.br
+    Modal m;
+.br
+    if ( m.exec() ) {
+.br
+       // ok was pressed, then fetch the interesting dialog data
+.br
+    }
+.fi
+.PP
+Modeless dialogs behave just like ordinary widgets. The only difference is that they have the default button mechanism.
+.PP
+See also: QTabDialog, QWidget, QSemiModal and GUI Design Handbook: Dialogs, Standard.
+.PP
+Examples:
+.(l
+xform/xform.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QDialog::QDialog ( QWidget * parent=0, const char * name=0, bool modal=FALSE, WFlags f=0 )"
+Constructs a dialog named \fIname,\fR which has a parent widget \fIparent.\fR
+.PP
+The dialog will by default be modeless, unless you set \fImodal\fR to TRUE to contruct a modal dialog.
+.PP
+The \fIf\fR argument is the widget flags, which can be used to customize the window frame style.
+.PP
+\fBWarning:\fR Creating a modeless dialog with a parent makes it an ordinary child widget, which is probably not what you want. Expect strange behavior (QDialog has a default button mechanism).
+.SH "QDialog::~QDialog ()"
+Destroys the QDialog and all its children.
+.SH "void QDialog::accept () \fC[protected slot]\fR"
+Closes the dialog and sets the result code to \fCAccepted.\fR
+.PP
+Equivalent to done(Accepted);.
+.SH "void QDialog::closeEvent ( QCloseEvent * e ) \fC[virtual protected]\fR"
+Calls reject() if it is a modal dialog, or accepts the close event if it is a modeless dialog.
+.PP
+Reimplemented from QWidget.
+.SH "void QDialog::done ( int r ) \fC[virtual protected slot]\fR"
+Closes the dialog and sets the result code to \fIr.\fR
+.PP
+Equivalent to calling hide(), then setResult(\fIr\fR ).
+.PP
+This function is very useful for modal dialogs. It leaves the local event loop and returns from the exec() or show() function.
+.PP
+\fBWarning:\fR Although done() will return to the caller if this dialog is modal, the local event loop is then marked for termination. Hence, a program should not try to do anything that depends on event handling before the corresponding exec() or show() has returned.
+.PP
+See also: accept() and reject().
+.SH "int QDialog::exec ()"
+Starts the dialog and returns the result code.
+.PP
+Equivalent to calling show(), then result().
+.PP
+This function is very useful for modal dialogs. It enters a new local event loop. The event loop is terminated when the dialog is hidden, usually by calling done().
+.SH "void QDialog::keyPressEvent ( QKeyEvent * e ) \fC[virtual protected]\fR"
+Handles key press events for the dialog.
+.PP
+Calls reject() if Escape is pressed. Simulates a button click for the default button if Enter is pressed. All other keys are ignored.
+.PP
+Reimplemented from QWidget.
+.SH "void QDialog::move ( const QPoint & p )"
+Reimplements QWidget::move() for internal purposes.
+.SH "void QDialog::move ( int x, int y ) \fC[virtual]\fR"
+Reimplements QWidget::move() for internal purposes.
+.PP
+Reimplemented from QWidget.
+.SH "void QDialog::reject () \fC[protected slot]\fR"
+Closes the dialog and sets the result code to \fCRejected.\fR
+.PP
+Equivalent to done(Rejected);.
+.SH "void QDialog::resize ( const QSize & s )"
+Reimplements QWidget::resize() for internal purposes.
+.PP
+Examples:
+.(l
+pref/pref.cpp
+.)l
+.SH "void QDialog::resize ( int w, int h ) \fC[virtual]\fR"
+Reimplements QWidget::resize() for internal purposes.
+.PP
+Reimplemented from QWidget.
+.SH "int QDialog::result () const"
+Returns the result code of the dialog.
+.SH "void QDialog::setGeometry ( const QRect & r )"
+Reimplements QWidget::setGeometry() for internal purposes.
+.SH "void QDialog::setGeometry ( int x, int y, int w, int h ) \fC[virtual]\fR"
+Reimplements QWidget::setGeometry() for internal purposes.
+.PP
+Examples:
+.(l
+xform/xform.cpp
+.)l
+.PP
+Reimplemented from QWidget.
+.SH "void QDialog::setResult ( int ) \fC[protected]\fR"
+Sets the result code of the dialog.
+.SH "void QDialog::show () \fC[virtual]\fR"
+Shows the dialog box on the screen, as QWidget::show() and enters a local event loop if this dialog is modal (see constructor).
+.PP
+This implementation also does automatic resizing and automatic positioning. If you have not already resized or moved the dialog, it will find a size that fits the contents and a position near the middle of the screen (or centered relative to the parent widget if any).
+.PP
+\fBWarning:\fR Calling show() for a modal dialog enters a local event loop. The event loop is terminated when the dialog is hidden, usually by calling done().
+.PP
+See also: exec().
+.PP
+Examples:
+.(l
+movies/main.cpp xform/xform.cpp
+.)l
+.PP
+Reimplemented from QWidget.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qdialog.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

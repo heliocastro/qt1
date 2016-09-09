@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - table/table.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Table</h1><br clear="all">
+
+  The table program displays a spreadsheet-like table. It is an example of
+  how to inherit the QTableView widget for presentations of 2D data arrays.
+
+  Left-click the mouse to set a current cell. Press the arrow buttons to
+  move the current mark around.
+<pre>/****************************************************************************
+** &#36;Id&#58; table.cpp,v 1.7 1998/05/21 19:24:59 agulbra Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "table.h"
+#include &lt;<a name="qpainter.h"></a><a href="qpainter-h.html">qpainter.h</a>&gt;
+#include &lt;<a name="qkeycode.h"></a><a href="qkeycode-h.html">qkeycode.h</a>&gt;
+#include &lt;<a name="qprinter.h"></a><a href="qprinter-h.html">qprinter.h</a>&gt;
+
+/*
+  Constructs a Table widget.
+*/
+
+Table::Table( int numRows, int numCols, QWidget *parent, const char *name )
+    : <a name="QTableView"></a><a href="qtableview.html">QTableView</a>(parent,name)
+{
+    curRow = curCol = 0;                        // set currently selected cell
+    <a name="setFocusPolicy"></a><a href="qwidget.html#i0">setFocusPolicy</a>( StrongFocus );              // we accept keyboard focus
+    <a name="setBackgroundMode"></a><a href="qwidget.html#e9">setBackgroundMode</a>( PaletteBase );           // set widgets background
+    <a name="setNumCols"></a><a href="qtableview.html#b1">setNumCols</a>( numCols );                      // set number of col's in table
+    <a name="setNumRows"></a><a href="qtableview.html#a9">setNumRows</a>( numRows );                      // set number of rows in table
+    <a name="setCellWidth"></a><a href="qtableview.html#c6">setCellWidth</a>( 100 );                        // set width of cell in pixels
+    <a name="setCellHeight"></a><a href="qtableview.html#c7">setCellHeight</a>( 30 );                        // set height of cell in pixels
+    <a name="setTableFlags"></a><a href="qtableview.html#d2">setTableFlags</a>( Tbl_vScrollBar |             // always vertical scroll bar
+                   Tbl_hScrollBar |             // ditto for horizontal
+                   Tbl_clipCellPainting |       // avoid drawing outside cell
+                   Tbl_smoothScrolling);        // easier to see the scrolling
+    <a name="resize"></a><a href="qwidget.html#l4">resize</a>( 400, 200 );                         // set default size in pixels
+
+    contents = new <a name="QString"></a><a href="qstring.html">QString</a>[numRows * numCols];  // make room for contents
+}
+
+/*
+  Destructor: deallocates memory for contents
+*/
+
+Table::~Table()
+{
+    delete[] contents;                          // deallocation
+}
+
+/*
+  Return content of cell
+*/
+
+const char* <a name="20"></a>Table::cellContent( int row, int col ) const
+{
+    return contents[indexOf( row, col )];       // contents array lookup
+}
+
+/*
+  Set content of cell
+*/
+
+void <a name="21"></a>Table::setCellContent( int row, int col, const char* c )
+{
+    contents[indexOf( row, col )] = c;          // contents lookup and assign
+    <a name="updateCell"></a><a href="qtableview.html#d6">updateCell</a>( row, col );                     // show new content
+}
+
+/*
+  Handles cell painting for the Table widget.
+*/
+
+void <a name="22"></a>Table::paintCell( <a name="QPainter"></a><a href="qpainter.html">QPainter</a>* p, int row, int col )
+{
+    int w = cellWidth( col );                   // width of cell in pixels
+    int h = cellHeight( row );                  // height of cell in pixels
+    int x2 = w - 1;
+    int y2 = h - 1;
+
+    /*
+      Draw our part of cell frame.
+    */
+    p-&gt;<a name="drawLine"></a><a href="qpainter.html#h8">drawLine</a>( x2, 0, x2, y2 );               // draw vertical line on right
+    p-&gt;<a href="qpainter.html#h8">drawLine</a>( 0, y2, x2, y2 );               // draw horiz. line at bottom
+
+    /*
+      Draw extra frame inside if this is the current cell.
+    */
+    if ( (row == curRow) &amp;&amp; (col == curCol) ) { // if we are on current cell,
+        if ( hasFocus() ) {
+            p-&gt;<a name="drawRect"></a><a href="qpainter.html#i0">drawRect</a>( 0, 0, x2, y2 );        // draw rect. along cell edges
+        }
+        else {                                  // we don't have focus, so
+            p-&gt;<a name="setPen"></a><a href="qpainter.html#c4">setPen</a>( DotLine );               // use dashed line to
+            p-&gt;<a href="qpainter.html#i0">drawRect</a>( 0, 0, x2, y2 );        // draw rect. along cell edges
+            p-&gt;<a href="qpainter.html#c4">setPen</a>( SolidLine );             // restore to normal
+        }
+    }
+
+    /*
+      Draw cell content (text)
+    */
+    p-&gt;<a name="drawText"></a><a href="qpainter.html#l4">drawText</a>( 0, 0, w, h, AlignCenter, contents[indexOf(row,col)] );
+}
+
+/*
+  Handles mouse press events for the Table widget.
+  The current cell marker is set to the cell the mouse is clicked in.
+*/
+
+void <a name="23"></a>Table::mousePressEvent( <a name="QMouseEvent"></a><a href="qmouseevent.html">QMouseEvent</a>* e )
+{
+    int oldRow = curRow;                        // store previous current cell
+    int oldCol = curCol;
+    <a name="QPoint"></a><a href="qpoint.html">QPoint</a> clickedPos = e-&gt;pos();               // extract pointer position
+    curRow = findRow( clickedPos.<a name="y"></a><a href="qpoint.html#a4">y</a>() );         // map to row; set current cell
+    curCol = findCol( clickedPos.<a name="x"></a><a href="qpoint.html#a3">x</a>() );         // map to col; set current cell
+    if ( (curRow != oldRow)                     // if current cell has moved,
+         || (curCol != oldCol) ) {
+        <a href="qtableview.html#d6">updateCell</a>( oldRow, oldCol );           // erase previous marking
+        <a href="qtableview.html#d6">updateCell</a>( curRow, curCol );           // show new current cell
+    }
+}
+
+/*
+  Handles key press events for the Table widget.
+  Allows moving the current cell marker around with the arrow keys
+*/
+
+void <a name="24"></a>Table::keyPressEvent( <a name="QKeyEvent"></a><a href="qkeyevent.html">QKeyEvent</a>* e )
+{
+    int oldRow = curRow;                        // store previous current cell
+    int oldCol = curCol;
+    int edge = 0;
+    switch( e-&gt;<a name="key"></a><a href="qkeyevent.html#a1">key</a>() ) {                        // Look at the key code
+        case Key_Left:                          // If 'left arrow'-key, 
+            if( curCol &gt; 0 ) {                  // and cr't not in leftmost col
+                curCol--;                       // set cr't to next left column
+                edge = leftCell();              // find left edge
+                if ( curCol &lt; edge )            // if we have moved off  edge,
+                    <a name="setLeftCell"></a><a href="qtableview.html#b5">setLeftCell</a>( edge - 1 );    // scroll view to rectify
+            }
+            break;
+        case Key_Right:                         // Correspondingly...
+            if( curCol &lt; numCols()-1 ) {
+                curCol++;
+                edge = lastColVisible();
+                if ( curCol &gt;= edge )
+                    <a href="qtableview.html#b5">setLeftCell</a>( leftCell() + 1 );
+            }
+            break;
+        case Key_Up:
+            if( curRow &gt; 0 ) {
+                curRow--;
+                edge = topCell();
+                if ( curRow &lt; edge )
+                    <a name="setTopCell"></a><a href="qtableview.html#b3">setTopCell</a>( edge - 1 );
+            }
+            break;
+        case Key_Down:
+            if( curRow &lt; numRows()-1 ) {
+                curRow++;
+                edge = lastRowVisible();
+                if ( curRow &gt;= edge )
+                    <a href="qtableview.html#b3">setTopCell</a>( topCell() + 1 );
+            }
+            break;
+        default:                                // If not an interesting key,
+            e-&gt;<a name="ignore"></a><a href="qkeyevent.html#a6">ignore</a>();                        // we don't accept the event
+            return;     
+    }
+
+    if ( (curRow != oldRow)                     // if current cell has moved,
+         || (curCol != oldCol)  ) {
+        <a href="qtableview.html#d6">updateCell</a>( oldRow, oldCol );           // erase previous marking
+        <a href="qtableview.html#d6">updateCell</a>( curRow, curCol );           // show new current cell
+    }
+}
+
+/*
+  Handles focus reception events for the Table widget.
+  Repaint only the current cell; to avoid flickering
+*/
+
+void <a name="25"></a>Table::focusInEvent( <a name="QFocusEvent"></a><a href="qfocusevent.html">QFocusEvent</a>* )
+{
+    <a href="qtableview.html#d6">updateCell</a>( curRow, curCol );               // draw current cell
+}    
+
+/*
+  Handles focus loss events for the Table widget.
+  Repaint only the current cell; to avoid flickering
+*/
+
+void <a name="26"></a>Table::focusOutEvent( <a href="qfocusevent.html">QFocusEvent</a>* )
+{
+    <a href="qtableview.html#d6">updateCell</a>( curRow, curCol );               // draw current cell
+}    
+
+/*
+  Utility function for mapping from 2D table to 1D array
+*/
+
+int <a name="27"></a>Table::indexOf( int row, int col ) const
+{
+    return (row * numCols()) + col;
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

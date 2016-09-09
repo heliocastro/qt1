@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>
+Qt Tutorial - Chapter 6
+</title></head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Chapter 6: Building Blocks Galore!</h1><br clear="all">
+<p>
+<center><img src="t6.gif" alt="Screenshot of tutorial six"></center>
+<p>
+This example shows how to encapsulate two widgets into a new component and
+how easy it is to use many widgets.  For the first time, we use a custom
+widget as a child widget.
+<p>
+<a name=main></a>
+<pre>/****************************************************************
+**
+** Qt tutorial 6
+**
+****************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a href="qscrollbar-h.html">qscrollbar.h</a>&gt;
+#include &lt;<a href="qlcdnumber-h.html">qlcdnumber.h</a>&gt;
+#include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+
+class LCDRange : public QWidget
+{
+public:
+    LCDRange( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+protected:
+    void resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * );
+private:
+    <a href="qscrollbar.html">QScrollBar</a>  *sBar;
+    <a href="qlcdnumber.html">QLCDNumber</a>  *lcd;
+};
+
+LCDRange::LCDRange( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    lcd  = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "lcd"  );
+    lcd-&gt;<a href="qwidget.html#l2">move</a>( 0, 0 );
+    sBar = new <a href="qscrollbar.html">QScrollBar</a>( 0, 99,                       // range
+                           1, 10,                       // line/page steps
+                           0,                           // inital value
+                           QScrollBar::Horizontal,      // orientation
+                           this, "scrollbar" );
+    <a href="qobject.html#f2">connect</a>( sBar, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)) );
+}
+
+void <a name="399"></a>LCDRange::resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * )
+{
+    sBar-&gt;<a href="qwidget.html#l5">setGeometry</a>( 0, <a href="qwidget.html#c0">height</a>() - 16, <a href="qwidget.html#b9">width</a>(), 16 );
+    lcd-&gt;<a href="qwidget.html#l4">resize</a>( <a href="qwidget.html#b9">width</a>(), sBar-&gt;<a href="qwidget.html#b6">y</a>() - 5 );
+}
+
+class MyWidget : public QWidget
+{
+public:
+    MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+protected:
+    void resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * );
+private:
+    <a href="qpushbutton.html">QPushButton</a> *quit;
+    LCDRange *value[16];
+};
+
+MyWidget::MyWidget( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    <a href="qwidget.html#c6">setMinimumSize</a>( 200, 300 );
+
+    quit = new <a href="qpushbutton.html">QPushButton</a>( "Quit", this, "quit" );
+    quit-&gt;<a href="qpushbutton.html#b4">setGeometry</a>( 10, 10, 75, 30 );
+    quit-&gt;<a href="qwidget.html#f9">setFont</a>( <a href="qfont.html">QFont</a>( "Times", 18, QFont::Bold ) );
+
+    <a href="qobject.html#f2">connect</a>( quit, SIGNAL(clicked()), qApp, SLOT(quit()) );
+
+    for( int i = 0 ; i &lt; 16 ; i++ )
+        value[i] = new LCDRange( this );
+}
+
+void <a name="400"></a>MyWidget::resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * )
+{
+    int startx      = 10;
+    int starty      = quit-&gt;<a href="qwidget.html#b6">y</a>() + quit-&gt;<a href="qwidget.html#c0">height</a>() + 10;
+    int valueWidth  = (<a href="qwidget.html#b9">width</a>() - startx - 10 - 3*5)/4;
+    int valueHeight = (<a href="qwidget.html#c0">height</a>() - starty - 10 - 3*5)/4;
+    for( int i = 0 ; i &lt; 16 ; i++ )
+        value[i]-&gt;setGeometry( startx + (i%4)*(5+valueWidth),
+                               starty + (i/4)*(5+valueHeight),
+                               valueWidth, valueHeight );
+}
+
+int main( int argc, char **argv )
+{
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+    MyWidget w;
+    w.<a href="qwidget.html#l5">setGeometry</a>( 100, 100, 400, 400 );
+    a.<a href="qapplication.html#b9">setMainWidget</a>( &amp;w );
+    w.<a href="qwidget.html#k2">show</a>();
+    return a.<a href="qapplication.html#c9">exec</a>();
+}
+</pre>
+<p>
+<h2>Line by Line Walk-Through</h2>
+<p>
+<pre>
+    class LCDRange : public QWidget
+    {
+    public:
+        LCDRange( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+    protected:
+        void resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * );
+    private:
+        <a href="qscrollbar.html">QScrollBar</a>  *sBar;
+        <a href="qlcdnumber.html">QLCDNumber</a>  *lcd;
+    };
+</pre>
+<p>
+The LCDRange widget is an encapsulation of a QScrollBar and a
+QLCDNumber, connected together.
+<p>
+<pre>
+    LCDRange::LCDRange( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qwidget.html">QWidget</a>( parent, name )
+    {
+        lcd  = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "lcd"  );
+        lcd-&gt;<a href="qwidget.html#l2">move</a>( 0, 0 );
+        sBar = new <a href="qscrollbar.html">QScrollBar</a>( 0, 99,                       // range
+                               1, 10,                       // line/page steps
+                               0,                           // inital value
+                               QScrollBar::Horizontal,      // orientation
+                               this, "scrollbar" );
+        <a href="qobject.html#f2">connect</a>( sBar, SIGNAL(valueChanged(int)), lcd, SLOT(display(int)) );
+    }
+</pre>
+<p>
+This is essentially lifted straight from the <a
+href="t5.html#constructor">MyWidget constructor</a> in chapter five.  The
+only difference is that <code>lcd</code> is now placed at coordinate 0,0 (the top
+left corner of the LCDRange widget) since we're making a new widget and
+don't want a border.  If the widget's user wants a border, he/she can make
+a border around the LCDRange.
+<p>
+<pre>
+    void <a name="399"></a>LCDRange::resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * )
+    {
+        sBar-&gt;<a href="qwidget.html#l5">setGeometry</a>( 0, <a href="qwidget.html#c0">height</a>() - 16, <a href="qwidget.html#b9">width</a>(), 16 );
+        lcd-&gt;<a href="qwidget.html#l4">resize</a>( <a href="qwidget.html#b9">width</a>(), sBar-&gt;<a href="qwidget.html#b6">y</a>() - 5 );
+    }
+</pre>
+<p>
+Since LCDRange doesn't have either a border or quit button, the resize
+event is simpler than <a href="t5.html#resize">the one in MyWidget.</a>
+<p>
+<pre>
+    private:
+        <a href="qpushbutton.html">QPushButton</a> *quit;
+        LCDRange *value[16];
+    };
+</pre>
+<p>
+MyWidget now contains the familiar quit button and an array of 16
+LCDRange pointers.
+<p>
+<pre>
+        for( int i = 0 ; i &lt; 16 ; i++ )
+            value[i] = new LCDRange( this );
+</pre>
+<p>
+In MyWidget's constructor, we create 16 LCDRanges, all with <code>this</code> as
+parent.  Remember that these will be deleted by Qt when MyWidget is
+destroyed.
+<p>
+<pre>
+    void <a name="400"></a>MyWidget::resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * )
+    {
+        int startx      = 10;
+        int starty      = quit-&gt;<a href="qwidget.html#b6">y</a>() + quit-&gt;<a href="qwidget.html#c0">height</a>() + 10;
+        int valueWidth  = (<a href="qwidget.html#b9">width</a>() - startx - 10 - 3*5)/4;
+        int valueHeight = (<a href="qwidget.html#c0">height</a>() - starty - 10 - 3*5)/4;
+        for( int i = 0 ; i &lt; 16 ; i++ )
+            value[i]-&gt;setGeometry( startx + (i%4)*(5+valueWidth),
+                                   starty + (i/4)*(5+valueHeight),
+                                   valueWidth, valueHeight );
+    }
+</pre>
+<p>
+In the resize event, we calculate and set the geometry of all 16
+LCDRanges in a simple for loop.
+<p>
+First we calculate the top left position of the top left LCDRange.
+We give it a 10 pixel border to the left and a 10 pixel border up
+to the quit button (see <a href="coordsys.html">The Coordinate System</a>)
+<p>
+We then calculate the size of each LCDRange. We want a grid of 4x4
+widgets with a 10 pixel border to the right and 5 pixels between 
+each one (i.e. 3 borders of 5 pixels in each direction).
+Note that since we divide by the integer 4, we will get small roundoff
+errors.
+<p>
+Next, we set each individual geometry in a simple loop. We calculate
+the position using integer modulo and divide and remember to add 5
+for the border between each one. 
+<p>
+<h2>Behavior</h2>
+<p>
+This program shows how easy it is to use many widgets at a time.
+Each single one behaves like the scroll bar and LCD number in the 
+previous chapter.  Again, the difference lies in the implementation.
+<p>
+<h2>Excercises</h2>
+<p>
+Change MyWidget so each LCDRange is guaranteed to be square.
+<p>
+Initialize each scroll bar with a different/random value on startup.
+<p>
+You may now go on to <a href="t7.html">chapter seven.</a>
+<p>
+[<a href="t5.html">Previous tutorial</a>]
+[<a href="t7.html">Next tutorial</a>]
+[<a href="tutorial.html">Main tutorial page</a>]
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

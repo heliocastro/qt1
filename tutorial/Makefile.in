@@ -1,0 +1,47 @@
+# $Source: /local/lib/cvs/qt/tutorial/tutorial.t,v $
+#
+
+####### Tools
+
+TMAKE	=	tmake
+
+####### Directories
+
+SUBDIRS =	t1 \
+		t2 \
+		t3 \
+		t4 \
+		t5 \
+		t6 \
+		t7 \
+		t8 \
+		t9 \
+		t10 \
+		t11 \
+		t12 \
+		t13 \
+		t14
+
+####### Targets
+
+all: $(SUBDIRS)
+
+showdirs:
+	@echo $(SUBDIRS)
+
+$(SUBDIRS): FORCE
+	cd $@; $(MAKE)
+
+galore:
+	for a in */* ; do [ -f $$a -a -x $$a ] && ( cd `dirname $$a` ; ../$$a & ) ; done
+
+tmake:
+	for i in $(SUBDIRS); do ( cd $$i ; $(TMAKE) $$i.pro -o Makefile ) ; done
+
+clean:
+	for i in $(SUBDIRS); do ( cd $$i ; $(MAKE) clean ) ; done
+
+Makefile: tutorial.t tutorial.pro
+	$(TMAKE) tutorial.pro -o Makefile
+
+FORCE:

@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qpixmap.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qpixmap.h</h1><br clear="all">
+This is the verbatim text of the qpixmap.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qpixmap.h,v 2.22.2.4 1998/10/08 18:21:02 hanord Exp $
+**
+** Definition of QPixmap class
+**
+** Created : 940501
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QPIXMAP_H
+#define QPIXMAP_H
+
+#ifndef QT_H
+#include "qpaintdevice.h"
+#include "qcolor.h"
+#include "qstring.h"
+#endif // QT_H
+
+
+class Q_EXPORT QPixmap : public QPaintDevice            // pixmap class
+{
+friend class QPaintDevice;
+friend class QPainter;
+public:
+    enum ColorMode { Auto, Color, Mono };
+
+    QPixmap();
+    QPixmap( int w, int h,  int depth=-1 );
+    QPixmap( const QSize &amp;, int depth=-1 );
+    QPixmap( const char *fileName, const char *format=0, ColorMode mode=Auto );
+    QPixmap( const char *fileName, const char *format, int conversion_flags );
+    QPixmap( const char *xpm[] );
+    QPixmap( const QPixmap &amp; );
+   ~QPixmap();
+
+    QPixmap    &amp;operator=( const QPixmap &amp; );
+    QPixmap    &amp;operator=( const QImage  &amp; );
+
+    bool        isNull()        const;
+
+    int         width()         const { return data-&gt;w; }
+    int         height()        const { return data-&gt;h; }
+    QSize       size()          const { return QSize(data-&gt;w,data-&gt;h); }
+    QRect       rect()          const { return QRect(0,0,data-&gt;w,data-&gt;h); }
+    int         depth()         const { return data-&gt;d; }
+    static int  defaultDepth();
+
+    void        fill( const QColor &amp;fillColor=white );
+    void        fill( const QWidget *, int xofs, int yofs );
+    void        fill( const QWidget *, const QPoint &amp;ofs );
+    void        resize( int width, int height );
+    void        resize( const QSize &amp; );
+
+    const QBitmap *mask() const;
+    void        setMask( const QBitmap &amp; );
+    bool        selfMask() const;
+    QBitmap     createHeuristicMask( bool clipTight = TRUE ) const;
+
+    static  QPixmap  grabWindow( WId, int x=0, int y=0, int w=-1, int h=-1 );
+
+    QPixmap         xForm( const QWMatrix &amp; ) const;
+    static QWMatrix trueMatrix( const QWMatrix &amp;, int w, int h );
+
+    QImage      convertToImage() const;
+    bool        convertFromImage( const QImage &amp;, ColorMode mode=Auto );
+    bool        convertFromImage( const QImage &amp;, int conversion_flags );
+
+    static const char *imageFormat( const char *fileName );
+    bool        load( const char *fileName, const char *format=0,
+                      ColorMode mode=Auto );
+    bool        load( const char *fileName, const char *format,
+                      int conversion_flags );
+    bool        loadFromData( const uchar *buf, uint len,
+                              const char *format=0,
+                              ColorMode mode=Auto );
+    bool        loadFromData( const uchar *buf, uint len,
+                              const char *format,
+                              int conversion_flags );
+    bool        loadFromData( QByteArray data,
+                              const char *format=0,
+                              int conversion_flags=0 );
+    bool        save( const char *fileName, const char *format ) const;
+
+#if defined(_WS_WIN_) || defined(_WS_PM_)
+    HANDLE      hbm() const;
+#endif
+
+    int         serialNumber()  const;
+
+    enum Optimization { NoOptim, NormalOptim, BestOptim };
+
+    Optimization        optimization() const;
+    void                setOptimization( Optimization );
+    static Optimization defaultOptimization();
+    static void         setDefaultOptimization( Optimization );
+
+#if 1
+    bool        isOptimized() const;
+    void        optimize( bool );
+    static bool isGloballyOptimized();
+    static void optimizeGlobally( bool );
+#endif
+
+    virtual void detach();
+
+    bool        isQBitmap() const;
+
+#if defined(_WS_WIN_)
+    HANDLE      allocMemDC();
+    void        freeMemDC();
+#endif
+
+protected:
+    QPixmap( int w, int h, const uchar *data, bool isXbitmap );
+    int         metric( int ) const;
+
+    struct QPixmapData : public QShared {       // internal pixmap data
+        QCOORD  w, h;
+        short   d;
+        uint    unused   : 1;
+        uint    optim    : 1;
+        uint    uninit   : 1;
+        uint    bitmap   : 1;
+        uint    selfmask : 1;
+        int     ser_no;
+        QBitmap *mask;
+#if defined(_WS_WIN_)
+        HANDLE  hbm;
+        void   *bits;
+        QPixmap *maskpm;
+#elif defined(_WS_PM_)
+        HANDLE  hdcmem;
+        HANDLE  hbm;
+#elif defined(_WS_X11_)
+        void   *ximage;
+        void   *maskgc;
+#endif
+        Optimization opt;
+    } *data;
+
+private:
+    void        init( int, int, int );
+    void        deref();
+    QPixmap     copy() const;
+    static bool optimAll;
+    static Optimization defOpt;
+    friend Q_EXPORT void bitBlt( QPaintDevice *, int, int,
+                                 const QPaintDevice *,
+                                 int, int, int, int, RasterOp, bool );
+    friend Q_EXPORT void bitBlt( QPaintDevice *, int, int,
+                                 const QImage* src,
+                                 int, int, int, int, int conversion_flags );
+};
+
+
+inline bool QPixmap::isNull() const
+{
+#if defined(_WS_X11_)
+    return hd == 0;
+#else
+    return data-&gt;hbm == 0;
+#endif
+}
+
+inline void QPixmap::fill( const QWidget *w, const QPoint &amp;ofs )
+{
+    fill( w, ofs.x(), ofs.y() );
+}
+
+inline void QPixmap::resize( const QSize &amp;s )
+{
+    resize( s.width(), s.height() );
+}
+
+inline const QBitmap *QPixmap::mask() const
+{
+    return data-&gt;mask;
+}
+
+inline bool QPixmap::selfMask() const
+{
+    return data-&gt;selfmask;
+}
+
+#if defined(_WS_WIN_) || defined(_WS_PM_)
+inline HANDLE QPixmap::hbm() const
+{
+    return data-&gt;hbm;
+}
+#endif
+
+inline int QPixmap::serialNumber() const
+{
+    return data-&gt;ser_no;
+}
+
+inline QPixmap::Optimization QPixmap::optimization() const
+{
+    return data-&gt;opt;
+}
+
+inline bool QPixmap::isOptimized() const
+{
+    return data-&gt;optim;
+}
+
+inline bool QPixmap::isQBitmap() const
+{
+    return data-&gt;bitmap;
+}
+
+
+/*****************************************************************************
+  QPixmap stream functions
+ *****************************************************************************/
+
+Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QPixmap &amp; );
+Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QPixmap &amp; );
+
+
+#endif // QPIXMAP_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

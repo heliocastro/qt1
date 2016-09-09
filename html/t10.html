@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>
+Qt Tutorial - Chapter 10
+</title></head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Chapter 10: Smooth as Silk</h1><br clear="all">
+<p>
+<center><img src="t10.gif" alt="Screenshot of tutorial ten"></center>
+<p>
+In this example, we introduce painting in a pixmap to remove flickering.
+We also add a force control.
+<p>
+<ul>
+<li><a href="t10-lcdrange-h.html">lcdrange.h</a> contains the LCDRange
+class definition
+<li><a href="t10-lcdrange-cpp.html">lcdrange.cpp</a> contains the LCDRange
+implementation
+<li><a href="t10-cannon-h.html">cannon.h</a> contains the CannonField class
+definition
+<li><a href="t10-cannon-cpp.html">cannon.cpp</a> contains the CannonField
+implementation
+<li><a href="t10-main-cpp.html">main.cpp</a> contains MyWidget and main.
+<li><a href="t10-makefile.html">Makefile</a> contains some rules for
+generating the meta object information necessary for <a
+href="metaobjects.html">signal/slot creation.</a>
+</ul>
+<p>
+<h2>Line by Line Walk-Through</h2>
+<p>
+<h3><a href="t10-cannon-h.html">cannon.h</a></h3>
+<p>
+The CannonField now has a force value in addition to the angle.
+<p>
+<pre>
+        int   angle() const { return ang; }
+        int   force() const { return f; }
+    public slots:
+        void  setAngle( int degrees );
+        void  setForce( int newton );
+    signals:
+        void  angleChanged( int );
+        void  forceChanged( int );
+</pre>
+<p>
+The interface to the force follows the same practice as for angle.
+<p>
+<pre>
+    private:
+        void  paintCannon( <a href="qpainter.html">QPainter</a> * );
+        <a href="qrect.html">QRect</a> cannonRect() const;
+</pre>
+<p>
+We have moved the painting of the cannon to a separate function and have
+also put the defintion of the cannon's enclosing rectangle in a separate
+function.
+<p>
+<pre>
+        int ang;
+        int f;
+    };
+</pre>
+<p>
+The force is stored in the integer f.
+<p>
+<h3><a href="t10-cannon-cpp.html">cannon.cpp</a></h3>
+<p>
+<pre>
+    #include &lt;<a href="qpixmap-h.html">qpixmap.h</a>&gt;
+</pre>
+<p>
+We include the QPixmap class definition.
+<p>
+<pre>
+    CannonField::CannonField( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+            : <a href="qwidget.html">QWidget</a>( parent, name )
+    {
+        ang = 45;
+        f   = 0;
+    }
+</pre>
+<p>
+The force (f) is initialized to zero.
+<p>
+<pre>
+    void CannonField::setAngle( int degrees )
+    {
+        if ( degrees &lt; 5 )
+            degrees = 5;
+        if ( degrees &gt; 70 )
+            degrees = 70;
+        if ( ang == degrees )
+            return;
+        ang = degrees;
+        <a href="qwidget.html#k0">repaint</a>( cannonRect(), FALSE );
+        emit angleChanged( ang );
+    }
+</pre>
+<p>
+We have made a slight change in the setAngle() function. It repaints
+only the portion of the widget that contains the cannon.  The FALSE
+argument indicates that the specified rectangle should not be erased
+before a paint event is sent to the widget.
+<p>
+<pre>
+    void CannonField::setForce( int newton )
+    {
+        if ( newton &lt; 0 )
+            newton = 0;
+        if ( f == newton )
+            return;
+        f = newton;
+        emit forceChanged( f );
+    }
+</pre>
+<p>
+The implementation of setForce() is quite similar to that of setAngle().
+The only difference is that we don't show the force value, hence we
+don't need to repaint the widget.
+<p>
+<pre>
+    void CannonField::paintEvent( <a href="qpaintevent.html">QPaintEvent</a> *e )
+    {
+        <a href="qrect.html">QRect</a> updateR = e-&gt;<a href="qpaintevent.html#a1">rect</a>();
+        <a href="qpainter.html">QPainter</a> p;
+    
+        p.<a href="qpainter.html#b0">begin</a>( this );
+        if ( updateR.<a href="qrect.html#e5">intersects</a>( cannonRect() ) )
+            paintCannon( &amp;p );
+        p.<a href="qpainter.html#b2">end</a>();
+    }
+</pre>
+<p>
+We have now optimized the paint event to repaint only the parts of the
+widget that need updating.  First we fetch the update rectangle parameter
+from the QPaintEvent.  Then we begin painting on this widget.  We check if
+the update rectangle intersects with the cannon rectangle. If it does, we
+paint the cannon.  Note that we pass a pointer to the painter to the
+paintCannon() function.
+<p>
+<pre>
+    const QRect barrel_rect(33, -4, 15, 8);
+</pre>
+<p>
+We have chosen to define the barrel rectangle as a constant.
+<p>
+<pre>
+    void CannonField::paintCannon( <a href="qpainter.html">QPainter</a> *p )
+    {
+        <a href="qrect.html">QRect</a>    cr = cannonRect();
+</pre>
+<p>
+First we fetch the cannon's enclosing rectangle and store it in <code>cr.</code>
+<p>
+<pre>
+        <a href="qpixmap.html">QPixmap</a>  pix( cr.<a href="qrect.html#d5">size</a>() );
+</pre>
+<p>
+Here we encounter a new class; the QPixmap.  QPixmap is an off-screen
+paint device which is handy for flicker-free painting.  Here we
+create a pixmap with the same size as the cannon.  We want to draw the
+cannon in this pixmap and then move the pixmap to the screen in one
+operation.  This technique is called double-buffering and virtually
+removes flickering.
+<p>
+<pre>
+        <a href="qpainter.html">QPainter</a> tmp;
+</pre>
+<p>
+We create a temporary painter <code>tmp</code> for drawing in the pixmap.
+<p>
+<pre>
+        pix.<a href="qpixmap.html#b7">fill</a>( this, cr.<a href="qrect.html#c0">topLeft</a>() );
+</pre>
+<p>
+Upon creation, a pixmap is filled with arbitrary pixels, thus we first
+fill it with the widget's background. We have to specify the position
+where the pixmap will be placed in the widget, so that we can cope with
+any type of background (for instance <a href="qwidget.html#f4">background pixmaps</a>).
+<p>
+<pre>
+        tmp.<a href="qpainter.html#b0">begin</a>( &amp;pix );
+        tmp.<a href="qpainter.html#c8">setBrush</a>( blue );
+        tmp.<a href="qpainter.html#c4">setPen</a>( NoPen );
+</pre>
+<p>
+Here we start painting on the pixmap.  We set a blue brush and an
+invisible pen, as in the previous chapter.  This time we use a shortcut.
+<a href="qpainter.html#c4">setPen()</a> and <a href="qpainter.html#c8">setBrush()</a> are overloaded functions in QPainter.
+<p>
+<pre>
+        tmp.<a href="qpainter.html#f2">translate</a>( 0, pix.<a href="qpixmap.html#b2">height</a>() - 1 );
+        tmp.<a href="qpainter.html#j2">drawPie</a>( <a href="qrect.html">QRect</a>( -35,-35, 70, 70 ), 0, 90*16 );
+        tmp.<a href="qpainter.html#f5">rotate</a>( -ang );
+        tmp.<a href="qpainter.html#i0">drawRect</a>( barrel_rect );
+        tmp.<a href="qpainter.html#b2">end</a>();
+</pre>
+<p>
+The code that draws the cannon is very similar to the code in the previous
+example.  The only difference is the translation which now is relative to
+the pixmap height and that we have moved the barrel rectangle into a
+constant.
+<p>
+<pre>
+        p-&gt;<a href="qpainter.html#k0">drawPixmap</a>( cr.<a href="qrect.html#c0">topLeft</a>(), pix );
+</pre>
+<p>
+Finally, we call <a href="qpainter.html#k0">drawPixmap()</a> to
+zip the pixmap onto the screen in one lightning fast operation.
+<p>
+<pre>
+    <a href="qrect.html">QRect</a> CannonField::cannonRect() const
+    {
+        <a href="qrect.html">QRect</a> r( 0, 0, 50, 50 );
+        r.<a href="qrect.html#d0">moveBottomLeft</a>( <a href="qwidget.html#c1">rect</a>().bottomLeft() );
+        return r;
+    }
+</pre>
+<p>
+This function returns the rectangle enclosing the cannon in widget
+coordinates.  First we create a rectangle with the size 50x50, then we set
+its bottom left corner equal to the widget's bottom left corner.
+<p>
+The <a href="qwidget.html#c1">rect()</a> function returns the widget's
+enclosing rectangle in widget coordinates (i.e. the top left corner is
+0,0).
+<p>
+<h3><a href="t10-main-cpp.html">main.cpp</a></h3>
+<p>
+<pre>
+    class MyWidget : public QWidget
+    {
+    public:
+        MyWidget( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+    protected:
+        void resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * );
+    private:
+        <a href="qpushbutton.html">QPushButton</a> *quit;
+        LCDRange    *angle;
+        LCDRange    *force;
+        CannonField *cannonField;
+    };
+</pre>
+<p>
+We add a second LCDRange which will be used to set the force.
+<p>
+<pre>
+        force  = new LCDRange( this, "force" );
+        force-&gt;setRange( 10, 50 );
+        force-&gt;<a href="qwidget.html#l5">setGeometry</a>( 10, angle-&gt;<a href="qwidget.html#b6">y</a>() + angle-&gt;<a href="qwidget.html#c0">height</a>() + 10, 75, 130 );
+</pre>
+<p>
+We place the <code>force</code> LCDRange widget below the <code>angle</code> widget and
+specify the range to 10..50.
+<p>
+<pre>
+        <a href="qobject.html#f2">connect</a>( force,SIGNAL(valueChanged(int)), cannonField,SLOT(setForce(int)));
+        <a href="qobject.html#f2">connect</a>( cannonField,SIGNAL(forceChanged(int)), force,SLOT(setValue(int)));
+</pre>
+<p>
+We connect the <code>force</code> widget and the <code>cannonField</code> widget just like
+we did for the <code>angle</code> widget.
+<p>
+<pre>
+        force-&gt;setValue( 25 );
+</pre>
+<p>
+We initialize the force value to 25.
+<p>
+<h2>Behavior</h2>
+<p>
+The flicker has gone and we have a force control.
+<p>
+<h2>Excercises</h2>
+<p>
+Make the size of the cannon barrel be dependent on the force.
+<p>
+Put the cannon in the bottom right corner.
+<p>
+You may now go on to <a href="t11.html">chapter eleven.</a>
+<p>
+[<a href="t9.html">Previous tutorial</a>]
+[<a href="t11.html">Next tutorial</a>]
+[<a href="tutorial.html">Main tutorial page</a>]
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

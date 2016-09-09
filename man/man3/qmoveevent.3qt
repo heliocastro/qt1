@@ -1,0 +1,51 @@
+.TH QMoveEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QMoveEvent \- Event parameters for move events
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherits QEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QMoveEvent ( const QPoint & " "pos" ", const QPoint & oldPos )"
+.br
+.ti -1c
+.BI "const QPoint& pos () const"
+.br
+.ti -1c
+.BI "const QPoint& oldPos () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QMoveEvent class contains event parameters for move events.
+.PP
+Move events are sent to widgets that have been moved to a new position relative to their parent.
+.PP
+The event handler QWidget::moveEvent() receives move events.
+.PP
+See also: QWidget::move() and QWidget::setGeometry().
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QMoveEvent::QMoveEvent ( const QPoint & pos, const QPoint & oldPos )"
+Constructs a move event with the new and old widget positions.
+.SH "const QPoint & QMoveEvent::oldPos () const"
+Returns the old position of the widget.
+.SH "const QPoint & QMoveEvent::pos () const"
+Returns the new position of the widget, which is the same as
+QWidget::pos().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qmoveevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

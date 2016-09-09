@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QScrollBar Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QScrollBar Class Reference</h1><br clear="all">
+<p>
+The QScrollBar widget provides a vertical or horizontal scroll bar.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qscrollbar-h.html">qscrollbar.h</a>&gt;</code>
+<p>
+Inherits <a href="qrangecontrol.html">QRangeControl</a> and <a href="qwidget.html">QWidget</a>.
+<p><a href="qscrollbar-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qscrollbar.html#a0"><strong>QScrollBar</strong></a> ( QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qscrollbar.html#a1"><strong>QScrollBar</strong></a> ( Orientation, QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn"><a href="qscrollbar.html#a2"><strong>QScrollBar</strong></a> ( int minValue, int maxValue, int LineStep, int PageStep, int value, Orientation, QWidget * parent=0, const char * name=0 ) </span>
+<li><span class="fn">void <a href="qscrollbar.html#a3"><strong>setOrientation</strong></a> ( Orientation ) </span>
+<li><span class="fn">Orientation <a href="qscrollbar.html#a4"><strong>orientation</strong></a> () const</span>
+<li><span class="fn">void <a href="qscrollbar.html#a5"><strong>setTracking</strong></a> ( bool enable ) </span>
+<li><span class="fn">bool <a href="qscrollbar.html#a6"><strong>tracking</strong></a> () const</span>
+<li><span class="fn">bool <a href="qscrollbar.html#a7"><strong>draggingSlider</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qscrollbar.html#a8"><strong>setPalette</strong></a> ( const QPalette &amp; ) </span>
+<li><span class="fn">virtual QSize <a href="qscrollbar.html#a9"><strong>sizeHint</strong></a> () const</span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qscrollbar.html#b0"><strong>valueChanged</strong></a> ( int value ) </span>
+<li><span class="fn">void <a href="qscrollbar.html#b1"><strong>sliderPressed</strong></a> () </span>
+<li><span class="fn">void <a href="qscrollbar.html#b2"><strong>sliderMoved</strong></a> ( int value ) </span>
+<li><span class="fn">void <a href="qscrollbar.html#b3"><strong>sliderReleased</strong></a> () </span>
+<li><span class="fn">void <a href="qscrollbar.html#b4"><strong>nextLine</strong></a> () </span>
+<li><span class="fn">void <a href="qscrollbar.html#b5"><strong>prevLine</strong></a> () </span>
+<li><span class="fn">void <a href="qscrollbar.html#b6"><strong>nextPage</strong></a> () </span>
+<li><span class="fn">void <a href="qscrollbar.html#b7"><strong>prevPage</strong></a> () </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qscrollbar.html#b8"><strong>timerEvent</strong></a> ( QTimerEvent * ) </span>
+<li><span class="fn">virtual void <a href="qscrollbar.html#b9"><strong>keyPressEvent</strong></a> ( QKeyEvent * ) </span>
+<li><span class="fn">virtual void <a href="qscrollbar.html#c0"><strong>resizeEvent</strong></a> ( QResizeEvent * ) </span>
+<li><span class="fn">virtual void <a href="qscrollbar.html#c1"><strong>paintEvent</strong></a> ( QPaintEvent * ) </span>
+<li><span class="fn">virtual void <a href="qscrollbar.html#c2"><strong>mousePressEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qscrollbar.html#c3"><strong>mouseReleaseEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qscrollbar.html#c4"><strong>mouseMoveEvent</strong></a> ( QMouseEvent * ) </span>
+<li><span class="fn">virtual void <a href="qscrollbar.html#c5"><strong>valueChange</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qscrollbar.html#c6"><strong>stepChange</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qscrollbar.html#c7"><strong>rangeChange</strong></a> () </span>
+<li><span class="fn">int <a href="qscrollbar.html#c8"><strong>sliderStart</strong></a> () const</span>
+<li><span class="fn">QRect <a href="qscrollbar.html#c9"><strong>sliderRect</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QScrollBar widget provides a vertical or horizontal scroll bar.
+<p>
+A scroll bar is used to let the user control a value within a
+program-definable range, and to give the user visible indication of
+the current value of a <a href="qrangecontrol.html">range control</a>.
+<p>Scroll bars include four separate controls, in order: <ul> <li> The
+<em>line-up</em> control is a little triangle with which the user can move
+one line up.  The meaning of line is configurable. In e.g. editors
+and list boxes means one line of text.  <li> The <em>slider</em> is the
+handle that indicates the current value of the scroll bar, and which
+the user can drag to change the value.  <li> The <em>page-up/down</em>
+control is the area on which the slider slides (the scroll bar's
+background).  Clicking here moves the scroll bar up or down one
+page.  The meaning of page too is configurable - in editors and list
+boxes it means as many lines as there is space for in the widget.
+<li> Finally, the line-down control is the arrow on the other end of
+the scroll bar.  Clicking there moves the scroll bar down/rightwards
+one line.</ul>
+<p>QScrollBar has not much of an API of its own; it mostly relies on
+<a href="qrangecontrol.html">QRangeControl</a>.  The most useful functions are <a href="qrangecontrol.html#a3">setValue</a>() to set the
+scrollbar directly to some value; <a href="qrangecontrol.html#a4">addPage</a>(), <a href="qrangecontrol.html#a6">addLine</a>(), subPage()
+and subLine() to simulate the effects of clicking (neat for
+accelerator keys; <a href="qrangecontrol.html#b3">setSteps</a>() to define the values of <a href="qrangecontrol.html#b2">pageStep</a>() and
+<a href="qrangecontrol.html#b1">lineStep</a>(); and last but NOT least <a href="qrangecontrol.html#b0">setRange</a>() to set the <a href="qrangecontrol.html#a8">minValue</a>()
+and <a href="qrangecontrol.html#a9">maxValue</a>() of the scrollbar.  (QScrollBar has a convenience
+constructor with which you can set most of that.)
+<p>In addition to the access functions from QRangeControl, QScrollBar
+has a comprehensive set of signals: <ul>
+<p><li> <a href="qscrollbar.html#b0">valueChanged</a>() - emitted when the scroll bar's value has changed.
+<p><li> <a href="qscrollbar.html#b1">sliderPressed</a>() - emitted when the user starts to drag the
+slider
+<p><li> <a href="qscrollbar.html#b2">sliderMoved</a>() - emitted when the user drags the slider
+<p><li> <a href="qscrollbar.html#b3">sliderReleased</a>() - emitted when the user releases the slider
+<p><li> <a href="qscrollbar.html#b4">nextLine</a>() - emitted when the scroll bar has moved one line
+down/rightwards.  Line is defined in QRangeControl.
+<p><li> <a href="qscrollbar.html#b5">prevLine</a>() - emitted when the scroll bar has moved one line
+up/leftwards.
+<p><li> <a href="qscrollbar.html#b6">nextPage</a>() - emitted when the scroll bar has moved one page
+down/rightwards.
+<p><li> <a href="qscrollbar.html#b7">prevPage</a>() - emitted when the scroll bar has moved one page
+up/leftwards.
+<p></ul>
+<p>QScrollBar only offers integer ranges, and the current
+implementation has problems when the range is greater than a million
+or so.  (A million is more than sufficient for today's display
+sizes, however.)
+<p>A scroll bar can be controlled by the keyboard, but it has a
+default focusPolicy() of <code>NoFocus.</code> Use <a href="qwidget.html#i0">setFocusPolicy</a>() to
+enable keyboard focus.
+<p><img src=qscrbar-m.gif> <img src=qscrbar-w.gif>
+<p>See also:  <a href="qslider.html">QSlider</a>, <a href="qspinbox.html">QSpinBox</a> and <a href="guibooks.html#fowler">GUI Design Handbook: Scroll Bar</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QScrollBar::QScrollBar ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs a vertical scroll bar.
+<p>The <em>parent</em> and <em>name</em> arguments are sent to the <a href="qwidget.html">QWidget</a> constructor.
+<h3 class="fn"><a name="a1"></a>QScrollBar::QScrollBar ( Orientation orientation, <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs a scroll bar.
+<p>The <em>orientation</em> must be QScrollBar::Vertical or QScrollBar::Horizontal.
+<p>The <em>parent</em> and <em>name</em> arguments are sent to the <a href="qwidget.html">QWidget</a> constructor.
+<h3 class="fn"><a name="a2"></a>QScrollBar::QScrollBar ( int minValue, int maxValue, int lineStep, int pageStep, int value, Orientation orientation, <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs a scroll bar.
+<p>Arguments:
+<ul>
+<li><em>minValue</em> is the minimum scroll bar value.
+<li><em>maxValue</em> is the maximum scroll bar value.
+<li><em>lineStep</em> is the line step value.
+<li><em>pageStep</em> is the page step value.
+<li><em>value</em> is the initial value.
+<li><em>orientation</em> must be QScrollBar::Vertical or QScrollBar::Horizontal.
+</ul>
+The <em>parent</em> and <em>name</em> arguments are sent to the <a href="qwidget.html">QWidget</a> constructor.
+<h3 class="fn">bool <a name="a7"></a>QScrollBar::draggingSlider () const</h3>
+<p>Returns TRUE if the user has clicked the mouse on the slider
+and is currenly dragging it, or FALSE if not.
+<h3 class="fn">void <a name="b9"></a>QScrollBar::keyPressEvent ( <a href="qkeyevent.html">QKeyEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles key press events for the scroll bar.
+<p>Reimplemented from <a href="qwidget.html#n8">QWidget.</a>
+<h3 class="fn">void <a name="c4"></a>QScrollBar::mouseMoveEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse move events for the scroll bar.
+<p>Reimplemented from <a href="qwidget.html#n7">QWidget.</a>
+<h3 class="fn">void <a name="c2"></a>QScrollBar::mousePressEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse press events for the scroll bar.
+<p>Reimplemented from <a href="qwidget.html#n4">QWidget.</a>
+<h3 class="fn">void <a name="c3"></a>QScrollBar::mouseReleaseEvent ( <a href="qmouseevent.html">QMouseEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles mouse release events for the scroll bar.
+<p>Reimplemented from <a href="qwidget.html#n5">QWidget.</a>
+<h3 class="fn">void <a name="b4"></a>QScrollBar::nextLine () <code>[signal]</code></h3>
+<p>This signal is emitted when the scroll bar scrolls one line down/right.
+<h3 class="fn">void <a name="b6"></a>QScrollBar::nextPage () <code>[signal]</code></h3>
+<p>This signal is emitted when the scroll bar scrolls one page down/right.
+<h3 class="fn">Orientation <a name="a4"></a>QScrollBar::orientation () const</h3>
+<p>Returns the scroll bar orientation; QScrollBar::Vertical or
+QScrollBar::Horizontal.
+<p>See also:  <a href="qscrollbar.html#a3">setOrientation</a>().
+<h3 class="fn">void <a name="c1"></a>QScrollBar::paintEvent ( <a href="qpaintevent.html">QPaintEvent</a> * event ) <code>[virtual protected]</code></h3>
+<p>Handles paint events for the scroll bar.
+<p>Reimplemented from <a href="qwidget.html#o4">QWidget.</a>
+<h3 class="fn">void <a name="b5"></a>QScrollBar::prevLine () <code>[signal]</code></h3>
+<p>This signal is emitted when the scroll bar scrolls one line up/left.
+<h3 class="fn">void <a name="b7"></a>QScrollBar::prevPage () <code>[signal]</code></h3>
+<p>This signal is emitted when the scroll bar scrolls one page up/left.
+<h3 class="fn">void <a name="c7"></a>QScrollBar::rangeChange () <code>[virtual protected]</code></h3>
+<p>For internal use only.
+<p>Reimplemented from <a href="qrangecontrol.html#b7">QRangeControl.</a>
+<h3 class="fn">void <a name="c0"></a>QScrollBar::resizeEvent ( <a href="qresizeevent.html">QResizeEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles resize events for the scroll bar.
+<p>Reimplemented from <a href="qwidget.html#o6">QWidget.</a>
+<h3 class="fn">void <a name="a3"></a>QScrollBar::setOrientation ( Orientation orientation )</h3>
+<p>Sets the scroll bar orientation.  The <em>orientation</em> must be
+QScrollBar::Vertical or QScrollBar::Horizontal.
+<p>See also:  <a href="qscrollbar.html#a4">orientation</a>().
+<h3 class="fn">void <a name="a8"></a>QScrollBar::setPalette ( const <a href="qpalette.html">QPalette</a> &amp; p ) <code>[virtual]</code></h3>
+<p>Reimplements the virtual function <a href="qwidget.html#f7">QWidget::setPalette</a>().
+<p>Sets the background color to the mid color for Motif style scroll bars.
+<p>Reimplemented from <a href="qwidget.html#f7">QWidget.</a>
+<h3 class="fn">void <a name="a5"></a>QScrollBar::setTracking ( bool enable )</h3>
+<p>Enables scroll bar tracking if <em>enable</em> is TRUE, or disables tracking
+if <em>enable</em> is FALSE.
+<p>If tracking is enabled (default), the scroll bar emits the
+<a href="qscrollbar.html#b0">valueChanged</a>() signal whenever the slider is being dragged.  If
+tracking is disabled, the scroll bar emits the valueChanged() signal
+when the user relases the mouse button (unless the value happens to
+be the same as before).
+<p>See also:  <a href="qscrollbar.html#a6">tracking</a>().
+<h3 class="fn"><a href="qsize.html">QSize</a> <a name="a9"></a>QScrollBar::sizeHint () const <code>[virtual]</code></h3>
+<p>Returns a size hint for this scroll bar.
+<p>Reimplemented from <a href="qwidget.html#l7">QWidget.</a>
+<h3 class="fn">void <a name="b2"></a>QScrollBar::sliderMoved ( int value ) <code>[signal]</code></h3>
+<p>This signal is emitted when the slider is moved by the user, with
+the new scroll bar value as an argument.
+<p>This signal is emitted even when tracking is turned off.
+<p>See also:  <a href="qscrollbar.html#a6">tracking</a>(), <a href="qscrollbar.html#b0">valueChanged</a>(), <a href="qscrollbar.html#b4">nextLine</a>(), <a href="qscrollbar.html#b5">prevLine</a>(), <a href="qscrollbar.html#b6">nextPage</a>() and <a href="qscrollbar.html#b7">prevPage</a>().
+<h3 class="fn">void <a name="b1"></a>QScrollBar::sliderPressed () <code>[signal]</code></h3>
+<p>This signal is emitted when the user presses the slider with the mouse.
+<h3 class="fn"><a href="qrect.html">QRect</a> <a name="c9"></a>QScrollBar::sliderRect () const <code>[protected]</code></h3>
+<p>Returns the scroll bar slider rectangle.
+<p>See also:  <a href="qscrollbar.html#c8">sliderStart</a>().
+<h3 class="fn">void <a name="b3"></a>QScrollBar::sliderReleased () <code>[signal]</code></h3>
+<p>This signal is emitted when the user releases the slider with the mouse.
+<h3 class="fn">int <a name="c8"></a>QScrollBar::sliderStart () const <code>[protected]</code></h3>
+<p>Returns the pixel position where the scroll bar slider starts.
+<p>It is equivalent to <a href="qscrollbar.html#c9">sliderRect</a>().<a href="qwidget.html#b6">y</a>() for vertical
+scroll bars or sliderRect().<a href="qwidget.html#b5">x</a>() for horizontal scroll bars.
+<h3 class="fn">void <a name="c6"></a>QScrollBar::stepChange () <code>[virtual protected]</code></h3>
+<p>For internal use only.
+<p>Reimplemented from <a href="qrangecontrol.html#b8">QRangeControl.</a>
+<h3 class="fn">void <a name="b8"></a>QScrollBar::timerEvent ( <a href="qtimerevent.html">QTimerEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles timer events for the scroll bar.
+<p>Reimplemented from <a href="qobject.html#e3">QObject.</a>
+<h3 class="fn">bool <a name="a6"></a>QScrollBar::tracking () const</h3>
+<p>Returns TRUE if tracking is enabled, or FALSE if tracking is disabled.
+<p>Tracking is initially enabled.
+<p>See also:  <a href="qscrollbar.html#a5">setTracking</a>().
+<h3 class="fn">void <a name="c5"></a>QScrollBar::valueChange () <code>[virtual protected]</code></h3>
+<p>For internal use only.
+<p>Reimplemented from <a href="qrangecontrol.html#b6">QRangeControl.</a>
+<h3 class="fn">void <a name="b0"></a>QScrollBar::valueChanged ( int value ) <code>[signal]</code></h3>
+<p>This signal is emitted when the scroll bar value is changed, with the
+new scroll bar value as an argument.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qscrollbar.h: 1998/08/21
+<li>qscrollbar.cpp: 1998/10/04
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

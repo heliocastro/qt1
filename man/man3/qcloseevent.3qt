@@ -1,0 +1,118 @@
+.TH QCloseEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QCloseEvent \- Parameters that describe a close event
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherits QEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QCloseEvent ()"
+.br
+.ti -1c
+.BI "bool isAccepted () const"
+.br
+.ti -1c
+.BI "void accept ()"
+.br
+.ti -1c
+.BI "void ignore ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QCloseEvent class contains parameters that describe a close event.
+.PP
+Close events are sent to widgets that the user wants to close, usually by choosing "Close" from the window menu. They are also sent when you call QWidget::close() to close a widget from inside the program.
+.PP
+Close events contain a special accept flag which tells whether the receiver wants the widget to be closed. When a widget accepts the close event, it is hidden. If it refuses to accept the close event, nothing happens.
+.PP
+The main widget of the application is a special case. When it accepts the close event, the application is immediately terminated.
+.PP
+The event handler QWidget::closeEvent() receives close events.
+.PP
+The default implementation of this event handler accepts the close event. This makes Qt hide the widget.
+.PP
+.nf
+.br
+    void QWidget::closeEvent( QCloseEvent *e )
+.br
+    {
+.br
+        e->accept();                            // hides the widget
+.br
+    }
+.fi
+.PP
+If you do not want your widget to be hidden, you should reimplement the event handler.
+.PP
+.nf
+.br
+    void MyWidget::closeEvent( QCloseEvent *e )
+.br
+    {
+.br
+        e->ignore();                            // does not hide the widget
+.br
+    }
+.fi
+.PP
+If you want your widget to be deleted when it is closed, simply delete it in the close event. In this case, calling QCloseEvent::accept() or QCloseEvent::ignore() makes no difference.
+.PP
+\fBWarning:\fR Be careful. The code below assumes that the widget was created on the heap using the \fCnew\fR operator. Even when the widget has been created by new doing this is a tricky opreation. Be sure that you cannot have any other pointers to the widget hanging around.
+.PP
+.nf
+.br
+    void MyWidget::closeEvent( QCloseEvent * )
+.br
+    {
+.br
+        delete this;
+.br
+    }
+.fi
+.PP
+QObject emits the destroyed() signal when it is deleted. This is a useful signal if a widget needs to know when another widget is deleted.
+.PP
+See also: QWidget::close(), QWidget::hide(), QObject::destroyed(), QApplication::setMainWidget() and QApplication::quit().
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QCloseEvent::QCloseEvent ()"
+Constructs a close event object with the accept parameter flag set to FALSE.
+.SH "void QCloseEvent::accept ()"
+Sets the accep flag of the close event object.
+.PP
+Setting the accept flag indicates that the receiver of this event agrees to close the widget.
+.PP
+The accept flag is not set by default.
+.PP
+If you choose to accept in QWidget::closeEvent(), the widget will be hidden.
+.PP
+See also: ignore() and QWidget::hide().
+.SH "void QCloseEvent::ignore ()"
+Clears the accept flag of the close event object.
+.PP
+Clearing the accept flag indicates that the receiver of this event does not want the widget to be hidden.
+.PP
+The accept flag is not set by default.
+.PP
+See also: accept().
+.SH "bool QCloseEvent::isAccepted () const"
+Returns TRUE if the receiver of the event has agreed to close the widget.
+.PP
+See also:  accept() and ignore().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qcloseevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - aclock/aclock.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Analog Clock</h1><br clear="all">
+
+  This example displays an analog clock widget.
+
+  <hr>
+
+  <pre>/****************************************************************************
+** &#36;Id&#58; aclock.h,v 2.3 1998/06/16 11:39:31 warwick Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#ifndef ACLOCK_H
+#define ACLOCK_H
+
+#include &lt;<a href="qwidget-h.html">qwidget.h</a>&gt;
+#include &lt;<a href="qdatetime-h.html">qdatetime.h</a>&gt;
+
+class AnalogClock : public QWidget              // analog clock widget
+{
+    Q_OBJECT
+public:
+    AnalogClock( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+
+protected:
+    void        paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * );
+
+private slots:
+    void        timeout();
+
+private:
+    <a href="qtime.html">QTime</a>       time;
+};
+
+#endif // ACLOCK_H
+</pre>
+
+<pre>/****************************************************************************
+** &#36;Id&#58; aclock.cpp,v 2.4 1998/05/21 19:24:50 agulbra Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "aclock.h"
+#include &lt;<a name="qtimer.h"></a><a href="qtimer-h.html">qtimer.h</a>&gt;
+#include &lt;<a name="qpainter.h"></a><a href="qpainter-h.html">qpainter.h</a>&gt;
+
+//
+// Constructs an analog clock widget that uses an internal QTimer.
+//
+
+AnalogClock::AnalogClock( <a name="QWidget"></a><a href="qwidget.html">QWidget</a> *parent, const char *name )
+    : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    time = QTime::currentTime();                // get current time
+    <a name="QTimer"></a><a href="qtimer.html">QTimer</a> *internalTimer = new <a href="qtimer.html">QTimer</a>( this ); // create internal timer
+    <a name="connect"></a><a href="qobject.html#f2">connect</a>( internalTimer, SIGNAL(<a name="timeout"></a><a href="#127">timeout</a>()), SLOT(<a href=#127>timeout</a>()) );
+    internalTimer-&gt;<a name="start"></a><a href="qtimer.html#a3">start</a>( 5000 );               // emit signal every 5 seconds
+}
+
+//
+// The QTimer::timeout() signal is received by this slot.
+//
+
+void <a name="127"></a>AnalogClock::timeout()
+{
+    <a name="QTime"></a><a href="qtime.html">QTime</a> new_time = QTime::currentTime();      // get the current time
+    if ( new_time.<a name="minute"></a><a href="qtime.html#a5">minute</a>() != time.minute() )   // minute has changed
+        <a name="update"></a><a href="qwidget.html#j6">update</a>();
+}
+
+//
+// The clock is painted using a 1000x1000 square coordinate system.
+//
+
+void <a name="128"></a>AnalogClock::paintEvent( <a name="QPaintEvent"></a><a href="qpaintevent.html">QPaintEvent</a> * )   // paint clock
+{
+    if ( !isVisible() )                         // is is invisible
+        return;
+    time = QTime::currentTime();                // save current time
+
+    <a name="QPointArray"></a><a href="qpointarray.html">QPointArray</a> pts;
+    <a name="QPainter"></a><a href="qpainter.html">QPainter</a> paint( this );
+    paint.<a name="setBrush"></a><a href="qpainter.html#c8">setBrush</a>( <a name="foregroundColor"></a><a href="qwidget.html#f1">foregroundColor</a>() );        // fill with foreground color
+
+    <a name="QPoint"></a><a href="qpoint.html">QPoint</a> cp = rect().center();                // widget center point
+    int d = QMIN(<a name="width"></a><a href="qwidget.html#b9">width</a>(),<a name="height"></a><a href="qwidget.html#c0">height</a>());             // we want a circular clock
+
+    <a name="QWMatrix"></a><a href="qwmatrix.html">QWMatrix</a> matrix;                            // setup transformation matrix
+    matrix.<a name="translate"></a><a href="qwmatrix.html#b5">translate</a>( cp.<a name="x"></a><a href="qpoint.html#a3">x</a>(), cp.<a name="y"></a><a href="qpoint.html#a4">y</a>() );         // origin at widget center
+    matrix.<a name="scale"></a><a href="qwmatrix.html#b6">scale</a>( d/1000.0F, d/1000.0F );       // scale coordinate system
+
+    float h_angle = 30*(time.hour()%12-3) + time.minute()/2;
+    matrix.<a name="rotate"></a><a href="qwmatrix.html#b8">rotate</a>( h_angle );                   // rotate to draw hour hand
+    paint.<a name="setWorldMatrix"></a><a href="qpainter.html#f1">setWorldMatrix</a>( matrix );
+    pts.<a name="setPoints"></a><a href="qpointarray.html#b3">setPoints</a>( 4, -20,0,  0,-20, 300,0, 0,20 );
+    paint.<a name="drawPolygon"></a><a href="qpainter.html#j8">drawPolygon</a>( pts );                   // draw hour hand
+    matrix.<a href="qwmatrix.html#b8">rotate</a>( -h_angle );                  // rotate back to zero
+
+    float m_angle = (time.minute()-15)*6;
+    matrix.<a href="qwmatrix.html#b8">rotate</a>( m_angle );                   // rotate to draw minute hand
+    paint.<a href="qpainter.html#f1">setWorldMatrix</a>( matrix );
+    pts.<a href="qpointarray.html#b3">setPoints</a>( 4, -10,0, 0,-10, 400,0, 0,10 );
+    paint.<a href="qpainter.html#j8">drawPolygon</a>( pts );                   // draw minute hand
+    matrix.<a href="qwmatrix.html#b8">rotate</a>( -m_angle );                  // rotate back to zero
+
+    for ( int i=0; i&lt;12; i++ ) {                // draw hour lines
+        paint.<a href="qpainter.html#f1">setWorldMatrix</a>( matrix );
+        paint.<a name="drawLine"></a><a href="qpainter.html#h8">drawLine</a>( 450,0, 500,0 );
+        matrix.<a href="qwmatrix.html#b8">rotate</a>( 30 );
+    }
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

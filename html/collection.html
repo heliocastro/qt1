@@ -1,0 +1,289 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>Qt Collection Classes</title>
+</head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Collection Classes</h1><br clear="all">
+<p>
+A collection class is a class that can contain a number of items in a
+certain data structure and perform operations on the contained items;
+insert, remove, find etc.
+<p>
+Qt has many collection classes:
+<ul>
+<li> <a href="qcache.html">QCache</a> and <a href="qintcache.html">QIntCache</a>;
+        LRU (least recently used) cache structures.
+<li> <a href="qdict.html">QDict</a> and <a href="qintdict.html">QIntDict</a>;
+        dictionary structures.
+<li> <a href="qlist.html">QList</a>; a doubly linked list structure.
+<li> <a href="qqueue.html">QQueue</a>; a FIFO (first in, first out) queue structure.
+<li> <a href="qstack.html">QStack</a>; a LIFO (last in, first out) stack structure.
+<li> QVector; a vector structure.
+</ul>
+<p>
+Some of these classes have corresponding iterators.  An iterator
+is a class for safely traversing the items in a collection:
+<ul>
+<li> <a href="qcacheiterator.html">QCacheIterator</a> and
+        <a href="qintcacheiterator.html">QIntCacheIterator</a> 
+<li> <a href="qdictiterator.html">QDictIterator</a> and
+        <a href="qintdictiterator.html">QIntDictIterator</a> 
+<li> <a href="qlistiterator.html">QListIterator</a> 
+</ul>
+<p>
+The collection classes work with pointers to items.  Qt has an array
+template class, <a href="qarray.html">QArray</a>, which stores the items
+directly in the array.  QArray only works for classes that do not have a
+constructor, a destructor or any virtual functions.
+<p>
+<h2>Architecture</h2>
+<p>
+Basically, there are two different implementation strategies for
+collection classes.
+<ol>
+<li>The collection can only contain objects that inherit a special
+    collectable class.  This is the Smalltalk way of doing it.
+<li>The collection is a template (generic) class.
+    Specific collections must be instantiated from the template.
+    This allows any object to be stored in a collection.
+</ol>
+<p>
+In Qt, we have chosen the second approach.  There are three internal base
+classes; <a href="qgcache.html">QGCache</a>, <a href="qgdict.html">QGDict</a> and
+<a href="qglist.html">QGList</a> that operate on <code>void*</code> pointers.  A thin
+template layer implements the actual collections by casting item pointers
+to and from <code>void*.</code>
+<p>
+This strategy allows Qt's templates to be very economical on space
+(instantiating one of these templates adds only inline-able calls to
+the base classes), while it does not hurt performance too much.  Qt's
+templates do not afford as much scope for optimization as the STL
+templates do, so for applications where speed is critical and code
+size is less important, the STL is preferable.
+<p>
+<h2>A List Example</h2>
+<p>
+This example shows how to store Employee items in a list and prints
+them out in the reverse order:
+<p>
+<pre>    #include &lt;qlist.h&gt;
+    #include &lt;qstring.h&gt;
+    #include &lt;stdio.h&gt;
+
+    class Employee
+    {
+    public:
+        Employee( const char *name, int salary ) { n=name; s=salary; }
+        const char *name()   const               { return n; }
+        int         salary() const               { return s; }
+    private:
+        <a href="qstring.html">QString</a>     n;
+        int         s;
+    };
+
+    void main()
+    {
+        <a href="qlist.html">QList</a>&lt;Employee&gt; list;           // list of pointers to Employee
+        list.<a href="qcollection.html#a1">setAutoDelete</a>( TRUE );     // delete items when they are removed
+
+        list.<a href="qlist.html#a8">append</a>( new Employee("Bill", 50000) );
+        list.<a href="qlist.html#a8">append</a>( new Employee("Steve",80000) );
+        list.<a href="qlist.html#a8">append</a>( new Employee("Ron",  60000) );
+
+        <a href="qlistiterator.html">QListIterator</a>&lt;Employee&gt; it(list); // iterator for employee list
+        for ( it.<a href="qlistiterator.html#a7">toLast</a>(); it.<a href="qlistiterator.html#a8">current</a>(); --it) ) {
+            Employee *emp = it.<a href="qlistiterator.html#a8">current</a>();
+            printf( "%s earns %d\n", emp-&gt;name(), emp-&gt;salary() );
+        }
+    }
+</pre>
+<p>
+Program output:
+<pre>        Ron earns 60000
+        Steve earns 80000
+        Bill earns 50000
+</pre>
+<p>
+<h2>Managing Collection Items</h2>
+<p>
+All collections inherit the <a href="qcollection.html">QCollection</a> base
+class.  This class knows only the number of items in the collection and
+the delete strategy.
+<p>
+Items in a collection are by default not deleted when they are removed
+from the collection. The <a href="qcollection.html#a1">QCollection::setAutoDelete()</a> function specifies the delete
+strategy. In the list example, we enable auto-deletion to make the list
+delete the items when they are removed from the list.
+<p>
+When inserting an item into a collection, only the pointer is copied, not
+the item itself. This is called a shallow copy. It is possible to make the
+collection copy all of the item's data (known as a deep copy) when an item
+is inserted.  All collection functions that insert an item call the
+virtual function <a href="qcollection.html#a7">QCollection::newItem()</a> for the item to be inserted.  Inherit a
+collection and reimplement it if you want to have deep copies in your
+collection.
+<p>
+When removing an item from a list, the virtual function <a href="qcollection.html#a8">QCollection::deleteItem()</a> is called.
+The default implementation in all collection classes is to delete the item
+if auto-deletion is enabled.
+<p>
+<h2>Templates and Macros</h2>
+<p>
+A template-based collection, for instance QList&lt;type&gt;, defines a
+collection of <em>pointers</em> to <em>type</em> objects.  The pointer (*) is
+implicit.
+<p>
+We discuss <a href="qlist.html">QList</a> here, but the same applies for all
+collection classes and all collection class iterators.
+<p>
+Template instantiation:
+<pre>  <a href="qlist.html">QList</a>&lt;Employee&gt; list;         // wherever the list is used
+</pre>
+<p>
+The item's class or type, Employee in our example, must be defined prior
+to the list definition.
+<p>
+<pre>  // Does not work: Employee is not defined
+  class Employee;
+  <a href="qlist.html">QList</a>&lt;Employee&gt; list;
+
+  // This works: Employee is defined before it is used
+  class Employee {
+    ...
+  };
+  <a href="qlist.html">QList</a>&lt;Employee&gt; list;
+</pre>
+<p>
+The list can also be instantiated through a macro expansion.
+This is necessary only for compilers that do not support templates.
+<p>
+Macro instantiation:
+<pre>  Q_DECLARE(QListM,Employee);   // declare once (for instance in a .h file)
+    ...
+  QListM(Employee) list;        // wherever the list is used
+</pre>
+<p>
+If you want to make your code work for compilers that do not have
+template support, but use templates if they are available, you
+can use <code>typedef:</code>
+<p>
+<pre>    ...
+  #if defined(USE_TEMPLATECLASS)
+  typedef QListT&lt;Employee&gt;         EmployeeList;
+  #else
+  typedef Q_DECLARE(QListM,Employee) EmployeeList;
+  #endif
+
+  void main()
+  {
+      EmployeeList list;        // list of pointers to Employee
+      ...
+</pre>
+<p>
+<code>USE_TEMPLATECLASS</code> is defined in qglobal.h.
+<p>
+QListT refers to the QList template and QListM refers to the QList macro.
+QList defaults to QListT if templates are supported, QListM otherwise.
+<p>
+We recommend using templates, because macro collections are harder to
+debug.  C++ debuggers understand templates but not macros.
+<p>
+<h2>Iterators</h2>
+<p>
+Although <a href="qlist.html">QList</a> has member functions to traverse the
+list, it can often be better to make use of an iterator. <a href="qlistiterator.html">QListIterator</a> is very safe and can traverse lists
+that are being modified at the same time.  Multiple iterators can work
+independently on the same collection.
+<p>
+A QList has an internal list of all iterators that are currently operating
+on the list.  When a list entry is removed, the list updates all iterators
+to point to this entry.
+<p>
+The <a href="qdict.html">QDict</a> and <a href="qcache.html">QCache</a> collections
+have no traversal functions. To traverse the these collections, you must
+use <a href="qdictiterator.html">QDictIterator</a> or <a href="qcacheiterator.html">QCacheIterator</a> .
+<p>
+<h2>Predefined Collections</h2>
+<p>
+Qt has the following predefined collection classes:
+<ul>
+<li> String lists; <a href="qstrlist.html">QStrList</a> and
+        <a href="qstrilist.html">QStrIList</a> (<a href="qstrlist-h.html">qstrlist.h</a>)
+<li> String vectors; QStrVec and
+        QStrIVec (qstrvec.h)
+</ul>
+<p>
+<h2>Comparison with the STL</h2>
+<p>
+We often get questions about why Qt does not use the STL, and why Qt's
+container templatess are provided at all.  Here are the major factors
+why we use and provide these templates: <ul>
+<p>
+<li>Qt's container templates add less space when instantiated than the
+STL ones do.  Size is important for a library, and Qt contains many
+instantiations of QDict, QList etc.
+<p>
+<li>Qt's containers are often not as fast as the STL's, for several
+reasons.  This is however not very important for Qt, as they are used
+in code that doesn't need to be very fast.  (The speed-critical data
+structures in Qt are mostly caches - either QCache instantiations or
+custom-written, custom-optimized ones.)
+<p>
+<li>Qt's containers are much more portable than the STL is.  When we
+started writing Qt, STL was far away in the future, and when we
+released Qt 1.0, no widely-used compilers could compile the STL.  For
+a library such as Qt, it is of course very important to compile on the
+widest possible variety of compilers.
+<p>
+<li>Qt's containers are documented because we document our APIs, and
+the containers and their documentation are provided as parts of Qt's
+external API because we saw no reason to hide them.
+<p>
+<ul>
+<p>
+There are also other differences, but the ones above are the important
+reasons behind our decision to write, use and provide these classes.
+
+<p>Classes:<ul plain>
+<li><a href="qcache.html">QCache</a>
+    (Template class that provides a cache based on <code>char*</code> keys)
+<li><a href="qcacheiterator.html">QCacheIterator</a>
+    (Iterator for <a href="qcache.html">QCache</a> collections)
+<li><a href="qcollection.html">QCollection</a>
+    (The base class of all Qt collections)
+<li><a href="qdict.html">QDict</a>
+    (Template class that provides a dictionary based on <code>char*</code> keys)
+<li><a href="qdictiterator.html">QDictIterator</a>
+    (Iterator for <a href="qdict.html">QDict</a> collections)
+<li><a href="qintcache.html">QIntCache</a>
+    (Template class that provides a cache based on <code>long</code> keys)
+<li><a href="qintcacheiterator.html">QIntCacheIterator</a>
+    (Iterator for <a href="qintcache.html">QIntCache</a> collections)
+<li><a href="qintdict.html">QIntDict</a>
+    (Template class that provides a dictionary based on <code>long</code> keys)
+<li><a href="qintdictiterator.html">QIntDictIterator</a>
+    (Iterator for <a href="qintdict.html">QIntDict</a> collections)
+<li><a href="qlist.html">QList</a>
+    (Template class that provides doubly linked lists)
+<li><a href="qlistiterator.html">QListIterator</a>
+    (Iterator for <a href="qlist.html">QList</a> collections)
+<li><a href="qptrdict.html">QPtrDict</a>
+    (Template class that provides a dictionary based on <code>void*</code> keys)
+<li><a href="qptrdictiterator.html">QPtrDictIterator</a>
+    (Iterator for <a href="qptrdict.html">QPtrDict</a> collections)
+<li><a href="qqueue.html">QQueue</a>
+    (Template class that provides a queue)
+<li><a href="qstack.html">QStack</a>
+    (Template class that provides a stack)
+<li><a href="qstrilist.html">QStrIList</a>
+    (Doubly linked list of <code>char*</code> with case insensitive compare)
+<li><a href="qstrlist.html">QStrList</a>
+    (Doubly linked list of <code>char*.</code>)
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

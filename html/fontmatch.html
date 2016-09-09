@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>Qt Font Matching</title></head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center> Font Matching </h1><br clear="all">
+<p>
+<p>
+The QFont class is an abstract specification of an ideal font. This
+font must be matched to fit an actual window system font when drawing
+is to be done. This is not a trivial operation since there are no
+fonts that we can be sure will be available on all window systems at all
+times, or even on a single window system at all times. Qt queries the
+window system for available fonts and uses a font matching algorithm to
+decide which one of the available fonts closely matches the QFont settings.
+<p>
+<p>
+The font matching algorithm works as follows:
+<p>
+<p>
+First an available font family is found. If the requested is not
+available the <a href="qfont.html#c3">style hint</a> is
+used to select a replacement family. If the style hint has not been
+set, "helvetica" will be used.
+<p>
+<p>
+If even the replacement family is not found, "helvetica" is searched
+for, if that too is not found Qt will search for a last resort font,
+i.e.  a specific font to match to, ignoring the attribute settings.
+Qt searches through a built-in list of very common fonts. If none of
+these are available, Qt chickens out, gives you an error message and
+aborts (of course this only happens if you are using fonts and Qt <em>has</em> to load a font). We have not been able to find a case where this
+happens. Please <a href="mailto:qt-bugs@troll.no">mail us</a> if you
+do, preferably with a list of the fonts you have installed (under X
+windows, type "xlsfonts").
+<p>
+<p>
+The following attributes are then matched, in order of priority:
+<p>
+<ol>
+<li> <a href="qfont.html#c5">character set</a>
+<li> <a href="qfont.html#c1">pitch</a>
+<li> <a href="qfont.html#a9">point size</a>
+<li> <a href="qfont.html#b1">weight</a>
+<li> <a href="qfont.html#b5">italic</a>
+</ol>
+<p>
+<p>
+If, for example, a font with the correct character set is found, but
+with all other attributes in the list unmatched, it will be chosen before
+a font with the wrong character set but with all other attributes correct.
+<p>
+<p>
+The point size is defined to match if it is within 20% of the requested
+point size. Of course, when several fonts match and only point size
+differs the closest point size to the one requested will be chosen.
+<p>
+<p>
+Using the correct font family has higher priority than using the correct
+character set.
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

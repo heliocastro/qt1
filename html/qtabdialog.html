@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QTabDialog Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QTabDialog Class Reference</h1><br clear="all">
+<p>
+The QTabDialog class provides a stack of tabbed widgets.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qtabdialog-h.html">qtabdialog.h</a>&gt;</code>
+<p>
+Inherits <a href="qdialog.html">QDialog</a>.
+<p><a href="qtabdialog-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qtabdialog.html#a0"><strong>QTabDialog</strong></a> ( QWidget * parent=0, const char * name=0, bool modal=FALSE, WFlags f=0 ) </span>
+<li><span class="fn"><a href="qtabdialog.html#a1"><strong>~QTabDialog</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qtabdialog.html#a2"><strong>show</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qtabdialog.html#a3"><strong>setFont</strong></a> ( const QFont &amp; font ) </span>
+<li><span class="fn">void <a href="qtabdialog.html#a4"><strong>addTab</strong></a> ( QWidget *, const char * ) </span>
+<li><span class="fn">void <a href="qtabdialog.html#a5"><strong>addTab</strong></a> ( QWidget *, QTab * ) </span>
+<li><span class="fn">bool <a href="qtabdialog.html#a6"><strong>isTabEnabled</strong></a> ( const char * ) const</span>
+<li><span class="fn">void <a href="qtabdialog.html#a7"><strong>setTabEnabled</strong></a> ( const char *, bool ) </span>
+<li><span class="fn">void <a href="qtabdialog.html#a8"><strong>showPage</strong></a> ( QWidget * ) </span>
+<li><span class="fn">const char* <a href="qtabdialog.html#a9"><strong>tabLabel</strong></a> ( QWidget * ) </span>
+<li><span class="fn">void <a href="qtabdialog.html#b0"><strong>setDefaultButton</strong></a> ( const char * text = "Defaults" ) </span>
+<li><span class="fn">bool <a href="qtabdialog.html#b1"><strong>hasDefaultButton</strong></a> () const</span>
+<li><span class="fn">void <a href="qtabdialog.html#b2"><strong>setCancelButton</strong></a> ( const char * text = "Cancel" ) </span>
+<li><span class="fn">bool <a href="qtabdialog.html#b3"><strong>hasCancelButton</strong></a> () const</span>
+<li><span class="fn">void <a href="qtabdialog.html#b4"><strong>setApplyButton</strong></a> ( const char * text = "Apply" ) </span>
+<li><span class="fn">bool <a href="qtabdialog.html#b5"><strong>hasApplyButton</strong></a> () const</span>
+<li><span class="fn">void <a href="qtabdialog.html#b6"><strong>setOkButton</strong></a> ( const char * text = "OK" ) </span>
+<li><span class="fn">bool <a href="qtabdialog.html#b7"><strong>hasOkButton</strong></a> () const</span>
+</ul>
+<h2>Signals</h2>
+<ul>
+<li><span class="fn">void <a href="qtabdialog.html#c3"><strong>aboutToShow</strong></a> () </span>
+<li><span class="fn">void <a href="qtabdialog.html#c4"><strong>applyButtonPressed</strong></a> () </span>
+<li><span class="fn">void <a href="qtabdialog.html#c5"><strong>cancelButtonPressed</strong></a> () </span>
+<li><span class="fn">void <a href="qtabdialog.html#c6"><strong>defaultButtonPressed</strong></a> () </span>
+<li><span class="fn">void <a href="qtabdialog.html#c7"><strong>selected</strong></a> ( const char * ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qtabdialog.html#b8"><strong>paintEvent</strong></a> ( QPaintEvent * ) </span>
+<li><span class="fn">virtual void <a href="qtabdialog.html#b9"><strong>resizeEvent</strong></a> ( QResizeEvent * ) </span>
+<li><span class="fn">virtual void <a href="qtabdialog.html#c0"><strong>styleChange</strong></a> ( GUIStyle ) </span>
+<li><span class="fn">void <a href="qtabdialog.html#c1"><strong>setTabBar</strong></a> ( QTabBar * ) </span>
+<li><span class="fn">QTabBar* <a href="qtabdialog.html#c2"><strong>tabBar</strong></a> () const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QTabDialog class provides a stack of tabbed widgets.
+<p>
+A tabbed dialog is one in which several "pages" are available, and
+the user selects which page to see and use by clicking on its tab,
+or by pressing the indicated Alt-(letter) key combination.
+<p>QTabDialog does not provide more than one row of tabs, and does not
+provide tabs along the sides or bottom of the pages.  It also does
+not offer any way to find out which page is currently visible or to
+set the visible page.
+<p>QTabDialog provides an OK button and optionally Apply, Cancel and
+Defaults buttons.
+<p>The normal way to use QTabDialog is to do the following in the
+constructor: <ol> <li> Create a QTabDialog, <li> create a <a href="qwidget.html">QWidget</a>
+for each of the pages in the tab dialog, insert children into it,
+set up geometry management for it, and use <a href="qtabdialog.html#a4">addTab</a>() to set up a tab
+and keyboard accelerator for it, <li> set up the buttons for the tab
+dialog (Apply, Cancel and so on), and finally <li> connect to the
+signals and slots. </ol>
+<p>The pref.cpp example does all this.
+<p>If you don't call addTab(), the page you have created will not be
+visible.  Please don't confuse the object name you supply to the
+QWidget constructor and the tab label you supply to addTab():
+addTab() takes a name which indicates an accelerator and is
+meaningful and descriptive to the user, while the widget name is
+used primarily for debugging.
+<p>Almost all applications have to connect the <a href="qtabdialog.html#c4">applyButtonPressed</a>()
+signal to something.  applyButtonPressed() is emitted when either OK
+or Apply is clicked, and your slot must copy the dialog's state into
+the application.
+<p>There are also several other signals which may be useful. <ul> <li>
+<a href="qtabdialog.html#c5">cancelButtonPressed</a>() is emitted when the user clicks Cancel.  <li>
+<a href="qtabdialog.html#c6">defaultButtonPressed</a>() is emitted when the user clicks Defaults; the
+slot it is connected to should reset the state of the dialog to the
+application defaults.  <li> <a href="qtabdialog.html#c3">aboutToShow</a>() is emitted at the start of
+<a href="qtabdialog.html#a2">show</a>(); if there is any chance that the state of the application may
+change between the creation of the tab dialog and the time it show()
+is called, you must connect this signal to a slot which resets the
+state of the dialog. <li> <a href="qtabdialog.html#c7">selected</a>() is emitted when the user
+selects some page. </ul>
+<p>Each tab is either enabled or disabled at any given time.  If a tab
+is enabled, the tab text is drawn in black and the user can select
+that tab.  If it is disabled, the tab is drawn in a different way
+and the user can not select that tab.  Note that even though a tab
+is disabled, the page can still be visible, for example if all of
+the tabs happen to be disabled.
+<p>While tab dialogs can be a very good way to split up a complex
+dialog, it's also very easy to make a royal mess out of a tab
+dialog.  Here is some advice.  For more, see e.g. the <a
+href="http://www.uie.com/tabbed.html">UIE web page on tab
+dialogs.</a>
+<p><ol><li> Make sure that each page forms a logical whole which is
+adequately described by the label on the tab.
+<p>If two related functions are on different pages, users will often
+not find one of the functions, or will spend far too long searching
+for it.
+<p><li> Do not join several independent dialogs into one tab dialog.
+Several aspects of one complex dialog is acceptable (such as the
+various aspects of "preferences") but a tab dialog is no substitute
+for a pop-up menu leading to several smaller dialogs.
+<p>The OK button (and the other buttons) apply to the <em>entire</em> dialog.
+If the tab dialog is really several independent smaller dialogs,
+users often press Cancel to cancel just the changes he/she has made
+on the current page: Many users will treat that page as independent
+of the other pages.
+<p><li> Do not use tab dialogs for frequent operations.  The tab dialog
+is probably the most complex widget in common use at the moment, and
+subjecting the user to this complexity during his/her normal use of
+your application is most often a bad idea.
+<p>The tab dialog is good for complex operations which have to be
+performed seldom, like Preferences dialogs.  Not for common
+operations, like setting left/right alignment in a word processor.
+(Often, these common operations are actually independent dialogs and
+should be treated as such.)
+<p>The tab dialog is not a navigational aid, it is an organizational
+aid.  It is a good way to organize aspects of a complex operation
+(such as setting up caching and proxies in a web browser), but a bad
+way to navigate towards a simple operation (such as emptying the
+cache in a web browser - emptying the cache is <em>not</em> part of
+setting up the cache, it is a separate and independent operation).
+<p><li> The changes should take effect when the user presses Apply or
+OK.  Not before.
+<p>Providing Apply, Cancel or OK buttons on the individual pages is
+likely to weaken the users' mental model of how tab dialogs work.
+If you think a page needs its own buttons, consider making it a
+separate dialog.
+<p><li> There should be no implicit ordering of the pages.  If there
+is, it is probably better to use a wizard dialog.
+<p>If some of the pages seem to be ordered and others not, perhaps they
+ought not to be joined in a tab dialog.
+<p></ol>
+<p>Most of the functionality in QTabDialog is provided by a <a href="qtabbar.html">QTabBar</a> (at
+the top, providing the tabs) and a <a href="qwidgetstack.html">QWidgetStack</a> (most of the area,
+organizing the individual pages).
+<p><img src=qtabdlg-m.gif> <img src=qtabdlg-w.gif>
+<p>See also:  <a href="qdialog.html">QDialog</a>.
+<p>Examples:
+ <a href="pref-pref-cpp.html#QTabDialog">pref/pref.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QTabDialog::QTabDialog ( <a href="qwidget.html">QWidget</a> * parent=0, const char * name=0, bool modal=FALSE, WFlags f=0 )</h3>
+<p>Constructs a QTabDialog with only an Ok button.
+<h3 class="fn"><a name="a1"></a>QTabDialog::~QTabDialog ()</h3>
+<p>Destroys the tab dialog.
+<h3 class="fn">void <a name="c3"></a>QTabDialog::aboutToShow () <code>[signal]</code></h3>
+<p>This signal is emitted by <a href="qtabdialog.html#a2">show</a>() when it's time to set the state of
+the dialog's contents.  The dialog should reflect the current state
+of the application when if appears; if there is any chance that the
+state of the application can change between the time you call
+<a href="qtabdialog.html#a0">QTabDialog::QTabDialog</a>() and <a href="qtabdialog.html#a2">QTabDialog::show</a>(), you should set the
+dialog's state in a slot and connect this signal to it.
+<p>This applies mainly to QTabDialog objects that are kept around
+hidden rather than being created, show()n and deleted afterwards.
+<p>See also:  <a href="qtabdialog.html#c4">applyButtonPressed</a>(), <a href="qtabdialog.html#a2">show</a>() and <a href="qtabdialog.html#c5">cancelButtonPressed</a>().
+<h3 class="fn">void <a name="a5"></a>QTabDialog::addTab ( <a href="qwidget.html">QWidget</a> * child, QTab * tab )</h3>
+<p>This is a lower-level method for adding tabs, similar to the other
+<a href="qtabdialog.html#a4">addTab</a>() method.  It is useful if you are using <a href="qtabdialog.html#c1">setTabBar</a>() to set a
+<a href="qtabbar.html">QTabBar</a> subclass with an overridden <a href="qtabbar.html#b5">QTabBar::paint</a>() routine for a
+subclass of QTab.
+<h3 class="fn">void <a name="a4"></a>QTabDialog::addTab ( <a href="qwidget.html">QWidget</a> * child, const char * label )</h3>
+<p>Add another tab and page to the tab view.
+<p>The tab will be labelled <em>label</em> and <em>child</em> constitutes the new
+page.  Note the difference between the widget name (which you supply
+to widget constructors and to e.g. <a href="qtabdialog.html#a7">setTabEnabled</a>()) and the tab
+label: The name is internal to the program and invariant, while the
+label is shown on screen and may vary according to e.g. language.
+<p><em>label</em> is written in the <a href="qbutton.html">QButton</a> style, where &P makes Qt create
+an accelerator key on Alt-P for this page.  For example:
+<p><pre>    td-&gt;addTab( graphicsPane, "&amp;Graphics" );
+    td-&gt;addTab( soundPane, "&amp;Sound" );
+</pre>
+<p>If the user presses Alt-S the sound page of the tab dialog is shown,
+if the user presses Alt-P the graphics page is shown.
+<p>If you call addTab() after <a href="qtabdialog.html#a2">show</a>(), the screen will flicker and the
+user will be confused.
+<p>Examples:
+ <a href="pref-pref-cpp.html#addTab">pref/pref.cpp</a>
+<h3 class="fn">void <a name="c4"></a>QTabDialog::applyButtonPressed () <code>[signal]</code></h3>
+<p>This signal is emitted when the Apply or OK buttons are clicked.
+<p>It should be connected to a slot (or several slots) which change the
+application's state according to the state of the dialog.
+<p>See also:  <a href="qtabdialog.html#c5">cancelButtonPressed</a>(), <a href="qtabdialog.html#c6">defaultButtonPressed</a>() and <a href="qtabdialog.html#b4">setApplyButton</a>().
+<h3 class="fn">void <a name="c5"></a>QTabDialog::cancelButtonPressed () <code>[signal]</code></h3>
+<p>This signal is emitted when the Cancel button is clicked.  It is
+automatically connected to <a href="qdialog.html#b3">QDialog::reject</a>(), which will hide the
+dialog.
+<p>The Cancel button should not change the application's state in any
+way, so generally you should not need to connect it to any slot.
+<p>See also:  <a href="qtabdialog.html#c4">applyButtonPressed</a>(), <a href="qtabdialog.html#c6">defaultButtonPressed</a>() and <a href="qtabdialog.html#b2">setCancelButton</a>().
+<h3 class="fn">void <a name="c6"></a>QTabDialog::defaultButtonPressed () <code>[signal]</code></h3>
+<p>This signal is emitted when the Defaults button is pressed.  It
+should reset the dialog (but not the application) to the "factory
+defaults."
+<p>The application's state should not be changed until the user clicks
+Apply or OK.
+<p>See also:  <a href="qtabdialog.html#c4">applyButtonPressed</a>(), <a href="qtabdialog.html#c5">cancelButtonPressed</a>() and <a href="qtabdialog.html#b0">setDefaultButton</a>().
+<h3 class="fn">bool <a name="b5"></a>QTabDialog::hasApplyButton () const</h3>
+<p>Returns TRUE if the tab dialog has an Apply button, FALSE if not.
+<p>See also:  setDefaultsButton(), <a href="qtabdialog.html#c6">defaultButtonPressed</a>(), hasApplyButton() and <a href="qtabdialog.html#b3">hasCancelButton</a>().
+<h3 class="fn">bool <a name="b3"></a>QTabDialog::hasCancelButton () const</h3>
+<p>Returns TRUE if the tab dialog has a Cancel button, FALSE if not.
+<p>See also:  <a href="qtabdialog.html#b2">setCancelButton</a>(), <a href="qtabdialog.html#c5">cancelButtonPressed</a>(), <a href="qtabdialog.html#b1">hasDefaultButton</a>() and <a href="qtabdialog.html#b5">hasApplyButton</a>().
+<h3 class="fn">bool <a name="b1"></a>QTabDialog::hasDefaultButton () const</h3>
+<p>Returns TRUE if the tab dialog has a Defaults button, FALSE if not.
+<p>See also:  <a href="qtabdialog.html#b4">setApplyButton</a>(), <a href="qtabdialog.html#c4">applyButtonPressed</a>(), <a href="qtabdialog.html#b3">hasCancelButton</a>() and hasDefaultButton().
+<h3 class="fn">bool <a name="b7"></a>QTabDialog::hasOkButton () const</h3>
+<p>Returns TRUE if the tab dialog has an OK button, FALSE if not.
+<p>See also:  setDefaultsButton(), <a href="qtabdialog.html#c6">defaultButtonPressed</a>(), hasOkButton() and <a href="qtabdialog.html#b3">hasCancelButton</a>().
+<h3 class="fn">bool <a name="a6"></a>QTabDialog::isTabEnabled ( const char * name ) const</h3>
+<p>Returns TRUE if the page with object name <em>name</em> is enabled, and
+false if it is disabled.
+<p>If <em>name</em> is 0 or not the name of any of the pages, isTabEnabled()
+returns FALSE.
+<p>See also:  <a href="qtabdialog.html#a7">setTabEnabled</a>() and <a href="qwidget.html#a9">QWidget::isEnabled</a>().
+<h3 class="fn">void <a name="b8"></a>QTabDialog::paintEvent ( <a href="qpaintevent.html">QPaintEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Handles paint events for the tabbed dialog.
+<p>Reimplemented from <a href="qwidget.html#o4">QWidget.</a>
+<h3 class="fn">void <a name="b9"></a>QTabDialog::resizeEvent ( <a href="qresizeevent.html">QResizeEvent</a> * e ) <code>[virtual protected]</code></h3>
+<p>Handles resize events for the tab dialog.
+<p>Reimplemented from <a href="qwidget.html#o6">QWidget.</a>
+<h3 class="fn">void <a name="c7"></a>QTabDialog::selected ( const char * tabLabel ) <code>[signal]</code></h3>
+<p>This signal is emitted whenever a tab is selected (raised),
+including during the first <a href="qtabdialog.html#a2">show</a>().
+<p>See also:  <a href="qwidget.html#k9">raise</a>().
+<h3 class="fn">void <a name="b4"></a>QTabDialog::setApplyButton ( const char * text = "Apply" )</h3>
+<p>Add an Apply button to the dialog.  The button's text is set to <em>text</em> (and defaults to "Apply").
+<p>The Apply button should apply the current settings in the dialog box
+to the application, while keeping the dialog visible.
+<p>When Apply is clicked, the <a href="qtabdialog.html#c4">applyButtonPressed</a>() signal is emitted.
+<p>See also:  <a href="qtabdialog.html#b2">setCancelButton</a>(), <a href="qtabdialog.html#b0">setDefaultButton</a>() and <a href="qtabdialog.html#c4">applyButtonPressed</a>().
+<p>Examples:
+ <a href="pref-pref-cpp.html#setApplyButton">pref/pref.cpp</a>
+<h3 class="fn">void <a name="b2"></a>QTabDialog::setCancelButton ( const char * text = "Cancel" )</h3>
+<p>Add a Cancel button to the dialog.  The button's text is set to <em>text</em> (and defaults to "Cancel").
+<p>The cancel button should always return the application to the state
+it was in before the tab view popped up, or if the user has clicked
+Apply, back the the state immediately after the last Apply.
+<p>When Cancel is clicked, the <a href="qtabdialog.html#c5">cancelButtonPressed</a>() signal is emitted.
+The dialog is closed at the same time.
+<p>See also:  setApplyButton, <a href="qtabdialog.html#b0">setDefaultButton</a>() and <a href="qtabdialog.html#c5">cancelButtonPressed</a>().
+<p>Examples:
+ <a href="pref-pref-cpp.html#setCancelButton">pref/pref.cpp</a>
+<h3 class="fn">void <a name="b0"></a>QTabDialog::setDefaultButton ( const char * text = "Defaults" )</h3>
+<p>Add a Defaults button to the dialog.  The button's text is set to <em>text</em> (and defaults to "Defaults").
+<p>The Defaults button should set the dialog (but not the application)
+back to the application defaults.
+<p>When Defaults is clicked, the <a href="qtabdialog.html#c6">defaultButtonPressed</a>() signal is emitted.
+<p>See also:  <a href="qtabdialog.html#b4">setApplyButton</a>(), <a href="qtabdialog.html#b2">setCancelButton</a>() and <a href="qtabdialog.html#c6">defaultButtonPressed</a>().
+<h3 class="fn">void <a name="a3"></a>QTabDialog::setFont ( const <a href="qfont.html">QFont</a> &amp; font ) <code>[virtual]</code></h3>
+<p>Sets the font for the tabs to <em>font.</em>
+<p>If the widget is visible, the display is updated with the new font
+immediately.  There may be some geometry changes, depending on the
+size of the old and new fonts.
+<p>Reimplemented from <a href="qwidget.html#f9">QWidget.</a>
+<h3 class="fn">void <a name="b6"></a>QTabDialog::setOkButton ( const char * text = "OK" )</h3>
+<p>Set the OK button's text to <em>text</em> (which defaults to "OK").
+<p>When the OK button is clicked, the <a href="qtabdialog.html#c4">applyButtonPressed</a>() signal is emitted,
+and the current settings in the dialog box should be applied to
+the application. Then the dialog closes.
+<p>See also:  <a href="qtabdialog.html#b2">setCancelButton</a>(), <a href="qtabdialog.html#b0">setDefaultButton</a>() and <a href="qtabdialog.html#c4">applyButtonPressed</a>().
+<h3 class="fn">void <a name="c1"></a>QTabDialog::setTabBar ( <a href="qtabbar.html">QTabBar</a> * tb ) <code>[protected]</code></h3>
+<p>Replaces the <a href="qtabbar.html">QTabBar</a> heading the dialog by the given tab bar.
+Note that this must be called <em>before</em> any tabs have been added,
+or the behavior is undefined.
+<p>See also:  <a href="qtabdialog.html#c2">tabBar</a>().
+<h3 class="fn">void <a name="a7"></a>QTabDialog::setTabEnabled ( const char * name, bool enable )</h3>
+<p>Finds the page with object name <em>name,</em> enables/disables it
+according to the value of <em>enable,</em> and redraws the page's tab
+appropriately.
+<p>QTabDialog uses <a href="qwidget.html#b2">QWidget::setEnabled</a>() internally, rather than keep a
+separate flag.
+<p>Note that even a disabled tab/page may be visible.  If the page is
+visible already, QTabDialog will not hide it, and if all the pages
+are disabled, QTabDialog will show one of them.
+<p>The object name is used (rather than the tab label) because the tab
+text may not be invariant in multi-language applications.
+<p>See also:  <a href="qtabdialog.html#a6">isTabEnabled</a>() and <a href="qwidget.html#b2">QWidget::setEnabled</a>().
+<h3 class="fn">void <a name="a2"></a>QTabDialog::show () <code>[virtual]</code></h3>
+<p>Shows the tab view and its children.  Reimplemented in order to
+delay show()'ing of every page except the initially visible one, and
+in order to emit the <a href="qtabdialog.html#c3">aboutToShow</a>() signal.
+<p>See also:  <a href="qwidget.html#k3">hide</a>() and <a href="qtabdialog.html#c3">aboutToShow</a>().
+<p>Examples:
+ <a href="pref-pref-cpp.html#show">pref/pref.cpp</a>
+<p>Reimplemented from <a href="qwidget.html#k2">QWidget.</a>
+<h3 class="fn">void <a name="a8"></a>QTabDialog::showPage ( <a href="qwidget.html">QWidget</a> * w )</h3>
+<p>Ensures that <em>w</em> is shown.  This is useful mainly for accelerators.<p><strong>Warning:</strong> Used carelessly, this function can easily surprise or
+confuse the user.
+<p>See also:  <a href="qtabbar.html#b2">QTabBar::setCurrentTab</a>().
+<h3 class="fn">void <a name="c0"></a>QTabDialog::styleChange ( GUIStyle s ) <code>[virtual protected]</code></h3>
+<p>Reimplemented to hndle a change of GUI style while on-screen.
+<p>Reimplemented from <a href="qwidget.html#o8">QWidget.</a>
+<h3 class="fn"><a href="qtabbar.html">QTabBar</a>* <a name="c2"></a>QTabDialog::tabBar () const <code>[protected]</code></h3>
+<p>Returns the currently set <a href="qtabbar.html">QTabBar</a>.
+<p>See also:  <a href="qtabdialog.html#c1">setTabBar</a>().
+<h3 class="fn">const char * <a name="a9"></a>QTabDialog::tabLabel ( <a href="qwidget.html">QWidget</a> * w )</h3>
+<p>Returns the text in the tab for page <em>w.</em>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qtabdialog.h: 1998/08/19
+<li>qtabdialog.cpp: 1999/02/19
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

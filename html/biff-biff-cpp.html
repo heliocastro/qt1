@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - biff/biff.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Biff (UNIX only)</h1><br clear="all">
+
+  Biff is a simple graphical program to indicate whether there is new
+  mail; it looks exactly like xbiff but is much shorter.
+
+  The example is divided into two .cpp files and one .h file.
+  main.cpp looks like most simple Qt-based main() implementations:
+
+  <pre>/****************************************************************************
+** &#36;Id&#58; main.cpp,v 2.3 1998/06/16 11:39:32 warwick Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include "biff.h"
+
+int main( int argc, char ** argv )
+{
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+    Biff b;
+    a.<a href="qapplication.html#b9">setMainWidget</a>( &amp;b );
+    b.<a href="qwidget.html#k2">show</a>();
+    return a.<a href="qapplication.html#c9">exec</a>();
+}
+</pre>
+
+
+  biff.h is the declaratin for the custom widget which does all the
+  work:
+
+  <pre>/****************************************************************************
+** &#36;Id&#58; biff.h,v 2.3 1998/06/16 11:39:32 warwick Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#ifndef BIFF_H
+#define BIFF_H
+
+#include &lt;<a href="qwidget-h.html">qwidget.h</a>&gt;
+#include &lt;<a href="qdatetime-h.html">qdatetime.h</a>&gt;
+#include &lt;<a href="qpixmap-h.html">qpixmap.h</a>&gt;
+
+class Biff : public QWidget
+{
+    Q_OBJECT
+public:
+    Biff( <a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+
+protected:
+    void        timerEvent( <a href="qtimerevent.html">QTimerEvent</a> * );
+    void        paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * );
+    void        mousePressEvent( <a href="qmouseevent.html">QMouseEvent</a> * );
+
+private:
+    <a href="qdatetime.html">QDateTime</a>   lastModified;
+    <a href="qpixmap.html">QPixmap</a>     hasNewMail;
+    <a href="qpixmap.html">QPixmap</a>     noNewMail;
+    <a href="qstring.html">QString</a>     mailbox;
+    bool        gotMail;
+};
+
+#endif // BIFF_H
+</pre>
+
+
+  Finally, biff.cpp implements this custom widget.  Note in particular
+  how two images (hasmail_bmp_data and nomail_bmp_data, both from
+  bmp.cpp) are included into the executable.
+<pre>/****************************************************************************
+** &#36;Id&#58; biff.cpp,v 2.3 1998/06/16 11:39:32 warwick Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "biff.h"
+#include &lt;<a name="qstring.h"></a><a href="qstring-h.html">qstring.h</a>&gt;
+#include &lt;<a name="qfileinfo.h"></a><a href="qfileinfo-h.html">qfileinfo.h</a>&gt;
+#include &lt;<a name="qpainter.h"></a><a href="qpainter-h.html">qpainter.h</a>&gt;
+
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+
+#include "bmp.cpp"
+
+Biff::Biff( <a name="QWidget"></a><a href="qwidget.html">QWidget</a> *parent, const char *name )
+    : <a href="qwidget.html">QWidget</a>( parent, name, WType_Modal )
+{
+    <a name="QFileInfo"></a><a href="qfileinfo.html">QFileInfo</a> fi( getenv( "MAIL" ) );
+    if ( !fi.<a name="exists"></a><a href="qfileinfo.html#b0">exists</a>() ) {
+        <a name="QString"></a><a href="qstring.html">QString</a> s( "/var/spool/mail/" );
+        s += getlogin();
+        fi.<a name="setFile"></a><a href="qfileinfo.html#a7">setFile</a>( s );
+    }
+
+    if ( fi.<a href="qfileinfo.html#b0">exists</a>() ) {
+        mailbox = fi.<a name="absFilePath"></a><a href="qfileinfo.html#b6">absFilePath</a>();
+        <a name="startTimer"></a><a href="qobject.html#b6">startTimer</a>( 1000 );
+    }
+
+    <a name="setMinimumSize"></a><a href="qwidget.html#c6">setMinimumSize</a>( 48, 48 );
+    <a name="setMaximumSize"></a><a href="qwidget.html#c8">setMaximumSize</a>( 48, 48 );
+    <a name="resize"></a><a href="qwidget.html#l3">resize</a>( 48, 48 );
+
+    hasNewMail.loadFromData( hasmail_bmp_data, hasmail_bmp_len );
+    noNewMail.loadFromData( nomail_bmp_data, nomail_bmp_len );
+
+    gotMail = FALSE;
+    lastModified = fi.<a name="lastModified"></a><a href="qfileinfo.html#d6">lastModified</a>();
+}
+
+void <a name="180"></a>Biff::timerEvent( <a name="QTimerEvent"></a><a href="qtimerevent.html">QTimerEvent</a> * )
+{
+    <a href="qfileinfo.html">QFileInfo</a> fi( mailbox );
+    bool newState = ( fi.<a href="qfileinfo.html#d6">lastModified</a>() != lastModified &amp;&amp;
+                      fi.<a href="qfileinfo.html#d6">lastModified</a>() &gt; fi.<a name="lastRead"></a><a href="qfileinfo.html#d7">lastRead</a>() );
+    if ( newState != gotMail ) {
+        if ( gotMail )
+            lastModified = fi.<a href="qfileinfo.html#d6">lastModified</a>();
+        gotMail = newState;
+        <a name="repaint"></a><a href="qwidget.html#k0">repaint</a>( FALSE );
+    }
+}
+
+void <a name="181"></a>Biff::paintEvent( <a name="QPaintEvent"></a><a href="qpaintevent.html">QPaintEvent</a> * )
+{
+    if ( gotMail )
+        <a name="bitBlt"></a><a href="qpaintdevice.html#b2">bitBlt</a>( this, 0, 0, &amp;hasNewMail );
+    else
+        <a href="qpaintdevice.html#b2">bitBlt</a>( this, 0, 0, &amp;noNewMail );
+}
+
+void <a name="182"></a>Biff::mousePressEvent( <a name="QMouseEvent"></a><a href="qmouseevent.html">QMouseEvent</a> * )
+{
+    <a href="qfileinfo.html">QFileInfo</a> fi( mailbox );
+    lastModified = fi.<a href="qfileinfo.html#d6">lastModified</a>();
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

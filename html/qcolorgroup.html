@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QColorGroup Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QColorGroup Class Reference</h1><br clear="all">
+<p>
+The QColorGroup class contains a group of widget colors.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qpalette-h.html">qpalette.h</a>&gt;</code>
+<p><a href="qcolorgroup-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qcolorgroup.html#a0"><strong>QColorGroup</strong></a> () </span>
+<li><span class="fn"><a href="qcolorgroup.html#a1"><strong>QColorGroup</strong></a> ( const QColor &amp; foreground, const QColor &amp; background, const QColor &amp; light, const QColor &amp; dark, const QColor &amp; mid, const QColor &amp; text, const QColor &amp; base ) </span>
+<li><span class="fn"><a href="qcolorgroup.html#a2"><strong>~QColorGroup</strong></a> () </span>
+<li><span class="fn">const QColor&amp; <a href="qcolorgroup.html#a3"><strong>foreground</strong></a> () const</span>
+<li><span class="fn">const QColor&amp; <a href="qcolorgroup.html#a4"><strong>background</strong></a> () const</span>
+<li><span class="fn">const QColor&amp; <a href="qcolorgroup.html#a5"><strong>light</strong></a> () const</span>
+<li><span class="fn">QColor <a href="qcolorgroup.html#a6"><strong>midlight</strong></a> () const</span>
+<li><span class="fn">const QColor&amp; <a href="qcolorgroup.html#a7"><strong>dark</strong></a> () const</span>
+<li><span class="fn">const QColor&amp; <a href="qcolorgroup.html#a8"><strong>mid</strong></a> () const</span>
+<li><span class="fn">const QColor&amp; <a href="qcolorgroup.html#a9"><strong>text</strong></a> () const</span>
+<li><span class="fn">const QColor&amp; <a href="qcolorgroup.html#b0"><strong>base</strong></a> () const</span>
+<li><span class="fn">bool <a href="qcolorgroup.html#b1"><strong>operator==</strong></a> ( const QColorGroup &amp; g ) const</span>
+<li><span class="fn">bool <a href="qcolorgroup.html#b2"><strong>operator!=</strong></a> ( const QColorGroup &amp; g ) const</span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>QDataStream &amp; <a href="qcolorgroup.html#b3"><strong>operator&lt;&lt;</strong></a> (QDataStream &amp; s, const QColorGroup &amp; g)
+<li>QDataStream &amp; <a href="qcolorgroup.html#b4"><strong>operator&gt;&gt;</strong></a> (QDataStream &amp; s, QColorGroup &amp; g)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QColorGroup class contains a group of widget colors.
+<p>
+A color group contains a group of colors used by widgets for drawing
+themselves.  Widgets should not use colors like "red" and "turqoise"
+but rather "foreground" and "base", where possible.
+<p>We have identified eight distinct color roles:
+<ol>
+<li>Foreground (graphics foreground color)
+<li>Background (general background color)
+<li>Light (lighter than background color, for shadow effects)
+<li>Midlight (between Background and Light, for shadow effects)
+<li>Dark (darker than the background color, for shadow effects)
+<li>Medium (between background and dark, used for shadow and contrast
+effects)
+<li>Text (usually the same as the foreground color, but sometimes text
+and other foreground are not the same)
+<li>Base (used as background color for some widgets). Usually white or
+another light color.
+</ol>
+<p>We have not seen any good, well-made and usable widgets that use more
+than these eight color roles.
+<p>A <a href="qpalette.html">QPalette</a> contains three color groups.
+<p>The current widget color group is returned by <a href="qwidget.html#f5">QWidget::colorGroup</a>().
+<p>See also:  <a href="qcolor.html">QColor</a> and <a href="qpalette.html">QPalette</a>.
+<p>Examples:
+ <a href="xform-xform-cpp.html#QColorGroup">xform/xform.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QColorGroup::QColorGroup ()</h3>
+<p>Constructs a color group with all colors set to black.
+<h3 class="fn"><a name="a1"></a>QColorGroup::QColorGroup ( const <a href="qcolor.html">QColor</a> &amp; foreground, const <a href="qcolor.html">QColor</a> &amp; background, const <a href="qcolor.html">QColor</a> &amp; light, const <a href="qcolor.html">QColor</a> &amp; dark, const <a href="qcolor.html">QColor</a> &amp; mid, const <a href="qcolor.html">QColor</a> &amp; text, const <a href="qcolor.html">QColor</a> &amp; base )</h3>
+<p>Constructs a color group with the specified colors.
+<h3 class="fn"><a name="a2"></a>QColorGroup::~QColorGroup ()</h3>
+<p>Destroys the color group.
+<h3 class="fn">const <a href="qcolor.html">QColor</a> &amp; <a name="a4"></a>QColorGroup::background () const</h3>
+<p>Returns the background color of the color group.
+<h3 class="fn">const <a href="qcolor.html">QColor</a> &amp; <a name="b0"></a>QColorGroup::base () const</h3>
+<p>Returns the base color of the color group.
+<h3 class="fn">const <a href="qcolor.html">QColor</a> &amp; <a name="a7"></a>QColorGroup::dark () const</h3>
+<p>Returns the dark color of the color group.
+<h3 class="fn">const <a href="qcolor.html">QColor</a> &amp; <a name="a3"></a>QColorGroup::foreground () const</h3>
+<p>Returns the foreground color of the color group.
+<h3 class="fn">const <a href="qcolor.html">QColor</a> &amp; <a name="a5"></a>QColorGroup::light () const</h3>
+<p>Returns the light color of the color group.
+<h3 class="fn">const <a href="qcolor.html">QColor</a> &amp; <a name="a8"></a>QColorGroup::mid () const</h3>
+<p>Returns the medium color of the color group.
+<h3 class="fn"><a href="qcolor.html">QColor</a> <a name="a6"></a>QColorGroup::midlight () const</h3>
+<p>Returns the midlight color of the color group. Currently, this is
+a lightened version of the background, but this may change
+in the future, to return a <tt>const <a href="qcolor.html">QColor</a> &</tt> from the
+palette.
+<h3 class="fn">bool <a name="b2"></a>QColorGroup::operator!= ( const QColorGroup &amp; g ) const</h3>
+<p>Returns TRUE if this color group is different from <em>g,</em> or FALSE if
+it is equal to <em>g.</em>
+<p>See also:  <a href="qpoint.html#c6">operator!=</a>().
+<h3 class="fn">bool <a name="b1"></a>QColorGroup::operator== ( const QColorGroup &amp; g ) const</h3>
+<p>Returns TRUE if this color group is equal to <em>g,</em> or FALSE if
+it is different from <em>g.</em>
+<p>See also:  <a href="qpoint.html#c5">operator==</a>().
+<h3 class="fn">const <a href="qcolor.html">QColor</a> &amp; <a name="a9"></a>QColorGroup::text () const</h3>
+<p>Returns the text foreground color of the color group.
+<hr><h2>Related Functions</h2>
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="b3"></a>operator&lt;&lt; (<a href="qdatastream.html">QDataStream</a> &amp; s, const QColorGroup &amp; g)</h3>
+<p>Writes a color group to the stream.
+<p>Serialization format:
+<ol>
+<li> <a href="qcolor.html">QColor</a> foreground
+<li> QColor background
+<li> QColor light
+<li> QColor dark
+<li> QColor mid
+<li> QColor text
+<li> QColor base
+</ol>
+The colors are serialized in the listed order.
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="b4"></a>operator&gt;&gt; (<a href="qdatastream.html">QDataStream</a> &amp; s, QColorGroup &amp; g)</h3>
+<p>Reads a color group from the stream.
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qpalette.h: 1998/08/25
+<li>qpalette.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,66 @@
+.TH QVBoxLayout 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QVBoxLayout \- Lines up child widgets vertically
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qlayout.h>\fR
+.PP
+Inherits QBoxLayout.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QVBoxLayout ( QWidget * " "parent" ", int " "border" "=0, int " "autoBorder" " = -1, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "QVBoxLayout ( int " "autoBorder" " = -1, const char * " "name" "=0 )"
+.br
+.ti -1c
+.BI "\fB~QVBoxLayout\fR ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QVBoxLayout class lines up child widgets vertically.
+.PP
+This class provides an easier way to construct vertical box layout objects. See QBoxLayout for more details.
+.PP
+The simplest way to use this class is:
+.PP
+.nf
+.br
+     QBoxLayout * l = new QVBoxLayout( widget );
+.br
+     l->addWidget( aWidget );
+.br
+     l->addWidget( anotherWidget );
+.br
+     l->activate()
+.fi
+.PP
+See also: QHBoxLayout and QGridLayout.
+.PP
+Examples:
+.(l
+layout/layout.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QVBoxLayout::QVBoxLayout ( QWidget * parent, int border=0, int autoBorder = -1, const char * name=0 )"
+Creates a new top-level vertical box.
+.SH "QVBoxLayout::QVBoxLayout ( int autoBorder = -1, const char * name=0 )"
+Creates a new vertical box. You have to add it to another layout before using it.
+.SH "QVBoxLayout::~QVBoxLayout ()"
+Destroys this box.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qvboxlayout.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

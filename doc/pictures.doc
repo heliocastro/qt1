@@ -1,0 +1,113 @@
+// $Id: pictures.doc,v 2.1 1998/07/08 15:26:30 agulbra Exp $
+
+/*! \page pictures.html
+
+<title>Pictures of Most Widgets</title>
+</head><body bgcolor="#ffffff">
+\postheader
+
+<h1 align=center>Pictures of Most Widgets in Qt</h1><br clear="all">
+
+<p>Most of these widgets are pictured in either Motif or Windows
+style.  They all support both, but for clarity we've chosen to cut
+down on the number of repeaded images.
+
+<h2><a href="qbuttongroup.html">QButtonGroup</a></h2>
+<img src=qbttngrp-m.gif align=top>&nbsp;Motif
+
+<h2><a href="qcheckbox.html">QCheckBox</a></h2>
+<img src=qchkbox-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qcombobox.html">QComboBox</a></h2>
+<img src="qcombo1-m.gif" align=top>&nbsp;Motif 1, read-only
+<br clear="all">
+<img src="qcombo2-m.gif" align=top>&nbsp;Motif 2, read-write
+<br clear="all">
+<img src="qcombo3-m.gif" align=top>&nbsp;Motif 2, read-only:
+<br clear="all">
+<img src="qcombo1-w.gif" align=top>&nbsp;Windows
+
+<h2><a href="qfiledialog.html">QFileDialog</a></h2>
+<img src=qfiledlg-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qgroupbox.html">QGroupBox</a></h2>
+<img src=qgrpbox-m.gif align=top>&nbsp;Motif
+
+<h2><a href="qheader.html">QHeader</a></h2>
+<img src=qheader-m.gif align=top>&nbsp;Motif
+
+<h2><a href="qlabel.html">QLagbel</a></h2>
+<img src=qlabel-m.gif align=top>&nbsp;Motif
+
+<h2><a href="qlcdnumber.html">QLCDNumber</a></h2>
+<img src=qlcdnum-m.gif align=top>&nbsp;Motif
+
+<h2><a href="qlineedit.html">QLineEdit</a></h2>
+<img src=qlined-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qlistbox.html">QListBox</a></h2>
+<img src=qlistbox-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qlistview.html">QListView</a></h2>
+<img src="listview.gif" width="518" height="82" align="top">&nbsp;
+Non-hierarchical list view
+<br clear="all">
+<img src="treeview.gif" width="256" height="216" align="top">
+Hierarchical list view (multi-column tree view)
+
+<img src=qlistbox-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qmainwindow.html">QMainWindow</a></h2>
+<img src=qmainwindow-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qmenubar.html">QMenuBar</a></h2>
+<img src=qmenubar-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qmessagebox.html">QMessageBox</a></h2>
+<img src=qmsgbox-m.gif align=top>&nbsp;Motif
+<br clear="all">
+<img src=qmsgbox-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qmultilineedit.html">QMultiLineEdit</a></h2>
+<img src=qmlined-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qpopupmenu.html">QPopupMenu</a></h2>
+<img src=qpopmenu-m.gif align=top>&nbsp;Motif
+
+<h2><a href="qprogressbar.html">QProgressBar</a></h2>
+<img src=qprogbar-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qprogressdialog.html">QProgressDialog</a></h2>
+<img src=qprogdlg-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qradiobutton.html">QRadioButton</a></h2>
+<img src=qradiobt-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qscrollbar.html">QScrollBar</a></h2>
+<img src=qscrbar-m.gif align=top>&nbsp;Motif
+
+<h2><a href="qscrollview.html">QScrollView</a></h2>
+<img src=qscrollview-m.gif align=top>&nbsp;Motif
+
+<h2><a href="qslider.html">QSlider</a></h2>
+<img src=qslider-m.gif align=top>&nbsp;Motif
+
+<h2><a href="qspinbox.html">QSpinBox</a></h2>
+<img src=qspinbox-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qsplitter.html">QSplitter</a></h2>
+<img src=qsplitter-m.gif align=top>&nbsp;Motif
+
+<h2><a href="qstatusbar.html">QStatusBar</a></h2>
+<img src=qstatusbar-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qtabbar.html">QTabBar</a></h2>
+<img src=qtabbar-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qtabdialog.html">QTabDialog</a></h2>
+<img src=qtabdlg-w.gif align=top>&nbsp;Windows
+
+<h2><a href="qtableview.html">QTableView</a></h2>
+<img src=qtablevw-m.gif align=top>&nbsp;Motif
+
+*/

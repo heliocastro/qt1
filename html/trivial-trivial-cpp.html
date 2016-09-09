@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - trivial/trivial.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Very Trivial Example</h1>
+
+  This example is extremely trivial, and thus useful for
+  investigating problems you might have installing the
+  extension.
+  <p>
+  To build the example, you must first build the
+  <a href=nsplugin.html>Qt Netscape Plugin Extension</a> library.
+  Then type <tt>make</tt> in <tt>extensions/nsplugin/examples/trivial/</tt>
+  and copy the resulting <tt>trivial.so</tt> or <tt>nptrivial.dll</tt>
+  to the Plugins directory of your WWW browser.
+  <p>
+  <EMBED TYPE=trivial/very WIDTH=100 HEIGHT=100>
+<pre>// Qt stuff
+#include "<a name="qnp.h"></a><a href="qnp-h.html">qnp.h</a>"
+#include &lt;<a name="qpainter.h"></a><a href="qpainter-h.html">qpainter.h</a>&gt;
+#include &lt;<a name="qmessagebox.h"></a><a href="qmessagebox-h.html">qmessagebox.h</a>&gt;
+
+class Trivial : public QNPWidget {
+    Q_OBJECT
+public:
+    void mouseReleaseEvent(<a name="QMouseEvent"></a><a href="qmouseevent.html">QMouseEvent</a>* event)
+    {
+        <a name="QMessageBox::aboutQt"></a><a href="qmessagebox.html#e0">QMessageBox::aboutQt</a>(this);
+    }
+
+    void paintEvent(<a name="QPaintEvent"></a><a href="qpaintevent.html">QPaintEvent</a>* event)
+    {
+        <a name="QPainter"></a><a href="qpainter.html">QPainter</a> p(this);
+        p.<a name="setClipRect"></a><a href="qpainter.html#g9">setClipRect</a>(event-&gt;<a name="rect"></a><a href="qpaintevent.html#a1">rect</a>());
+        int w = width();
+        p.<a name="drawRect"></a><a href="qpainter.html#i0">drawRect</a>(rect());
+        p.<a name="drawText"></a><a href="qpainter.html#l4">drawText</a>(w/8, 0, w-w/4, height(), AlignCenter|WordBreak, "Trivial!");
+    }
+};
+
+class TrivialInstance : public QNPInstance {
+    Q_OBJECT
+public:
+    <a name="QNPWidget"></a><a href="qnpwidget.html">QNPWidget</a>* newWindow()
+    {
+        return new Trivial;
+    }
+
+    void print(<a href="qpainter.html">QPainter</a>* p)
+    {
+        p-&gt;<a href="qpainter.html#l4">drawText</a>(0,0,"Hello");
+    }
+};
+
+class TrivialPlugin : public QNPlugin {
+public:
+    <a name="QNPInstance"></a><a href="qnpinstance.html">QNPInstance</a>* newInstance()
+    {
+        return new TrivialInstance;
+    }
+
+    const char* getMIMEDescription() const
+    {
+        return "trivial/very:xxx:Trivial and useless";
+    }
+
+    const char * getPluginNameString() const
+    {
+        return "Trivial Qt-based Plugin";
+    }
+
+    const char * getPluginDescriptionString() const
+    {
+        return "A Qt-based LiveConnected plug-in that does nothing";
+    }
+
+};
+
+<a name="QNPlugin"></a><a href="qnplugin.html">QNPlugin</a>* QNPlugin::create()
+{
+    return new TrivialPlugin;
+}
+
+#include "trivial.moc"
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

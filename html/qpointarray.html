@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QPointArray Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QPointArray Class Reference</h1><br clear="all">
+<p>
+The QPointArray class provides an array of points.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qpointarray-h.html">qpointarray.h</a>&gt;</code>
+<p>
+Inherits <a href="qarray.html">QArray</a>.
+<p><a href="qpointarray-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qpointarray.html#a0"><strong>QPointArray</strong></a> () </span>
+<li><span class="fn"><a href="qpointarray.html#a1"><strong>QPointArray</strong></a> ( int size ) </span>
+<li><span class="fn"><a href="qpointarray.html#a2"><strong>QPointArray</strong></a> ( const QPointArray &amp; a ) </span>
+<li><span class="fn"><a href="qpointarray.html#a3"><strong>QPointArray</strong></a> ( const QRect &amp; r, bool closed=FALSE ) </span>
+<li><span class="fn"><a href="qpointarray.html#a4"><strong>QPointArray</strong></a> ( int nPoints, const QCOORD * points ) </span>
+<li><span class="fn">QPointArray&amp; <a href="qpointarray.html#a5"><strong>operator=</strong></a> ( const QPointArray &amp; a ) </span>
+<li><span class="fn">bool <a href="qpointarray.html#a6"><strong>fill</strong></a> ( const QPoint &amp; p, int size = -1 ) </span>
+<li><span class="fn">QPointArray <a href="qpointarray.html#a7"><strong>copy</strong></a> () const</span>
+<li><span class="fn">void <a href="qpointarray.html#a8"><strong>translate</strong></a> ( int dx, int dy ) </span>
+<li><span class="fn">void <a href="qpointarray.html#a9"><strong>point</strong></a> ( uint i, int * x, int * y ) const</span>
+<li><span class="fn">QPoint <a href="qpointarray.html#b0"><strong>point</strong></a> ( uint i ) const</span>
+<li><span class="fn">void <a href="qpointarray.html#b1"><strong>setPoint</strong></a> ( uint i, int x, int y ) </span>
+<li><span class="fn">void <a href="qpointarray.html#b2"><strong>setPoint</strong></a> ( uint i, const QPoint &amp; p ) </span>
+<li><span class="fn">bool <a href="qpointarray.html#b3"><strong>setPoints</strong></a> ( int nPoints, const QCOORD * points ) </span>
+<li><span class="fn">bool <a href="qpointarray.html#b4"><strong>setPoints</strong></a> ( int nPoints, int firstx, int firsty, ... ) </span>
+<li><span class="fn">bool <a href="qpointarray.html#b5"><strong>putPoints</strong></a> ( int index, int nPoints, const QCOORD * points ) </span>
+<li><span class="fn">bool <a href="qpointarray.html#b6"><strong>putPoints</strong></a> ( int index, int nPoints, int firstx, int firsty, ... ) </span>
+<li><span class="fn">QPoint <a href="qpointarray.html#b7"><strong>at</strong></a> ( uint i ) const</span>
+<li><span class="fn">QPointVal <a href="qpointarray.html#b8"><strong>operator[]</strong></a> ( int i ) </span>
+<li><span class="fn">QPointVal <a href="qpointarray.html#b9"><strong>operator[]</strong></a> ( uint i ) </span>
+<li><span class="fn">QPoint <a href="qpointarray.html#c0"><strong>operator[]</strong></a> ( int i ) const</span>
+<li><span class="fn">QPoint <a href="qpointarray.html#c1"><strong>operator[]</strong></a> ( uint i ) const</span>
+<li><span class="fn">QRect <a href="qpointarray.html#c2"><strong>boundingRect</strong></a> () const</span>
+<li><span class="fn">void <a href="qpointarray.html#c3"><strong>makeArc</strong></a> ( int x, int y, int w, int h, int a1, int a2 ) </span>
+<li><span class="fn">void <a href="qpointarray.html#c4"><strong>makeEllipse</strong></a> ( int x, int y, int w, int h ) </span>
+<li><span class="fn">QPointArray <a href="qpointarray.html#c5"><strong>quadBezier</strong></a> () const</span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>QDataStream &amp; <a href="qpointarray.html#c6"><strong>operator&lt;&lt;</strong></a> (QDataStream &amp; s, const QPointArray &amp; a)
+<li>QDataStream &amp; <a href="qpointarray.html#c7"><strong>operator&gt;&gt;</strong></a> (QDataStream &amp; s, QPointArray &amp; a)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QPointArray class provides an array of points.
+<p>
+QPointArray is used by the <a href="qpainter.html">QPainter</a> to draw
+<a href="qpainter.html#j6">line segments</a>,
+<a href="qpainter.html#j7">polylines</a>,
+<a href="qpainter.html#j8">polygons</a> and
+<a href="qpainter.html#j9">Bezier curves</a>.
+<p>The QPointArray is not an array of <a href="qpoint.html">QPoint</a>, instead it contains a
+platform dependent point type to make the QPainter functions more
+efficient (no conversion needed).  On the other hand, QPointArray
+has member functions that operate on QPoint to make programming
+easier.
+<p>Note that since this class is a <a href="qarray.html">QArray</a>, it is
+<a href="shclass.html">explicitly shared</a>
+and works with shallow copies by default.
+<p>Examples:
+ <a href="desktop-desktop-cpp.html#QPointArray">desktop/desktop.cpp</a>
+ <a href="drawdemo-drawdemo-cpp.html#QPointArray">drawdemo/drawdemo.cpp</a>
+ <a href="picture-picture-cpp.html#QPointArray">picture/picture.cpp</a>
+ <a href="aclock-aclock-cpp.html#QPointArray">aclock/aclock.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QPointArray::QPointArray ()</h3>
+<p>Constructs a null point array.
+<p>See also:  <a href="qarray.html#b0">isNull</a>().
+<h3 class="fn"><a name="a3"></a>QPointArray::QPointArray ( const <a href="qrect.html">QRect</a> &amp; r, bool closed=FALSE )</h3>
+<p>Constructs a point array from the rectangle <em>r.</em>
+<p>If <em>closed</em> is FALSE, then the point array will contain the
+following four points (in the listed order):
+<ol>
+<li> r.topLeft()
+<li> r.topRight()
+<li> r.bottomRight()
+<li> r.bottomLeft()
+</ol>
+<p>If <em>closed</em> is TRUE, then a fifth point is set to r.topLeft() to
+close the point array.
+<h3 class="fn"><a name="a2"></a>QPointArray::QPointArray ( const QPointArray &amp; a )</h3>
+<p>Constructs a
+<a href="shclass.html">shallow copy</a> of the point array <em>a.</em>
+<p>See also:  <a href="qpointarray.html#a7">copy</a>().
+<h3 class="fn"><a name="a4"></a>QPointArray::QPointArray ( int nPoints, const QCOORD * points )</h3>
+<p>Constructs a point array with <em>nPoints</em> points, taken from the
+<em>points</em> array.
+<p>Equivalent to <a href="qpointarray.html#b3">setPoints</a>(nPoints,points).
+<h3 class="fn"><a name="a1"></a>QPointArray::QPointArray ( int size )</h3>
+<p>Constructs a point array with room for <em>size</em> points.
+Makes a null array if <em>size</em> == 0.
+<p>See also:  <a href="qarray.html#b1">resize</a>() and <a href="qarray.html#b0">isNull</a>().
+<h3 class="fn"><a href="qpoint.html">QPoint</a> <a name="b7"></a>QPointArray::at ( uint index ) const</h3>
+<p>Returns the point at position <em>index</em> in the array.
+<p>See also:  operator[].
+<h3 class="fn"><a href="qrect.html">QRect</a> <a name="c2"></a>QPointArray::boundingRect () const</h3>
+<p>Returns the bounding rectangle of the points in the array, or
+<a href="qrect.html">QRect</a>(0,0,0,0) if the array is empty.
+<h3 class="fn">QPointArray <a name="a7"></a>QPointArray::copy () const</h3>
+<p>Creates a
+<a href="shclass.html">deep copy</a> of the array.
+<h3 class="fn">bool <a name="a6"></a>QPointArray::fill ( const <a href="qpoint.html">QPoint</a> &amp; p, int size = -1 )</h3>
+<p>Fills the point array with the point <em>p.</em>
+If <em>size</em> is specified as different from -1, then the array will be
+resized before filled.
+<p>Returns TRUE if successful, or FALSE if the memory cannot be allocated
+(only when <em>size</em> != -1).
+<p>See also:  <a href="qarray.html#b1">resize</a>().
+<h3 class="fn">void <a name="c3"></a>QPointArray::makeArc ( int x, int y, int w, int h, int a1, int a2 )</h3>
+<p>Sets the points of the array to those describing an arc of an
+ellipse with size <em>w</em> by <em>h</em> and position (<em>x, y</em> ), starting
+from angle \a1, spanning <em>a2.</em>
+Angles are specified in 16ths of a degree,
+i.e. a full circle equals 5760 (16*360). Positive values mean
+counter-clockwise while negative values mean clockwise direction.
+Zero degrees is at the 3'o clock position.
+<h3 class="fn">void <a name="c4"></a>QPointArray::makeEllipse ( int xx, int yy, int w, int h )</h3>
+<p>Sets the points of the array to those describing an ellipse with
+size <em>w</em> by <em>h</em> and position (<em>x, y</em> ).
+<h3 class="fn">QPointArray &amp; <a name="a5"></a>QPointArray::operator= ( const QPointArray &amp; a )</h3>
+<p>Assigns a
+<a href="shclass.html">shallow copy</a> of <em>a</em> to this point array
+and returns a reference to this point array.
+<p>Equivalent to <a href="qarray.html#b6">assign</a>( a ).
+<p>See also:  <a href="qpointarray.html#a7">copy</a>().
+<h3 class="fn"><a href="qpoint.html">QPoint</a> <a name="c0"></a>QPointArray::operator[] ( int i ) const</h3>
+<p>Returns the point at position <em>index</em> in the array.
+<h3 class="fn"><a href="qpoint.html">QPoint</a> <a name="c1"></a>QPointArray::operator[] ( uint i ) const</h3>
+<p>Returns the point at position <em>index</em> in the array.
+<h3 class="fn"><a href="qpointval.html">QPointVal</a> <a name="b8"></a>QPointArray::operator[] ( int index )</h3>
+<p>Returns a reference to the point at position <em>index</em> in the array.
+<h3 class="fn"><a href="qpointval.html">QPointVal</a> <a name="b9"></a>QPointArray::operator[] ( uint index )</h3>
+<p>Returns a reference to the point at position <em>index</em> in the array.
+<h3 class="fn"><a href="qpoint.html">QPoint</a> <a name="b0"></a>QPointArray::point ( uint index ) const</h3>
+<p>Returns the point at position <em>index</em> in the array.
+<h3 class="fn">void <a name="a9"></a>QPointArray::point ( uint index, int * x, int * y ) const</h3>
+<p>Returns the point at position <em>index</em> in the array in <em>*x</em> and <em>*y.</em>
+<p>Examples:
+ <a href="drawdemo-drawdemo-cpp.html#point">drawdemo/drawdemo.cpp</a>
+<h3 class="fn">bool <a name="b5"></a>QPointArray::putPoints ( int index, int nPoints, const QCOORD * points )</h3>
+<p>Copies <em>nPoints</em> points from the <em>points</em> array into this point array.
+Will resize this point array if <code>index+nPoints</code> exceeds
+the size of the array.
+<p>Returns TRUE if successful, or FALSE if the array could not be resized.
+<p>Example:
+<pre>    <a href="qpointarray.html">QPointArray</a> a( 1 );
+    a[0] = QPoint( 1, 2 );
+    static QCOORD points[] = { 3,4, 5,6 };
+    a.<a href="qpointarray.html#b5">putPoints</a>( 1, 2, points );
+</pre>
+<p>The example code creates an array with three points: (1,2), (3,4)
+and (5,6).
+<p>This function differs from <a href="qpointarray.html#b3">setPoints</a>() in that it does not resize the
+array unless the array size is exceeded.
+<p>See also:  <a href="qarray.html#b1">resize</a>() and <a href="qpointarray.html#b3">setPoints</a>().
+<h3 class="fn">bool <a name="b6"></a>QPointArray::putPoints ( int index, int nPoints, int firstx, int firsty, ... )</h3>
+<p>Copies <em>nPoints</em> points from the variable argument list into this point
+array. Will resize this point array if <code>index+nPoints</code> exceeds
+the size of the array.
+<p>Returns TRUE if successful, or FALSE if the array could not be resized.
+<p>Example:
+<pre>    <a href="qpointarray.html">QPointArray</a> a( 1 );
+    a[0] = QPoint( 1, 2 );
+    a.<a href="qpointarray.html#b5">putPoints</a>( 1, 2, 3,4, 5,6 );
+</pre>
+<p>The example code creates an array with two points (1,2), (3,4) and (5,6).
+<p>This function differs from <a href="qpointarray.html#b3">setPoints</a>() because it does not resize the
+array unless the array size is exceeded.
+<p>See also:  <a href="qarray.html#b1">resize</a>() and <a href="qpointarray.html#b3">setPoints</a>().
+<h3 class="fn">QPointArray <a name="c5"></a>QPointArray::quadBezier () const</h3>
+<p>Returns the Bezier points for the four control points in this array.
+<p>Examples:
+ <a href="drawdemo-drawdemo-cpp.html#quadBezier">drawdemo/drawdemo.cpp</a>
+<h3 class="fn">void <a name="b2"></a>QPointArray::setPoint ( uint i, const <a href="qpoint.html">QPoint</a> &amp; p )</h3>
+<p>Equivalent to <a href="qpointarray.html#b1">setPoint</a>( i, p.x(), p.y() ).
+<h3 class="fn">void <a name="b1"></a>QPointArray::setPoint ( uint index, int x, int y )</h3>
+<p>Sets the point at position <em>index</em> in the array to <em>(x,y).</em>
+<p>Examples:
+ <a href="drawdemo-drawdemo-cpp.html#setPoint">drawdemo/drawdemo.cpp</a>
+<h3 class="fn">bool <a name="b3"></a>QPointArray::setPoints ( int nPoints, const QCOORD * points )</h3>
+<p>Resizes the array to <em>nPoints</em> and sets the points in the array to
+the values taken from <em>points.</em>
+<p>Returns TRUE if successful, or FALSE if the array could not be resized.
+<p>Example:
+<pre>    static QCOORD points[] = { 1,2, 3,4 };
+    <a href="qpointarray.html">QPointArray</a> a;
+    a.<a href="qpointarray.html#b3">setPoints</a>( 2, points );
+</pre>
+<p>The example code creates an array with two points (1,2) and (3,4).
+<p>See also:  <a href="qarray.html#b1">resize</a>() and <a href="qpointarray.html#b5">putPoints</a>().
+<p>Examples:
+ <a href="aclock-aclock-cpp.html#setPoints">aclock/aclock.cpp</a>
+<h3 class="fn">bool <a name="b4"></a>QPointArray::setPoints ( int nPoints, int firstx, int firsty, ... )</h3>
+<p>Resizes the array to <em>nPoints</em> and sets the points in the array to
+the values taken from the variable argument list.
+<p>Returns TRUE if successful, or FALSE if the array could not be resized.
+<p>Example:
+<pre>    <a href="qpointarray.html">QPointArray</a> a;
+    a.<a href="qpointarray.html#b3">setPoints</a>( 2, 1,2, 3,4 );
+</pre>
+<p>The example code creates an array with two points (1,2) and (3,4).
+<p>See also:  <a href="qarray.html#b1">resize</a>() and <a href="qpointarray.html#b5">putPoints</a>().
+<h3 class="fn">void <a name="a8"></a>QPointArray::translate ( int dx, int dy )</h3>
+<p>Translates all points in the array <em>(dx,dy).</em>
+<hr><h2>Related Functions</h2>
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="c6"></a>operator&lt;&lt; (<a href="qdatastream.html">QDataStream</a> &amp; s, const QPointArray &amp; a)</h3>
+<p>Writes a point array to the stream and returns a reference to the stream.
+<p>The serialization format is:
+<ol>
+<li> The array size (UINT32)
+<li> The array points (<a href="qpoint.html">QPoint</a>)
+</ol>
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="c7"></a>operator&gt;&gt; (<a href="qdatastream.html">QDataStream</a> &amp; s, QPointArray &amp; a)</h3>
+<p>Reads a point array from the stream and returns a reference to the stream.
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qpointarray.h: 1998/12/08
+<li>qpointarray.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

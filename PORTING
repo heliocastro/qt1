@@ -1,0 +1,53 @@
+		      PORTING QT TO OTHER PLATFORMS
+
+Read this file if you wish to adapt Qt to a new platform or compiler.  If
+you come across any problems, feel free to send mail to qt-bugs@troll.no.
+
+
+			       REQUIREMENTS
+
+The new platform needs Xlib for X11R5 or newer.  Motif is not required.
+If it is not a Unix system (for instance VMS) things may get complicated.
+Porting to other Unixes is generally straight-forward.
+
+Qt requires that your C++ compiler supports multiple inheritance and
+templates.  The compiler must recognize the .cpp extension.  Exception
+handling and RTTI (Run-Time Type Information) are not required.
+
+				 PATCHES
+
+Note that you may not distribute your port without our explicit
+permission.  Please send us the patches you had to make so we can add them
+to the code base; then we can support the new platform in an orderly
+manner.  (We want Qt to run on as many platforms as possible, but _not_ if
+that involves patches we don't know about floating around the net.)
+
+Further, we would like to have copies of all Qt-related files on
+ftp.troll.no.
+
+			   PORTING INSTRUCTIONS
+
+Create a new file in the configs/ directory, describing the compilation
+requirements for your platform.  Edit qt/Makefile to support the new
+architecture (it just refers to the config file).  Run "make config" and
+thus configure for your platform.  You should not have to modify any other
+Makefiles (but let us know if you do).
+
+Modify qt/src/tools/qglobal.h as required: you need to ensure that
+_OS_whatever_ is defined.  We've done it for many platforms in the past,
+those should be okay.  If you are using a compiler we don't detect it's
+probably a good idea to add a _CC_whatever_ too (even though you don't
+need it at once).
+
+There are also some size-dependent types (Q_UINT32 and so on), make sure
+they are right for your system.
+
+Some compilers emit bad warnings when they compile Qt.  If yours does, and
+the code in Qt is sane, please use a #pragma or two to shut your compiler
+up.  (This is a good reason for wanting the _CC_whatever_ define above.)
+
+Make a unified diff (diff -u) and send the patch to qt-bugs@troll.no
+
+For most Unix varieties, that's all.  Some may need some include file
+tweaks.  Good luck, and again, feel free to send mail to qt-bugs@troll.no.
+

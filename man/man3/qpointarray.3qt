@@ -1,0 +1,313 @@
+.TH QPointArray 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QPointArray \- Array of points
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qpointarray.h>\fR
+.PP
+Inherits QArray.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QPointArray ()"
+.br
+.ti -1c
+.BI "QPointArray ( int size )"
+.br
+.ti -1c
+.BI "QPointArray ( const QPointArray & a )"
+.br
+.ti -1c
+.BI "QPointArray ( const QRect & " "r" ", bool " "closed" "=FALSE )"
+.br
+.ti -1c
+.BI "QPointArray ( int " "nPoints" ", const QCOORD * points )"
+.br
+.ti -1c
+.BI "QPointArray& operator= ( const QPointArray & a )"
+.br
+.ti -1c
+.BI "bool fill ( const QPoint & " "p" ", int " "size" " = -1 )"
+.br
+.ti -1c
+.BI "QPointArray copy () const"
+.br
+.ti -1c
+.BI "void translate ( int " "dx" ", int dy )"
+.br
+.ti -1c
+.BI "void point ( uint " "i" ", int * " "x" ", int * y ) const"
+.br
+.ti -1c
+.BI "QPoint point ( uint i ) const"
+.br
+.ti -1c
+.BI "void setPoint ( uint " "i" ", int " "x" ", int y )"
+.br
+.ti -1c
+.BI "void setPoint ( uint " "i" ", const QPoint & p )"
+.br
+.ti -1c
+.BI "bool setPoints ( int " "nPoints" ", const QCOORD * points )"
+.br
+.ti -1c
+.BI "bool setPoints ( int " "nPoints" ", int " "firstx" ", int " "firsty" ", ... )"
+.br
+.ti -1c
+.BI "bool putPoints ( int " "index" ", int " "nPoints" ", const QCOORD * points )"
+.br
+.ti -1c
+.BI "bool putPoints ( int " "index" ", int " "nPoints" ", int " "firstx" ", int " "firsty" ", ... )"
+.br
+.ti -1c
+.BI "QPoint at ( uint i ) const"
+.br
+.ti -1c
+.BI "QPointVal operator[] ( int i )"
+.br
+.ti -1c
+.BI "QPointVal operator[] ( uint i )"
+.br
+.ti -1c
+.BI "QPoint operator[] ( int i ) const"
+.br
+.ti -1c
+.BI "QPoint operator[] ( uint i ) const"
+.br
+.ti -1c
+.BI "QRect boundingRect () const"
+.br
+.ti -1c
+.BI "void makeArc ( int " "x" ", int " "y" ", int " "w" ", int " "h" ", int " "a1" ", int a2 )"
+.br
+.ti -1c
+.BI "void makeEllipse ( int " "x" ", int " "y" ", int " "w" ", int h )"
+.br
+.ti -1c
+.BI "QPointArray quadBezier () const"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "QDataStream & operator<< (QDataStream & " "s" ", const QPointArray & " "a" ")"
+.br
+.ti -1c
+.BI "QDataStream & operator>> (QDataStream & " "s" ", QPointArray & " "a" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The QPointArray class provides an array of points.
+.PP
+QPointArray is used by the QPainter to draw line segments, polylines, polygons and Bezier curves.
+.PP
+The QPointArray is not an array of QPoint, instead it contains a platform dependent point type to make the QPainter functions more efficient (no conversion needed). On the other hand, QPointArray has member functions that operate on QPoint to make programming easier.
+.PP
+Note that since this class is a QArray, it is explicitly shared and works with shallow copies by default.
+.PP
+Examples:
+.(l
+desktop/desktop.cpp drawdemo/drawdemo.cpp picture/picture.cpp aclock/aclock.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QPointArray::QPointArray ()"
+Constructs a null point array.
+.PP
+See also: isNull().
+.SH "QPointArray::QPointArray ( const QRect & r, bool closed=FALSE )"
+Constructs a point array from the rectangle \fIr.\fR
+.PP
+If \fIclosed\fR is FALSE, then the point array will contain the following four points (in the listed order):
+.IP 1
+r.topLeft()
+.IP 2
+r.topRight()
+.IP 3
+r.bottomRight()
+.IP 4
+r.bottomLeft()
+.PP
+If \fIclosed\fR is TRUE, then a fifth point is set to r.topLeft() to close the point array.
+.SH "QPointArray::QPointArray ( const QPointArray & a )"
+Constructs a shallow copy of the point array \fIa.\fR
+.PP
+See also: copy().
+.SH "QPointArray::QPointArray ( int nPoints, const QCOORD * points )"
+Constructs a point array with \fInPoints\fR points, taken from the \fIpoints\fR array.
+.PP
+Equivalent to setPoints(nPoints,points).
+.SH "QPointArray::QPointArray ( int size )"
+Constructs a point array with room for \fIsize\fR points. Makes a null array if \fIsize\fR == 0.
+.PP
+See also: resize() and isNull().
+.SH "QPoint QPointArray::at ( uint index ) const"
+Returns the point at position \fIindex\fR in the array.
+.PP
+See also: operator[].
+.SH "QRect QPointArray::boundingRect () const"
+Returns the bounding rectangle of the points in the array, or QRect(0,0,0,0) if the array is empty.
+.SH "QPointArray QPointArray::copy () const"
+Creates a deep copy of the array.
+.SH "bool QPointArray::fill ( const QPoint & p, int size = -1 )"
+Fills the point array with the point \fIp.\fR If \fIsize\fR is specified as different from -1, then the array will be resized before filled.
+.PP
+Returns TRUE if successful, or FALSE if the memory cannot be allocated (only when \fIsize\fR != -1).
+.PP
+See also: resize().
+.SH "void QPointArray::makeArc ( int x, int y, int w, int h, int a1, int a2 )"
+Sets the points of the array to those describing an arc of an ellipse with size \fIw\fR by \fIh\fR and position (\fIx, y\fR ), starting from angle \\a1, spanning \fIa2.\fR Angles are specified in 16ths of a degree, i.e. a full circle equals 5760 (16*360). Positive values mean counter-clockwise while negative values mean clockwise direction. Zero degrees is at the 3'o clock position.
+.SH "void QPointArray::makeEllipse ( int xx, int yy, int w, int h )"
+Sets the points of the array to those describing an ellipse with size \fIw\fR by \fIh\fR and position (\fIx, y\fR ).
+.SH "QPointArray & QPointArray::operator= ( const QPointArray & a )"
+Assigns a shallow copy of \fIa\fR to this point array and returns a reference to this point array.
+.PP
+Equivalent to assign( a ).
+.PP
+See also: copy().
+.SH "QPoint QPointArray::operator[] ( int i ) const"
+Returns the point at position \fIindex\fR in the array.
+.SH "QPoint QPointArray::operator[] ( uint i ) const"
+Returns the point at position \fIindex\fR in the array.
+.SH "QPointVal QPointArray::operator[] ( int index )"
+Returns a reference to the point at position \fIindex\fR in the array.
+.SH "QPointVal QPointArray::operator[] ( uint index )"
+Returns a reference to the point at position \fIindex\fR in the array.
+.SH "QPoint QPointArray::point ( uint index ) const"
+Returns the point at position \fIindex\fR in the array.
+.SH "void QPointArray::point ( uint index, int * x, int * y ) const"
+Returns the point at position \fIindex\fR in the array in \fI*x\fR and \fI*y.\fR
+.PP
+Examples:
+.(l
+drawdemo/drawdemo.cpp
+.)l
+.SH "bool QPointArray::putPoints ( int index, int nPoints, const QCOORD * points )"
+Copies \fInPoints\fR points from the \fIpoints\fR array into this point array. Will resize this point array if \fCindex+nPoints\fR exceeds the size of the array.
+.PP
+Returns TRUE if successful, or FALSE if the array could not be resized.
+.PP
+Example:
+.PP
+.nf
+.br
+    QPointArray a( 1 );
+.br
+    a[0] = QPoint( 1, 2 );
+.br
+    static QCOORD points[] = { 3,4, 5,6 };
+.br
+    a.putPoints( 1, 2, points );
+.fi
+.PP
+The example code creates an array with three points: (1,2), (3,4) and (5,6).
+.PP
+This function differs from setPoints() in that it does not resize the array unless the array size is exceeded.
+.PP
+See also: resize() and setPoints().
+.SH "bool QPointArray::putPoints ( int index, int nPoints, int firstx, int firsty, ... )"
+Copies \fInPoints\fR points from the variable argument list into this point array. Will resize this point array if \fCindex+nPoints\fR exceeds the size of the array.
+.PP
+Returns TRUE if successful, or FALSE if the array could not be resized.
+.PP
+Example:
+.PP
+.nf
+.br
+    QPointArray a( 1 );
+.br
+    a[0] = QPoint( 1, 2 );
+.br
+    a.putPoints( 1, 2, 3,4, 5,6 );
+.fi
+.PP
+The example code creates an array with two points (1,2), (3,4) and (5,6).
+.PP
+This function differs from setPoints() because it does not resize the array unless the array size is exceeded.
+.PP
+See also: resize() and setPoints().
+.SH "QPointArray QPointArray::quadBezier () const"
+Returns the Bezier points for the four control points in this array.
+.PP
+Examples:
+.(l
+drawdemo/drawdemo.cpp
+.)l
+.SH "void QPointArray::setPoint ( uint i, const QPoint & p )"
+Equivalent to setPoint( i, p.x(), p.y() ).
+.SH "void QPointArray::setPoint ( uint index, int x, int y )"
+Sets the point at position \fIindex\fR in the array to \fI(x,y).\fR
+.PP
+Examples:
+.(l
+drawdemo/drawdemo.cpp
+.)l
+.SH "bool QPointArray::setPoints ( int nPoints, const QCOORD * points )"
+Resizes the array to \fInPoints\fR and sets the points in the array to the values taken from \fIpoints.\fR
+.PP
+Returns TRUE if successful, or FALSE if the array could not be resized.
+.PP
+Example:
+.PP
+.nf
+.br
+    static QCOORD points[] = { 1,2, 3,4 };
+.br
+    QPointArray a;
+.br
+    a.setPoints( 2, points );
+.fi
+.PP
+The example code creates an array with two points (1,2) and (3,4).
+.PP
+See also: resize() and putPoints().
+.PP
+Examples:
+.(l
+aclock/aclock.cpp
+.)l
+.SH "bool QPointArray::setPoints ( int nPoints, int firstx, int firsty, ... )"
+Resizes the array to \fInPoints\fR and sets the points in the array to the values taken from the variable argument list.
+.PP
+Returns TRUE if successful, or FALSE if the array could not be resized.
+.PP
+Example:
+.PP
+.nf
+.br
+    QPointArray a;
+.br
+    a.setPoints( 2, 1,2, 3,4 );
+.fi
+.PP
+The example code creates an array with two points (1,2) and (3,4).
+.PP
+See also: resize() and putPoints().
+.SH "void QPointArray::translate ( int dx, int dy )"
+Translates all points in the array \fI(dx,dy).\fR
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "QDataStream & operator<< (QDataStream & s, const QPointArray & a)"
+Writes a point array to the stream and returns a reference to the stream.
+.PP
+The serialization format is:
+.IP 1
+The array size (UINT32)
+.IP 2
+The array points (QPoint)
+.SH "QDataStream & operator>> (QDataStream & s, QPointArray & a)"
+Reads a point array from the stream and returns a reference to the stream.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qpointarray.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

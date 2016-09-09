@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QDate Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QDate Class Reference</h1><br clear="all">
+<p>
+The QDate class provides date functions.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qdatetime-h.html">qdatetime.h</a>&gt;</code>
+<p><a href="qdate-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qdate.html#a0"><strong>QDate</strong></a> () </span>
+<li><span class="fn"><a href="qdate.html#a1"><strong>QDate</strong></a> ( int y, int m, int d ) </span>
+<li><span class="fn">bool <a href="qdate.html#a2"><strong>isNull</strong></a> () const</span>
+<li><span class="fn">bool <a href="qdate.html#a3"><strong>isValid</strong></a> () const</span>
+<li><span class="fn">int <a href="qdate.html#a4"><strong>year</strong></a> () const</span>
+<li><span class="fn">int <a href="qdate.html#a5"><strong>month</strong></a> () const</span>
+<li><span class="fn">int <a href="qdate.html#a6"><strong>day</strong></a> () const</span>
+<li><span class="fn">int <a href="qdate.html#a7"><strong>dayOfWeek</strong></a> () const</span>
+<li><span class="fn">int <a href="qdate.html#a8"><strong>dayOfYear</strong></a> () const</span>
+<li><span class="fn">int <a href="qdate.html#a9"><strong>daysInMonth</strong></a> () const</span>
+<li><span class="fn">int <a href="qdate.html#b0"><strong>daysInYear</strong></a> () const</span>
+<li><span class="fn">virtual const char* <a href="qdate.html#b1"><strong>monthName</strong></a> ( int month ) const</span>
+<li><span class="fn">virtual const char* <a href="qdate.html#b2"><strong>dayName</strong></a> ( int weekday ) const</span>
+<li><span class="fn">QString <a href="qdate.html#b3"><strong>toString</strong></a> () const</span>
+<li><span class="fn">bool <a href="qdate.html#b4"><strong>setYMD</strong></a> ( int y, int m, int d ) </span>
+<li><span class="fn">QDate <a href="qdate.html#b5"><strong>addDays</strong></a> ( int days ) const</span>
+<li><span class="fn">int <a href="qdate.html#b6"><strong>daysTo</strong></a> ( const QDate &amp; ) const</span>
+<li><span class="fn">bool <a href="qdate.html#b7"><strong>operator==</strong></a> ( const QDate &amp; d ) const</span>
+<li><span class="fn">bool <a href="qdate.html#b8"><strong>operator!=</strong></a> ( const QDate &amp; d ) const</span>
+<li><span class="fn">bool <a href="qdate.html#b9"><strong>operator&lt;</strong></a> ( const QDate &amp; d ) const</span>
+<li><span class="fn">bool <a href="qdate.html#c0"><strong>operator&lt;=</strong></a> ( const QDate &amp; d ) const</span>
+<li><span class="fn">bool <a href="qdate.html#c1"><strong>operator&gt;</strong></a> ( const QDate &amp; d ) const</span>
+<li><span class="fn">bool <a href="qdate.html#c2"><strong>operator&gt;=</strong></a> ( const QDate &amp; d ) const</span>
+</ul>
+<h2>Static Public Members</h2>
+<ul>
+<li><span class="fn">QDate <a href="qdate.html#d0"><strong>currentDate</strong></a> () </span>
+<li><span class="fn">bool <a href="qdate.html#d1"><strong>isValid</strong></a> ( int y, int m, int d ) </span>
+<li><span class="fn">bool <a href="qdate.html#d2"><strong>leapYear</strong></a> ( int year ) </span>
+</ul>
+<h2>Static Protected Members</h2>
+<ul>
+<li><span class="fn">uint <a href="qdate.html#d3"><strong>greg2jul</strong></a> ( int y, int m, int d ) </span>
+<li><span class="fn">void <a href="qdate.html#d4"><strong>jul2greg</strong></a> ( uint jd, int &amp; y, int &amp; m, int &amp; d ) </span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>QDataStream &amp; <a href="qdate.html#d5"><strong>operator&lt;&lt;</strong></a> (QDataStream &amp; s, const QDate &amp; d)
+<li>QDataStream &amp; <a href="qdate.html#d6"><strong>operator&gt;&gt;</strong></a> (QDataStream &amp; s, QDate &amp; d)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QDate class provides date functions.
+<p>
+The QDate is based on the Gregorian (modern western) calendar. England
+adopted the Gregorian calendar on September 14th 1752, which is the
+earliest date that is supported by QDate.  Using earlier dates will give
+undefined results. Some countries adopted the Gregorian calendar later
+than England, thus the week day of early dates might be incorrect for
+these countries (but correct for England).  The end of time is reached
+around 8000AD, by which time we expect Qt to be obsolete.
+<p>See also:  <a href="qtime.html">QTime</a> and <a href="qdatetime.html">QDateTime</a>.
+<p>Examples:
+ <a href="dclock-dclock-cpp.html#QDate">dclock/dclock.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QDate::QDate ()</h3>
+<p>Constructs a null date.  Null dates are invalid.
+<h3 class="fn"><a name="a1"></a>QDate::QDate ( int y, int m, int d )</h3>
+<p>Constructs a date with the year <em>y,</em> month <em>m</em> and day <em>d.</em>
+<h3 class="fn">QDate <a name="b5"></a>QDate::addDays ( int ndays ) const</h3>
+<p>Returns this date plus <em>ndays</em> days.
+<h3 class="fn">QDate <a name="d0"></a>QDate::currentDate () <code>[static]</code></h3>
+<p>Returns the current date.
+<p>See also:  <a href="qtime.html#c8">QTime::currentTime</a>() and <a href="qdatetime.html#c4">QDateTime::currentDateTime</a>().
+<h3 class="fn">int <a name="a6"></a>QDate::day () const</h3>
+<p>Returns the day of the month (1..31) for this date.
+<p>See also:  <a href="qdate.html#a4">year</a>(), <a href="qdate.html#a5">month</a>() and <a href="qdate.html#a7">dayOfWeek</a>().
+<p>Examples:
+ <a href="dclock-dclock-cpp.html#day">dclock/dclock.cpp</a>
+<h3 class="fn">const char * <a name="b2"></a>QDate::dayName ( int weekday ) const <code>[virtual]</code></h3>
+<p>Returns the name of the <em>weekday.</em>
+<p>Weekday 1 == "Mon", day 2 == "Tue" etc.
+<h3 class="fn">int <a name="a7"></a>QDate::dayOfWeek () const</h3>
+<p>Returns the weekday (Monday=1 .. Sunday=7) for this date.
+<p>See also:  <a href="qdate.html#a6">day</a>().
+<h3 class="fn">int <a name="a8"></a>QDate::dayOfYear () const</h3>
+<p>Returns the day of the year (1..365) for this date.
+<h3 class="fn">int <a name="a9"></a>QDate::daysInMonth () const</h3>
+<p>Returns the number of days in the month (28..31) for this date.
+<h3 class="fn">int <a name="b0"></a>QDate::daysInYear () const</h3>
+<p>Returns the number of days in the year (365 or 366) for this date.
+<h3 class="fn">int <a name="b6"></a>QDate::daysTo ( const QDate &amp; d ) const</h3>
+<p>Returns the number of days from this date to <em>d,</em> which is negative
+if <em>d</em> is in the past.
+<p>Example:
+<pre>    <a href="qdate.html">QDate</a> d1( 1995, 5, 17 );            // May 17th 1995
+    <a href="qdate.html">QDate</a> d2( 1995, 5, 20 );            // May 20th 1995
+    d1.<a href="qdate.html#b6">daysTo</a>( d2 );                    // returns 3
+    d2.<a href="qdate.html#b6">daysTo</a>( d1 );                    // returns -3
+</pre>
+<p>See also:  <a href="qdate.html#b5">addDays</a>().
+<h3 class="fn">uint <a name="d3"></a>QDate::greg2jul ( int y, int m, int d ) <code>[static protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">bool <a name="a2"></a>QDate::isNull () const</h3>
+<p>Returns TRUE if the date is null.  A null date is invalid.
+<p>See also:  <a href="qdate.html#a3">isValid</a>().
+<h3 class="fn">bool <a name="a3"></a>QDate::isValid () const</h3>
+<p>Returns TRUE if the date is valid.
+<p>See also:  <a href="qdate.html#a2">isNull</a>().
+<h3 class="fn">bool <a name="d1"></a>QDate::isValid ( int y, int m, int d ) <code>[static]</code></h3>
+<p>Returns TRUE if the specified date is valid.
+<p>Note that years 00-99 are treated as 1900-1999.
+<p>See also:  <a href="qdate.html#a2">isNull</a>().
+<h3 class="fn">void <a name="d4"></a>QDate::jul2greg ( uint jd, int &amp; y, int &amp; m, int &amp; d ) <code>[static protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">bool <a name="d2"></a>QDate::leapYear ( int y ) <code>[static]</code></h3>
+<p>Returns TRUE if the specified year <em>y</em> is a leap year.
+<h3 class="fn">int <a name="a5"></a>QDate::month () const</h3>
+<p>Returns the month (January=1 .. December=12) for this date.
+<p>See also:  <a href="qdate.html#a4">year</a>() and <a href="qdate.html#a6">day</a>().
+<p>Examples:
+ <a href="dclock-dclock-cpp.html#month">dclock/dclock.cpp</a>
+<h3 class="fn">const char * <a name="b1"></a>QDate::monthName ( int month ) const <code>[virtual]</code></h3>
+<p>Returns the name of the <em>month.</em>
+<p>Month 1 == "Jan", month 2 == "Feb" etc.
+<h3 class="fn">bool <a name="b8"></a>QDate::operator!= ( const QDate &amp; d ) const</h3>
+<p>Returns TRUE if this date is different from <em>d,</em> or FALSE if
+they are equal.
+<h3 class="fn">bool <a name="b9"></a>QDate::operator&lt; ( const QDate &amp; d ) const</h3>
+<p>Returns TRUE if this date is before <em>d,</em> otherwise FALSE.
+<h3 class="fn">bool <a name="c0"></a>QDate::operator&lt;= ( const QDate &amp; d ) const</h3>
+<p>Returns TRUE if this date is before or equal to <em>d,</em> otherwise FALSE.
+<h3 class="fn">bool <a name="b7"></a>QDate::operator== ( const QDate &amp; d ) const</h3>
+<p>Returns TRUE if this date is equal to <em>d,</em> or FALSE if
+they are different.
+<h3 class="fn">bool <a name="c1"></a>QDate::operator&gt; ( const QDate &amp; d ) const</h3>
+<p>Returns TRUE if this date is after <em>d,</em> otherwise FALSE.
+<h3 class="fn">bool <a name="c2"></a>QDate::operator&gt;= ( const QDate &amp; d ) const</h3>
+<p>Returns TRUE if this date is equal to or after <em>d,</em> otherwise FALSE.
+<h3 class="fn">bool <a name="b4"></a>QDate::setYMD ( int y, int m, int d )</h3>
+<p>Sets the year <em>y,</em> month <em>m</em> and day <em>d.</em>
+Returns TRUE if the date is valid, otherwise FALSE.
+<h3 class="fn"><a href="qstring.html">QString</a> <a name="b3"></a>QDate::toString () const</h3>
+<p>Returns the date as a string.
+<p>The string format is "Sat May 20 1995".
+<h3 class="fn">int <a name="a4"></a>QDate::year () const</h3>
+<p>Returns the year (>= 1752) for this date.
+<p>See also:  <a href="qdate.html#a5">month</a>() and <a href="qdate.html#a6">day</a>().
+<hr><h2>Related Functions</h2>
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="d5"></a>operator&lt;&lt; (<a href="qdatastream.html">QDataStream</a> &amp; s, const QDate &amp; d)</h3>
+<p>Writes the date to the stream.
+<p>Serialization format: [Q_UINT32], Julian day.
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="d6"></a>operator&gt;&gt; (<a href="qdatastream.html">QDataStream</a> &amp; s, QDate &amp; d)</h3>
+<p>Reads a date from the stream.
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qdatetime.h: 1998/08/25
+<li>qdatetime.cpp: 1999/02/15
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

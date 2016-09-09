@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QSignal Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QSignal Class Reference</h1><br clear="all">
+<p>
+The QSignal class can be used to send signals without parameters.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qsignal-h.html">qsignal.h</a>&gt;</code>
+<p><a href="qsignal-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qsignal.html#a0"><strong>QSignal</strong></a> ( QObject * parent=0, const char * name=0 ) </span>
+<li><span class="fn">const char* <a href="qsignal.html#a1"><strong>name</strong></a> () const</span>
+<li><span class="fn">void <a href="qsignal.html#a2"><strong>setName</strong></a> ( const char * name ) </span>
+<li><span class="fn">bool <a href="qsignal.html#a3"><strong>connect</strong></a> ( const QObject * receiver, const char * member ) </span>
+<li><span class="fn">bool <a href="qsignal.html#a4"><strong>disconnect</strong></a> ( const QObject * receiver, const char * member=0 ) </span>
+<li><span class="fn">bool <a href="qsignal.html#a5"><strong>isBlocked</strong></a> () const</span>
+<li><span class="fn">void <a href="qsignal.html#a6"><strong>block</strong></a> ( bool b ) </span>
+<li><span class="fn">void <a href="qsignal.html#a7"><strong>activate</strong></a> () </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QSignal class can be used to send signals without parameters.
+<p>
+QSignal is a simple extension of <a href="qobject.html">QObject</a> that can send plain signals
+without parameters.  If you want to send signals from a class that does
+not inherit QObject, you can create an internal QSignal object to emit
+the signal. You must also provide a function that connects the signal to
+an outside object slot.  This is how we have implemented signals in the
+<a href="qmenudata.html">QMenuData</a> class, which is not a QObject.
+<p>In general, we recommend inheriting QObject instead.  QObject provides
+much more functionality.
+<p>Note that QObject is a <em>private</em> base class of QSignal, i.e. you cannot
+call any QObject member functions from a QSignal object.
+<p>Example:
+<pre>    #include &lt;qsignal.h&gt;
+
+    class MyClass
+    {
+    public:
+        MyClass();
+       ~MyClass();
+
+        void doSomething();
+
+        void connect( <a href="qobject.html">QObject</a> *receiver, const char *member );
+
+    private:
+        <a href="qsignal.html">QSignal</a> *sig;
+    };
+
+    MyClass::MyClass()
+    {
+        sig = new <a href="qsignal.html">QSignal</a>;
+    }
+
+    MyClass::~MyClass()
+    {
+        delete sig;
+    }
+
+    void MyClass::doSomething()
+    {
+        // ... does something
+        sig-&gt;<a href="qsignal.html#a7">activate</a>();        // activates the signal
+    }
+
+    void MyClass::connect( <a href="qobject.html">QObject</a> *receiver, const char *member )
+    {
+        sig-&gt;<a href="qsignal.html#a3">connect</a>( receiver, member );
+    }
+</pre>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QSignal::QSignal ( <a href="qobject.html">QObject</a> * parent=0, const char * name=0 )</h3>
+<p>Constructs a signal object with the parent object <em>parent</em> and a <em>name.</em>
+These arguments are passed directly to <a href="qobject.html">QObject</a>.
+<h3 class="fn">void <a name="a7"></a>QSignal::activate ()</h3>
+<p>Emits the signal.
+<p>See also:  isBlock().
+<h3 class="fn">void <a name="a6"></a>QSignal::block ( bool b )</h3>
+<p>Blocks the signal if <em>b</em> is TRUE, or unblocks the signal if <em>b</em> is FALSE.
+<p>An activated signal disappears into hyperspace if it is blocked.
+<p>See also:  <a href="qsignal.html#a5">isBlocked</a>(), <a href="qsignal.html#a7">activate</a>() and <a href="qobject.html#b5">QObject::blockSignals</a>().
+<h3 class="fn">bool <a name="a3"></a>QSignal::connect ( const <a href="qobject.html">QObject</a> * receiver, const char * member )</h3>
+<p>Connects the signal to <em>member</em> in object <em>receiver.</em>
+<p>See also:  <a href="qsignal.html#a4">disconnect</a>() and <a href="qobject.html#f2">QObject::connect</a>().
+<h3 class="fn">bool <a name="a4"></a>QSignal::disconnect ( const <a href="qobject.html">QObject</a> * receiver, const char * member=0 )</h3>
+<p>Disonnects the signal from <em>member</em> in object <em>receiver.</em>
+<p>See also:  <a href="qsignal.html#a3">connect</a>() and <a href="qobject.html#f3">QObject::disconnect</a>().
+<h3 class="fn">bool <a name="a5"></a>QSignal::isBlocked () const</h3>
+<p>Returns TRUE if the signal is blocked, or FALSE if it is not blocked.
+<p>The signal is not blocked by default.
+<p>See also:  <a href="qsignal.html#a6">block</a>() and <a href="qobject.html#b4">QObject::signalsBlocked</a>().
+<h3 class="fn">const char * <a name="a1"></a>QSignal::name () const</h3>
+<p>Returns the name of this signal object.
+<p>Since <a href="qobject.html">QObject</a> is a private base class, we have added this function, which
+calls <a href="qobject.html#a9">QObject::name</a>().
+<h3 class="fn">void <a name="a2"></a>QSignal::setName ( const char * name )</h3>
+<p>Sets the name of this signal object to <em>name.</em>
+<p>Since <a href="qobject.html">QObject</a> is a private base class, we have added this function, which
+calls <a href="qobject.html#b1">QObject::setName</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qsignal.h: 1998/08/21
+<li>qsignal.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

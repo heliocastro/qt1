@@ -1,0 +1,55 @@
+.TH QPaintEvent 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QPaintEvent \- Event parameters for paint events
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qevent.h>\fR
+.PP
+Inherits QEvent.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QPaintEvent ( const QRect & paintRect )"
+.br
+.ti -1c
+.BI "const QRect& rect () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QPaintEvent class contains event parameters for paint events.
+.PP
+Paint events are sent to widgets that need to update themselves, for instance when a part of a widget is exposed because an overlying widget is moved away.
+.PP
+The event handler QWidget::paintEvent() receives paint events.
+.PP
+See also: QPainter, QWidget::update() and QWidget::repaint().
+.PP
+Examples:
+.(l
+qtimage/qtimage.cpp life/life.cpp grapher/grapher.cpp forever/forever.cpp desktop/desktop.cpp connect/connect.cpp trivial/trivial.cpp tooltip/tooltip.cpp drawdemo/drawdemo.cpp hello/hello.cpp picture/picture.cpp xform/xform.cpp aclock/aclock.cpp progress/progress.cpp qmag/qmag.cpp showimg/showimg.cpp biff/biff.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QPaintEvent::QPaintEvent ( const QRect & paintRect )"
+Constructs a paint event object with the rectangle that should be updated.
+.SH "const QRect & QPaintEvent::rect () const"
+Returns the rectangle that should be updated.
+.PP
+Examples:
+.(l
+qtimage/qtimage.cpp life/life.cpp grapher/grapher.cpp trivial/trivial.cpp progress/progress.cpp showimg/showimg.cpp
+.)l
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qpaintevent.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

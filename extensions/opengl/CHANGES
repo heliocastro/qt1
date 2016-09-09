@@ -1,0 +1,42 @@
+
+Changes from version 3.00 (Qt 1.42) to version 4.00 (Qt 1.43)
+-------------------------------------------------------------
+
+Added support for rendering to pixmaps. QGLContext now accepts a
+QPixmap as the paint device. Added QGLWidget::renderPixmap() method
+for easy pixmap rendering. Added example program 'glpixmap'
+demonstrating the pixmap rendering feature.
+
+QGLFormat is no longer shared (no memory was saved by sharing). This
+should not have any effect on existing code using the QGL classes.
+
+Added a FormatOption enum, and a QGLFormat constructor taking a format
+option array. This will allow classes derived from QGLWidget to (try
+to) obtain a specific buffer format without doing setFormat (with the
+implied window recreation). (This could also be achieved in previous
+versions, but would require code to be executed prior to the
+construction of the QGLWidget-subclass itself.)
+
+Dropped the optional bool doubleBuffer parameter to the default QGLFormat
+constructor, to avoid clash with the new constructor in stupid
+compilers. Any calls in existing code to QGLFormat( FALSE ) or 
+QGLFormat( TRUE ) must be changed!
+
+Changed policy when the system cannot provide all features requested
+in the QGLFormat: Instead of just going invalid and returning at once,
+QGLWidget/Context will now try to reduce the demands until a GL
+context can be created. The resulting format can then be examined by
+calling QGLWidget/Context::format() after creation. (On X11, the
+algorithm for reducing demands can be tuned by reimplementing
+chooseVisual() and/or tryVisual()).
+
+Added QGLWidget::setAutoBufferSwap, to allow users to turn off the
+automatic swapBuffers()-after-paintGL() feature.
+
+Added QGLWidget::isSharing(), to allow users to test whether requested
+display list sharing could be provided.
+
+Added QGLContext state variables 'initialized' and 'windowCreated',
+with access methods, to support more intelligent context switching of
+QGLWidgets.
+

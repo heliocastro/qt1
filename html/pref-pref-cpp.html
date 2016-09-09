@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - pref/pref.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Preferences</h1><br clear="all">
+
+  This example displays a simple (and ugly) tab dialog and then
+  options the user chooses.  It illustrates hello-world usage of
+  QTabDialog, QGridLayout and QBoxLayout.
+<pre>/****************************************************************************
+** &#36;Id&#58; pref.cpp,v 1.21.2.1 1998/09/28 17:38:19 warwick Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include "pref.h"
+#include &lt;<a name="qtabdialog.h"></a><a href="qtabdialog-h.html">qtabdialog.h</a>&gt;
+#include &lt;<a name="qmultilinedit.h"></a><a href="qmultilinedit-h.html">qmultilinedit.h</a>&gt;
+#include &lt;<a name="qbuttongroup.h"></a><a href="qbuttongroup-h.html">qbuttongroup.h</a>&gt;
+#include &lt;<a name="qradiobutton.h"></a><a href="qradiobutton-h.html">qradiobutton.h</a>&gt;
+#include &lt;<a name="qlabel.h"></a><a href="qlabel-h.html">qlabel.h</a>&gt;
+#include &lt;<a name="qslider.h"></a><a href="qslider-h.html">qslider.h</a>&gt;
+#include &lt;<a name="qlayout.h"></a><a href="qlayout-h.html">qlayout.h</a>&gt;
+#include &lt;stdio.h&gt;
+#include &lt;<a name="qstring.h"></a><a href="qstring-h.html">qstring.h</a>&gt;
+
+Preferences::Preferences( <a name="QWidget"></a><a href="qwidget.html">QWidget</a> * parent , const char * name )
+    : <a name="QLabel"></a><a href="qlabel.html">QLabel</a>( parent, name )
+{
+    <a name="QTabDialog"></a><a href="qtabdialog.html">QTabDialog</a> * tab = new <a href="qtabdialog.html">QTabDialog</a>( 0, "top-level dialog" );
+    tab-&gt;<a name="setCaption"></a><a href="qwidget.html#h2">setCaption</a>( "Ugly Tab Dialog" );
+
+    // set up page one of the tab dialog
+    <a href="qwidget.html">QWidget</a> * w = new <a href="qwidget.html">QWidget</a>( tab, "page one" );
+
+    // stuff the labels and lineedits into a grid layout
+    <a name="QGridLayout"></a><a href="qgridlayout.html">QGridLayout</a> * g = new <a href="qgridlayout.html">QGridLayout</a>( w, 2, 2, 5 );
+
+    // two multilineedits in column 1
+    ed1 = new <a name="QMultiLineEdit"></a><a href="qmultilineedit.html">QMultiLineEdit</a>( w );
+    g-&gt;<a name="addWidget"></a><a href="qgridlayout.html#a3">addWidget</a>( ed1, 0, 1 );
+    ed1-&gt;setText( "" );
+    ed1-&gt;setMinimumSize( <a name="QSize"></a><a href="qsize.html">QSize</a>( 100, 10 ) );
+    ed2 = new <a href="qmultilineedit.html">QMultiLineEdit</a>( w );
+    g-&gt;<a href="qgridlayout.html#a3">addWidget</a>( ed2, 1, 1 );
+    ed2-&gt;setText( "" );
+    ed2-&gt;setMinimumSize( <a href="qsize.html">QSize</a>( 100, 10 ) );
+
+    // let the lineedits stretch
+    g-&gt;<a name="setColStretch"></a><a href="qgridlayout.html#a7">setColStretch</a>( 1, 1 );
+
+    // two labels in column 0
+    <a href="qlabel.html">QLabel</a> * l = new <a href="qlabel.html">QLabel</a>( w );
+    g-&gt;<a href="qgridlayout.html#a3">addWidget</a>( l, 0, 0 );
+    l-&gt;<a name="setText"></a><a href="qlabel.html#b6">setText</a>( "&amp;Name" );
+    l-&gt;<a name="setBuddy"></a><a href="qlabel.html#b4">setBuddy</a>( ed1 );
+    l-&gt;<a name="setMinimumSize"></a><a href="qwidget.html#c6">setMinimumSize</a>( l-&gt;<a name="sizeHint"></a><a href="qlabel.html#b3">sizeHint</a>() );
+    l = new <a href="qlabel.html">QLabel</a>( w );
+    g-&gt;<a href="qgridlayout.html#a3">addWidget</a>( l, 1, 0 );
+    l-&gt;<a href="qlabel.html#b6">setText</a>( "&amp;Email" );
+    l-&gt;<a href="qlabel.html#b4">setBuddy</a>( ed2 );
+    l-&gt;<a href="qwidget.html#c6">setMinimumSize</a>( l-&gt;<a href="qlabel.html#b3">sizeHint</a>() );
+
+    // no stretch on the labels unless they have to
+    g-&gt;<a href="qgridlayout.html#a7">setColStretch</a>( 0, 0 );
+
+    // finally insert page one into the tab dialog and start GM
+    tab-&gt;<a name="addTab"></a><a href="qtabdialog.html#a4">addTab</a>( w, "&amp;Who" );
+    g-&gt;<a name="activate"></a><a href="qlayout.html#a2">activate</a>();
+
+    // that was page one, now for page two, where we use a box layout
+    w = new <a href="qwidget.html">QWidget</a>( tab, "page two" );
+    <a name="QBoxLayout"></a><a href="qboxlayout.html">QBoxLayout</a> * b = new <a href="qboxlayout.html">QBoxLayout</a>( w, QBoxLayout::LeftToRight, 5 );
+
+    // two vertical boxes in the horizontal one
+    <a href="qboxlayout.html">QBoxLayout</a> * radioBoxes = new <a href="qboxlayout.html">QBoxLayout</a>( QBoxLayout::Down );
+    b-&gt;<a name="addLayout"></a><a href="qboxlayout.html#a6">addLayout</a>( radioBoxes );
+
+    // fill the leftmost vertical box
+    b1 = new <a name="QRadioButton"></a><a href="qradiobutton.html">QRadioButton</a>( w, "radio button 1" );
+    b1-&gt;setText( "Male" );
+    b1-&gt;setMinimumSize( b1-&gt;sizeHint() );
+    b1-&gt;setMaximumSize( 500, b1-&gt;minimumSize().height() );
+    radioBoxes-&gt;<a name="addWidget"></a><a href="qboxlayout.html#a5">addWidget</a>( b1, AlignLeft|AlignTop );
+    b2 = new <a href="qradiobutton.html">QRadioButton</a>( w, "radio button 2" );
+    b2-&gt;setText( "Female" );
+    b2-&gt;setMinimumSize( b2-&gt;sizeHint() );
+    b2-&gt;setMaximumSize( 500, b2-&gt;minimumSize().height() );
+    radioBoxes-&gt;<a href="qboxlayout.html#a5">addWidget</a>( b2, AlignLeft|AlignTop );
+    b3 = new <a href="qradiobutton.html">QRadioButton</a>( w, "radio button 3" );
+    b3-&gt;setText( "Other" );
+    b3-&gt;setMinimumSize( b3-&gt;sizeHint() );
+    b3-&gt;setMaximumSize( 500, b3-&gt;minimumSize().height() );
+    radioBoxes-&gt;<a href="qboxlayout.html#a5">addWidget</a>( b3, AlignLeft|AlignTop );
+
+    // since none of those will stretch, add some stretch at the bottom
+    radioBoxes-&gt;<a name="addStretch"></a><a href="qboxlayout.html#a4">addStretch</a>( 1 );
+
+    // insert all of the radio boxes into the button group, so they'll
+    // switch each other off
+    bg = new <a name="QButtonGroup"></a><a href="qbuttongroup.html">QButtonGroup</a>();
+    bg-&gt;insert( b1 );
+    bg-&gt;insert( b2 );
+    bg-&gt;insert( b3 );
+
+    // add some optional spacing between the radio buttons and the slider
+
+    b-&gt;<a href="qboxlayout.html#a4">addStretch</a>( 1 );
+
+    // make the central slider
+    mood = new <a name="QSlider"></a><a href="qslider.html">QSlider</a>( QSlider::Vertical, w, "mood slider" );
+    mood-&gt;setRange( 0, 127 );
+    mood-&gt;setMinimumSize( mood-&gt;sizeHint() );
+    mood-&gt;setMaximumSize( mood-&gt;minimumSize().width(), 500 );
+    b-&gt;<a href="qboxlayout.html#a5">addWidget</a>( mood, AlignLeft|AlignTop|AlignBottom );
+
+    // make the top and bottom labels for the slider
+    <a href="qboxlayout.html">QBoxLayout</a> * labels = new <a href="qboxlayout.html">QBoxLayout</a>( QBoxLayout::Down );
+    b-&gt;<a href="qboxlayout.html#a6">addLayout</a>( labels );
+    l = new <a href="qlabel.html">QLabel</a>( "Optimistic", w, "optimistic" );
+    l-&gt;<a name="setFixedSize"></a><a href="qwidget.html#e0">setFixedSize</a>( l-&gt;<a href="qlabel.html#b3">sizeHint</a>() );
+    labels-&gt;<a href="qboxlayout.html#a5">addWidget</a>( l, AlignTop|AlignLeft );
+
+    // spacing in the middle, so the labels are located right
+    labels-&gt;<a href="qboxlayout.html#a4">addStretch</a>( 1 );
+
+    l = new <a href="qlabel.html">QLabel</a>( "Pessimistic", w, "pessimistic" );
+    l-&gt;<a href="qwidget.html#e0">setFixedSize</a>( l-&gt;<a href="qlabel.html#b3">sizeHint</a>() );
+    labels-&gt;<a href="qboxlayout.html#a5">addWidget</a>( l, AlignBottom|AlignLeft );
+
+    b-&gt;<a href="qlayout.html#a2">activate</a>();
+    tab-&gt;<a href="qtabdialog.html#a4">addTab</a>( w, "&amp;How" );
+
+    // we want both Apply and Cancel
+    tab-&gt;<a name="setApplyButton"></a><a href="qtabdialog.html#b4">setApplyButton</a>();
+    tab-&gt;<a name="setCancelButton"></a><a href="qtabdialog.html#b2">setCancelButton</a>();
+
+    <a name="connect"></a><a href="qobject.html#f2">connect</a>( tab, SIGNAL(applyButtonPressed()), SLOT(<a name="apply"></a><a href="#146">apply</a>()) );
+    <a href="qobject.html#f2">connect</a>( tab, SIGNAL(cancelButtonPressed()), SLOT(<a name="setup"></a><a href="#145">setup</a>()) );
+    <a href="qobject.html#f2">connect</a>( tab, SIGNAL(aboutToShow()), SLOT(<a href=#145>setup</a>()) );
+
+    tab-&gt;<a name="resize"></a><a href="qdialog.html#a8">resize</a>( 200, 135 );
+
+    <a href="qlabel.html#b6">setText</a>( "This tab dialog is rather ugly:  The code is clear, though:\n"
+             "There are no hard-to-understand aesthetic tradeoffs\n" );
+
+    <a name="show"></a><a href="qwidget.html#k2">show</a>();
+    tab-&gt;<a name="show"></a><a href="qtabdialog.html#a2">show</a>();
+}
+
+Preferences::~Preferences()
+{
+    delete bg;
+    // the others are children of this, so Qt will delete them
+}
+
+void <a name="145"></a>Preferences::setup()
+{
+    ed1-&gt;setText( "Inge Rowe" );
+    ed2-&gt;setText( "inge@troll.no" );
+
+    b1-&gt;setChecked( TRUE );
+
+    mood-&gt;setValue( 42 );
+}
+
+void <a name="146"></a>Preferences::apply()
+{
+    <a name="QString"></a><a href="qstring.html">QString</a> s;
+    s.<a name="sprintf"></a><a href="qstring.html#c7">sprintf</a>( "What the dialog decided:\n"
+               "\tLine Edit 1: %s\n\tLineEdit 2: %s\n"
+               "\tMood: %d (0 == down, 127 == up)\n"
+               "\tButtons: %s %s %s\n",
+               (const char *)(ed1-&gt;text()), (const char *)(ed2-&gt;text()),
+               mood-&gt;value(),
+               b1-&gt;isChecked() ? "X" : "-",
+               b2-&gt;isChecked() ? "X" : "-",
+               b3-&gt;isChecked() ? "X" : "-" );
+    <a href="qlabel.html#b6">setText</a>( s );
+    <a href="qsize.html">QSize</a> sh (<a href="qlabel.html#b3">sizeHint</a>() );
+    bool b = FALSE;
+
+    if ( sh.<a name="width"></a><a href="qsize.html#a5">width</a>() &gt; width() ) {
+        sh.<a name="setWidth"></a><a href="qsize.html#a7">setWidth</a>( <a name="width"></a><a href="qwidget.html#b9">width</a>() );
+        b = TRUE;
+    }
+    if ( sh.<a name="height"></a><a href="qsize.html#a6">height</a>() &gt; height() ) {
+        sh.<a name="setHeight"></a><a href="qsize.html#a8">setHeight</a>( <a name="height"></a><a href="qwidget.html#c0">height</a>() );
+        b = TRUE;
+    }
+
+    if ( b )
+        <a name="resize"></a><a href="qwidget.html#l4">resize</a>( sh );
+
+    <a name="repaint"></a><a href="qwidget.html#k1">repaint</a>();
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

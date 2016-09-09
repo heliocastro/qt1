@@ -1,0 +1,568 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - widgets/widgets.cpp example file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>Widgets Demo</h1><br clear="all">
+
+  This example creates a window with many Qt widgets and two custom
+  example widgets; aclock and dclock.
+
+  It also shows how to connect widget signals to internal slots.
+<pre>/****************************************************************************
+** &#36;Id&#58; widgets.cpp,v 2.46 1998/07/08 13:22:45 aavit Exp $
+**
+** Copyright (C) 1992-1998 Troll Tech AS.  All rights reserved.
+**
+** This file is part of an example program for Qt.  This example
+** program may be used, distributed and modified without limitation.
+**
+*****************************************************************************/
+
+#include &lt;<a name="qdialog.h"></a><a href="qdialog-h.html">qdialog.h</a>&gt;
+#include &lt;<a name="qmessagebox.h"></a><a href="qmessagebox-h.html">qmessagebox.h</a>&gt;
+#include &lt;<a name="qpixmap.h"></a><a href="qpixmap-h.html">qpixmap.h</a>&gt;
+#include &lt;<a name="qmovie.h"></a><a href="qmovie-h.html">qmovie.h</a>&gt;
+#include &lt;<a name="qlayout.h"></a><a href="qlayout-h.html">qlayout.h</a>&gt;
+#include &lt;<a name="qapplication.h"></a><a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a name="qkeycode.h"></a><a href="qkeycode-h.html">qkeycode.h</a>&gt;
+
+// Standard Qt widgets
+
+#include &lt;<a name="qmenubar.h"></a><a href="qmenubar-h.html">qmenubar.h</a>&gt;
+#include &lt;<a name="qpopupmenu.h"></a><a href="qpopupmenu-h.html">qpopupmenu.h</a>&gt;
+#include &lt;<a name="qbuttongroup.h"></a><a href="qbuttongroup-h.html">qbuttongroup.h</a>&gt;
+#include &lt;<a name="qcheckbox.h"></a><a href="qcheckbox-h.html">qcheckbox.h</a>&gt;
+#include &lt;<a name="qcombobox.h"></a><a href="qcombobox-h.html">qcombobox.h</a>&gt;
+#include &lt;<a name="qframe.h"></a><a href="qframe-h.html">qframe.h</a>&gt;
+#include &lt;<a name="qgroupbox.h"></a><a href="qgroupbox-h.html">qgroupbox.h</a>&gt;
+#include &lt;<a name="qlabel.h"></a><a href="qlabel-h.html">qlabel.h</a>&gt;
+#include &lt;<a name="qlcdnumber.h"></a><a href="qlcdnumber-h.html">qlcdnumber.h</a>&gt;
+#include &lt;<a name="qmultilinedit.h"></a><a href="qmultilinedit-h.html">qmultilinedit.h</a>&gt;
+#include &lt;<a name="qlineedit.h"></a><a href="qlineedit-h.html">qlineedit.h</a>&gt;
+#include &lt;<a name="qlistbox.h"></a><a href="qlistbox-h.html">qlistbox.h</a>&gt;
+#include &lt;<a name="qpushbutton.h"></a><a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a name="qradiobutton.h"></a><a href="qradiobutton-h.html">qradiobutton.h</a>&gt;
+#include &lt;<a name="qslider.h"></a><a href="qslider-h.html">qslider.h</a>&gt;
+#include &lt;<a name="qtooltip.h"></a><a href="qtooltip-h.html">qtooltip.h</a>&gt;
+#include &lt;<a name="qspinbox.h"></a><a href="qspinbox-h.html">qspinbox.h</a>&gt;
+
+// Some sample widgets
+
+#include "../aclock/aclock.h"
+#include "../dclock/dclock.h"
+
+#define MOVIEFILENAME "trolltech.gif"
+
+//
+// WidgetView contains lots of Qt widgets.
+//
+
+class WidgetView : public QWidget
+{
+    Q_OBJECT
+public:
+    WidgetView( <a name="QWidget"></a><a href="qwidget.html">QWidget</a> *parent=0, const char *name=0 );
+
+public slots:
+    void        setStatus(const char*);
+
+private slots:
+    void        button1Clicked();
+    void        checkBoxClicked( int );
+    void        radioButtonClicked( int );
+    void        sliderValueChanged( int );
+    void        listBoxItemSelected( int );
+    void        comboBoxItemActivated( int );
+    void        edComboBoxItemActivated( const char * );
+    void        lineEditTextChanged( const char * );
+    void        movieStatus( int );
+    void        movieUpdate( const QRect&amp; );
+    void        spinBoxValueChanged( const char * );
+
+private:
+    bool        eventFilter( <a name="QObject"></a><a href="qobject.html">QObject</a> *, QEvent * );
+    <a name="QLabel"></a><a href="qlabel.html">QLabel</a>     *msg;
+    <a name="QCheckBox"></a><a href="qcheckbox.html">QCheckBox</a>  *cb[3];
+    <a href="qlabel.html">QLabel</a>     *movielabel;
+    <a name="QMovie"></a><a href="qmovie.html">QMovie</a>      movie;
+};
+
+//
+// Construct the WidgetView with buttons
+//
+
+WidgetView::WidgetView( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+    : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    <a name="QColor"></a><a href="qcolor.html">QColor</a> col;
+
+  // Set the window caption/title
+
+    <a name="setCaption"></a><a href="qwidget.html#h2">setCaption</a>( "Qt Widgets Demo Application" );
+
+  // Install an application-global event filter
+
+    qApp-&gt;installEventFilter( this );
+
+  // Create a layout to position the widgets
+
+    <a name="QVBoxLayout"></a><a href="qvboxlayout.html">QVBoxLayout</a> *topLayout = new <a href="qvboxlayout.html">QVBoxLayout</a>( this, 10 );
+
+  // Create a grid layout to hold most of the widgets
+
+    <a name="QGridLayout"></a><a href="qgridlayout.html">QGridLayout</a> *grid = new <a href="qgridlayout.html">QGridLayout</a>( 6, 3 );
+ // This layout will get all of the stretch
+    topLayout-&gt;<a name="addLayout"></a><a href="qboxlayout.html#a6">addLayout</a>( grid, 10 );
+
+  // Create a menubar
+    <a name="QMenuBar"></a><a href="qmenubar.html">QMenuBar</a> *menubar = new <a href="qmenubar.html">QMenuBar</a>( this );
+    menubar-&gt;<a name="setSeparator"></a><a href="qmenubar.html#a8">setSeparator</a>( QMenuBar::InWindowsStyle );
+  // Create an easter egg
+    <a name="QToolTip::add"></a><a href="qtooltip.html#c3">QToolTip::add</a>( menubar, QRect( 0, 0, 2, 2 ), "easter egg" );
+
+    <a name="QPopupMenu"></a><a href="qpopupmenu.html">QPopupMenu</a>* popup;
+    popup = new <a href="qpopupmenu.html">QPopupMenu</a>;
+    int id;
+    id = popup-&gt;<a name="insertItem"></a><a href="qmenudata.html#a8">insertItem</a>( "&amp;New" );
+    popup-&gt;<a name="setItemEnabled"></a><a href="qmenudata.html#c7">setItemEnabled</a>( id, FALSE );
+    id = popup-&gt;<a href="qmenudata.html#a8">insertItem</a>( "&amp;Open" );
+    popup-&gt;<a href="qmenudata.html#c7">setItemEnabled</a>( id, FALSE );
+    popup-&gt;<a name="insertSeparator"></a><a href="qmenudata.html#b5">insertSeparator</a>();
+    popup-&gt;<a href="qmenudata.html#a8">insertItem</a>( "&amp;Quit", qApp, SLOT(quit()), CTRL+Key_Q );
+
+    menubar-&gt;<a href="qmenudata.html#a8">insertItem</a>( "&amp;File", popup );
+
+    // Must tell the layout about a menubar in a widget
+    topLayout-&gt;<a name="setMenuBar"></a><a href="qlayout.html#a5">setMenuBar</a>( menubar );
+
+  // Create an analog and a digital clock
+
+    AnalogClock  *aclock = new AnalogClock( this );
+    DigitalClock *dclock = new DigitalClock( this );
+    dclock-&gt;setMaximumWidth(200);
+    grid-&gt;<a name="addWidget"></a><a href="qgridlayout.html#a3">addWidget</a>( aclock, 0, 2 );
+    grid-&gt;<a href="qgridlayout.html#a3">addWidget</a>( dclock, 1, 2 );
+
+  // Give the dclock widget a blue palette
+
+    col.<a name="setRgb"></a><a href="qcolor.html#b2">setRgb</a>( 0xaa, 0xbe, 0xff );
+    dclock-&gt;setPalette( <a name="QPalette"></a><a href="qpalette.html">QPalette</a>( col ) );
+
+  // make tool tips for both of them
+
+    <a href="qtooltip.html#c3">QToolTip::add</a>( aclock, "custom widget: analog clock" );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( dclock, "custom widget: digital clock" );
+
+  // Create a push button.
+
+    <a name="QPushButton"></a><a href="qpushbutton.html">QPushButton</a> *pb;
+    pb = new <a href="qpushbutton.html">QPushButton</a>( this, "button1" );    // create button 1
+    pb-&gt;<a name="setText"></a><a href="qbutton.html#a3">setText</a>( "Push button 1" );
+    pb-&gt;<a name="setFixedHeight"></a><a href="qwidget.html#e2">setFixedHeight</a>( pb-&gt;<a name="sizeHint"></a><a href="qpushbutton.html#a9">sizeHint</a>().height() );
+    grid-&gt;<a href="qgridlayout.html#a3">addWidget</a>( pb, 0, 0, AlignVCenter );
+    <a name="connect"></a><a href="qobject.html#f2">connect</a>( pb, SIGNAL(clicked()), SLOT(<a name="button1Clicked"></a><a href="#184">button1Clicked</a>()) );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( pb, "push button 1" );
+    <a name="QPixmap"></a><a href="qpixmap.html">QPixmap</a> pm;
+    bool pix = pm.<a name="load"></a><a href="qpixmap.html#d4">load</a>("qt.bmp");               // load pixmap for button 2
+    if ( !pix ) {
+        <a name="QMessageBox::information"></a><a href="qmessagebox.html#d3">QMessageBox::information</a>( 0, "Qt Widgets Example",
+                                  "Could not load the file \"qt.bmp\", which\n"
+                                  "contains an icon used...\n\n"
+                                  "The text \"line 42\" will be substituted.",
+                                  QMessageBox::Ok + QMessageBox::Default );
+    }
+
+    // Create a label containing a QMovie
+
+    movielabel = new <a href="qlabel.html">QLabel</a>( this, "label0" );
+    movie = QMovie( MOVIEFILENAME );
+    movie.<a name="connectStatus"></a><a href="qmovie.html#c8">connectStatus</a>(this, SLOT(<a name="movieStatus"></a><a href="#186">movieStatus</a>(int)));
+    movie.<a name="connectUpdate"></a><a href="qmovie.html#c6">connectUpdate</a>(this, SLOT(<a name="movieUpdate"></a><a href="#185">movieUpdate</a>(const QRect&amp;)));
+    movielabel-&gt;<a name="setFrameStyle"></a><a href="qframe.html#a4">setFrameStyle</a>( QFrame::Box | QFrame::Plain );
+    movielabel-&gt;<a name="setMovie"></a><a href="qlabel.html#b8">setMovie</a>( movie );
+    movielabel-&gt;<a name="setMargin"></a><a href="qlabel.html#b0">setMargin</a>( 0 );
+    movielabel-&gt;<a name="setFixedSize"></a><a href="qwidget.html#e0">setFixedSize</a>( 128+movielabel-&gt;<a name="frameWidth"></a><a href="qframe.html#b2">frameWidth</a>()*2,
+                              64+movielabel-&gt;<a href="qframe.html#b2">frameWidth</a>()*2 );
+    grid-&gt;<a href="qgridlayout.html#a3">addWidget</a>( movielabel, 0, 1, AlignCenter );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( movielabel, "movie" );
+
+  // Create a group of check boxes
+
+    <a name="QButtonGroup"></a><a href="qbuttongroup.html">QButtonGroup</a> *bg = new <a href="qbuttongroup.html">QButtonGroup</a>( this, "checkGroup" );
+    bg-&gt;<a name="setTitle"></a><a href="qgroupbox.html#a3">setTitle</a>( "Check Boxes" );
+    grid-&gt;<a href="qgridlayout.html#a3">addWidget</a>( bg, 1, 0 );
+
+  // Create a layout for the check boxes
+    <a href="qvboxlayout.html">QVBoxLayout</a> *vbox = new <a href="qvboxlayout.html">QVBoxLayout</a>(bg, 10);
+
+    vbox-&gt;<a name="addSpacing"></a><a href="qboxlayout.html#a3">addSpacing</a>( bg-&gt;<a name="fontMetrics"></a><a href="qwidget.html#g0">fontMetrics</a>().height() );
+
+    cb[0] = new <a href="qcheckbox.html">QCheckBox</a>( bg );
+    cb[0]-&gt;setText( "Read" );
+    vbox-&gt;<a name="addWidget"></a><a href="qboxlayout.html#a5">addWidget</a>( cb[0] );
+    cb[0]-&gt;setMinimumSize( cb[0]-&gt;sizeHint() );
+    cb[1] = new <a href="qcheckbox.html">QCheckBox</a>( bg );
+    cb[1]-&gt;setText( "Write" );
+    vbox-&gt;<a href="qboxlayout.html#a5">addWidget</a>( cb[1] );
+    cb[1]-&gt;setMinimumSize( cb[1]-&gt;sizeHint() );
+    cb[2] = new <a href="qcheckbox.html">QCheckBox</a>( bg );
+    cb[2]-&gt;setText( "Execute" );
+    cb[2]-&gt;setMinimumSize( cb[2]-&gt;sizeHint() );
+    vbox-&gt;<a href="qboxlayout.html#a5">addWidget</a>( cb[2] );
+    bg-&gt;<a name="setMinimumSize"></a><a href="qwidget.html#c6">setMinimumSize</a>( bg-&gt;<a name="childrenRect"></a><a href="qwidget.html#c2">childrenRect</a>().size() );
+    vbox-&gt;<a name="activate"></a><a href="qlayout.html#a2">activate</a>();
+
+    <a href="qobject.html#f2">connect</a>( bg, SIGNAL(clicked(int)), SLOT(<a name="checkBoxClicked"></a><a href="#187">checkBoxClicked</a>(int)) );
+
+    <a href="qtooltip.html#c3">QToolTip::add</a>( cb[0], "check box 1" );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( cb[1], "check box 2" );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( cb[2], "check box 3" );
+
+  // Create a group of radio buttons
+
+    <a name="QRadioButton"></a><a href="qradiobutton.html">QRadioButton</a> *rb;
+    bg = new <a href="qbuttongroup.html">QButtonGroup</a>( this, "radioGroup" );
+    bg-&gt;<a href="qgroupbox.html#a3">setTitle</a>( "Radio buttons" );
+
+    grid-&gt;<a href="qgridlayout.html#a3">addWidget</a>( bg, 1, 1 );
+
+  // Create a layout for the radio buttons
+    vbox = new <a href="qvboxlayout.html">QVBoxLayout</a>(bg, 10);
+
+    vbox-&gt;<a href="qboxlayout.html#a3">addSpacing</a>( bg-&gt;<a href="qwidget.html#g0">fontMetrics</a>().height() );
+    rb = new <a href="qradiobutton.html">QRadioButton</a>( bg );
+    rb-&gt;<a href="qbutton.html#a3">setText</a>( "&amp;AM" );
+    rb-&gt;<a name="setChecked"></a><a href="qradiobutton.html#a3">setChecked</a>( TRUE );
+    vbox-&gt;<a href="qboxlayout.html#a5">addWidget</a>(rb);
+    rb-&gt;<a href="qwidget.html#c6">setMinimumSize</a>( rb-&gt;<a name="sizeHint"></a><a href="qradiobutton.html#a4">sizeHint</a>() );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( rb, "radio button 1" );
+    rb = new <a href="qradiobutton.html">QRadioButton</a>( bg );
+    rb-&gt;<a href="qbutton.html#a3">setText</a>( "&amp;FM" );
+    vbox-&gt;<a href="qboxlayout.html#a5">addWidget</a>(rb);
+    rb-&gt;<a href="qwidget.html#c6">setMinimumSize</a>( rb-&gt;<a href="qradiobutton.html#a4">sizeHint</a>() );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( rb, "radio button 2" );
+    rb = new <a href="qradiobutton.html">QRadioButton</a>( bg );
+    rb-&gt;<a href="qbutton.html#a3">setText</a>( "&amp;Short Wave" );
+    vbox-&gt;<a href="qboxlayout.html#a5">addWidget</a>(rb);
+    rb-&gt;<a href="qwidget.html#c6">setMinimumSize</a>( rb-&gt;<a href="qradiobutton.html#a4">sizeHint</a>() );
+    vbox-&gt;<a href="qlayout.html#a2">activate</a>();
+
+    <a href="qobject.html#f2">connect</a>( bg, SIGNAL(clicked(int)), SLOT(<a name="radioButtonClicked"></a><a href="#189">radioButtonClicked</a>(int)) );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( rb, "radio button 3" );
+
+  // Create a list box
+
+    <a name="QListBox"></a><a href="qlistbox.html">QListBox</a> *lb = new <a href="qlistbox.html">QListBox</a>( this, "listBox" );
+    for ( int i=0; i&lt;100; i++ ) {               // fill list box
+        <a name="QString"></a><a href="qstring.html">QString</a> str;
+        str.<a name="sprintf"></a><a href="qstring.html#c7">sprintf</a>( "line %d", i );
+        if ( i == 42 &amp;&amp; pix )
+            lb-&gt;<a name="insertItem"></a><a href="qlistbox.html#a6">insertItem</a>( pm );
+        else
+            lb-&gt;<a href="qlistbox.html#a6">insertItem</a>( str );
+    }
+    grid-&gt;<a name="addMultiCellWidget"></a><a href="qgridlayout.html#a4">addMultiCellWidget</a>( lb, 2, 4, 0, 0 );
+    <a href="qobject.html#f2">connect</a>( lb, SIGNAL(selected(int)), SLOT(<a name="listBoxItemSelected"></a><a href="#190">listBoxItemSelected</a>(int)) );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( lb, "list box" );
+
+    vbox = new <a href="qvboxlayout.html">QVBoxLayout</a>(8);
+    grid-&gt;<a name="addLayout"></a><a href="qgridlayout.html#a5">addLayout</a>( vbox, 2, 1 );
+
+  // Create a slider
+
+    <a name="QSlider"></a><a href="qslider.html">QSlider</a> *sb = new <a href="qslider.html">QSlider</a>( 0, 300, 1, 100, QSlider::Horizontal,
+                               this, "Slider" );
+    sb-&gt;<a name="setTickmarks"></a><a href="qslider.html#b0">setTickmarks</a>( QSlider::Below );
+    sb-&gt;<a name="setTickInterval"></a><a href="qslider.html#b2">setTickInterval</a>( 10 );
+    sb-&gt;<a name="setFocusPolicy"></a><a href="qwidget.html#i0">setFocusPolicy</a>( QWidget::TabFocus );
+    sb-&gt;<a href="qwidget.html#e2">setFixedHeight</a>(sb-&gt;<a name="sizeHint"></a><a href="qslider.html#a9">sizeHint</a>().height());
+    vbox-&gt;<a href="qboxlayout.html#a5">addWidget</a>( sb );
+
+    <a href="qobject.html#f2">connect</a>( sb, SIGNAL(valueChanged(int)), SLOT(<a name="sliderValueChanged"></a><a href="#191">sliderValueChanged</a>(int)) );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( sb, "slider" );
+
+  // Create a combo box
+
+    <a name="QComboBox"></a><a href="qcombobox.html">QComboBox</a> *combo = new <a href="qcombobox.html">QComboBox</a>( FALSE, this, "comboBox" );
+    combo-&gt;<a name="insertItem"></a><a href="qcombobox.html#a6">insertItem</a>( "darkBlue" );
+    combo-&gt;<a href="qcombobox.html#a6">insertItem</a>( "darkRed" );
+    combo-&gt;<a href="qcombobox.html#a6">insertItem</a>( "darkGreen" );
+    combo-&gt;<a href="qcombobox.html#a6">insertItem</a>( "blue" );
+    combo-&gt;<a href="qcombobox.html#a6">insertItem</a>( "red" );
+    combo-&gt;<a href="qwidget.html#e2">setFixedHeight</a>(combo-&gt;<a name="sizeHint"></a><a href="qcombobox.html#b9">sizeHint</a>().height());
+    vbox-&gt;<a href="qboxlayout.html#a5">addWidget</a>( combo );
+    <a href="qobject.html#f2">connect</a>( combo, SIGNAL(activated(int)), SLOT(<a name="comboBoxItemActivated"></a><a href="#192">comboBoxItemActivated</a>(int)) );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( combo, "read-only combo box" );
+
+  // Create an editable combo box
+
+    <a href="qcombobox.html">QComboBox</a> *edCombo = new <a href="qcombobox.html">QComboBox</a>( TRUE, this, "edComboBox" );
+    edCombo-&gt;<a href="qcombobox.html#a6">insertItem</a>( "Permutable" );
+    edCombo-&gt;<a href="qcombobox.html#a6">insertItem</a>( "Malleable" );
+    edCombo-&gt;<a href="qcombobox.html#a6">insertItem</a>( "Adaptable" );
+    edCombo-&gt;<a href="qcombobox.html#a6">insertItem</a>( "Alterable" );
+    edCombo-&gt;<a href="qcombobox.html#a6">insertItem</a>( "Inconstant" );
+    edCombo-&gt;<a href="qwidget.html#e2">setFixedHeight</a>(edCombo-&gt;<a href="qcombobox.html#b9">sizeHint</a>().height());
+    vbox-&gt;<a href="qboxlayout.html#a5">addWidget</a>( edCombo );
+    <a href="qobject.html#f2">connect</a>( edCombo, SIGNAL(activated(const char *)),
+             SLOT(<a name="edComboBoxItemActivated"></a><a href="#188">edComboBoxItemActivated</a>(const char *)) );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( edCombo, "editable combo box" );
+
+    edCombo-&gt;<a name="setAutoCompletion"></a><a href="qcombobox.html#d5">setAutoCompletion</a>( TRUE );
+
+    vbox-&gt;<a name="addStretch"></a><a href="qboxlayout.html#a4">addStretch</a>( 1 );
+
+    vbox = new <a href="qvboxlayout.html">QVBoxLayout</a>(8);
+    grid-&gt;<a href="qgridlayout.html#a5">addLayout</a>( vbox, 2, 2 );
+
+  // Create a spin box
+
+    <a name="QSpinBox"></a><a href="qspinbox.html">QSpinBox</a> *spin = new <a href="qspinbox.html">QSpinBox</a>( 0, 10, 1, this, "spin" );
+    spin-&gt;<a name="setSuffix"></a><a href="qspinbox.html#b5">setSuffix</a>(" mm");
+    spin-&gt;<a name="setSpecialValueText"></a><a href="qspinbox.html#a7">setSpecialValueText</a>( "Auto" );
+    spin-&gt;<a href="qwidget.html#c6">setMinimumSize</a>( spin-&gt;<a name="sizeHint"></a><a href="qspinbox.html#b2">sizeHint</a>() );
+    <a href="qobject.html#f2">connect</a>( spin, SIGNAL( valueChanged(const char*) ), 
+             SLOT( <a name="spinBoxValueChanged"></a><a href="#194">spinBoxValueChanged</a>(const char*) ) );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( spin, "spin box" );
+    vbox-&gt;<a href="qboxlayout.html#a5">addWidget</a>( spin );
+
+    vbox-&gt;<a href="qboxlayout.html#a4">addStretch</a>( 1 );
+
+  // Create a multi line edit
+
+    <a name="QMultiLineEdit"></a><a href="qmultilineedit.html">QMultiLineEdit</a> *mle = new <a href="qmultilineedit.html">QMultiLineEdit</a>( this, "multiLineEdit" );
+
+    grid-&gt;<a href="qgridlayout.html#a4">addMultiCellWidget</a>( mle, 3, 3, 1, 2 );
+    mle-&gt;<a name="setMinimumHeight"></a><a href="qwidget.html#d0">setMinimumHeight</a>(mle-&gt;<a href="qwidget.html#g0">fontMetrics</a>().height()*3);
+    mle-&gt;<a name="setText"></a><a href="qmultilineedit.html#c1">setText</a>("This is a QMultiLineEdit widget,\n"
+                 "useful for small multi-line\n"
+                 "input fields.");
+    <a href="qtooltip.html#c3">QToolTip::add</a>( mle, "multi line editor" );
+
+  // Create a single line edit
+
+    <a name="QLineEdit"></a><a href="qlineedit.html">QLineEdit</a> *le = new <a href="qlineedit.html">QLineEdit</a>( this, "lineEdit" );
+    grid-&gt;<a href="qgridlayout.html#a4">addMultiCellWidget</a>( le, 4, 4, 1, 2 );
+    le-&gt;<a href="qwidget.html#e2">setFixedHeight</a>(le-&gt;<a name="sizeHint"></a><a href="qlineedit.html#b1">sizeHint</a>().height());
+    <a href="qobject.html#f2">connect</a>( le, SIGNAL(textChanged(const char *)),
+                 SLOT(<a name="lineEditTextChanged"></a><a href="#193">lineEditTextChanged</a>(const char *)) );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( le, "single line editor" );
+
+  // Create a horizontal line (sort of QFrame) above the message line
+
+    <a name="QFrame"></a><a href="qframe.html">QFrame</a> *separator = new <a href="qframe.html">QFrame</a>( this, "separatorLine" );
+    separator-&gt;<a href="qframe.html#a4">setFrameStyle</a>( QFrame::HLine | QFrame::Sunken );
+    separator-&gt;<a href="qwidget.html#e2">setFixedHeight</a>( separator-&gt;<a name="sizeHint"></a><a href="qwidget.html#l7">sizeHint</a>().height() );
+    grid-&gt;<a href="qgridlayout.html#a4">addMultiCellWidget</a>( separator, 5, 5, 0, 2 );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( separator, "tool tips on a separator! wow!" );
+
+    grid-&gt;<a name="setRowStretch"></a><a href="qgridlayout.html#a6">setRowStretch</a>(0,0);
+    grid-&gt;<a href="qgridlayout.html#a6">setRowStretch</a>(1,0);
+    grid-&gt;<a href="qgridlayout.html#a6">setRowStretch</a>(2,0);
+    grid-&gt;<a href="qgridlayout.html#a6">setRowStretch</a>(3,1);
+    grid-&gt;<a href="qgridlayout.html#a6">setRowStretch</a>(4,1);
+    grid-&gt;<a href="qgridlayout.html#a6">setRowStretch</a>(5,0);
+
+    grid-&gt;<a name="setColStretch"></a><a href="qgridlayout.html#a7">setColStretch</a>(0,1);
+    grid-&gt;<a href="qgridlayout.html#a7">setColStretch</a>(1,1);
+    grid-&gt;<a href="qgridlayout.html#a7">setColStretch</a>(2,1);
+
+  // Create an label and a message in a plain widget
+  // The message is updated when buttons are clicked etc.
+
+    <a name="QHBoxLayout"></a><a href="qhboxlayout.html">QHBoxLayout</a> *hbox = new <a href="qhboxlayout.html">QHBoxLayout</a>();
+    topLayout-&gt;<a href="qboxlayout.html#a6">addLayout</a>( hbox );
+    <a href="qlabel.html">QLabel</a> *msgLabel = new <a href="qlabel.html">QLabel</a>( this, "msgLabel" );
+    msgLabel-&gt;<a name="setText"></a><a href="qlabel.html#b6">setText</a>( "Message:" );
+    msgLabel-&gt;<a name="setAlignment"></a><a href="qlabel.html#a8">setAlignment</a>( AlignHCenter|AlignVCenter );
+    msgLabel-&gt;<a href="qwidget.html#e0">setFixedSize</a>( msgLabel-&gt;<a name="sizeHint"></a><a href="qlabel.html#b3">sizeHint</a>() );
+    hbox-&gt;<a href="qboxlayout.html#a5">addWidget</a>( msgLabel );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( msgLabel, "label 1" );
+
+    msg = new <a href="qlabel.html">QLabel</a>( this, "message" );
+    msg-&gt;<a href="qframe.html#a4">setFrameStyle</a>( QFrame::Panel | QFrame::Sunken );
+    msg-&gt;<a href="qlabel.html#a8">setAlignment</a>( AlignCenter );
+    msg-&gt;<a name="setFont"></a><a href="qwidget.html#f9">setFont</a>( <a name="QFont"></a><a href="qfont.html">QFont</a>("times",12,QFont::Bold) );
+    msg-&gt;<a href="qlabel.html#b6">setText</a>( "Message" );
+    msg-&gt;<a href="qwidget.html#e2">setFixedHeight</a>( msg-&gt;<a href="qlabel.html#b3">sizeHint</a>().height() );
+    msg-&gt;<a href="qlabel.html#b6">setText</a>( "" );
+    hbox-&gt;<a href="qboxlayout.html#a5">addWidget</a>( msg, 5 );
+    <a href="qtooltip.html#c3">QToolTip::add</a>( msg, "label 2" );
+
+    topLayout-&gt;<a href="qlayout.html#a2">activate</a>();
+}
+
+void <a name="183"></a>WidgetView::setStatus(const char* text)
+{
+    msg-&gt;<a href="qlabel.html#b6">setText</a>(text);
+}
+
+void <a name="184"></a>WidgetView::button1Clicked()
+{
+    msg-&gt;<a href="qlabel.html#b6">setText</a>( "The first push button was clicked" );
+}
+
+void <a name="185"></a>WidgetView::movieUpdate( const QRect&amp; )
+{
+    // Uncomment this to test animated icons on your window manager
+    //setIcon( movie.<a name="framePixmap"></a><a href="qmovie.html#b0">framePixmap</a>() );
+}
+
+void <a name="186"></a>WidgetView::movieStatus( int s )
+{
+    switch ( s ) {
+      case QMovie::SourceEmpty:
+        movielabel-&gt;<a href="qlabel.html#b6">setText</a>("Could not load\n" MOVIEFILENAME );
+        movielabel-&gt;<a href="qlabel.html#a8">setAlignment</a>( AlignCenter );
+        movielabel-&gt;<a name="setBackgroundColor"></a><a href="qwidget.html#f2">setBackgroundColor</a>( <a name="backgroundColor"></a><a href="qwidget.html#f0">backgroundColor</a>() );
+      break;
+      default:
+        if ( movielabel-&gt;<a name="movie"></a><a href="qlabel.html#a6">movie</a>() )              // for flicker-free animation:
+            movielabel-&gt;<a name="setBackgroundMode"></a><a href="qwidget.html#e9">setBackgroundMode</a>( NoBackground );
+    }
+}
+
+void <a name="187"></a>WidgetView::checkBoxClicked( int id )
+{
+    <a href="qstring.html">QString</a> str;
+    str.<a href="qstring.html#c7">sprintf</a>( "Check box %d clicked : ", id );
+    <a href="qstring.html">QString</a> chk = "---";
+    if ( cb[0]-&gt;isChecked() )
+        chk[0] = 'r';
+    if ( cb[1]-&gt;isChecked() )
+        chk[1] = 'w';
+    if ( cb[2]-&gt;isChecked() )
+        chk[2] = 'x';
+    str += chk;
+    msg-&gt;<a href="qlabel.html#b6">setText</a>( str );
+}
+
+void <a name="188"></a>WidgetView::edComboBoxItemActivated( const char * text)
+{
+    <a href="qstring.html">QString</a> str;
+    str.<a href="qstring.html#c7">sprintf</a>( "Editable Combo Box set to %s", text );
+    msg-&gt;<a href="qlabel.html#b6">setText</a>( str );
+}
+
+void <a name="189"></a>WidgetView::radioButtonClicked( int id )
+{
+    <a href="qstring.html">QString</a> str;
+    str.<a href="qstring.html#c7">sprintf</a>( "Radio button #%d clicked", id );
+    msg-&gt;<a href="qlabel.html#b6">setText</a>( str );
+}
+
+void <a name="190"></a>WidgetView::listBoxItemSelected( int index )
+{
+    <a href="qstring.html">QString</a> str;
+    str.<a href="qstring.html#c7">sprintf</a>( "List box item %d selected", index );
+    msg-&gt;<a href="qlabel.html#b6">setText</a>( str );
+}
+
+void <a name="191"></a>WidgetView::sliderValueChanged( int value )
+{
+    <a href="qstring.html">QString</a> str;
+    str.<a href="qstring.html#c7">sprintf</a>( "Movie set to %d%% of normal speed", value );
+    msg-&gt;<a href="qlabel.html#b6">setText</a>( str );
+    movie.<a name="setSpeed"></a><a href="qmovie.html#c3">setSpeed</a>( value );
+}
+
+void <a name="192"></a>WidgetView::comboBoxItemActivated( int index )
+{
+    <a href="qstring.html">QString</a> str;
+    str.<a href="qstring.html#c7">sprintf</a>( "Combo box item %d activated", index );
+    msg-&gt;<a href="qlabel.html#b6">setText</a>( str );
+    switch ( index ) {
+    default:
+    case 0:
+        <a name="QApplication::setWinStyleHighlightColor"></a><a href="qapplication.html#g8">QApplication::setWinStyleHighlightColor</a>( darkBlue );
+        break;
+    case 1:
+        <a href="qapplication.html#g8">QApplication::setWinStyleHighlightColor</a>( darkRed );
+        break;
+    case 2:
+        <a href="qapplication.html#g8">QApplication::setWinStyleHighlightColor</a>( darkGreen );
+        break;
+    case 3:
+        <a href="qapplication.html#g8">QApplication::setWinStyleHighlightColor</a>( blue );
+        break;
+    case 4:
+        <a href="qapplication.html#g8">QApplication::setWinStyleHighlightColor</a>( red );
+        break;
+    }
+}
+
+void <a name="193"></a>WidgetView::lineEditTextChanged( const char *newText )
+{
+    <a href="qstring.html">QString</a> str( "Line edit text: ");
+    str += newText;
+    msg-&gt;<a href="qlabel.html#b6">setText</a>( str );
+}
+
+void <a name="194"></a>WidgetView::spinBoxValueChanged( const char * valueText )
+{
+    <a href="qstring.html">QString</a> str( "Spin box value: " );
+    str += valueText;
+    msg-&gt;<a href="qlabel.html#b6">setText</a>( str );
+}    
+
+//
+// All application events are passed throught this event filter.
+// We're using it to display some information about a clicked
+// widget (right mouse button + CTRL).
+//
+
+bool <a name="195"></a>WidgetView::eventFilter( <a href="qobject.html">QObject</a> *obj, QEvent *event )
+{
+    static bool identify_now = TRUE;
+    if ( event-&gt;type() == Event_MouseButtonPress &amp;&amp; identify_now ) {
+        <a name="QMouseEvent"></a><a href="qmouseevent.html">QMouseEvent</a> *e = (<a href="qmouseevent.html">QMouseEvent</a>*)event;
+        if ( e-&gt;<a name="button"></a><a href="qmouseevent.html#a8">button</a>() == RightButton &amp;&amp; (e-&gt;<a name="state"></a><a href="qmouseevent.html#a9">state</a>() &amp; ControlButton) != 0 ){
+            <a href="qstring.html">QString</a> str = "The clicked widget is a\n";
+            str += obj-&gt;<a name="className"></a><a href="qobject.html#a6">className</a>();
+            str += "\nThe widget's name is\n";
+            if ( obj-&gt;<a name="name"></a><a href="qobject.html#a9">name</a>() )
+                str += obj-&gt;<a href="qobject.html#a9">name</a>();
+            else
+                str += "&lt;no name&gt;";
+            identify_now = FALSE;               // don't do it in message box
+            <a name="QMessageBox::message"></a><a href="qmessagebox.html#d1">QMessageBox::message</a>( "Identify Widget", str, 0, (<a href="qwidget.html">QWidget</a>*)obj );
+            identify_now = TRUE;                // allow it again
+        }
+    }
+    return FALSE;                               // don't eat event
+}
+
+//
+// Include the meta-object code for classes in this file
+//
+
+#include "widgets.moc"
+
+//
+// Create and display our WidgetView.
+//
+
+int main( int argc, char **argv )
+{
+    <a name="QApplication::setColorSpec"></a><a href="qapplication.html#f6">QApplication::setColorSpec</a>( QApplication::CustomColor );
+    <a name="QApplication"></a><a href="qapplication.html">QApplication</a> a( argc, argv );
+    WidgetView w;
+    a.<a name="setMainWidget"></a><a href="qapplication.html#b9">setMainWidget</a>( &amp;w );
+    w.<a name="show"></a><a href="qwidget.html#k2">show</a>();
+    return a.<a name="exec"></a><a href="qapplication.html#c9">exec</a>();
+}
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

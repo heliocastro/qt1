@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QPaintDevice Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QPaintDevice Class Reference</h1><br clear="all">
+<p>
+The base class of objects that can be painted.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qpaintdevice-h.html">qpaintdevice.h</a>&gt;</code>
+<p>Inherited by <a href="qpicture.html">QPicture</a>, <a href="qpixmap.html">QPixmap</a>, <a href="qprinter.html">QPrinter</a> and <a href="qwidget.html">QWidget</a>.
+<p><a href="qpaintdevice-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn">virtual <a href="qpaintdevice.html#a0"><strong>~QPaintDevice</strong></a> () </span>
+<li><span class="fn">int <a href="qpaintdevice.html#a1"><strong>devType</strong></a> () const</span>
+<li><span class="fn">bool <a href="qpaintdevice.html#a2"><strong>isExtDev</strong></a> () const</span>
+<li><span class="fn">bool <a href="qpaintdevice.html#a3"><strong>paintingActive</strong></a> () const</span>
+<li><span class="fn">HANDLE <a href="qpaintdevice.html#a4"><strong>handle</strong></a> () const</span>
+<li><span class="fn">Display* <a href="qpaintdevice.html#a5"><strong>x11Display</strong></a> () const</span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn"><a href="qpaintdevice.html#a6"><strong>QPaintDevice</strong></a> ( uint devflags ) </span>
+<li><span class="fn">virtual bool <a href="qpaintdevice.html#a7"><strong>cmd</strong></a> ( int, QPainter *, QPDevCmdParam * ) </span>
+<li><span class="fn">virtual int <a href="qpaintdevice.html#a8"><strong>metric</strong></a> ( int ) const</span>
+<li><span class="fn">virtual int <a href="qpaintdevice.html#a9"><strong>fontMet</strong></a> ( QFont *, int, const char * = 0, int = 0 ) const</span>
+<li><span class="fn">virtual int <a href="qpaintdevice.html#b0"><strong>fontInf</strong></a> ( QFont *, int ) const</span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>void <a href="qpaintdevice.html#b2"><strong>bitBlt</strong></a> (QPaintDevice * dst, int dx, int dy, const QPaintDevice * src, int sx, int sy, int sw, int sh, RasterOp rop, bool ignoreMask)
+<li>void <a href="qpaintdevice.html#b3"><strong>bitBlt</strong></a> (QPaintDevice * dst, const QPoint &amp; dp, const QPaintDevice * src, const QRect &amp; sr, RasterOp rop)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The base class of objects that can be painted.
+<p>
+A paint device is an abstraction of a two-dimensional space that can be
+drawn using a <a href="qpainter.html">QPainter</a>.
+The drawing capabilities are implemented by the subclasses: <a href="qwidget.html">QWidget</a>,
+<a href="qpixmap.html">QPixmap</a>, <a href="qpicture.html">QPicture</a> and <a href="qprinter.html">QPrinter</a>.
+<p>The default coordinate system of a paint device has its origin
+located at the top left position. X increases to the right and Y
+increases downwards. The unit is one pixel.  There are several ways
+to set up a user-defined coordinate system using the painter, for
+example by <a href="qpainter.html#f1">QPainter::setWorldMatrix</a>().
+<p>Example (draw on a paint device):
+<pre>    void MyWidget::paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * )
+    {
+        <a href="qpainter.html">QPainter</a> p;                             // our painter
+        p.<a href="qpainter.html#b0">begin</a>( this );                        // start painting widget
+        p.<a href="qpainter.html#c4">setPen</a>( red );                        // blue outline
+        p.<a href="qpainter.html#c8">setBrush</a>( yellow );                   // yellow fill
+        p.<a href="qpainter.html#i8">drawEllipse</a>( 10,20, 100,100 );        // 100x100 ellipse at 10,20
+        p.<a href="qpainter.html#b2">end</a>();                                // painting done
+    }
+</pre>
+<p>The bit block transfer is an extremely useful operation for copying pixels
+from one paint device to another (or to itself).
+It is implemented as the global function <a href="qpaintdevice.html#b2">bitBlt</a>().
+<p>Example (scroll widget contents 10 pixels to the right):
+<pre>    <a href="qpaintdevice.html#b2">bitBlt</a>( myWidget, 10,0, myWidget );
+</pre>
+<p><strong>Warning:</strong> Qt requires that a <a href="qapplication.html">QApplication</a> object must exist before any paint
+devices can be created.  Paint devices access window system resources, and
+these resources are not initialized before an application object is created.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a6"></a>QPaintDevice::QPaintDevice ( uint devflags ) <code>[protected]</code></h3>
+<p>Constructs a paint device with internal flags <em>devflags.</em>
+This constructor can only be invoked from subclasses of QPaintDevice.
+<h3 class="fn"><a name="a0"></a>QPaintDevice::~QPaintDevice () <code>[virtual]</code></h3>
+<p>Destroys the paint device and frees window system resources.
+<h3 class="fn">bool <a name="a7"></a>QPaintDevice::cmd ( int, <a href="qpainter.html">QPainter</a> *, QPDevCmdParam * ) <code>[virtual protected]</code></h3>
+<p>Internal virtual function that interprets drawing commands from
+the painter.
+<p>Implemented by subclasses that have no direct support for drawing
+graphics (external paint devices, for example <a href="qpicture.html">QPicture</a>).
+<p>Reimplemented in <a href="qpicture.html#a9">QPicture</a> and <a href="qprinter.html#d4">QPrinter</a>.
+<h3 class="fn">int <a name="a1"></a>QPaintDevice::devType () const</h3>
+<p>Returns the device type identifier: <code>PDT_WIDGET, PDT_PIXMAP, PDT_PRINTER, PDT_PICTURE</code> or <code>PDT_UNDEF.</code>
+<h3 class="fn">int <a name="b0"></a>QPaintDevice::fontInf ( <a href="qfont.html">QFont</a> *, int ) const <code>[virtual protected]</code></h3>
+<p>Internal virtual function. Reserved for future use.
+<h3 class="fn">int <a name="a9"></a>QPaintDevice::fontMet ( <a href="qfont.html">QFont</a> *, int, const char * = 0, int = 0 ) const <code>[virtual protected]</code></h3>
+<p>Internal virtual function. Reserved for future use.
+<h3 class="fn">HANDLE <a name="a4"></a>QPaintDevice::handle () const</h3>
+<p>Returns the window system handle of the paint device, for low-level
+access.  <em>Using this function is not portable.</em>
+<p>The HANDLE type varies with platform; see <a href="qpaintdevice-h.html">qpaintdevice.h</a> and <a href="qwindowdefs-h.html">qwindowdefs.h</a>
+for details.
+<p>See also:  <a href="qpaintdevice.html#a5">x11Display</a>().
+<h3 class="fn">bool <a name="a2"></a>QPaintDevice::isExtDev () const</h3>
+<p>Returns TRUE if the device is a so-called external paint device.
+<p>External paint devices cannot be <a href="qpaintdevice.html#b2">bitBlt</a>()'ed from.
+<a href="qpicture.html">QPicture</a> and <a href="qprinter.html">QPrinter</a> are external paint devices.
+<h3 class="fn">int <a name="a8"></a>QPaintDevice::metric ( int ) const <code>[virtual protected]</code></h3>
+<p>Internal virtual function that returns paint device metrics.
+<p>Please use the <a href="qpaintdevicemetrics.html">QPaintDeviceMetrics</a> class instead.
+<p>Reimplemented in <a href="qpixmap.html#e7">QPixmap</a>, <a href="qwidget.html#p4">QWidget</a>, <a href="qpicture.html#b0">QPicture</a> and <a href="qprinter.html#d5">QPrinter</a>.
+<h3 class="fn">bool <a name="a3"></a>QPaintDevice::paintingActive () const</h3>
+<p>Returns TRUE if the device is being painted, i.e. someone has called
+<a href="qpainter.html#b0">QPainter::begin</a>() and not yet <a href="qpainter.html#b2">QPainter::end</a>() for this device.
+<p>See also:  <a href="qpainter.html#b5">QPainter::isActive</a>().
+<h3 class="fn">Display * <a name="a5"></a>QPaintDevice::x11Display () const</h3>
+<p>Returns a pointer to the X display (X11 only).
+<em>Using this function is not portable.</em>
+<p>See also:  <a href="qpaintdevice.html#a4">handle</a>().
+<hr><h2>Related Functions</h2>
+<h3>void <a name="b2"></a>bitBlt (QPaintDevice * dst, int dx, int dy, const QPaintDevice * src, int sx, int sy, int sw, int sh, RasterOp rop, bool ignoreMask)</h3>
+<p>This function copies a block of pixels from one paint device to another
+(bitBlt means bit block transfer).
+<p>Arguments:
+<ul>
+<li><em>dst</em> is the paint device to copy to.
+<li><em>dx</em> and <em>dy</em> is the position to copy to.
+<li><em>src</em> is the paint device to copy from.
+<li><em>sx</em> and <em>sy</em> is the position to copy from.
+<li><em>sw</em> and <em>sh</em> is the width and height of the block to be copied.
+<li><em>rop</em> defines the raster operation to be used when copying.
+</ul>
+If <em>sw</em> is 0 or <em>sh</em> is 0, then bitBlt will do nothing.
+<p>If <em>sw</em> is negative, then bitBlt calculates <code>sw = src->width -
+sx.</code> If <em>sh</em> is negative, then bitBlt calculates <code>sh =
+src->height - sy.</code>
+<p>The <em>rop</em> argument can be one of:
+<ul>
+<li> <code>CopyROP:</code>     dst = src.
+<li> <code>OrROP:</code>       dst = dst OR src.
+<li> <code>XorROP:</code>      dst = dst XOR src.
+<li> <code>EraseROP:</code>    dst = (NOT src) AND dst
+<li> <code>NotCopyROP:</code>  dst = NOT src
+<li> <code>NotOrROP:</code>    dst = (NOT src) OR dst
+<li> <code>NotXorROP:</code>   dst = (NOT src) XOR dst
+<li> <code>NotEraseROP:</code> dst = src AND dst
+<li> <code>NotROP:</code>      dst = NOT dst
+</ul>
+<p>The <em>ignoreMask</em> argument (default FALSE) applies where <em>src</em> is
+a <a href="qpixmap.html">QPixmap</a> with a <a href="qpixmap.html#c3">mask</a>.
+If <em>ignoreMask</em> is TRUE, bitBlt ignores the pixmap's mask.
+<p>BitBlt has two restrictions:
+<ol>
+<li> The <em>src</em> device must be <a href="qwidget.html">QWidget</a> or QPixmap.  You cannot copy pixels
+from a picture or a printer (external device).
+<li> The <em>src</em> device may not have pixel depth greater than <em>dst.</em>
+You cannot copy from an 8 bit pixmap to a 1 bit pixmap.
+</ol>
+<p>Examples:
+ <a href="desktop-desktop-cpp.html#bitBlt">desktop/desktop.cpp</a>
+ <a href="hello-hello-cpp.html#bitBlt">hello/hello.cpp</a>
+ <a href="xform-xform-cpp.html#bitBlt">xform/xform.cpp</a>
+ <a href="showimg-showimg-cpp.html#bitBlt">showimg/showimg.cpp</a>
+ <a href="biff-biff-cpp.html#bitBlt">biff/biff.cpp</a>
+
+<h3>void <a name="b3"></a>bitBlt (QPaintDevice * dst, const <a href="qpoint.html">QPoint</a> &amp; dp, const QPaintDevice * src, const <a href="qrect.html">QRect</a> &amp; sr, RasterOp rop)</h3>
+<p>Overloaded <a href="qpaintdevice.html#b2">bitBlt</a>() with the destination point <em>dp</em> and source rectangle
+<em>sr.</em>
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qpaintdevice.h: 1999/01/18
+<li>qpaintdevice_x11.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

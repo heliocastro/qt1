@@ -1,0 +1,294 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QGLFormat Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QGLFormat Class Reference</h1><br clear="all">
+<p>
+The QGLFormat class specifies the display format of an OpenGL rendering context.
+This class is part of the <b>Qt OpenGL Extension.</b>
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qgl-h.html">qgl.h</a>&gt;</code>
+<p>
+Inherits QGL.
+<p><a href="qglformat-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qglformat.html#a1"><strong>QGLFormat</strong></a> () </span>
+<li><span class="fn"><a href="qglformat.html#a2"><strong>QGLFormat</strong></a> ( int options ) </span>
+<li><span class="fn">bool <a href="qglformat.html#a3"><strong>doubleBuffer</strong></a> () const</span>
+<li><span class="fn">void <a href="qglformat.html#a4"><strong>setDoubleBuffer</strong></a> ( bool enable ) </span>
+<li><span class="fn">bool <a href="qglformat.html#a5"><strong>depth</strong></a> () const</span>
+<li><span class="fn">void <a href="qglformat.html#a6"><strong>setDepth</strong></a> ( bool enable ) </span>
+<li><span class="fn">bool <a href="qglformat.html#a7"><strong>rgba</strong></a> () const</span>
+<li><span class="fn">void <a href="qglformat.html#a8"><strong>setRgba</strong></a> ( bool enable ) </span>
+<li><span class="fn">bool <a href="qglformat.html#a9"><strong>alpha</strong></a> () const</span>
+<li><span class="fn">void <a href="qglformat.html#b0"><strong>setAlpha</strong></a> ( bool enable ) </span>
+<li><span class="fn">bool <a href="qglformat.html#b1"><strong>accum</strong></a> () const</span>
+<li><span class="fn">void <a href="qglformat.html#b2"><strong>setAccum</strong></a> ( bool enable ) </span>
+<li><span class="fn">bool <a href="qglformat.html#b3"><strong>stencil</strong></a> () const</span>
+<li><span class="fn">void <a href="qglformat.html#b4"><strong>setStencil</strong></a> ( bool enable ) </span>
+<li><span class="fn">bool <a href="qglformat.html#b5"><strong>stereo</strong></a> () const</span>
+<li><span class="fn">void <a href="qglformat.html#b6"><strong>setStereo</strong></a> ( bool enable ) </span>
+<li><span class="fn">bool <a href="qglformat.html#b7"><strong>directRendering</strong></a> () const</span>
+<li><span class="fn">void <a href="qglformat.html#b8"><strong>setDirectRendering</strong></a> ( bool enable ) </span>
+<li><span class="fn">void <a href="qglformat.html#b9"><strong>setOption</strong></a> ( FormatOption opt ) </span>
+<li><span class="fn">bool <a href="qglformat.html#c0"><strong>testOption</strong></a> ( FormatOption opt ) const</span>
+</ul>
+<h2>Static Public Members</h2>
+<ul>
+<li><span class="fn">QGLFormat <a href="qglformat.html#c7"><strong>defaultFormat</strong></a> () </span>
+<li><span class="fn">void <a href="qglformat.html#c8"><strong>setDefaultFormat</strong></a> ( const QGLFormat &amp; f ) </span>
+<li><span class="fn">bool <a href="qglformat.html#c6"><strong>hasOpenGL</strong></a> () </span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>const char * <a href="qglformat.html#a0"><strong>qGLVersion</strong></a> ()
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+This class is defined in the <b>Qt OpenGL Extension</b>, which can be found in the <tt>qt/extensions</tt> directory.
+It is not included in the main Qt API.
+<p>
+The QGLFormat class specifies the display format of an OpenGL rendering context.
+<p>
+A display format has several characteristics:
+<ul>
+<li> <a href="qglformat.html#a4">Double or single buffering.</a>
+<li> <a href="qglformat.html#a6">Depth buffer.</a>
+<li> <a href="qglformat.html#a8">RGBA or color index mode.</a>
+<li> <a href="qglformat.html#b0">Alpha channel.</a>
+<li> <a href="qglformat.html#b2">Accumulation buffer.</a>
+<li> <a href="qglformat.html#b4">Stencil buffer.</a>
+<li> <a href="qglformat.html#b6">Stereo buffers.</a>
+<li> <a href="qglformat.html#b8">Direct rendering..</a>
+</ul>
+<p>You create and tell a QGLFormat object what rendering options
+you want from an OpenGL rendering context.
+<p>OpenGL drivers or accelerated hardware may or may not support
+advanced features like alpha channel or stereographic viewing. If
+you request some features the driver/hardware does not provide when
+you create a <a href="qglwidget.html">QGLWidget</a>, you will get the a rendering context with
+the nearest subset of features.
+<p>There are different ways of defining the display characteristics
+of a rendering context. One is to create a QGLFormat and make
+it default for the entire application:
+<pre>    <a href="qglformat.html">QGLFormat</a> f;
+    f.<a href="qglformat.html#b0">setAlpha</a>( TRUE );
+    f.<a href="qglformat.html#b6">setStereo</a>( TRUE );
+    <a href="qglformat.html#c8">QGLFormat::setDefaultFormat</a>( f );
+</pre>
+<p>Or you can specify the desired format when creating an object of
+your QGLWidget subclass:
+<pre>    <a href="qglformat.html">QGLFormat</a> f;
+    f.<a href="qglformat.html#a4">setDoubleBuffer</a>( FALSE );
+    f.<a href="qglformat.html#b8">setDirectRendering</a>( FALSE );
+    MyGLWidget* myWidget = new MyGLWidget( f, ... );
+</pre>
+<p>You can even set the format for an already existing QGLWidget:
+<pre>    MyGLWidget *w;
+      ...
+    <a href="qglformat.html">QGLFormat</a> f;
+    f.<a href="qglformat.html#b0">setAlpha</a>( TRUE );
+    f.<a href="qglformat.html#b6">setStereo</a>( TRUE );
+    w-&gt;setFormat( f );
+    if ( !w-&gt;format().stereo() ) {
+        // ok, goggles off
+        if ( !w-&gt;format().alpha() ) {
+            <a href="qapplication.html#j6">fatal</a>( "Cool hardware wanted" );
+        }
+    }
+</pre>
+<p>See also:  <a href="qglcontext.html">QGLContext</a> and <a href="qglwidget.html">QGLWidget</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a1"></a>QGLFormat::QGLFormat ()</h3>
+<p>Constructs a QGLFormat object with the factory default settings:
+<ul>
+<li> <a href="qglformat.html#a4">Double buffer:</a> Enabled.
+<li> <a href="qglformat.html#a6">Depth buffer:</a> Enabled.
+<li> <a href="qglformat.html#a8">RGBA:</a> Enabled (i.e. color index disabled).
+<li> <a href="qglformat.html#b0">Alpha channel:</a> Disabled.
+<li> <a href="qglformat.html#b2">Accumulator buffer:</a> Disabled.
+<li> <a href="qglformat.html#b4">Stencil buffer:</a> Disabled.
+<li> <a href="qglformat.html#b6">Stereo:</a> Disabled.
+<li> <a href="qglformat.html#b8">Direct rendering:</a> Enabled.
+</ul>
+<h3 class="fn"><a name="a2"></a>QGLFormat::QGLFormat ( int options )</h3>
+<p>Creates a QGLFormat object that is a copy of the current <a href="qglformat.html#c7">application default format</a>.
+<p>If <em>options</em> is not 0, this copy will be modified by these format options.
+The <em>options</em> parameter must be FormatOption values OR'ed together.
+<p>This constructor makes it easy to specify a certain desired format
+in classes derived from <a href="qglwidget.html">QGLWidget</a>, for example:
+<pre>    // The rendering in MyGLWidget depends on using 
+    // stencil buffer and alpha channel
+    MyGLWidget::MyGLWidget( <a href="qwidget.html">QWidget</a>* parent, const char* name )
+        : <a href="qglwidget.html">QGLWidget</a>( <a href="qglformat.html">QGLFormat</a>( StencilBuffer | AlphaChannel ), parent, name )
+    {
+      if ( !format().stencil() )
+        <a href="qapplication.html#j5">warning</a>( "Could not get stencil buffer; results will be suboptimal" );
+      if ( !format().alphaChannel() )
+        <a href="qapplication.html#j5">warning</a>( "Could not get alpha channel; results will be suboptimal" );
+      ...
+   }
+</pre>
+<p>Note that there exists FormatOption values for both turning on and
+off all format settings, e.g. DepthBuffer and NoDepthBuffer,
+DirectRendering and IndirectRendering, etc.
+<p>See also:  <a href="qglformat.html#c7">defaultFormat</a>() and <a href="qglformat.html#b9">setOption</a>().
+<h3 class="fn">bool <a name="b1"></a>QGLFormat::accum () const</h3>
+<p>Returns TRUE if the accumulation buffer is enabled, otherwise FALSE.
+The accumulation buffer is disabled by default.
+<p>See also:  <a href="qglformat.html#b2">setAccum</a>().
+<h3 class="fn">bool <a name="a9"></a>QGLFormat::alpha () const</h3>
+<p>Returns TRUE if the alpha channel of the framebuffer is enabled,
+otherwise FALSE.  The alpha channel is disabled by default.
+<p>See also:  <a href="qglformat.html#b0">setAlpha</a>().
+<h3 class="fn">QGLFormat <a name="c7"></a>QGLFormat::defaultFormat () <code>[static]</code></h3>
+<p>Returns the default QGLFormat for the application.
+All QGLWidgets that are created use this format unless
+anything else is specified.
+<p>If no special default format has been set using <a href="qglformat.html#c8">setDefaultFormat</a>(),
+the default format is the same as that created with QGLFormat().
+<p>See also:  <a href="qglformat.html#c8">setDefaultFormat</a>().
+<h3 class="fn">bool <a name="a5"></a>QGLFormat::depth () const</h3>
+<p>Returns TRUE if the depth buffer is enabled, otherwise FALSE.
+The depth buffer is enabled by default.
+<p>See also:  <a href="qglformat.html#a6">setDepth</a>().
+<h3 class="fn">bool <a name="b7"></a>QGLFormat::directRendering () const</h3>
+<p>Returns TRUE if direct rendering is enabled, otherwise FALSE.
+<p>Direct rendering is enabled by default.
+<p>See also:  <a href="qglformat.html#b8">setDirectRendering</a>().
+<h3 class="fn">bool <a name="a3"></a>QGLFormat::doubleBuffer () const</h3>
+<p>Returns TRUE if double buffering is enabled, otherwise FALSE.
+Double buffering is enabled by default.
+<p>See also:  <a href="qglformat.html#a4">setDoubleBuffer</a>().
+<h3 class="fn">bool <a name="c6"></a>QGLFormat::hasOpenGL () <code>[static]</code></h3>
+<p>Returns TRUE if the window system has any OpenGL support,
+otherwise FALSE.
+<h3 class="fn">bool <a name="a7"></a>QGLFormat::rgba () const</h3>
+<p>Returns TRUE if RGBA color mode is set, or FALSE if color index
+mode is set. The default color mode is RGBA.
+<p>See also:  <a href="qglformat.html#a8">setRgba</a>().
+<h3 class="fn">void <a name="b2"></a>QGLFormat::setAccum ( bool enable )</h3>
+<p>Enables the accumulation buffer if <em>enable</em> is TRUE, or disables
+it if <em>enable</em> is FALSE.
+<p>The accumulation buffer is disabled by default.
+<p>The accumulation buffer is used for create blur effects and
+multiple exposures.
+<p>See also:  <a href="qglformat.html#b1">accum</a>().
+<h3 class="fn">void <a name="b0"></a>QGLFormat::setAlpha ( bool enable )</h3>
+<p>Enables the alpha channel of the framebuffer if <em>enable</em> is TRUE,
+or disables it if <em>enable</em> is FALSE.
+<p>The alpha buffer is disabled by default.
+<p>The alpha channel is typically used for implementing transparency or
+translucency.  The A in RGBA specifies the transparency of a pixel.
+<p>See also:  <a href="qglformat.html#a9">alpha</a>().
+<h3 class="fn">void <a name="c8"></a>QGLFormat::setDefaultFormat ( const QGLFormat &amp; f ) <code>[static]</code></h3>
+<p>Sets a new default QGLFormat for the application.
+For example, to set single buffering as default instead
+of double buffering, your main() can contain:
+<pre>    <a href="qapplication.html">QApplication</a> a(argc, argv);
+    <a href="qglformat.html">QGLFormat</a> f;
+    f.<a href="qglformat.html#a4">setDoubleBuffer</a>( FALSE );
+    <a href="qglformat.html#c8">QGLFormat::setDefaultFormat</a>( f );
+</pre>
+<p>See also:  <a href="qglformat.html#c7">defaultFormat</a>().
+<h3 class="fn">void <a name="a6"></a>QGLFormat::setDepth ( bool enable )</h3>
+<p>Enables the depth buffer if <em>enable</em> is TRUE, or disables
+it if <em>enable</em> is FALSE.
+<p>The depth buffer is enabled by default.
+<p>The purpose of a depth buffer (or z-buffering) is to remove hidden
+surfaces. Pixels are assigned z values based on the distance to the
+viewer. A pixel with a high z value is closer to the viewer than a
+pixel with a low z value. This information is used to decide whether
+to draw a pixel or not.
+<p>See also:  <a href="qglformat.html#a5">depth</a>().
+<h3 class="fn">void <a name="b8"></a>QGLFormat::setDirectRendering ( bool enable )</h3>
+<p>Enables direct rendering if <em>enable</em> is TRUE, or disables
+it if <em>enable</em> is FALSE.
+<p>Direct rendering is enabled by default.
+<p>Enabling this option will make OpenGL bypass the underlying window
+system and render directly from hardware to the screen, if this is
+supported by the system.
+<p>See also:  <a href="qglformat.html#b7">directRendering</a>().
+<h3 class="fn">void <a name="a4"></a>QGLFormat::setDoubleBuffer ( bool enable )</h3>
+<p>Sets double buffering if <em>enable</em> is TRUE og single buffering if
+<em>enable</em> is FALSE.
+<p>Double buffering is enabled by default.
+<p>Double buffering is a technique where graphics is rendered to an off-screen
+buffer and not directly to the screen. When the drawing has been
+completed, the program calls a swapBuffers function to exchange the screen
+contents with the buffer. The result is flicker-free drawing and often
+better performance.
+<p>See also:  <a href="qglformat.html#a3">doubleBuffer</a>(), <a href="qglcontext.html#a9">QGLContext::swapBuffers</a>() and <a href="qglwidget.html#a7">QGLWidget::swapBuffers</a>().
+<h3 class="fn">void <a name="b9"></a>QGLFormat::setOption ( FormatOption opt )</h3>
+<p>Sets the option <em>opt.</em>
+<p>See also:  <a href="qglformat.html#c0">testOption</a>().
+<h3 class="fn">void <a name="a8"></a>QGLFormat::setRgba ( bool enable )</h3>
+<p>Sets RGBA mode if <em>enable</em> is TRUE, or color index mode if <em>enable</em>
+is FALSE.
+<p>The default color mode is RGBA.
+<p>RGBA is the preferred mode for most OpenGL applications.
+In RGBA color mode you specify colors as a red + green + blue + alpha
+quadruplet.
+<p>In color index mode you specify an index into a color lookup table.
+<p>See also:  <a href="qglformat.html#a7">rgba</a>().
+<h3 class="fn">void <a name="b4"></a>QGLFormat::setStencil ( bool enable )</h3>
+<p>Enables the stencil buffer if <em>enable</em> is TRUE, or disables
+it if <em>enable</em> is FALSE.
+<p>The stencil buffer is disabled by default.
+<p>The stencil buffer masks away drawing from certain parts of
+the screen.
+<p>See also:  <a href="qglformat.html#b3">stencil</a>().
+<h3 class="fn">void <a name="b6"></a>QGLFormat::setStereo ( bool enable )</h3>
+<p>Enables stereo buffering if <em>enable</em> is TRUE, or disables
+it if <em>enable</em> is FALSE.
+<p>Stereo buffering is disabled by default.
+<p>Stereo buffering provides extra color buffers to generate left-eye
+and right-eye images.
+<p>See also:  <a href="qglformat.html#b5">stereo</a>().
+<h3 class="fn">bool <a name="b3"></a>QGLFormat::stencil () const</h3>
+<p>Returns TRUE if the stencil buffer is enabled, otherwise FALSE.
+The stencil buffer is disabled by default.
+<p>See also:  <a href="qglformat.html#b4">setStencil</a>().
+<h3 class="fn">bool <a name="b5"></a>QGLFormat::stereo () const</h3>
+<p>Returns TRUE if stereo buffering is enabled, otherwise FALSE.
+Stereo buffering is disabled by default.
+<p>See also:  <a href="qglformat.html#b6">setStereo</a>().
+<h3 class="fn">bool <a name="c0"></a>QGLFormat::testOption ( FormatOption opt ) const</h3>
+<p>Returns TRUE if format option <em>opt</em> is set, otherwise FALSE.
+<p>See also:  <a href="qglformat.html#b9">setOption</a>().
+<hr><h2>Related Functions</h2>
+<h3>const char * <a name="a0"></a>qGLVersion ()</h3>
+<p>Returns the version number string for the Qt OpenGL extension,
+e.g. "1.0".
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qgl.h: 1999/01/28
+<li>qgl.cpp: 1999/01/28
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

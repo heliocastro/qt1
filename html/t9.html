@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>
+Qt Tutorial - Chapter 9
+</title></head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Chapter 9: With Cannon You Can</h1><br clear="all">
+<p>
+<center><img src="t9.gif" alt="Screenshot of tutorial nine"></center>
+<p>
+In this example, we use a QPainter for the first time.
+It is used to draw a cute little blue cannon.
+Only cannon.cpp differs from the previous chapter.
+<p>
+<ul>
+<li><a href="t9-lcdrange-h.html">lcdrange.h</a> contains the LCDRange
+class definition
+<li><a href="t9-lcdrange-cpp.html">lcdrange.cpp</a> contains the LCDRange
+implementation
+<li><a href="t9-cannon-h.html">cannon.h</a> contains the CannonField class
+definition
+<li><a href="t9-cannon-cpp.html">cannon.cpp</a> contains the CannonField
+implementation
+<li><a href="t9-main-cpp.html">main.cpp</a> contains MyWidget and main.
+<li><a href="t9-makefile.html">Makefile</a> contains some rules for
+generating the meta object information necessary for <a
+href="metaobjects.html">signal/slot creation.</a>
+</ul>
+<p>
+<h2>Line by Line Walk-Through</h2>
+<p>
+<h3><a href="t9-cannon-cpp.html">cannon.cpp</a></h3>
+<p>
+<pre>
+    void CannonField::paintEvent( <a href="qpaintevent.html">QPaintEvent</a> * )
+    {
+        <a href="qpainter.html">QPainter</a> p;
+        <a href="qbrush.html">QBrush</a>   brush( blue );
+        <a href="qpen.html">QPen</a>     pen( NoPen );
+</pre>
+<p>
+In order to paint our widget, we use a QPainter.  QPainter is Qt's
+painting engine.  It can render 2D graphics on several types of <a href="qpaintdevice.html">paint devices</a>.  QWidget is a paint device.  See the
+QPainter <a href="qpainter.html">documentation</a> for details.
+<p>
+QPainter uses a QPen and a QBrush. The pen specifies a line style and a
+text color while the brush specifies a fill color and/or a fill pattern.
+In our paintEvent, we want to use a blue brush and an invisible pen.
+<p>
+<pre>
+        p.<a href="qpainter.html#b0">begin</a>( this );
+</pre>
+<p>
+Calling <a href="qpainter.html#b0">begin()</a> tells the painter to start
+painting on a paint device.  Here we start painting on the CannonField
+widget.
+<p>
+<pre>
+        p.<a href="qpainter.html#c8">setBrush</a>( brush );
+        p.<a href="qpainter.html#c4">setPen</a>( pen );
+</pre>
+<p>
+Here we set the brush and pen created above.
+<p>
+<pre>
+        p.<a href="qpainter.html#f2">translate</a>( 0, <a href="qwidget.html#c1">rect</a>().bottom() );
+</pre>
+<p>
+The <a href="qpainter.html#f2">translate()</a> function translates the
+coordinate system of the QPainter, i.e. moves it by an offset.  Here we
+set the (0,0) point to the bottom left corner of the widget.  The x and y
+directions remain unchanged, i.e. all the y coordinates inside the widget
+are now negative (see <a href="coordsys.html">The Coordinate System</a>).
+<p>
+<pre>
+        p.<a href="qpainter.html#j2">drawPie</a>( <a href="qrect.html">QRect</a>(-35, -35, 70, 70), 0, 90*16 );
+</pre>
+<p>
+The <a href="qpainter.html#j2">drawPie()</a> function draws a pie shape
+inside the specified rectangle using a start angle and an arc length.  The
+angles are specified in 1/16th of a degree.  Zero degrees is at the 3
+o'clock position. The drawing direction is counter-clockwise.  Here we
+draw a quarter of a circle in the bottom left corner of the widget.  The
+pie is filled with blue and has no outline.
+<p>
+<pre>
+        p.<a href="qpainter.html#f5">rotate</a>( -ang );
+</pre>
+<p>
+The <a href="qpainter.html#f5">rotate()</a> function rotates the
+coordinate system of the QPainter around the point (0,0).  The rotation
+argument is a <code>float</code> given in degrees (not given in 1/16th of a degree
+as above) and clockwise.  Here we rotate the coordinate system <code>ang</code>
+degrees counter-clockwise.
+<p>
+<pre>
+        p.<a href="qpainter.html#i0">drawRect</a>( <a href="qrect.html">QRect</a>(33, -4, 15, 8) );
+</pre>
+<p>
+The <a href="qpainter.html#i0">drawRect()</a> function draws the
+specified rectangle.  Here we draw the barrel of the cannon.
+<p>
+It can often be difficult to envision the resulting drawing when the
+coordinate system has been transformed (translated, rotated, scaled or
+sheared) as above.
+<p>
+In this case, the coordinate system is first translated, then rotated.
+If the rectangle QRect(33, -4, 15, 8) had been drawn in the translated
+coordinate system, it would have looked like this:
+<p>
+<img src="t9_1.gif" alt="The cannon, translated but not rotated">
+<p>
+Note that the rectangle is clipped by the border of the CannonField widget.
+When we rotate the coordinate system, for instance 60 degrees, the
+rectangle will be rotated around (0,0), which is the bottom left corner,
+since we have translated the coordinate system.
+The result looks like this:
+<p>
+<img src="t9_2.gif" alt="The cannon, translated and rotated">
+<p>
+<pre>
+        p.<a href="qpainter.html#b2">end</a>();
+</pre>
+<p>
+Calling <a href="qpainter.html#b2">end()</a> tells the painter to end
+painting on a paint device.  We're done, except that we haven't
+explained why Windows didn't dither this time.
+<p>
+<pre>
+    int main( int argc, char **argv )    {
+        <a href="qapplication.html#f6">QApplication::setColorSpec</a>( QApplication::CustomColor );
+</pre>
+<p>
+We tell Qt that we want a different color allocation strategy for this
+program.  There is no single correct color allocation strategy.  Some
+strategies look good for some programs, some look bad.
+<p>
+<code>CustomColor</code> gives Qt applications better colors on Windows. It has no
+effect under X11. There are several options. You can read about them in
+the <a href="qapplication.html#f6">documentation</a>.
+<p>
+<h2>Behavior</h2>
+<p>
+When the scroll bar is operated, the angle of the drawn cannon changes
+accordingly.
+<p>
+You may notice that the cannon flickers annoyingly, especially on a
+slow machine.  We'll fix this in the next chapter.
+<p>
+<h2>Excercises</h2>
+<p>
+Set a background pixmap for the CannonField widget.
+<p>
+You may now go on to <a href="t10.html">chapter ten.</a>
+<p>
+[<a href="t8.html">Previous tutorial</a>]
+[<a href="t10.html">Next tutorial</a>]
+[<a href="tutorial.html">Main tutorial page</a>]
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

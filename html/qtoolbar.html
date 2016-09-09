@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QToolBar Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QToolBar Class Reference</h1><br clear="all">
+<p>
+The QToolBar class provides a simple tool bar.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qtoolbar-h.html">qtoolbar.h</a>&gt;</code>
+<p>
+Inherits <a href="qwidget.html">QWidget</a>.
+<p><a href="qtoolbar-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qtoolbar.html#a0"><strong>QToolBar</strong></a> ( const char * label, QMainWindow *, QMainWindow::ToolBarDock = QMainWindow::Top, bool newLine = FALSE, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qtoolbar.html#a1"><strong>QToolBar</strong></a> ( const char * label, QMainWindow *, QWidget *, bool newLine = FALSE, const char * name = 0, WFlags f = 0 ) </span>
+<li><span class="fn"><a href="qtoolbar.html#a2"><strong>QToolBar</strong></a> ( QMainWindow * parent = 0, const char * name = 0 ) </span>
+<li><span class="fn"><a href="qtoolbar.html#a3"><strong>~QToolBar</strong></a> () </span>
+<li><span class="fn">void <a href="qtoolbar.html#a4"><strong>addSeparator</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qtoolbar.html#a5"><strong>setOrientation</strong></a> ( Orientation ) </span>
+<li><span class="fn">Orientation <a href="qtoolbar.html#a6"><strong>orientation</strong></a> () const</span>
+<li><span class="fn">virtual void <a href="qtoolbar.html#a7"><strong>show</strong></a> () </span>
+<li><span class="fn">QMainWindow* <a href="qtoolbar.html#a8"><strong>mainWindow</strong></a> () </span>
+<li><span class="fn">void <a href="qtoolbar.html#a9"><strong>setStretchableWidget</strong></a> ( QWidget * ) </span>
+<li><span class="fn">virtual bool <a href="qtoolbar.html#b0"><strong>event</strong></a> ( QEvent * e ) </span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qtoolbar.html#b1"><strong>paintEvent</strong></a> ( QPaintEvent * ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QToolBar class provides a simple tool bar.
+<p>
+To use QToolBar, you simply create a QToolBar as child of a
+<a href="qmainwindow.html">QMainWindow</a>, create a number of <a href="qtoolbutton.html">QToolButton</a> widgets (or other
+widgets) in left to right (or top to bottom) order, call
+<a href="qtoolbar.html#a4">addSeparator</a>() when you want a separator, and that's all.
+<p>The <a href="application-application-cpp.html#QToolBar">application/application.cpp</a> example does precisely this.
+<p>Each QToolBar lives in a <a href="qmainwindow.html">dock</a> in a
+QMainWindow, and can optionally start a new line in its dock.  Tool
+bars that start a new line are always positioned at the left end or
+top of the tool bar dock; others are placed next to the previous
+tool bar and word-wrapped as necessary.
+<p>The tool bar is able to arrange its buttons horizontally or
+vertically (see <a href="qtoolbar.html#a5">setOrientation</a>() for details) and draws the
+appropriate frames around the tool button in Windows and Motif
+style.  Generally, QMainWindow will set the orientation correctly
+for you.
+<p>See also:  <a href="qtoolbutton.html">QToolButton</a>, <a href="qmainwindow.html">QMainWindow</a>, <a href="http://www.iarchitect.com/visual.htm">Parts of Isys on Visual Design,</a>, <a href="http://www.microsoft.com/win32dev/uiguide/uigui192.htm">Microsoft Style Guide,</a>, <a href="http://www.microsoft.com/win32dev/uiguide/uigui196.htm">some common buttons (NB: read the license),</a> and <a href="guibooks.html#fowler">GUI Design Handbook: Tool Bar.</a>
+<p>Examples:
+ <a href="application-application-cpp.html#QToolBar">application/application.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a2"></a>QToolBar::QToolBar ( <a href="qmainwindow.html">QMainWindow</a> * parent = 0, const char * name = 0 )</h3>
+<p>Constructs an empty tool bar in the top dock of its parent,
+without any label and without requiring a newline.  This is mostly
+useless.
+<h3 class="fn"><a name="a1"></a>QToolBar::QToolBar ( const char * label, <a href="qmainwindow.html">QMainWindow</a> * mainWindow, <a href="qwidget.html">QWidget</a> * parent, bool newLine = FALSE, const char * name = 0, WFlags f = 0 )</h3>
+<p>Constructs an empty horizontal tool bar which is a parent of <em>parent</em> and managed by <em>mainWindow.</em>  The <em>label</em> and <em>newLine</em>
+are passed straight to <a href="qmainwindow.html#a9">QMainWindow::addToolBar</a>().  <em>name</em> is the
+object name and <em>f</em> is the widget flags.
+<p>This is the constructor to use if you want to create torn-off
+toolbars, or toolbars in the status bar.
+<h3 class="fn"><a name="a0"></a>QToolBar::QToolBar ( const char * label, <a href="qmainwindow.html">QMainWindow</a> * parent, <a href="qmainwindow.html">QMainWindow::ToolBarDock</a> dock = QMainWindow::Top, bool newLine = FALSE, const char * name = 0 )</h3>
+<p>Constructs an empty tool bar which is a chilf od <em>parent</em> and
+managed by <em>parent,</em> initially in <em>dock,</em> labelled <em>and</em> starting
+a new line in the dock if <em>newLine</em> is TRUE.  <em>name</em> is the object
+name, as usual.
+<h3 class="fn"><a name="a3"></a>QToolBar::~QToolBar ()</h3>
+<p>Destroys the object and frees any allocated resources.
+<h3 class="fn">void <a name="a4"></a>QToolBar::addSeparator ()</h3>
+<p>Adds a separator in here.  Cool, man.
+<h3 class="fn">bool <a name="b0"></a>QToolBar::event ( <a href="qevent.html">QEvent</a> * e ) <code>[virtual]</code></h3>
+<p>Reimplemented for internal reasons; the API is not affected.
+<p>Reimplemented from <a href="qobject.html#a2">QObject.</a>
+<h3 class="fn"><a href="qmainwindow.html">QMainWindow</a> * <a name="a8"></a>QToolBar::mainWindow ()</h3>
+<p>Returns a pointer to the <a href="qmainwindow.html">QMainWindow</a> which controls this tool bar.
+<h3 class="fn">QToolBar::Orientation <a name="a6"></a>QToolBar::orientation() const</h3>
+<p>Returns the current orientation of the toolbar.
+<h3 class="fn">void <a name="b1"></a>QToolBar::paintEvent ( <a href="qpaintevent.html">QPaintEvent</a> * ) <code>[virtual protected]</code></h3>
+<p>Paint the handle.  The Motif style is rather close to Netscape
+and even closer to KDE.
+<p>Reimplemented from <a href="qwidget.html#o4">QWidget.</a>
+<h3 class="fn">void <a name="a5"></a>QToolBar::setOrientation ( Orientation newOrientation ) <code>[virtual]</code></h3>
+<p>Sets this toolbar to organize its content vertically if <em>newOrientation</em> is <code>Vertical</code> and horizontally if <em>newOrientation</em>
+is <code>Horizontal.</code>
+<h3 class="fn">void <a name="a9"></a>QToolBar::setStretchableWidget ( <a href="qwidget.html">QWidget</a> * w )</h3>
+<p>Sets <em>w</em> to be expanded if this toolbar is requested to stretch
+(because <a href="qmainwindow.html">QMainWindow</a> right-justifies the dock it's in).
+<h3 class="fn">void <a name="a7"></a>QToolBar::show () <code>[virtual]</code></h3>
+<p>Reimplemented to set up geometry management.
+<p>Reimplemented from <a href="qwidget.html#k2">QWidget.</a>
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qtoolbar.h: 1998/08/19
+<li>qtoolbar.cpp: 1998/08/12
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qsize.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qsize.h</h1><br clear="all">
+This is the verbatim text of the qsize.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qsize.h,v 2.7.2.3 1998/11/02 16:09:37 hanord Exp $
+**
+** Definition of QSize class
+**
+** Created : 931028
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QSIZE_H
+#define QSIZE_H
+
+#ifndef QT_H
+#include "qpoint.h"
+#endif // QT_H
+
+#if (defined(QSIZE_C) || defined(DEBUG)) &amp;&amp; !defined(_OS_WIN32_)
+#define QSIZE_DEBUG
+#endif
+
+
+class Q_EXPORT QSize
+{
+public:
+    QSize()     { wd = ht = -1; }
+    QSize( int w, int h );
+
+    bool   isNull()     const;
+    bool   isEmpty()    const;
+    bool   isValid()    const;
+
+    int    width()      const;
+    int    height()     const;
+    void   setWidth( int w );
+    void   setHeight( int h );
+    void   transpose();
+
+    QSize expandedTo( const QSize &amp; ) const;
+    QSize boundedTo( const QSize &amp; ) const;
+
+    QCOORD &amp;rwidth();
+    QCOORD &amp;rheight();
+
+    QSize &amp;operator+=( const QSize &amp; );
+    QSize &amp;operator-=( const QSize &amp; );
+    QSize &amp;operator*=( int c );
+    QSize &amp;operator*=( float c );
+    QSize &amp;operator/=( int c );
+    QSize &amp;operator/=( float c );
+
+    friend inline bool  operator==( const QSize &amp;, const QSize &amp; );
+    friend inline bool  operator!=( const QSize &amp;, const QSize &amp; );
+    friend inline QSize operator+( const QSize &amp;, const QSize &amp; );
+    friend inline QSize operator-( const QSize &amp;, const QSize &amp; );
+    friend inline QSize operator*( const QSize &amp;, int );
+    friend inline QSize operator*( int, const QSize &amp; );
+    friend inline QSize operator*( const QSize &amp;, float );
+    friend inline QSize operator*( float, const QSize &amp; );
+#if defined(QSIZE_DEBUG)
+    friend Q_EXPORT QSize operator/( const QSize &amp;, int );
+    friend Q_EXPORT QSize operator/( const QSize &amp;, float );
+#else
+    friend inline QSize operator/( const QSize &amp;, int );
+    friend inline QSize operator/( const QSize &amp;, float );
+#endif
+
+    static void warningDivByZero();
+
+private:
+    QCOORD wd;
+    QCOORD ht;
+};
+
+
+/*****************************************************************************
+  QSize stream functions
+ *****************************************************************************/
+
+Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QSize &amp; );
+Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QSize &amp; );
+
+
+/*****************************************************************************
+  QSize inline functions
+ *****************************************************************************/
+
+inline QSize::QSize( int w, int h )
+{ wd=(QCOORD)w; ht=(QCOORD)h; }
+
+inline bool QSize::isNull() const
+{ return wd==0 &amp;&amp; ht==0; }
+
+inline bool QSize::isEmpty() const
+{ return wd&lt;1 || ht&lt;1; }
+
+inline bool QSize::isValid() const
+{ return wd&gt;=0 &amp;&amp; ht&gt;=0; }
+
+inline int QSize::width() const
+{ return wd; }
+
+inline int QSize::height() const
+{ return ht; }
+
+inline void QSize::setWidth( int w )
+{ wd=(QCOORD)w; }
+
+inline void QSize::setHeight( int h )
+{ ht=(QCOORD)h; }
+
+inline QCOORD &amp;QSize::rwidth()
+{ return wd; }
+
+inline QCOORD &amp;QSize::rheight()
+{ return ht; }
+
+inline QSize &amp;QSize::operator+=( const QSize &amp;s )
+{ wd+=s.wd; ht+=s.ht; return *this; }
+
+inline QSize &amp;QSize::operator-=( const QSize &amp;s )
+{ wd-=s.wd; ht-=s.ht; return *this; }
+
+inline QSize &amp;QSize::operator*=( int c )
+{ wd*=(QCOORD)c; ht*=(QCOORD)c; return *this; }
+
+inline QSize &amp;QSize::operator*=( float c )
+{ wd=(QCOORD)(wd*c); ht=(QCOORD)(ht*c); return *this; }
+
+inline bool operator==( const QSize &amp;s1, const QSize &amp;s2 )
+{ return s1.wd == s2.wd &amp;&amp; s1.ht == s2.ht; }
+
+inline bool operator!=( const QSize &amp;s1, const QSize &amp;s2 )
+{ return s1.wd != s2.wd || s1.ht != s2.ht; }
+
+inline QSize operator+( const QSize &amp; s1, const QSize &amp; s2 )
+{ return QSize(s1.wd+s2.wd, s1.ht+s2.ht); }
+
+inline QSize operator-( const QSize &amp;s1, const QSize &amp;s2 )
+{ return QSize(s1.wd-s2.wd, s1.ht-s2.ht); }
+
+inline QSize operator*( const QSize &amp;s, int c )
+{ return QSize(s.wd*c, s.ht*c); }
+
+inline QSize operator*( int c, const QSize &amp;s )
+{  return QSize(s.wd*c, s.ht*c); }
+
+inline QSize operator*( const QSize &amp;s, float c )
+{ return QSize((QCOORD)(s.wd*c), (QCOORD)(s.ht*c)); }
+
+inline QSize operator*( float c, const QSize &amp;s )
+{ return QSize((QCOORD)(s.wd*c), (QCOORD)(s.ht*c)); }
+
+#if !defined(QSIZE_DEBUG)
+
+inline QSize &amp;QSize::operator/=( int c )
+{
+#if defined(CHECK_MATH)
+    if ( c == 0 )
+        warningDivByZero();
+#endif
+    wd/=(QCOORD)c;
+    ht/=(QCOORD)c;
+    return *this;
+}
+
+inline QSize &amp;QSize::operator/=( float c )
+{
+#if defined(CHECK_MATH)
+    if ( c == 0.0 )
+        warningDivByZero();
+#endif
+    wd=(QCOORD)(wd/c);
+    ht=(QCOORD)(ht/c);
+    return *this;
+}
+
+inline QSize operator/( const QSize &amp;s, int c )
+{
+#if defined(CHECK_MATH)
+    if ( c == 0 )
+        QSize::warningDivByZero();
+#endif
+    return QSize(s.wd/c, s.ht/c);
+}
+
+inline QSize operator/( const QSize &amp;s, float c )
+{
+#if defined(CHECK_MATH)
+    if ( c == 0.0 )
+        QSize::warningDivByZero();
+#endif
+    return QSize((QCOORD)(s.wd/c), (QCOORD)(s.ht/c));
+}
+
+#endif // no-debug functions
+
+inline QSize QSize::expandedTo( const QSize &amp; otherSize ) const
+{
+    return QSize( QMAX( wd, otherSize.wd ), QMAX( ht, otherSize.ht ) );
+}
+
+inline QSize QSize::boundedTo( const QSize &amp; otherSize ) const
+{
+    return QSize( QMIN( wd, otherSize.wd ), QMIN( ht, otherSize.ht ) );
+}
+
+#endif // QSIZE_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

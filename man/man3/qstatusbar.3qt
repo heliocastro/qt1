@@ -1,0 +1,138 @@
+.TH QStatusBar 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QStatusBar \- Horizontal bar suitable for presenting status messages
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qstatusbar.h>\fR
+.PP
+Inherits QWidget.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QStatusBar ( QWidget * " "parent" " = 0, const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "\fB~QStatusBar\fR ()"
+.br
+.ti -1c
+.BI "void addWidget ( QWidget *, int, bool = FALSE )"
+.br
+.ti -1c
+.BI "void removeWidget ( QWidget * )"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "void message ( const char * )"
+.br
+.ti -1c
+.BI "void message ( const char *, int )"
+.br
+.ti -1c
+.BI "void clear ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void paintEvent ( QPaintEvent * )"
+.br
+.ti -1c
+.BI "void reformat ()"
+.br
+.ti -1c
+.BI "void hideOrShow ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QStatusBar class provides a horizontal bar suitable for presenting status messages.
+.PP
+Each status message falls into one of three classes: 
+.IP
+.TP
+\fCTemporary\fR - occupies most of the status bar briefly. Used e.g. for explaining tool tip texts or menu entries)
+.IP
+.TP
+\fCNormal\fR - occupies part of the status bar and may be hidden by temporary messages. Used e.g. for displaying the page and line number in a word processor.
+.IP
+.TP
+\fCPermanent\fR - occupies the far right of the statusbar and is never hidden. Used for important mode indications. Some applications put a Caps Lock indicator here.
+.IP
+.PP
+QStatusBar lets you display all three sorts of messages.
+.PP
+To display a temporary message, you can call message(), or connect a suitable signal to it. To remove a temporary message, you can call clear(), or connect a signal to it.
+.PP
+There are two variants of message(), one which displays the message until the next clear() or mesage(), and one which also has a time limit.
+.PP
+Normal and permanent messages are displayed by creating a widget (typically a QLabel) and using addWidget() to add this widget to the status bar.
+.PP
+Finally, in Windows style QStatusBar also provides a Windows standard resize handle. In the X11 version Qt 1.40 this resize handle generally works differently than the one provided by the system; we hope to reduce this difference in the future.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+
+.ce 1
+.B "[Image Omitted]"
+.PP
+See also: QToolBar, QMainWindow, QLabel, Microsoft Style Guide, and GUI Design Handbook: Status Bar.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QStatusBar::QStatusBar ( QWidget * parent = 0, const char * name = 0 )"
+Constructs an empty status bar.
+.SH "QStatusBar::~QStatusBar ()"
+Destroys the object and frees any allocated resources.
+.SH "void QStatusBar::addWidget ( QWidget * widget, int stretch, bool permanent = FALSE )"
+Adds \fIwidget\fR to this status bar, with a width of \fIstretch.\fR
+.PP
+\fIwidget\fR is permanently visible if \fIpermanent\fR is TRUE, and is obscured by temporary messages if \fIpermanent\fR is FALSE. The default is FALSE.
+.PP
+\fIstretch\fR is used to compute a suitable size for \fIwidget.\fR
+.PP
+If \fIpermanent\fR is TRUE, \fIwidget\fR is located at the far right of the status bar. If \fIpermanent\fR is FALSE (the default) \fIwidget\fR is located just to the left of the first permanent widget.
+.PP
+This function may cause some flicker.
+.PP
+See also: removeWidget().
+.SH "void QStatusBar::clear () \fC[slot]\fR"
+Removes any temporary message being shown.
+.PP
+See also: message().
+.SH "void QStatusBar::hideOrShow () \fC[protected]\fR"
+Ensures that the right widgets are visible. Used by message() and clear().
+.SH "void QStatusBar::message ( const char * message ) \fC[slot]\fR"
+Hide the normal status indications and display \fImessage,\fR until clear() or another message() is called.
+.PP
+See also: clear().
+.SH "void QStatusBar::message ( const char * message, int ms ) \fC[slot]\fR"
+Hide the normal status indications and display \fImessage\fR for \fIms\fR milli-seconds, or until clear() or another message() is called, whichever is shorter.
+.SH "void QStatusBar::paintEvent ( QPaintEvent * ) \fC[virtual protected]\fR"
+Shows the temporary message, if appropriate.
+.PP
+Reimplemented from QWidget.
+.SH "void QStatusBar::reformat () \fC[protected]\fR"
+Changes the status bar's appearance to account for item changes.
+.SH "void QStatusBar::removeWidget ( QWidget * widget )"
+Removes \fIwidget\fR from the status bar.
+.PP
+This function may cause some flicker.
+.PP
+Note that \fIwidget\fR is not deleted.
+.PP
+See also:  addWidget().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qstatusbar.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

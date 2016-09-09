@@ -1,0 +1,120 @@
+.TH QCollection 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QCollection \- The base class of all Qt collections
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qcollection.h>\fR
+.PP
+Inherited by QGCache, QGDict and QGList.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "bool autoDelete () const"
+.br
+.ti -1c
+.BI "void setAutoDelete ( bool enable )"
+.br
+.ti -1c
+.BI "virtual uint count () const"
+.br
+.ti -1c
+.BI "virtual void clear ()"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "QCollection ()"
+.br
+.ti -1c
+.BI "QCollection ( const QCollection & )"
+.br
+.ti -1c
+.BI "virtual \fB~QCollection\fR ()"
+.br
+.ti -1c
+.BI "virtual GCI newItem ( GCI )"
+.br
+.ti -1c
+.BI "virtual void deleteItem ( GCI )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QCollection class is the base class of all Qt collections.
+.PP
+The QCollection class is an abstract base class for the Qt collection classes QDict, QList etc. via QGDict, QGList etc.
+.PP
+A QCollection knows only about the number of objects in the collection and the deletion strategy.
+.PP
+A collection is implemented using the \fCGCI\fR (generic collection item) type, which is a \fCvoid*.\fR The template (or macro) classes that create the real collections cast the \fCGCI\fR to the required type.
+.PP
+See also: Collection Classes
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QCollection::QCollection () \fC[protected]\fR"
+Constructs a collection. The constructor is protected because QCollection is an abstract class.
+.SH "QCollection::QCollection ( const QCollection & source ) \fC[protected]\fR"
+Constructs a copy of \fIsource\fR with autoDelete() set to FALSE. The constructor is protected because QCollection is an abstract class.
+.PP
+Note that if \fIsource\fR has autoDelete turned on, copying it is a good way to get memory leaks, reading freed memory, or both.
+.SH "QCollection::~QCollection () \fC[virtual protected]\fR"
+Destroys the collection. The destructor is protected because QCollection is an abstract class.
+.SH "bool QCollection::autoDelete () const"
+Returns the setting of the auto-delete option (default is FALSE).
+.PP
+See also: setAutoDelete().
+.SH "virtual void QCollection::clear () \fC[virtual]\fR"
+Removes all objects from the collection. The objects will be deleted if auto-delete has been enabled.
+.PP
+See also: setAutoDelete().
+.PP
+Reimplemented in QPtrDict, QIntCache, QGCache, QDict, QIntDict, QGDict, QList, QCache and QGList.
+.SH "virtual uint QCollection::count () const \fC[virtual]\fR"
+Returns the number of objects in the collection.
+.PP
+Reimplemented in QPtrDict, QIntCache, QGCache, QDict, QIntDict, QGDict, QList, QCache and QGList.
+.SH "void QCollection::deleteItem ( GCI d ) \fC[virtual protected]\fR"
+Virtual function that deletes an item that is about to be removed from the collection.
+.PP
+The default implementation deletes \fId\fR pointer if and only if auto-delete has been enabled.
+.PP
+This function is always reimplemented in the collection template classes.
+.PP
+See also: newItem() and setAutoDelete().
+.SH "GCI QCollection::newItem ( GCI d ) \fC[virtual protected]\fR"
+Virtual function that creates a copy of an object that is about to be inserted into the collection.
+.PP
+The default implementation returns the \fId\fR pointer, i.e. no copy is made.
+.PP
+This function is seldom reimplemented in the collection template classes. It is not common practice to make a copy of something that is being inserted.
+.PP
+See also: deleteItem().
+.SH "void QCollection::setAutoDelete ( bool enable )"
+Sets the auto-delete option of the collection.
+.PP
+Enabling auto-delete (\fIenable\fR is TRUE) will delete objects that are removed from the collection. This can be useful if the collection has the only reference to the objects. (Note that the object can still be copied using the copy constructor - copying such objects is a good way to get memory leaks, reading freed memory or both.)
+.PP
+Disabling auto-delete (\fIenable\fR is FALSE) will \fInot\fR delete objects that are removed from the collection. This is useful if the objects are part of many collections.
+.PP
+The default setting is FALSE.
+.PP
+See also: autoDelete().
+.PP
+Examples:
+.(l
+grapher/grapher.cpp
+.)l
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qcollection.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

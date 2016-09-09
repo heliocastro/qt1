@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QPalette Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QPalette Class Reference</h1><br clear="all">
+<p>
+The QPalette class contains color groups for each widget state.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qpalette-h.html">qpalette.h</a>&gt;</code>
+<p><a href="qpalette-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qpalette.html#a0"><strong>QPalette</strong></a> () </span>
+<li><span class="fn"><a href="qpalette.html#a1"><strong>QPalette</strong></a> ( const QColor &amp; background ) </span>
+<li><span class="fn"><a href="qpalette.html#a2"><strong>QPalette</strong></a> ( const QColorGroup &amp; normal, const QColorGroup &amp; disabled, const QColorGroup &amp; active ) </span>
+<li><span class="fn"><a href="qpalette.html#a3"><strong>QPalette</strong></a> ( const QPalette &amp; ) </span>
+<li><span class="fn"><a href="qpalette.html#a4"><strong>~QPalette</strong></a> () </span>
+<li><span class="fn">QPalette&amp; <a href="qpalette.html#a5"><strong>operator=</strong></a> ( const QPalette &amp; ) </span>
+<li><span class="fn">QPalette <a href="qpalette.html#a6"><strong>copy</strong></a> () const</span>
+<li><span class="fn">const QColorGroup&amp; <a href="qpalette.html#a7"><strong>normal</strong></a> () const</span>
+<li><span class="fn">const QColorGroup&amp; <a href="qpalette.html#a8"><strong>disabled</strong></a> () const</span>
+<li><span class="fn">const QColorGroup&amp; <a href="qpalette.html#a9"><strong>active</strong></a> () const</span>
+<li><span class="fn">void <a href="qpalette.html#b0"><strong>setNormal</strong></a> ( const QColorGroup &amp; ) </span>
+<li><span class="fn">void <a href="qpalette.html#b1"><strong>setDisabled</strong></a> ( const QColorGroup &amp; ) </span>
+<li><span class="fn">void <a href="qpalette.html#b2"><strong>setActive</strong></a> ( const QColorGroup &amp; ) </span>
+<li><span class="fn">bool <a href="qpalette.html#b3"><strong>operator==</strong></a> ( const QPalette &amp; p ) const</span>
+<li><span class="fn">bool <a href="qpalette.html#b4"><strong>operator!=</strong></a> ( const QPalette &amp; p ) const</span>
+<li><span class="fn">bool <a href="qpalette.html#b5"><strong>isCopyOf</strong></a> ( const QPalette &amp; ) </span>
+<li><span class="fn">int <a href="qpalette.html#b6"><strong>serialNumber</strong></a> () const</span>
+</ul>
+<h2>Related Functions</h2>
+(Note that these are not member functions.)
+<ul>
+<li>QDataStream &amp; <a href="qpalette.html#b8"><strong>operator&lt;&lt;</strong></a> (QDataStream &amp; s, const QPalette &amp; p)
+<li>QDataStream &amp; <a href="qpalette.html#b9"><strong>operator&gt;&gt;</strong></a> (QDataStream &amp; s, QPalette &amp; p)
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QPalette class contains color groups for each widget state.
+<p>
+A palette consists of three color groups: a <em>normal,</em> a <em>disabled</em>
+and an <em>active</em> color group.  All <a href="qwidget.html">widgets</a>
+contain a palette, and all the widgets in Qt use their palette to draw
+themselves.  This makes the user interface consistent and easily
+configurable.
+<p>If you make a new widget you are strongly advised to use the colors in
+the palette rather than hard-coding specific colors.
+<p>The <em>active</em> group is used for the widget in focus.  Normally it
+contains the same colors as <em>normal</em> so as not to overwhelm the user
+with bright and flashing colors, but if you need to you can change it.
+<p>The <em>disabled</em> group is used for widgets that are currently
+inactive or not usable.
+<p>The <em>normal</em> color group is used in all other cases.
+<p>See also:  <a href="qapplication.html#f8">QApplication::setPalette</a>(), <a href="qwidget.html#f7">QWidget::setPalette</a>(), <a href="qcolorgroup.html">QColorGroup</a> and <a href="qcolor.html">QColor</a>.
+<p>Examples:
+ <a href="xform-xform-cpp.html#QPalette">xform/xform.cpp</a>
+ <a href="widgets-widgets-cpp.html#QPalette">widgets/widgets.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QPalette::QPalette ()</h3>
+<p>Constructs a palette that consists of color groups with only black colors.
+<h3 class="fn"><a name="a1"></a>QPalette::QPalette ( const <a href="qcolor.html">QColor</a> &amp; background )</h3>
+<p>Constructs a palette from the <em>background</em> color. The other colors are
+automatically calculated, based on this color.
+<h3 class="fn"><a name="a2"></a>QPalette::QPalette ( const <a href="qcolorgroup.html">QColorGroup</a> &amp; normal, const <a href="qcolorgroup.html">QColorGroup</a> &amp; disabled, const <a href="qcolorgroup.html">QColorGroup</a> &amp; active )</h3>
+<p>Constructs a palette that consists of the three color groups <em>normal, disabled</em> and <em>active.</em>
+<h3 class="fn"><a name="a3"></a>QPalette::QPalette ( const QPalette &amp; p )</h3>
+<p>Constructs a palette that is a
+<a href="shclass.html">shallow copy</a> of <em>p.</em>
+<p>See also:  <a href="qpalette.html#a6">copy</a>().
+<h3 class="fn"><a name="a4"></a>QPalette::~QPalette ()</h3>
+<p>Destroys the palette.
+<h3 class="fn">const <a href="qcolorgroup.html">QColorGroup</a> &amp; <a name="a9"></a>QPalette::active () const</h3>
+<p>Returns the active color group of this palette.
+<p>See also:  <a href="qcolorgroup.html">QColorGroup</a>, <a href="qpalette.html#a7">normal</a>(), <a href="qpalette.html#a8">disabled</a>() and <a href="qpalette.html#b2">setActive</a>().
+<h3 class="fn">QPalette <a name="a6"></a>QPalette::copy () const</h3>
+<p>Returns a
+<a href="shclass.html">deep copy</a> of the palette.
+<h3 class="fn">const <a href="qcolorgroup.html">QColorGroup</a> &amp; <a name="a8"></a>QPalette::disabled () const</h3>
+<p>Returns the disabled color group of this palette.
+<p>See also:  <a href="qcolorgroup.html">QColorGroup</a>, <a href="qpalette.html#a7">normal</a>(), <a href="qpalette.html#a9">active</a>() and <a href="qpalette.html#b1">setDisabled</a>().
+<h3 class="fn">bool <a name="b5"></a>QPalette::isCopyOf ( const QPalette &amp; p )</h3>
+<p>Returns TRUE if this palette and <em>p</em> are copies of each other,
+ie. one of them was created as a copy of the other and neither was
+subsequently modified.  This is much stricter than equality.
+<p>See also:  operator= and operator==.
+<h3 class="fn">const <a href="qcolorgroup.html">QColorGroup</a> &amp; <a name="a7"></a>QPalette::normal () const</h3>
+<p>Returns the normal color group of this palette.
+<p>See also:  <a href="qcolorgroup.html">QColorGroup</a>, <a href="qpalette.html#a8">disabled</a>(), <a href="qpalette.html#a9">active</a>() and <a href="qpalette.html#b0">setNormal</a>().
+<h3 class="fn">bool <a name="b4"></a>QPalette::operator!= ( const QPalette &amp; p ) const</h3>
+<p>Returns TRUE if this palette is different from <em>p,</em> or FALSE if they
+are equal.
+<h3 class="fn">QPalette &amp; <a name="a5"></a>QPalette::operator= ( const QPalette &amp; p )</h3>
+<p>Assigns <em>p</em> to this palette and returns a reference to this palette.
+Note that a <em>shallow</em> copy of <em>p</em> is used.
+<p>See also:  <a href="qpalette.html#a6">copy</a>().
+<h3 class="fn">bool <a name="b3"></a>QPalette::operator== ( const QPalette &amp; p ) const</h3>
+<p>Returns TRUE if this palette is equal to <em>p,</em> or FALSE if they
+are different.
+<h3 class="fn">int <a name="b6"></a>QPalette::serialNumber () const</h3>
+<p>Returns a number that uniquely identifies this QPalette object. The
+serial number is very useful for caching.
+<p>See also:  <a href="qpixmap.html">QPixmap</a> and <a href="qpixmapcache.html">QPixmapCache</a>.
+<h3 class="fn">void <a name="b2"></a>QPalette::setActive ( const <a href="qcolorgroup.html">QColorGroup</a> &amp; g )</h3>
+<p>Sets the <code>active</code> color group to <em>g.</em>
+<p>See also:  <a href="qpalette.html#a9">active</a>().
+<h3 class="fn">void <a name="b1"></a>QPalette::setDisabled ( const <a href="qcolorgroup.html">QColorGroup</a> &amp; g )</h3>
+<p>Sets the <code>disabled</code> color group to <em>g.</em>
+<p>See also:  <a href="qpalette.html#a8">disabled</a>().
+<h3 class="fn">void <a name="b0"></a>QPalette::setNormal ( const <a href="qcolorgroup.html">QColorGroup</a> &amp; g )</h3>
+<p>Sets the <code>normal</code> color group to <em>g.</em>
+<p>See also:  <a href="qpalette.html#a7">normal</a>().
+<hr><h2>Related Functions</h2>
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="b8"></a>operator&lt;&lt; (<a href="qdatastream.html">QDataStream</a> &amp; s, const QPalette &amp; p)</h3>
+<p>Writes a palette to the stream and returns a reference to the stream.
+<p>Serialization format:
+<ol>
+<li> <a href="qcolorgroup.html">QColorGroup</a> normal
+<li> QColorGroup disabled
+<li> QColorGroup active
+</ol>
+The color groups are serialized in the listed order.
+
+<h3><a href="qdatastream.html">QDataStream</a> &amp; <a name="b9"></a>operator&gt;&gt; (<a href="qdatastream.html">QDataStream</a> &amp; s, QPalette &amp; p)</h3>
+<p>Reads a palette from the stream and returns a reference to the stream.
+
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qpalette.h: 1998/08/25
+<li>qpalette.cpp: 1998/07/03
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

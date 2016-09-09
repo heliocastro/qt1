@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QImageConsumer Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QImageConsumer Class Reference</h1><br clear="all">
+<p>
+An abstraction used by <a href="qimagedecoder.html">QImageDecoder</a>.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qasyncimageio-h.html">qasyncimageio.h</a>&gt;</code>
+<p><a href="qimageconsumer-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn">virtual void <a href="qimageconsumer.html#a0"><strong>changed</strong></a> ( const QRect &amp; ) </span>
+<li><span class="fn">virtual void <a href="qimageconsumer.html#a1"><strong>end</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qimageconsumer.html#a2"><strong>frameDone</strong></a> () </span>
+<li><span class="fn">virtual void <a href="qimageconsumer.html#a3"><strong>setLooping</strong></a> ( int ) </span>
+<li><span class="fn">virtual void <a href="qimageconsumer.html#a4"><strong>setFramePeriod</strong></a> ( int ) </span>
+<li><span class="fn">virtual void <a href="qimageconsumer.html#a5"><strong>setSize</strong></a> ( int, int ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+An abstraction used by <a href="qimagedecoder.html">QImageDecoder</a>.
+<p>
+A QImageConsumer consumes information about changes to the
+<a href="qimage.html">QImage</a> maintained by a QImageDecoder.  It represents the
+a view of the image which the decoder produces.
+<p>See also:  <a href="qimagedecoder.html">QImageDecoder</a>.
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn">void <a name="a0"></a>QImageConsumer::changed ( const <a href="qrect.html">QRect</a> &amp; ) <code>[virtual]</code></h3>
+<p>Called when the given area of the image has changed.
+<h3 class="fn">void <a name="a1"></a>QImageConsumer::end () <code>[virtual]</code></h3>
+<p>Called when all data of all frames has been decoded and revealed
+as <a href="qimageconsumer.html#a0">changed</a>().
+<h3 class="fn">void <a name="a2"></a>QImageConsumer::frameDone () <code>[virtual]</code></h3>
+<p>Called when a frame of an animated image has ended and been revealed
+as <a href="qimageconsumer.html#a0">changed</a>().  The decoder will not make
+any further changes to the image until the next call to
+<a href="qimageformat.html#a1">QImageFormat::decode</a>().
+<h3 class="fn">void <a name="a4"></a>QImageConsumer::setFramePeriod ( int milliseconds ) <code>[virtual]</code></h3>
+<p>Notes that the frame about to be decoded should not be displayed until
+the given number of <em>milliseconds</em> after the time that this function
+is called.  Of course, the image may not have been decoded by then, in
+which case the frame should not be displayed until it is complete.
+A value of -1 (the assumed default) indicates that the image should
+be diplayed even while it is only partially loaded.
+<h3 class="fn">void <a name="a3"></a>QImageConsumer::setLooping ( int n ) <code>[virtual]</code></h3>
+<p>Called to indicate that the sequence of frames in the image
+should be repeated <em>n</em> times, including the sequence during
+decoding.
+<p><ul>
+<li> 0 = Forever
+<li> 1 = Only display frames the first time through
+<li> 2 = Repeat once after first pass through images
+<li> etc.
+</ul>
+<p>To make the <a href="qimagedecoder.html">QImageDecoder</a>
+do this just delete it and pass the information to it again
+for decoding (setLooping() will be called again of course, but
+that can be ignored), or keep copies of the
+changed areas at the ends of frames.
+<h3 class="fn">void <a name="a5"></a>QImageConsumer::setSize ( int, int ) <code>[virtual]</code></h3>
+<p>This function is called as soon as the size of the image has
+been determined.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qasyncimageio.h: 1999/02/12
+<li>qasyncimageio.cpp: 1999/02/13
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

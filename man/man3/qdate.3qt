@@ -1,0 +1,248 @@
+.TH QDate 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QDate \- Date functions
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qdatetime.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QDate ()"
+.br
+.ti -1c
+.BI "QDate ( int " "y" ", int " "m" ", int d )"
+.br
+.ti -1c
+.BI "bool isNull () const"
+.br
+.ti -1c
+.BI "bool isValid () const"
+.br
+.ti -1c
+.BI "int year () const"
+.br
+.ti -1c
+.BI "int month () const"
+.br
+.ti -1c
+.BI "int day () const"
+.br
+.ti -1c
+.BI "int dayOfWeek () const"
+.br
+.ti -1c
+.BI "int dayOfYear () const"
+.br
+.ti -1c
+.BI "int daysInMonth () const"
+.br
+.ti -1c
+.BI "int daysInYear () const"
+.br
+.ti -1c
+.BI "virtual const char* monthName ( int month ) const"
+.br
+.ti -1c
+.BI "virtual const char* dayName ( int weekday ) const"
+.br
+.ti -1c
+.BI "QString toString () const"
+.br
+.ti -1c
+.BI "bool setYMD ( int " "y" ", int " "m" ", int d )"
+.br
+.ti -1c
+.BI "QDate addDays ( int days ) const"
+.br
+.ti -1c
+.BI "int daysTo ( const QDate & ) const"
+.br
+.ti -1c
+.BI "bool operator== ( const QDate & d ) const"
+.br
+.ti -1c
+.BI "bool operator!= ( const QDate & d ) const"
+.br
+.ti -1c
+.BI "bool operator< ( const QDate & d ) const"
+.br
+.ti -1c
+.BI "bool operator<= ( const QDate & d ) const"
+.br
+.ti -1c
+.BI "bool operator> ( const QDate & d ) const"
+.br
+.ti -1c
+.BI "bool operator>= ( const QDate & d ) const"
+.br
+.in -1c
+.SS "Static Public Members"
+.in +1c
+.ti -1c
+.BI "QDate currentDate ()"
+.br
+.ti -1c
+.BI "bool isValid ( int " "y" ", int " "m" ", int d )"
+.br
+.ti -1c
+.BI "bool leapYear ( int year )"
+.br
+.in -1c
+.SS "Static Protected Members"
+.in +1c
+.ti -1c
+.BI "uint greg2jul ( int " "y" ", int " "m" ", int d )"
+.br
+.ti -1c
+.BI "void jul2greg ( uint " "jd" ", int & " "y" ", int & " "m" ", int & d )"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "QDataStream & operator<< (QDataStream & " "s" ", const QDate & " "d" ")"
+.br
+.ti -1c
+.BI "QDataStream & operator>> (QDataStream & " "s" ", QDate & " "d" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The QDate class provides date functions.
+.PP
+The QDate is based on the Gregorian (modern western) calendar. England adopted the Gregorian calendar on September 14th 1752, which is the earliest date that is supported by QDate. Using earlier dates will give undefined results. Some countries adopted the Gregorian calendar later than England, thus the week day of early dates might be incorrect for these countries (but correct for England). The end of time is reached around 8000AD, by which time we expect Qt to be obsolete.
+.PP
+See also: QTime and QDateTime.
+.PP
+Examples:
+.(l
+dclock/dclock.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QDate::QDate ()"
+Constructs a null date. Null dates are invalid.
+.SH "QDate::QDate ( int y, int m, int d )"
+Constructs a date with the year \fIy,\fR month \fIm\fR and day \fId.\fR
+.SH "QDate QDate::addDays ( int ndays ) const"
+Returns this date plus \fIndays\fR days.
+.SH "QDate QDate::currentDate () \fC[static]\fR"
+Returns the current date.
+.PP
+See also: QTime::currentTime() and QDateTime::currentDateTime().
+.SH "int QDate::day () const"
+Returns the day of the month (1..31) for this date.
+.PP
+See also: year(), month() and dayOfWeek().
+.PP
+Examples:
+.(l
+dclock/dclock.cpp
+.)l
+.SH "const char * QDate::dayName ( int weekday ) const \fC[virtual]\fR"
+Returns the name of the \fIweekday.\fR
+.PP
+Weekday 1 == "Mon", day 2 == "Tue" etc.
+.SH "int QDate::dayOfWeek () const"
+Returns the weekday (Monday=1 .. Sunday=7) for this date.
+.PP
+See also: day().
+.SH "int QDate::dayOfYear () const"
+Returns the day of the year (1..365) for this date.
+.SH "int QDate::daysInMonth () const"
+Returns the number of days in the month (28..31) for this date.
+.SH "int QDate::daysInYear () const"
+Returns the number of days in the year (365 or 366) for this date.
+.SH "int QDate::daysTo ( const QDate & d ) const"
+Returns the number of days from this date to \fId,\fR which is negative if \fId\fR is in the past.
+.PP
+Example:
+.PP
+.nf
+.br
+    QDate d1( 1995, 5, 17 );            // May 17th 1995
+.br
+    QDate d2( 1995, 5, 20 );            // May 20th 1995
+.br
+    d1.daysTo( d2 );                    // returns 3
+.br
+    d2.daysTo( d1 );                    // returns -3
+.fi
+.PP
+See also: addDays().
+.SH "uint QDate::greg2jul ( int y, int m, int d ) \fC[static protected]\fR"
+For internal use only.
+.SH "bool QDate::isNull () const"
+Returns TRUE if the date is null. A null date is invalid.
+.PP
+See also: isValid().
+.SH "bool QDate::isValid () const"
+Returns TRUE if the date is valid.
+.PP
+See also: isNull().
+.SH "bool QDate::isValid ( int y, int m, int d ) \fC[static]\fR"
+Returns TRUE if the specified date is valid.
+.PP
+Note that years 00-99 are treated as 1900-1999.
+.PP
+See also: isNull().
+.SH "void QDate::jul2greg ( uint jd, int & y, int & m, int & d ) \fC[static protected]\fR"
+For internal use only.
+.SH "bool QDate::leapYear ( int y ) \fC[static]\fR"
+Returns TRUE if the specified year \fIy\fR is a leap year.
+.SH "int QDate::month () const"
+Returns the month (January=1 .. December=12) for this date.
+.PP
+See also: year() and day().
+.PP
+Examples:
+.(l
+dclock/dclock.cpp
+.)l
+.SH "const char * QDate::monthName ( int month ) const \fC[virtual]\fR"
+Returns the name of the \fImonth.\fR
+.PP
+Month 1 == "Jan", month 2 == "Feb" etc.
+.SH "bool QDate::operator!= ( const QDate & d ) const"
+Returns TRUE if this date is different from \fId,\fR or FALSE if they are equal.
+.SH "bool QDate::operator< ( const QDate & d ) const"
+Returns TRUE if this date is before \fId,\fR otherwise FALSE.
+.SH "bool QDate::operator<= ( const QDate & d ) const"
+Returns TRUE if this date is before or equal to \fId,\fR otherwise FALSE.
+.SH "bool QDate::operator== ( const QDate & d ) const"
+Returns TRUE if this date is equal to \fId,\fR or FALSE if they are different.
+.SH "bool QDate::operator> ( const QDate & d ) const"
+Returns TRUE if this date is after \fId,\fR otherwise FALSE.
+.SH "bool QDate::operator>= ( const QDate & d ) const"
+Returns TRUE if this date is equal to or after \fId,\fR otherwise FALSE.
+.SH "bool QDate::setYMD ( int y, int m, int d )"
+Sets the year \fIy,\fR month \fIm\fR and day \fId.\fR Returns TRUE if the date is valid, otherwise FALSE.
+.SH "QString QDate::toString () const"
+Returns the date as a string.
+.PP
+The string format is "Sat May 20 1995".
+.SH "int QDate::year () const"
+Returns the year (>= 1752) for this date.
+.PP
+See also: month() and day().
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "QDataStream & operator<< (QDataStream & s, const QDate & d)"
+Writes the date to the stream.
+.PP
+Serialization format: [Q_UINT32], Julian day.
+.SH "QDataStream & operator>> (QDataStream & s, QDate & d)"
+Reads a date from the stream.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qdate.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

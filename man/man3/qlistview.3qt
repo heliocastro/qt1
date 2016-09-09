@@ -1,0 +1,556 @@
+.TH QListView 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QListView \- Implements a list/tree view
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qlistview.h>\fR
+.PP
+Inherits QScrollView.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QListView ( QWidget * " "parent" " = 0, const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "\fB~QListView\fR ()"
+.br
+.ti -1c
+.BI "int treeStepSize () const"
+.br
+.ti -1c
+.BI "virtual void setTreeStepSize ( int )"
+.br
+.ti -1c
+.BI "virtual void insertItem ( QListViewItem * )"
+.br
+.ti -1c
+.BI "virtual void clear ()"
+.br
+.ti -1c
+.BI "QHeader* header () const"
+.br
+.ti -1c
+.BI "virtual int addColumn ( const char * " "label" ", int " "size" " = -1 )"
+.br
+.ti -1c
+.BI "virtual void setColumnText ( int " "column" ", const char * label )"
+.br
+.ti -1c
+.BI "const char* columnText ( int column ) const"
+.br
+.ti -1c
+.BI "virtual void setColumnWidth ( int " "column" ", int width )"
+.br
+.ti -1c
+.BI "int columnWidth ( int column ) const"
+.br
+.ti -1c
+.BI "enum WidthMode { Manual, Maximum }"
+.br
+.ti -1c
+.BI "virtual void setColumnWidthMode ( int " "column" ", WidthMode )"
+.br
+.ti -1c
+.BI "WidthMode columnWidthMode ( int column ) const"
+.br
+.ti -1c
+.BI "virtual void setColumnAlignment ( int, int )"
+.br
+.ti -1c
+.BI "int columnAlignment ( int ) const"
+.br
+.ti -1c
+.BI "virtual void show ()"
+.br
+.ti -1c
+.BI "QListViewItem* itemAt ( const QPoint & screenPos ) const"
+.br
+.ti -1c
+.BI "QRect itemRect ( const QListViewItem * ) const"
+.br
+.ti -1c
+.BI "int itemPos ( const QListViewItem * )"
+.br
+.ti -1c
+.BI "void ensureItemVisible ( const QListViewItem * )"
+.br
+.ti -1c
+.BI "void repaintItem ( const QListViewItem * ) const"
+.br
+.ti -1c
+.BI "virtual void setMultiSelection ( bool enable )"
+.br
+.ti -1c
+.BI "bool isMultiSelection () const"
+.br
+.ti -1c
+.BI "virtual void setSelected ( QListViewItem *, bool )"
+.br
+.ti -1c
+.BI "bool isSelected ( QListViewItem * ) const"
+.br
+.ti -1c
+.BI "virtual void setOpen ( QListViewItem *, bool )"
+.br
+.ti -1c
+.BI "bool isOpen ( QListViewItem * ) const"
+.br
+.ti -1c
+.BI "virtual void setCurrentItem ( QListViewItem * )"
+.br
+.ti -1c
+.BI "QListViewItem* currentItem () const"
+.br
+.ti -1c
+.BI "QListViewItem* firstChild () const"
+.br
+.ti -1c
+.BI "int childCount () const"
+.br
+.ti -1c
+.BI "virtual void setAllColumnsShowFocus ( bool )"
+.br
+.ti -1c
+.BI "bool allColumnsShowFocus () const"
+.br
+.ti -1c
+.BI "virtual void setItemMargin ( int )"
+.br
+.ti -1c
+.BI "int itemMargin () const"
+.br
+.ti -1c
+.BI "virtual void setRootIsDecorated ( bool )"
+.br
+.ti -1c
+.BI "bool rootIsDecorated () const"
+.br
+.ti -1c
+.BI "virtual void setSorting ( int " "column" ", bool " "increasing" " = TRUE )"
+.br
+.ti -1c
+.BI "virtual void setStyle ( GUIStyle )"
+.br
+.ti -1c
+.BI "virtual void setFont ( const QFont & )"
+.br
+.ti -1c
+.BI "virtual void setPalette ( const QPalette & )"
+.br
+.ti -1c
+.BI "virtual bool eventFilter ( QObject * " "o" ", QEvent * )"
+.br
+.ti -1c
+.BI "virtual QSize sizeHint () const"
+.br
+.in -1c
+.SS "Public Slots"
+.in +1c
+.ti -1c
+.BI "void triggerUpdate ()"
+.br
+.in -1c
+.SS "Signals"
+.in +1c
+.ti -1c
+.BI "void selectionChanged ()"
+.br
+.ti -1c
+.BI "void selectionChanged ( QListViewItem * )"
+.br
+.ti -1c
+.BI "void currentChanged ( QListViewItem * )"
+.br
+.ti -1c
+.BI "void doubleClicked ( QListViewItem * )"
+.br
+.ti -1c
+.BI "void returnPressed ( QListViewItem * )"
+.br
+.ti -1c
+.BI "void rightButtonClicked ( QListViewItem *, const QPoint &, int )"
+.br
+.ti -1c
+.BI "void rightButtonPressed ( QListViewItem *, const QPoint &, int )"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void mousePressEvent ( QMouseEvent * e )"
+.br
+.ti -1c
+.BI "virtual void mouseReleaseEvent ( QMouseEvent * e )"
+.br
+.ti -1c
+.BI "virtual void mouseMoveEvent ( QMouseEvent * e )"
+.br
+.ti -1c
+.BI "virtual void mouseDoubleClickEvent ( QMouseEvent * e )"
+.br
+.ti -1c
+.BI "virtual void focusInEvent ( QFocusEvent * e )"
+.br
+.ti -1c
+.BI "virtual void focusOutEvent ( QFocusEvent * e )"
+.br
+.ti -1c
+.BI "virtual void keyPressEvent ( QKeyEvent * e )"
+.br
+.ti -1c
+.BI "virtual void resizeEvent ( QResizeEvent * e )"
+.br
+.ti -1c
+.BI "virtual void drawContentsOffset ( QPainter *, int " "ox" ", int " "oy" ", int " "cx" ", int " "cy" ", int " "cw" ", int ch )"
+.br
+.ti -1c
+.BI "virtual void paintEmptyArea ( QPainter *, const QRect & )"
+.br
+.ti -1c
+.BI "virtual void enabledChange ( bool )"
+.br
+.in -1c
+.SS "Protected Slots"
+.in +1c
+.ti -1c
+.BI "void updateContents ()"
+.br
+.in -1c
+.SH DESCRIPTION
+The QListView class implements a list/tree view.
+.PP
+It can display and control a hierarchy of multi-column items, and provides the ability to add new items at run-time, let the user select one or many items, sort the list in increasing or decreasing order by any column, and so on.
+.PP
+The simplest mode of usage is to create a QListView, add some column headers using setColumn(), create one or more QListViewItem objects with the QListView as parent, set up the list view's geometry(), and show() it.
+.PP
+The main setup functions are 
+.IP
+.TP
+addColumn() - adds a column, with text and perhaps width.
+.IP
+.TP
+setColumnWidthMode() - sets the column to be resized automatically or not.
+.IP
+.TP
+setMultiSelection() - decides whether one can select one or many objects in this list view. The default is FALSE (selecting one item unselects any other selected item).
+.IP
+.TP
+setAllColumnsShowFocus() - decides whether items should show keyboard focus using all columns, or just column 0. The default is to show focus using just column 0.
+.IP
+.TP
+setRootIsDecorated() - decides whether root items can be opened and closed by the user, and have open/close decoration to their left. The default is FALSE.
+.IP
+.TP
+setTreeStepSize() - decides the how many pixels an item's children are indented relative to their parent. The default is 20. This is mostly a matter of taste.
+.IP
+.TP
+setSorting() - decides whether the items should be sorted, whether it should be in ascending or descending order, and by what column it should be sorted.
+.PP
+There are also several functions for mapping between items and coordinates. itemAt() returns the item at a position on-screen, itemRect() returns the rectangle an item occupies on the screen and itemPos() returns the position of any item (not on-screen, in the list view). firstChild() returns the item at the top of the view (not necessarily on-screen) so you can iterate over the items using either QListViewItem::itemBelow() or a combination of QListViewItem::firstChild() and QListViewItem::nextSibling().
+.PP
+Naturally, QListView provides a clear() function, as well as an explicit insertItem() for when QListViewItem's default insertion won't do.
+.PP
+Since QListView offers multiple selection it has to display keyboard focus and selection state separately. Therefore there are functions both to set the selection state of an item, setSelected(), and to select which item displays keyboard focus, setCurrentItem().
+.PP
+QListView emits two groups of signals: One group signals changes in selection/focus state and one signals selection. The first group consists of selectionChanged(), applicable to all list views, and selectionChanged( QListViewItem * ), applicable only to single-selection list view, and currentChanged( QListViewItem * ). The second group consists of doubleClicked( QListViewItem * ), returnPressed( QListViewItem * ) and rightButtonClicked( QListViewItem *, const QPoint&, int ).
+.PP
+In Motif style, QListView deviates fairly strongly from the look and feel of the Motif hierarchical tree view. This is done mostly to provide a usable keyboard interface and to make the list view look better with a white background.
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+Windows style, flat (from QFileDialog)
+.PP
+.ce 1
+.B "[Image Omitted]"
+.PP
+Motif style, hierarchial (from the dirview/dirview.cpp example).
+.PP
+Examples:
+.(l
+dirview/dirview.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QListView::QListView ( QWidget * parent = 0, const char * name = 0 )"
+Creates a new empty list view, with \fIparent\fR as a parent and \fIname\fR as object name.
+.SH "QListView::~QListView ()"
+Deletes the list view and all items in it, and frees all allocated resources.
+.SH "int QListView::addColumn ( const char * label, int width = -1 ) \fC[virtual]\fR"
+Adds a new column at the right end of the widget, with the header \fIlabel,\fR and returns the index of the column.
+.PP
+If \fIwidth\fR is negative, the new column will have WidthMode Maximum, otherwise it will be Manual at \fIwidth\fR pixels wide.
+.PP
+See also: setColumnText(), setColumnWidth() and setColumnWidthMode().
+.SH "bool QListView::allColumnsShowFocus () const"
+Returns TRUE if the items in this list view indicate focus and selection state using all of their columns, else FALSE.
+.PP
+See also: setAllColumnsShowFocus().
+.SH "int QListView::childCount () const"
+Returns the current number of parentless QListViewItem objects in this QListView, like QListViewItem::childCount() returns the number of child items for a QListViewItem.
+.PP
+See also: QListViewItem::childCount().
+.SH "void QListView::clear () \fC[virtual]\fR"
+Remove and delete all the items in this list view, and trigger an update.
+.PP
+See also: triggerUpdate().
+.SH "int QListView::columnAlignment ( int column ) const"
+Returns the alignment of logical column \fIcolumn.\fR
+.SH "const char* QListView::columnText ( int c ) const"
+Returns the text for the heading of column \fIc.\fR
+.SH "int QListView::columnWidth ( int c ) const"
+Returns the width of the heading of column \fIc.\fR
+.SH "QListView::WidthMode QListView::columnWidthMode( int c ) const"
+Returns the currently set WidthMode for column \fIc.\fR
+.PP
+See also: setColumnWidthMode().
+.SH "void QListView::currentChanged ( QListViewItem * ) \fC[signal]\fR"
+This signal is emitted whenever the current item has changed (normally after the screen update). The current item is the item responsible for indicating keyboard focus.
+.PP
+The argument is the newly current item.
+.PP
+See also: setCurrentItem() and currentItem().
+.SH "QListViewItem * QListView::currentItem () const"
+Returns a pointer to the currently highlighted item, or 0 if there isn't any.
+.PP
+See also: setCurrentItem().
+.SH "void QListView::doubleClicked ( QListViewItem * ) \fC[signal]\fR"
+This signal is emitted whenever an item is double-clicked. It's emitted on the second button press, not the second button release.
+.SH "void QListView::drawContentsOffset ( QPainter * p, int ox, int oy, int cx, int cy, int cw, int ch ) \fC[virtual protected]\fR"
+Calls QListViewItem::paintCell() and/or QListViewItem::paintBranches() for all list view items that require repainting. See the documentation for those functions for details.
+.PP
+Reimplemented from QScrollView.
+.SH "void QListView::ensureItemVisible ( const QListViewItem * i )"
+Ensures that \fIi\fR is makde visible, scrolling the list view vertically as required.
+.PP
+See also: itemRect() and QSCrollView::ensureVisible().
+.SH "bool QListView::eventFilter ( QObject * o, QEvent * e ) \fC[virtual]\fR"
+Redirects events for the viewport to mousePressEvent(), keyPressEvent() and friends.
+.PP
+Reimplemented from QObject.
+.SH "QListViewItem * QListView::firstChild () const"
+Returns the first item in this QListView. You can use its firstChild() and nextSibling() functions to traverse the entire tree of items.
+.PP
+Returns 0 if there is no first item.
+.PP
+See also: itemAt(), itemBelow() and itemAbove().
+.SH "void QListView::focusInEvent ( QFocusEvent * ) \fC[virtual protected]\fR"
+Handles focus in events on behalf of viewport(). Since viewport() is this widget's focus proxy by default, you can think of this function as handling this widget's focus in events.
+.PP
+See also: setFocusPolicy(), setFocusProxy() and focusOutEvent().
+.PP
+Reimplemented from QWidget.
+.SH "void QListView::focusOutEvent ( QFocusEvent * ) \fC[virtual protected]\fR"
+Handles focus out events on behalf of viewport(). Since viewport() is this widget's focus proxy by default, you can think of this function as handling this widget's focus in events.
+.PP
+See also: setFocusPolicy(), setFocusProxy() and focusInEvent().
+.PP
+Reimplemented from QWidget.
+.SH "QHeader * QListView::header () const"
+Returns a pointer to the QHeader object that manages this list view's columns. Please don't modify the header behind the list view's back.
+.PP
+See also: setHeader().
+.SH "void QListView::insertItem ( QListViewItem * i ) \fC[virtual]\fR"
+Inserts a top-level QListViewItem into this list view. You generally do not need to call this; the QListViewItem constructor does it for you.
+.SH "bool QListView::isMultiSelection () const"
+Returns TRUE if this list view is in multi-selection mode and FALSE if it is in single-selection mode.
+.PP
+See also: setMultiSelection().
+.SH "bool QListView::isOpen ( QListViewItem * item ) const"
+Identical to \fIitem->isOpen().\fR Provided for completeness.
+.PP
+See also: setOpen().
+.SH "bool QListView::isSelected ( QListViewItem * i ) const"
+Returns i->isSelected().
+.PP
+Provided only because QListView provides setSelected() and trolls are neat creatures and like neat, orthogonal interfaces.
+.SH "QListViewItem * QListView::itemAt ( const QPoint & screenPos ) const"
+Returns a pointer to the QListViewItem at \fIscreenPos.\fR Note that \fIscreenPos\fR is in the coordinate system of viewport(), not in the listview's own, much larger, coordinate system.
+.PP
+itemAt() returns 0 if there is no such item.
+.PP
+See also: itemPos() and itemRect().
+.SH "int QListView::itemMargin () const"
+Returns the advisory item margin which list items may use.
+.PP
+See also: QListViewItem::paintCell() and setItemMargin().
+.SH "int QListView::itemPos ( const QListViewItem * item )"
+Returns the y coordinate of \fIitem\fR in the list view's coordinate system. This functions is normally much slower than itemAt(), but it works for all items, while itemAt() normally works only for items on the screen.
+.PP
+This is a thin wrapper around QListViewItem::itemPos().
+.PP
+See also: itemAt() and itemRect().
+.SH "QRect QListView::itemRect ( const QListViewItem * i ) const"
+Returns the rectangle on the screen \fIi\fR occupies in viewport()'s coordinates, or an invalid rectangle if \fIi\fR is a null pointer or is not currently visible.
+.PP
+The rectangle returned does not include any children of the rectangle (ie. it uses QListViewItem::height() rather than QListViewItem::totalHeight()). If you want the rectangle including children, you can use something like this code:
+.PP
+.nf
+.br
+    QRect r( listView->itemRect( item ) );
+.br
+    r.setHeight( (QCOORD)(QMIN( item->totalHeight(),
+.br
+                                listView->viewport->height() - r.y() ) ) )
+.fi
+.PP
+Note the way it avoids too-high rectangles. totalHeight() can be much larger than the window system's coordinate system allows.
+.PP
+itemRect() is comparatively slow. It's best to call it only for items that are probably on-screen.
+.SH "void QListView::keyPressEvent ( QKeyEvent * e ) \fC[virtual protected]\fR"
+Handles key press events on behalf of viewport(). Since viewport() is this widget's focus proxy by default, you can think of this function as handling this widget's keyboard input.
+.PP
+Reimplemented from QWidget.
+.SH "void QListView::mouseDoubleClickEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Processes mouse double-click events on behalf of the viewed widget; eventFilter() calls this function. Note that the coordinates in \fIe\fR is in the coordinate system of viewport().
+.PP
+Reimplemented from QWidget.
+.SH "void QListView::mouseMoveEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Processes mouse move events on behalf of the viewed widget; eventFilter() calls this function. Note that the coordinates in \fIe\fR is in the coordinate system of viewport().
+.PP
+Reimplemented from QWidget.
+.SH "void QListView::mousePressEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Processes mouse move events on behalf of the viewed widget; eventFilter() calls this function. Note that the coordinates in \fIe\fR is in the coordinate system of viewport().
+.PP
+Reimplemented from QWidget.
+.SH "void QListView::mouseReleaseEvent ( QMouseEvent * e ) \fC[virtual protected]\fR"
+Processes mouse move events on behalf of the viewed widget; eventFilter() calls this function. Note that the coordinates in \fIe\fR is in the coordinate system of viewport().
+.PP
+Reimplemented from QWidget.
+.SH "void QListView::paintEmptyArea ( QPainter * p, const QRect & rect ) \fC[virtual protected]\fR"
+Paints \fIrect\fR so that it looks like empty background using painter p. \fIrect\fR is is widget coordinates, ready to be fed to \fIp.\fR
+.PP
+The default function fills \fIrect\fR with colorGroup().base().
+.SH "void QListView::repaintItem ( const QListViewItem * item ) const"
+Repaints \fIitem\fR on the screen, if \fIitem\fR is currently visible. Takes care to avoid multiple repaints.
+.SH "void QListView::resizeEvent ( QResizeEvent * e ) \fC[virtual protected]\fR"
+Ensures that the header is correctly sized and positioned.
+.PP
+Reimplemented from QWidget.
+.SH "void QListView::returnPressed ( QListViewItem * ) \fC[signal]\fR"
+This signal is emitted when enter or return is pressed. The argument is currentItem().
+.SH "void QListView::rightButtonClicked ( QListViewItem *, const QPoint &, int ) \fC[signal]\fR"
+This signal is emitted when the right button is clicked (ie. when it's released). The arguments are the relevant QListViewItem (may be 0), the point in global coordinates and the relevant column.
+.SH "void QListView::rightButtonPressed ( QListViewItem *, const QPoint &, int ) \fC[signal]\fR"
+This signal is emitted when the right button is pressed. Then arguments are the relevant QListViewItem (may be 0), the point in global coordinates and the relevant column.
+.SH "bool QListView::rootIsDecorated () const"
+Returns TRUE if root items can be opened and closed by the user, FALSE if not.
+.SH "void QListView::selectionChanged () \fC[signal]\fR"
+This signal is emitted whenever the set of selected items has changed (normally before the screen update). It is available both in single-selection and multi-selection mode, but is most meaningful in multi-selection mode.
+.PP
+See also: setSelected() and QListViewItem::setSelected().
+.SH "void QListView::selectionChanged ( QListViewItem * ) \fC[signal]\fR"
+This signal is emitted whenever the selected item has changed in single-selection mode (normally after the screen update). The argument is the newly selected item.
+.PP
+There is another signal which is more useful in multi-selection mode.
+.PP
+See also: setSelected(), QListViewItem::setSelected() and currentChanged().
+.SH "void QListView::setAllColumnsShowFocus ( bool enable ) \fC[virtual]\fR"
+Sets this list view to assume that the items show focus and selection state using all of their columns if \fIenable\fR is TRUE, or that they show it just using column 0 if \fIenable\fR is FALSE.
+.PP
+The default is FALSE.
+.PP
+Setting this to TRUE if it isn't necessary can cause noticeable flicker.
+.PP
+See also: allColumnsShowFocus().
+.SH "void QListView::setColumnAlignment ( int column, int align ) \fC[virtual]\fR"
+Configures the logical columne \fIcolumn\fR to have alignment \fIalign.\fR The alignment is ultimately passed to QListViewItem::paintCell() for each item in the view.
+.PP
+The display is automatically scheduled to be updated.
+.SH "void QListView::setColumnText ( int column, const char * label ) \fC[virtual]\fR"
+Sets the heading text of column \fIcolumn\fR to \fIlabel.\fR The leftmost colum is number 0.
+.SH "void QListView::setColumnWidth ( int column, int w ) \fC[virtual]\fR"
+Sets the width of column \fIcolumn\fR to \fIw\fR pixels. Note that if the column has a WidthMode other than Manual, this width setting may be subsequently overridden. The leftmost colum is number 0.
+.SH "void QListView::setColumnWidthMode ( int c, WidthMode mode ) \fC[virtual]\fR"
+Sets column \fCto\fR behave according to \fImode,\fR which is one of:
+.TP
+\fCManual\fR - the column width does not change automatically
+.TP
+\fCMaximum\fR - the column is automatically sized according to the widths of all items in the column.
+.PP
+See also: QListViewItem::width().
+.PP
+Bugs and limitations:
+.TP
+doesn't shrink back yet when items shrink or close
+.SH "void QListView::setCurrentItem ( QListViewItem * i ) \fC[virtual]\fR"
+Sets \fIi\fR to be the current highlighted item and repaints appropriately. This highlighted item is used for keyboard navigation and focus indication; it doesn't mean anything else.
+.PP
+See also: currentItem().
+.SH "void QListView::setFont ( const QFont & f ) \fC[virtual]\fR"
+Reimplemented to let the list view items update themselves. \fIf\fR is the new font.
+.PP
+Reimplemented from QWidget.
+.SH "void QListView::setItemMargin ( int m ) \fC[virtual]\fR"
+Sets the advisory item margin which list items may use to \fIm.\fR
+.PP
+The item margin defaults to one pixels and is the margin between the item's edges and the area where it draws its contents. QListViewItem::paintFocus() draws in the margin.
+.PP
+See also: QListViewItem::paintCell().
+.SH "void QListView::setMultiSelection ( bool enable ) \fC[virtual]\fR"
+Sets the list view to multi-selection mode if \fIenable\fR is TRUE, and to single-selection mode if \fIenable\fR is FALSE.
+.PP
+See also: isMultiSelection().
+.SH "void QListView::setOpen ( QListViewItem * item, bool open ) \fC[virtual]\fR"
+Sets \fIitem\fR to be open if \fIopen\fR is TRUE and \\item is expandable, and to be closed if \fIopen\fR is FALSE. Repaints accordingly.
+.PP
+Does nothing if \fIitem\fR is not expandable.
+.PP
+See also: QListViewItem::setOpen() and QListViewItem::setExpandable().
+.SH "void QListView::setPalette ( const QPalette & p ) \fC[virtual]\fR"
+Reimplemented to let the list view items update themselves. \fIp\fR is the new palette.
+.PP
+Reimplemented from QWidget.
+.SH "void QListView::setRootIsDecorated ( bool enable ) \fC[virtual]\fR"
+Sets this list view to show open/close signs on root items if \fIenable\fR is TRUE, and to not show such signs if \fIenable\fR is FALSE.
+.PP
+Open/close signs is a little + or - in windows style, an arrow in Motif style.
+.SH "void QListView::setSelected ( QListViewItem * item, bool selected ) \fC[virtual]\fR"
+Sets \fIitem\fR to be selected if \fIselected\fR is TRUE, and to be not selected if \fIselected\fR is FALSE.
+.PP
+If the list view is in single-selection mode and \fIselected\fR is TRUE, the present selected item is unselected and made current. Unlike QListViewItem::setSelected(), this function updates the list view as necessary and emits the selectionChanged() signals.
+.PP
+See also: isSelected(), setMultiSelection(), isMultiSelection() and setCurrentItem().
+.SH "void QListView::setSorting ( int column, bool ascending = TRUE ) \fC[virtual]\fR"
+Set the list view to be sorted by \fIcolumn\fR and to be sorted in ascending order if \fIascending\fR is TRUE or descending order if it is FALSE.
+.PP
+If \fIcolumn\fR is -1, sorting is disabled.
+.SH "void QListView::setStyle ( GUIStyle s ) \fC[virtual]\fR"
+Reimplemented to let the list view items update themselves. \fIs\fR is the new GUI style.
+.PP
+Reimplemented from QWidget.
+.SH "void QListView::setTreeStepSize ( int l ) \fC[virtual]\fR"
+Sets the the number of pixels a child is offset from its parent, in a tree view to \fIl.\fR The default is 20.
+.PP
+See also: treeStepSize().
+.SH "void QListView::show () \fC[virtual]\fR"
+Reimplemented to set the correct background mode and viewed area size.
+.PP
+Reimplemented from QWidget.
+.SH "QSize QListView::sizeHint () const \fC[virtual]\fR"
+Returns a size suitable for this scroll view. This is as wide as mostly upon QHeader's sizeHint() recommends and tall enough for perhaps 10 items.
+.PP
+Reimplemented from QWidget.
+.SH "int QListView::treeStepSize () const"
+Returns the number of pixels a child is offset from its parent. This number has meaning only for tree views. The default is 20.
+.PP
+See also: setTreeStepSize().
+.SH "void QListView::triggerUpdate () \fC[slot]\fR"
+Triggers a size, geometry and contentual update during the next iteration of the event loop. Cleverly makes sure that there'll be just one update, to avoid flicker.
+.SH "void QListView::updateContents () \fC[protected slot]\fR"
+Updates the sizes of the viewport, header, scrollbars and so on.
+Don't call this directly; call triggerUpdates() instead.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qlistview.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QHBoxLayout Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QHBoxLayout Class Reference</h1><br clear="all">
+<p>
+The QHBoxLayout class lines up child widgets horizontally.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qlayout-h.html">qlayout.h</a>&gt;</code>
+<p>
+Inherits <a href="qboxlayout.html">QBoxLayout</a>.
+<p><a href="qhboxlayout-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qhboxlayout.html#a0"><strong>QHBoxLayout</strong></a> ( QWidget * parent, int border=0, int autoBorder = -1, const char * name=0 ) </span>
+<li><span class="fn"><a href="qhboxlayout.html#a1"><strong>QHBoxLayout</strong></a> ( int autoBorder = -1, const char * name=0 ) </span>
+<li><span class="fn"><a href="qhboxlayout.html#a2"><strong>~QHBoxLayout</strong></a> () </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QHBoxLayout class lines up child widgets horizontally.
+<p>
+This class provides an easier way to construct horizontal box layout
+objects.  See <a href="qboxlayout.html">QBoxLayout</a> for more details.
+<p>The simplest way to use this class is:
+<p><pre>     <a href="qboxlayout.html">QBoxLayout</a> * l = new <a href="qhboxlayout.html">QHBoxLayout</a>( widget );
+     l-&gt;<a href="qboxlayout.html#a5">addWidget</a>( aWidget );
+     l-&gt;<a href="qboxlayout.html#a5">addWidget</a>( anotherWidget );
+     l-&gt;<a href="qlayout.html#a2">activate</a>()
+</pre>
+<p>See also:  <a href="qvboxlayout.html">QVBoxLayout</a> and <a href="qgridlayout.html">QGridLayout</a>.
+<p>Examples:
+ <a href="layout-layout-cpp.html#QHBoxLayout">layout/layout.cpp</a>
+ <a href="widgets-widgets-cpp.html#QHBoxLayout">widgets/widgets.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QHBoxLayout::QHBoxLayout ( <a href="qwidget.html">QWidget</a> * parent, int border=0, int autoBorder = -1, const char * name=0 )</h3>
+<p>Creates a new top-level horizontal box.
+<h3 class="fn"><a name="a1"></a>QHBoxLayout::QHBoxLayout ( int autoBorder = -1, const char * name=0 )</h3>
+<p>Creates a new horizontal box. You have to add it to another
+layout before using it.
+<h3 class="fn"><a name="a2"></a>QHBoxLayout::~QHBoxLayout ()</h3>
+<p>Destroys this box.
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qlayout.h: 1998/08/21
+<li>qlayout.cpp: 1998/09/21
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

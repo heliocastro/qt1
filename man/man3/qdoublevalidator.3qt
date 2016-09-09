@@ -1,0 +1,79 @@
+.TH QDoubleValidator 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QDoubleValidator \- Range checking of floating-point numbers
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qvalidator.h>\fR
+.PP
+Inherits QValidator.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QDoubleValidator ( QWidget * " "parent" ", const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "QDoubleValidator ( double " "bottom" ", double " "top" ", int " "decimals" ", QWidget * " "parent" ", const char * " "name" " = 0 )"
+.br
+.ti -1c
+.BI "\fB~QDoubleValidator\fR ()"
+.br
+.ti -1c
+.BI "virtual QValidator::State validate ( QString &, int & )"
+.br
+.ti -1c
+.BI "virtual void setRange ( double " "bottom" ", double " "top" ", int " "decimals" " = 0 )"
+.br
+.ti -1c
+.BI "double bottom () const"
+.br
+.ti -1c
+.BI "double top () const"
+.br
+.ti -1c
+.BI "int decimals () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QDoubleValidator class provides range checking of floating-point numbers.
+.PP
+QDoubleValidator provides an upper bound, a lower bound, and a limit on the number of digits after the decimal point. It does not provide a fixup() function.
+.PP
+See also: QIntValidator.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QDoubleValidator::QDoubleValidator ( QWidget * parent, const char * name = 0 )"
+Creates a validator object which accepts all double from 2.7182818 to 3.1415926 (please, no bug reports) with at most seven digits after the decimal point.
+.PP
+This constructor is not meant to be useful; it is provided for completeness.
+.SH "QDoubleValidator::QDoubleValidator ( double bottom, double top, int decimals, QWidget * parent, const char * name = 0 )"
+Creates a validator object which accepts all doubles from \fIbottom\fR up to and including \fItop\fR with at most \fIdecimals\fR digits after the decimal point.
+.SH "QDoubleValidator::~QDoubleValidator ()"
+Deletes the validator and frees any storage and other resources used.
+.SH "double QDoubleValidator::bottom () const"
+Returns the lowest valid number according to this validator.
+.PP
+See also: top(), decimals() and setRange().
+.SH "int QDoubleValidator::decimals () const"
+Returns the largest number of digits a valid number can have after its decimal point.
+.PP
+See also: bottom(), top() and setRange().
+.SH "void QDoubleValidator::setRange ( double bottom, double top, int decimals = 0 ) \fC[virtual]\fR"
+Sets the validator to accept numbers from \fIbottom\fR up to and including \fItop\fR with at most \fIdecimals\fR digits after the decimal point.
+.SH "double QDoubleValidator::top () const"
+Returns the highest valid number according to this validator.
+.PP
+See also:  bottom(), decimals and setRange().
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qdoublevalidator.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

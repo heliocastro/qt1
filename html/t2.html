@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>
+Qt Tutorial - Chapter 2
+</title></head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Chapter 2: Calling it Quits</h1><br clear="all">
+<p>
+<center><img src="t2.gif" alt="Screenshot of tutorial two"></center>
+<p>
+Having created a window in <a href="t1.html">chapter one,</a> we will
+now go on to make the application quit properly when the user tells it to.
+<p>
+We will also use a font that is more exciting than the default one.
+<p>
+<pre>/****************************************************************
+**
+** Qt tutorial 2
+**
+****************************************************************/
+
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+
+int main( int argc, char **argv )
+{
+    <a href="qapplication.html">QApplication</a> a( argc, argv );
+
+    <a href="qpushbutton.html">QPushButton</a> quit( "Quit" );
+    quit.<a href="qpushbutton.html#b2">resize</a>( 75, 30 );
+    quit.<a href="qwidget.html#f9">setFont</a>( <a href="qfont.html">QFont</a>( "Times", 18, QFont::Bold ) );
+
+    <a href="qobject.html#f2">QObject::connect</a>( &amp;quit, SIGNAL(clicked()), &amp;a, SLOT(quit()) );
+
+    a.<a href="qapplication.html#b9">setMainWidget</a>( &amp;quit );
+    quit.<a href="qwidget.html#k2">show</a>();
+    return a.<a href="qapplication.html#c9">exec</a>();
+}
+</pre>
+<p>
+<h2>Line by Line Walk-Through</h2>
+<p>
+<pre>
+    #include &lt;<a href="qfont-h.html">qfont.h</a>&gt;</pre>
+<p>
+Since this program uses QFont, it needs to include qfont.h.  Qt's font
+abstraction is rather different from the horror provided by X, and
+loading and using fonts has been highly optimized.
+<p>
+<pre>
+        <a href="qpushbutton.html">QPushButton</a> quit( "Quit" );</pre>
+<p>
+This time, the button says "Quit" and that's exactly what the program
+will do when the user clicks the button.  This is not a coincidence.
+<p>
+<pre>
+        quit.<a href="qpushbutton.html#b2">resize</a>( 75, 30 );
+</pre>
+<p>
+We've chosen another size for the button since the text is a bit shorter
+than "Hello World!".  We could also have used <a href="qbutton.html#b3">QPushButton::setAutoResize()</a>, or even
+use <a href="qfontmetrics.html">QFontMetrics</a> to set right size.
+<p>
+<pre>
+        quit.<a href="qwidget.html#f9">setFont</a>( <a href="qfont.html">QFont</a>( "Times", 18, QFont::Bold ) );
+</pre>
+<p>
+Here we choose a new font for the button, an 18-point bold font from
+the Times family.  Note that we create the font on the spot.
+<p>
+It is also possible to <a href="qapplication.html#g0">change the
+default font</a> for the whole application.
+<p>
+<pre>
+        <a href="qobject.html#f2">QObject::connect</a>( &amp;quit, SIGNAL(clicked()), &amp;a, SLOT(quit()) );
+</pre>
+<p>
+connect() is perhaps <em>the</em> most central feature of Qt.
+Note that connect() is a static function in QObject. Do not confuse it
+with the connect() function in the socket library.
+<p>
+This line establishes a one-way connection between two Qt objects (objects
+that inherit QObject, directly or indirectly).  Every Qt object can have
+both <code>signals</code> (to send messages) and <code>slots</code> (to receive messages). All
+widgets are Qt objects.  They inherit QWidget which in turn inherits
+QObject.
+<p>
+Here, the <em>clicked()</em> signal of <em>quit</em> is connected to the <em>quit()</em> slot of <em>a,</em> so that when the button is clicked, the
+application quits.
+<p>
+The <a href="metaobjects.html">Signals and Slots</a> documentation
+describes this topic in detail.
+<p>
+<h2>Behavior</h2>
+<p>
+When you run this program, you will see an even smaller window than in
+chapter one, filled with an even smaller button.
+<p>
+<h2>Excercises</h2>
+<p>
+Try to resize the window.  Press the button.  Oops!  That connect()
+would seem to make some difference :)
+<p>
+Are there any other signals in QPushButton you can connect to quit?
+Hint: The QPushButton inherits most of its behavior from QButton.
+<p>
+You may now go on to <a href="t3.html">chapter three.</a>
+<p>
+[<a href="t1.html">Previous tutorial</a>]
+[<a href="t3.html">Next tutorial</a>]
+[<a href="tutorial.html">Main tutorial page</a>]
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

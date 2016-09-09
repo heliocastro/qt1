@@ -1,0 +1,442 @@
+/****************************************************************************
+** $Id: misc.doc,v 2.29.2.2 1999/02/15 15:14:43 aavit Exp $
+**
+** Miscellaneous documentation that doesn't fit anywhere else
+**
+** Copyright (C) 1995-1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+#if defined(DEBUG)
+static char ident[] = "$Id: misc.doc,v 2.29.2.2 1999/02/15 15:14:43 aavit Exp $";
+#endif
+
+
+/*! \page license.html
+
+<title>Qt Free Edition License Agreement</title>
+</head><body bgcolor="#ffffff">
+\postheader
+
+<h1 align=center>Qt Free Edition License Agreement</h1><br clear="all">
+
+This is the license of <em>the version 1 series</em> of Qt Free
+Edition. It allows you to use Qt Free Edition free of charge for
+developing free software for the free software community.
+
+<p>If you want to use Qt for developing commercial/proprietary
+software, you must use the Qt Professional Edition. The Professional
+Edition has a standard commercial library license, with none of the
+special restrictions that the Free Edition license below has.
+
+<p>
+<hr>
+<p>
+<h2 align=center>QT FREE EDITION LICENSE</h2>
+<p>
+Copyright &copy; 1992-1999 Troll Tech AS.  All rights reserved.
+<p>
+This is the license for the latest version of Qt Free Edition; it covers
+private use, use of third-party application programs based on Qt, and
+development of free software for the free software community.
+<p>
+<h2 align=center>COPYRIGHT AND RESTRICTIONS</h2>
+<p>
+The Qt toolkit is a product of Troll Tech AS. The Qt Free Edition is limited to
+use with the X Window System.
+<p>
+You may copy this version of the Qt Free Edition provided that the entire
+archive is distributed unchanged and as a whole, including this notice.
+<p>
+You may use this version of the Qt Free Edition to compile, link and run
+application programs legally developed by third parties.
+<p>
+You may use the Qt Free Edition to create application programs provided that:
+<ul>
+<li>You accept this license.
+<li>Your software does not require modifications to Qt Free Edition.
+<li>You satisfy ONE of the following three requirements
+ <dl>
+ <dt>EITHER 
+ <dd>Users of your software can freely obtain source code for the
+ software, freely modify the source code (possibly with restrictions
+ on copyright notices, attributions and legal responsibility), and
+ freely redistribute original or modified versions of the software.
+ <dt>OR
+ <dd>Your software is distributed under the GNU GENERAL PUBLIC LICENSE,
+ version 2 or later, as defined by the Free Software Foundation.
+ <dt>OR
+ <dd>Your software is distributed under the GNU LIBRARY GENERAL PUBLIC 
+ LICENSE, version 2 or later, as defined by the Free Software Foundation.
+ </dl>
+</ul>
+<p>
+If you are paid to develop something with Qt Free Edition or it is a
+part of your job the following conditions also apply:
+<ul>
+<li>Your software must not require libraries, programs, data or
+    documentation that are not available outside your organization in
+    order to compile or use.
+<li>If and when your organization starts using the software, you must 
+    notify Troll Tech AS of the following:
+    <ul>
+    <li>Your organization's name and purpose.
+    <li>The software's name and purpose.
+    <li>The software's license.
+    <li>That your organization considers the software to be free software.
+    </ul>
+</ul>
+<p>
+You may also use the Qt Free Edition to create reusable components (such as
+libraries) provided that you accept the terms above, and in addition that:
+<ul>
+<li>Your components' license includes the following text:
+<blockquote>
+[Your package] requires the Qt library, which is copyright Troll Tech
+AS.  Freely distributable programs may generally use Qt Free Edition
+free of charge, see [README.QT] for details.
+</blockquote>
+<li>README.QT is distributed along with your components.
+<li>Qt Free Edition is not distributed <em>as an integral part</em> of
+your components.
+</ul>
+<p>
+<h2 align=center>LIMITATIONS OF LIABILITY</h2>
+<p>
+Troll Tech AS makes no obligation under this license to support or upgrade
+Qt Free Edition, or assist in the use of Qt Free Edition.
+<p>
+In no event shall Troll Tech AS be liable for any lost revenue or profits
+or other direct, indirect, special, incidental or consequential damages,
+even if Troll Tech has been advised of the possibility of such damages.
+<p>
+<strong>
+QT FREE EDITION IS PROVIDED AS IS WITH NO WARRANTY OF ANY KIND,
+INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A
+PARTICULAR PURPOSE.
+</strong>
+
+*/
+
+/*! \page troll.html
+
+<title>Troll Tech Contact Information</title>
+</head>
+<body bgcolor="#ffffff">
+\postheader
+
+<h1 align=center>Contact Information</h1><br clear="all">
+
+<center>
+<img width="168" height="98" src="ttlogo-small.jpg" alt="Troll Tech Logo">
+</center>
+
+
+<h2>World Wide Web</h2>
+
+The Troll Tech web server is located at:<br>
+<center>
+<b><tt>
+<a href=http://www.troll.no/>http://www.troll.no/</a>
+</tt>
+</b>
+</center>
+
+<h2>Email</h2>
+
+Troll Tech can be reached via the following e-mail addresses:
+<dl>
+ <dt><a href="mailto:info@troll.no"><b>info@troll.no</b></a>
+  <dd>General inquiries and questions.
+ <br> 
+ <dt><a href="mailto:sales@troll.no"><b>sales@troll.no</b></a>
+  <dd>Inquires related to purchasing, pricing and availability of
+  Troll Tech products.
+ <br> 
+ <dt><a href="mailto:www@troll.no"><b>www@troll.no</b></a>
+  <dd>Comments about our web pages.
+ <br> 
+ <dt><a href="mailto:qt-bugs@troll.no"><b>qt-bugs@troll.no</b></a>
+  <dd>Use this if you think you have found a bug in Qt. Please provide
+  as much information as possible, including Qt version and your
+  operating system and compiler.
+</dl>
+
+
+<h2>Phone</h2>
+
+General inquiries: <strong>+47 22 80 63 90</strong>
+
+<h2>Fax</h2>
+
+General inquiries: <strong>+47 22 80 63 80</strong>
+
+
+<h2>Regular Mail</h2>
+
+<center>
+<table>
+<tr><td align=left>
+Troll Tech AS<br>
+Waldemar Thranes gt. 98b<br>
+N-0175 Oslo<br>
+</table>
+</center>
+
+*/
+
+
+/*! \page mailinglists.html
+
+<title>Qt Mailing Lists Information</title></head><body bgcolor="#ffffff">
+\postheader
+<h1 align=center>Mailing Lists</h1><br clear="all">
+
+Troll Tech operates two mailing lists for Qt users:
+<code>qt-announce</code> and <code>qt-interest</code>.
+
+<h2>qt-announce</h2>
+
+The subscribers to this mailing list receives all official Troll Tech
+announcements when new versions of Qt and other Troll Tech products
+are released, and other Troll Tech announcements of general interest.
+
+To subscribe to the <code>qt-announce</code> mailing list, simply press
+the button below.
+
+<center>
+<form enctype="text/plain" action="mailto:qt-announce-request@troll.no">
+<input type=hidden name="magic" value="subscribe">
+<input type=submit value="Subscribe to Qt Announcement Mailing List"></form>
+</center>
+
+<p>You can also subscribe by sending an email containing just the word
+<tt>subscribe</tt> or <tt>subscribe <em>your@email.address</em></tt> to <a
+href="mailto:qt-announce-request@troll.no">qt-announce-request@troll.no</a>
+
+<p>To unsubscribe yourself from the <code>qt-announce</code> mailing
+list, similarly send an email containing just the word
+<tt>unsubscribe</tt> or
+<tt>unsubscribe <em>your@email.address</em></tt> to <a
+href="mailto:qt-announce-request@troll.no">qt-announce-request@troll.no</a>
+
+
+<h2>qt-interest</h2>
+
+This mailing list is a discussion forum for Qt users. Typical traffic
+is 5-10 messages per day.
+
+An archive of the messages from qt-interest is available on the Troll
+Tech web site: <a href="http://www.troll.no/qt-interest/">Qt Mailing
+List Archive</a>.
+
+To subscribe to the <code>qt-interest</code> mailing list, send an
+email containing just the word <tt>subscribe</tt> or <tt>subscribe
+ <em>your@email.address</em></tt> to <a
+href="mailto:qt-interest-request@troll.no">qt-interest-request@troll.no</a>
+
+To unsubscribe yourself from the <code>qt-interest</code> mailing
+list, similarly send an email containing just the word
+<tt>unsubscribe</tt> or
+<tt>unsubscribe <em>your@email.address</em></tt> to <a
+href="mailto:qt-interest-request@troll.no">qt-interest-request@troll.no</a>
+
+<h2>snapshot-users</h2>
+
+There is a special mailing list, <tt>snapshot-users@troll.no</tt>, for
+discussion of Qt snapshot-related issues. To subscribe, send a message
+containing just the word "subscribe" (without the quotes) to <a
+href="mailto:snapshot-users-request@troll.no">snapshot-users-request@troll.no</a>. We
+encourage you to use this mailing list in stead of
+<tt>qt-interest</tt> for snapshot-specific issues.
+
+<small>Troll Tech does not sell or in any way redistribute the
+adresses on our mailing lists. We also employ active filtering to
+ensure the mailing lists are virtually free from spam.</small>
+
+*/
+
+
+/*! \page trademarks.html
+
+<title>Trademarks</title></head><body bgcolor="#ffffff">
+\postheader
+<h1 align=center>Trademarks</h1><br clear="all">
+
+The <a href="qtlogo.jpg">Qt logo</a> and <a
+href="ttlogo-small.jpg">Troll Tech logo</a> are copyright © Troll
+Tech AS.
+
+<tt>Qt</tt> is a trademark of Troll Tech AS.
+
+All other trademarks mentioned in this documentation are recognized as
+belonging to their respective owners, including but not limited to
+<tt>AIX, BSD/OS, BSDI, Borland, DEC, Digital UNIX, HP, HP-UX, IBM,
+IRIX, Microsoft, OpenGL, OSF/1, OpenGL, SGI, Solaris, SparcWorks, Sun,
+SunOS, SunPRO, Symantec, Tetris, Visual C++</tt> and <tt> Watcom.</tt>
+
+*/
+
+
+/*! \page easteregg.html
+
+<title>Qt Official Easter Egg</title>
+<meta http-equiv="refresh" content="60"; URL="easteregg2.html">
+</head><body bgcolor="#ffffff">
+
+<center><h1>Congratulations!<br>
+You've found our easter egg</h1><br clear="all">
+<p><small>No prizes, though</small>
+</center>
+
+<p>A friend of mine forwarded the following little snippet to me,
+probably because of my views on pretty pictures versus actual content.
+It probably originates on USENET somewhere, but I don't know where.
+<blockquote>
+<p>
+It sounds like there may be a near-term need for a new
+newsgroup in the alt.recovery heirarchy.
+<p>
+"Hi, my name is Geoff and I was a N*tscapeaholic."
+<p>
+"Hi, Geoff."
+<p>
+"It started as a little Under Construction picture, then I found
+myself using graphics for horizontal rules and bullets.  The next
+thing I knew, I had GIF's for all of my text and my pages took
+longer to download than to read.
+<p>
+"A guy I knew at work tried to get me hooked on PDF.  I saw the
+power, and I was ready to make the switch.
+<p>
+"That's when a close friend of mine stepped in.  She erased
+N*tscape from my hard drive and made me use Lynx.  Thanks to her,
+I'm here today and I'm ready to walk the long road back to
+content delivery."
+</blockquote>
+Amen!
+*/
+
+/*! \page easteregg2.html
+
+<title>Qt Official Easter Egg</title>
+</head><body bgcolor="#ffffff">
+
+<center><h1>Congratulations!<br>
+You've found our easter egg</h1><br clear="all">
+<p><small>No prizes, though</small>
+</center>
+
+<p>A friend of mine forwarded the following little snippet to me,
+probably because of my views on pretty pictures versus actual content.
+It probably originates on USENET somewhere, but I don't know where.
+<blockquote><blink>
+<p>
+It sounds like there may be a near-term need for a new
+newsgroup in the alt.recovery heirarchy.
+<p>
+"Hi, my name is Geoff and I was a N*tscapeaholic."
+<p>
+"Hi, Geoff."
+<p>
+"It started as a little Under Construction picture, then I found
+myself using graphics for horizontal rules and bullets.  The next
+thing I knew, I had GIF's for all of my text and my pages took
+longer to download than to read.
+<p>
+"A guy I knew at work tried to get me hooked on PDF.  I saw the
+power, and I was ready to make the switch.
+<p>
+"That's when a close friend of mine stepped in.  She erased
+N*tscape from my hard drive and made me use Lynx.  Thanks to her,
+I'm here today and I'm ready to walk the long road back to
+content delivery."
+</blink></blockquote>
+Amen!
+*/
+
+
+/*! \page guibooks.html
+
+<title>Books about GUI</title>
+</head><body bgcolor="#ffffff">
+\postheader
+
+<h1 align=center>Books about GUI</h1><br clear="all">
+
+<p>This is not a comprehensive list of books, there are many other
+books worth buying.  This is just a few GUI/UI books that don't gather
+dust in our shelves.
+
+<p><b>The (Psychology|Design) of Everyday Things</b> by Donald Norman,
+ISBN 0-38526774-6, is one of the classics of human interface design.
+Norman shows how badly something as simple as a kitchen stove can be
+designed, and everyone should read it who will design a dialog box,
+write an error message, or design just about anything else humans are
+supposed to use.
+
+<p>The title of the first edition was <em>The Psychology of Everyday
+Things</em>, the book was renamed to <em>The Design of Everyday
+Things</em> for the second edition, sacrificing a neat acronym for a
+descriptive title.
+<a href="http://www.amazon.com/exec/obidos/ASIN/0385267746/trolltech/t">
+(Read more or buy it.)</a>
+
+<p><a name="fowler"></a><b>GUI Design Handbook</b> by Susan Fowler,
+ISBN 0-07-059274-8, is an alphabetical dictionary of widgets and other
+user interface elements, with comprehensive coverage of each.  Each
+chapter covers one widget or other element, contains the most
+important recommendation from the Macintosh, Windows and Motif style
+guides, notes about common problems, comparison with other widgets
+that can serve some of the same roles as this one, etc.
+
+<p>There is an <a href="http://fast-consulting.com/chkbox.htm">example
+chapter</a> on the author's web site.
+<a href="http://www.amazon.com/exec/obidos/ASIN/0070592748/trolltech/t">
+(Read more or buy it.)</a>
+
+<p><b>Macintosh Human Interface Guidelines</b>, second edition, ISBN
+0-201-62216-5, is worth buying for the <em>don't</em>s alone.  Even
+though you're not writing Macintosh software, avoiding most of what it
+advises against will produce more easily comprehensible software.
+Doing what it tells you to <em>do</em> helps, too.
+<a href="http://www.amazon.com/exec/obidos/ASIN/0201622165/trolltech/t">
+(Read more or buy it.)</a>
+
+This book is now available
+<a href="http://developer.apple.com/techpubs/mac/HIGuidelines/HIGuidelines-2.html">
+on the web</a> and there is a
+<a href="http://developer.apple.com/techpubs/mac/HIGOS8Guide/thig-2.html">Mac
+OS 8 addendum.</a>
+
+<p><b>The Windows Interface Guidelines for Software Design</b>, ISBN
+1-55615-679-0, is perhaps the best guide to how a modern GUI program
+should look.  Skips some of the more elementary stuff from the
+Macintosh one, but covers newer widgets (like tool tips) and says much
+about e.g. dialog layout.
+<a href="http://www.amazon.com/exec/obidos/ASIN/1556156790/trolltech/t">
+(Read more or buy it.)</a>
+
+This book too is available on the web, but has occasionally been
+hidden in an impenetrable maze of javascript.
+<a href="http://www.microsoft.com/win32dev/uiguide/">Try and see.</a>
+
+<p><b>The Icon Book</b> by William Horton, ISBN 0-471-59900-X, is a
+thorough beginner's icon drawing book.  It starts from scratch and
+goes through (I assume) every aspect of icon design.  Some 500
+examples are scattered throughout the text, generally in groups of
+four or five.
+<a href="http://www.amazon.com/exec/obidos/ASIN/047159900X/trolltech/t">
+(Read more or buy it.)</a>
+
+<h2><nobr>Buying these books from</nobr>
+<a href="http://www.amazon.com/text">Amazon.com.</a></h2>
+
+<p>These books are made available in association with Amazon.com,
+our favorite on-line bookstore.  Here is more information about
+<a href="http://www.amazon.com/exec/obidos/subst/help/shipping-policy.html/t">
+Amazon.com's shipping options</a> and its
+<a href="http://www.amazon.com/exec/obidos/subst/help/desk.html/t">
+customer service.</a>
+
+*/

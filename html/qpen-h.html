@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qpen.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qpen.h</h1><br clear="all">
+This is the verbatim text of the qpen.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qpen.h,v 2.4.2.2 1998/08/25 09:20:52 hanord Exp $
+**
+** Definition of QPen class
+**
+** Created : 940112
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QPEN_H
+#define QPEN_H
+
+#ifndef QT_H
+#include "qcolor.h"
+#include "qshared.h"
+#endif // QT_H
+
+
+enum PenStyle { NoPen, SolidLine, DashLine,     // pen style
+                DotLine, DashDotLine, DashDotDotLine };
+
+
+class Q_EXPORT QPen
+{
+friend class QPainter;
+public:
+    QPen();
+    QPen( PenStyle );
+    QPen( const QColor &amp;color, uint width=0, PenStyle style=SolidLine );
+    QPen( const QPen &amp; );
+   ~QPen();
+    QPen &amp;operator=( const QPen &amp; );
+
+    PenStyle    style() const           { return data-&gt;style; }
+    void        setStyle( PenStyle );
+    uint        width() const           { return data-&gt;width; }
+    void        setWidth( uint );
+    const QColor &amp;color() const         { return data-&gt;color; }
+    void        setColor( const QColor &amp; );
+
+    bool        operator==( const QPen &amp;p ) const;
+    bool        operator!=( const QPen &amp;p ) const
+                                        { return !(operator==(p)); }
+
+private:
+    QPen        copy()  const;
+    void        detach();
+    void        init( const QColor &amp;, uint, PenStyle );
+    struct QPenData : public QShared {          // pen data
+        PenStyle  style;
+        uint      width;
+        QColor    color;
+    } *data;
+};
+
+
+/*****************************************************************************
+  QPen stream functions
+ *****************************************************************************/
+
+Q_EXPORT QDataStream &amp;operator&lt;&lt;( QDataStream &amp;, const QPen &amp; );
+Q_EXPORT QDataStream &amp;operator&gt;&gt;( QDataStream &amp;, QPen &amp; );
+
+
+#endif // QPEN_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

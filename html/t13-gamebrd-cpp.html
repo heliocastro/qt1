@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex"><title>Qt tutorial - t13/gamebrd.cpp</title>
+</head><body bgcolor="#ffffff">
+<p>
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+<p>
+<h1 align=center>Source code for <a href="t13.html">tutorial 13</a>: gamebrd.cpp</h1><br clear="all">
+<hr>
+<pre>/****************************************************************
+**
+** Implementation of GameBoard class, Qt tutorial 13
+**
+****************************************************************/
+
+#include "gamebrd.h"
+
+#include &lt;<a href="qfont-h.html">qfont.h</a>&gt;
+#include &lt;<a href="qapplication-h.html">qapplication.h</a>&gt;
+#include &lt;<a href="qlabel-h.html">qlabel.h</a>&gt;
+#include &lt;<a href="qpushbutton-h.html">qpushbutton.h</a>&gt;
+#include &lt;<a href="qlcdnumber-h.html">qlcdnumber.h</a>&gt;
+
+#include "lcdrange.h"
+#include "cannon.h"
+
+GameBoard::GameBoard( <a href="qwidget.html">QWidget</a> *parent, const char *name )
+        : <a href="qwidget.html">QWidget</a>( parent, name )
+{
+    <a href="qwidget.html#c6">setMinimumSize</a>( 500, 355 );
+
+    quit = new <a href="qpushbutton.html">QPushButton</a>( "Quit", this, "quit" );
+    quit-&gt;setFont( <a href="qfont.html">QFont</a>( "Times", 18, QFont::Bold ) );
+
+    <a href="qobject.html#f2">connect</a>( quit, SIGNAL(clicked()), qApp, SLOT(quit()) );
+
+    angle  = new LCDRange( "ANGLE", this, "angle" );
+    angle-&gt;setRange( 5, 70 );
+
+    force  = new LCDRange( "FORCE", this, "force" );
+    force-&gt;setRange( 10, 50 );
+
+    cannonField = new CannonField( this, "cannonField" );
+    cannonField-&gt;setBackgroundColor( <a href="qcolor.html">QColor</a>( 250, 250, 200) );
+
+    <a href="qobject.html#f2">connect</a>( angle,SIGNAL(valueChanged(int)), cannonField,SLOT(setAngle(int)));
+    <a href="qobject.html#f2">connect</a>( cannonField,SIGNAL(angleChanged(int)), angle,SLOT(setValue(int)));
+
+    <a href="qobject.html#f2">connect</a>( force,SIGNAL(valueChanged(int)), cannonField,SLOT(setForce(int)));
+    <a href="qobject.html#f2">connect</a>( cannonField,SIGNAL(forceChanged(int)), force,SLOT(setValue(int)));
+
+    <a href="qobject.html#f2">connect</a>( cannonField, SIGNAL(<a href=#337>hit</a>()),SLOT(<a href=#337>hit</a>()) );
+    <a href="qobject.html#f2">connect</a>( cannonField, SIGNAL(<a href=#338>missed</a>()),SLOT(<a href=#338>missed</a>()) );
+
+    angle-&gt;setValue( 60 );
+    force-&gt;setValue( 25 );
+
+    shoot = new <a href="qpushbutton.html">QPushButton</a>( "Shoot", this, "shoot" );
+    shoot-&gt;setFont( <a href="qfont.html">QFont</a>( "Times", 18, QFont::Bold ) );
+
+    <a href="qobject.html#f2">connect</a>( shoot, SIGNAL(clicked()), SLOT(<a href=#336>fire</a>()) );
+
+    restart = new <a href="qpushbutton.html">QPushButton</a>( "New Game", this, "newgame" );
+    restart-&gt;setFont( <a href="qfont.html">QFont</a>( "Times", 18, QFont::Bold ) );
+
+    <a href="qobject.html#f2">connect</a>( restart, SIGNAL(clicked()), SLOT(<a href=#339>newGame</a>()) );
+
+    hits               = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "hits" );
+    shotsLeft          = new <a href="qlcdnumber.html">QLCDNumber</a>( 2, this, "shotsleft" );
+    <a href="qlabel.html">QLabel</a> *hitsL      = new <a href="qlabel.html">QLabel</a>( "HITS", this, "hitsLabel" );
+    <a href="qlabel.html">QLabel</a> *shotsLeftL = new <a href="qlabel.html">QLabel</a>( "SHOTS LEFT", this, "shotsleftLabel" );
+
+    quit-&gt;setGeometry( 10, 10, 75, 30 );
+    angle-&gt;setGeometry( 10, quit-&gt;y() + quit-&gt;height() + 10, 75, 130 );
+    force-&gt;setGeometry( 10, angle-&gt;y() + angle-&gt;height() + 10, 75, 130 );
+    cannonField-&gt;move( angle-&gt;x() + angle-&gt;width() + 10, angle-&gt;y() );
+    shoot-&gt;setGeometry( 10, 315, 75, 30 );
+    restart-&gt;setGeometry( 380, 10, 110, 30 );
+    hits-&gt;setGeometry( 130, 10, 40, 30 );
+    hitsL-&gt;<a href="qwidget.html#l5">setGeometry</a>( hits-&gt;x() + hits-&gt;width() + 5, 10, 60, 30 );
+    shotsLeft-&gt;setGeometry( 240, 10, 40, 30 );
+    shotsLeftL-&gt;<a href="qwidget.html#l5">setGeometry</a>( shotsLeft-&gt;x()+shotsLeft-&gt;width()+5, 10, 60, 30 );
+
+    <a href=#339>newGame</a>();
+}
+
+void <a name="335"></a>GameBoard::resizeEvent( <a href="qresizeevent.html">QResizeEvent</a> * )
+{
+    cannonField-&gt;resize( <a href="qwidget.html#b9">width</a>()  - cannonField-&gt;x() - 10,
+                         <a href="qwidget.html#c0">height</a>() - cannonField-&gt;y() - 10 );
+}
+
+void <a name="336"></a>GameBoard::fire()
+{
+    if ( cannonField-&gt;gameOver() || cannonField-&gt;isShooting() )
+        return;
+    shotsLeft-&gt;display( shotsLeft-&gt;intValue() - 1 );
+    cannonField-&gt;shoot();
+}
+
+void <a name="337"></a>GameBoard::hit()
+{
+    hits-&gt;display( hits-&gt;intValue() + 1 );
+    if ( shotsLeft-&gt;intValue() == 0 )
+        cannonField-&gt;setGameOver();
+    else
+        cannonField-&gt;newTarget();
+}
+
+void <a name="338"></a>GameBoard::missed()
+{
+    if ( shotsLeft-&gt;intValue() == 0 )
+        cannonField-&gt;setGameOver();
+}
+
+void <a name="339"></a>GameBoard::newGame()
+{
+    shotsLeft-&gt;display( 15 );
+    hits-&gt;display( 0 );
+    cannonField-&gt;restartGame();
+    cannonField-&gt;newTarget();
+}
+</pre>
+<p>
+
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

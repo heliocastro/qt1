@@ -1,0 +1,314 @@
+/****************************************************************************
+** $Id: examples.doc,v 2.15 1998/06/01 12:52:32 agulbra Exp $
+**
+** Documentation for the examples
+**
+** Copyright (C) 1995-1997 by Troll Tech AS.  All rights reserved.
+**
+*****************************************************************************/
+
+#if defined(DEBUG)
+static char ident[] = "$Id: examples.doc,v 2.15 1998/06/01 12:52:32 agulbra Exp $";
+#endif
+
+
+/*! \example aclock/aclock.cpp
+
+  <h1 align=center>Analog Clock</h1><br clear="all">
+
+  This example displays an analog clock widget.
+
+  <hr>
+
+  \include aclock/aclock.h
+
+*/
+
+
+/*! \example biff/biff.cpp
+
+  <h1 align=center>Biff (UNIX only)</h1><br clear="all">
+
+  Biff is a simple graphical program to indicate whether there is new
+  mail; it looks exactly like xbiff but is much shorter.
+
+  The example is divided into two .cpp files and one .h file.
+  main.cpp looks like most simple Qt-based main() implementations:
+
+  \include biff/main.cpp
+
+  biff.h is the declaratin for the custom widget which does all the
+  work:
+
+  \include biff/biff.h
+
+  Finally, biff.cpp implements this custom widget.  Note in particular
+  how two images (hasmail_bmp_data and nomail_bmp_data, both from
+  bmp.cpp) are included into the executable.
+*/	
+
+
+/*! \example connect/connect.cpp
+
+  <h1 align=center>Connect the Points</h1><br clear="all">
+
+  This example shows very simple mouse-based user interaction and
+  painting without any world transform matrix or other advanced
+  features.  Run the program, click the button, move the mouse,
+  release the button, and watch the lines get drawn.
+*/
+
+
+/*! \example cursor/cursor.cpp
+
+  <h1 align=center>Cursors</h1><br clear="all">
+
+  This example shows how to set a mouse cursor for a widget.
+*/
+
+
+/*! \example dclock/dclock.cpp
+
+  <h1 align=center>Digital Clock</h1><br clear="all">
+
+  This example displays a digital LCD clock and can switch between time
+  and date.
+
+  <hr>
+
+  \include dclock/dclock.h
+
+*/
+
+
+/*! \example desktop/desktop.cpp
+
+  <h1 align=center>Painting on the Desktop</h1><br clear="all">
+
+  The desktop demo contains three routines, each of which draws
+  something on the desktop.  It does some nice stuff with QPainter,
+  and also demonstrates how one can treat the desktop as a widget like
+  any other.
+*/	
+
+
+/*! \example drawdemo/drawdemo.cpp
+
+  <h1 align=center>Draw Demo</h1><br clear="all">
+
+  This example demontrates several drawing functions and printer output.
+  You can easily add you own drawing functions.  See "ourDrawFunctions".
+*/
+
+
+/*! \example forever/forever.cpp
+
+  <h1 align=center>A Rectangle Draw "Benchmark"</h1><br clear="all">
+
+  This example continuously draws rectangles in a window and
+  has another widget that counts the number of rectangles that
+  are drawn per second.
+*/
+
+
+/*! \example hello/hello.cpp
+  <h1 align=center>Hello, World</h1><br clear="all">
+
+  This example brings up the words "Hello, World" moving up and down,
+  and in different colors.
+
+  <hr>
+
+  \include hello/hello.h
+
+*/
+
+
+/*! \example layout/layout.cpp
+
+  <h1 align=center>Geometry management</h1><br clear="all">
+
+  This example shows simple and intermediate use of Qt's layout
+  classes, QGridLaout, QBoxLayout etc.
+*/
+
+
+/*! \example life/life.cpp
+
+  <h1 align=center>Conway's Game of Life</h1><br clear="all">
+
+  We'll include just the main widget from Life; there are also a
+  rudimentary main() and a dialog which wraps this widget in a QSlider
+  to set the speed as well as Pause and Quit buttons.
+
+.  The class definition:
+
+  \include life/life.h
+
+  And the implementation of the member functions:
+*/	
+
+
+/*! \example menu/menu.cpp
+
+  <h1 align=center>Using menus</h1><br clear="all">
+
+  This example demontrates simple use of menus (a menu bar and
+  pull-down menus).  Qt also supports popup menus, but this example
+  doesn't contain any.
+*/
+
+
+/*! \example movies/main.cpp  
+
+  <h1 align=center>Movies<br>Or the Story of the Animated GIF file</h1><br clear="all">
+
+  The Movies example displays animated GIF files using the QMovie and
+  QLabel classes.
+*/
+
+
+/*! \example picture/picture.cpp
+  <h1 align=center>Picture</h1><br clear="all">
+
+  This example shows how to make, store to file, and read a picture as
+  a set of drawing commands.
+
+*/
+
+
+/*! \example pref/pref.cpp
+
+  <h1 align=center>Preferences</h1><br clear="all">
+
+  This example displays a simple (and ugly) tab dialog and then
+  options the user chooses.  It illustrates hello-world usage of
+  QTabDialog, QGridLayout and QBoxLayout.
+*/
+
+
+/*! \example progress/progress.cpp
+
+  <h1 align=center>Progress Bar and Dialog Example</h1><br clear="all">
+
+  This example displays either a simple (text-only) or a
+  custom-labelled (user-supplied widget) progress dialog.  It also
+  demonstrates simple use of menus.
+*/
+
+
+/*! \example qmag/qmag.cpp
+
+<h1 align=center>QMag</h1><br clear="all">
+
+This is a simple magnifier-type program.  It shows how one can do
+some quite low-level operations portably using Qt.
+
+Run it, click in the magnifier window, then click where you want to
+magnify or drag out a rectangle.  Two combo boxes let you select
+amplification and refresh frequency, a text label tells you the color
+of the pixel the cursor is on, and a button lets you save the
+magnified area as a .bmp file. */
+
+
+/*! \example showimg/showimg.cpp
+
+  <h1 align=center>Show Image</h1><br clear="all">
+
+  This example reads and displays an image in any supported image
+  format (GIF, BMP, PPM, XMP etc.)
+*/
+
+
+/*! \example table/table.cpp
+
+  <h1 align=center>Table</h1><br clear="all">
+
+  The table program displays a spreadsheet-like table. It is an example of
+  how to inherit the QTableView widget for presentations of 2D data arrays.
+
+  Left-click the mouse to set a current cell. Press the arrow buttons to
+  move the current mark around.
+*/
+
+
+/*! \example tictac/tictac.cpp
+
+  <h1 align=center>Tic Tac Toe</h1><br clear="all">
+
+  This is an implementation of the Tic-tac-toe game.
+
+  We didn't put much effort in making a clever algorithm so it's not a
+  challenge to play against the computer. Instead, study the source code
+  to see how you can make reusable components such as the TicTacGameBoard
+  widget.
+
+  <hr>
+
+  \include tictac/tictac.h
+
+*/
+
+
+/*! \example tooltip/tooltip.cpp
+
+  <h1 align=center>Advanced use of tool tips</h1><br clear="all">
+
+  This example widget demonstrates how to use tool tips for static and
+  dynamic regions within a widget.
+
+  It displays two blue and one red rectangle.  The blue ones move every
+  time you click on them, the red one is static.  There are dynamic
+  tool tips on the blue rectangles and a static tool tip on the red one.
+*/
+
+
+/*! \example widgets/widgets.cpp
+
+  <h1 align=center>Widgets Demo</h1><br clear="all">
+
+  This example creates a window with many Qt widgets and two custom
+  example widgets; aclock and dclock.
+
+  It also shows how to connect widget signals to internal slots.
+*/
+
+
+/*! \example xform/xform.cpp
+
+  <h1 align=center>Transformed Graphics Demo</h1><br clear="all">
+
+  This example lets the user rotate, shear and scale text and graphics
+  arbitrarily.
+*/
+
+
+/*! \example application/application.cpp
+
+  <h1 align=center>A Complete Application Window</h1><br clear="all">
+
+  This example program looks like a complete modern application.  It
+  has a menu bar, it has a tool bar, it has a status bar.
+
+  It also illustrates use of QPrinter.  Oh yes, and you can edit text
+  with it.
+*/
+
+
+/*! \example dirview/dirview.cpp
+
+  <h1 align=center>A Directory Browser</h1><br clear="all">
+
+  This example program demonstrates how to use QListView and
+  QListViewItem to build a multi-column hierarchical, memory- and
+  CPU-efficient directory browser.
+
+  Here is the header file:
+
+  \include dirview/dirview.h
+
+  And here is the main implementation file.  Note the way the program
+  scans subdirectories only when it has to.  This allows the program
+  to handle very large file systems efficiently.  The same technique
+  can be used in any other trees.
+*/

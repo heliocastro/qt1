@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><meta name="robots" content="noindex,noarchive"><title>
+Qt Toolkit - qarray.h include file
+</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>qarray.h</h1><br clear="all">
+This is the verbatim text of the qarray.h include file.  It is is
+provided only for illustration; the copyright
+remains with Troll Tech.
+<hr>
+<pre>
+/****************************************************************************
+** &#36;Id&#58; qarray.h,v 2.3.2.3 1998/08/27 08:14:00 hanord Exp $
+**
+** Definition of QArray template/macro class
+**
+** Created : 930906
+**
+** Copyright (C) 1992-1999 Troll Tech AS.  All rights reserved.
+**
+** This file is part of Qt Free Edition, version 1.45.
+**
+** See the file LICENSE included in the distribution for the usage
+** and distribution terms, or http://www.troll.no/free-license.html.
+**
+** IMPORTANT NOTE: You may NOT copy this file or any part of it into
+** your own programs or libraries.
+**
+** Please see http://www.troll.no/pricing.html for information about 
+** Qt Professional Edition, which is this same library but with a
+** license which allows creation of commercial/proprietary software.
+**
+*****************************************************************************/
+
+#ifndef QARRAY_H
+#define QARRAY_H
+
+#ifndef QT_H
+#include "qgarray.h"
+#endif // QT_H
+
+
+#if defined(USE_MACROCLASS)
+
+#include "qgeneric.h"
+
+#if !defined(name2)
+#define name2(a,b)    name2_xx(a,b)
+#define name2_xx(a,b) a##b
+#endif
+
+#if defined(DEFAULT_MACROCLASS)
+#define QArraydeclare QArrayMdeclare
+#define QArray QArrayM
+#endif
+#define QArrayM(type) name2(QArrayM_,type)
+
+#define QArrayMdeclare(type)                                                  \
+class Q_EXPORTM QArrayM(type) : public QGArray                                \
+{                                                                             \
+protected:                                                                    \
+    QArrayM(type)( int, int ) : QGArray( 0, 0 ) {}                            \
+public:                                                                       \
+    QArrayM(type)()             {}                                            \
+    QArrayM(type)( int size ) : QGArray(size*sizeof(type)) {}                 \
+    QArrayM(type)( const QArrayM(type) &amp;a ) : QGArray(a) {}                   \
+   ~QArrayM(type)()             {}                                            \
+    QArrayM(type)&amp; operator=(const QArrayM(type) &amp;a)                          \
+                                { return (QArrayM(type)&amp;)QGArray::assign(a); }\
+    type *data()    const       { return (type *)QGArray::data(); }           \
+    uint  nrefs()   const       { return QGArray::nrefs(); }                  \
+    uint  size()    const       { return QGArray::size()/sizeof(type); }      \
+    bool  isEmpty() const       { return QGArray::size() == 0; }              \
+    bool  isNull()  const       { return QGArray::data() == 0; }              \
+    bool  resize( uint size )   { return QGArray::resize(size*sizeof(type)); }\
+    bool  truncate( uint pos )  { return QGArray::resize(pos*sizeof(type)); } \
+    bool  fill( const type &amp;d, int size=-1 )                                  \
+        { return QGArray::fill((char*)&amp;d,size,sizeof(type) ); }               \
+    void  detach()              { QGArray::detach(); }                        \
+    QArrayM(type)   copy() const                                              \
+        { QArrayM(type) tmp; return tmp.duplicate(*this); }                   \
+    QArrayM(type)&amp; assign( const QArrayM(type)&amp; a )                           \
+        { return (QArrayM(type)&amp;)QGArray::assign(a); }                        \
+    QArrayM(type)&amp; assign( const type *a, uint n )                            \
+        { return (QArrayM(type)&amp;)QGArray::assign((char*)a,n*sizeof(type));}   \
+    QArrayM(type)&amp; duplicate( const QArrayM(type)&amp; a )                        \
+        { return (QArrayM(type)&amp;)QGArray::duplicate(a); }                     \
+    QArrayM(type)&amp; duplicate( const type *a, uint n )                         \
+        { return (QArrayM(type)&amp;)QGArray::duplicate((char*)a,n*sizeof(type));}\
+    QArrayM(type)&amp; setRawData( const type *a, uint n )                        \
+        { return (QArrayM(type)&amp;)QGArray::setRawData((char*)a,                \
+                                                     n*sizeof(type)); }       \
+    void resetRawData( const type *a, uint n )                                \
+        { QGArray::resetRawData((char*)a,n*sizeof(type)); }                   \
+    int  find( const type &amp;d, uint i=0 ) const                                \
+        { return QGArray::find((char*)&amp;d,i,sizeof(type)); }                   \
+    int  contains( const type &amp;d ) const                                      \
+        { return QGArray::contains((char*)&amp;d,sizeof(type)); }                 \
+    type&amp; operator[]( int i ) const                                           \
+        { return (type &amp;)(*(type *)QGArray::at(i*sizeof(type))); }            \
+    type&amp; at( uint i ) const                                                  \
+        { return (type &amp;)(*(type *)QGArray::at(i*sizeof(type))); }            \
+         operator const type*() const { return (const type *)QGArray::data();}\
+    bool operator==( const QArrayM(type) &amp;a ) const { return isEqual(a); }    \
+    bool operator!=( const QArrayM(type) &amp;a ) const { return !isEqual(a); }   \
+}
+
+#endif // USE_MACROCLASS
+
+
+#if defined(USE_TEMPLATECLASS)
+
+#if defined(DEFAULT_TEMPLATECLASS)
+#undef  QArray
+#define QArray QArrayT
+#endif
+
+template&lt;class type&gt; class Q_EXPORT QArrayT : public QGArray
+{
+protected:
+    QArrayT( int, int ) : QGArray( 0, 0 ) {}
+public:
+    QArrayT()                   {}
+    QArrayT( int size ) : QGArray(size*sizeof(type)) {}
+    QArrayT( const QArrayT&lt;type&gt; &amp;a ) : QGArray(a) {}
+   ~QArrayT()                   {}
+    QArrayT&lt;type&gt; &amp;operator=(const QArrayT&lt;type&gt; &amp;a)
+                                { return (QArrayT&lt;type&gt;&amp;)QGArray::assign(a); }
+    type *data()    const       { return (type *)QGArray::data(); }
+    uint  nrefs()   const       { return QGArray::nrefs(); }
+    uint  size()    const       { return QGArray::size()/sizeof(type); }
+    bool  isEmpty() const       { return QGArray::size() == 0; }
+    bool  isNull()  const       { return QGArray::data() == 0; }
+    bool  resize( uint size )   { return QGArray::resize(size*sizeof(type)); }
+    bool  truncate( uint pos )  { return QGArray::resize(pos*sizeof(type)); }
+    bool  fill( const type &amp;d, int size=-1 )
+        { return QGArray::fill((char*)&amp;d,size,sizeof(type) ); }
+    void  detach()              { QGArray::detach(); }
+    QArrayT&lt;type&gt;   copy() const
+        { QArrayT&lt;type&gt; tmp; return tmp.duplicate(*this); }
+    QArrayT&lt;type&gt;&amp; assign( const QArrayT&lt;type&gt;&amp; a )
+        { return (QArrayT&lt;type&gt;&amp;)QGArray::assign(a); }
+    QArrayT&lt;type&gt;&amp; assign( const type *a, uint n )
+        { return (QArrayT&lt;type&gt;&amp;)QGArray::assign((char*)a,n*sizeof(type)); }
+    QArrayT&lt;type&gt;&amp; duplicate( const QArrayT&lt;type&gt;&amp; a )
+        { return (QArrayT&lt;type&gt;&amp;)QGArray::duplicate(a); }
+    QArrayT&lt;type&gt;&amp; duplicate( const type *a, uint n )
+        { return (QArrayT&lt;type&gt;&amp;)QGArray::duplicate((char*)a,n*sizeof(type)); }
+    QArrayT&lt;type&gt;&amp; setRawData( const type *a, uint n )
+        { return (QArrayT&lt;type&gt;&amp;)QGArray::setRawData((char*)a,
+                                                     n*sizeof(type)); }
+    void resetRawData( const type *a, uint n )
+        { QGArray::resetRawData((char*)a,n*sizeof(type)); }
+    int  find( const type &amp;d, uint i=0 ) const
+        { return QGArray::find((char*)&amp;d,i,sizeof(type)); }
+    int  contains( const type &amp;d ) const
+        { return QGArray::contains((char*)&amp;d,sizeof(type)); }
+    type&amp; operator[]( int i ) const
+        { return (type &amp;)(*(type *)QGArray::at(i*sizeof(type))); }
+    type&amp; at( uint i ) const
+        { return (type &amp;)(*(type *)QGArray::at(i*sizeof(type))); }
+         operator const type*() const { return (const type *)QGArray::data(); }
+    bool operator==( const QArrayT&lt;type&gt; &amp;a ) const { return isEqual(a); }
+    bool operator!=( const QArrayT&lt;type&gt; &amp;a ) const { return !isEqual(a); }
+};
+
+
+#endif // USE_TEMPLATECLASS
+
+
+#endif // QARRAY_H
+
+</pre>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

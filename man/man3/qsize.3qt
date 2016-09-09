@@ -1,0 +1,293 @@
+.TH QSize 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QSize \- Defines the size of a two-dimensional object
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qsize.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QSize ()"
+.br
+.ti -1c
+.BI "QSize ( int " "w" ", int h )"
+.br
+.ti -1c
+.BI "bool isNull () const"
+.br
+.ti -1c
+.BI "bool isEmpty () const"
+.br
+.ti -1c
+.BI "bool isValid () const"
+.br
+.ti -1c
+.BI "int width () const"
+.br
+.ti -1c
+.BI "int height () const"
+.br
+.ti -1c
+.BI "void setWidth ( int w )"
+.br
+.ti -1c
+.BI "void setHeight ( int h )"
+.br
+.ti -1c
+.BI "void transpose ()"
+.br
+.ti -1c
+.BI "QSize expandedTo ( const QSize & ) const"
+.br
+.ti -1c
+.BI "QSize boundedTo ( const QSize & ) const"
+.br
+.ti -1c
+.BI "QCOORD& rwidth ()"
+.br
+.ti -1c
+.BI "QCOORD& rheight ()"
+.br
+.ti -1c
+.BI "QSize& operator+= ( const QSize & )"
+.br
+.ti -1c
+.BI "QSize& operator-= ( const QSize & )"
+.br
+.ti -1c
+.BI "QSize& operator*= ( int c )"
+.br
+.ti -1c
+.BI "QSize& operator*= ( float c )"
+.br
+.ti -1c
+.BI "QSize& operator/= ( int c )"
+.br
+.ti -1c
+.BI "QSize& operator/= ( float c )"
+.br
+.in -1c
+.SS "Static Public Members"
+.in +1c
+.ti -1c
+.BI "void warningDivByZero ()"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "bool operator== (const QSize & " "s1" ", const QSize & " "s2" ")"
+.br
+.ti -1c
+.BI "bool operator!= (const QSize & " "s1" ", const QSize & " "s2" ")"
+.br
+.ti -1c
+.BI "QSize operator+ (const QSize & " "s1" ", const QSize & " "s2" ")"
+.br
+.ti -1c
+.BI "QSize operator- (const QSize & " "s1" ", const QSize & " "s2" ")"
+.br
+.ti -1c
+.BI "QSize operator* (const QSize & " "s" ", int " "c" ")"
+.br
+.ti -1c
+.BI "QSize operator* (int " "c" ", const QSize & " "s" ")"
+.br
+.ti -1c
+.BI "QSize operator* (const QSize & " "s" ", float " "c" ")"
+.br
+.ti -1c
+.BI "QSize operator* (float " "c" ", const QSize & " "s" ")"
+.br
+.ti -1c
+.BI "QSize operator/ (const QSize & " "s" ", int " "c" ")"
+.br
+.ti -1c
+.BI "QSize operator/ (const QSize & " "s" ", float " "c" ")"
+.br
+.ti -1c
+.BI "QDataStream & operator<< (QDataStream & " "s" ", const QSize & " "sz" ")"
+.br
+.ti -1c
+.BI "QDataStream & operator>> (QDataStream & " "s" ", QSize & " "sz" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The QSize class defines the size of a two-dimensional object.
+.PP
+A size is specified by a width and a height.
+.PP
+The coordinate type is QCOORD (defined in qwindowdefs.h as \fCshort).\fR The minimum value of QCOORD is QCOORD_MIN (-32768) and the maximum value is QCOORD_MAX (32767).
+.PP
+See also: QPoint and QRect.
+.PP
+Examples:
+.(l
+tictac/tictac.cpp xform/xform.cpp pref/pref.cpp progress/progress.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QSize::QSize ()"
+Constructs a size with invalid (negative) width and height.
+.SH "QSize::QSize ( int w, int h )"
+Constructs a size with width \fIw\fR and height \fIh.\fR
+.SH "QSize QSize::boundedTo ( const QSize & otherSize ) const"
+Returns a size with the minimum width and height of this size and \fIotherSize.\fR
+.SH "QSize QSize::expandedTo ( const QSize & otherSize ) const"
+Returns a size with the maximum width and height of this size and \fIotherSize.\fR
+.SH "int QSize::height () const"
+Returns the height.
+.PP
+See also: width().
+.PP
+Examples:
+.(l
+pref/pref.cpp
+.)l
+.SH "bool QSize::isEmpty () const"
+Returns TRUE if the width is <= 0 or the height is <= 0, otherwise FALSE.
+.SH "bool QSize::isNull () const"
+Returns TRUE if the width is 0 and the height is 0, otherwise FALSE.
+.SH "bool QSize::isValid () const"
+Returns TRUE if the width is equal to or greater than 0 and the height is equal to or greater than 0, otherwise FALSE.
+.SH "QSize & QSize::operator*= ( float c )"
+Multiplies both the width and height with \fIc\fR and returns a reference to the size.
+.PP
+Note that the result is truncated.
+.SH "QSize & QSize::operator*= ( int c )"
+Multiplies both the width and height with \fIc\fR and returns a reference to the size.
+.SH "QSize & QSize::operator+= ( const QSize & s )"
+Adds \fIs\fR to the size and returns a reference to this size.
+.PP
+Example:
+.PP
+.nf
+.br
+    QSize s(  3, 7 );
+.br
+    QSize r( -1, 4 );
+.br
+    s += r;                     // s becomes (2,11)
+.fi
+.SH "QSize & QSize::operator-= ( const QSize & s )"
+Subtracts \fIs\fR from the size and returns a reference to this size.
+.PP
+Example:
+.PP
+.nf
+.br
+    QSize s(  3, 7 );
+.br
+    QSize r( -1, 4 );
+.br
+    s -= r;                     // s becomes (4,3)
+.fi
+.SH "QSize & QSize::operator/= ( float c )"
+Divides both the width and height by \fIc\fR and returns a reference to the size.
+.PP
+Note that the result is truncated.
+.SH "QSize & QSize::operator/= ( int c )"
+Divides both the width and height by \fIc\fR and returns a reference to the size.
+.SH "QCOORD & QSize::rheight ()"
+Returns a reference to the height.
+.PP
+Using a reference makes it possible to directly manipulate the height.
+.PP
+Example:
+.PP
+.nf
+.br
+    QSize s( 100, 10 );
+.br
+    s.rheight() += 5;           // s becomes (100,15)
+.fi
+.PP
+See also: rwidth().
+.SH "QCOORD & QSize::rwidth ()"
+Returns a reference to the width.
+.PP
+Using a reference makes it possible to directly manipulate the width.
+.PP
+Example:
+.PP
+.nf
+.br
+    QSize s( 100, 10 );
+.br
+    s.rwidth() += 20;           // s becomes (120,10)
+.fi
+.PP
+See also: rheight().
+.SH "void QSize::setHeight ( int h )"
+Sets the height to \fIh.\fR
+.PP
+See also: height() and setWidth().
+.PP
+Examples:
+.(l
+pref/pref.cpp
+.)l
+.SH "void QSize::setWidth ( int w )"
+Sets the width to \fIw.\fR
+.PP
+See also: width() and setHeight().
+.PP
+Examples:
+.(l
+pref/pref.cpp
+.)l
+.SH "void QSize::transpose ()"
+Swaps the values of width and height.
+.SH "int QSize::width () const"
+Returns the width.
+.PP
+See also: height().
+.PP
+Examples:
+.(l
+pref/pref.cpp
+.)l
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "bool operator== (const QSize & s1, const QSize & s2)"
+Returns TRUE if \fIs1\fR and \fIs2\fR are equal, or FALSE if they are different.
+.SH "bool operator!= (const QSize & s1, const QSize & s2)"
+Returns TRUE if \fIs1\fR and \fIs2\fR are different, or FALSE if they are equal.
+.SH "QSize operator+ (const QSize & s1, const QSize & s2)"
+Returns the sum of \fIs1\fR and \fIs2;\fR each component is added separately.
+.SH "QSize operator- (const QSize & s1, const QSize & s2)"
+Returns \fIs2\fR subtracted from \fIs1;\fR each component is subtracted separately.
+.SH "QSize operator* (const QSize & s, int c)"
+Multiplies \fIs\fR by \fIc\fR and returns the result.
+.SH "QSize operator* (int c, const QSize & s)"
+Multiplies \fIs\fR by \fIc\fR and returns the result.
+.SH "QSize operator* (const QSize & s, float c)"
+Multiplies \fIs\fR by \fIc\fR and returns the result.
+.SH "QSize operator* (float c, const QSize & s)"
+Multiplies \fIs\fR by \fIc\fR and returns the result.
+.SH "QSize operator/ (const QSize & s, int c)"
+Divides \fIs\fR by \fIc\fR and returns the result.
+.SH "QSize operator/ (const QSize & s, float c)"
+Divides \fIs\fR by \fIc\fR and returns the result.
+.PP
+Note that the result is truncated.
+.SH "QDataStream & operator<< (QDataStream & s, const QSize & sz)"
+Writes the size to the stream and returns a reference to the stream.
+.PP
+Serialization format: [width (INT16), height (INT16)].
+.SH "QDataStream & operator>> (QDataStream & s, QSize & sz)"
+Reads the size from the stream and returns a reference to the stream.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qsize.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

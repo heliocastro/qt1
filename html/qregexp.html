@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QRegExp Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QRegExp Class Reference</h1><br clear="all">
+<p>
+The QRegExp class provides pattern matching using regular expressions and wildcards.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qregexp-h.html">qregexp.h</a>&gt;</code>
+<p><a href="qregexp-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qregexp.html#a0"><strong>QRegExp</strong></a> () </span>
+<li><span class="fn"><a href="qregexp.html#a1"><strong>QRegExp</strong></a> ( const char *, bool caseSensitive=TRUE, bool wildcard=FALSE ) </span>
+<li><span class="fn"><a href="qregexp.html#a2"><strong>QRegExp</strong></a> ( const QRegExp &amp; ) </span>
+<li><span class="fn"><a href="qregexp.html#a3"><strong>~QRegExp</strong></a> () </span>
+<li><span class="fn">QRegExp&amp; <a href="qregexp.html#a4"><strong>operator=</strong></a> ( const QRegExp &amp; ) </span>
+<li><span class="fn">QRegExp&amp; <a href="qregexp.html#a5"><strong>operator=</strong></a> ( const char * pattern ) </span>
+<li><span class="fn">bool <a href="qregexp.html#a6"><strong>operator==</strong></a> ( const QRegExp &amp; ) const</span>
+<li><span class="fn">bool <a href="qregexp.html#a7"><strong>operator!=</strong></a> ( const QRegExp &amp; r ) const</span>
+<li><span class="fn">bool <a href="qregexp.html#a8"><strong>isEmpty</strong></a> () const</span>
+<li><span class="fn">bool <a href="qregexp.html#a9"><strong>isValid</strong></a> () const</span>
+<li><span class="fn">bool <a href="qregexp.html#b0"><strong>caseSensitive</strong></a> () const</span>
+<li><span class="fn">void <a href="qregexp.html#b1"><strong>setCaseSensitive</strong></a> ( bool ) </span>
+<li><span class="fn">bool <a href="qregexp.html#b2"><strong>wildcard</strong></a> () const</span>
+<li><span class="fn">void <a href="qregexp.html#b3"><strong>setWildcard</strong></a> ( bool ) </span>
+<li><span class="fn">const char* <a href="qregexp.html#b4"><strong>pattern</strong></a> () const</span>
+<li><span class="fn">int <a href="qregexp.html#b5"><strong>match</strong></a> ( const char * str, int index=0, int * len=0 ) const</span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn">void <a href="qregexp.html#b6"><strong>compile</strong></a> () </span>
+<li><span class="fn">char* <a href="qregexp.html#b7"><strong>matchstr</strong></a> ( ushort *, char *, char * ) const</span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QRegExp class provides pattern matching using regular expressions and wildcards.
+<p>
+QRegExp knows these regexp primitives:
+<ul plain>
+<li><dfn>c</dfn> matches the character 'c'
+<li><dfn>.</dfn> matches any character
+<li><dfn>^</dfn> matches start of input (except [^x] which matches NOT [x])
+<li><dfn>$</dfn>  matches end of input
+<li><dfn>[]</dfn> matches a set of characters, for example [a-z0-9_]
+<li><dfn>a*</dfn> matches a sequence of zero or more a's
+<li><dfn>a+</dfn> matches a sequence of one or more a's
+<li><dfn>a?</dfn> matches an optional a
+<li><dfn>\c</dfn> escape code for matching special characters like \, [, *, +, . etc.
+<li><dfn>\b</dfn> matches the BELL character (7)
+<li><dfn>\t</dfn> matches the TAB character (9)
+<li><dfn>\n</dfn> matches newline (10)
+<li><dfn>\r</dfn> matches return (13)
+<li><dfn>\s</dfn> matches white space (9,10,11,12,13,32)
+<li><dfn>\x12</dfn> matches the character 0x12 (18 decimal, 12 hexadecimal).
+<li><dfn>\022</dfn> matches the character 022 (18 decimal, 22 octal).
+</ul>
+<p>In wildcard mode, it only knows three primitives:
+<ul plain>
+<li><dfn>?</dfn> matches any character
+<li><dfn>*</dfn> matches any sequence of characters
+<li><dfn>[]</dfn> matches a defined set of characters,
+e.g. [a-zA-Z0-9\.] matches upper and lower case ASCII letters, digits,
+and dot, and [^z] matches everything except lower-case z.
+</ul>
+<p>When writing regular expressions in C++ code, remember that the C++
+preprocessor processes \ characters.  So in order to match a "."
+character, you must write "\\." in C++ source, not "\.".
+<p>Examples:
+ <a href="qmag-qmag-cpp.html#QRegExp">qmag/qmag.cpp</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a0"></a>QRegExp::QRegExp ()</h3>
+<p>Constructs an empty regular expression.
+<h3 class="fn"><a name="a2"></a>QRegExp::QRegExp ( const QRegExp &amp; r )</h3>
+<p>Constructs a regular expression which is a copy of <em>r.</em>
+<p>See also:  <a href="qregexp.html#a4">operator=</a>(const and <a href="qregexp.html">QRegExp</a>&).
+<h3 class="fn"><a name="a1"></a>QRegExp::QRegExp ( const char * pattern, bool caseSensitive=TRUE, bool wildcard=FALSE )</h3>
+<p>Constructs a regular expression.
+<p>Arguments:
+<ul>
+<li><em>pattern</em> is the regular expression pattern string.
+<li><em>caseSensitive</em> specifies whether or not to use case sensitive
+matching.
+<li><em>wildcard</em> specifies whether the pattern string should be used for
+wildcard matching (also called globbing expression), normally used for
+matching file names.
+</ul>
+<p>See also:  <a href="qregexp.html#b3">setWildcard</a>().
+<h3 class="fn"><a name="a3"></a>QRegExp::~QRegExp ()</h3>
+<p>Destroys the regular expression and cleans up its internal data.
+<h3 class="fn">bool <a name="b0"></a>QRegExp::caseSensitive () const</h3>
+<p>Returns TRUE if case sensitivity is enabled, otherwise FALSE.  The
+default is TRUE.
+<p>See also:  <a href="qregexp.html#b1">setCaseSensitive</a>().
+<h3 class="fn">void <a name="b6"></a>QRegExp::compile () <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">bool <a name="a8"></a>QRegExp::isEmpty () const</h3>
+<p>Returns TRUE if the regexp is empty.
+<h3 class="fn">bool <a name="a9"></a>QRegExp::isValid () const</h3>
+<p>Returns TRUE if the regexp is valid, or FALSE if it is invalid.
+<p>The pattern "[a-z" is an example of an invalid pattern, since it lacks a
+closing bracket.
+<h3 class="fn">int <a name="b5"></a>QRegExp::match ( const char * str, int index=0, int * len=0 ) const</h3>
+<p>Attempts to match in <em>str,</em> starting from position <em>index.</em>
+Returns the position of the match, or -1 if there was no match.
+<p>If <em>len</em> is not a null pointer, the length of the match is stored in
+<em>*len.</em>
+<p>Example:
+<pre>    <a href="qregexp.html">QRegExp</a> r("[0-9]*\.[0-9]+");                // matches floating point
+    int len;
+    r.<a href="qregexp.html#b5">match</a>("pi = 3.1416", 0, &amp;len);            // returns 5, len == 6
+</pre>
+<p>Examples:
+ <a href="qmag-qmag-cpp.html#match">qmag/qmag.cpp</a>
+<h3 class="fn">char * <a name="b7"></a>QRegExp::matchstr ( ushort * rxd, char * str, char * bol ) const <code>[protected]</code></h3>
+<p>For internal use only.
+<h3 class="fn">bool <a name="a7"></a>QRegExp::operator!= ( const QRegExp &amp; r ) const</h3>
+<p>Returns TRUE if this regexp is <em>not</em> equal to <em>r.</em>
+<p>See also:  <a href="qregexp.html#a6">operator==</a>().
+<h3 class="fn">QRegExp &amp; <a name="a4"></a>QRegExp::operator= ( const QRegExp &amp; r )</h3>
+<p>Copies the regexp <em>r</em> and returns a reference to this regexp.
+The case sensitivity and wildcard options are copied, as well.
+<h3 class="fn">QRegExp &amp; <a name="a5"></a>QRegExp::operator= ( const char * pattern )</h3>
+<p>Sets the pattern string to <em>pattern</em> and returns a reference to this regexp.
+The case sensitivity or wildcard options do not change.
+<h3 class="fn">bool <a name="a6"></a>QRegExp::operator== ( const QRegExp &amp; r ) const</h3>
+<p>Returns TRUE if this regexp is equal to <em>r.</em>
+<p>Two regexp objects are equal if they have equal pattern strings,
+case sensitivity options and wildcard options.
+<h3 class="fn">const char * <a name="b4"></a>QRegExp::pattern () const</h3>
+<p>Returns the pattern string of the regexp.
+<h3 class="fn">void <a name="b1"></a>QRegExp::setCaseSensitive ( bool enable )</h3>
+<p>Enables or disables case sensitive matching.
+<p>In case sensitive mode, "a.e" matches "axe" but not "Axe".
+<p>See also: <a href="qregexp.html#b0">caseSensitive</a>().
+<h3 class="fn">void <a name="b3"></a>QRegExp::setWildcard ( bool wildcard )</h3>
+<p>Sets the wildcard option for the regular expression.  The default
+is FALSE.
+<p>Setting <em>wildcard</em> to TRUE makes it convenient to match filenames
+instead of plain text.
+<p>For example, "qr*.cpp" matches the string "qregexp.cpp" in wildcard mode,
+but not "qicpp" (which will be matched in normal mode).
+<p>See also:  <a href="qregexp.html#b2">wildcard</a>().
+<h3 class="fn">bool <a name="b2"></a>QRegExp::wildcard () const</h3>
+<p>Returns TRUE if wildcard mode is on, otherwise FALSE.
+<p>See also:  <a href="qregexp.html#b3">setWildcard</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qregexp.h: 1998/08/19
+<li>qregexp.cpp: 1998/11/26
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>

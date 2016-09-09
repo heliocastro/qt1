@@ -1,0 +1,64 @@
+.TH QConnection 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QConnection \- Internal class, used in the signal/slot mechanism
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qconnection.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QConnection ( const QObject *, QMember, const char * memberName )"
+.br
+.ti -1c
+.BI "\fB~QConnection\fR ()"
+.br
+.ti -1c
+.BI "bool isConnected () const"
+.br
+.ti -1c
+.BI "QObject* object () const"
+.br
+.ti -1c
+.BI "QMember* member () const"
+.br
+.ti -1c
+.BI "const char* memberName () const"
+.br
+.ti -1c
+.BI "int numArgs () const"
+.br
+.in -1c
+.SH DESCRIPTION
+The QConnection class is an internal class, used in the signal/slot mechanism.
+.PP
+Do not use this class directly in application programs.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QConnection::QConnection ( const QObject * object, QMember member, const char * memberName )"
+For internal use only.
+.SH "QConnection::~QConnection ()"
+For internal use only.
+.SH "bool QConnection::isConnected () const"
+For internal use only.
+.SH "QMember * QConnection::member () const"
+For internal use only.
+.SH "const char * QConnection::memberName () const"
+For internal use only.
+.SH "int QConnection::numArgs () const"
+For internal use only.
+.SH "QObject * QConnection::object () const"
+For internal use only.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qconnection.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

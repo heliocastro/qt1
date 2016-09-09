@@ -1,0 +1,475 @@
+.TH QMenuData 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QMenuData \- Base class for QMenuBar and QPopupMenu
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qmenudata.h>\fR
+.PP
+Inherited by QMenuBar and QPopupMenu.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QMenuData ()"
+.br
+.ti -1c
+.BI "virtual \fB~QMenuData\fR ()"
+.br
+.ti -1c
+.BI "uint count () const"
+.br
+.ti -1c
+.BI "int insertItem ( const char * " "text" ", const QObject * " "receiver" ", const char * " "member" ", int " "accel" "=0 )"
+.br
+.ti -1c
+.BI "int insertItem ( const QPixmap & " "pixmap" ", const QObject * " "receiver" ", const char * " "member" ", int " "accel" "=0 )"
+.br
+.ti -1c
+.BI "int insertItem ( const QPixmap & " "pixmap" ", const char * " "text" ", const QObject * " "receiver" ", const char * " "member" ", int " "accel" "=0 )"
+.br
+.ti -1c
+.BI "int insertItem ( const char * " "text" ", const QObject * " "receiver" ", const char * " "member" ", int " "accel" ", int " "id" ", int " "index" " = -1 )"
+.br
+.ti -1c
+.BI "int insertItem ( const QPixmap & " "pixmap" ", const QObject * " "receiver" ", const char * " "member" ", int " "accel" ", int " "id" ", int " "index" " = -1 )"
+.br
+.ti -1c
+.BI "int insertItem ( const QPixmap & " "pixmap" ", const char * " "text" ", const QObject * " "receiver" ", const char * " "member" ", int " "accel" ", int " "id" ", int " "index" " = -1 )"
+.br
+.ti -1c
+.BI "int insertItem ( const char * " "text" ", int " "id" "=-1, int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "int insertItem ( const char * " "text" ", QPopupMenu * " "popup" ", int " "id" "=-1, int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "int insertItem ( const QPixmap & " "pixmap" ", int " "id" "=-1, int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "int insertItem ( const QPixmap & " "pixmap" ", QPopupMenu * " "popup" ", int " "id" "=-1, int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "int insertItem ( const QPixmap & " "pixmap" ", const char * " "text" ", int " "id" "=-1, int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "int insertItem ( const QPixmap & " "pixmap" ", const char * " "text" ", QPopupMenu * " "popup" ", int " "id" "=-1, int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "void insertSeparator ( int " "index" "=-1 )"
+.br
+.ti -1c
+.BI "void removeItem ( int id )"
+.br
+.ti -1c
+.BI "void removeItemAt ( int index )"
+.br
+.ti -1c
+.BI "void clear ()"
+.br
+.ti -1c
+.BI "int accel ( int id ) const"
+.br
+.ti -1c
+.BI "void setAccel ( int " "key" ", int id )"
+.br
+.ti -1c
+.BI "const char* text ( int id ) const"
+.br
+.ti -1c
+.BI "QPixmap* pixmap ( int id ) const"
+.br
+.ti -1c
+.BI "void changeItem ( const char * " "text" ", int id )"
+.br
+.ti -1c
+.BI "void changeItem ( const QPixmap & " "pixmap" ", int id )"
+.br
+.ti -1c
+.BI "void changeItem ( const QPixmap & " "pixmap" ", const char * " "text" ", int id )"
+.br
+.ti -1c
+.BI "bool isItemEnabled ( int id ) const"
+.br
+.ti -1c
+.BI "void setItemEnabled ( int " "id" ", bool enable )"
+.br
+.ti -1c
+.BI "bool isItemChecked ( int id ) const"
+.br
+.ti -1c
+.BI "void setItemChecked ( int " "id" ", bool check )"
+.br
+.ti -1c
+.BI "virtual void updateItem ( int id )"
+.br
+.ti -1c
+.BI "int indexOf ( int id ) const"
+.br
+.ti -1c
+.BI "int idAt ( int index ) const"
+.br
+.ti -1c
+.BI "void setId ( int " "index" ", int id )"
+.br
+.ti -1c
+.BI "bool connectItem ( int " "id" ", const QObject * " "receiver" ", const char * member )"
+.br
+.ti -1c
+.BI "bool disconnectItem ( int " "id" ", const QObject * " "receiver" ", const char * member )"
+.br
+.ti -1c
+.BI "QMenuItem* findItem ( int id ) const"
+.br
+.ti -1c
+.BI "QMenuItem* findItem ( int " "id" ", QMenuData ** parent ) const"
+.br
+.in -1c
+.SS "Protected Members"
+.in +1c
+.ti -1c
+.BI "virtual void menuContentsChanged ()"
+.br
+.ti -1c
+.BI "virtual void menuStateChanged ()"
+.br
+.ti -1c
+.BI "virtual void menuInsPopup ( QPopupMenu * )"
+.br
+.ti -1c
+.BI "virtual void menuDelPopup ( QPopupMenu * )"
+.br
+.ti -1c
+.BI "QMenuItem* findPopup ( QPopupMenu *, int * " "index" " = 0 )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QMenuData class is a base class for QMenuBar and QPopupMenu.
+.PP
+QMenuData has an internal list of menu items. A menu item is a text, pixmap or a separator, and may also have a popup menu (separators have no popup menus).
+.PP
+The menu item sends out an activated() signal when it is selected, and a highlighted() signal when it receives the user input focus.
+.PP
+Menu items can be accessed through identifiers.
+.PP
+See also: QAccel.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QMenuData::QMenuData ()"
+Constructs an empty list.
+.SH "QMenuData::~QMenuData () \fC[virtual]\fR"
+Removes all menu items and disconnects any signals that have been connected.
+.SH "int QMenuData::accel ( int id ) const"
+Returns the accelerator key that has been defined for the menu item \fIid,\fR or 0 if it has no accelerator key.
+.PP
+See also: setAccel(), QAccel and qkeycode.h.
+.SH "void QMenuData::changeItem ( const QPixmap & pixmap, const char * text, int id )"
+Changes the pixmap and text of the menu item \fIid.\fR
+.PP
+See also: pixmap().
+.SH "void QMenuData::changeItem ( const QPixmap & pixmap, int id )"
+Changes the pixmap of the menu item \fIid.\fR
+.PP
+See also: pixmap().
+.SH "void QMenuData::changeItem ( const char * text, int id )"
+Changes the text of the menu item \fIid.\fR
+.PP
+See also: text().
+.SH "void QMenuData::clear ()"
+Removes all menu items.
+.PP
+See also: removeItem() and removeItemAt().
+.SH "bool QMenuData::connectItem ( int id, const QObject * receiver, const char * member )"
+Connects a menu item to a receiver and a slot or signal.
+.PP
+The receiver's slot/signal is activated when the menu item is activated.
+.SH "uint QMenuData::count () const"
+Returns the number of items in the menu.
+.SH "bool QMenuData::disconnectItem ( int id, const QObject * receiver, const char * member )"
+Disconnects a receiver/member from a menu item.
+.PP
+All connections are removed when the menu data object is destroyed.
+.SH "QMenuItem * QMenuData::findItem ( int id ) const"
+Returns a pointer to the menu item with identifier \fIid,\fR or 0 if there is no item with such an identifier.
+.PP
+See also: indexOf().
+.SH "QMenuItem * QMenuData::findItem ( int id, QMenuData ** parent ) const"
+Returns a pointer to the menu item with identifier \fIid,\fR or 0 if there is no item with such an identifier, and changes \fIparent\fR to point to the parent of the return value.
+.PP
+See also: indexOf().
+.SH "QMenuItem * QMenuData::findPopup ( QPopupMenu * popup, int * index = 0 ) \fC[protected]\fR"
+Internal function that finds the menu item where \fIpopup\fR is located, storing its index at \fIindex\fR if \fIindex\fR is not NULL.
+.SH "int QMenuData::idAt ( int index ) const"
+Returns the identifier of the menu item at position \fIindex\fR in the internal list, or -1 if \fIindex\fR is out of range.
+.PP
+See also: setId() and indexOf().
+.SH "int QMenuData::indexOf ( int id ) const"
+Returns the index of the menu item with identifier \fIid,\fR or -1 if there is no item with such an identifier.
+.PP
+See also: idAt() and findItem().
+.SH "int QMenuData::insertItem ( const QPixmap & pixmap, QPopupMenu * popup, int id=-1, int index=-1 )"
+Inserts a menu item with a pixmap and a sub menu. Returns the menu item identifier.
+.PP
+The \fIpopup\fR must be deleted by the programmer. It is not deleted when this menu item is removed or when the menu is deleted. Note that all popups are automatically deleted when the application terminates. (The QApplication destructor destroys all remaining widgets.)
+.PP
+The menu item is assigned the identifier \fIid\fR or an automatically generated identifier. It works as follows: If \fIid\fR >= 0, this identifier is assigned. If \fIid\fR == -1 (default), the identifier is set equal to the menu item's real index (see below). If \fIid\fR is any other negative integer, for instance -2, a unique identifier (negative integer <= -2) is generated.
+.PP
+The \fIindex\fR specifies the position in the menu. The menu item is appended at the end of the list if \fIindex\fR is negative.
+.PP
+\fBWarning:\fR Be careful when passing a literal 0 to insertItem(), as some C++ compilers choose the wrong overloaded function. Cast the 0 to what you mean, eg. \fC(QObject*)0\fR.
+.PP
+See also: removeItem(), changeItem(), setAccel() and connectItem().
+.SH "int QMenuData::insertItem ( const QPixmap & pixmap, const QObject * receiver, const char * member, int accel, int id, int index = -1 )"
+Inserts a menu item with a pixmap, an accelerator key, an id and an optional index and connects it to an object/slot.
+.PP
+The menu item is assigned the identifier \fIid\fR or an automatically generated identifier. It works as follows: If \fIid\fR >= 0, this identifier is assigned. If \fIid\fR == -1 (default), the identifier is set equal to the menu item's real index (see below). If \fIid\fR is any other negative integer, for instance -2, a unique identifier (negative integer <= -2) is generated.
+.PP
+The \fIindex\fR specifies the position in the menu. The menu item is appended at the end of the list if \fIindex\fR is negative.
+.PP
+Note that accelerators only work for QPopupMenu items that live in a menu bar. For stand-alone popup menus, use an independent QAccel object.
+.PP
+\fBWarning:\fR Be careful when passing a literal 0 to insertItem(), as some C++ compilers choose the wrong overloaded function. Cast the 0 to what you mean, eg. \fC(QObject*)0\fR.
+.PP
+See also: removeItem(), changeItem(), setAccel(), connectItem(), QAccel and qkeycode.h.
+.SH "int QMenuData::insertItem ( const QPixmap & pixmap, const QObject * receiver, const char * member, int accel=0 )"
+Inserts a menu item with a pixmap and an optional accelerator key, and connects it to an object/slot.
+.PP
+Returns a unique menu item identifier (negative integer <= -2).
+.PP
+\fBWarning:\fR Be careful when passing a literal 0 to insertItem(), as some C++ compilers choose the wrong overloaded function. Cast the 0 to what you mean, eg. \fC(QObject*)0\fR.
+.PP
+See also: removeItem(), changeItem(), setAccel(), connectItem(), QAccel and qkeycode.h.
+.SH "int QMenuData::insertItem ( const QPixmap & pixmap, const char * text, QPopupMenu * popup, int id=-1, int index=-1 )"
+Inserts a menu item with a pixmap, a text and a sub menu. Returns the menu item identifier.
+.PP
+The \fIpopup\fR must be deleted by the programmer. It is not deleted when this menu item is removed or when the menu is deleted. Note that all popups are automatically deleted when the application terminates. (The QApplication destructor destroys all remaining widgets.)
+.PP
+The menu item is assigned the identifier \fIid\fR or an automatically generated identifier. It works as follows: If \fIid\fR >= 0, this identifier is assigned. If \fIid\fR == -1 (default), the identifier is set equal to the menu item's real index (see below). If \fIid\fR is any other negative integer, for instance -2, a unique identifier (negative integer <= -2) is generated.
+.PP
+The \fIindex\fR specifies the position in the menu. The menu item is appended at the end of the list if \fIindex\fR is negative.
+.PP
+\fBWarning:\fR Be careful when passing a literal 0 to insertItem(), as some C++ compilers choose the wrong overloaded function. Cast the 0 to what you mean, eg. \fC(QObject*)0\fR.
+.PP
+See also: removeItem(), changeItem(), setAccel() and connectItem().
+.SH "int QMenuData::insertItem ( const QPixmap & pixmap, const char * text, const QObject * receiver, const char * member, int accel, int id, int index = -1 )"
+Inserts a menu item with a pixmap, a text, an accelerator key, an id and an optional index and connects it to an object/slot.
+.PP
+The menu item is assigned the identifier \fIid\fR or an automatically generated identifier. It works as follows: If \fIid\fR >= 0, this identifier is assigned. If \fIid\fR == -1 (default), the identifier is set equal to the menu item's real index (see below). If \fIid\fR is any other negative integer, for instance -2, a unique identifier (negative integer <= -2) is generated.
+.PP
+The \fIindex\fR specifies the position in the menu. The menu item is appended at the end of the list if \fIindex\fR is negative.
+.PP
+Note that accelerators only work for QPopupMenu items that live in a menu bar. For stand-alone popup menus, use an independent QAccel object.
+.PP
+\fBWarning:\fR Be careful when passing a literal 0 to insertItem(), as some C++ compilers choose the wrong overloaded function. Cast the 0 to what you mean, eg. \fC(QObject*)0\fR.
+.PP
+See also: removeItem(), changeItem(), setAccel(), connectItem(), QAccel and qkeycode.h.
+.PP
+Examples:
+.(l
+qtimage/qtimage.cpp grapher/grapher.cpp xform/xform.cpp application/application.cpp menu/menu.cpp progress/progress.cpp layout/layout.cpp showimg/showimg.cpp widgets/widgets.cpp
+.)l
+.SH "int QMenuData::insertItem ( const QPixmap & pixmap, const char * text, const QObject * receiver, const char * member, int accel=0 )"
+Inserts a menu item with a pixmap, a text and an optional accelerator key, and connects it to an object/slot. The pixmap will be displayed to the left of the text in the item.
+.PP
+Returns a unique menu item identifier (negative integer <= -2).
+.PP
+\fBWarning:\fR Be careful when passing a literal 0 to insertItem(), as some C++ compilers choose the wrong overloaded function. Cast the 0 to what you mean, eg. \fC(QObject*)0\fR.
+.PP
+See also: removeItem(), changeItem(), setAccel(), connectItem(), QAccel and qkeycode.h.
+.SH "int QMenuData::insertItem ( const QPixmap & pixmap, const char * text, int id=-1, int index=-1 )"
+Inserts a menu item with a pixmap and a text. Returns the menu item identifier.
+.PP
+The menu item is assigned the identifier \fIid\fR or an automatically generated identifier. It works as follows: If \fIid\fR >= 0, this identifier is assigned. If \fIid\fR == -1 (default), the identifier is set equal to the menu item's real index (see below). If \fIid\fR is any other negative integer, for instance -2, a unique identifier (negative integer <= -2) is generated.
+.PP
+The \fIindex\fR specifies the position in the menu. The menu item is appended at the end of the list if \fIindex\fR is negative.
+.PP
+\fBWarning:\fR Be careful when passing a literal 0 to insertItem(), as some C++ compilers choose the wrong overloaded function. Cast the 0 to what you mean, eg. \fC(QObject*)0\fR.
+.PP
+See also: removeItem(), changeItem(), setAccel() and connectItem().
+.SH "int QMenuData::insertItem ( const QPixmap & pixmap, int id=-1, int index=-1 )"
+Inserts a menu item with a pixmap. Returns the menu item identifier.
+.PP
+The menu item is assigned the identifier \fIid\fR or an automatically generated identifier. It works as follows: If \fIid\fR >= 0, this identifier is assigned. If \fIid\fR == -1 (default), the identifier is set equal to the menu item's real index (see below). If \fIid\fR is any other negative integer, for instance -2, a unique identifier (negative integer <= -2) is generated.
+.PP
+The \fIindex\fR specifies the position in the menu. The menu item is appended at the end of the list if \fIindex\fR is negative.
+.PP
+\fBWarning:\fR Be careful when passing a literal 0 to insertItem(), as some C++ compilers choose the wrong overloaded function. Cast the 0 to what you mean, eg. \fC(QObject*)0\fR.
+.PP
+See also: removeItem(), changeItem(), setAccel() and connectItem().
+.SH "int QMenuData::insertItem ( const char * text, QPopupMenu * popup, int id=-1, int index=-1 )"
+Inserts a menu item with a text and a sub menu. Returns the menu item identifier.
+.PP
+The \fIpopup\fR must be deleted by the programmer. It is not deleted when this menu item is removed or when the menu is deleted. Note that all popups are automatically deleted when the application terminates. (The QApplication destructor destroys all remaining widgets.)
+.PP
+The menu item is assigned the identifier \fIid\fR or an automatically generated identifier. It works as follows: If \fIid\fR >= 0, this identifier is assigned. If \fIid\fR == -1 (default), the identifier is set equal to the menu item's real index (see below). If \fIid\fR is any other negative integer, for instance -2, a unique identifier (negative integer <= -2) is generated.
+.PP
+The \fIindex\fR specifies the position in the menu. The menu item is appended at the end of the list if \fIindex\fR is negative.
+.PP
+\fBWarning:\fR Be careful when passing a literal 0 to insertItem(), as some C++ compilers choose the wrong overloaded function. Cast the 0 to what you mean, eg. \fC(QObject*)0\fR.
+.PP
+See also: removeItem(), changeItem(), setAccel() and connectItem().
+.SH "int QMenuData::insertItem ( const char * text, const QObject * receiver, const char * member, int accel, int id, int index = -1 )"
+Inserts a menu item with a text, an accelerator key, an id and an optional index and connects it to an object/slot.
+.PP
+The menu item is assigned the identifier \fIid\fR or an automatically generated identifier. It works as follows: If \fIid\fR >= 0, this identifier is assigned. If \fIid\fR == -1 (default), the identifier is set equal to the menu item's real index (see below). If \fIid\fR is any other negative integer, for instance -2, a unique identifier (negative integer <= -2) is generated.
+.PP
+The \fIindex\fR specifies the position in the menu. The menu item is appended at the end of the list if \fIindex\fR is negative.
+.PP
+Note that accelerators only work for QPopupMenu items that live in a menu bar. For stand-alone popup menus, use an independent QAccel object.
+.PP
+\fBWarning:\fR Be careful when passing a literal 0 to insertItem(), as some C++ compilers choose the wrong overloaded function. Cast the 0 to what you mean, eg. \fC(QObject*)0\fR.
+.PP
+See also: removeItem(), changeItem(), setAccel(), connectItem(), QAccel and qkeycode.h.
+.SH "int QMenuData::insertItem ( const char * text, const QObject * receiver, const char * member, int accel=0 )"
+Inserts a menu item with a text and an optional accelerator key, and connects it to an object/slot.
+.PP
+Returns a unique menu item identifier (negative integer <= -2).
+.PP
+Example:
+.PP
+.nf
+.br
+    QMenuBar   *mainMenu = new QMenuBar;
+.br
+    QPopupMenu *fileMenu = new QPopupMenu;
+.br
+    fileMenu->insertItem( "New",  myView, SLOT(newFile()), CTRL+Key_N );
+.br
+    fileMenu->insertItem( "Open", myView, SLOT(open()),    CTRL+Key_O );
+.br
+    mainMenu->insertItem( "File", fileMenu );
+.fi
+.PP
+In the example above, pressing CTRL+N or selecting "open" from the menu activates the myView->open() function.
+.PP
+Note that accelerators only work for QPopupMenu items that live in a menu bar. For stand-alone popup menus, use an independent QAccel object.
+.PP
+\fBWarning:\fR Be careful when passing a literal 0 to insertItem(), as some C++ compilers choose the wrong overloaded function. Cast the 0 to what you mean, eg. \fC(QObject*)0\fR.
+.PP
+See also: removeItem(), changeItem(), setAccel(), connectItem(), QAccel and qkeycode.h.
+.SH "int QMenuData::insertItem ( const char * text, int id=-1, int index=-1 )"
+Inserts a menu item with a text. Returns the menu item identifier.
+.PP
+The menu item is assigned the identifier \fIid\fR or an automatically generated identifier. It works as follows: If \fIid\fR >= 0, this identifier is assigned. If \fIid\fR == -1 (default), the identifier is set equal to the menu item's real index (see below). If \fIid\fR is any other negative integer, for instance -2, a unique identifier (negative integer <= -2) is generated.
+.PP
+The \fIindex\fR specifies the position in the menu. The menu item is appended at the end of the list if \fIindex\fR is negative.
+.PP
+\fBWarning:\fR Be careful when passing a literal 0 to insertItem(), as some C++ compilers choose the wrong overloaded function. Cast the 0 to what you mean, eg. \fC(QObject*)0\fR.
+.PP
+See also: removeItem(), changeItem(), setAccel() and connectItem().
+.SH "void QMenuData::insertSeparator ( int index=-1 )"
+Inserts a separator at position \fIindex.\fR The separator becomes the last menu item if \fIindex\fR is negative.
+.PP
+In a popup menu, a separator is rendered as a horizontal line. In a Motif menubar, a separator is spacing, so the rest of the items (just "Help", normally) are drawn right-justified. In a Windows menubar, all separator are ignored (to comply with the Windows style guide).
+.PP
+Examples:
+.(l
+grapher/grapher.cpp application/application.cpp menu/menu.cpp progress/progress.cpp widgets/widgets.cpp
+.)l
+.SH "bool QMenuData::isItemChecked ( int id ) const"
+Returns TRUE if the menu item has been checked, otherwise FALSE.
+.PP
+See also: setItemChecked().
+.SH "bool QMenuData::isItemEnabled ( int id ) const"
+Returns TRUE if the item with identifier \fIid\fR is enabled or FALSE if it is disabled.
+.PP
+See also: setItemEnabled().
+.SH "void QMenuData::menuContentsChanged () \fC[virtual protected]\fR"
+Virtual function; notifies subclasses that one or more items have been inserted or removed.
+.PP
+Reimplemented in QMenuBar.
+.SH "void QMenuData::menuDelPopup ( QPopupMenu * ) \fC[virtual protected]\fR"
+Virtual function; notifies subclasses that a popup menu item has been removed.
+.SH "void QMenuData::menuInsPopup ( QPopupMenu * ) \fC[virtual protected]\fR"
+Virtual function; notifies subclasses that a popup menu item has been inserted.
+.SH "void QMenuData::menuStateChanged () \fC[virtual protected]\fR"
+Virtual function; notifies subclasses that one or more items have changed state (enabled/disabled or checked/unchecked).
+.PP
+Reimplemented in QMenuBar.
+.SH "QPixmap * QMenuData::pixmap ( int id ) const"
+Returns the pixmap that has been set for menu item \fIid,\fR or 0 if no pixmap has been set.
+.PP
+See also: changeItem() and text().
+.SH "void QMenuData::removeItem ( int id )"
+Removes the menu item which has the identifier \fIid.\fR
+.PP
+See also: removeItemAt() and clear().
+.SH "void QMenuData::removeItemAt ( int index )"
+Removes the menu item at position \fIindex.\fR
+.PP
+See also: removeItem() and clear().
+.SH "void QMenuData::setAccel ( int key, int id )"
+Defines an accelerator key for the menu item \fIid.\fR
+.PP
+An accelerator key consists of a key code and a combination of the modifiers \fCSHIFT, CTRL\fR and \fCALT\fR (OR'ed or added). The header file qkeycode.h contains a list of key codes.
+.PP
+Defining an accelerator key generates a text which is added to the menu item, for instance, \fCCTRL\fR + \fCKey_O\fR generates "Ctrl+O". The text is formatted differently for different platforms.
+.PP
+Note that accelerators only work for QPopupMenu items that live in a menu bar. For stand-alone popup menus, use an independent QAccel object.
+.PP
+Example:
+.PP
+.nf
+.br
+    QMenuBar   *mainMenu = new QMenuBar;
+.br
+    QPopupMenu *fileMenu = new QPopupMenu;      // file sub menu
+.br
+    fileMenu->insertItem( "Open Document", 67 );// add "Open" item
+.br
+    fileMenu->setAccel( CTRL + Key_O, 67 );
+.br
+    fileMenu->insertItem( "Quit", 69 );         // add "Quit" item
+.br
+    fileMenu->setAccel( CTRL + ALT + Key_Delete, 69 );
+.br
+    mainMenu->insertItem( "File", fileMenu );   // add the file menu
+.fi
+.PP
+You can also specify the accelerator in the insertItem() function.
+.PP
+See also: accel(), insertItem(), QAccel and qkeycode.h.
+.SH "void QMenuData::setId ( int index, int id )"
+Sets the menu identifier of the item at \fIindex\fR to \fIid.\fR
+.PP
+If index is out of range the operation is ignored.
+.PP
+See also: idAt().
+.SH "void QMenuData::setItemChecked ( int id, bool check )"
+Checks the menu item with id \fIid\fR if \fIcheck\fR is TRUE, or unchecks it if \fIcheck\fR is FALSE, and calls setCheckable( TRUE ) if necessary.
+.PP
+See also: isItemChecked().
+.PP
+Examples:
+.(l
+grapher/grapher.cpp progress/progress.cpp
+.)l
+.SH "void QMenuData::setItemEnabled ( int id, bool enable )"
+Enables the menu item with identifier \fIid\fR if \fIenable\fR is TRUE, or disables the item if \fIenable\fR is FALSE.
+.PP
+See also: isItemEnabled().
+.PP
+Examples:
+.(l
+menu/menu.cpp progress/progress.cpp widgets/widgets.cpp
+.)l
+.SH "const char * QMenuData::text ( int id ) const"
+Returns the text that has been set for menu item \fIid,\fR or 0 if no text has been set.
+.PP
+See also: changeItem() and pixmap().
+.SH "void QMenuData::updateItem ( int ) \fC[virtual]\fR"
+Virtual function; notifies subclasses about an item that has been changed.
+.PP
+Reimplemented in QMenuBar.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qmenudata.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

@@ -1,0 +1,157 @@
+.TH QDictIterator 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QDictIterator \- Iterator for QDict collections
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qdict.h>\fR
+.PP
+Inherits QGDictIterator.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QDictIterator ( const QDict<type> & dict )"
+.br
+.ti -1c
+.BI "\fB~QDictIterator\fR ()"
+.br
+.ti -1c
+.BI "uint count () const"
+.br
+.ti -1c
+.BI "bool isEmpty () const"
+.br
+.ti -1c
+.BI "type* toFirst ()"
+.br
+.ti -1c
+.BI "operator \fBtype*\fR ()const"
+.br
+.ti -1c
+.BI "type* current () const"
+.br
+.ti -1c
+.BI "const char* currentKey () const"
+.br
+.ti -1c
+.BI "type* operator ()"
+.br
+.ti -1c
+.BI "type* operator++ ()"
+.br
+.ti -1c
+.BI "type* operator+= ( uint jump )"
+.br
+.in -1c
+.SH DESCRIPTION
+The QDictIterator class provides an iterator for QDict collections.
+.PP
+QDictIterator is implemented as both a template and a macro class. Define a template instance QDictIterator<X> to create a dictionary iterator that operates on QDict<X> (dictionary of X*).
+.PP
+Example:
+.PP
+.nf
+.br
+    #include <qdict.h>
+.br
+    #include <stdio.h>
+.br
+.br
+    void main()
+.br
+    {
+.br
+      // Creates a dictionary that maps char* ==> char* (case insensitive)
+.br
+        QDict<char> dict( 17, FALSE );
+.br
+.br
+        dict.insert( "France", "Paris" );
+.br
+        dict.insert( "Russia", "Moscow" );
+.br
+        dict.insert( "Norway", "Oslo" );
+.br
+.br
+        QDictIterator<char> it( dict ); // iterator for dict
+.br
+.br
+        while ( it.current() ) {
+.br
+            printf( "%s -> %s\\n", it.currentKey(), it.current() );
+.br
+            ++it;
+.br
+        }
+.br
+    }
+.fi
+.PP
+Program output:
+.PP
+.nf
+.br
+        Russia -> Moscow
+.br
+        Norway -> Oslo
+.br
+        France -> Paris
+.fi
+.PP
+Note that the traversal order is arbitrary, you are not guaranteed the order above.
+.PP
+A QDictIterator can also be instantiated through a macro expansion, but this is necessary only for compilers that do not support templates. See the collection classes documentation for a general discussion on template-based versus macro-based collections.
+.PP
+Multiple iterators may independently traverse the same dictionary. A QDict knows about all iterators that are operating on the dictionary. When an item is removed from the dictionary, QDict update all iterators that are referring the removed item to point to the next item in the traversing order.
+.PP
+See also: QDict and Collection Classes
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QDictIterator::QDictIterator ( const QDict<type> & dict )"
+Constructs an iterator for \fIdict.\fR The current iterator item is set to point on the first item in the \fIdict.\fR
+.SH "QDictIterator::~QDictIterator ()"
+Destroys the iterator.
+.SH "QDictIterator::operator type * () const"
+Cast operator. Returns a pointer to the current iterator item. Same as current().
+.SH "uint QDictIterator::count () const"
+Returns the number of items in the dictionary this iterator operates on.
+.PP
+See also: isEmpty().
+.SH "type * QDictIterator::current () const"
+Returns a pointer to the current iterator item.
+.SH "const char * QDictIterator::currentKey () const"
+Returns a pointer to the key for the current iterator item.
+.SH "bool QDictIterator::isEmpty () const"
+Returns TRUE if the dictionary is empty, i.e. count() == 0, otherwise FALSE.
+.PP
+See also: count().
+.SH "type * QDictIterator::operator() ()"
+Makes the succeeding item current and returns the original current item.
+.PP
+If the current iterator item was the last item in the dictionary or if it was null, null is returned.
+.SH "type * QDictIterator::operator++ ()"
+Prefix ++ makes the succeeding item current and returns the new current item.
+.PP
+If the current iterator item was the last item in the dictionary or if it was null, null is returned.
+.SH "type * QDictIterator::operator+= ( uint jump )"
+Sets the current item to the item \fIjump\fR positions after the current item, and returns a pointer to that item.
+.PP
+If that item is beyond the last item or if the dictionary is empty, it sets the current item to null and returns null.
+.SH "type * QDictIterator::toFirst ()"
+Sets the current iterator item to point to the first item in the
+dictionary and returns a pointer to the item.
+If the dictionary is  empty it sets the current item to null and 
+returns null.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qdictiterator.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

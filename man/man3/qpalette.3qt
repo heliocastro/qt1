@@ -1,0 +1,172 @@
+.TH QPalette 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QPalette \- Color groups for each widget state
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qpalette.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QPalette ()"
+.br
+.ti -1c
+.BI "QPalette ( const QColor & background )"
+.br
+.ti -1c
+.BI "QPalette ( const QColorGroup & " "normal" ", const QColorGroup & " "disabled" ", const QColorGroup & active )"
+.br
+.ti -1c
+.BI "QPalette ( const QPalette & )"
+.br
+.ti -1c
+.BI "\fB~QPalette\fR ()"
+.br
+.ti -1c
+.BI "QPalette& operator= ( const QPalette & )"
+.br
+.ti -1c
+.BI "QPalette copy () const"
+.br
+.ti -1c
+.BI "const QColorGroup& normal () const"
+.br
+.ti -1c
+.BI "const QColorGroup& disabled () const"
+.br
+.ti -1c
+.BI "const QColorGroup& active () const"
+.br
+.ti -1c
+.BI "void setNormal ( const QColorGroup & )"
+.br
+.ti -1c
+.BI "void setDisabled ( const QColorGroup & )"
+.br
+.ti -1c
+.BI "void setActive ( const QColorGroup & )"
+.br
+.ti -1c
+.BI "bool operator== ( const QPalette & p ) const"
+.br
+.ti -1c
+.BI "bool operator!= ( const QPalette & p ) const"
+.br
+.ti -1c
+.BI "bool isCopyOf ( const QPalette & )"
+.br
+.ti -1c
+.BI "int serialNumber () const"
+.br
+.in -1c
+.SH RELATED FUNCTION DOCUMENTATION
+(Note that these are not member functions.)
+.in +1c
+.ti -1c
+.BI "QDataStream & operator<< (QDataStream & " "s" ", const QPalette & " "p" ")"
+.br
+.ti -1c
+.BI "QDataStream & operator>> (QDataStream & " "s" ", QPalette & " "p" ")"
+.br
+.in -1c
+.SH DESCRIPTION
+The QPalette class contains color groups for each widget state.
+.PP
+A palette consists of three color groups: a \fInormal,\fR a \fIdisabled\fR and an \fIactive\fR color group. All widgets contain a palette, and all the widgets in Qt use their palette to draw themselves. This makes the user interface consistent and easily configurable.
+.PP
+If you make a new widget you are strongly advised to use the colors in the palette rather than hard-coding specific colors.
+.PP
+The \fIactive\fR group is used for the widget in focus. Normally it contains the same colors as \fInormal\fR so as not to overwhelm the user with bright and flashing colors, but if you need to you can change it.
+.PP
+The \fIdisabled\fR group is used for widgets that are currently inactive or not usable.
+.PP
+The \fInormal\fR color group is used in all other cases.
+.PP
+See also: QApplication::setPalette(), QWidget::setPalette(), QColorGroup and QColor.
+.PP
+Examples:
+.(l
+xform/xform.cpp widgets/widgets.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QPalette::QPalette ()"
+Constructs a palette that consists of color groups with only black colors.
+.SH "QPalette::QPalette ( const QColor & background )"
+Constructs a palette from the \fIbackground\fR color. The other colors are automatically calculated, based on this color.
+.SH "QPalette::QPalette ( const QColorGroup & normal, const QColorGroup & disabled, const QColorGroup & active )"
+Constructs a palette that consists of the three color groups \fInormal, disabled\fR and \fIactive.\fR
+.SH "QPalette::QPalette ( const QPalette & p )"
+Constructs a palette that is a shallow copy of \fIp.\fR
+.PP
+See also: copy().
+.SH "QPalette::~QPalette ()"
+Destroys the palette.
+.SH "const QColorGroup & QPalette::active () const"
+Returns the active color group of this palette.
+.PP
+See also: QColorGroup, normal(), disabled() and setActive().
+.SH "QPalette QPalette::copy () const"
+Returns a deep copy of the palette.
+.SH "const QColorGroup & QPalette::disabled () const"
+Returns the disabled color group of this palette.
+.PP
+See also: QColorGroup, normal(), active() and setDisabled().
+.SH "bool QPalette::isCopyOf ( const QPalette & p )"
+Returns TRUE if this palette and \fIp\fR are copies of each other, ie. one of them was created as a copy of the other and neither was subsequently modified. This is much stricter than equality.
+.PP
+See also: operator= and operator==.
+.SH "const QColorGroup & QPalette::normal () const"
+Returns the normal color group of this palette.
+.PP
+See also: QColorGroup, disabled(), active() and setNormal().
+.SH "bool QPalette::operator!= ( const QPalette & p ) const"
+Returns TRUE if this palette is different from \fIp,\fR or FALSE if they are equal.
+.SH "QPalette & QPalette::operator= ( const QPalette & p )"
+Assigns \fIp\fR to this palette and returns a reference to this palette. Note that a \fIshallow\fR copy of \fIp\fR is used.
+.PP
+See also: copy().
+.SH "bool QPalette::operator== ( const QPalette & p ) const"
+Returns TRUE if this palette is equal to \fIp,\fR or FALSE if they are different.
+.SH "int QPalette::serialNumber () const"
+Returns a number that uniquely identifies this QPalette object. The serial number is very useful for caching.
+.PP
+See also: QPixmap and QPixmapCache.
+.SH "void QPalette::setActive ( const QColorGroup & g )"
+Sets the \fCactive\fR color group to \fIg.\fR
+.PP
+See also: active().
+.SH "void QPalette::setDisabled ( const QColorGroup & g )"
+Sets the \fCdisabled\fR color group to \fIg.\fR
+.PP
+See also: disabled().
+.SH "void QPalette::setNormal ( const QColorGroup & g )"
+Sets the \fCnormal\fR color group to \fIg.\fR
+.PP
+See also: normal().
+.SH RELATED FUNCTION DOCUMENTATION
+.SH "QDataStream & operator<< (QDataStream & s, const QPalette & p)"
+Writes a palette to the stream and returns a reference to the stream.
+.PP
+Serialization format:
+.IP 1
+QColorGroup normal
+.IP 2
+QColorGroup disabled
+.IP 3
+QColorGroup active The color groups are serialized in the listed order.
+.SH "QDataStream & operator>> (QDataStream & s, QPalette & p)"
+Reads a palette from the stream and returns a reference to the stream.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qpalette.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

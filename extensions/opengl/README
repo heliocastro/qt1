@@ -1,0 +1,36 @@
+		Qt OpenGL Extension - The QGL classes
+
+QGLWidget (qgl.h) is a Qt wrapper class for OpenGL and Mesa. To use
+OpenGL in your Qt application, you only need to create a subclass of
+QGLWidget and implement two or more virtual functions. the
+documentation of Qt OpenGL Extension can be found together with the Qt
+Reference Documentation in the qt/html directory.
+
+To learn how to use Qt with OpenGL, see the box example.  It does no fancy
+OpenGL rendering, but it illustrates how things work together.  The gears
+example is a reworked example from the Mesa 2.0 distribution.
+
+To compile and install the Qt OpenGL Extension, give the command 'make' in
+the qt/extensions/opengl/src directory.  Of course, the Qt library must
+already be compiled and installed.
+
+The makefiles are set up to use the MesaGL include files and libraries by
+default; if you want to use SGI OpenGL, change the GL_INC setting in the
+src/Makefile and the GL_INC and GL_LIBS settings in the example program
+makefiles.
+
+Note that the resulting library, qgl, does not use any of the peripheral
+OpenGL libraries (GLU etc.).  If you write a Qt/OpenGL program that uses
+those, you will have to add the corresponding linker options when you
+compile your application (for example, "-lMesaGLU" on UNIX, "glu32.lib" on
+Windows).
+
+On Unix, the library qgl is created as a static library (qgl.a), and
+not a dynamic library (qgl.so). This is because the Qt OpenGL API may
+in the future be changed in ways that are not binary compatible with
+previous versions, so your applications should not depend on a
+dynamically linked qgl library. Since the Qt OpenGL Extension is a
+rather small library, the resulting increase in the size of
+executables using this library is insignificant.
+
+

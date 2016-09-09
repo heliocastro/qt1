@@ -1,0 +1,81 @@
+.TH QGDictIterator 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QGDictIterator \- An internal class for implementing QDictIterator and QIntDictIterator
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qgdict.h>\fR
+.PP
+Inherited by QDictIterator, QIntDictIterator and QPtrDictIterator.
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "QGDictIterator ( const QGDict & )"
+.br
+.ti -1c
+.BI "QGDictIterator ( const QGDictIterator & )"
+.br
+.ti -1c
+.BI "QGDictIterator& operator= ( const QGDictIterator & )"
+.br
+.ti -1c
+.BI "\fB~QGDictIterator\fR ()"
+.br
+.ti -1c
+.BI "GCI toFirst ()"
+.br
+.ti -1c
+.BI "GCI get () const"
+.br
+.ti -1c
+.BI "const char* getKey () const"
+.br
+.ti -1c
+.BI "GCI operator ()()"
+.br
+.ti -1c
+.BI "GCI operator++ ()"
+.br
+.ti -1c
+.BI "GCI operator+= ( uint )"
+.br
+.in -1c
+.SH DESCRIPTION
+An internal class for implementing QDictIterator and QIntDictIterator.
+.PP
+QGDictIterator is a strictly internal class that does the heavy work for QDictIterator and QIntDictIterator.
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QGDictIterator::QGDictIterator ( const QGDict & d )"
+For internal use only.
+.SH "QGDictIterator::QGDictIterator ( const QGDictIterator & it )"
+For internal use only.
+.SH "QGDictIterator::~QGDictIterator ()"
+For internal use only.
+.SH "GCI QGDictIterator::get () const"
+For internal use only.
+.SH "const char * QGDictIterator::getKey () const"
+For internal use only.
+.SH "GCI QGDictIterator::operator() ()"
+For internal use only.
+.SH "GCI QGDictIterator::operator++ ()"
+For internal use only.
+.SH "GCI QGDictIterator::operator+= ( uint jumps )"
+For internal use only.
+.SH "QGDictIterator & QGDictIterator::operator= ( const QGDictIterator & it )"
+For internal use only.
+.SH "GCI QGDictIterator::toFirst ()"
+For internal use only.
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qgdictiterator.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

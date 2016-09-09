@@ -1,0 +1,113 @@
+.TH QNPStream 3qt "26 Febrary 1999" "Troll Tech AS" \" -*- nroff -*-
+.\" Copyright 1992-1997 Troll Tech AS.  All rights reserved.  See the
+.\" LICENSE file included in the distribution for a complete license
+.\" statement.
+.\"
+.ad l
+.nh
+.SH NAME
+QNPStream \- A stream of data provided to a QNPInstance by the browser [Qt NSPlugin Extension]
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <qnp.h>\fR
+.PP
+.SS "Public Members"
+.in +1c
+.ti -1c
+.BI "\fB~QNPStream\fR ()"
+.br
+.ti -1c
+.BI "const char* url () const"
+.br
+.ti -1c
+.BI "uint end () const"
+.br
+.ti -1c
+.BI "uint lastModified () const"
+.br
+.ti -1c
+.BI "const char* type () const"
+.br
+.ti -1c
+.BI "bool seekable () const"
+.br
+.ti -1c
+.BI "bool okay () const"
+.br
+.ti -1c
+.BI "bool complete () const"
+.br
+.ti -1c
+.BI "void requestRead ( int " "offset" ", uint length )"
+.br
+.ti -1c
+.BI "int write ( int " "len" ", void * buffer )"
+.br
+.ti -1c
+.BI "QNPInstance* instance ()"
+.br
+.ti -1c
+.BI "QNPStream ( QNPInstance *, const char *, _NPStream *, bool )"
+.br
+.ti -1c
+.BI "void setOkay ( bool )"
+.br
+.ti -1c
+.BI "void setComplete ( bool )"
+.br
+.in -1c
+.SH DESCRIPTION
+This class is defined in the \fBQt NSPlugin Extension\fR, which can be found in the \fCqt/extensions\fR directory. It is not included in the main Qt API.
+.PP
+A stream of data provided to a QNPInstance by the browser.
+.PP
+Note that this is neither a QTextStream or a QDataStream.
+.PP
+See also: QNPInstance::write() and QNPInstance::newStreamCreated().
+.PP
+Examples:
+.(l
+qtimage/qtimage.cpp grapher/grapher.cpp
+.)l
+.SH MEMBER FUNCTION DOCUMENTATION
+.SH "QNPStream::QNPStream ( QNPInstance * in,const char * mt, _NPStream * st, bool se )"
+Creates a stream. Plugins should not call this, but rather QNPInstance::newStream() if a stream is required.
+.SH "QNPStream::~QNPStream ()"
+Destroys the stream.
+.SH "bool QNPStream::complete () const"
+Returns TRUE if the stream has received all the data from the source.
+.SH "uint QNPStream::end () const"
+Returns the length of the stream (???).
+.SH "QNPInstance* QNPStream::instance ()"
+Returns the QNPInstance for which this stream was created.
+.SH "uint QNPStream::lastModified () const"
+Returns the time when the source of the stream was last modified.
+.SH "bool QNPStream::okay () const"
+Returns TRUE if no errors have occurred on the stream.
+.SH "void QNPStream::requestRead ( int offset, uint length )"
+Requests the given section of the stream be sent to the QNPInstance::write() function of the instance() of this stream.
+.PP
+See also: Netscape: NPN_RequestRead method
+.SH "bool QNPStream::seekable () const"
+Returns TRUE if the stream is seekable.
+.SH "void QNPStream::setComplete ( bool y )"
+For internal use only.
+.SH "void QNPStream::setOkay ( bool y )"
+For internal use only.
+.SH "const char* QNPStream::type () const"
+Returns the MIME type of the stream.
+.SH "const char* QNPStream::url () const"
+Returns the URL from which the stream was created.
+.SH "int QNPStream::write ( int len, void * buffer )"
+Writes data \fIto\fR the stream.
+.PP
+See also:
+Netscape: NPN_Write method
+.SH "SEE ALSO"
+.BR http://www.troll.no/qt/qnpstream.html
+.SH COPYRIGHT
+Copyright 1992-1997 Troll Tech AS.  See the LICENSE file included in
+the distribution for a complete license statement.
+.SH AUTHOR
+Generated automatically from the source code.

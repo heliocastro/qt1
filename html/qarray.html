@@ -1,0 +1,311 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"><html><head><meta name="robots" content="noindex,noarchive">
+<title>Qt Toolkit - QArray Class</title><style type="text/css"><!--
+h3.fn,span.fn { margin-left: 15%; text-indent: -15%; }
+a:link { text-decoration: none; }
+--></style>
+</head><body bgcolor="#ffffff">
+
+<a href=index.html><img width=122 height=65 src=qtlogo.jpg alt="Qt logo" align=left border=0></a>
+<center><img src=dochead.gif width=472 height=27></center>
+<br clear=all>
+
+<h1 align=center>QArray Class Reference</h1><br clear="all">
+<p>
+The QArray class is a template class that provides arrays of simple types.
+<a href="#details">More...</a>
+<p>
+<code>#include &lt;<a href="qarray-h.html">qarray.h</a>&gt;</code>
+<p>
+Inherits <a href="qgarray.html">QGArray</a>.
+<p>Inherited by <a href="qbytearray.html">QByteArray</a> and <a href="qpointarray.html">QPointArray</a>.
+<p><a href="qarray-members.html">List of all member functions.</a>
+<h2>Public Members</h2>
+<ul>
+<li><span class="fn"><a href="qarray.html#a1"><strong>QArray</strong></a> () </span>
+<li><span class="fn"><a href="qarray.html#a2"><strong>QArray</strong></a> ( int size ) </span>
+<li><span class="fn"><a href="qarray.html#a3"><strong>QArray</strong></a> ( const QArray&lt;type&gt; &amp; a ) </span>
+<li><span class="fn"><a href="qarray.html#a4"><strong>~QArray</strong></a> () </span>
+<li><span class="fn">QArray&lt;type&gt;&amp; <a href="qarray.html#a5"><strong>operator=</strong></a> ( const QArray&lt;type&gt; &amp; a ) </span>
+<li><span class="fn">type* <a href="qarray.html#a6"><strong>data</strong></a> () const</span>
+<li><span class="fn">uint <a href="qarray.html#a7"><strong>nrefs</strong></a> () const</span>
+<li><span class="fn">uint <a href="qarray.html#a8"><strong>size</strong></a> () const</span>
+<li><span class="fn">bool <a href="qarray.html#a9"><strong>isEmpty</strong></a> () const</span>
+<li><span class="fn">bool <a href="qarray.html#b0"><strong>isNull</strong></a> () const</span>
+<li><span class="fn">bool <a href="qarray.html#b1"><strong>resize</strong></a> ( uint size ) </span>
+<li><span class="fn">bool <a href="qarray.html#b2"><strong>truncate</strong></a> ( uint pos ) </span>
+<li><span class="fn">bool <a href="qarray.html#b3"><strong>fill</strong></a> ( const type &amp; v, int size=-1=-1 ) </span>
+<li><span class="fn">virtual void <a href="qarray.html#b4"><strong>detach</strong></a> () </span>
+<li><span class="fn">QArray&lt;type&gt; <a href="qarray.html#b5"><strong>copy</strong></a> () const</span>
+<li><span class="fn">QArray&lt;type&gt;&amp; <a href="qarray.html#b6"><strong>assign</strong></a> ( const QArray&lt;type&gt; &amp; a ) </span>
+<li><span class="fn">QArray&lt;type&gt;&amp; <a href="qarray.html#b7"><strong>assign</strong></a> ( const type * data, uint size ) </span>
+<li><span class="fn">QArray&lt;type&gt;&amp; <a href="qarray.html#b8"><strong>duplicate</strong></a> ( const QArray&lt;type&gt; &amp; a ) </span>
+<li><span class="fn">QArray&lt;type&gt;&amp; <a href="qarray.html#b9"><strong>duplicate</strong></a> ( const type * data, uint size ) </span>
+<li><span class="fn">QArray&lt;type&gt;&amp; <a href="qarray.html#c0"><strong>setRawData</strong></a> ( const type * data, uint size ) </span>
+<li><span class="fn">void <a href="qarray.html#c1"><strong>resetRawData</strong></a> ( const type * data, uint size ) </span>
+<li><span class="fn">int <a href="qarray.html#c2"><strong>find</strong></a> ( const type &amp; v, uint index=0 ) const</span>
+<li><span class="fn">int <a href="qarray.html#c3"><strong>contains</strong></a> ( const type &amp; v ) const</span>
+<li><span class="fn">type&amp; <a href="qarray.html#c4"><strong>operator[]</strong></a> ( int index ) const</span>
+<li><span class="fn">type&amp; <a href="qarray.html#c5"><strong>at</strong></a> ( uint index ) const</span>
+<li><span class="fn">operator <a href=qarray.html#c8><strong>const type*</strong></a> ()const</span>
+<li><span class="fn">bool <a href="qarray.html#c6"><strong>operator==</strong></a> ( const QArray&lt;type&gt; &amp; a ) const</span>
+<li><span class="fn">bool <a href="qarray.html#c7"><strong>operator!=</strong></a> ( const QArray&lt;type&gt; &amp; a ) const</span>
+</ul>
+<h2>Protected Members</h2>
+<ul>
+<li><span class="fn"><a href="qarray.html#a0"><strong>QArray</strong></a> ( int, int ) </span>
+</ul>
+<hr><h2><a name="details"></a>Detailed Description</h2>
+The QArray class is a template class that provides arrays of simple types.
+<p>
+QArray is implemented as both a template and a macro class. Define a
+template instance QArray&lt;X&gt; to create an array that contains X items.
+<p>The QVector collection class is also a kind of array.  Like all
+<a href="collection.html">collection classes</a>, it has pointers to the
+contained items.
+<p>QArray stores the array elements directly in the array. It can only
+deal with simple types, i.e. C++ types, structs and classes that have
+no constructors, destructors or virtual functions.  QArray uses
+bitwise operations to copy and compare array elements.
+<p>QArray uses explicit <a href="shclass.html">sharing</a> with a reference
+count.  If more than one array share common data, and one array is
+modified, all arrays will be modified.
+<p>The benefit of sharing is that a program does not need to duplicate
+data when it is not required, which results in less memory usage and
+less copying of data.
+<p>Example:
+<pre>    #include &lt;qarray.h&gt;
+    #include &lt;stdio.h&gt;
+
+    <a href="qarray.html">QArray</a>&lt;int&gt; fib( int num )                  // returns fibonacci array
+    {
+        ASSERT( num &gt; 2 );
+        <a href="qarray.html">QArray</a>&lt;int&gt; f( num );                   // array of ints
+
+        f[0] = f[1] = 1;                        // initialize first two numbers
+        for ( int i=2; i&lt;num; i++ )
+            f[i] = f[i-1] + f[i-2];     
+
+        return f;
+    }
+
+    void main()
+    {
+        <a href="qarray.html">QArray</a>&lt;int&gt; a = fib( 6 );               // get 6 first fibonaccis
+        int i;
+
+        for ( i=0; i&lt;a.<a href="qarray.html#a8">size</a>(); i++ )            // print them
+            prinf( "%d: %d\n", i, a[i] );
+
+        printf( "1 is found %d time(s)\n", a.<a href="qarray.html#c3">contains</a>(1) );
+        printf( "5 is found at index %d\n", a.<a href="qarray.html#c2">find</a>(5) );
+    }
+</pre>
+<p>Program output:
+<pre>        0: 1
+        1: 1
+        2: 2
+        3: 3
+        4: 5
+        5: 8
+        1 is found 2 times
+        5 is found at index 4
+</pre>
+<p>An array can also be instantiated through a macro expansion, but this
+is necessary only for compilers that do not support templates.
+We recommend using templates if your compiler supports it.  Macros
+are much harder to debug.
+<p>Macro expansion:
+<pre>      ...
+    Q_DECLARE(QArrayM,X);                       // declares the array
+
+    void main()
+    {
+        QArrayM(X) a;                   // array of X elements
+      ...
+</pre>
+<p>If you want to make your code work for compilers that do not have
+template support, but use templates if they are available, you
+can use <code>typedef:</code>
+<p><pre>      ...
+    #if defined(USE_TEMPLATECLASS)      // defined in qglobal.h
+    typedef QArrayT&lt;X&gt;         XArray;
+    #else
+    typedef Q_DECLARE(QArrayM,X) XArray;
+    #endif
+
+    void main()
+    {
+        XArray a;                       // array of X elements
+      ...
+</pre>
+<p>QArrayT refers to the QArray template and QArrayM refers to the QArray macro.
+QArray defaults to QArrayT if templates are supported, QArrayM otherwise.
+<p>See also:  <a href="shclass.html">Shared Classes</a>
+
+<hr><h2>Member Function Documentation</h2>
+<h3 class="fn"><a name="a1"></a>QArray::QArray ()</h3>
+<p>Constructs a null array.
+<p>See also:  <a href="qarray.html#b0">isNull</a>().
+<h3 class="fn"><a name="a3"></a>QArray::QArray ( const QArray&lt;type&gt; &amp; a )</h3>
+<p>Constructs a shallow copy of <em>a.</em>
+<p>See also:  <a href="qarray.html#b6">assign</a>().
+<h3 class="fn"><a name="a2"></a>QArray::QArray ( int size )</h3>
+<p>Constructs an array with room for <em>size</em> elements.
+Makes a null array if <em>size</em> == 0.
+<p>Note that the elements are not initialized.
+<p>See also:  <a href="qarray.html#b1">resize</a>() and <a href="qarray.html#b0">isNull</a>().
+<h3 class="fn"><a name="a0"></a>QArray::QArray ( int, int ) <code>[protected]</code></h3>
+<p>Constructs an array <em>without allocating</em> array space.
+The arguments should be (0, 0). Use at own risk.
+<h3 class="fn"><a name="a4"></a>QArray::~QArray ()</h3>
+<p>Dereferences the array data and deletes it if this was the last
+reference.
+<h3 class="fn"><a name="c8"></a>QArray::operator const type * () const</h3>
+<p>Cast operator.  Returns a pointer to the array.
+<p>See also:  <a href="qarray.html#a6">data</a>().
+<h3 class="fn">QArray&lt;type&gt; &amp; <a name="b6"></a>QArray::assign ( const QArray&lt;type&gt; &amp; a )</h3>
+<p>Shallow copy. Dereferences the current array and references the data
+contained in <em>a</em> instead. Returns a reference to this array.
+<p>See also:  <a href="qarray.html#a5">operator=</a>().
+<h3 class="fn">QArray&lt;type&gt; &amp; <a name="b7"></a>QArray::assign ( const type * data, uint size )</h3>
+<p>Shallow copy. Dereferences the current array and references the
+array data <em>data,</em> which contains <em>size</em> elements.
+Returns a reference to this array.
+<p>Do not delete <em>data</em> later, QArray takes care of that.
+<h3 class="fn">type &amp; <a name="c5"></a>QArray::at ( uint index ) const</h3>
+<p>Returns a reference to the element at position <em>index</em> in the array.
+<p>This can be used to both read and set an element.
+<p>See also:  <a href="qarray.html#c4">operator[]</a>().
+<h3 class="fn">int <a name="c3"></a>QArray::contains ( const type &amp; v ) const</h3>
+<p>Returns the number of times <em>v</em> occurs in the array.
+<p>See also:  <a href="qarray.html#c2">find</a>().
+<h3 class="fn">QArray&lt;type&gt; <a name="b5"></a>QArray::copy () const</h3>
+<p>Returns a deep copy of this array.
+<p>See also:  <a href="qarray.html#b4">detach</a>() and <a href="qarray.html#b8">duplicate</a>().
+<h3 class="fn">type * <a name="a6"></a>QArray::data () const</h3>
+<p>Returns a pointer to the actual array data.
+<p>The array is a null array if data() == 0 (null pointer).
+<p>See also:  <a href="qarray.html#b0">isNull</a>().
+<h3 class="fn">void <a name="b4"></a>QArray::detach () <code>[virtual]</code></h3>
+<p>Detaches this array from shared array data, i.e. makes a private, deep
+copy of the data.
+<p>Copying will only be performed if the
+<a href="qarray.html#a7">reference count</a> is greater than one.
+<p>See also:  <a href="qarray.html#b5">copy</a>().
+<p>Reimplemented from <a href="qgarray.html#a6">QGArray.</a>
+<h3 class="fn">QArray&lt;type&gt; &amp; <a name="b8"></a>QArray::duplicate ( const QArray&lt;type&gt; &amp; a )</h3>
+<p>Deep copy. Dereferences the current array and obtains a copy of the data
+contained in <em>a</em> instead. Returns a reference to this array.
+<p>See also:  <a href="qarray.html#b5">copy</a>().
+<h3 class="fn">QArray&lt;type&gt; &amp; <a name="b9"></a>QArray::duplicate ( const type * data, uint size )</h3>
+<p>Deep copy. Dereferences the current array and obtains a copy of the
+array data <em>data</em> instead.  Returns a reference to this array.
+<p>See also:  <a href="qarray.html#b5">copy</a>().
+<h3 class="fn">bool <a name="b3"></a>QArray::fill ( const type &amp; v, int size=-1=-1 )</h3>
+<p>Fills the array with the value <em>v.</em> If <em>size</em> is specified as different
+from -1, then the array will be resized before filled.
+<p>Returns TRUE if successful, or FALSE if the memory cannot be allocated
+(only when <em>size</em> != -1).
+<p>See also:  <a href="qarray.html#b1">resize</a>().
+<h3 class="fn">int <a name="c2"></a>QArray::find ( const type &amp; v, uint index=0 ) const</h3>
+<p>Finds the first occurrence of <em>v,</em> starting at position <em>index.</em>
+<p>Returns the position of <em>v,</em> or -1 if <em>v</em> could not be found.
+<p>See also:  <a href="qarray.html#c3">contains</a>().
+<h3 class="fn">bool <a name="a9"></a>QArray::isEmpty () const</h3>
+<p>Returns TRUE if the array is empty, i.e. <a href="qarray.html#a8">size</a>() == 0, otherwise FALSE.
+<p>isEmpty() is equivalent with <a href="qarray.html#b0">isNull</a>() for QArray.  Note that this is not
+the case for <a href="qstring.html#c1">QString::isEmpty</a>().
+<h3 class="fn">bool <a name="b0"></a>QArray::isNull () const</h3>
+<p>Returns TRUE if the array is null, otherwise FALSE.
+<p>A null array has <a href="qarray.html#a8">size</a>() == 0 and <a href="qarray.html#a6">data</a>() == 0.
+<h3 class="fn">uint <a name="a7"></a>QArray::nrefs () const</h3>
+<p>Returns the reference count for the shared array data. This reference count
+is always greater than zero.
+<h3 class="fn">bool <a name="c7"></a>QArray::operator!= ( const QArray&lt;type&gt; &amp; a ) const</h3>
+<p>Returns TRUE if this array is different from <em>a,</em> otherwise FALSE.
+<p>The two arrays are bitwise compared.
+<p>See also:  <a href="qarray.html#c6">operator==</a>().
+<h3 class="fn">QArray&lt;type&gt; &amp; <a name="a5"></a>QArray::operator= ( const QArray&lt;type&gt; &amp; a )</h3>
+<p>Assigns a shallow copy of <em>a</em> to this array and returns a reference
+to this array.
+<p>Equivalent to <a href="qarray.html#b6">assign</a>( a ).
+<h3 class="fn">bool <a name="c6"></a>QArray::operator== ( const QArray&lt;type&gt; &amp; a ) const</h3>
+<p>Returns TRUE if this array is equal to <em>a,</em> otherwise FALSE.
+<p>The two arrays are bitwise compared.
+<p>See also:  <a href="qarray.html#c7">operator!=</a>().
+<h3 class="fn">type &amp; <a name="c4"></a>QArray::operator[] ( int index ) const</h3>
+<p>Returns a reference to the element at position <em>index</em> in the array.
+<p>This can be used to both read and set an element.  Equivalent to <a href="qarray.html#c5">at</a>().
+<p>See also:  <a href="qarray.html#c5">at</a>().
+<h3 class="fn">void <a name="c1"></a>QArray::resetRawData ( const type * data, uint size )</h3>
+<p>Resets raw data that was set using <a href="qarray.html#c0">setRawData</a>().
+<p>The arguments must be the data and length that were passed to
+setRawData().  This is for consistency checking.
+<p>See also:  <a href="qarray.html#c0">setRawData</a>().
+<h3 class="fn">bool <a name="b1"></a>QArray::resize ( uint size )</h3>
+<p>Resizes (expands or shrinks) the array to <em>size</em> elements. The array
+becomes a null array if <em>size</em> == 0.
+<p>Returns TRUE if successful, or FALSE if the memory cannot be allocated.
+<p>New elements will not be initialized.
+<p>See also:  <a href="qarray.html#a8">size</a>().
+<h3 class="fn">QArray&lt;type&gt; &amp; <a name="c0"></a>QArray::setRawData ( const type * data, uint size )</h3>
+<p>Sets raw data and returns a reference to the array.
+<p>Dereferences the current array and sets the new array data to <em>data</em> and
+the new array size to <em>size.</em>  Do not attempt to resize or re-assign the
+array data when raw data has been set.
+Call <a href="qarray.html#c1">resetRawData</a>(d,len) to reset the array.
+<p>Setting raw data is useful because it sets QArray data without allocating
+memory or copying data.
+<p>Example I (intended use):
+<pre>    static char bindata[] = { 231, 1, 44, ... };
+    <a href="qbytearray.html">QByteArray</a>  a;
+    a.<a href="qbytearray.html#c4">setRawData</a>( bindata, sizeof(bindata) );   // a points to bindata
+    <a href="qdatastream.html">QDataStream</a> s( a, IO_ReadOnly );            // open on a's data
+    s &gt;&gt; &lt;something&gt;;                           // read raw bindata
+    a.<a href="qbytearray.html#c5">resetRawData</a>( bindata, sizeof(bindata) ); // finished
+</pre>
+<p>Example II (you don't want to do this):
+<pre>    static char bindata[] = { 231, 1, 44, ... };
+    <a href="qbytearray.html">QByteArray</a>  a, b;
+    a.<a href="qbytearray.html#c4">setRawData</a>( bindata, sizeof(bindata) );   // a points to bindata
+    a.<a href="qbytearray.html#b5">resize</a>( 8 );                              // will crash
+    b = a;                                      // will crash
+    a[2] = 123;                                 // might crash
+      // forget to resetRawData - will crash
+</pre>
+<p><strong>Warning:</strong> If you do not call resetRawData(), QArray will attempt to
+deallocate or reallocate the raw data, which might not be too good.
+Be careful.
+<p>See also:  <a href="qarray.html#c1">resetRawData</a>().
+<h3 class="fn">uint <a name="a8"></a>QArray::size () const</h3>
+<p>Returns the size of the array (max number of elements).
+<p>The array is a null array if size() == 0.
+<p>See also:  <a href="qarray.html#b0">isNull</a>() and <a href="qarray.html#b1">resize</a>().
+<p>Examples:
+ <a href="drawdemo-drawdemo-cpp.html#size">drawdemo/drawdemo.cpp</a>
+<h3 class="fn">bool <a name="b2"></a>QArray::truncate ( uint pos )</h3>
+<p>Truncates the array at position <em>pos.</em>
+<p>Returns TRUE if successful, or FALSE if the memory cannot be allocated.
+<p>Equivalent to <a href="qarray.html#b1">resize</a>(<em>pos).</em>
+<p>See also:  <a href="qarray.html#b1">resize</a>().
+<hr><p>
+Search the documentation, FAQ, qt-interest archive and more (uses 
+<a href="http://www.troll.no">www.troll.no</a>):<br>
+<form method=post action="http://www.troll.no/search.cgi">
+<input type=hidden name="version" value="1.44"><nobr>
+<input size="50" name="search"><input type=submit value="Search">
+</nobr></form><hr><p>
+This file is part of the <a href="index.html">Qt toolkit</a>,
+copyright &copy; 1995-99
+<a href="troll.html">Troll Tech</a>, all rights reserved.
+<p>
+It was generated from the following files:
+<ul>
+<li>qarray.h: 1998/08/27
+<li>qarray.doc: 1997/08/06
+</ul>
+<p><address><hr><div align="center">
+<table width="100%" cellspacing="0" border="0"><tr>
+<td>Copyright © 1999 Troll Tech<td><a href="trademarks.html">Trademarks</a>
+<td align="right"><div align="right">Qt version 1.45</div>
+</table></div></address></body></html>
