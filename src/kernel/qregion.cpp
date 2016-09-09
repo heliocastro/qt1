@@ -226,15 +226,3 @@ QDataStream &operator>>( QDataStream &s, QRegion &r )
     r.exec( b );
     return s;
 }
-
-
-// OBSOLETE
-#if !(defined(__STRICT_ANSI__) && defined(_CC_GNU_)) && !defined(_CC_EDG_) && !defined(_CC_HP_) && !defined(_CC_HP_ACC_) && !defined(_CC_USLC_) && !defined(xor)
-/*!
-  OBSOLETE - Use eor() instead.
-*/
-QRegion QRegion::xor( const QRegion &r ) const
-{
-    return eor(r);
-}
-#endif
