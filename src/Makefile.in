@@ -25,7 +25,7 @@ MOC	=	$(SYSCONF_MOC)
 TARGET	= qt
 DESTDIR = ../lib/
 VER_MAJ = 1
-VER_MIN = 44
+VER_MIN = 45
 
 ####### Files
 
