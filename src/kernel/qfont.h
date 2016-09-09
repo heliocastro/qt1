@@ -66,6 +66,9 @@ public:
     virtual ~QFont();
     QFont      &operator=( const QFont & );
 
+    void	initFontInfo()	    const;
+    void	load( HANDLE=0 )    const;
+
     const char *family()	const;
     void	setFamily( const char * );
     int		pointSize()	const;
@@ -126,8 +129,6 @@ private:
     QFont( bool );
     void	init();
     void	detach();
-    void	initFontInfo()	    const;
-    void	load( HANDLE=0 )    const;
 #if defined(_WS_WIN_)
     HANDLE	create( bool *, HANDLE=0, bool=FALSE ) const;
     void       *textMetric()	    const;
