@@ -14,6 +14,6 @@
 **
 *****************************************************************************/
 
-#define QT_BUILTIN_GIF_READER 0
+#define QT_BUILTIN_GIF_READER 1
 
 bool qt_builtin_gif_reader();
