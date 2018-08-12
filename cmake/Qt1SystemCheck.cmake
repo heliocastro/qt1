@@ -1,0 +1,7 @@
+if(UNIX)
+    if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+        list(APPEND GLOBAL_COMPILE_OPTIONS -Wall )
+    elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+        list(APPEND GLOBAL_COMPILE_OPTIONS -Wall -fno-strength-reduce)
+    endif()
+endif()
