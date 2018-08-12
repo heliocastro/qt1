@@ -56,7 +56,7 @@ target_include_directories(Qt1
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/qt1>
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     PRIVATE
-        ${X11_INCLUDE_DIRS}
+        ${X11_INCLUDE_DIR}
     )
 
 install(TARGETS Qt1 EXPORT Qt1Targets
