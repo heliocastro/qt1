@@ -33,7 +33,6 @@ function(qt1_wrap_moc mocable_files)
         get_filename_component(outfileName ${mocable} NAME_WE)
         file(STRINGS ${realfile} Q_OBJECT REGEX "Q_OBJECT")
         if(Q_OBJECT)
-            message(STATUS "Generating moc_${outfileName}.cpp")
             add_custom_command(
                 OUTPUT moc_${outfileName}.cpp
                 COMMAND moc-qt1 ${realfile} -o moc_${outfileName}.cpp
